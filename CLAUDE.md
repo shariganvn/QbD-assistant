@@ -48,10 +48,17 @@ Khi làm việc/scout/đọc dữ liệu với file docx, excel, pdf:
 - Sử dụng liteparse skill, CLI để tìm kiếm nhanh
 - **KHÔNG ĐƯỢC ĐỌC TRỰC TIẾP SẼ BỊ TRÀN CONTEXT**.
 
+## GitNexus — Known Issues (human-owned, outside generated block)
+
+> Đặt NGOÀI marker `gitnexus:start/end` vì block dưới bị `npx gitnexus analyze` ghi đè.
+
+- **FTS "read-only database" errors:** Lỗi cosmetic — single-writer limitation, MCP server giữ write connection nên hook process chỉ được read-only. Mọi MCP query (`gitnexus_impact`, `gitnexus_context`, `gitnexus_query`, `gitnexus_detect_changes`) hoạt động bình thường.
+- **Stale-index loop:** Không commit ngay sau `npx gitnexus analyze` — analyze sửa CLAUDE.md/AGENTS.md, commit làm HEAD advance → loop stale notification. Luôn commit analyze results trong commit riêng, tách biệt.
+
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
-This project is indexed by GitNexus as **MODULE3-agent** (392 symbols, 398 relationships, 0 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
+This project is indexed by GitNexus as **MODULE3-agent** (403 symbols, 408 relationships, 0 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
 > If any GitNexus tool warns the index is stale, run `npx gitnexus analyze` in terminal first.
 
@@ -69,8 +76,6 @@ This project is indexed by GitNexus as **MODULE3-agent** (392 symbols, 398 relat
 - NEVER ignore HIGH or CRITICAL risk warnings from impact analysis.
 - NEVER rename symbols with find-and-replace — use `gitnexus_rename` which understands the call graph.
 - NEVER commit changes without running `gitnexus_detect_changes()` to check affected scope.
-- NEVER commit immediately after `npx gitnexus analyze` — analyze modifies CLAUDE.md/AGENTS.md; committing that advances HEAD and triggers a stale-index notification loop. Commit analyze results in a separate, explicit commit.
-- FTS index "read-only database" errors in hook output are a known cosmetic issue (single-writer limitation — the MCP server holds the write connection). MCP queries (`gitnexus_impact`, `gitnexus_context`, `gitnexus_query`, `gitnexus_detect_changes`) are unaffected.
 
 ## Resources
 
