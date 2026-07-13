@@ -1,0 +1,78 @@
+# Phỏng vấn FD / Người phụ trách — Chốt giả định trước khi xây (hệ thống dựng hồ sơ P.2)
+
+**Mục đích tài liệu:** Trước khi bắt tay làm phần mềm, team đang dựa trên một số **giả định**. Nếu giả định sai, làm xong mới biết thì tốn công. Tài liệu này liệt kê từng giả định + câu hỏi để anh/chị xác nhận. Trả lời được càng nhiều, càng chốt hướng đúng ngay từ đầu.
+
+Không cần chuẩn bị gì — chỉ cần trả lời theo hiểu biết thực tế của anh/chị về công việc dựng hồ sơ.
+
+---
+
+## Cách đọc: 3 loại thông tin
+
+- ✅ **Đã chắc** — team không hỏi lại.
+- ❓ **Biết là chưa rõ** — phần chính bên dưới, cần anh/chị trả lời.
+- 💡 **Chưa biết là mình chưa biết** — mục cuối cùng, xin anh/chị kể thêm những gì team có thể đã bỏ sót.
+
+---
+
+## Phần chính — các câu hỏi cần chốt
+
+### 1. Phạm vi bản thử nghiệm đầu tiên
+> **Team đang giả định:** chỉ làm mục "Phát triển dược học" (P.2), cho **1 thuốc mẫu** (bisoprolol 5/10 mg viên nén bao phim), ra **bản nháp** để người duyệt sửa — chưa làm các phần khác, chưa làm nhiều thuốc.
+
+- Giả định này đúng với kỳ vọng của anh/chị cho bản demo đầu tiên không?
+- Có mục nào **bắt buộc phải thấy** trong bản demo thì anh/chị mới thấy "được"?
+
+### 2. Nguồn tài liệu nội bộ *(quan trọng nhất)*
+> **Team đang giả định:** công ty có sẵn kho tài liệu nội bộ (Word/PDF/Excel) để máy đọc và lấy dữ liệu.
+> **Thực tế team tìm thấy:** kho tài liệu hiện có chủ yếu là **dữ liệu thanh tra GMP**, *không phải* dữ liệu phát triển thuốc. Nghĩa là nguồn để điền P.2 có thể chưa sẵn.
+
+- Tài liệu phát triển dược học nội bộ (báo cáo nghiên cứu cũ, hồ sơ thuốc đã đăng ký, sách chuyên môn) hiện **nằm ở đâu, dạng gì, ai giữ**?
+- Khi nào máy được phép dùng những tài liệu đó?
+- Có tài liệu **bản scan (dạng ảnh)** không? (ảnh scan khó đọc hơn file chữ, cần biết trước.)
+
+### 3. Phần nào máy làm được — phần nào cần số liệu phòng lab
+> **Cần phân biệt rõ:** Máy **tra cứu và tổng hợp được** thông tin đã công bố (đặc tính lý hóa của dược chất, phân loại tan/hấp thu, tính tương kỵ tá dược…). Nhưng **kết quả thí nghiệm bào chế thực tế** (công thức tối ưu, thiết kế thực nghiệm, thẩm định độ hòa tan, nâng quy mô sản xuất) là **số liệu do phòng lab của anh/chị tạo ra** — máy **không bịa ra được** và không nên bịa.
+
+- Với bản demo: anh/chị **chấp nhận** máy chỉ điền phần tra cứu được, còn phần số liệu thí nghiệm để trống hoặc chờ FD điền tay — đúng không?
+- Hay anh/chị kỳ vọng khác? (nếu khác, cụ thể là gì?)
+
+### 4. Chuẩn "đạt yêu cầu"
+> **Team đang giả định:** dùng hồ sơ mẫu (135-00) làm chuẩn so sánh độ sâu.
+> **Lưu ý:** hồ sơ mẫu đó viết **tiếng Anh** và theo **hệ mục lục khác** với form tiếng Việt cần điền — nên không copy nguyên được, phải chuyển đổi.
+
+- Với anh/chị, **"đạt"** nghĩa là gì? Giống hồ sơ mẫu tới mức nào là đủ để anh/chị bắt đầu review được?
+
+### 5. Cách anh/chị muốn xem và duyệt bản nháp *(quyết định giao diện)*
+> Sau khi máy ra bản nháp, cách anh/chị duyệt sẽ quyết định team làm giao diện kiểu gì.
+
+- Anh/chị muốn duyệt theo cách nào?
+  - (a) Mở thẳng file Word, sửa như bình thường.
+  - (b) Xem trên màn hình, mỗi ý có nút **Đồng ý / Sửa / Bỏ** kèm nguồn trích dẫn ngay bên cạnh.
+  - (c) Cách khác — mô tả giúp.
+- **Ai** là người duyệt cuối cùng và chịu trách nhiệm ký?
+
+### 6. Trích dẫn và độ tin cậy nguồn
+> **Team đang giả định:** mọi câu máy viết đều phải kèm nguồn kiểm chứng được; không có nguồn thì không viết.
+
+- Cách ghi trích dẫn anh/chị quen dùng trong hồ sơ? (đánh số [1], chú thích chân trang, hay kiểu khác)
+- Nguồn nào anh/chị coi là **đáng tin** (dược điển, nhãn thuốc FDA/EMA, bài báo khoa học…)? Nguồn nào **không được phép dùng**?
+
+### 7. Bảo mật dữ liệu
+- Tài liệu nội bộ có được phép đưa lên **dịch vụ AI bên ngoài** để xử lý không, hay bắt buộc xử lý nội bộ?
+- Có ràng buộc bảo mật hoặc pháp lý nào team cần biết trước không?
+
+---
+
+## 💡 Điều team có thể chưa nghĩ tới
+
+Xin anh/chị bổ sung tự do:
+
+- Có **quy định, tiêu chuẩn, hoặc thói quen** nào trong việc dựng hồ sơ mà người ngoài ngành thường bỏ sót không?
+- Có "cái bẫy" nào anh/chị từng gặp khi làm mục P.2 mà nếu biết trước sẽ đỡ mất công không?
+
+---
+
+## Câu hỏi chưa giải quyết (team tự chốt sau khi phỏng vấn)
+- Nguồn tài liệu nội bộ thật sự sẵn sàng khi nào → ảnh hưởng trực tiếp lịch làm.
+- Ranh giới "máy điền" vs "FD điền tay" cho từng mục nhỏ của P.2.
+- Kiểu giao diện duyệt (mục 5) → chốt trước khi làm phần review.
