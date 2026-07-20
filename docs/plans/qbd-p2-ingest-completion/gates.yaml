@@ -20,7 +20,7 @@ gates:
     evidence: artifacts/qbd-p2-ingest-completion/gates/G-01.json
     owner_step: 1
     blocks: [G-03]
-    status: unverified
+    status: pass
 
   - id: G-02
     name: record-contract-freeze
@@ -38,7 +38,7 @@ gates:
     evidence: artifacts/qbd-p2-ingest-completion/gates/G-02.json
     owner_step: 1
     blocks: [G-03, G-07]
-    status: unverified
+    status: pass
 
   - id: G-03
     name: modular-pipeline-compatibility

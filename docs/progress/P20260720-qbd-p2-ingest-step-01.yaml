@@ -1,0 +1,31 @@
+id: P20260720-qbd-p2-ingest-step-01
+date: "2026-07-20"
+workstream: qbd-p2-ingest-completion
+status: partial
+summary: Completed the tracked ingest repository boundary and froze the accepted
+  JSONL compatibility contract without changing record output.
+changed_files:
+- package.json
+- cowork-p2-kit/.gitignore
+- cowork-p2-kit/README.md
+- cowork-p2-kit/ingest/
+- docs/plans/qbd-p2-ingest-completion/plan.md
+- docs/plans/qbd-p2-ingest-completion/gates.yaml
+- docs/reports/qbd-p2-ingest-completion/pm-260720-1928-step-01-progress.md
+- docs/test-plans/T20260720-qbd-p2-ingest-step-01.yaml
+tests_run:
+  verdict: passed
+  counts:
+    passed:
+    failed:
+    warnings:
+decisions: []
+next_pickup:
+  files:
+  - docs/plans/qbd-p2-ingest-completion/plan.md
+  - docs/plans/qbd-p2-ingest-completion/gates.yaml
+  - docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md
+  - cowork-p2-kit/ingest/legacy-ingest.mjs
+  - cowork-p2-kit/ingest/tests/fixtures/contract/records.jsonl
+  text: Execute Step 2 modularization against the frozen Step 1 contract; stop 
+    for a spec-diff review before Step 3.

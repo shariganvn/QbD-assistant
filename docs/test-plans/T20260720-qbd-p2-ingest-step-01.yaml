@@ -1,0 +1,39 @@
+id: T20260720-qbd-p2-ingest-step-01
+date: "2026-07-20"
+workstream: qbd-p2-ingest-completion
+status: executed
+plan: docs/plans/qbd-p2-ingest-completion/plan.md
+scope:
+  summary: Verify the tracked ingest boundary and frozen JSONL compatibility contract delivered by Step 1.
+  changed_files:
+    - package.json
+    - cowork-p2-kit/.gitignore
+    - cowork-p2-kit/README.md
+    - cowork-p2-kit/ingest/
+    - docs/plans/qbd-p2-ingest-completion/plan.md
+    - docs/plans/qbd-p2-ingest-completion/gates.yaml
+    - docs/reports/qbd-p2-ingest-completion/pm-260720-1928-step-01-progress.md
+approval:
+  required: false
+  approved_at: null
+  approved_by: null
+commands:
+  - id: ingest-step-01-verification
+    description: Run repository-boundary and record-contract tests through the package verification command.
+    command:
+      - npm
+      - run
+      - verify:ingest
+    requires_live_services: false
+    mutates_datastore: false
+results:
+  verdict: passed
+  artifact: artifacts/260720-2002/test-verdict.json
+  counts:
+    passed: null
+    failed: null
+    warnings: null
+notes:
+  - Baton attested exit code 0 and a stable worktree for the verification command.
+  - The exit-code adapter does not expose structured test counts; raw TAP output is retained in the verdict bundle.
+  - A separate real ingest run produced 17 records with byte-identical before/after store hashes.

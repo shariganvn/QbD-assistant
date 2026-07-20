@@ -1,0 +1,14 @@
+# Generated .docx inputs (rebuild from inputs/src/*.md via npm run inputs:build)
+inputs/**/*.docx
+
+# Extracted store artifacts (regenerated per ingest run)
+store/records.jsonl
+store/records.jsonl.bak
+store/records.jsonl.tmp
+store/records.jsonl.*.tmp
+store/run-log.json
+store/.ingest.lock
+
+# Rendered output (regenerated per render run)
+outputs/*
+!outputs/.gitkeep

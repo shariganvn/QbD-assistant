@@ -1,11 +1,11 @@
 <!-- GENERATED VIEW — do not edit manually -->
-<!-- Source: docs/test-plans/T20260720-plan-source-of-truth-migration.yaml -->
+<!-- Source: docs/test-plans/T20260720-qbd-p2-ingest-step-01.yaml -->
 <!-- Regenerate: baton render-test-plan -->
-<!-- Source fingerprint: sha256:abe962a015fa8942e7ba180039d2fa83ac82b63c60bf23b5f59e7997c85eb0de -->
+<!-- Source fingerprint: sha256:6e739677f1633a87e974c0f3b1bb35f196f218fd2436f59e3e143eababdeeda0 -->
 
 # TEST_PLAN — Active Validation Gates
 
-## T20260720-plan-source-of-truth-migration
+## T20260720-qbd-p2-ingest-step-01
 
 Status: **Executed — results recorded**
 
@@ -15,22 +15,17 @@ Status: **Executed — results recorded**
 
 ## Scope
 
-Verify the canonical plan migration, workflow routing, and generated compatibility views.
+Verify the tracked ingest boundary and frozen JSONL compatibility contract delivered by Step 1.
 
 ### Changed files
 
-- `IMPLEMENTATION_PLAN.md`
-- `CLAUDE.md`
-- `.claude/rules/documentation-management.md`
-- `.claude/rules/primary-workflow.md`
-- `.claude/rules/orchestration-protocol.md`
-- `.claude/rules/RULE-BRAINSTORM-PLAN.md`
-- `docs/plans/qbd-p2-ingest-completion/`
-- `docs/plans/OUTDATED/`
-- `docs/reports/qbd-p2-ingest-completion/`
-- `docs/reports/OUTDATED/`
-- `project-state.yaml`
-- `session-handoff.yaml`
+- `package.json`
+- `cowork-p2-kit/.gitignore`
+- `cowork-p2-kit/README.md`
+- `cowork-p2-kit/ingest/`
+- `docs/plans/qbd-p2-ingest-completion/plan.md`
+- `docs/plans/qbd-p2-ingest-completion/gates.yaml`
+- `docs/reports/qbd-p2-ingest-completion/pm-260720-1928-step-01-progress.md`
 
 ## Approval
 
@@ -38,18 +33,18 @@ Verify the canonical plan migration, workflow routing, and generated compatibili
 
 ## Commands
 
-### workflow-state-validation — Validate canonical ledgers, pointers, pickup files, and generated workflow views.
+### ingest-step-01-verification — Run repository-boundary and record-contract tests through the package verification command.
 
 ```bash
-baton state validate
+npm run verify:ingest
 ```
 
 
 ## Results
 
 Verdict: **passed**
-Artifact: `artifacts/260720-plan-source-of-truth-migration-final/test-verdict.json`
-Counts: passed=1, failed=0, warnings=0
+Artifact: `artifacts/260720-2002/test-verdict.json`
+Counts: passed=unknown, failed=unknown, warnings=unknown
 
 ---
 

@@ -1,0 +1,71 @@
+# QbD P.2 Cowork MVP Kit
+
+Claude Cowork-runnable kit that ingests bisoprolol trial data, selects the best formulation via decision matrix, and drafts CTD P.2.2/P.2.3 in Vietnamese.
+
+## System Dependencies
+
+| Dependency | Binary | Verified Version | Purpose |
+|------------|--------|-----------------|---------|
+| Node.js | `node` | v22.22.2 | Runtime |
+| LibreOffice | `/usr/bin/soffice` | 26.2.4.2 (Build: 2) | `.md` → `.docx` conversion; liteparse DOCX path |
+| Ghostscript | `/usr/bin/gs` | 10.06.0 | liteparse PDF conversion support |
+| Tesseract OCR | `tesseract` | 5.x | OCR for scanned pages (eng + vie models) |
+| liteparse | `@llamaindex/liteparse` | 2.5.0 (CLI 2.0.0) | Deterministic document extraction |
+
+**Tessdata location:** `/usr/share/tesseract-ocr/5/tessdata/` (eng + vie verified present).
+
+## Quick Start
+
+```bash
+# 1. Build .docx inputs from markdown source
+npm run inputs:build
+
+# 2. Run ingest (extract → store)
+npm run ingest
+
+# 3. Run render (draft → .docx)
+npm run render
+```
+
+## Folder Structure
+
+```
+cowork-p2-kit/
+├── SKILL.md                  # Cowork reasoning instructions
+├── README.md                 # This file
+├── inputs/
+│   ├── src/                  # Authoring source (.md) — git-tracked
+│   │   ├── product-profile.md
+│   │   └── formulation-trial-*.md
+│   ├── trials/               # Generated trial .docx — git-ignored
+│   ├── reference/            # Reference docs .docx — git-ignored
+│   ├── build-inputs.mjs      # .md → .docx converter
+│   └── classification-manifest.json
+├── ingest/                   # Tracked Layer A ingest source
+│   ├── cli.mjs               # Thin npm run ingest entry point
+│   ├── legacy-ingest.mjs     # Step 1 compatibility implementation
+│   └── tests/                # Repository-boundary and record-contract tests
+├── store/                    # Store contract plus generated records
+│   ├── records.schema.json   # Record JSON schema (reuse artifact)
+│   └── README.md
+├── render/                   # Layer C renderer — git-ignored output
+│   └── render-docx.mjs
+├── template/
+│   └── p2-template.md        # P.2 layout template (P0.2 caveat)
+├── rubric/
+│   └── scoring-90-100.md     # Scoring rubric (Phase 6)
+└── outputs/                  # Final rendered output — git-ignored
+    ├── p2-draft.docx
+    ├── evidence-log.md
+    └── formula-decision.md
+```
+
+## Data Classification
+
+See `data-classification.md` for the two-axis classification system (sensitivity label + citable flag).
+
+## Retention
+
+Generated artifacts under `store/` and `outputs/` are kept for project duration (configurable) and
+git-ignored to prevent committing extracted content. The ingest source under `ingest/`, the store
+schema, and store documentation remain tracked. See P0.5 tracked risk.
