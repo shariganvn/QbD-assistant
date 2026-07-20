@@ -1,0 +1,58 @@
+{
+  "branch": "master",
+  "da_review": "summary:\n🔥 RESOLVED staged G-01 and state reconciliation blockers; staged verification passes 5/5.\n⚠️ Retain Draft-07, child failure E2E, and legacy hardening as non-blocking carry-forwards.",
+  "diff_stat": "unknown",
+  "generated_at": "2026-07-20T15:19:39+00:00",
+  "git_head": "d03cf4f36b509d0189e4016537b18ab7f17e5b63",
+  "next_pickup": [
+    {
+      "files": [
+        "docs/plans/qbd-p2-ingest-completion/plan.md",
+        "docs/plans/qbd-p2-ingest-completion/gates.yaml",
+        "docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md",
+        "cowork-p2-kit/ingest/legacy-ingest.mjs",
+        "cowork-p2-kit/ingest/tests/fixtures/contract/records.jsonl"
+      ],
+      "text": "Execute Step 2 modularization against the frozen Step 1 contract; stop for a spec-diff review before Step 3"
+    }
+  ],
+  "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
+  "pickup_files": [
+    "cowork-p2-kit/ingest/legacy-ingest.mjs",
+    "cowork-p2-kit/ingest/tests/fixtures/contract/records.jsonl",
+    "cowork-p2-kit/ingest/tests/record-contract.test.mjs",
+    "cowork-p2-kit/ingest/tests/repository-boundary.test.mjs",
+    "docs/plans/qbd-p2-ingest-completion/gates.yaml",
+    "docs/plans/qbd-p2-ingest-completion/plan.md",
+    "docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md",
+    "docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md"
+  ],
+  "pickup_fingerprint_files": [
+    "cowork-p2-kit/ingest/legacy-ingest.mjs",
+    "cowork-p2-kit/ingest/tests/fixtures/contract/records.jsonl",
+    "cowork-p2-kit/ingest/tests/record-contract.test.mjs",
+    "cowork-p2-kit/ingest/tests/repository-boundary.test.mjs",
+    "docs/plans/qbd-p2-ingest-completion/gates.yaml",
+    "docs/plans/qbd-p2-ingest-completion/plan.md",
+    "docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md",
+    "docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md"
+  ],
+  "schema_version": 2,
+  "session_id": "260720-2002",
+  "summary": "Completed Step 1 repository boundary and JSONL contract freeze; verified 5/5 focused tests, byte-identical 17-record ingest output, canonical docs, and LOW GitNexus scope with zero affected flows.",
+  "test_verdict": "artifacts/260720-2002/test-verdict.json",
+  "ui_verdict": null,
+  "unresolved": [
+    {
+      "files": [
+        "cowork-p2-kit/ingest/legacy-ingest.mjs",
+        "cowork-p2-kit/ingest/tests/record-contract.test.mjs",
+        "cowork-p2-kit/ingest/tests/repository-boundary.test.mjs",
+        "docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md",
+        "docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md"
+      ],
+      "text": "Carry forward full Draft-07 validation, end-to-end nonzero child failure coverage, and legacy monolith/shell/is-complex hardening in later steps"
+    }
+  ],
+  "worktree_status": []
+}
