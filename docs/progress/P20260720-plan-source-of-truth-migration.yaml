@@ -1,0 +1,36 @@
+id: P20260720-plan-source-of-truth-migration
+date: "2026-07-20"
+workstream: qbd-p2-ingest-completion
+status: partial
+summary: Created one canonical executable Phase 2 plan package, moved superseded
+  planning material into OUTDATED quarantine, and repointed workflow state to
+  Step 1.
+changed_files:
+- IMPLEMENTATION_PLAN.md
+- CLAUDE.md
+- .claude/rules/documentation-management.md
+- .claude/rules/primary-workflow.md
+- .claude/rules/orchestration-protocol.md
+- .claude/rules/RULE-BRAINSTORM-PLAN.md
+- docs/plans/qbd-p2-ingest-completion/
+- docs/plans/OUTDATED/
+- docs/reports/qbd-p2-ingest-completion/design-basis.md
+- docs/reports/OUTDATED/
+- docs/project-roadmap.md
+- docs/architecture/ADR-qbd-core-module-boundaries.md
+- cowork-p2-kit/render/README.md
+- docs/test-plans/T20260720-agent-baton-state-cutover.yaml
+tests_run:
+  verdict: passed
+  counts:
+    passed: 1
+    failed: 0
+    warnings: 0
+decisions: []
+next_pickup:
+  files:
+  - docs/plans/qbd-p2-ingest-completion/plan.md
+  - docs/plans/qbd-p2-ingest-completion/gates.yaml
+  - docs/plans/qbd-p2-ingest-completion/step-01-repository-boundary-and-contract-freeze.md
+  text: Execute Step 1 repository boundary and contract freeze; do not read
+    OUTDATED material.

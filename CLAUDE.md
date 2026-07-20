@@ -35,9 +35,14 @@ Mọi phản hồi cho HUMAN tuân theo 5 nguyên tắc:
 ## Where things live
 
 - `docs/raw/` — source of example file to work with.
-- `docs/` — project docs go here; **do not create `.md` outside `docs/` or `plans/`** unless the user asks.
-- `docs/docs-state.yaml` — source-of-truth trạng thái docs (canonical/active/planned/deprecated/reference). Đọc trước để biết doc nào là sự thật. Cập nhật khi thêm/đổi/bỏ doc; `npm run docs:check` để soát lệch.
-- `plans/` — plans (`<timestamp>-<slug>/`) and `plans/templates/`; `plans/**` is git-ignored except templates.
+- `docs/` — project docs, active plans, and reports live here. Do not create project Markdown
+  outside `docs/` except the root workflow pointers named below.
+- `baton state` — quản lý workflow state, handoff, và evidence qua agent-baton CLI. Dùng `baton state startup` để nạp context và `baton state validate` để kiểm tra ledger khi workflow state thay đổi.
+- `IMPLEMENTATION_PLAN.md` — pointer to the single canonical active plan; never duplicate status here.
+- `docs/plans/<workstream>/` — active plan package. Read `plan.md`, then only the current step.
+- `docs/reports/<workstream>/` — current evidence and review artifacts.
+- `docs/plans/OUTDATED/`, `docs/reports/OUTDATED/` — historical quarantine. **Do not scan or read
+  these directories unless the user explicitly requests historical investigation.**
 - `.claude/rules/` — the always-loaded engineering contract; open the linked on-demand rule files only when the task needs them.
 
 ## Nguyên Tắc Làm việc
@@ -47,6 +52,24 @@ Khi làm việc/scout/đọc dữ liệu với file docx, excel, pdf:
 - Spawn subagent lower tier (Haiku, Sonnet) cho mục đích scout
 - Sử dụng liteparse skill, CLI để tìm kiếm nhanh
 - **KHÔNG ĐƯỢC ĐỌC TRỰC TIẾP SẼ BỊ TRÀN CONTEXT**.
+
+Khi chuyển từ brainstorm --> plan, đọc rule `.claude/rules/RULE-BRAINSTORM-PLAN.md`
+
+## qbd_core module boundaries (Phase 2 — proposed, xem ADR)
+
+> Áp dụng cho `qbd_core/` (Phase 2 roadmap, Python, chưa bắt đầu code). **Không áp dụng cho
+> `cowork-p2-kit/`** (Phase 1 MVP, giữ nguyên layer A/B/C như hiện tại).
+
+- Monolith, chia module theo **nghiệp vụ** (không theo layer kỹ thuật), 5–7 module.
+- Mỗi module: `SPEC.md` (nguồn sự thật) + `service.py` + `models.py` (bảng DB riêng) +
+  `api.py` (cổng vào/ra duy nhất) + `tests/`. Module khác chỉ được gọi qua `api.py`.
+- DB dùng chung được. `shared/` chỉ chứa thứ thật sự dùng chung (auth, db connection) —
+  không chứa business logic. Chia sẻ file ngoài `api.py`/`shared/` phải khai permission
+  trong `SPEC.md` của module bị đọc.
+- SDD: đổi hành vi = đổi `SPEC.md` trước, code sau. Review phải đối chiếu **spec-diff**
+  với code-diff, không chỉ đọc code-diff.
+- Chi tiết đầy đủ + module list đề xuất + thứ tự implement:
+  `docs/architecture/ADR-qbd-core-module-boundaries.md` (draft, chờ confirm).
 
 ## GitNexus — Known Issues (human-owned, outside generated block)
 
@@ -58,7 +81,7 @@ Khi làm việc/scout/đọc dữ liệu với file docx, excel, pdf:
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
-This project is indexed by GitNexus as **MODULE3-agent** (403 symbols, 408 relationships, 0 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
+This project is indexed by GitNexus as **QbD-assistant** (736 symbols, 753 relationships, 0 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
 > If any GitNexus tool warns the index is stale, run `npx gitnexus analyze` in terminal first.
 
@@ -81,10 +104,10 @@ This project is indexed by GitNexus as **MODULE3-agent** (403 symbols, 408 relat
 
 | Resource | Use for |
 |----------|---------|
-| `gitnexus://repo/MODULE3-agent/context` | Codebase overview, check index freshness |
-| `gitnexus://repo/MODULE3-agent/clusters` | All functional areas |
-| `gitnexus://repo/MODULE3-agent/processes` | All execution flows |
-| `gitnexus://repo/MODULE3-agent/process/{name}` | Step-by-step execution trace |
+| `gitnexus://repo/QbD-assistant/context` | Codebase overview, check index freshness |
+| `gitnexus://repo/QbD-assistant/clusters` | All functional areas |
+| `gitnexus://repo/QbD-assistant/processes` | All execution flows |
+| `gitnexus://repo/QbD-assistant/process/{name}` | Step-by-step execution trace |
 
 ## CLI
 

@@ -1,6 +1,6 @@
 # Glossary — QbD P.2 domain terminology
 
-Status: reference · Updated: 2026-07-13
+Status: reference · Updated: 2026-07-20
 
 Use these terms precisely and consistently across code, docs, and drafts.
 
@@ -42,6 +42,31 @@ Use these terms precisely and consistently across code, docs, and drafts.
   renderer (footnotes/hyperlinks/TOC/tables); fidelity gated by the P1.2 spike.
 - **Decision matrix** — criteria × formulation scoring table driving the formulation choice,
   paired with prose reasoning + a TL;DR.
+
+## Module architecture (`qbd_core`, Phase 2 — proposed)
+
+> Draft, không canonical — xem `docs/architecture/ADR-qbd-core-module-boundaries.md`. Chưa
+> áp dụng cho `cowork-p2-kit/` (Phase 1 MVP).
+
+- **`evidence`** — module biến raw docx/pdf thành record có provenance + classification;
+  sở hữu `KnowledgeDBPort` + `EvidenceStorePort`.
+- **`dossier_drafting`** — module dựng decision matrix + soạn prose P.2.2/P.2.3 có trích
+  dẫn; sở hữu `LLMPort` + `SearchPort`.
+- **`egress_gate`** — module chính sách: classification label nào được đi provider nào,
+  fail-closed khi thiếu nhãn (business-module hóa của guardrail layer 2 "Egress control").
+- **`provider_access`** — module cơ chế gọi provider thật: hợp đồng ZDR, danh sách model
+  được duyệt, local-model fallback.
+- **`rendering`** — module fill `.docx` xác định (footnote/hyperlink/TOC/table); sở hữu
+  `DocRenderPort`.
+- **`quality_gate`** — module chấm P0.1 dossier-readiness rubric + P1.5 golden-set.
+- **`SPEC.md`** — nguồn sự thật duy nhất của một module; đổi hành vi phải đổi `SPEC.md`
+  trước khi code (xem SDD trong ADR).
+- **Spec-diff** — review đối chiếu diff của `SPEC.md` với diff của code; spec đổi mà code
+  không đổi (hoặc ngược lại) không tương ứng ⇒ reject.
+- **`api.py`** — cổng vào/ra duy nhất của một module; module khác không được import thẳng
+  `service.py`/`models.py` nội bộ.
+- **`shared/`** — thư mục chỉ chứa thứ thật sự dùng chung giữa các module (auth, db
+  connection, base types); không chứa business logic.
 
 ## Security / data governance
 

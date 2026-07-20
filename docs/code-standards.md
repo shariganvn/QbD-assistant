@@ -47,7 +47,7 @@ Baseline principles: **YAGNI · KISS · DRY**, in that order.
 
 ## Docs & plans hygiene
 
-- Update `docs/docs-state.yaml` whenever a doc is added/renamed/removed; run `npm run docs:check`.
+- Không duy trì docs registry trong repo. Khi thay đổi workflow state, dùng `baton state validate` để kiểm tra canonical ledgers và generated views.
 - **No plan IDs, phase numbers, or finding codes in code comments, filenames, test names, or
   commit messages.** Explain the invariant/behavior directly.
 - Conventional commits (`feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`), no AI

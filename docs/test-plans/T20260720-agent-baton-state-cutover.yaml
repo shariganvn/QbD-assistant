@@ -1,0 +1,39 @@
+id: T20260720-agent-baton-state-cutover
+date: "2026-07-20"
+workstream: qbd-p2-ingest-completion
+status: executed
+plan: docs/plans/qbd-p2-ingest-completion/plan.md
+scope:
+  summary: Verify the agent-baton state cutover that replaces the retired docs-state registry with canonical progress records and generated compatibility views.
+  changed_files:
+    - CLAUDE.md
+    - docs/code-standards.md
+    - cowork-p2-kit/data-classification.md
+    - docs/progress/P20260720-agent-baton-state-cutover.yaml
+    - docs/test-plans/T20260720-agent-baton-state-cutover.yaml
+    - docs/test-plans/active.yaml
+    - PROGRESS.md
+    - DECISIONS.md
+    - TEST_PLAN.md
+approval:
+  required: false
+  approved_at: null
+  approved_by: null
+commands:
+  - id: workflow-state-validation
+    description: Validate the canonical state ledgers and their generated compatibility views.
+    command:
+      - baton
+      - state
+      - validate
+    requires_live_services: false
+    mutates_datastore: false
+results:
+  verdict: passed
+  artifact: artifacts/20260720-agent-baton-state-cutover/test-verdict.json
+  counts:
+    passed: 1
+    failed: 0
+    warnings: 0
+notes:
+  - State cutover validation passed through the agent-baton verdict producer.

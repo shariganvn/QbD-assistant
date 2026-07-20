@@ -1,0 +1,43 @@
+id: T20260720-plan-source-of-truth-migration
+date: "2026-07-20"
+workstream: qbd-p2-ingest-completion
+status: executed
+plan: docs/plans/qbd-p2-ingest-completion/plan.md
+scope:
+  summary: Verify the canonical plan migration, workflow routing, and generated compatibility views.
+  changed_files:
+    - IMPLEMENTATION_PLAN.md
+    - CLAUDE.md
+    - .claude/rules/documentation-management.md
+    - .claude/rules/primary-workflow.md
+    - .claude/rules/orchestration-protocol.md
+    - .claude/rules/RULE-BRAINSTORM-PLAN.md
+    - docs/plans/qbd-p2-ingest-completion/
+    - docs/plans/OUTDATED/
+    - docs/reports/qbd-p2-ingest-completion/
+    - docs/reports/OUTDATED/
+    - project-state.yaml
+    - session-handoff.yaml
+approval:
+  required: false
+  approved_at: null
+  approved_by: null
+commands:
+  - id: workflow-state-validation
+    description: Validate canonical ledgers, pointers, pickup files, and generated workflow views.
+    command:
+      - baton
+      - state
+      - validate
+    requires_live_services: false
+    mutates_datastore: false
+results:
+  verdict: passed
+  artifact: artifacts/260720-plan-source-of-truth-migration-final/test-verdict.json
+  counts:
+    passed: 1
+    failed: 0
+    warnings: 0
+notes:
+  - Active routing resolves to plan.md, gates.yaml, and Step 1 in the new canonical package.
+  - OUTDATED directories are explicitly excluded by CLAUDE.md and planning rules.

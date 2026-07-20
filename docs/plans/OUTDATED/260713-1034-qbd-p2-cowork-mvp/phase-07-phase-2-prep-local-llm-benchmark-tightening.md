@@ -50,8 +50,9 @@ Local model = internal-track worker (extraction/retrieval/bounded drafting on ap
 4. **`qbd_core` ports outline** — `LLMPort` / `SearchPort` / `KnowledgeDBPort` /
    `EvidenceStorePort` / `DocRenderPort`. Reuse is cross-language (qbd_core is Python; MVP Layer A
    ingest is Node `.mjs`), so **Layer A is reused as its documented JSON record schema, not its
-   code**; Layer C's render binary (OfficeCLI/fallback) is reused by **shell invocation**. Do not
-   assume the `.mjs` modules are importable by the Python port.
+   code**; Layer C's render (Node `docx` script; .NET OfficeCLI as fallback) is reused by
+   **shell/CLI invocation** (a `node` subprocess), not Python import. Do not assume the `.mjs`
+   modules are importable by the Python port.
 
 ## Success Criteria
 
@@ -65,3 +66,5 @@ Local model = internal-track worker (extraction/retrieval/bounded drafting on ap
   phase prepares but does not unblock them. Do not begin 48/96 GB sizing without benchmark data.
 - **Posture drift:** the MVP's relaxed consent/retention must not silently become production;
   the backlog is the mechanism that forces the tightening decisions.
+
+<!-- Updated: Validation Session 1 - Layer C reuse restated: render is now a Node `docx` script (OfficeCLI fallback), reused by node-subprocess shell/CLI invocation, not Python import. -->

@@ -12,7 +12,7 @@ Every subagent prompt should include:
 - acceptance criteria
 - constraints
 - work context path
-- reports path, normally `{work_context}/plans/reports/`
+- reports path, normally `{work_context}/docs/reports/<workstream>/`
 
 If the shell CWD differs from the primary project, use the primary project paths.
 

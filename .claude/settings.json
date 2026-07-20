@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "baton gate --root \"$CLAUDE_PROJECT_DIR\"",
+            "statusMessage": "Validating session handoff..."
+          }
+        ]
+      }
+    ]
+  }
+}

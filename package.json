@@ -7,13 +7,17 @@
   },
   "scripts": {
     "liteparse": "lit",
-    "docs:check": "node scripts/check-docs-state.mjs"
+    "inputs:build": "node cowork-p2-kit/inputs/build-inputs.mjs",
+    "ingest": "node cowork-p2-kit/store/ingest.mjs",
+    "render": "node cowork-p2-kit/render/render-docx.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@llamaindex/liteparse": "^2.5.0",
-    "js-yaml": "^4.3.0"
+    "@llamaindex/liteparse": "^2.5.0"
+  },
+  "dependencies": {
+    "docx": "9.7.1"
   }
 }

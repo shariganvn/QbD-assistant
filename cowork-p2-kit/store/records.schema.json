@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QbD Store Record",
+  "description": "Portable record schema for Layer A ingest output. Reuse artifact for qbd_core (Python) — target this schema, not the .mjs code.",
+  "type": "object",
+  "required": ["id", "source_type", "content", "provenance", "confidence", "extraction_status", "classification"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique record identifier (e.g. file-base64hash-page-offset)"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": ["text", "table"],
+      "description": "Whether this record is free text or a reconstructed table"
+    },
+    "content": {
+      "type": "string",
+      "description": "Extracted text content (treated as delimited untrusted data)"
+    },
+    "table": {
+      "type": ["object", "null"],
+      "description": "Reconstructed table grid (only for source_type=table)",
+      "properties": {
+        "headers": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "required": ["headers", "rows"]
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Mandatory provenance anchor — rejects null page/offsets",
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "Relative path to source file (never absolute)"
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Page number (1-indexed)"
+        },
+        "char_start": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Start offset into pages[i].text (as emitted by liteparse)"
+        },
+        "char_end": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "End offset into pages[i].text (exclusive)"
+        },
+        "quote": {
+          "type": "string",
+          "description": "Exact substring for round-trip verification"
+        },
+        "page_kind": {
+          "type": "string",
+          "enum": ["pdf", "renderer-derived"],
+          "description": "PDF page numbers are physical; DOCX pages are liteparse layout artifacts"
+        }
+      },
+      "required": ["file", "page", "char_start", "char_end", "quote", "page_kind"]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "low"],
+      "description": "Extraction confidence; low = needs OCR or partial extraction"
+    },
+    "extraction_status": {
+      "type": "string",
+      "enum": ["ok", "needs-ocr"],
+      "description": "Extraction outcome; needs-ocr = page still empty after OCR attempt"
+    },
+    "classification": {
+      "type": "object",
+      "description": "Two-axis classification (sensitivity + trust)",
+      "properties": {
+        "label": {
+          "type": "string",
+          "enum": ["public", "internal", "internal-derived"],
+          "description": "Sensitivity label; unlabeled ⇒ internal (fail-closed)"
+        },
+        "citable": {
+          "type": "boolean",
+          "description": "Whether this record may be cited in the dossier draft"
+        }
+      },
+      "required": ["label", "citable"]
+    }
+  }
+}

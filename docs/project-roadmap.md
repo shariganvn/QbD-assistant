@@ -12,7 +12,11 @@ executable detail yet.
 results, picks the best-supported formulation (logical, defensible), and drafts **P.2.2 +
 P.2.3** in Vietnamese — grounded, cited, draft-only. **Public / FD-modified MOCK data only.**
 
-Build phases (see `plans/260713-1034-qbd-p2-cowork-mvp/plan.md`):
+Current executable work is tracked only by
+`docs/plans/qbd-p2-ingest-completion/plan.md`. The former seven-phase narrative plan is archived
+under `docs/plans/OUTDATED/` and must not be used for status or execution.
+
+Roadmap phases:
 
 1. Foundation — docs + kit scaffold + data-classification convention.
 2. Ingest & store layer (liteparse + provenance).

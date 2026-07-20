@@ -6,7 +6,8 @@ Use this file when a task needs an implementation workflow beyond a direct answe
 
 - Read the request, relevant docs, and nearby code before planning.
 - Clarify only decisions that cannot be discovered from the repo.
-- For broad or risky work, create or update a plan in `plans/`.
+- For broad or risky work, follow `IMPLEMENTATION_PLAN.md` to the active package in `docs/plans/`.
+  Create a new active package only after retiring the previous one; never maintain two active plans.
 - For ambiguous workflow sequence, load `.claude/skills/cook/references/workflow-routing.md`.
 
 ## 2. Implement

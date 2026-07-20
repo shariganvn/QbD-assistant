@@ -1,0 +1,27 @@
+id: P20260720-agent-baton-state-cutover
+date: "2026-07-20"
+workstream: qbd-p2-ingest-completion
+status: partial
+summary: Retired the docs-state registry and seeded agent-baton with the current
+  QbD P.2 ingest-completion state; retained the FD response, system
+  architecture, code standards, and roadmap as core context.
+changed_files:
+- docs/docs-state.yaml
+- scripts/check-docs-state.mjs
+- CLAUDE.md
+- docs/code-standards.md
+- cowork-p2-kit/data-classification.md
+- package.json
+- package-lock.json
+tests_run:
+  verdict: passed
+  counts:
+    passed: 1
+    failed: 0
+    warnings: 0
+decisions: []
+next_pickup:
+  files:
+  - plans/260717-0957-qbd-p2-ingest-completion/plan.md
+  text: Continue the active QbD P.2 ingest-completion workstream; use the
+    retained core documents as targeted context when needed.

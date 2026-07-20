@@ -1,0 +1,220 @@
+schema_version: 1
+workstream: qbd-p2-ingest-completion
+canonical_plan: docs/plans/qbd-p2-ingest-completion/plan.md
+status_rule: all blocking gates require status=pass and a readable evidence artifact
+
+gates:
+  - id: G-01
+    name: tracked-source-boundary
+    requirement: A fresh checkout contains all executable ingest source.
+    invariant: No executable source is stored under ignored generated-data globs.
+    boundary: cowork-p2-kit/ingest and cowork-p2-kit/.gitignore
+    fixture: repository index
+    command: [node, --test, cowork-p2-kit/ingest/tests/repository-boundary.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - every runtime module is returned by git ls-files
+        - no runtime module is returned by git check-ignore
+        - npm run ingest resolves to cowork-p2-kit/ingest/cli.mjs
+    evidence: artifacts/qbd-p2-ingest-completion/gates/G-01.json
+    owner_step: 1
+    blocks: [G-03]
+    status: unverified
+
+  - id: G-02
+    name: record-contract-freeze
+    requirement: Modularization preserves the accepted JSONL contract.
+    invariant: Required fields, deterministic ID basis, provenance offsets, and default CLI behavior do not drift.
+    boundary: records.schema.json and ingest contract tests
+    fixture: cowork-p2-kit/ingest/tests/fixtures/contract/
+    command: [node, --test, cowork-p2-kit/ingest/tests/record-contract.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - representative records match the schema and approved snapshot
+        - ingested_at is absent
+        - page text sliced by offsets equals quote
+    evidence: artifacts/qbd-p2-ingest-completion/gates/G-02.json
+    owner_step: 1
+    blocks: [G-03, G-07]
+    status: unverified
+
+  - id: G-03
+    name: modular-pipeline-compatibility
+    requirement: Library boundaries are testable without changing happy-path behavior.
+    invariant: Only the CLI maps errors to exits; libraries use injected roots/adapters and typed errors.
+    boundary: cowork-p2-kit/ingest/*.mjs
+    fixture: cowork-p2-kit/ingest/tests/fixtures/happy-path/
+    command: [node, --test, cowork-p2-kit/ingest/tests/pipeline.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - no library module calls process.exit
+        - dependency execution uses argument arrays rather than shell command strings
+        - injected temp roots are honored
+        - happy-path records match the contract snapshot
+    evidence: artifacts/qbd-p2-ingest-completion/gates/G-03.json
+    owner_step: 2
+    blocks: [G-04, G-05, G-06, G-07]
+    status: unverified
+
+  - id: G-04
+    name: atomic-failure-preserves-store
+    requirement: Failed publication never changes the prior store.
+    invariant: Validation, round-trip, and rename failures preserve the previous store hash.
+    boundary: cowork-p2-kit/ingest/publication.mjs
+    fixture: isolated temp store with seeded records.jsonl
+    command: [node, --test, cowork-p2-kit/ingest/tests/publication-failure.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - each injected failure returns a typed non-success result
+        - before and after store hashes are identical
+        - no lock or temp file remains
+    evidence: artifacts/qbd-p2-ingest-completion/gates/G-04.json
+    owner_step: 3
+    blocks: [G-10]
+    status: unverified
+
+  - id: G-05
+    name: concurrent-writer-safety
+    requirement: Concurrent writers cannot share or steal a temporary file.
+    invariant: Publication is serialized or rejects the second writer predictably without ENOENT or corruption.
+    boundary: cowork-p2-kit/ingest/publication.mjs
+    fixture: isolated store with two synchronized CLI processes
+    command: [node, --test, cowork-p2-kit/ingest/tests/publication-concurrency.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - no shared temp path is used
+        - no process deletes another process temp file
+        - final store validates and no temp or stale lock remains
+    evidence: artifacts/qbd-p2-ingest-completion/gates/G-05.json
+    owner_step: 3
+    blocks: [G-10]
+    status: unverified
+
+  - id: G-06
+    name: file-boundary-security
+    requirement: Input and publication paths stay within configured roots.
+    invariant: Traversal, symlink escape, duplicate normalized path, and shell metacharacters cannot escape policy.
+    boundary: admission.mjs, liteparse-adapter.mjs, publication.mjs
+    fixture: cowork-p2-kit/ingest/tests/fixtures/file-boundaries/
+    command: [node, --test, cowork-p2-kit/ingest/tests/file-boundaries.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - malicious paths are rejected before parsing or writing
+        - parser arguments are passed literally without shell evaluation
+        - prior store hash is unchanged for every rejection
+    evidence: artifacts/qbd-p2-ingest-completion/gates/G-06.json
+    owner_step: 3
+    blocks: [G-10]
+    status: unverified
+
+  - id: G-07
+    name: fail-closed-admission
+    requirement: Every trust-boundary rejection is executable and isolated.
+    invariant: Unsupported input, absent manifest, non-public label, invalid metadata, dependency failure, and assertion failure exit nonzero without publication.
+    boundary: admission.mjs and cli.mjs
+    fixture: cowork-p2-kit/ingest/tests/fixtures/admission/
+    command: [node, --test, cowork-p2-kit/ingest/tests/admission-negative.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - every case observes a nonzero child CLI exit
+        - prior store hash is unchanged
+        - canonical mock fixtures are never modified
+    evidence: artifacts/qbd-p2-ingest-completion/gates/G-07.json
+    owner_step: 4
+    blocks: [G-10]
+    status: unverified
+
+  - id: G-08
+    name: capability-discovery
+    requirement: Optional LiteParse capabilities are discovered before use.
+    invariant: Missing is-complex is reported as unsupported and is never converted to an empty successful result.
+    boundary: liteparse-adapter.mjs and run log
+    fixture: adapters exposing supported, unsupported, malformed, and failing capability responses
+    command: [node, --test, cowork-p2-kit/ingest/tests/capability-discovery.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - unsupported is explicit in CLI output and run log
+        - malformed or failing required parse operations block publication
+        - no OCR execution occurs
+    evidence: artifacts/qbd-p2-ingest-completion/gates/G-08.json
+    owner_step: 4
+    blocks: [G-10]
+    status: unverified
+
+  - id: G-09
+    name: deterministic-real-liteparse
+    requirement: Identical real inputs produce byte-identical JSONL.
+    invariant: Two isolated runs using the repo-local LiteParse produce the same raw store hash.
+    boundary: full ingest pipeline
+    fixture: generated canonical mock DOCX inputs
+    command: [node, --test, cowork-p2-kit/ingest/tests/determinism.integration.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - both stores are non-empty and schema-valid
+        - raw JSONL hashes are identical
+        - every non-empty record round-trips
+    evidence: artifacts/qbd-p2-ingest-completion/gates/G-09.json
+    owner_step: 4
+    blocks: [G-10]
+    status: unverified
+
+  - id: G-10
+    name: complete-ingest-verification
+    requirement: One command runs all required Phase 2 gates.
+    invariant: The verification command cannot pass with skipped blocking tests.
+    boundary: package.json verify:ingest script and complete gate suite
+    fixture: all committed ingest fixtures plus generated canonical mock inputs
+    command: [npm, run, verify:ingest]
+    expected:
+      exit_code: 0
+      assertions:
+        - G-01 through G-09 evidence exists and reports pass
+        - no blocking test is skipped
+    evidence: artifacts/qbd-p2-ingest-completion/gates/G-10.json
+    owner_step: 4
+    blocks: [G-11, G-12]
+    status: unverified
+
+  - id: G-11
+    name: change-impact-review
+    requirement: The final diff affects only expected Phase 2 symbols and workflows.
+    invariant: GitNexus change detection and manual diff review show no unexpected Phase 3 or downstream change.
+    boundary: repository diff
+    fixture: final uncommitted Phase 2 diff
+    command: [gitnexus_detect_changes, --scope, all]
+    expected:
+      exit_code: 0
+      assertions:
+        - changed symbols match the active plan
+        - unexpected affected flows are zero or explicitly approved
+    evidence: artifacts/qbd-p2-ingest-completion/gates/G-11.md
+    owner_step: 5
+    blocks: [G-12]
+    status: unverified
+
+  - id: G-12
+    name: blocking-review-closure
+    requirement: A fresh code review finds no blocking Phase 2 issue.
+    invariant: Review traces every requirement to fixture, command, raw result, and retained evidence.
+    boundary: Phase 2 code, tests, plan, and evidence
+    fixture: final diff plus G-01 through G-11 artifacts
+    command: [ck:code-review, pending-changes]
+    expected:
+      exit_code: 0
+      assertions:
+        - no blocking finding remains
+        - Phase 3 remains open and out of scope
+        - canonical plan status matches evidence
+    evidence: docs/reports/qbd-p2-ingest-completion/code-review.md
+    owner_step: 5
+    blocks: []
+    status: unverified

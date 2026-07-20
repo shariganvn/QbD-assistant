@@ -15,20 +15,25 @@ Common docs:
 
 ## Plan Location
 
-Save plans under `plans/<timestamp>-<descriptive-slug>/`.
+`IMPLEMENTATION_PLAN.md` is a pointer to the single active plan. Save the canonical plan package
+under `docs/plans/<descriptive-workstream>/`.
 
 Use:
 
 ```text
-plans/<slug>/
+IMPLEMENTATION_PLAN.md             # pointer only
+docs/plans/<workstream>/
   plan.md
-  phase-01-<name>.md
-  reports/
+  gates.yaml
+  step-01-<name>.md
+docs/reports/<workstream>/
+  <review-or-evidence>.md
 ```
 
-Keep `plan.md` short: status, phases, dependencies, acceptance criteria, and links to phase files.
+Keep `plan.md` short: source-of-truth rules, scope, ordered step status, dependencies, exit
+acceptance, and links to step/gate files. `gates.yaml` owns executable acceptance definitions.
 
-Phase files should include only the detail needed to execute safely:
+Step files should include only the detail needed to execute safely:
 
 - context links
 - requirements
@@ -36,5 +41,9 @@ Phase files should include only the detail needed to execute safely:
 - implementation steps
 - tests or validation
 - risks and rollback notes
+
+Historical material belongs under `docs/plans/OUTDATED/` or `docs/reports/OUTDATED/`. Agents must
+not recursively read those directories unless the user explicitly requests historical analysis.
+Archived material never declares current status or satisfies an acceptance gate.
 
 Before updating docs, read the existing document. After updating, verify dates, links, and claims match the actual change.
