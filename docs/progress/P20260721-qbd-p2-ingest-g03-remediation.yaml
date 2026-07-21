@@ -1,0 +1,26 @@
+id: P20260721-qbd-p2-ingest-g03-remediation
+date: "2026-07-21"
+workstream: qbd-p2-ingest-completion
+status: partial
+summary: Resolved the two formal Step 2 spec-diff blockers, refreshed G-03 with 
+  15 passing focused tests, and accepted G-03; Step 3 is now unblocked.
+changed_files:
+- cowork-p2-kit/ingest/records.mjs
+- cowork-p2-kit/ingest/tests/pipeline.test.mjs
+- docs/test-plans/T20260721-qbd-p2-ingest-g03-spec-diff-remediation.yaml
+- docs/reports/qbd-p2-ingest-completion/spec-diff-step-02-remediation-20260721.md
+- artifacts/qbd-p2-ingest-completion/gates/G-03.json
+tests_run:
+  verdict: passed
+  counts:
+    passed: 15
+    failed: 0
+    warnings: 0
+decisions: []
+next_pickup:
+  files:
+  - docs/plans/qbd-p2-ingest-completion/step-03-harden-publication-and-file-boundaries.md
+  - docs/plans/qbd-p2-ingest-completion/gates.yaml
+  - artifacts/qbd-p2-ingest-completion/gates/G-03.json
+  text: Begin Step 3 publication and file-boundary hardening from the accepted 
+    G-03 baseline.

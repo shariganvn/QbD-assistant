@@ -3,14 +3,16 @@
   "name": "modular-pipeline-compatibility",
   "status": "pass",
   "verdict_kind": "final_verified",
-  "timestamp": "2026-07-21T13:14:22+07:00",
+  "timestamp": "2026-07-21T14:52:47+07:00",
   "command": "npm run verify:ingest",
   "exit_code": 0,
-  "tests": { "total": 14, "passed": 14, "failed": 0, "skipped": 0 },
+  "tests": { "total": 15, "passed": 15, "failed": 0, "skipped": 0 },
   "assertions_verified": [
     "G-01 tracked runtime-module inventory and package scripts",
     "G-02 frozen JSONL fields, deterministic IDs/order, and provenance offsets",
     "G-03 child CLI produces byte-identical 17-record JSONL with expected SHA-256, LiteParse version, and representative records",
+    "G-03 child config uses an absolute injected Node probe rather than /usr/bin/soffice while the default pipeline keeps its configured prerequisite probe",
+    "buildRecords declares the fixed (admitted, adapter, config) public boundary",
     "capability outcomes, typed manifest/config errors, absolute binary paths, argument arrays, process.exit boundary, and the 200-line limit"
   ],
   "module_line_counts": {
@@ -21,7 +23,7 @@
     "liteparse-adapter.mjs": 109,
     "pipeline.mjs": 86,
     "publication.mjs": 105,
-    "records.mjs": 135,
+    "records.mjs": 136,
     "table-reconstruction.mjs": 91
   },
   "snapshot_integrity": {

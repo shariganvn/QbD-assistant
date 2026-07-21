@@ -11,7 +11,7 @@ import {
   readFileSync, writeFileSync, mkdirSync, existsSync, cpSync, copyFileSync, rmSync, mkdtempSync,
 } from "node:fs";
 import { spawnSync } from "node:child_process";
-import { dirname, join, resolve } from "node:path";
+import { dirname, isAbsolute, join, resolve } from "node:path";
 import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
@@ -26,6 +26,7 @@ const fixtureDir = resolve(testDir, "fixtures/happy-path");
 const repoRoot = resolve(testDir, "../../../");
 const cliPath = resolve(testDir, "../cli.mjs");
 const litBinary = resolve(repoRoot, "node_modules/.bin/lit");
+const harmlessProbeBinary = process.execPath;
 
 // ─── Helpers ───────────────────────────────────────────────────────────
 
@@ -57,15 +58,21 @@ test("happy-path fixture produces byte-identical output via child CLI", () => {
 
     // Write absolute JSON config
     const configPath = join(tmpDir, "config.json");
-    writeFileSync(configPath, JSON.stringify({
+    const childConfig = {
       inputsRoot: tmpInputs,
       storeRoot: tmpStore,
       kitDir: tmpDir,
       litBinary,
-      sofficeBinary: "/usr/bin/soffice",
+      sofficeBinary: harmlessProbeBinary,
       ghostscriptBinary: "/usr/bin/gs",
       tessdataRoot: "/usr/share/tesseract-ocr/5/tessdata",
-    }));
+    };
+    assert.equal(childConfig.sofficeBinary, process.execPath);
+    assert.ok(isAbsolute(childConfig.sofficeBinary));
+    assert.notEqual(childConfig.sofficeBinary, "/usr/bin/soffice");
+    const pipelineSource = readFileSync(resolve(testDir, "../pipeline.mjs"), "utf-8");
+    assert.match(pipelineSource, /probeBinary\(sofficeBinary, "LibreOffice", config\)/);
+    writeFileSync(configPath, JSON.stringify(childConfig));
 
     // Start child CLI process
     const result = spawnSync(process.execPath, [cliPath, "--config", configPath], {
@@ -154,6 +161,10 @@ test("is-complex keeps available, unsupported, and invalid outcomes distinct", (
 
   const invalid = buildRecords(admitted, { parse: () => ({ pages: [page] }), isComplex: () => ({ status: "invalid", code: "E_CAPABILITY_INVALID" }) }, config);
   assert.deepEqual(invalid.capabilities.isComplex, { status: "invalid", code: "E_CAPABILITY_INVALID" });
+});
+
+test("buildRecords retains its three-parameter public boundary", () => {
+  assert.equal(buildRecords.length, 3, "buildRecords must accept admitted, adapter, and config");
 });
 
 test("liteparse adapter parses trailing output and reports bad is-complex output as invalid", () => {

@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "exit-code",
+    "report_path": null,
+    "report_sha256": null,
+    "report_size_bytes": null,
+    "stable": null
+  },
+  "argv": [
+    "npm",
+    "run",
+    "verify:ingest"
+  ],
+  "branch": "master",
+  "command": [
+    "npm",
+    "run",
+    "verify:ingest"
+  ],
+  "counts": {
+    "collected": null,
+    "deselected": null,
+    "error": null,
+    "failed": null,
+    "passed": null,
+    "skipped": null,
+    "warnings": null,
+    "xfailed": null,
+    "xpassed": null
+  },
+  "dirty_files": {
+    "cowork-p2-kit/ingest/records.mjs": {
+      "sha256": "5fe5075f24a2587678ac7862677c415caf1b04e7d285cb9446d0ad28d659dc79",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/tests/pipeline.test.mjs": {
+      "sha256": "1bb9bdb2e757c72dc89f8eaf1c4b47f6b1a750f21577be2359ac6b1dc7bef752",
+      "status": "modified"
+    }
+  },
+  "duration_seconds": 20.613983,
+  "evidence_level": "local-attested",
+  "evidence_quality": "exit-code-only",
+  "exit_code": 0,
+  "finished_at": "2026-07-21T08:08:44.044344+00:00",
+  "git": {
+    "branch_after": "master",
+    "branch_before": "master",
+    "head_after": "ad81589d7ead760323f10c11320fc84759175d50",
+    "head_before": "ad81589d7ead760323f10c11320fc84759175d50",
+    "stable": true
+  },
+  "git_head": "ad81589d7ead760323f10c11320fc84759175d50",
+  "log_path": "artifacts/260721-1508/test-output.log",
+  "log_sha256": "79f069912396f12d605a4098333d2a3387aa2bd7de10e0d066a15d28d31e69f8",
+  "log_size_bytes": 3256,
+  "outcome": "passed",
+  "requested_test_targets": [],
+  "runner_id": "stdlib-popen-v3",
+  "runtime": {
+    "implementation": "CPython",
+    "version": "3.14.4"
+  },
+  "schema_version": 3,
+  "session_id": "260721-1508",
+  "started_at": "2026-07-21T08:08:23.430351+00:00",
+  "status": "passed",
+  "summary": "command exited with code 0",
+  "test_targets": [],
+  "tool": "run_tests_with_verdict.py",
+  "worktree": {
+    "after": "80ec0c044bb12a9cf08d2d52d7b3a82c1878ca9983ec2da70c0fa13f4d4b10d5",
+    "before": "80ec0c044bb12a9cf08d2d52d7b3a82c1878ca9983ec2da70c0fa13f4d4b10d5",
+    "stable": true
+  }
+}

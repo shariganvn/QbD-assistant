@@ -1,0 +1,29 @@
+schema_version: 1
+updated_at: "2026-07-21T08:10:32.025654+00:00"
+branch: master
+git_head: "ad81589d7ead760323f10c11320fc84759175d50"
+worktree_id: nguyen-dell-7577:master
+active_workstream:
+  id: qbd-p2-ingest-completion
+  plan: docs/plans/qbd-p2-ingest-completion/plan.md
+  status: in-progress
+current_pickup:
+  source: session-handoff.yaml
+  summary: Begin Step 3 publication and file-boundary hardening from the 
+    accepted G-03 baseline.
+  files:
+  - docs/plans/qbd-p2-ingest-completion/step-03-harden-publication-and-file-boundaries.md
+  - docs/plans/qbd-p2-ingest-completion/gates.yaml
+  - artifacts/qbd-p2-ingest-completion/gates/G-03.json
+relevant_progress:
+- P20260721-qbd-p2-ingest-g03-remediation
+- P20260721-qbd-p2-ingest-step-02
+relevant_decisions:
+- D20260721
+read_next:
+- session-handoff.yaml
+- PROGRESS.md
+- docs/plans/qbd-p2-ingest-completion/plan.md
+- docs/plans/qbd-p2-ingest-completion/gates.yaml
+- docs/plans/qbd-p2-ingest-completion/step-03-harden-publication-and-file-boundaries.md
+- artifacts/qbd-p2-ingest-completion/gates/G-03.json

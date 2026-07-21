@@ -1,0 +1,46 @@
+id: T20260721-qbd-p2-ingest-g03-spec-diff-remediation
+date: "2026-07-21"
+workstream: qbd-p2-ingest-completion
+status: executed
+plan: docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md
+scope:
+  summary: Close the two G-03 spec-diff blockers without adding Step 3 publication hardening.
+  changed_files:
+    - cowork-p2-kit/ingest/records.mjs
+    - cowork-p2-kit/ingest/tests/pipeline.test.mjs
+    - docs/test-plans/T20260721-qbd-p2-ingest-g03-spec-diff-remediation.yaml
+    - docs/test-plans/active.yaml
+approval:
+  required: true
+  approved_at: "2026-07-21T15:09:05+07:00"
+  approved_by: human
+acceptance:
+  - id: g03-no-libreoffice-fixture
+    requirement: The G-03 child CLI fixture uses an absolute non-LibreOffice executable for the injected prerequisite probe and does not spawn the LibreOffice binary; the default CLI still probes its configured dependency.
+    evidence: pipeline.test.mjs happy-path child CLI test; fresh npm run verify:ingest
+  - id: g03-build-records-interface
+    requirement: records.mjs declares buildRecords(admitted, adapter, config), and a focused test guards the three-parameter public boundary.
+    evidence: pipeline.test.mjs interface assertion; fresh npm run verify:ingest
+  - id: g03-no-contract-drift
+    requirement: The isolated child CLI still produces the reviewed 17-record JSONL byte-for-byte with the expected SHA-256 and representative records.
+    evidence: pipeline.test.mjs; artifacts/qbd-p2-ingest-completion/gates/G-03.json
+commands:
+  - id: ingest-g03-remediation-verification
+    description: Run tracked-source, frozen-record, and modular-pipeline regressions after the two G-03 corrections.
+    command:
+      - npm
+      - run
+      - verify:ingest
+    requires_live_services: false
+    mutates_datastore: false
+results:
+  verdict: passed
+  artifact: artifacts/260721-1508/test-verdict.json
+  counts:
+    passed: 15
+    failed: 0
+    warnings: 0
+notes:
+  - Do not add lock, unique-temp, full-schema, failure-path, or concurrency behavior; those remain Step 3 work.
+  - Fresh verification passed 15/15 on 2026-07-21 after the focused signature and child-fixture corrections.
+  - The formal remediation spec-diff accepted G-03; Step 3 is now unblocked but remains out of scope for this test plan.

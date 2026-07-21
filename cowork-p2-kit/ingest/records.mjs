@@ -68,9 +68,10 @@ function addPageRecords(records, relPath, entry, page, complexByPage, capabiliti
  * Build records from admitted files using the LiteParse adapter.
  * @param {{ filePath: string, relPath: string, entry: object }[]} admitted
  * @param {{ parse: Function, isComplex: Function }} adapter
+ * @param {object} config — reserved programmatic seam for record construction
  * @returns {{ records: object[], capabilities: object }}
  */
-export function buildRecords(admitted, adapter) {
+export function buildRecords(admitted, adapter, config) {
   const records = [];
   const capabilities = {
     isComplex: { status: "unsupported", code: "E_CAPABILITY_UNSUPPORTED" },
