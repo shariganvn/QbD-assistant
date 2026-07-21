@@ -1,58 +1,58 @@
 {
   "branch": "master",
-  "da_review": "summary:\n🔥 RESOLVED staged G-01 and state reconciliation blockers; staged verification passes 5/5.\n⚠️ Retain Draft-07, child failure E2E, and legacy hardening as non-blocking carry-forwards.",
+  "da_review": "summary:\n✅ ACCEPT — C1/C1e evidence is verified; 14/14 focused tests pass.\n⚠️ Carry forward formal Step 2 spec-diff review before Step 3; tmp-happy-path is untracked test residue excluded from commits.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-20T15:19:39+00:00",
-  "git_head": "d03cf4f36b509d0189e4016537b18ab7f17e5b63",
+  "generated_at": "2026-07-21T06:19:08+00:00",
+  "git_head": "21cf9f920f6376ff0de46c2f126a77dda8de95d6",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/qbd-p2-ingest-completion/plan.md",
-        "docs/plans/qbd-p2-ingest-completion/gates.yaml",
         "docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md",
-        "cowork-p2-kit/ingest/legacy-ingest.mjs",
-        "cowork-p2-kit/ingest/tests/fixtures/contract/records.jsonl"
+        "docs/plans/qbd-p2-ingest-completion/step-03-harden-publication-and-file-boundaries.md",
+        "docs/plans/qbd-p2-ingest-completion/gates.yaml",
+        "artifacts/qbd-p2-ingest-completion/gates/G-03.json"
       ],
-      "text": "Execute Step 2 modularization against the frozen Step 1 contract; stop for a spec-diff review before Step 3"
+      "text": "Conduct and record the formal Step 2 spec-diff review, then begin Step 3 only after acceptance"
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
-    "cowork-p2-kit/ingest/legacy-ingest.mjs",
-    "cowork-p2-kit/ingest/tests/fixtures/contract/records.jsonl",
-    "cowork-p2-kit/ingest/tests/record-contract.test.mjs",
-    "cowork-p2-kit/ingest/tests/repository-boundary.test.mjs",
+    "artifacts/qbd-p2-ingest-completion/gates/G-03.json",
     "docs/plans/qbd-p2-ingest-completion/gates.yaml",
-    "docs/plans/qbd-p2-ingest-completion/plan.md",
     "docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md",
-    "docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md"
+    "docs/plans/qbd-p2-ingest-completion/step-03-harden-publication-and-file-boundaries.md"
   ],
   "pickup_fingerprint_files": [
-    "cowork-p2-kit/ingest/legacy-ingest.mjs",
-    "cowork-p2-kit/ingest/tests/fixtures/contract/records.jsonl",
-    "cowork-p2-kit/ingest/tests/record-contract.test.mjs",
-    "cowork-p2-kit/ingest/tests/repository-boundary.test.mjs",
+    "artifacts/qbd-p2-ingest-completion/gates/G-03.json",
     "docs/plans/qbd-p2-ingest-completion/gates.yaml",
-    "docs/plans/qbd-p2-ingest-completion/plan.md",
     "docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md",
-    "docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md"
+    "docs/plans/qbd-p2-ingest-completion/step-03-harden-publication-and-file-boundaries.md"
   ],
   "schema_version": 2,
-  "session_id": "260720-2002",
-  "summary": "Completed Step 1 repository boundary and JSONL contract freeze; verified 5/5 focused tests, byte-identical 17-record ingest output, canonical docs, and LOW GitNexus scope with zero affected flows.",
-  "test_verdict": "artifacts/260720-2002/test-verdict.json",
+  "session_id": "260721-1309",
+  "summary": "Completed the Step 2 modular ingest pipeline, removed the legacy bridge, restored typed boundary handling, and attested 14 focused passing tests. Step 3 remains blocked on formal spec-diff review.",
+  "test_verdict": "artifacts/260721-1309/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
       "files": [
-        "cowork-p2-kit/ingest/legacy-ingest.mjs",
-        "cowork-p2-kit/ingest/tests/record-contract.test.mjs",
-        "cowork-p2-kit/ingest/tests/repository-boundary.test.mjs",
         "docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md",
-        "docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md"
+        "docs/plans/qbd-p2-ingest-completion/step-03-harden-publication-and-file-boundaries.md",
+        "docs/plans/qbd-p2-ingest-completion/gates.yaml",
+        "artifacts/qbd-p2-ingest-completion/gates/G-03.json"
       ],
-      "text": "Carry forward full Draft-07 validation, end-to-end nonzero child failure coverage, and legacy monolith/shell/is-complex hardening in later steps"
+      "text": "Conduct and record the formal Step 2 spec-diff review before starting Step 3"
     }
   ],
-  "worktree_status": []
+  "worktree_status": [
+    " M docs/.session-state.md",
+    " M session-handoff.yaml",
+    "?? cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/config.json",
+    "?? cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/inputs/classification-manifest.json",
+    "?? cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/inputs/product-profile.docx",
+    "?? cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/inputs/trials/formulation-trial-01.docx",
+    "?? cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/inputs/trials/formulation-trial-02.docx",
+    "?? cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/inputs/trials/formulation-trial-03.docx",
+    "?? cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/store/records.schema.json"
+  ]
 }
