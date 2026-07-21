@@ -1,0 +1,22 @@
+{
+  "inputs/trials/formulation-trial-01.docx": {
+    "label": "public",
+    "citable": true,
+    "ocr_language": "vie"
+  },
+  "inputs/trials/formulation-trial-02.docx": {
+    "label": "public",
+    "citable": true,
+    "ocr_language": "vie"
+  },
+  "inputs/trials/formulation-trial-03.docx": {
+    "label": "public",
+    "citable": true,
+    "ocr_language": "vie"
+  },
+  "inputs/product-profile.docx": {
+    "label": "public",
+    "citable": true,
+    "ocr_language": "vie"
+  }
+}

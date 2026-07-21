@@ -1,7 +1,7 @@
 <!-- GENERATED VIEW — do not edit manually -->
 <!-- Source: docs/progress/*.yaml and docs/decisions/D*.md -->
 <!-- Regenerate: baton render-workflow -->
-<!-- Source fingerprint: sha256:2557b108c9f712eb04d2557782914865a6f4fb019492cdb5032f8add595fee15 -->
+<!-- Source fingerprint: sha256:cb7fac148c0ce5b6f5344096be04c2cca7e508d3d6b8f34a88dbf6926844ead2 -->
 
 # PROGRESS
 
@@ -12,15 +12,14 @@
 - ID: `qbd-p2-ingest-completion`
 - Status: `in-progress`
 - Plan: `docs/plans/qbd-p2-ingest-completion/plan.md`
-- Current pickup: Execute Step 2 modularization against the frozen Step 1 contract; stop for a spec-diff review before Step 3.
-- Pickup files: `docs/plans/qbd-p2-ingest-completion/plan.md`, `docs/plans/qbd-p2-ingest-completion/gates.yaml`, `docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md`, `cowork-p2-kit/ingest/legacy-ingest.mjs`, `cowork-p2-kit/ingest/tests/fixtures/contract/records.jsonl`
+- Current pickup: Conduct and record the Step 2 spec-diff review before starting Step 3.
+- Pickup files: `docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md`, `docs/plans/qbd-p2-ingest-completion/step-03-harden-publication-and-file-boundaries.md`, `docs/plans/qbd-p2-ingest-completion/gates.yaml`, `artifacts/qbd-p2-ingest-completion/gates/G-03.json`
 
 ## Latest progress
 
 | Date | ID | Status | Summary |
 |---|---|---|---|
-| 2026-07-20 | `P20260720-qbd-p2-ingest-step-01` | partial | Completed the tracked ingest repository boundary and froze the accepted JSONL compatibility contract without changing record output. |
-| 2026-07-20 | `P20260720-plan-source-of-truth-migration` | partial | Created one canonical executable Phase 2 plan package, moved superseded planning material into OUTDATED quarantine, and repointed workflow state to Step 1. |
+| 2026-07-21 | `P20260721-qbd-p2-ingest-step-02` | partial | Modularized the ingest pipeline, removed the legacy bridge, and attested the frozen compatibility gate with 14 passing focused tests; formal spec-diff review remains before Step 3. |
 
 ## Blockers
 

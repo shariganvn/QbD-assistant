@@ -19,8 +19,15 @@ function runGit(args) {
 
 test("all ingest runtime modules are tracked and not ignored", () => {
   assert.deepEqual(runtimeModules, [
+    "cowork-p2-kit/ingest/admission.mjs",
     "cowork-p2-kit/ingest/cli.mjs",
-    "cowork-p2-kit/ingest/legacy-ingest.mjs",
+    "cowork-p2-kit/ingest/config.mjs",
+    "cowork-p2-kit/ingest/errors.mjs",
+    "cowork-p2-kit/ingest/liteparse-adapter.mjs",
+    "cowork-p2-kit/ingest/pipeline.mjs",
+    "cowork-p2-kit/ingest/publication.mjs",
+    "cowork-p2-kit/ingest/records.mjs",
+    "cowork-p2-kit/ingest/table-reconstruction.mjs",
   ]);
 
   for (const modulePath of runtimeModules) {
@@ -39,7 +46,8 @@ test("package scripts resolve to the tracked CLI and focused verification", () =
   assert.equal(
     packageJson.scripts["verify:ingest"],
     "node --test cowork-p2-kit/ingest/tests/repository-boundary.test.mjs " +
-      "cowork-p2-kit/ingest/tests/record-contract.test.mjs",
+      "cowork-p2-kit/ingest/tests/record-contract.test.mjs " +
+      "cowork-p2-kit/ingest/tests/pipeline.test.mjs",
   );
   assert.equal(packageJson.scripts.render, "node cowork-p2-kit/render/render-docx.mjs");
   assert.equal(packageJson.dependencies.docx, "9.7.1");

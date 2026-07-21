@@ -53,16 +53,27 @@ gates:
         - no library module calls process.exit
         - dependency execution uses argument arrays rather than shell command strings
         - injected temp roots are honored
-        - happy-path records match the contract snapshot
+        - the committed non-sensitive four-DOCX happy-path fixture is copied to isolated roots
+          without invoking the local input builder or LibreOffice
+        - a child CLI process receives only an absolute JSON config and uses the repo-local absolute
+          LiteParse binary
+        - output bytes equal expected-records.jsonl; expected.json reports its 17-record SHA-256
+          and LiteParse version; the three G-02 representative records remain byte-identical
     evidence: artifacts/qbd-p2-ingest-completion/gates/G-03.json
+    review_fixes:
+      applied: "2026-07-21T22:20"
+      findings_addressed: 14
+      tests_after: "7/7 pass"
+      notes: "See impl-notes post-implementation review fixes section"
     owner_step: 2
     blocks: [G-04, G-05, G-06, G-07]
-    status: unverified
+    status: pass
 
   - id: G-04
     name: atomic-failure-preserves-store
-    requirement: Failed publication never changes the prior store.
-    invariant: Validation, round-trip, and rename failures preserve the previous store hash.
+    requirement: Failed publication never changes the prior store and records diagnostic output outside it.
+    invariant: Full-schema validation, round-trip, and rename failures preserve every prior store-root byte;
+      a structured failure log may exist only below the injected artifact root.
     boundary: cowork-p2-kit/ingest/publication.mjs
     fixture: isolated temp store with seeded records.jsonl
     command: [node, --test, cowork-p2-kit/ingest/tests/publication-failure.test.mjs]
@@ -70,8 +81,9 @@ gates:
       exit_code: 0
       assertions:
         - each injected failure returns a typed non-success result
-        - before and after store hashes are identical
+        - before and after hashes of every store-root file are identical
         - no lock or temp file remains
+        - each failure log is outside the store root and includes command, result, hashes, run identifier, and timestamp
     evidence: artifacts/qbd-p2-ingest-completion/gates/G-04.json
     owner_step: 3
     blocks: [G-10]
@@ -80,7 +92,8 @@ gates:
   - id: G-05
     name: concurrent-writer-safety
     requirement: Concurrent writers cannot share or steal a temporary file.
-    invariant: Publication is serialized or rejects the second writer predictably without ENOENT or corruption.
+    invariant: The first writer owns the lock and the second writer immediately returns
+      E_PUBLICATION_LOCKED without ENOENT, corruption, waiting, or queueing.
     boundary: cowork-p2-kit/ingest/publication.mjs
     fixture: isolated store with two synchronized CLI processes
     command: [node, --test, cowork-p2-kit/ingest/tests/publication-concurrency.test.mjs]
@@ -89,6 +102,9 @@ gates:
       assertions:
         - no shared temp path is used
         - no process deletes another process temp file
+        - the second process exits nonzero with E_PUBLICATION_LOCKED before any writer-side effect
+        - a well-formed lock is reclaimed only when its owner is absent and it is at least five minutes old
+        - live, fresh, malformed, and indeterminate locks are rejected without store mutation
         - final store validates and no temp or stale lock remains
     evidence: artifacts/qbd-p2-ingest-completion/gates/G-05.json
     owner_step: 3
@@ -98,7 +114,8 @@ gates:
   - id: G-06
     name: file-boundary-security
     requirement: Input and publication paths stay within configured roots.
-    invariant: Traversal, symlink escape, duplicate normalized path, and shell metacharacters cannot escape policy.
+    invariant: Canonical configured roots contain all operations; traversal, absolute paths outside roots,
+      every symlink, duplicate normalized path, unsupported extension, and shell metacharacters cannot escape policy.
     boundary: admission.mjs, liteparse-adapter.mjs, publication.mjs
     fixture: cowork-p2-kit/ingest/tests/fixtures/file-boundaries/
     command: [node, --test, cowork-p2-kit/ingest/tests/file-boundaries.test.mjs]
@@ -106,8 +123,10 @@ gates:
       exit_code: 0
       assertions:
         - malicious paths are rejected before parsing or writing
+        - every symlink is rejected before parsing or writing
         - parser arguments are passed literally without shell evaluation
-        - prior store hash is unchanged for every rejection
+        - the configured parser binary is absolute and no PATH lookup occurs
+        - every store-root file is unchanged for every rejection
     evidence: artifacts/qbd-p2-ingest-completion/gates/G-06.json
     owner_step: 3
     blocks: [G-10]

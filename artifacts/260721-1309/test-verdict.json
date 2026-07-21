@@ -1,0 +1,196 @@
+{
+  "adapter": {
+    "id": "exit-code",
+    "report_path": null,
+    "report_sha256": null,
+    "report_size_bytes": null,
+    "stable": null
+  },
+  "argv": [
+    "npm",
+    "run",
+    "verify:ingest"
+  ],
+  "branch": "master",
+  "command": [
+    "npm",
+    "run",
+    "verify:ingest"
+  ],
+  "counts": {
+    "collected": null,
+    "deselected": null,
+    "error": null,
+    "failed": null,
+    "passed": null,
+    "skipped": null,
+    "warnings": null,
+    "xfailed": null,
+    "xpassed": null
+  },
+  "dirty_files": {
+    "cowork-p2-kit/README.md": {
+      "sha256": "5efc492ef24a2f195797986564fd481dee516a758066a4a0e4c5a7f437bd0095",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/admission.mjs": {
+      "sha256": "61681f23c3d53701c87dc2db07f1ecab55e0e0eace7cc1ff002c31f21e57693c",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/cli.mjs": {
+      "sha256": "24fd0c268d77c149f50c0c75399202f98bcdc234439d16c8820674f24047a246",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/config.mjs": {
+      "sha256": "d63484bae1f3de21d5fdf7ecd1d667a0ba046bf4b8bfbb6b5eba4f6bede9db88",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/errors.mjs": {
+      "sha256": "f4a54629ac066c3ac59fe51378fd201fb2e9e2766e5e6afa938949936abfa9d9",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/legacy-ingest.mjs": {
+      "sha256": null,
+      "status": "deleted"
+    },
+    "cowork-p2-kit/ingest/liteparse-adapter.mjs": {
+      "sha256": "ebf97b5095441485bce71252f979ba6c04445d22842d3bf167dc6c0f7d99542e",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/pipeline.mjs": {
+      "sha256": "d8ce788392b40243fed25ddf1fd1bfe0e73e71323099183dad9ccd3549fd13b1",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/publication.mjs": {
+      "sha256": "018f84ae3365a3b2ffc54469da9d3f45139f689463aab8cb163b0e8c7d6f1416",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/records.mjs": {
+      "sha256": "1bb0360c84b79c05e118e6d6828509a3785b5bba05cbab48bc4fe15a80a54bec",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/table-reconstruction.mjs": {
+      "sha256": "6a2bd15eede655a4c796234f60b07d7dd4eeffbe0e662f85d109e9bde70ce8c0",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/fixtures/happy-path/expected-records.jsonl": {
+      "sha256": "6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/fixtures/happy-path/expected.json": {
+      "sha256": "969cde77d53f9cb06d5b740d655c73529294aab7b8d0b0084ba6121b1a66767c",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/fixtures/happy-path/inputs/classification-manifest.json": {
+      "sha256": "abb568eb7e6d9d032cd415e70d767c1a7e41cd3046892db2369b4b7142d39eae",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/fixtures/happy-path/inputs/product-profile.docx": {
+      "sha256": "a66dde8038d131aa93c848c749c91eb64d965201c479c3f95bbdeceb55f0942d",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/fixtures/happy-path/inputs/trials/formulation-trial-01.docx": {
+      "sha256": "5ac9275d2befbc40a574f0897dfa77f21722bcc2c953d0965a97049613181b3c",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/fixtures/happy-path/inputs/trials/formulation-trial-02.docx": {
+      "sha256": "e0979fb0b299a7fd6e254777feb167b8181f5fb846c61c231ba7ea45f0570241",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/fixtures/happy-path/inputs/trials/formulation-trial-03.docx": {
+      "sha256": "da20d894cf4b859ea74813be1d63bc431568101bbdb849682877bd096e09505d",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/fixtures/happy-path/records.schema.json": {
+      "sha256": "216b47d41ec7d6a94a6cd4f9c0e2e687524f3836969f53ce66b06d8745dabc0f",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/generate-fixture.mjs": {
+      "sha256": "82dc5ae68a1a96ae9f9c280f885350309fde9e4eb7c474c1686f43f4187fc9e8",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/pipeline.test.mjs": {
+      "sha256": "a7b5788635933f95ad85d2051e3c0fe2b37aafbd21ef573bf122ea60d297b1e4",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/record-contract.test.mjs": {
+      "sha256": "7930985c3db6e946726c9caeed5b574edaaf0b30b654f54c1bbef3f9df12bf12",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/tests/repository-boundary.test.mjs": {
+      "sha256": "52d03eab044982ab9fc3fd0b2eb829ed8d40314109e2868630a232e4999ae1cf",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/config.json": {
+      "sha256": "6b998e7c0da52f09f48f8d79a9c7fa1e3cd9b8b41a41c9f70450aa899282ccb6",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/inputs/classification-manifest.json": {
+      "sha256": "abb568eb7e6d9d032cd415e70d767c1a7e41cd3046892db2369b4b7142d39eae",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/inputs/product-profile.docx": {
+      "sha256": "a66dde8038d131aa93c848c749c91eb64d965201c479c3f95bbdeceb55f0942d",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/inputs/trials/formulation-trial-01.docx": {
+      "sha256": "5ac9275d2befbc40a574f0897dfa77f21722bcc2c953d0965a97049613181b3c",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/inputs/trials/formulation-trial-02.docx": {
+      "sha256": "e0979fb0b299a7fd6e254777feb167b8181f5fb846c61c231ba7ea45f0570241",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/inputs/trials/formulation-trial-03.docx": {
+      "sha256": "da20d894cf4b859ea74813be1d63bc431568101bbdb849682877bd096e09505d",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/store/records.schema.json": {
+      "sha256": "216b47d41ec7d6a94a6cd4f9c0e2e687524f3836969f53ce66b06d8745dabc0f",
+      "status": "added"
+    },
+    "cowork-p2-kit/store/README.md": {
+      "sha256": "9ada7ea089065f992b70ad7ca13d66d55800624428dc7e251d373de5bb5b2dac",
+      "status": "modified"
+    },
+    "package.json": {
+      "sha256": "388d460de0f78f49c80e7da5ea7a1845aef4fd5e14e8bca48a3fbff02408ce38",
+      "status": "modified"
+    }
+  },
+  "duration_seconds": 20.698283,
+  "evidence_level": "local-attested",
+  "evidence_quality": "exit-code-only",
+  "exit_code": 0,
+  "finished_at": "2026-07-21T06:14:11.691301+00:00",
+  "git": {
+    "branch_after": "master",
+    "branch_before": "master",
+    "head_after": "9a3f6ca5c2d110ef2ee79c4f7bd4908fd80b02b6",
+    "head_before": "9a3f6ca5c2d110ef2ee79c4f7bd4908fd80b02b6",
+    "stable": true
+  },
+  "git_head": "9a3f6ca5c2d110ef2ee79c4f7bd4908fd80b02b6",
+  "log_path": "artifacts/260721-1309/test-output.log",
+  "log_sha256": "d403c97cacd23e2d4fb13f08a60f57b16180c1641aed616c7329dcddc77bc38e",
+  "log_size_bytes": 3074,
+  "outcome": "passed",
+  "requested_test_targets": [],
+  "runner_id": "stdlib-popen-v3",
+  "runtime": {
+    "implementation": "CPython",
+    "version": "3.14.4"
+  },
+  "schema_version": 3,
+  "session_id": "260721-1309",
+  "started_at": "2026-07-21T06:13:50.992920+00:00",
+  "status": "passed",
+  "summary": "command exited with code 0",
+  "test_targets": [],
+  "tool": "run_tests_with_verdict.py",
+  "worktree": {
+    "after": "173d4128a1b7b60c87e3e44145a80d231aebae8cb2843d669d8f29841825ee44",
+    "before": "173d4128a1b7b60c87e3e44145a80d231aebae8cb2843d669d8f29841825ee44",
+    "stable": true
+  }
+}

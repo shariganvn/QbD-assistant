@@ -15,7 +15,7 @@ npm run ingest
 1. **Admission gate** — verifies system deps (LibreOffice, Ghostscript, tessdata, repo-local `lit`), reads `classification-manifest.json`, rejects unlabeled/non-public/unreadable files.
 2. **Preflight** — enumerates ALL files in input dirs; rejects unsupported extensions (`.md` in particular) before any write.
 3. **Extract** — runs `lit parse --format json` on each admitted `.docx`, splits into per-segment records with provenance `{file, page, char_start, char_end, quote}`.
-4. **OCR detection** — runs `lit is-complex --compact` to detect OCR-eligible pages. **No OCR is executed** (deferred). Flag rule: `confidence:"low"`/`needs-ocr` ONLY when `textLength < 50` (extraction genuinely failed). OCR-eligibility marker recorded in run log for the deferred OCR session.
+4. **OCR detection** — runs `lit is-complex --compact` to detect OCR-eligible pages. **No OCR is executed** (deferred). The modular pipeline reports this optional capability as `available`, `unsupported` (`E_CAPABILITY_UNSUPPORTED`), or `invalid` (`E_CAPABILITY_INVALID`); failed output never masquerades as an empty successful scan. Flag rule: `confidence:"low"`/`needs-ocr` ONLY when `textLength < 50` (extraction genuinely failed).
 5. **Table spike** — attempts to reconstruct formulation×attribute tables by clustering `textItems` on x/y axes. If successful, records carry a `table` field; otherwise text-only.
 6. **Round-trip verification** — re-parses each source file and asserts `page.text.slice(char_start, char_end) === quote` for every record.
 7. **Atomic publication** — writes to temp file, validates against schema, round-trip verifies, then atomically replaces `records.jsonl`.

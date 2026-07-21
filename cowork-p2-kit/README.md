@@ -43,8 +43,11 @@ cowork-p2-kit/
 │   └── classification-manifest.json
 ├── ingest/                   # Tracked Layer A ingest source
 │   ├── cli.mjs               # Thin npm run ingest entry point
-│   ├── legacy-ingest.mjs     # Step 1 compatibility implementation
-│   └── tests/                # Repository-boundary and record-contract tests
+│   ├── pipeline.mjs          # Modular orchestration entry point
+│   ├── admission.mjs         # Input and manifest admission gate
+│   ├── liteparse-adapter.mjs # Literal-argument LiteParse boundary
+│   ├── records.mjs           # Deterministic records and round-trip checks
+│   └── tests/                # Boundary, contract, and child-CLI oracle tests
 ├── store/                    # Store contract plus generated records
 │   ├── records.schema.json   # Record JSON schema (reuse artifact)
 │   └── README.md

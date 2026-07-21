@@ -45,6 +45,12 @@ Mọi phản hồi cho HUMAN tuân theo 5 nguyên tắc:
   these directories unless the user explicitly requests historical investigation.**
 - `.claude/rules/` — the always-loaded engineering contract; open the linked on-demand rule files only when the task needs them.
 
+## Session handoff discipline (baton)
+
+- **Two-phase commit:** commit work + closeout artifacts trước (C1) → `HEAD_C1=$(git rev-parse HEAD)` → `baton handoff --expected-git-head "$HEAD_C1" ...` → `baton reconcile`. Chỉ khi kết quả clean/benign mới commit C2 = riêng `session-handoff.yaml` + `docs/.session-state.md`. Không gộp C1/C2 vào một commit.
+- **Critical/DA review bắt buộc trước khi đóng session** nếu diff chạm: auth, schema/migration, đường dẫn security-sensitive, `baton verdict` báo warning/fail, quyết định kiến trúc mới, hoặc scope vượt plan đã duyệt. Các trường hợp khác có thể bỏ qua.
+- **Exit-3 / handoff conflict:** KHÔNG BAO GIỜ `git reset` hay `git commit --amend` để xử lý — orphan commit mà `git_head` đang trỏ tới, gây lặp stale-loop ở session sau. Dùng `baton reconcile --repair` (forward-repoint, tự refuse nếu có content drift thật), rồi commit tiếp bình thường.
+
 ## Nguyên Tắc Làm việc
 
 Khi làm việc/scout/đọc dữ liệu với file docx, excel, pdf:

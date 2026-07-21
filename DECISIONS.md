@@ -1,7 +1,7 @@
 <!-- GENERATED VIEW — do not edit manually -->
 <!-- Source: docs/progress/*.yaml and docs/decisions/D*.md -->
 <!-- Regenerate: baton render-workflow -->
-<!-- Source fingerprint: sha256:2557b108c9f712eb04d2557782914865a6f4fb019492cdb5032f8add595fee15 -->
+<!-- Source fingerprint: sha256:cb7fac148c0ce5b6f5344096be04c2cca7e508d3d6b8f34a88dbf6926844ead2 -->
 
 # DECISIONS
 
@@ -11,6 +11,7 @@
 
 | ID | Date | Status | Scope | Decision | Read when |
 |---|---|---|---|---|---|
+| `D20260721` | 2026-07-21 | active | qbd-p2-ingest-completion-step-03 | [Step 3 Publication and File-Boundary Decisions](docs/decisions/D20260721-qbd-p2-ingest-step-03-publication-boundaries.md) | Before implementing Step 2 fixture seams or any Step 3 publication, path, or parser boundary. |
 
 ## History
 

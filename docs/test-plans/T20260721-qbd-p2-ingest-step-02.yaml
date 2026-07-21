@@ -1,0 +1,37 @@
+id: T20260721-qbd-p2-ingest-step-02
+date: "2026-07-21"
+workstream: qbd-p2-ingest-completion
+status: executed
+plan: docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md
+scope:
+  summary: Verify the modular ingest pipeline preserves the frozen record contract and exposes the required typed boundaries.
+  changed_files:
+    - cowork-p2-kit/ingest/
+    - cowork-p2-kit/ingest/tests/
+    - cowork-p2-kit/README.md
+    - cowork-p2-kit/store/README.md
+    - docs/plans/qbd-p2-ingest-completion/
+approval:
+  required: true
+  approved_at: "2026-07-21T13:00:00+07:00"
+  approved_by: human
+commands:
+  - id: ingest-step-02-verification
+    description: Run repository-boundary, frozen-contract, and modular-pipeline tests.
+    command:
+      - npm
+      - run
+      - verify:ingest
+    requires_live_services: false
+    mutates_datastore: false
+results:
+  verdict: passed
+  artifact: artifacts/260721-1309/test-verdict.json
+  counts:
+    passed: null
+    failed: null
+    warnings: null
+notes:
+  - The attested runner is exit-code-only; TAP output records 14 passing subtests.
+  - G-03 evidence is artifacts/qbd-p2-ingest-completion/gates/G-03.json.
+  - Formal spec-diff review remains the next pickup and gates Step 3.

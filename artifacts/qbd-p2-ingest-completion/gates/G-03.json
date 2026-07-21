@@ -1,0 +1,40 @@
+{
+  "gate": "G-03",
+  "name": "modular-pipeline-compatibility",
+  "status": "pass",
+  "verdict_kind": "final_verified",
+  "timestamp": "2026-07-21T13:14:22+07:00",
+  "command": "npm run verify:ingest",
+  "exit_code": 0,
+  "tests": { "total": 14, "passed": 14, "failed": 0, "skipped": 0 },
+  "assertions_verified": [
+    "G-01 tracked runtime-module inventory and package scripts",
+    "G-02 frozen JSONL fields, deterministic IDs/order, and provenance offsets",
+    "G-03 child CLI produces byte-identical 17-record JSONL with expected SHA-256, LiteParse version, and representative records",
+    "capability outcomes, typed manifest/config errors, absolute binary paths, argument arrays, process.exit boundary, and the 200-line limit"
+  ],
+  "module_line_counts": {
+    "admission.mjs": 186,
+    "cli.mjs": 123,
+    "config.mjs": 121,
+    "errors.mjs": 54,
+    "liteparse-adapter.mjs": 109,
+    "pipeline.mjs": 86,
+    "publication.mjs": 105,
+    "records.mjs": 135,
+    "table-reconstruction.mjs": 91
+  },
+  "snapshot_integrity": {
+    "status": "pass",
+    "method": "SHA-256 of git diff --binary and git diff --cached --binary before and after verification",
+    "before": {
+      "unstaged_diff_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "staged_diff_sha256": "e374993978e676ecc45d2c2fdb9a61989ffe09b3b9288c6cb59e7e7219cd349d"
+    },
+    "after": {
+      "unstaged_diff_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "staged_diff_sha256": "e374993978e676ecc45d2c2fdb9a61989ffe09b3b9288c6cb59e7e7219cd349d"
+    }
+  },
+  "supersedes": "gate-verdicts-step02-20260721-125612.md (inconclusive snapshot-hash collection)"
+}

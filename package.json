@@ -9,7 +9,7 @@
     "liteparse": "lit",
     "inputs:build": "node cowork-p2-kit/inputs/build-inputs.mjs",
     "ingest": "node cowork-p2-kit/ingest/cli.mjs",
-    "verify:ingest": "node --test cowork-p2-kit/ingest/tests/repository-boundary.test.mjs cowork-p2-kit/ingest/tests/record-contract.test.mjs",
+    "verify:ingest": "node --test cowork-p2-kit/ingest/tests/repository-boundary.test.mjs cowork-p2-kit/ingest/tests/record-contract.test.mjs cowork-p2-kit/ingest/tests/pipeline.test.mjs",
     "render": "node cowork-p2-kit/render/render-docx.mjs"
   },
   "keywords": [],

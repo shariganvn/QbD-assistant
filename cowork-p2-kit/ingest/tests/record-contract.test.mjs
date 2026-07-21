@@ -5,8 +5,6 @@ import { dirname, isAbsolute, posix, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 
-import { resolveChildExitCode } from "../cli.mjs";
-
 const testDir = dirname(fileURLToPath(import.meta.url));
 const fixtureDir = resolve(testDir, "fixtures/contract");
 const fixtureBytes = readFileSync(resolve(fixtureDir, "records.jsonl"));
@@ -56,7 +54,6 @@ test("reviewed JSONL fixture and required fields remain frozen", () => {
     assert.equal(typeof record.classification.citable, "boolean");
   }
 });
-
 test("IDs, relative paths, offsets, and record order remain deterministic", () => {
   const sortedKeys = records.map(recordSortKey).toSorted((left, right) => left.localeCompare(right));
   assert.deepEqual(records.map(recordSortKey), sortedKeys);
@@ -75,11 +72,4 @@ test("IDs, relative paths, offsets, and record order remain deterministic", () =
       provenance.quote,
     );
   }
-});
-
-test("CLI exit behavior mirrors the compatibility process", () => {
-  assert.equal(resolveChildExitCode({ status: 0 }), 0);
-  assert.equal(resolveChildExitCode({ status: 1 }), 1);
-  assert.equal(resolveChildExitCode({ status: null, signal: "SIGTERM" }), 1);
-  assert.equal(resolveChildExitCode({ status: null, error: new Error("spawn failed") }), 1);
 });
