@@ -6,85 +6,85 @@ TAP version 13
 # Subtest: happy-path fixture produces byte-identical output via child CLI
 ok 1 - happy-path fixture produces byte-identical output via child CLI
   ---
-  duration_ms: 19673.198111
+  duration_ms: 19834.136007
   type: 'test'
   ...
 # Subtest: no library module calls process.exit
 ok 2 - no library module calls process.exit
   ---
-  duration_ms: 1.499577
+  duration_ms: 1.286331
   type: 'test'
   ...
 # Subtest: dependency execution uses argument arrays, not shell strings
 ok 3 - dependency execution uses argument arrays, not shell strings
   ---
-  duration_ms: 0.302679
+  duration_ms: 0.27423
   type: 'test'
   ...
 # Subtest: is-complex keeps available, unsupported, and invalid outcomes distinct
 ok 4 - is-complex keeps available, unsupported, and invalid outcomes distinct
   ---
-  duration_ms: 1.140993
+  duration_ms: 1.114658
   type: 'test'
   ...
 # Subtest: liteparse adapter parses trailing output and reports bad is-complex output as invalid
 ok 5 - liteparse adapter parses trailing output and reports bad is-complex output as invalid
   ---
-  duration_ms: 0.480753
+  duration_ms: 0.42519
   type: 'test'
   ...
 # Subtest: non-zero is-complex execution is explicitly unsupported
 ok 6 - non-zero is-complex execution is explicitly unsupported
   ---
-  duration_ms: 0.180262
+  duration_ms: 0.173113
   type: 'test'
   ...
 # Subtest: malformed manifests are normalized to E_MANIFEST_INVALID
 ok 7 - malformed manifests are normalized to E_MANIFEST_INVALID
   ---
-  duration_ms: 1.770602
+  duration_ms: 1.786255
   type: 'test'
   ...
 # Subtest: CLI config rejects non-object and non-string path values as E_CONFIG
 ok 8 - CLI config rejects non-object and non-string path values as E_CONFIG
   ---
-  duration_ms: 286.734086
+  duration_ms: 284.70208
   type: 'test'
   ...
 # Subtest: programmatic binary overrides are absolute and the Stage 2 taxonomy is complete
 ok 9 - programmatic binary overrides are absolute and the Stage 2 taxonomy is complete
   ---
-  duration_ms: 0.644575
+  duration_ms: 0.733928
   type: 'test'
   ...
 # Subtest: all production ingest modules meet the 200-line limit
 ok 10 - all production ingest modules meet the 200-line limit
   ---
-  duration_ms: 2.081531
+  duration_ms: 1.767922
   type: 'test'
   ...
 # Subtest: reviewed JSONL fixture and required fields remain frozen
 ok 11 - reviewed JSONL fixture and required fields remain frozen
   ---
-  duration_ms: 2.899139
+  duration_ms: 2.458051
   type: 'test'
   ...
 # Subtest: IDs, relative paths, offsets, and record order remain deterministic
 ok 12 - IDs, relative paths, offsets, and record order remain deterministic
   ---
-  duration_ms: 11.578953
+  duration_ms: 11.921725
   type: 'test'
   ...
 # Subtest: all ingest runtime modules are tracked and not ignored
 ok 13 - all ingest runtime modules are tracked and not ignored
   ---
-  duration_ms: 90.990532
+  duration_ms: 86.057812
   type: 'test'
   ...
 # Subtest: package scripts resolve to the tracked CLI and focused verification
 ok 14 - package scripts resolve to the tracked CLI and focused verification
   ---
-  duration_ms: 0.768326
+  duration_ms: 0.339246
   type: 'test'
   ...
 1..14
@@ -95,4 +95,4 @@ ok 14 - package scripts resolve to the tracked CLI and focused verification
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 20067.824409
+# duration_ms 20219.646101
