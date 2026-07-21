@@ -1,58 +1,35 @@
 {
   "branch": "master",
-  "da_review": "summary:\n✅ ACCEPT — C1/C1e evidence is verified; 14/14 focused tests pass.\n⚠️ Carry forward formal Step 2 spec-diff review before Step 3; tmp-happy-path is untracked test residue excluded from commits.",
+  "da_review": "summary:\n⚠️ Low: the configured LibreOffice preflight regression guard is source-text based; add a direct injected preflight test when Step 3 changes pipeline behavior.\n⚠️ Step 3 publication, concurrency, failure-path, and file-boundary hardening remain intentionally pending.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-21T06:19:08+00:00",
-  "git_head": "21cf9f920f6376ff0de46c2f126a77dda8de95d6",
+  "generated_at": "2026-07-21T08:14:41+00:00",
+  "git_head": "be8aa5fbe2d12a7b560532b033a2faa3e7e8bd4e",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md",
         "docs/plans/qbd-p2-ingest-completion/step-03-harden-publication-and-file-boundaries.md",
         "docs/plans/qbd-p2-ingest-completion/gates.yaml",
         "artifacts/qbd-p2-ingest-completion/gates/G-03.json"
       ],
-      "text": "Conduct and record the formal Step 2 spec-diff review, then begin Step 3 only after acceptance"
+      "text": "Begin Step 3 publication and file-boundary hardening from the accepted G-03 baseline."
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
     "artifacts/qbd-p2-ingest-completion/gates/G-03.json",
     "docs/plans/qbd-p2-ingest-completion/gates.yaml",
-    "docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md",
     "docs/plans/qbd-p2-ingest-completion/step-03-harden-publication-and-file-boundaries.md"
   ],
   "pickup_fingerprint_files": [
     "artifacts/qbd-p2-ingest-completion/gates/G-03.json",
     "docs/plans/qbd-p2-ingest-completion/gates.yaml",
-    "docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md",
     "docs/plans/qbd-p2-ingest-completion/step-03-harden-publication-and-file-boundaries.md"
   ],
   "schema_version": 2,
-  "session_id": "260721-1309",
-  "summary": "Completed the Step 2 modular ingest pipeline, removed the legacy bridge, restored typed boundary handling, and attested 14 focused passing tests. Step 3 remains blocked on formal spec-diff review.",
-  "test_verdict": "artifacts/260721-1309/test-verdict.json",
+  "session_id": "260721-1508",
+  "summary": "Resolved and accepted the Step 2 G-03 spec-diff blockers; baton-attested 15/15 focused tests pass, and Step 3 is unblocked.",
+  "test_verdict": "artifacts/260721-1508/test-verdict.json",
   "ui_verdict": null,
-  "unresolved": [
-    {
-      "files": [
-        "docs/plans/qbd-p2-ingest-completion/step-02-modularize-ingest-pipeline.md",
-        "docs/plans/qbd-p2-ingest-completion/step-03-harden-publication-and-file-boundaries.md",
-        "docs/plans/qbd-p2-ingest-completion/gates.yaml",
-        "artifacts/qbd-p2-ingest-completion/gates/G-03.json"
-      ],
-      "text": "Conduct and record the formal Step 2 spec-diff review before starting Step 3"
-    }
-  ],
-  "worktree_status": [
-    " M docs/.session-state.md",
-    " M session-handoff.yaml",
-    "?? cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/config.json",
-    "?? cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/inputs/classification-manifest.json",
-    "?? cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/inputs/product-profile.docx",
-    "?? cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/inputs/trials/formulation-trial-01.docx",
-    "?? cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/inputs/trials/formulation-trial-02.docx",
-    "?? cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/inputs/trials/formulation-trial-03.docx",
-    "?? cowork-p2-kit/ingest/tests/tmp-happy-path-1784605897345/store/records.schema.json"
-  ]
+  "unresolved": [],
+  "worktree_status": []
 }
