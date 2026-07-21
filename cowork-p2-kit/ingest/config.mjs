@@ -7,7 +7,8 @@
 
 import {
   readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync,
-  renameSync, unlinkSync, copyFileSync, lstatSync, readlinkSync,
+  renameSync, unlinkSync, copyFileSync, lstatSync, readlinkSync, openSync,
+  closeSync, realpathSync,
 } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -33,6 +34,9 @@ const DEFAULT_FILE_OPS = {
   copyFileSync,
   lstatSync,
   readlinkSync,
+  openSync,
+  closeSync,
+  realpathSync,
 };
 
 function defaultClock() {
@@ -93,7 +97,11 @@ export function createConfig(overrides = {}) {
   const kitDir = absolutePathOverride(overrides, "kitDir", KIT_DIR);
   const inputsRoot = absolutePathOverride(overrides, "inputsRoot", join(kitDir, "inputs"));
   const storeRoot = absolutePathOverride(overrides, "storeRoot", join(kitDir, "store"));
-  const artifactRoot = absolutePathOverride(overrides, "artifactRoot", join(storeRoot, "artifacts"));
+  const artifactRoot = absolutePathOverride(
+    overrides,
+    "artifactRoot",
+    join(REPO_ROOT, "artifacts/qbd-p2-ingest-completion/runs"),
+  );
 
   return {
     inputsRoot,

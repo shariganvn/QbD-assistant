@@ -6,6 +6,8 @@
  */
 
 import { IngestError } from "./errors.mjs";
+import { isAbsolute, resolve } from "node:path";
+import { canonicalRoot, inside } from "./publication-support.mjs";
 
 /**
  * Extract JSON from liteparse output (may append timing info after JSON).
@@ -31,6 +33,23 @@ function extractJson(raw, type = "object") {
 export function createLiteparseAdapter(config) {
   const { litBinary, runProcess, fileOps } = config;
 
+  if (!isAbsolute(litBinary)) {
+    throw new IngestError("E_CONFIG", "LiteParse binary must be an absolute path", { details: { binary: litBinary } });
+  }
+
+  function assertTrustedInput(filePath) {
+    if (!isAbsolute(filePath) || !fileOps.existsSync(filePath)) {
+      throw new IngestError("E_PARSE", `Input file not found: ${filePath}`, { details: { path: filePath } });
+    }
+    if (!config.inputsRoot) return;
+    const inputsRoot = canonicalRoot(config.inputsRoot, fileOps);
+    const canonicalFile = resolve(filePath);
+    const stat = fileOps.lstatSync(canonicalFile);
+    if (stat.isSymbolicLink() || fileOps.realpathSync(canonicalFile) !== canonicalFile || !inside(inputsRoot, canonicalFile)) {
+      throw new IngestError(stat.isSymbolicLink() ? "E_SYMLINK" : "E_PATH_ESCAPE", `Input is outside trusted root: ${filePath}`, { details: { path: filePath, inputsRoot } });
+    }
+  }
+
   return {
     /** Absolute path to the lit binary. */
     getBinary() {
@@ -54,11 +73,7 @@ export function createLiteparseAdapter(config) {
      * @returns {{ pages: Array }}
      */
     parse(filePath) {
-      if (!fileOps.existsSync(filePath)) {
-        throw new IngestError("E_PARSE", `Input file not found: ${filePath}`, {
-          details: { path: filePath },
-        });
-      }
+      assertTrustedInput(filePath);
 
       // Argument array — no shell evaluation
       const result = runProcess(litBinary, ["parse", filePath, "--format", "json"], {
@@ -89,7 +104,7 @@ export function createLiteparseAdapter(config) {
      * @returns {{ status: "available", results: Array }|{ status: "unsupported"|"invalid", code: string }}
      */
     isComplex(filePath) {
-      if (!fileOps.existsSync(filePath)) {
+      try { assertTrustedInput(filePath); } catch {
         return { status: "unsupported", code: "E_CAPABILITY_UNSUPPORTED" };
       }
       const result = runProcess(litBinary, ["is-complex", filePath, "--compact"], {

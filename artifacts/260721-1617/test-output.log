@@ -1,0 +1,242 @@
+
+> module3-agent@1.0.0 verify:ingest
+> node --test cowork-p2-kit/ingest/tests/repository-boundary.test.mjs cowork-p2-kit/ingest/tests/record-contract.test.mjs cowork-p2-kit/ingest/tests/pipeline.test.mjs && node cowork-p2-kit/ingest/tests/run-gate.mjs G-04 cowork-p2-kit/ingest/tests/publication-failure.test.mjs && node cowork-p2-kit/ingest/tests/run-gate.mjs G-05 cowork-p2-kit/ingest/tests/publication-concurrency.test.mjs && node cowork-p2-kit/ingest/tests/run-gate.mjs G-06 cowork-p2-kit/ingest/tests/file-boundaries.test.mjs
+
+TAP version 13
+# Subtest: happy-path fixture produces byte-identical output via child CLI
+ok 1 - happy-path fixture produces byte-identical output via child CLI
+  ---
+  duration_ms: 20163.792437
+  type: 'test'
+  ...
+# Subtest: no library module calls process.exit
+ok 2 - no library module calls process.exit
+  ---
+  duration_ms: 1.535022
+  type: 'test'
+  ...
+# Subtest: dependency execution uses argument arrays, not shell strings
+ok 3 - dependency execution uses argument arrays, not shell strings
+  ---
+  duration_ms: 0.253925
+  type: 'test'
+  ...
+# Subtest: is-complex keeps available, unsupported, and invalid outcomes distinct
+ok 4 - is-complex keeps available, unsupported, and invalid outcomes distinct
+  ---
+  duration_ms: 1.157446
+  type: 'test'
+  ...
+# Subtest: buildRecords retains its three-parameter public boundary
+ok 5 - buildRecords retains its three-parameter public boundary
+  ---
+  duration_ms: 0.135834
+  type: 'test'
+  ...
+# Subtest: liteparse adapter parses trailing output and reports bad is-complex output as invalid
+ok 6 - liteparse adapter parses trailing output and reports bad is-complex output as invalid
+  ---
+  duration_ms: 0.46779
+  type: 'test'
+  ...
+# Subtest: non-zero is-complex execution is explicitly unsupported
+ok 7 - non-zero is-complex execution is explicitly unsupported
+  ---
+  duration_ms: 0.288982
+  type: 'test'
+  ...
+# Subtest: malformed manifests are normalized to E_MANIFEST_INVALID
+ok 8 - malformed manifests are normalized to E_MANIFEST_INVALID
+  ---
+  duration_ms: 1.983929
+  type: 'test'
+  ...
+# Subtest: CLI config rejects non-object and non-string path values as E_CONFIG
+ok 9 - CLI config rejects non-object and non-string path values as E_CONFIG
+  ---
+  duration_ms: 305.661007
+  type: 'test'
+  ...
+# Subtest: programmatic binary overrides are absolute and the Stage 2 taxonomy is complete
+ok 10 - programmatic binary overrides are absolute and the Stage 2 taxonomy is complete
+  ---
+  duration_ms: 0.794771
+  type: 'test'
+  ...
+# Subtest: all production ingest modules meet the 200-line limit
+ok 11 - all production ingest modules meet the 200-line limit
+  ---
+  duration_ms: 1.87322
+  type: 'test'
+  ...
+# Subtest: reviewed JSONL fixture and required fields remain frozen
+ok 12 - reviewed JSONL fixture and required fields remain frozen
+  ---
+  duration_ms: 2.435812
+  type: 'test'
+  ...
+# Subtest: IDs, relative paths, offsets, and record order remain deterministic
+ok 13 - IDs, relative paths, offsets, and record order remain deterministic
+  ---
+  duration_ms: 11.369099
+  type: 'test'
+  ...
+# Subtest: all ingest runtime modules are tracked and not ignored
+ok 14 - all ingest runtime modules are tracked and not ignored
+  ---
+  duration_ms: 112.228924
+  type: 'test'
+  ...
+# Subtest: package scripts resolve to the tracked CLI and focused verification
+ok 15 - package scripts resolve to the tracked CLI and focused verification
+  ---
+  duration_ms: 0.457621
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 20575.945069
+TAP version 13
+# Subtest: publication schema failure preserves store and emits an external diagnostic
+ok 1 - publication schema failure preserves store and emits an external diagnostic
+  ---
+  duration_ms: 18.419507
+  type: 'test'
+  ...
+# Subtest: publication round-trip failure preserves store and emits an external diagnostic
+ok 2 - publication round-trip failure preserves store and emits an external diagnostic
+  ---
+  duration_ms: 2.348986
+  type: 'test'
+  ...
+# Subtest: publication rename failure preserves store and emits an external diagnostic
+ok 3 - publication rename failure preserves store and emits an external diagnostic
+  ---
+  duration_ms: 2.04169
+  type: 'test'
+  ...
+# Subtest: publication rejects an artifact root inside the store without mutation
+ok 4 - publication rejects an artifact root inside the store without mutation
+  ---
+  duration_ms: 1.277257
+  type: 'test'
+  ...
+# Subtest: lock-metadata write failure removes the lock before reporting failure
+ok 5 - lock-metadata write failure removes the lock before reporting failure
+  ---
+  duration_ms: 1.533732
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 117.195976
+TAP version 13
+# Subtest: a fresh live lock is rejected immediately and cannot be removed by another writer
+ok 1 - a fresh live lock is rejected immediately and cannot be removed by another writer
+  ---
+  duration_ms: 17.482805
+  type: 'test'
+  ...
+# Subtest: a second synchronized writer exits locked while the first owns a unique temp file
+ok 2 - a second synchronized writer exits locked while the first owns a unique temp file
+  ---
+  duration_ms: 961.409304
+  type: 'test'
+  ...
+# Subtest: only an old lock whose owner is absent is reclaimed
+ok 3 - only an old lock whose owner is absent is reclaimed
+  ---
+  duration_ms: 2.999744
+  type: 'test'
+  ...
+# Subtest: failed stale-lock replacement restores the exact prior lock
+ok 4 - failed stale-lock replacement restores the exact prior lock
+  ---
+  duration_ms: 1.402153
+  type: 'test'
+  ...
+# Subtest: reclaim collision removes only its private reclaim file, never the competing lock
+ok 5 - reclaim collision removes only its private reclaim file, never the competing lock
+  ---
+  duration_ms: 2.322208
+  type: 'test'
+  ...
+# Subtest: malformed lock fails closed without store mutation
+ok 6 - malformed lock fails closed without store mutation
+  ---
+  duration_ms: 1.486554
+  type: 'test'
+  ...
+# Subtest: fresh absent owner lock fails closed without store mutation
+ok 7 - fresh absent owner lock fails closed without store mutation
+  ---
+  duration_ms: 1.418448
+  type: 'test'
+  ...
+# Subtest: indeterminate owner lock fails closed without store mutation
+ok 8 - indeterminate owner lock fails closed without store mutation
+  ---
+  duration_ms: 1.314549
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1075.8312
+TAP version 13
+# Subtest: admission rejects every symlink before the parser can run
+ok 1 - admission rejects every symlink before the parser can run
+  ---
+  duration_ms: 5.628474
+  type: 'test'
+  ...
+# Subtest: unsupported input is rejected before parsing or publication
+ok 2 - unsupported input is rejected before parsing or publication
+  ---
+  duration_ms: 2.620274
+  type: 'test'
+  ...
+# Subtest: LiteParse receives a literal argument array and cannot parse outside the configured root
+ok 3 - LiteParse receives a literal argument array and cannot parse outside the configured root
+  ---
+  duration_ms: 1.774564
+  type: 'test'
+  ...
+# Subtest: configured traversal, manifest escape, and duplicate normalized paths fail closed
+ok 4 - configured traversal, manifest escape, and duplicate normalized paths fail closed
+  ---
+  duration_ms: 2.427287
+  type: 'test'
+  ...
+# Subtest: adapter rejects a non-absolute binary instead of falling back to PATH
+ok 5 - adapter rejects a non-absolute binary instead of falling back to PATH
+  ---
+  duration_ms: 0.241762
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 100.144442

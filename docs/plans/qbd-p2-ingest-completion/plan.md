@@ -78,7 +78,7 @@ gates.
 |---|---|---|---|
 | 1 | [Repository boundary and contract freeze](./step-01-repository-boundary-and-contract-freeze.md) | completed | G-01, G-02 |
 | 2 | [Modularize ingest pipeline](./step-02-modularize-ingest-pipeline.md) | completed | G-03 |
-| 3 | [Harden publication and file boundaries](./step-03-harden-publication-and-file-boundaries.md) | pending | G-04, G-05, G-06 |
+| 3 | [Harden publication and file boundaries](./step-03-harden-publication-and-file-boundaries.md) | completed | G-04, G-05, G-06 |
 | 4 | [Run isolated gate suite](./step-04-isolated-gate-suite.md) | pending | G-07, G-08, G-09, G-10 |
 | 5 | [Code-review closure and handoff](./step-05-code-review-closure-and-handoff.md) | pending | G-11, G-12 |
 

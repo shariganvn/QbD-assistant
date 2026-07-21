@@ -1,0 +1,120 @@
+{
+  "adapter": {
+    "id": "exit-code",
+    "report_path": null,
+    "report_sha256": null,
+    "report_size_bytes": null,
+    "stable": null
+  },
+  "argv": [
+    "npm",
+    "run",
+    "verify:ingest"
+  ],
+  "branch": "master",
+  "command": [
+    "npm",
+    "run",
+    "verify:ingest"
+  ],
+  "counts": {
+    "collected": null,
+    "deselected": null,
+    "error": null,
+    "failed": null,
+    "passed": null,
+    "skipped": null,
+    "warnings": null,
+    "xfailed": null,
+    "xpassed": null
+  },
+  "dirty_files": {
+    "cowork-p2-kit/ingest/admission.mjs": {
+      "sha256": "64a89f4bf59ac7203cfb2106d22c83b9436fa39c9913d45655bd37bc33f1c56f",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/config.mjs": {
+      "sha256": "9a0912a1287ffdf1489c8214b85e762696365097e2898340158067634a428254",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/liteparse-adapter.mjs": {
+      "sha256": "450c20041a945c63f23b0bb9a6da139da58f75c291008f389a81ebd890f4b41c",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/publication-support.mjs": {
+      "sha256": "4d857526a0eb067ecadd91208fc86d05421609df4ad9b18ac5b620f0cc06634b",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/publication.mjs": {
+      "sha256": "661783feed1ab8ac634f2bcaa0ca930d16e70a97ec2cb3cc11a7ac363d8aa6c5",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/schema-validation.mjs": {
+      "sha256": "b27508a924f922e265a8e5eff346e3af7c6a360170df4e9b9d664b64ac1ab581",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/file-boundaries.test.mjs": {
+      "sha256": "c3e82f5258ac825ed3e1ed55a482ec4689ad5eed55df2757ad0762f303262ce7",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/pipeline.test.mjs": {
+      "sha256": "ae655b4b55c64d54fa29540964911b097d29eff2704da4270e1fa605f577e054",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/tests/publication-concurrency.test.mjs": {
+      "sha256": "2be3dbe05da0989017817e4aaa97aa5c3618c516884bfa76425e8035dceba59f",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/publication-failure.test.mjs": {
+      "sha256": "2f120612546470881b9af3c4318d8f4858ee5e08401ed49c747799012b5a233f",
+      "status": "added"
+    },
+    "cowork-p2-kit/ingest/tests/repository-boundary.test.mjs": {
+      "sha256": "a3e78ef00646d599188b2ffe0c49613fb44765aa1ec8c15aae9b83e66159fd65",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/tests/run-gate.mjs": {
+      "sha256": "bf93cba86104eb5ecb43d6cdf39cbec84d86acc3df83d82c2e4bd19f089e5e3c",
+      "status": "added"
+    },
+    "package.json": {
+      "sha256": "ad78fb11933ff4656760f3cf24a3b07b90d0008f2b0bb40009a5446bf461076e",
+      "status": "modified"
+    }
+  },
+  "duration_seconds": 22.706387,
+  "evidence_level": "local-attested",
+  "evidence_quality": "exit-code-only",
+  "exit_code": 0,
+  "finished_at": "2026-07-21T09:18:42.258858+00:00",
+  "git": {
+    "branch_after": "master",
+    "branch_before": "master",
+    "head_after": "509399242109528295c2bf44944fde8efa18adee",
+    "head_before": "509399242109528295c2bf44944fde8efa18adee",
+    "stable": true
+  },
+  "git_head": "509399242109528295c2bf44944fde8efa18adee",
+  "log_path": "artifacts/260721-1617/test-output.log",
+  "log_sha256": "004cf3f0c8314a767b1eabf641d8cea8ac59f12de3109ab8211bbac3fd33d128",
+  "log_size_bytes": 7709,
+  "outcome": "passed",
+  "requested_test_targets": [],
+  "runner_id": "stdlib-popen-v3",
+  "runtime": {
+    "implementation": "CPython",
+    "version": "3.14.4"
+  },
+  "schema_version": 3,
+  "session_id": "260721-1617",
+  "started_at": "2026-07-21T09:18:19.552460+00:00",
+  "status": "passed",
+  "summary": "command exited with code 0",
+  "test_targets": [],
+  "tool": "run_tests_with_verdict.py",
+  "worktree": {
+    "after": "732ac5691c0d7a875d1ba26cb80f88bd7c2a51521682b1e33f10a9d694a25ec0",
+    "before": "732ac5691c0d7a875d1ba26cb80f88bd7c2a51521682b1e33f10a9d694a25ec0",
+    "stable": true
+  }
+}

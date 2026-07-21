@@ -125,7 +125,9 @@ test("no library module calls process.exit", () => {
     "liteparse-adapter.mjs",
     "pipeline.mjs",
     "publication.mjs",
+    "publication-support.mjs",
     "records.mjs",
+    "schema-validation.mjs",
     "table-reconstruction.mjs",
   ];
 
@@ -235,7 +237,7 @@ test("programmatic binary overrides are absolute and the Stage 2 taxonomy is com
 });
 
 test("all production ingest modules meet the 200-line limit", () => {
-  for (const module of ["admission.mjs", "cli.mjs", "config.mjs", "errors.mjs", "liteparse-adapter.mjs", "pipeline.mjs", "publication.mjs", "records.mjs", "table-reconstruction.mjs"]) {
+  for (const module of ["admission.mjs", "cli.mjs", "config.mjs", "errors.mjs", "liteparse-adapter.mjs", "pipeline.mjs", "publication.mjs", "publication-support.mjs", "records.mjs", "schema-validation.mjs", "table-reconstruction.mjs"]) {
     const lines = readFileSync(resolve(testDir, `../${module}`), "utf-8").split("\n").length - 1;
     assert.ok(lines <= 200, `${module} has ${lines} lines`);
   }

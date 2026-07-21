@@ -87,7 +87,7 @@ gates:
     evidence: artifacts/qbd-p2-ingest-completion/gates/G-04.json
     owner_step: 3
     blocks: [G-10]
-    status: unverified
+    status: pass
 
   - id: G-05
     name: concurrent-writer-safety
@@ -109,7 +109,7 @@ gates:
     evidence: artifacts/qbd-p2-ingest-completion/gates/G-05.json
     owner_step: 3
     blocks: [G-10]
-    status: unverified
+    status: pass
 
   - id: G-06
     name: file-boundary-security
@@ -130,7 +130,7 @@ gates:
     evidence: artifacts/qbd-p2-ingest-completion/gates/G-06.json
     owner_step: 3
     blocks: [G-10]
-    status: unverified
+    status: pass
 
   - id: G-07
     name: fail-closed-admission

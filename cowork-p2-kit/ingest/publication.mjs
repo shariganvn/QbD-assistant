@@ -1,105 +1,117 @@
-/**
- * publication.mjs — Atomic write seam for record publication.
- *
- * publishRecords(records, config) writes temp → validate → rename.
- * Future hardening: lock, unique-temp, complete-schema, and failure-path handling.
- */
+/** Atomic, single-writer publication with failure-safe cleanup. */
 
 import { createHash } from "node:crypto";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import { IngestError } from "./errors.mjs";
+import { canonicalRoot, inside, snapshot, validateJsonl, validRunId } from "./publication-support.mjs";
 
-/**
- * Validate records against the JSON schema (hand-rolled, matching monolith behavior).
- * @param {object[]} records
- * @param {object} schema — parsed records.schema.json
- * @returns {string[]} validation error messages (empty = valid)
- */
-function validateRecords(records, schema) {
-  const errors = [];
+const LOCK_AGE_MS = 5 * 60 * 1000;
 
-  for (const rec of records) {
-    for (const field of schema.required) {
-      if (rec[field] === undefined) {
-        errors.push(`Record ${rec.id} missing required field: ${field}`);
-      }
-    }
-    if (rec.provenance) {
-      for (const field of schema.properties.provenance.required) {
-        if (rec.provenance[field] === undefined) {
-          errors.push(`Record ${rec.id} missing provenance.${field}`);
-        }
-      }
-    }
-    if (rec.classification) {
-      for (const field of schema.properties.classification.required) {
-        if (rec.classification[field] === undefined) {
-          errors.push(`Record ${rec.id} missing classification.${field}`);
-        }
-      }
-    }
-  }
-
-  return errors;
+function locked(message, details) {
+  return new IngestError("E_PUBLICATION_LOCKED", message, { details });
 }
 
-/**
- * Publish records: write temp → validate → atomic rename.
- *
- * @param {object[]} records
- * @param {object} config — from createConfig
- * @returns {{ storeHash: string, recordCount: number, storePath: string }}
- * @throws {IngestError} on validation or publication failure
- */
-export function publishRecords(records, config) {
-  const { storeRoot, schemaPath, fileOps } = config;
-  const recordsPath = join(storeRoot, "records.jsonl");
-  const tempPath = join(storeRoot, "records.jsonl.tmp");
-
-  // Ensure store dir exists
-  if (!fileOps.existsSync(storeRoot)) {
-    fileOps.mkdirSync(storeRoot, { recursive: true });
-  }
-
-  // Assert non-empty store
-  if (records.length === 0) {
-    throw new IngestError("E_EMPTY_STORE", "Store is EMPTY after ingest — admission gate may have silently dropped all files");
-  }
-
-  // Load schema
-  if (!fileOps.existsSync(schemaPath)) {
-    throw new IngestError("E_RECORD_SCHEMA", `Schema not found: ${schemaPath}`, {
-      details: { path: schemaPath },
-    });
-  }
-  const schema = JSON.parse(fileOps.readFileSync(schemaPath, "utf-8"));
-
-  // Validate records
-  const validationErrors = validateRecords(records, schema);
-  if (validationErrors.length > 0) {
-    throw new IngestError("E_RECORD_SCHEMA", `${validationErrors.length} schema validation errors`, {
-      details: { errors: validationErrors },
-    });
-  }
-
-  // Write to temp file
-  const jsonl = records.map((r) => JSON.stringify(r)).join("\n") + "\n";
-  fileOps.writeFileSync(tempPath, jsonl);
-
+function readLock(lockPath, config) {
   try {
-    // Atomic replace: rename temp to final
-    fileOps.renameSync(tempPath, recordsPath);
-  } catch (err) {
-    // Clean up temp on failure
-    try { fileOps.unlinkSync(tempPath); } catch { /* ignore cleanup error */ }
-    throw new IngestError("E_PUBLICATION_FAILED", `Failed to atomically replace store: ${err.message}`, {
-      cause: err,
-    });
+    const lock = JSON.parse(config.fileOps.readFileSync(lockPath, "utf-8"));
+    const created = Date.parse(lock.createdAt);
+    if (!Number.isInteger(lock.pid) || lock.pid <= 0 || !validRunId(lock.runId) || Number.isNaN(created)) return null;
+    return { ...lock, created };
+  } catch { return null; }
+}
+
+function acquireLock(lockPath, runId, config) {
+  const { fileOps, clock, pidIsAlive } = config;
+  function create() {
+    let descriptor;
+    let opened = false;
+    try {
+      descriptor = fileOps.openSync(lockPath, "wx");
+      opened = true;
+      fileOps.writeFileSync(lockPath, JSON.stringify({ pid: process.pid, createdAt: clock(), runId }) + "\n");
+      fileOps.closeSync(descriptor);
+      descriptor = undefined;
+    } catch (cause) {
+      try { if (descriptor !== undefined) fileOps.closeSync(descriptor); } catch { /* best effort */ }
+      try { if (opened && fileOps.existsSync(lockPath)) fileOps.unlinkSync(lockPath); } catch { /* best effort */ }
+      throw cause;
+    }
   }
+  try { create(); return; } catch (cause) {
+    if (cause?.code !== "EEXIST") throw cause;
+  }
+  const previous = readLock(lockPath, config);
+  if (!previous) throw locked("Publication lock is malformed or indeterminate", { lockPath });
+  let alive;
+  try { alive = pidIsAlive(previous.pid); } catch { throw locked("Publication lock owner is indeterminate", { lockPath }); }
+  if (alive || Date.parse(clock()) - previous.created < LOCK_AGE_MS) {
+    throw locked("Publication is already running", { lockPath, ownerPid: previous.pid });
+  }
+  const reclaimed = `${lockPath}.${runId}.reclaim`;
+  let replacementCreated = false;
+  try {
+    fileOps.renameSync(lockPath, reclaimed);
+    create();
+    replacementCreated = true;
+    fileOps.unlinkSync(reclaimed);
+  } catch (cause) {
+    try {
+      if (replacementCreated && fileOps.existsSync(lockPath)) fileOps.unlinkSync(lockPath);
+      if (fileOps.existsSync(reclaimed) && !fileOps.existsSync(lockPath)) fileOps.renameSync(reclaimed, lockPath);
+      else if (fileOps.existsSync(reclaimed) && fileOps.existsSync(lockPath)) fileOps.unlinkSync(reclaimed);
+    } catch { /* fail closed; never remove a competing lock */ }
+    throw locked("Unable to safely reclaim publication lock", { lockPath, cause: cause?.code });
+  }
+}
 
-  // Compute store hash
-  const writtenStore = fileOps.readFileSync(recordsPath, "utf-8");
-  const storeHash = createHash("sha256").update(writtenStore).digest("hex");
+function writeFailureLog(config, runId, before, error) {
+  try {
+    const storeRoot = canonicalRoot(config.storeRoot, config.fileOps, false);
+    const artifactRoot = canonicalRoot(config.artifactRoot, config.fileOps, true);
+    if (inside(storeRoot, artifactRoot)) return;
+    const payload = {
+      command: "publishRecords", result: { code: error.code ?? "E_PUBLICATION_FAILED", message: error.message },
+      before, after: snapshot(storeRoot, config.fileOps), runId, timestamp: config.clock(),
+    };
+    config.fileOps.writeFileSync(join(artifactRoot, `publication-${runId}.json`), `${JSON.stringify(payload)}\n`);
+  } catch { /* logging never masks the publication failure */ }
+}
 
-  return { storeHash, recordCount: records.length, storePath: recordsPath };
+/** Publish records after full-contract validation, then atomically replace records.jsonl. */
+export function publishRecords(records, config) {
+  const { fileOps, schemaPath, makeRunId } = config;
+  const runId = makeRunId();
+  if (!validRunId(runId)) throw new IngestError("E_CONFIG", "makeRunId must return a crypto-random 128-bit identifier");
+  const storeRoot = canonicalRoot(config.storeRoot, fileOps, true);
+  if (inside(storeRoot, resolve(config.artifactRoot))) throw new IngestError("E_PATH_ESCAPE", "Artifact root must be outside store root");
+  if (!inside(storeRoot, schemaPath) || !fileOps.existsSync(schemaPath)) {
+    throw new IngestError("E_RECORD_SCHEMA", `Schema not found within store root: ${schemaPath}`);
+  }
+  const recordsPath = join(storeRoot, "records.jsonl");
+  const tempPath = join(storeRoot, `records.jsonl.${runId}.tmp`);
+  const lockPath = join(storeRoot, "records.jsonl.lock");
+  const before = snapshot(storeRoot, fileOps);
+  let ownsLock = false;
+  let failure;
+  try {
+    acquireLock(lockPath, runId, config);
+    ownsLock = true;
+    const schema = JSON.parse(fileOps.readFileSync(schemaPath, "utf-8"));
+    const jsonl = records.map((record) => JSON.stringify(record)).join("\n") + (records.length ? "\n" : "");
+    validateJsonl(jsonl, schema);
+    const descriptor = fileOps.openSync(tempPath, "wx");
+    try { fileOps.writeFileSync(descriptor, jsonl); } finally { fileOps.closeSync(descriptor); }
+    const written = fileOps.readFileSync(tempPath, "utf-8");
+    validateJsonl(written, schema);
+    config.verifyPublication?.(records);
+    fileOps.renameSync(tempPath, recordsPath);
+    return { storeHash: createHash("sha256").update(fileOps.readFileSync(recordsPath, "utf-8")).digest("hex"), recordCount: records.length, storePath: recordsPath, runId };
+  } catch (cause) {
+    failure = cause instanceof IngestError ? cause : new IngestError("E_PUBLICATION_FAILED", `Failed to publish records: ${cause.message}`, { cause });
+  } finally {
+    try { if (fileOps.existsSync(tempPath)) fileOps.unlinkSync(tempPath); } catch { /* own temp only */ }
+    try { if (ownsLock && fileOps.existsSync(lockPath)) fileOps.unlinkSync(lockPath); } catch { /* own lock only */ }
+  }
+  if (failure.code !== "E_PUBLICATION_LOCKED") writeFailureLog(config, runId, before, failure);
+  throw failure;
 }
