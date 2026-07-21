@@ -1,35 +1,44 @@
 {
   "branch": "master",
-  "da_review": "summary:\n⚠️ Low: the configured LibreOffice preflight regression guard is source-text based; add a direct injected preflight test when Step 3 changes pipeline behavior.\n⚠️ Step 3 publication, concurrency, failure-path, and file-boundary hardening remain intentionally pending.",
+  "da_review": "summary:\n⚠️ Low: File validation has a same-host TOCTOU window between lstat/realpath checks and LiteParse invocation; retain as a hardening follow-up.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-21T08:14:41+00:00",
-  "git_head": "be8aa5fbe2d12a7b560532b033a2faa3e7e8bd4e",
+  "generated_at": "2026-07-21T09:29:50+00:00",
+  "git_head": "dc22d74d896ab5aefc2c5c97a2b667c97829edf7",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/qbd-p2-ingest-completion/step-03-harden-publication-and-file-boundaries.md",
-        "docs/plans/qbd-p2-ingest-completion/gates.yaml",
-        "artifacts/qbd-p2-ingest-completion/gates/G-03.json"
+        "docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md",
+        "docs/plans/qbd-p2-ingest-completion/gates.yaml"
       ],
-      "text": "Begin Step 3 publication and file-boundary hardening from the accepted G-03 baseline."
+      "text": "Execute Step 4 isolated G-07 through G-10 gate suite"
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
-    "artifacts/qbd-p2-ingest-completion/gates/G-03.json",
+    "cowork-p2-kit/ingest/admission.mjs",
+    "cowork-p2-kit/ingest/liteparse-adapter.mjs",
     "docs/plans/qbd-p2-ingest-completion/gates.yaml",
-    "docs/plans/qbd-p2-ingest-completion/step-03-harden-publication-and-file-boundaries.md"
+    "docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md"
   ],
   "pickup_fingerprint_files": [
-    "artifacts/qbd-p2-ingest-completion/gates/G-03.json",
+    "cowork-p2-kit/ingest/admission.mjs",
+    "cowork-p2-kit/ingest/liteparse-adapter.mjs",
     "docs/plans/qbd-p2-ingest-completion/gates.yaml",
-    "docs/plans/qbd-p2-ingest-completion/step-03-harden-publication-and-file-boundaries.md"
+    "docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md"
   ],
   "schema_version": 2,
-  "session_id": "260721-1508",
-  "summary": "Resolved and accepted the Step 2 G-03 spec-diff blockers; baton-attested 15/15 focused tests pass, and Step 3 is unblocked.",
-  "test_verdict": "artifacts/260721-1508/test-verdict.json",
+  "session_id": "260721-1617",
+  "summary": "Completed Step 3 publication and file-boundary hardening; G-04/G-05/G-06 pass with reviewer-approved evidence and an attested verification verdict.",
+  "test_verdict": "artifacts/260721-1617/test-verdict.json",
   "ui_verdict": null,
-  "unresolved": [],
+  "unresolved": [
+    {
+      "files": [
+        "cowork-p2-kit/ingest/admission.mjs",
+        "cowork-p2-kit/ingest/liteparse-adapter.mjs"
+      ],
+      "text": "TOCTOU hardening remains outside accepted Step 3 scope"
+    }
+  ],
   "worktree_status": []
 }
