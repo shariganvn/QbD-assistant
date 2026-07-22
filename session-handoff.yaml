@@ -1,41 +1,47 @@
 {
   "branch": "master",
-  "da_review": "summary:\n⚠️ Accepted: same-host TOCTOU between trust validation and LiteParse invocation remains an out-of-scope hardening follow-up.\n✅ DA recheck: G-01 tracked-review-input guard covers runner and both Step 4 reports; no blocking finding remains.",
+  "da_review": "summary:\n✅ Phase 2 review closure recorded; no blocking finding remains.\n⚠️ Accepted technical debt: D20260722 records the same-host LiteParse TOCTOU hardening follow-up.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-22T08:59:38+00:00",
-  "git_head": "34cf65f02916853cad3f2014a25bd6fcd85798cd",
+  "generated_at": "2026-07-22T09:19:31+00:00",
+  "git_head": "688597841bf581c23751ff6443cf8c53ac3ac4da",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/qbd-p2-ingest-completion/step-05-code-review-closure-and-handoff.md",
-        "docs/plans/qbd-p2-ingest-completion/plan.md"
+        "IMPLEMENTATION_PLAN.md",
+        "project-state.yaml"
       ],
-      "text": "Execute Step 5 code-review closure and handoff"
+      "text": "Select the next approved workstream"
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
+    "IMPLEMENTATION_PLAN.md",
     "cowork-p2-kit/ingest/liteparse-adapter.mjs",
-    "docs/plans/qbd-p2-ingest-completion/plan.md",
-    "docs/plans/qbd-p2-ingest-completion/step-05-code-review-closure-and-handoff.md"
+    "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
+    "project-state.yaml"
   ],
   "pickup_fingerprint_files": [
+    "IMPLEMENTATION_PLAN.md",
     "cowork-p2-kit/ingest/liteparse-adapter.mjs",
-    "docs/plans/qbd-p2-ingest-completion/plan.md",
-    "docs/plans/qbd-p2-ingest-completion/step-05-code-review-closure-and-handoff.md"
+    "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
+    "project-state.yaml"
   ],
   "schema_version": 2,
   "session_id": "260722-1539",
-  "summary": "Completed Step 4 isolated G-01 through G-10 verification with a stable attested suite pass, strict retained evidence, and staged review inputs.",
+  "summary": "Closed QbD P.2 ingest completion: G-01 through G-12 pass; retained review evidence and TOCTOU technical debt are versioned.",
   "test_verdict": "artifacts/260722-1539/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
       "files": [
+        "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
         "cowork-p2-kit/ingest/liteparse-adapter.mjs"
       ],
-      "text": "TOCTOU hardening remains accepted out of scope"
+      "text": "D20260722 LiteParse TOCTOU hardening technical debt"
     }
   ],
-  "worktree_status": []
+  "worktree_status": [
+    " M docs/.session-state.md",
+    " M session-handoff.yaml"
+  ]
 }
