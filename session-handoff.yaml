@@ -1,43 +1,40 @@
 {
   "branch": "master",
-  "da_review": "summary:\n⚠️ Low: File validation has a same-host TOCTOU window between lstat/realpath checks and LiteParse invocation; retain as a hardening follow-up.",
+  "da_review": "summary:\n⚠️ Accepted: same-host TOCTOU between trust validation and LiteParse invocation remains an out-of-scope hardening follow-up.\n✅ DA recheck: G-01 tracked-review-input guard covers runner and both Step 4 reports; no blocking finding remains.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-21T09:29:50+00:00",
-  "git_head": "dc22d74d896ab5aefc2c5c97a2b667c97829edf7",
+  "generated_at": "2026-07-22T08:59:38+00:00",
+  "git_head": "34cf65f02916853cad3f2014a25bd6fcd85798cd",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md",
-        "docs/plans/qbd-p2-ingest-completion/gates.yaml"
+        "docs/plans/qbd-p2-ingest-completion/step-05-code-review-closure-and-handoff.md",
+        "docs/plans/qbd-p2-ingest-completion/plan.md"
       ],
-      "text": "Execute Step 4 isolated G-07 through G-10 gate suite"
+      "text": "Execute Step 5 code-review closure and handoff"
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
-    "cowork-p2-kit/ingest/admission.mjs",
     "cowork-p2-kit/ingest/liteparse-adapter.mjs",
-    "docs/plans/qbd-p2-ingest-completion/gates.yaml",
-    "docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md"
+    "docs/plans/qbd-p2-ingest-completion/plan.md",
+    "docs/plans/qbd-p2-ingest-completion/step-05-code-review-closure-and-handoff.md"
   ],
   "pickup_fingerprint_files": [
-    "cowork-p2-kit/ingest/admission.mjs",
     "cowork-p2-kit/ingest/liteparse-adapter.mjs",
-    "docs/plans/qbd-p2-ingest-completion/gates.yaml",
-    "docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md"
+    "docs/plans/qbd-p2-ingest-completion/plan.md",
+    "docs/plans/qbd-p2-ingest-completion/step-05-code-review-closure-and-handoff.md"
   ],
   "schema_version": 2,
-  "session_id": "260721-1617",
-  "summary": "Completed Step 3 publication and file-boundary hardening; G-04/G-05/G-06 pass with reviewer-approved evidence and an attested verification verdict.",
-  "test_verdict": "artifacts/260721-1617/test-verdict.json",
+  "session_id": "260722-1539",
+  "summary": "Completed Step 4 isolated G-01 through G-10 verification with a stable attested suite pass, strict retained evidence, and staged review inputs.",
+  "test_verdict": "artifacts/260722-1539/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
       "files": [
-        "cowork-p2-kit/ingest/admission.mjs",
         "cowork-p2-kit/ingest/liteparse-adapter.mjs"
       ],
-      "text": "TOCTOU hardening remains outside accepted Step 3 scope"
+      "text": "TOCTOU hardening remains accepted out of scope"
     }
   ],
   "worktree_status": []
