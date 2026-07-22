@@ -1,0 +1,33 @@
+id: T20260722-qbd-p2-ingest-step-04
+date: "2026-07-22"
+workstream: qbd-p2-ingest-completion
+status: executed
+plan: docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md
+scope:
+  summary: Verify the isolated G-01 through G-10 ingest suite, its strict retained evidence schema, hard timeouts, and real LiteParse capability semantics.
+  changed_files:
+    - cowork-p2-kit/ingest/liteparse-adapter.mjs
+    - cowork-p2-kit/ingest/tests/
+    - docs/reports/qbd-p2-ingest-completion/gates/
+    - docs/plans/qbd-p2-ingest-completion/
+approval:
+  required: true
+  approved_at: "2026-07-22"
+  approved_by: human
+commands:
+  - id: ingest-step-04-verification
+    description: Run the literal G-01 through G-10 isolated gate suite and regenerate canonical evidence.
+    command: [npm, run, verify:ingest]
+    requires_live_services: false
+    mutates_datastore: false
+results:
+  verdict: passed
+  artifact: artifacts/260722-1539/test-verdict.json
+  counts:
+    passed: null
+    failed: null
+    warnings: null
+notes:
+  - Canonical evidence is docs/reports/qbd-p2-ingest-completion/gates/G-01.json through G-10.json plus suite.json.
+  - The accepted TOCTOU hardening follow-up remains out of scope for Step 4.
+  - The attested suite ran in an isolated Git worktree so the canonical evidence writer could not change the verdict worktree.

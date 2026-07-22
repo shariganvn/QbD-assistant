@@ -31,10 +31,7 @@ const harmlessProbeBinary = process.execPath;
 // ─── Helpers ───────────────────────────────────────────────────────────
 
 function makeIsolatedDir(testName) {
-  const dir = resolve(testDir, `tmp-${testName}-${Date.now()}`);
-  if (existsSync(dir)) rmSync(dir, { recursive: true, force: true });
-  mkdirSync(dir, { recursive: true });
-  return dir;
+  return mkdtempSync(join(tmpdir(), `ingest-${testName}-`));
 }
 
 function cleanupDir(dir) {
@@ -183,16 +180,17 @@ test("liteparse adapter parses trailing output and reports bad is-complex output
   assert.deepEqual(adapter.isComplex(filePath), { status: "invalid", code: "E_CAPABILITY_INVALID" });
 });
 
-test("non-zero is-complex execution is explicitly unsupported", () => {
-  const adapter = createLiteparseAdapter({
-    litBinary: "/absolute/lit",
-    fileOps: { existsSync: () => true },
-    runProcess: () => ({ status: 127, stderr: "command unavailable" }),
-  });
-  assert.deepEqual(adapter.isComplex("/absolute/input.docx"), {
-    status: "unsupported",
-    code: "E_CAPABILITY_UNSUPPORTED",
-  });
+test("non-zero is-complex execution without valid JSON is explicitly unsupported or invalid", () => {
+  const filePath = resolve(testDir, "fixtures/happy-path/inputs/product-profile.docx");
+  const cfg = { litBinary: "/absolute/lit", inputsRoot: resolve(testDir, "fixtures/happy-path/inputs"), fileOps: { existsSync: () => true, lstatSync: () => ({ isSymbolicLink: () => false, isDirectory: () => true }), realpathSync: (p) => p } };
+
+  // exit 127 without valid JSON → unsupported
+  const exit127 = createLiteparseAdapter({ ...cfg, runProcess: () => ({ status: 127, stderr: "command unavailable" }) });
+  assert.deepEqual(exit127.isComplex(filePath), { status: "unsupported", code: "E_CAPABILITY_UNSUPPORTED" });
+
+  // ENOENT (binary not found) → unsupported
+  const enoent = createLiteparseAdapter({ ...cfg, runProcess: () => ({ status: null, error: { code: "ENOENT" } }) });
+  assert.deepEqual(enoent.isComplex(filePath), { status: "unsupported", code: "E_CAPABILITY_UNSUPPORTED" });
 });
 
 test("malformed manifests are normalized to E_MANIFEST_INVALID", () => {

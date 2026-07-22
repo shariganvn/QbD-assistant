@@ -1,0 +1,24 @@
+{
+  "suite_run_id": "713b19b8-69e3-4387-9a05-946dfba390be",
+  "status": "pass",
+  "started_at": "2026-07-22T08:40:35.611Z",
+  "completed_at": "2026-07-22T08:42:37.558Z",
+  "timeout_ms": 1200000,
+  "duration_ms": 121947,
+  "timed_out": false,
+  "next_gate_id": null,
+  "completed_gate_ids": [
+    "G-01",
+    "G-02",
+    "G-03",
+    "G-04",
+    "G-05",
+    "G-06",
+    "G-07",
+    "G-08",
+    "G-09",
+    "G-10"
+  ],
+  "failed_gate_id": null,
+  "exit_code": 0
+}

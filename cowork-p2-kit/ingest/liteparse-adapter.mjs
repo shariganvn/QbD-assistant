@@ -105,20 +105,21 @@ export function createLiteparseAdapter(config) {
      */
     isComplex(filePath) {
       try { assertTrustedInput(filePath); } catch {
-        return { status: "unsupported", code: "E_CAPABILITY_UNSUPPORTED" };
+        return { status: "invalid", code: "E_CAPABILITY_INVALID" };
       }
       const result = runProcess(litBinary, ["is-complex", filePath, "--compact"], {
         encoding: "utf-8",
         timeout: 60_000,
       });
-      if (result.status !== 0) {
-        return { status: "unsupported", code: "E_CAPABILITY_UNSUPPORTED" };
-      }
+      // Try to extract valid JSON array — available regardless of exit code (lit exits 1 for complex pages)
       try {
         return { status: "available", results: extractJson(result.stdout ?? "", "array") };
-      } catch {
-        return { status: "invalid", code: "E_CAPABILITY_INVALID" };
+      } catch { /* no valid JSON */ }
+      // No valid JSON: unavailable executable is unsupported; everything else is invalid.
+      if (result.error?.code === "ENOENT" || result.status === 127) {
+        return { status: "unsupported", code: "E_CAPABILITY_UNSUPPORTED" };
       }
+      return { status: "invalid", code: "E_CAPABILITY_INVALID" };
     },
   };
 }

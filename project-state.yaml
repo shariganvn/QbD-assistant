@@ -1,7 +1,6 @@
 schema_version: 1
-updated_at: "2026-07-21T09:28:46.129963+00:00"
 branch: master
-git_head: "509399242109528295c2bf44944fde8efa18adee"
+git_head: 9d40d8b710a06d521ca2af4a2e1bdc8c774bce9c
 worktree_id: nguyen-dell-7577:master
 active_workstream:
   id: qbd-p2-ingest-completion
@@ -9,19 +8,18 @@ active_workstream:
   status: in-progress
 current_pickup:
   source: session-handoff.yaml
-  summary: Execute Step 4's isolated G-07 through G-10 gate suite after the 
-    accepted Step 3 boundary hardening.
+  summary: Execute Step 5 code-review closure and handoff after the verified
+    Step 4 gate suite.
   files:
-  - docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md
-  - docs/plans/qbd-p2-ingest-completion/gates.yaml
+  - docs/plans/qbd-p2-ingest-completion/step-05-code-review-closure-and-handoff.md
+  - docs/plans/qbd-p2-ingest-completion/plan.md
 relevant_progress:
 - P20260721-qbd-p2-ingest-step-03
-- P20260721-qbd-p2-ingest-g03-remediation
+- P20260722-qbd-p2-ingest-step-04
 relevant_decisions:
 - D20260721
 read_next:
 - session-handoff.yaml
-- PROGRESS.md
 - docs/plans/qbd-p2-ingest-completion/plan.md
-- docs/plans/qbd-p2-ingest-completion/gates.yaml
-- docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md
+- docs/plans/qbd-p2-ingest-completion/step-05-code-review-closure-and-handoff.md
+updated_at: '2026-07-22T08:49:23.660810+00:00'

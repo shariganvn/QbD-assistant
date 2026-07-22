@@ -1,0 +1,26 @@
+id: P20260722-qbd-p2-ingest-step-04
+date: "2026-07-22"
+workstream: qbd-p2-ingest-completion
+status: partial
+summary: Completed Step 4 isolated G-01 through G-10 gate suite; the strict
+  LiteParse capability, timeout, and retained-evidence contracts pass with fresh
+  version-controlled evidence.
+changed_files:
+- cowork-p2-kit/ingest/liteparse-adapter.mjs
+- cowork-p2-kit/ingest/tests/
+- docs/reports/qbd-p2-ingest-completion/gates/
+- docs/plans/qbd-p2-ingest-completion/
+- docs/test-plans/T20260722-qbd-p2-ingest-step-04.yaml
+tests_run:
+  verdict: passed
+  counts:
+    passed:
+    failed:
+    warnings:
+decisions: []
+next_pickup:
+  files:
+  - docs/plans/qbd-p2-ingest-completion/step-05-code-review-closure-and-handoff.md
+  - docs/plans/qbd-p2-ingest-completion/plan.md
+  text: Execute Step 5 code-review closure and handoff; preserve the accepted
+    TOCTOU hardening follow-up as out of scope.

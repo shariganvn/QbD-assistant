@@ -17,7 +17,9 @@ gates:
         - every runtime module is returned by git ls-files
         - no runtime module is returned by git check-ignore
         - npm run ingest resolves to cowork-p2-kit/ingest/cli.mjs
-    evidence: artifacts/qbd-p2-ingest-completion/gates/G-01.json
+        - every Step 4 test, admission fixture, suite harness, design report, and retained G-01 through G-10
+          evidence file is returned by git ls-files before the final suite claim
+    evidence: docs/reports/qbd-p2-ingest-completion/gates/G-01.json
     owner_step: 1
     blocks: [G-03]
     status: pass
@@ -35,7 +37,7 @@ gates:
         - representative records match the schema and approved snapshot
         - ingested_at is absent
         - page text sliced by offsets equals quote
-    evidence: artifacts/qbd-p2-ingest-completion/gates/G-02.json
+    evidence: docs/reports/qbd-p2-ingest-completion/gates/G-02.json
     owner_step: 1
     blocks: [G-03, G-07]
     status: pass
@@ -59,7 +61,7 @@ gates:
           LiteParse binary
         - output bytes equal expected-records.jsonl; expected.json reports its 17-record SHA-256
           and LiteParse version; the three G-02 representative records remain byte-identical
-    evidence: artifacts/qbd-p2-ingest-completion/gates/G-03.json
+    evidence: docs/reports/qbd-p2-ingest-completion/gates/G-03.json
     review_fixes:
       applied: "2026-07-21T22:20"
       findings_addressed: 14
@@ -84,7 +86,7 @@ gates:
         - before and after hashes of every store-root file are identical
         - no lock or temp file remains
         - each failure log is outside the store root and includes command, result, hashes, run identifier, and timestamp
-    evidence: artifacts/qbd-p2-ingest-completion/gates/G-04.json
+    evidence: docs/reports/qbd-p2-ingest-completion/gates/G-04.json
     owner_step: 3
     blocks: [G-10]
     status: pass
@@ -106,7 +108,7 @@ gates:
         - a well-formed lock is reclaimed only when its owner is absent and it is at least five minutes old
         - live, fresh, malformed, and indeterminate locks are rejected without store mutation
         - final store validates and no temp or stale lock remains
-    evidence: artifacts/qbd-p2-ingest-completion/gates/G-05.json
+    evidence: docs/reports/qbd-p2-ingest-completion/gates/G-05.json
     owner_step: 3
     blocks: [G-10]
     status: pass
@@ -127,7 +129,7 @@ gates:
         - parser arguments are passed literally without shell evaluation
         - the configured parser binary is absolute and no PATH lookup occurs
         - every store-root file is unchanged for every rejection
-    evidence: artifacts/qbd-p2-ingest-completion/gates/G-06.json
+    evidence: docs/reports/qbd-p2-ingest-completion/gates/G-06.json
     owner_step: 3
     blocks: [G-10]
     status: pass
@@ -135,73 +137,91 @@ gates:
   - id: G-07
     name: fail-closed-admission
     requirement: Every trust-boundary rejection is executable and isolated.
-    invariant: Unsupported input, absent manifest, non-public label, invalid metadata, dependency failure, and assertion failure exit nonzero without publication.
+    invariant: The six named child-CLI cases (unsupported extension, missing manifest entry, non-public label,
+      invalid metadata, unavailable dependency, and schema-invariant failure) exit nonzero with their specified
+      IngestError code while every seeded store-root byte remains unchanged.
     boundary: admission.mjs and cli.mjs
     fixture: cowork-p2-kit/ingest/tests/fixtures/admission/
     command: [node, --test, cowork-p2-kit/ingest/tests/admission-negative.test.mjs]
     expected:
       exit_code: 0
       assertions:
-        - every case observes a nonzero child CLI exit
-        - prior store hash is unchanged
-        - canonical mock fixtures are never modified
-    evidence: artifacts/qbd-p2-ingest-completion/gates/G-07.json
+        - every named case observes a nonzero child CLI exit and its exact expected IngestError code
+        - every store-root file hash before the child CLI equals its hash after the child CLI
+        - the fixture hash map before all cases equals the fixture hash map after all cases
+        - GATE_EVIDENCE_PATH records case, before, after, exit_code, and stderr_code for every case
+    evidence: docs/reports/qbd-p2-ingest-completion/gates/G-07.json
     owner_step: 4
     blocks: [G-10]
-    status: unverified
+    status: pass
 
   - id: G-08
     name: capability-discovery
     requirement: Optional LiteParse capabilities are discovered before use.
-    invariant: Missing is-complex is reported as unsupported and is never converted to an empty successful result.
-    boundary: liteparse-adapter.mjs and run log
-    fixture: adapters exposing supported, unsupported, malformed, and failing capability responses
+    invariant: A valid is-complex JSON array is available regardless of exit status, including the installed
+      CLI's exit 1 complex-page result; only ENOENT or exit 127 without valid JSON is unsupported; all other
+      missing or malformed results are invalid; a required parse failure blocks publication; no OCR command is issued.
+    boundary: liteparse-adapter.mjs, cli.mjs, and G-08 raw evidence output
+    fixture: injected runProcess unit cases plus copied happy-path inputs for the real child CLI case
     command: [node, --test, cowork-p2-kit/ingest/tests/capability-discovery.test.mjs]
     expected:
       exit_code: 0
       assertions:
-        - unsupported is explicit in CLI output and run log
-        - malformed or failing required parse operations block publication
-        - no OCR execution occurs
-    evidence: artifacts/qbd-p2-ingest-completion/gates/G-08.json
+        - injected valid JSON with exits 0 and 1 is available; ENOENT/127 without valid JSON is unsupported; malformed, other nonzero, signalled, and timed-out results are invalid; required parse failure is E_PARSE
+        - input-path trust-validation failure is invalid, never unsupported
+        - the injected invocation recorder observes argument arrays and no ocr subcommand
+        - mixed admitted outcomes aggregate as all-unsupported -> unsupported, available plus unsupported -> available, and any invalid -> invalid
+        - the real product-profile DOCX precheck emits valid JSON and exits 1, then the child CLI reports isComplex available
+        - G-08 snapshot retains precheck and child stdout, stderr, exit code, and parsed JSON
+    evidence: docs/reports/qbd-p2-ingest-completion/gates/G-08.json
     owner_step: 4
     blocks: [G-10]
-    status: unverified
+    status: pass
 
   - id: G-09
     name: deterministic-real-liteparse
     requirement: Identical real inputs produce byte-identical JSONL.
-    invariant: Two isolated runs using the repo-local LiteParse produce the same raw store hash.
+    invariant: Two independently rooted child CLI runs with the absolute repo-local LiteParse binary produce
+      non-empty schema-valid JSONL with equal SHA-256 hashes and successful real-adapter round trips.
     boundary: full ingest pipeline
-    fixture: generated canonical mock DOCX inputs
+    fixture: cowork-p2-kit/ingest/tests/fixtures/happy-path/inputs/ copied into two temporary roots
     command: [node, --test, cowork-p2-kit/ingest/tests/determinism.integration.test.mjs]
     expected:
       exit_code: 0
       assertions:
+        - both child CLI runs use the resolved node_modules/.bin/lit binary without adapter, runProcess, or parser injection
         - both stores are non-empty and schema-valid
         - raw JSONL hashes are identical
-        - every non-empty record round-trips
-    evidence: artifacts/qbd-p2-ingest-completion/gates/G-09.json
+        - every non-empty record from each matching run output round-trips with failed equal to zero and verified greater than zero
+        - committed happy-path fixture hashes remain unchanged
+    evidence: docs/reports/qbd-p2-ingest-completion/gates/G-09.json
     owner_step: 4
     blocks: [G-10]
-    status: unverified
+    status: pass
 
   - id: G-10
     name: complete-ingest-verification
     requirement: One command runs all required Phase 2 gates.
-    invariant: The verification command cannot pass with skipped blocking tests.
+    invariant: An explicit ordered runner executes G-01 through G-10 within a 1,200,000 ms suite deadline;
+      each child receives its explicit INGEST_GATE_TIMEOUT_MS budget, and suite.json records any deadline
+      expiry before a child starts. No gate evidence can report pass with a missing TAP summary, timeout,
+      failed/skipped/todo/cancelled test, nonzero child exit, or absent required field.
     boundary: package.json verify:ingest script and complete gate suite
-    fixture: all committed ingest fixtures plus generated canonical mock inputs
+    fixture: all committed ingest fixtures plus the current verify-ingest.mjs suite UUID
     command: [npm, run, verify:ingest]
     expected:
       exit_code: 0
       assertions:
-        - G-01 through G-09 evidence exists and reports pass
-        - no blocking test is skipped
-    evidence: artifacts/qbd-p2-ingest-completion/gates/G-10.json
+        - each G-01 through G-09 evidence file has matching gate_id, status pass, exit_code 0, command, raw TAP output, timestamp, gate UUID run ID, current suite UUID, parsed TAP summary, timeout_ms, duration_ms, timed_out false, and signal
+        - every G-01 through G-09 TAP summary has total greater than zero, passed equal total, and failed, skipped, todo, cancelled all equal zero
+        - every G-01 through G-09 evidence has exactly the approved key set, raw_stderr, an array snapshots field, safe-integer timings, and exact TAP-summary keys; the suite runner validates G-10 evidence and final suite.json with the same strict validator before returning zero
+        - repository-boundary.test.mjs asserts the exact verify:ingest script and literal ten-gate mapping, and all G-01 through G-10 evidence uses the one canonical schema
+        - while G-10 runs, suite.json has the exact suite-manifest fields, matching suite UUID, status running, timed_out false, G-01 through G-09 in completed_gate_ids, next_gate_id G-10, null failed_gate_id, and null exit_code; after G-10 exits zero, verify-ingest.mjs must replace it with final status pass, all ten completed gate IDs, null next_gate_id and failed_gate_id, and exit_code 0
+        - invalid timeout spellings, malformed detail snapshots, a timeout before a gate, and a timeout while the runner is in progress all retain fail evidence and cannot produce a suite pass
+    evidence: docs/reports/qbd-p2-ingest-completion/gates/G-10.json
     owner_step: 4
     blocks: [G-11, G-12]
-    status: unverified
+    status: pass
 
   - id: G-11
     name: change-impact-review
