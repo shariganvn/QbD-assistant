@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "gate_id": "G-11",
+  "status": "pass",
+  "reviewed_commit": "34cf65f02916853cad3f2014a25bd6fcd85798cd",
+  "command": ["npx", "gitnexus", "detect-changes", "--repo", "QbD-assistant", "--scope", "all"],
+  "result": {
+    "changed_files": 42,
+    "changed_symbols": 31,
+    "affected_processes": 0,
+    "risk_level": "low"
+  },
+  "conclusion": "All changed symbols and files are within the approved Phase 2 ingest, test, retained-evidence, and workflow-closeout scope. No affected execution flow or unapproved downstream impact was reported.",
+  "review_report": "docs/reports/qbd-p2-ingest-completion/code-review.md"
+}

@@ -1,25 +1,21 @@
 schema_version: 1
 branch: master
-git_head: 9d40d8b710a06d521ca2af4a2e1bdc8c774bce9c
+git_head: 8ab4e1c5fbc8d6a30b5708cd10837a0ca49b39cd
 worktree_id: nguyen-dell-7577:master
 active_workstream:
   id: qbd-p2-ingest-completion
   plan: docs/plans/qbd-p2-ingest-completion/plan.md
-  status: in-progress
+  status: done
 current_pickup:
   source: session-handoff.yaml
-  summary: Execute Step 5 code-review closure and handoff after the verified
-    Step 4 gate suite.
-  files:
-  - docs/plans/qbd-p2-ingest-completion/step-05-code-review-closure-and-handoff.md
-  - docs/plans/qbd-p2-ingest-completion/plan.md
+  summary: Select the next approved workstream; QbD P.2 ingest completion is 
+    complete.
+  files: []
 relevant_progress:
-- P20260721-qbd-p2-ingest-step-03
-- P20260722-qbd-p2-ingest-step-04
+- P20260722-qbd-p2-ingest-step-05
 relevant_decisions:
-- D20260721
+- D20260722
 read_next:
 - session-handoff.yaml
-- docs/plans/qbd-p2-ingest-completion/plan.md
-- docs/plans/qbd-p2-ingest-completion/step-05-code-review-closure-and-handoff.md
-updated_at: '2026-07-22T08:49:23.660810+00:00'
+- project-state.yaml
+updated_at: '2026-07-22T09:18:41.439220+00:00'

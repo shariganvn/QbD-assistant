@@ -1,0 +1,21 @@
+id: P20260722-qbd-p2-ingest-step-05
+date: "2026-07-22"
+workstream: qbd-p2-ingest-completion
+status: done
+summary: Closed Step 5 and the Phase 2 ingest-completion plan from retained gate, impact, and review evidence.
+changed_files:
+  - docs/plans/qbd-p2-ingest-completion/plan.md
+  - docs/plans/qbd-p2-ingest-completion/gates.yaml
+  - docs/reports/qbd-p2-ingest-completion/code-review.md
+  - docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md
+tests_run:
+  verdict: passed
+  counts:
+    passed: null
+    failed: null
+    warnings: null
+decisions:
+  - D20260722
+next_pickup:
+  files: []
+  text: Select the next approved workstream; this Phase 2 plan is complete.

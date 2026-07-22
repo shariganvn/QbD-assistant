@@ -228,17 +228,17 @@ gates:
     requirement: The final diff affects only expected Phase 2 symbols and workflows.
     invariant: GitNexus change detection and manual diff review show no unexpected Phase 3 or downstream change.
     boundary: repository diff
-    fixture: final uncommitted Phase 2 diff
-    command: [gitnexus_detect_changes, --scope, all]
+    fixture: Step 4 review patch committed as 34cf65f02916853cad3f2014a25bd6fcd85798cd
+    command: [npx, gitnexus, detect-changes, --repo, QbD-assistant, --scope, all]
     expected:
       exit_code: 0
       assertions:
         - changed symbols match the active plan
         - unexpected affected flows are zero or explicitly approved
-    evidence: artifacts/qbd-p2-ingest-completion/gates/G-11.md
+    evidence: docs/reports/qbd-p2-ingest-completion/gates/G-11.json
     owner_step: 5
     blocks: [G-12]
-    status: unverified
+    status: pass
 
   - id: G-12
     name: blocking-review-closure
@@ -256,4 +256,4 @@ gates:
     evidence: docs/reports/qbd-p2-ingest-completion/code-review.md
     owner_step: 5
     blocks: []
-    status: unverified
+    status: pass

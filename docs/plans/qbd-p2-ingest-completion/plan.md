@@ -1,7 +1,7 @@
 ---
 title: QbD P.2 ingest completion
 workstream: qbd-p2-ingest-completion
-status: in-progress
+status: completed
 canonical: true
 created: 2026-07-20
 scope: phase-2-ingest-only
@@ -80,7 +80,7 @@ gates.
 | 2 | [Modularize ingest pipeline](./step-02-modularize-ingest-pipeline.md) | completed | G-03 |
 | 3 | [Harden publication and file boundaries](./step-03-harden-publication-and-file-boundaries.md) | completed | G-04, G-05, G-06 |
 | 4 | [Run isolated gate suite](./step-04-isolated-gate-suite.md) | completed | G-07, G-08, G-09, G-10 |
-| 5 | [Code-review closure and handoff](./step-05-code-review-closure-and-handoff.md) | pending | G-11, G-12 |
+| 5 | [Code-review closure and handoff](./step-05-code-review-closure-and-handoff.md) | completed | G-11, G-12 |
 
 Only this table may change step status. Valid transitions are `pending → in-progress → completed`;
 `completed` requires all listed gates to be `pass` with readable, version-controlled evidence. A blocking
@@ -95,7 +95,7 @@ transition and must name the blocking remediation in the applicable step file.
 4. Step 4 runs after production behavior is complete; it cannot weaken a gate to accommodate code. Its
    canonical execution contract fixes the six G-07 child-CLI failures, real-LiteParse-only G-09 execution,
    and the complete evidence schema and ordered G-01 through G-10 runner.
-5. Step 5 requires the full suite and a clean traceability review.
+5. Step 5 closes only after the full suite and traceability review are retained as version-controlled evidence.
 
 ## Exit acceptance
 
@@ -114,7 +114,6 @@ Phase 2 is complete only when all of the following are true:
 
 ## Risks and unknowns
 
-- The current worktree contains overlapping uncommitted Phase 3 and workflow-state changes.
 - GitNexus indexes symbols but currently has zero execution flows; runtime gates are authoritative.
 - The fixed `records.jsonl.tmp` race has been reproduced; publication changes need failure and
   concurrency tests before refactoring is considered safe.
@@ -123,10 +122,9 @@ Phase 2 is complete only when all of the following are true:
   is unsupported, while malformed or otherwise unusable output is invalid.
 - Gate evidence must be retained as version-controlled Step 5 review input rather than ignored local
   artifacts, and the runner must enforce the approved per-gate and suite deadlines.
-- The first Step 4 completion claim is under blocking review remediation: trust-validation must be invalid,
-  evidence/schema validation must be complete, the suite deadline must be hard, every suite test must be
-  isolated, and the new tests/fixtures/evidence must be tracked before a replacement claim.
-- The accepted TOCTOU hardening follow-up is intentionally outside Step 4; green gates do not close it.
+- The accepted same-host TOCTOU hardening follow-up is tracked as
+  [D20260722](../../decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md). It is intentionally
+  outside this completed Phase 2 plan; green gates do not close it.
 - Package scripts are a shared-file boundary; inspect the existing diff before any implementation edit.
 
 ## Design basis
