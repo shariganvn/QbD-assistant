@@ -1,47 +1,46 @@
 {
   "branch": "master",
-  "da_review": "summary:\n✅ Phase 2 review closure recorded; no blocking finding remains.\n⚠️ Accepted technical debt: D20260722 records the same-host LiteParse TOCTOU hardening follow-up.",
+  "da_review": "summary:\n⚠️ User-authorized broad C1 includes dirty Phase 2 and workflow artifacts; G-P3-03 through G-P3-06 remain explicitly unverified.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-22T09:19:31+00:00",
-  "git_head": "688597841bf581c23751ff6443cf8c53ac3ac4da",
+  "generated_at": "2026-07-23T00:36:46+00:00",
+  "git_head": "b56193770a23c68c78312e50d1d866c8af4f474b",
   "next_pickup": [
     {
       "files": [
-        "IMPLEMENTATION_PLAN.md",
-        "project-state.yaml"
+        "docs/plans/qbd-p3-render-layer/step-03-fidelity-offline-spike.md",
+        "docs/plans/qbd-p3-render-layer/gates.yaml"
       ],
-      "text": "Select the next approved workstream"
+      "text": "Create and approve the Step 3 fidelity/offline test plan; do not select a fallback renderer without a failed must-pass gate and separately approved plan"
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
-    "IMPLEMENTATION_PLAN.md",
-    "cowork-p2-kit/ingest/liteparse-adapter.mjs",
-    "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
-    "project-state.yaml"
+    "docs/plans/qbd-p3-render-layer/gates.yaml",
+    "docs/plans/qbd-p3-render-layer/step-03-fidelity-offline-spike.md",
+    "docs/plans/qbd-p3-render-layer/step-04-determinism-viewer-evidence.md",
+    "docs/plans/qbd-p3-render-layer/step-05-review-closure-handoff.md"
   ],
   "pickup_fingerprint_files": [
-    "IMPLEMENTATION_PLAN.md",
-    "cowork-p2-kit/ingest/liteparse-adapter.mjs",
-    "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
-    "project-state.yaml"
+    "docs/plans/qbd-p3-render-layer/gates.yaml",
+    "docs/plans/qbd-p3-render-layer/step-03-fidelity-offline-spike.md",
+    "docs/plans/qbd-p3-render-layer/step-04-determinism-viewer-evidence.md",
+    "docs/plans/qbd-p3-render-layer/step-05-review-closure-handoff.md"
   ],
   "schema_version": 2,
-  "session_id": "260722-1539",
-  "summary": "Closed QbD P.2 ingest completion: G-01 through G-12 pass; retained review evidence and TOCTOU technical debt are versioned.",
-  "test_verdict": "artifacts/260722-1539/test-verdict.json",
+  "session_id": "260723-0731",
+  "summary": "Closed deterministic render Steps 1–2: contract and fail-closed publication gates pass with retained evidence; broad C1 was explicitly user-authorized.",
+  "test_verdict": "artifacts/260723-0731/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
       "files": [
-        "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
-        "cowork-p2-kit/ingest/liteparse-adapter.mjs"
+        "docs/plans/qbd-p3-render-layer/step-03-fidelity-offline-spike.md",
+        "docs/plans/qbd-p3-render-layer/step-04-determinism-viewer-evidence.md",
+        "docs/plans/qbd-p3-render-layer/step-05-review-closure-handoff.md",
+        "docs/plans/qbd-p3-render-layer/gates.yaml"
       ],
-      "text": "D20260722 LiteParse TOCTOU hardening technical debt"
+      "text": "Phase 3 fidelity, offline, determinism, viewer, and final review gates remain unverified"
     }
   ],
-  "worktree_status": [
-    " M docs/.session-state.md",
-    " M session-handoff.yaml"
-  ]
+  "worktree_status": []
 }
