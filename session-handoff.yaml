@@ -1,46 +1,46 @@
 {
   "branch": "master",
-  "da_review": "summary:\n⚠️ User-authorized broad C1 includes dirty Phase 2 and workflow artifacts; G-P3-03 through G-P3-06 remain explicitly unverified.",
+  "da_review": "summary:\n🔥 Resolved strict single-snapshot evidence validation and one-successful-isolated-render hardening; final 29/29 verdict is retained.\n⚠️ Carry forward only G-P3-05 determinism/viewer evidence and G-P3-06 final closure.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-23T00:36:46+00:00",
-  "git_head": "b56193770a23c68c78312e50d1d866c8af4f474b",
+  "generated_at": "2026-07-23T03:02:07+00:00",
+  "git_head": "855956524fc9dbb7edcbe6b023afe14becb9f4b3",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/qbd-p3-render-layer/step-03-fidelity-offline-spike.md",
+        "docs/plans/qbd-p3-render-layer/step-04-determinism-viewer-evidence.md",
         "docs/plans/qbd-p3-render-layer/gates.yaml"
       ],
-      "text": "Create and approve the Step 3 fidelity/offline test plan; do not select a fallback renderer without a failed must-pass gate and separately approved plan"
+      "text": "Execute Step 4 determinism and viewer-fidelity evidence; G-P3-05 remains blocking and no fallback renderer is authorized"
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
     "docs/plans/qbd-p3-render-layer/gates.yaml",
-    "docs/plans/qbd-p3-render-layer/step-03-fidelity-offline-spike.md",
     "docs/plans/qbd-p3-render-layer/step-04-determinism-viewer-evidence.md",
     "docs/plans/qbd-p3-render-layer/step-05-review-closure-handoff.md"
   ],
   "pickup_fingerprint_files": [
     "docs/plans/qbd-p3-render-layer/gates.yaml",
-    "docs/plans/qbd-p3-render-layer/step-03-fidelity-offline-spike.md",
     "docs/plans/qbd-p3-render-layer/step-04-determinism-viewer-evidence.md",
     "docs/plans/qbd-p3-render-layer/step-05-review-closure-handoff.md"
   ],
   "schema_version": 2,
-  "session_id": "260723-0731",
-  "summary": "Closed deterministic render Steps 1–2: contract and fail-closed publication gates pass with retained evidence; broad C1 was explicitly user-authorized.",
-  "test_verdict": "artifacts/260723-0731/test-verdict.json",
+  "session_id": "260723-1215",
+  "summary": "Completed Phase 3 render Step 3: G-P3-03 OOXML fidelity and G-P3-04 network-isolated rendering passed with retained evidence; Steps 1–3 are complete.",
+  "test_verdict": "artifacts/260723-1215/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
       "files": [
-        "docs/plans/qbd-p3-render-layer/step-03-fidelity-offline-spike.md",
         "docs/plans/qbd-p3-render-layer/step-04-determinism-viewer-evidence.md",
         "docs/plans/qbd-p3-render-layer/step-05-review-closure-handoff.md",
         "docs/plans/qbd-p3-render-layer/gates.yaml"
       ],
-      "text": "Phase 3 fidelity, offline, determinism, viewer, and final review gates remain unverified"
+      "text": "G-P3-05 determinism/viewer evidence and G-P3-06 final review/handoff remain blocking; no fallback renderer is authorized"
     }
   ],
-  "worktree_status": []
+  "worktree_status": [
+    " M AGENTS.md",
+    " M CLAUDE.md"
+  ]
 }
