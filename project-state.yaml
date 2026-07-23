@@ -1,7 +1,7 @@
 schema_version: 1
-updated_at: '2026-07-23T00:26:39.861723+00:00'
+updated_at: '2026-07-23T03:01:32.299754+00:00'
 branch: master
-git_head: 53da09d09fba0917984ba4d6d53b8408a2800d76
+git_head: 737e0258c06bfa9f31ab22c8f4d5e8ec2aaa61e7
 worktree_id: nguyen-dell-7577:master
 active_workstream:
   id: qbd-p3-render-layer
@@ -9,18 +9,18 @@ active_workstream:
   status: in-progress
 current_pickup:
   source: session-handoff.yaml
-  summary: "Steps 1–2 passed and closed: G-P3-02 proves fail-closed publication. Step
-    3 needs its approved fidelity/offline test plan."
+  summary: "Steps 1–3 passed and closed: G-P3-01 through G-P3-04 have retained evidence.
+    Step 4 must prove determinism and viewer fidelity; no fallback renderer is authorized."
   files:
-  - docs/plans/qbd-p3-render-layer/step-03-fidelity-offline-spike.md
+  - docs/plans/qbd-p3-render-layer/step-04-determinism-viewer-evidence.md
   - docs/plans/qbd-p3-render-layer/gates.yaml
-  - docs/reports/qbd-p3-render-layer/pm-20260723-0724-step-02-closure.md
 relevant_progress:
-- P20260722-qbd-p2-ingest-step-05
+- P20260723-qbd-p3-render-step-03
+- P20260723-qbd-p3-render-step-03-final-verdict
 relevant_decisions:
 - D20260722
 read_next:
 - session-handoff.yaml
 - docs/plans/qbd-p3-render-layer/plan.md
-- docs/plans/qbd-p3-render-layer/step-03-fidelity-offline-spike.md
-- docs/reports/qbd-p3-render-layer/pm-20260723-0724-step-02-closure.md
+- docs/plans/qbd-p3-render-layer/step-04-determinism-viewer-evidence.md
+- docs/plans/qbd-p3-render-layer/gates.yaml

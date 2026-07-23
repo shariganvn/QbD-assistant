@@ -127,7 +127,7 @@ by hand and do not claim a Phase 3 gate passed during this planning change.
 |---|---|---|---|
 | 1 | [Freeze render contract and test boundary](./step-01-freeze-render-contract.md) | completed | G-P3-01 |
 | 2 | [Implement fail-closed renderer](./step-02-fail-closed-renderer.md) | completed | G-P3-02 |
-| 3 | [Run fidelity and offline spike](./step-03-fidelity-offline-spike.md) | pending | G-P3-03, G-P3-04 |
+| 3 | [Run fidelity and offline spike](./step-03-fidelity-offline-spike.md) | completed | G-P3-03, G-P3-04 |
 | 4 | [Prove determinism and viewer fidelity](./step-04-determinism-viewer-evidence.md) | pending | G-P3-05 |
 | 5 | [Review closure and handoff](./step-05-review-closure-handoff.md) | pending | G-P3-06 |
 

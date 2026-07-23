@@ -1,0 +1,129 @@
+id: T20260723-qbd-p3-render-step-03
+date: "2026-07-23"
+workstream: qbd-p3-render-layer
+status: executed
+plan: docs/plans/qbd-p3-render-layer/step-03-fidelity-offline-spike.md
+scope:
+  summary: >-
+    Test-first fidelity and offline verification of the existing Node docx candidate with the
+    committed public two-citation fixture. This plan verifies G-P3-03 and G-P3-04 only; it does
+    not select, provision, or test a fallback renderer.
+  changed_files:
+    - package.json
+    - cowork-p2-kit/render/render-spike.mjs
+    - cowork-p2-kit/render/run-isolated-spike.mjs
+    - cowork-p2-kit/render/document-builder.mjs
+    - cowork-p2-kit/render/tests/ooxml-fidelity.test.mjs
+    - cowork-p2-kit/render/tests/isolated-network.test.mjs
+    - cowork-p2-kit/render/tests/run-gate.mjs
+    - cowork-p2-kit/render/tests/gate-evidence-validator.mjs
+    - cowork-p2-kit/render/tests/gate-evidence.contract.test.mjs
+    - cowork-p2-kit/render/tests/fixtures/fidelity/two-citation-draft.json
+    - docs/reports/qbd-p3-render-layer/gates/
+approval:
+  required: true
+  approved_at: "2026-07-23"
+  approved_by: human
+preflight:
+  - id: bubblewrap-namespace
+    command:
+      - bwrap
+      - --unshare-net
+      - --ro-bind
+      - /
+      - /
+      - --proc
+      - /proc
+      - --dev
+      - /dev
+      - --
+      - /usr/bin/true
+    observed: pass
+    notes: >-
+      bwrap 0.11.1 is installed and can create an unshared network namespace in this WSL2
+      environment. This checks capability only; G-P3-04 must still prove the restricted wrapper
+      mount set and actual renderer invocation.
+test_first:
+  initial_expected_failures:
+    - >-
+      node --test cowork-p2-kit/render/tests/ooxml-fidelity.test.mjs fails because the focused
+      test and fixture do not yet exist.
+    - >-
+      node --test cowork-p2-kit/render/tests/isolated-network.test.mjs fails because the wrapper
+      and focused isolation test do not yet exist.
+  rule: >-
+    Add each focused test and fixture, observe its failure against the current implementation,
+    then make only the production changes needed to turn it green. Do not run verify:render as a
+    substitute for either focused gate.
+commands:
+  - id: render-contract-regression
+    description: Preserve the Step 1 citation envelope and exact-host policy before fidelity work.
+    command: [node, --test, cowork-p2-kit/render/tests/contract.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+  - id: render-output-preservation-regression
+    description: Preserve G-P3-02 fail-closed output publication while Step 3 calls the production publisher.
+    command: [node, --test, cowork-p2-kit/render/tests/output-preservation.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+  - id: ooxml-citation-fidelity
+    description: >-
+      Render the committed two-citation draft, inspect OOXML without shell evaluation, and prove
+      the two positive footnote IDs/references, one allowed external footnote relationship, no
+      relationship for the local citation, TOC field, and table markup.
+    command: [node, --test, cowork-p2-kit/render/tests/ooxml-fidelity.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+  - id: isolated-network-render
+    description: >-
+      Invoke run-isolated-spike.mjs once. It must use a literal bwrap argv with --unshare-net,
+      read-only /work and runtime mounts, and only test-created /out and /report write mounts;
+      retain argv, stdout, stderr, tool versions, and output hash as one required structured
+      G-P3-04 snapshot through the gate runner. The runner passes a unique snapshot-file path to
+      the test, validates its JSON, and fails if it is absent, malformed, or has an unexpected shape.
+    command: [node, --test, cowork-p2-kit/render/tests/isolated-network.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+  - id: isolated-evidence-contract
+    description: Reject empty, malformed, or multiple G-P3-04 snapshots before evidence can pass.
+    command: [node, --test, cowork-p2-kit/render/tests/gate-evidence.contract.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+acceptance:
+  gates: [G-P3-03, G-P3-04]
+  evidence:
+    - docs/reports/qbd-p3-render-layer/gates/G-P3-03.json
+    - docs/reports/qbd-p3-render-layer/gates/G-P3-04.json
+  invariants:
+    - Existing G-P3-01 and G-P3-02 focused tests remain green.
+    - render-spike.mjs accepts only explicit arguments and never invokes bwrap, a shell, or a fallback renderer.
+    - run-isolated-spike.mjs is the sole bwrap owner and fails closed when bwrap is absent or returns nonzero.
+    - No root plans/ directory is created; diagnostic output is confined to the injected report root.
+    - >-
+      G-P3-03 and G-P3-04 evidence is produced only by the gate runner and satisfies its schema;
+      G-P3-04 has exactly one non-empty snapshot containing argv, stdout, stderr, node/npm/bwrap
+      versions, and the output SHA-256.
+stop_conditions:
+  - >-
+    Any OOXML mismatch, missing/failed bwrap isolation, unexpected writable mount, root plans/
+    creation, or incomplete evidence leaves both gates unverified and stops Phase 3.
+  - >-
+    A failed must-pass gate does not authorize a fallback. A new renderer requires a separately
+    approved plan after the failure is retained.
+notes:
+  - >-
+    The legacy render-spike.mjs currently has shell execution, obsolete plans/ report routing,
+    static citations, and automatic fallback language. Step 3 replaces those behaviors; it must
+    not attest or reuse them.
+  - >-
+    Step 4 determinism/viewer work, G-P3-05, G-P3-06, and changes to Phase 2 ingest remain out of scope.
+results:
+  verdict: passed
+  artifact: artifacts/260723-1215/test-verdict.json
+  counts:
+    passed: 29
+    failed: 0
+    warnings: 0
+  notes:
+    - G-P3-03 and G-P3-04 gate evidence passed through the canonical gate runner.
+    - G-P3-04 embeds one complete isolation snapshot and removes its transient snapshot file.

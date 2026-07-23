@@ -1,0 +1,112 @@
+{
+  "adapter": {
+    "id": "exit-code",
+    "report_path": null,
+    "report_sha256": null,
+    "report_size_bytes": null,
+    "stable": null
+  },
+  "argv": [
+    "node",
+    "--test",
+    "cowork-p2-kit/render/tests/contract.test.mjs",
+    "cowork-p2-kit/render/tests/output-preservation.test.mjs",
+    "cowork-p2-kit/render/tests/ooxml-fidelity.test.mjs",
+    "cowork-p2-kit/render/tests/isolated-network.test.mjs",
+    "cowork-p2-kit/render/tests/gate-evidence.contract.test.mjs"
+  ],
+  "branch": "master",
+  "command": [
+    "node",
+    "--test",
+    "cowork-p2-kit/render/tests/contract.test.mjs",
+    "cowork-p2-kit/render/tests/output-preservation.test.mjs",
+    "cowork-p2-kit/render/tests/ooxml-fidelity.test.mjs",
+    "cowork-p2-kit/render/tests/isolated-network.test.mjs",
+    "cowork-p2-kit/render/tests/gate-evidence.contract.test.mjs"
+  ],
+  "counts": {
+    "collected": null,
+    "deselected": null,
+    "error": null,
+    "failed": null,
+    "passed": null,
+    "skipped": null,
+    "warnings": null,
+    "xfailed": null,
+    "xpassed": null
+  },
+  "dirty_files": {
+    "cowork-p2-kit/render/render-spike.mjs": {
+      "sha256": "2829f2edd90569f4d81ebac10d06d6c7e54c02b95b7a694535f8dd1689790b6e",
+      "status": "modified"
+    },
+    "cowork-p2-kit/render/run-isolated-spike.mjs": {
+      "sha256": "f9aebb678fbee1bbb7589575ffab02298e15aae4a2b550fc436e10e5e4e2681c",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/fixtures/fidelity/two-citation-draft.json": {
+      "sha256": "4d07f24204b186c37bd1ac7697ef72df3ed5db895786961875e4cb3d9d051041",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/gate-evidence-validator.mjs": {
+      "sha256": "b65d0bbe7e37261490e2a4618db67020f867a8b5ebd304398a499a5a60eebc1f",
+      "status": "modified"
+    },
+    "cowork-p2-kit/render/tests/gate-evidence.contract.test.mjs": {
+      "sha256": "316c1b0b99c25319a73d64d6270503e04c012ebc4b91632e988945ae8183a63b",
+      "status": "modified"
+    },
+    "cowork-p2-kit/render/tests/isolated-network.test.mjs": {
+      "sha256": "ec162cab2a171497dccf5be7431e214518e4650238e34ceff1efac2243b3864f",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/ooxml-fidelity.test.mjs": {
+      "sha256": "aba8b22d33157431ef335071a5c047ebb23023ebac6e25a85ecf14102fe8b30d",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/run-gate.mjs": {
+      "sha256": "1a73297756fceaf92a15da64f89d9de3a55faad15f5410dcea32a8032dcf0759",
+      "status": "modified"
+    },
+    "package.json": {
+      "sha256": "886faaca185ec3cf9bb7b7c6406856f0c87a487f2016bf431dd17b6dfe2d92a7",
+      "status": "modified"
+    }
+  },
+  "duration_seconds": 1.770994,
+  "evidence_level": "local-attested",
+  "evidence_quality": "exit-code-only",
+  "exit_code": 0,
+  "finished_at": "2026-07-23T02:59:58.432376+00:00",
+  "git": {
+    "branch_after": "master",
+    "branch_before": "master",
+    "head_after": "737e0258c06bfa9f31ab22c8f4d5e8ec2aaa61e7",
+    "head_before": "737e0258c06bfa9f31ab22c8f4d5e8ec2aaa61e7",
+    "stable": true
+  },
+  "git_head": "737e0258c06bfa9f31ab22c8f4d5e8ec2aaa61e7",
+  "log_path": "artifacts/260723-1215/test-output.log",
+  "log_sha256": "2fb47339aab390179bfbf675797a5594e8f619f2f4b87f8fcc01463b06282607",
+  "log_size_bytes": 5890,
+  "outcome": "passed",
+  "requested_test_targets": [],
+  "runner_id": "stdlib-popen-v3",
+  "runtime": {
+    "implementation": "CPython",
+    "version": "3.14.4"
+  },
+  "schema_version": 3,
+  "session_id": "260723-1215",
+  "started_at": "2026-07-23T02:59:56.661374+00:00",
+  "status": "passed",
+  "summary": "command exited with code 0",
+  "test_targets": [],
+  "tool": "run_tests_with_verdict.py",
+  "worktree": {
+    "after": "5ce7308ccddf67b9ae012e34853782739c1555c4db94877eecfffcf667d50c3e",
+    "before": "5ce7308ccddf67b9ae012e34853782739c1555c4db94877eecfffcf667d50c3e",
+    "stable": true
+  }
+}

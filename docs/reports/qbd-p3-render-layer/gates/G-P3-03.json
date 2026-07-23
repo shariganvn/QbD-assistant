@@ -1,0 +1,28 @@
+{
+  "gate_id": "G-P3-03",
+  "status": "pass",
+  "command": [
+    "/usr/bin/node",
+    "--test",
+    "cowork-p2-kit/render/tests/ooxml-fidelity.test.mjs"
+  ],
+  "exit_code": 0,
+  "raw_tap_output": "TAP version 13\n# Subtest: G-P3-03: footnotes have unique positive IDs matching citation count\nok 1 - G-P3-03: footnotes have unique positive IDs matching citation count\n  ---\n  duration_ms: 163.333368\n  type: 'test'\n  ...\n# Subtest: G-P3-03: inline footnote references match footnote IDs\nok 2 - G-P3-03: inline footnote references match footnote IDs\n  ---\n  duration_ms: 154.747588\n  type: 'test'\n  ...\n# Subtest: G-P3-03: exactly one external hyperlink relationship for approved URL\nok 3 - G-P3-03: exactly one external hyperlink relationship for approved URL\n  ---\n  duration_ms: 155.797549\n  type: 'test'\n  ...\n# Subtest: G-P3-03: local-only citation has no hyperlink relationship\nok 4 - G-P3-03: local-only citation has no hyperlink relationship\n  ---\n  duration_ms: 166.957103\n  type: 'test'\n  ...\n# Subtest: G-P3-03: document XML contains TOC field\nok 5 - G-P3-03: document XML contains TOC field\n  ---\n  duration_ms: 155.52023\n  type: 'test'\n  ...\n# Subtest: G-P3-03: document XML contains table markup\nok 6 - G-P3-03: document XML contains table markup\n  ---\n  duration_ms: 162.714945\n  type: 'test'\n  ...\n1..6\n# tests 6\n# suites 0\n# pass 6\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1036.708898\n",
+  "raw_stderr": "",
+  "timestamp": "2026-07-23T02:24:57.977Z",
+  "run_id": "d4576096-a682-49a1-abba-1b63e97316a0",
+  "suite_run_id": "e363520b-8b3a-43e4-8f55-073fcb04083b",
+  "assertions_summary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "cancelled": 0
+  },
+  "snapshots": [],
+  "timeout_ms": 300000,
+  "duration_ms": 1083,
+  "timed_out": false,
+  "signal": null
+}

@@ -1,0 +1,57 @@
+{
+  "title": "QbD P.2 Fidelity Test — Bisoprolol 5/10 mg",
+  "citations": [
+    {
+      "evidenceId": "ev-fidelity-001",
+      "source": "inputs/trials/formulation-trial-01.docx",
+      "location": "page 2, offset 0",
+      "excerpt": "Formulation F-01 (wet granulation) showed the best dissolution profile at 93.5% release",
+      "classification": { "label": "public", "citable": true },
+      "evidenceLink": "https://www.usp.org/search?query=bisoprolol"
+    },
+    {
+      "evidenceId": "ev-fidelity-002",
+      "source": "inputs/trials/formulation-trial-02.docx",
+      "location": "page 1, offset 150",
+      "excerpt": "Content uniformity AV = 11.2 for direct compression exceeded acceptance criteria",
+      "classification": { "label": "public", "citable": true },
+      "evidenceLink": null
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading1",
+      "text": "P.2.2 Formulation Development"
+    },
+    {
+      "type": "paragraph",
+      "segments": [
+        { "text": "Three bisoprolol formulations were evaluated. " },
+        { "text": "Formulation F-01 showed superior dissolution" },
+        { "citation": 0 },
+        { "text": " with 93.5% release at 30 minutes." }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "segments": [
+        { "text": "Content uniformity for direct compression was " },
+        { "text": "AV = 11.2" },
+        { "citation": 1 },
+        { "text": ", which exceeded the acceptance criteria." }
+      ]
+    },
+    {
+      "type": "heading2",
+      "text": "Decision Matrix"
+    },
+    {
+      "type": "table",
+      "headers": ["Attribute", "F-01 (WG)", "F-02 (DC)", "F-03 (WG 10mg)"],
+      "rows": [
+        ["Dissolution (30 min)", "93.5%", "85.7%", "96.8%"],
+        ["Content Uniformity (AV)", "6.8", "11.2", "5.4"]
+      ]
+    }
+  ]
+}

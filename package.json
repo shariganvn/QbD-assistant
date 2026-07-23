@@ -11,7 +11,8 @@
     "ingest": "node cowork-p2-kit/ingest/cli.mjs",
     "verify:ingest": "node cowork-p2-kit/ingest/tests/verify-ingest.mjs",
     "verify:render": "node cowork-p2-kit/render/tests/verify-render.mjs",
-    "render": "node cowork-p2-kit/render/render-docx.mjs"
+    "render": "node cowork-p2-kit/render/render-docx.mjs",
+    "render:spike": "node cowork-p2-kit/render/render-spike.mjs"
   },
   "keywords": [],
   "author": "",

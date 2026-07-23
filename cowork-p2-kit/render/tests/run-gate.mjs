@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
-import { dirname, resolve } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { validateGateEvidence } from "./gate-evidence-validator.mjs";
@@ -16,7 +16,21 @@ const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const command = [process.execPath, "--test", testPath];
 const timeoutMs = 300000;
 const started = Date.now();
-const result = spawnSync(command[0], command.slice(1), { cwd: repoRoot, encoding: "utf8", timeout: timeoutMs });
+
+// For G-P3-04, pass a unique snapshot file path to the child test
+const snapshotFile = gateId === "G-P3-04"
+  ? join(repoRoot, `docs/reports/qbd-p3-render-layer/gates/${gateId}-snapshot-${randomUUID()}.json`)
+  : undefined;
+
+const result = spawnSync(command[0], command.slice(1), {
+  cwd: repoRoot,
+  encoding: "utf8",
+  timeout: timeoutMs,
+  env: {
+    ...process.env,
+    ...(snapshotFile ? { GATE_SNAPSHOT_FILE: snapshotFile } : {}),
+  },
+});
 const output = result.stdout ?? "";
 const summary = Object.fromEntries(
   ["tests", "pass", "fail", "skipped", "todo", "cancelled"].map((name) => {
@@ -50,6 +64,19 @@ const evidence = {
   timed_out: timedOut,
   signal: timedOut ? (result.signal ?? "SIGTERM") : null,
 };
+
+// For G-P3-04, read the snapshot file if it exists
+if (gateId === "G-P3-04" && snapshotFile && existsSync(snapshotFile)) {
+  try {
+    const snapshotData = JSON.parse(readFileSync(snapshotFile, "utf8"));
+    evidence.snapshots = [snapshotData];
+  } catch (error) {
+    evidence.raw_stderr += `\n[run-gate] Failed to read snapshot file: ${error.message}`;
+  } finally {
+    rmSync(snapshotFile, { force: true });
+  }
+}
+
 const validation = validateGateEvidence(evidence, gateId);
 if (!validation.valid) {
   evidence.status = "fail";

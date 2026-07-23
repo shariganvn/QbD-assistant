@@ -1,0 +1,184 @@
+TAP version 13
+# Subtest: accepts the committed public citation envelope and supported block shapes
+ok 1 - accepts the committed public citation envelope and supported block shapes
+  ---
+  duration_ms: 4.286676
+  type: 'test'
+  ...
+# Subtest: preserves the existing optional title boundary and Phase 2 evidence identity mapping
+ok 2 - preserves the existing optional title boundary and Phase 2 evidence identity mapping
+  ---
+  duration_ms: 1.059604
+  type: 'test'
+  ...
+# Subtest: accepts only the two exact HTTPS hosts without credentials or ports
+ok 3 - accepts only the two exact HTTPS hosts without credentials or ports
+  ---
+  duration_ms: 3.889343
+  type: 'test'
+  ...
+# Subtest: rejects the committed citation deny fixtures with declared codes
+ok 4 - rejects the committed citation deny fixtures with declared codes
+  ---
+  duration_ms: 1.836729
+  type: 'test'
+  ...
+# Subtest: rejects duplicate evidence IDs, unknown keys, malformed segments, and ragged tables
+ok 5 - rejects duplicate evidence IDs, unknown keys, malformed segments, and ragged tables
+  ---
+  duration_ms: 4.76612
+  type: 'test'
+  ...
+# Subtest: rejects non-object drafts, top-level extras, path escapes, and malformed nested shapes
+ok 6 - rejects non-object drafts, top-level extras, path escapes, and malformed nested shapes
+  ---
+  duration_ms: 5.749606
+  type: 'test'
+  ...
+# Subtest: render gate evidence accepts only complete successful TAP evidence
+ok 7 - render gate evidence accepts only complete successful TAP evidence
+  ---
+  duration_ms: 2.574446
+  type: 'test'
+  ...
+# Subtest: render gate evidence preserves strict UUID, timestamp, and timeout semantics
+ok 8 - render gate evidence preserves strict UUID, timestamp, and timeout semantics
+  ---
+  duration_ms: 0.357687
+  type: 'test'
+  ...
+# Subtest: G-P3-04 requires one complete isolation snapshot to pass
+ok 9 - G-P3-04 requires one complete isolation snapshot to pass
+  ---
+  duration_ms: 2.24959
+  type: 'test'
+  ...
+# Subtest: G-P3-04: wrapper discovers bwrap and runs render-spike.mjs
+ok 10 - G-P3-04: wrapper discovers bwrap and runs render-spike.mjs
+  ---
+  duration_ms: 1.227067
+  type: 'test'
+  ...
+# Subtest: G-P3-04: wrapper uses read-only binds for repo and runtime
+ok 11 - G-P3-04: wrapper uses read-only binds for repo and runtime
+  ---
+  duration_ms: 0.298794
+  type: 'test'
+  ...
+# Subtest: G-P3-04: wrapper uses writable binds only for output and report
+ok 12 - G-P3-04: wrapper uses writable binds only for output and report
+  ---
+  duration_ms: 0.28928
+  type: 'test'
+  ...
+# Subtest: G-P3-04: wrapper uses tmpfs, proc, and dev
+ok 13 - G-P3-04: wrapper uses tmpfs, proc, and dev
+  ---
+  duration_ms: 0.20219
+  type: 'test'
+  ...
+# Subtest: G-P3-04: wrapper changes to /work directory
+ok 14 - G-P3-04: wrapper changes to /work directory
+  ---
+  duration_ms: 0.659838
+  type: 'test'
+  ...
+# Subtest: G-P3-04: snapshot contains required metadata
+ok 15 - G-P3-04: snapshot contains required metadata
+  ---
+  duration_ms: 0.202686
+  type: 'test'
+  ...
+# Subtest: G-P3-04: snapshot contains output hash
+ok 16 - G-P3-04: snapshot contains output hash
+  ---
+  duration_ms: 0.280732
+  type: 'test'
+  ...
+# Subtest: G-P3-04: no root plans directory is created
+ok 17 - G-P3-04: no root plans directory is created
+  ---
+  duration_ms: 0.839476
+  type: 'test'
+  ...
+# Subtest: G-P3-04: wrapper rejects a writable repository bind
+ok 18 - G-P3-04: wrapper rejects a writable repository bind
+  ---
+  duration_ms: 64.845176
+  type: 'test'
+  ...
+# Subtest: G-P3-04: wrapper rejects a draft symlink that resolves outside /work
+ok 19 - G-P3-04: wrapper rejects a draft symlink that resolves outside /work
+  ---
+  duration_ms: 55.249359
+  type: 'test'
+  ...
+# Subtest: G-P3-03: footnotes have unique positive IDs matching citation count
+ok 20 - G-P3-03: footnotes have unique positive IDs matching citation count
+  ---
+  duration_ms: 183.973613
+  type: 'test'
+  ...
+# Subtest: G-P3-03: inline footnote references match footnote IDs
+ok 21 - G-P3-03: inline footnote references match footnote IDs
+  ---
+  duration_ms: 178.772526
+  type: 'test'
+  ...
+# Subtest: G-P3-03: exactly one external hyperlink relationship for approved URL
+ok 22 - G-P3-03: exactly one external hyperlink relationship for approved URL
+  ---
+  duration_ms: 168.176843
+  type: 'test'
+  ...
+# Subtest: G-P3-03: local-only citation has no hyperlink relationship
+ok 23 - G-P3-03: local-only citation has no hyperlink relationship
+  ---
+  duration_ms: 166.098978
+  type: 'test'
+  ...
+# Subtest: G-P3-03: document XML contains TOC field
+ok 24 - G-P3-03: document XML contains TOC field
+  ---
+  duration_ms: 163.262589
+  type: 'test'
+  ...
+# Subtest: G-P3-03: document XML contains table markup
+ok 25 - G-P3-03: document XML contains table markup
+  ---
+  duration_ms: 158.885521
+  type: 'test'
+  ...
+# Subtest: invalid draft inputs preserve every file in the injected output root and declare their failure code
+ok 26 - invalid draft inputs preserve every file in the injected output root and declare their failure code
+  ---
+  duration_ms: 884.937114
+  type: 'test'
+  ...
+# Subtest: a valid draft publishes exactly one DOCX through the absolute injected output root
+ok 27 - a valid draft publishes exactly one DOCX through the absolute injected output root
+  ---
+  duration_ms: 162.130426
+  type: 'test'
+  ...
+# Subtest: a non-directory output root is rejected with the declared output-root code
+ok 28 - a non-directory output root is rejected with the declared output-root code
+  ---
+  duration_ms: 141.742175
+  type: 'test'
+  ...
+# Subtest: a publication write failure removes only its temporary file and preserves seeded hashes
+ok 29 - a publication write failure removes only its temporary file and preserves seeded hashes
+  ---
+  duration_ms: 1.904294
+  type: 'test'
+  ...
+1..29
+# tests 29
+# suites 0
+# pass 29
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1375.126825

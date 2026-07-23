@@ -25,3 +25,27 @@ test("render gate evidence preserves strict UUID, timestamp, and timeout semanti
   assert.equal(validateGateEvidence(evidence({ status: "fail", exit_code: null, timed_out: true, signal: "SIGTERM" }), "G-P3-01").valid, true);
   assert.equal(validateGateEvidence(evidence({ status: "fail", exit_code: 1, timed_out: true, signal: "SIGTERM" }), "G-P3-01").valid, false);
 });
+
+test("G-P3-04 requires one complete isolation snapshot to pass", () => {
+  // Empty snapshots should fail for G-P3-04
+  assert.equal(validateGateEvidence(evidence({ gate_id: "G-P3-04", snapshots: [] }), "G-P3-04").valid, false);
+
+  // Non-empty snapshots should pass for G-P3-04
+  const validSnapshot = {
+    argv: ["/usr/bin/bwrap", "--unshare-net", "node", "render-spike.mjs"],
+    argv_hash: "a".repeat(16),
+    stdout: "Render spike completed\n",
+    stderr: "",
+    exit_code: 0,
+    versions: { node: "v20.0.0", npm: "10.0.0", bwrap: "0.9.0" },
+    output_sha256: "a".repeat(64),
+    timestamp: new Date().toISOString(),
+  };
+  assert.equal(validateGateEvidence(evidence({ gate_id: "G-P3-04", snapshots: [validSnapshot] }), "G-P3-04").valid, true);
+  assert.equal(validateGateEvidence(evidence({ gate_id: "G-P3-04", snapshots: [{}] }), "G-P3-04").valid, false);
+  assert.equal(validateGateEvidence(evidence({ gate_id: "G-P3-04", snapshots: [validSnapshot, validSnapshot] }), "G-P3-04").valid, false);
+  assert.equal(validateGateEvidence(evidence({ gate_id: "G-P3-04", snapshots: [{ ...validSnapshot, output_sha256: "short" }] }), "G-P3-04").valid, false);
+
+  // Empty snapshots is fine for other gates
+  assert.equal(validateGateEvidence(evidence({ snapshots: [] }), "G-P3-01").valid, true);
+});
