@@ -7,11 +7,11 @@
     "cowork-p2-kit/ingest/tests/file-boundaries.test.mjs"
   ],
   "exit_code": 0,
-  "raw_tap_output": "TAP version 13\n# Subtest: admission rejects every symlink before the parser can run\nok 1 - admission rejects every symlink before the parser can run\n  ---\n  duration_ms: 5.959736\n  type: 'test'\n  ...\n# Subtest: unsupported input is rejected before parsing or publication\nok 2 - unsupported input is rejected before parsing or publication\n  ---\n  duration_ms: 2.765534\n  type: 'test'\n  ...\n# Subtest: LiteParse receives a literal argument array and cannot parse outside the configured root\nok 3 - LiteParse receives a literal argument array and cannot parse outside the configured root\n  ---\n  duration_ms: 1.748402\n  type: 'test'\n  ...\n# Subtest: configured traversal, manifest escape, and duplicate normalized paths fail closed\nok 4 - configured traversal, manifest escape, and duplicate normalized paths fail closed\n  ---\n  duration_ms: 2.31564\n  type: 'test'\n  ...\n# Subtest: adapter rejects a non-absolute binary instead of falling back to PATH\nok 5 - adapter rejects a non-absolute binary instead of falling back to PATH\n  ---\n  duration_ms: 0.25144\n  type: 'test'\n  ...\n1..5\n# tests 5\n# suites 0\n# pass 5\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 102.831265\n",
+  "raw_tap_output": "TAP version 13\n# Subtest: admission rejects every symlink before the parser can run\nok 1 - admission rejects every symlink before the parser can run\n  ---\n  duration_ms: 5.72525\n  type: 'test'\n  ...\n# Subtest: unsupported input is rejected before parsing or publication\nok 2 - unsupported input is rejected before parsing or publication\n  ---\n  duration_ms: 2.637096\n  type: 'test'\n  ...\n# Subtest: LiteParse receives a literal argument array and cannot parse outside the configured root\nok 3 - LiteParse receives a literal argument array and cannot parse outside the configured root\n  ---\n  duration_ms: 1.780293\n  type: 'test'\n  ...\n# Subtest: configured traversal, manifest escape, and duplicate normalized paths fail closed\nok 4 - configured traversal, manifest escape, and duplicate normalized paths fail closed\n  ---\n  duration_ms: 2.32489\n  type: 'test'\n  ...\n# Subtest: adapter rejects a non-absolute binary instead of falling back to PATH\nok 5 - adapter rejects a non-absolute binary instead of falling back to PATH\n  ---\n  duration_ms: 0.323638\n  type: 'test'\n  ...\n1..5\n# tests 5\n# suites 0\n# pass 5\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 94.785597\n",
   "raw_stderr": "",
-  "timestamp": "2026-07-22T08:40:58.224Z",
-  "run_id": "4526ac3b-40b1-4e3a-9758-56acb19844dc",
-  "suite_run_id": "713b19b8-69e3-4387-9a05-946dfba390be",
+  "timestamp": "2026-07-22T12:19:04.341Z",
+  "run_id": "672420e7-edde-4cf2-be1a-39ce3e71f143",
+  "suite_run_id": "6a7c250a-1613-4730-8f8a-42f444f14324",
   "assertions_summary": {
     "total": 5,
     "passed": 5,
@@ -89,7 +89,7 @@
     }
   ],
   "timeout_ms": 300000,
-  "duration_ms": 147,
+  "duration_ms": 141,
   "timed_out": false,
   "signal": null
 }

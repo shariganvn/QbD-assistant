@@ -7,7 +7,11 @@ scope: qbd-p2-ingest-completion
 affects:
   - cowork-p2-kit/ingest/liteparse-adapter.mjs
   - docs/plans/qbd-p2-ingest-completion/plan.md
-read_when: Before accepting untrusted input or changing LiteParse binary trust checks.
+  - cowork-p2-kit/render/render-docx.mjs
+  - cowork-p2-kit/render/render-spike.mjs
+  - cowork-p2-kit/ingest/cli.mjs
+  - cowork-p2-kit/ingest/records.mjs
+read_when: Before accepting untrusted input, production rendering, citation-contract changes, or a claim of full historical Phase 2 compliance.
 ---
 
 # D20260722 — LiteParse TOCTOU Hardening
@@ -32,3 +36,20 @@ threat model, an executable regression test, and explicit handling for the suppo
 ## Non-goals
 
 This record neither weakens path admission nor changes the accepted LiteParse capability contract.
+
+## Related Phase 3 readiness debt
+
+The Phase 2 → Phase 3 readiness review records the following independent follow-ups. They are
+accepted only for an isolated fidelity spike with committed public fixtures; none authorizes a
+production draft render.
+
+| ID | Finding | Required resolution before |
+|---|---|---|
+| R-01 | Structured-render input does not carry or enforce a cited record's `classification.citable`; the renderer cannot reject `citable:false` evidence. | Any production draft render. Define the citation input contract, reject uncitable evidence before output creation, and add an executable negative test. |
+| R-02 | `evidenceLink` accepts arbitrary `http`/`https` targets; the required approved-public-URL policy is not encoded or tested. | Any production draft render. Define the approval source/policy, reject non-approved URLs, and add allow/deny tests. |
+| R-03 | `render-spike.mjs` writes its report to obsolete repository-root `plans/...`, which violates the current `docs/plans` and `docs/reports` layout. | Running or attesting the fidelity spike. Route output to a tracked `docs/reports/...` path and verify no root `plans/` directory is created. |
+| R-04 | Historical Phase 2 required a non-contract run log containing LiteParse path/version and OCR-eligibility markers. Current code exposes capability data only through the process result/stdout; no runtime artifact is retained. | Any claim of full compliance with the archived Phase 2 specification. Either restore a versioned/safe runtime artifact with tests or formally accept this as a modernization deviation. |
+
+This section does not reopen G-01 through G-12, select a renderer, or declare Phase 3 fidelity,
+offline, OOXML, or viewer gates passed. The review evidence is
+`docs/reports/qbd-p2-ingest-completion/phase-02-to-phase-03-readiness-review-20260722.md`.

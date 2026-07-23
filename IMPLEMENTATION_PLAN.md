@@ -2,7 +2,7 @@
 
 The single canonical execution plan is:
 
-`docs/plans/qbd-p2-ingest-completion/plan.md`
+`docs/plans/qbd-p3-render-layer/plan.md`
 
 This file is a pointer only. It must not duplicate phase status, task status, gates, or
 acceptance results.

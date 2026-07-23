@@ -1,0 +1,28 @@
+{
+  "gate_id": "G-P3-02",
+  "status": "pass",
+  "command": [
+    "/usr/bin/node",
+    "--test",
+    "cowork-p2-kit/render/tests/output-preservation.test.mjs"
+  ],
+  "exit_code": 0,
+  "raw_tap_output": "TAP version 13\n# Subtest: invalid draft inputs preserve every file in the injected output root and declare their failure code\nok 1 - invalid draft inputs preserve every file in the injected output root and declare their failure code\n  ---\n  duration_ms: 788.996925\n  type: 'test'\n  ...\n# Subtest: a valid draft publishes exactly one DOCX through the absolute injected output root\nok 2 - a valid draft publishes exactly one DOCX through the absolute injected output root\n  ---\n  duration_ms: 145.823928\n  type: 'test'\n  ...\n# Subtest: a non-directory output root is rejected with the declared output-root code\nok 3 - a non-directory output root is rejected with the declared output-root code\n  ---\n  duration_ms: 144.113854\n  type: 'test'\n  ...\n# Subtest: a publication write failure removes only its temporary file and preserves seeded hashes\nok 4 - a publication write failure removes only its temporary file and preserves seeded hashes\n  ---\n  duration_ms: 1.946347\n  type: 'test'\n  ...\n1..4\n# tests 4\n# suites 0\n# pass 4\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1170.174225\n",
+  "raw_stderr": "",
+  "timestamp": "2026-07-23T00:21:16.644Z",
+  "run_id": "e02dd7c4-e458-4418-89e5-adb79878fd81",
+  "suite_run_id": "70576343-0a68-4879-93b2-cc367dc14e1f",
+  "assertions_summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "cancelled": 0
+  },
+  "snapshots": [],
+  "timeout_ms": 300000,
+  "duration_ms": 1220,
+  "timed_out": false,
+  "signal": null
+}

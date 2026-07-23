@@ -1,28 +1,11 @@
 # Render — Layer C Deterministic .docx Output
 
-## Renderer Choice
+## Phase 3 status
 
-**Primary:** `docx` npm library (v9.7.1, pure-JS OOXML writer, MIT) — same Node runtime as ingest, no second toolchain, offline by construction.
-
-**Fallback (named, not provisioned):** .NET OfficeCLI (`iOfficeAI/OfficeCLI`, Apache-2.0) — only if the Node spike fails a must-pass element. Not installed; would require .NET runtime provisioning.
-
-## P1.2 Spike Results
-
-| Element | Status | Evidence |
-|---------|--------|----------|
-| Footnotes | ✅ PASS | `FootnoteReference` + inline citation; unique positive IDs verified in OOXML |
-| Clickable hyperlinks | ✅ PASS | `ExternalHyperlink` for URL-bearing citations; OOXML relationship count verified |
-| Offline render | ✅ PASS | `bwrap --unshare-net` isolated run succeeded |
-| Table of Contents | ✅ PASS | `TableOfContents` with heading range 1-3 |
-| Tables | ✅ PASS | Table with headers + data rows |
-
-**Must-pass** (footnotes + hyperlinks + offline): ✅ PASS
-**Nice-to-have** (TOC + tables): ✅ PASS
-
-**Gate decision:** Lock `.docx`-via-`docx`-npm. No .NET provisioning needed.
-
-The historical spike report is quarantined under `docs/plans/OUTDATED/` and is not an active
-execution or status source. Re-run the spike before relying on it for a new renderer change.
+`docx@9.7.1` is the Phase 3 candidate, not a selected fallback decision. The historical spike is
+quarantined and cannot satisfy a current gate. G-P3-01 (contract/link policy) and G-P3-02
+(fail-closed publication) pass; G-P3-03 through G-P3-06 remain unverified. Do not provision or name an alternative renderer without a
+separately approved plan after a must-pass gate fails.
 
 ## Version Pinning
 
@@ -42,7 +25,14 @@ npm run render
 
 # With structured draft input
 npm run render -- path/to/draft.json
+
+# Use an existing absolute output root (the only output-root override)
+npm run render -- path/to/draft.json --output-root /absolute/path/to/outputs
 ```
+
+`--output-root` is optional, must be an absolute path, and never reads an environment variable.
+The renderer validates the complete draft before it creates the default output directory or opens an
+injected output root for publication.
 
 ## Input Contract
 
@@ -62,10 +52,12 @@ The renderer accepts a structured JSON draft (from Phase 4 SKILL output):
   ],
   "citations": [
     {
-      "source": "file path",
+      "evidenceId": "stable Phase 2 record id",
+      "source": "relative/provenance.docx",
       "location": "page X, offset Y",
       "excerpt": "...",
-      "evidenceLink": "https://..."  // optional, public URL only
+      "classification": { "label": "public", "citable": true },
+      "evidenceLink": "https://www.usp.org/..."  // optional, exact approved HTTPS host only
     }
   ]
 }
@@ -75,7 +67,7 @@ The renderer accepts a structured JSON draft (from Phase 4 SKILL output):
 
 - **Footnote IDs start at 1** (not 0 — 0 conflicts with DOCX continuation separator)
 - **`evidenceLink`** is optional. When present:
-  - Must be a **public URL** (`http://` or `https://`)
+  - Must be HTTPS without credentials or a port, and its exact host must be `www.usp.org` or `dav.gov.vn`
   - Renders as `ExternalHyperlink` inside the numbered footnote
   - `file://` and absolute-path targets are **rejected**
 - **Local-only evidence** (no `evidenceLink`): renders as **plain provenance text** (source + location)
@@ -101,4 +93,5 @@ The render script is reusable via **shell/CLI invocation** from Python (`node re
 
 ## Offline Guarantee
 
-The `docx` library is pure-JS with no network calls. Render runs fully in-process and offline. No third-party binary on the dossier path. Verified with `bwrap --unshare-net` isolated run.
+The `docx` library is pure-JS, but an offline claim requires fresh G-P3-04 evidence from the approved
+Bubblewrap isolation wrapper. A host-level installation or historical report is not proof.

@@ -1,0 +1,15 @@
+{
+  "schema_version": 3,
+  "session_id": "260722-p3-render-step-01",
+  "status": "passed",
+  "outcome": "passed",
+  "summary": "G-P3-01 contract test passed: 6/6 tests, with canonical raw TAP evidence retained.",
+  "command": [
+    "node",
+    "--test",
+    "cowork-p2-kit/render/tests/contract.test.mjs"
+  ],
+  "exit_code": 0,
+  "started_at": "2026-07-22T12:14:20.000Z",
+  "finished_at": "2026-07-22T12:14:20.209Z"
+}

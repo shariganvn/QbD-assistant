@@ -1,21 +1,26 @@
 schema_version: 1
+updated_at: '2026-07-23T00:26:39.861723+00:00'
 branch: master
-git_head: 8ab4e1c5fbc8d6a30b5708cd10837a0ca49b39cd
+git_head: 53da09d09fba0917984ba4d6d53b8408a2800d76
 worktree_id: nguyen-dell-7577:master
 active_workstream:
-  id: qbd-p2-ingest-completion
-  plan: docs/plans/qbd-p2-ingest-completion/plan.md
-  status: done
+  id: qbd-p3-render-layer
+  plan: docs/plans/qbd-p3-render-layer/plan.md
+  status: in-progress
 current_pickup:
   source: session-handoff.yaml
-  summary: Select the next approved workstream; QbD P.2 ingest completion is 
-    complete.
-  files: []
+  summary: "Steps 1–2 passed and closed: G-P3-02 proves fail-closed publication. Step
+    3 needs its approved fidelity/offline test plan."
+  files:
+  - docs/plans/qbd-p3-render-layer/step-03-fidelity-offline-spike.md
+  - docs/plans/qbd-p3-render-layer/gates.yaml
+  - docs/reports/qbd-p3-render-layer/pm-20260723-0724-step-02-closure.md
 relevant_progress:
 - P20260722-qbd-p2-ingest-step-05
 relevant_decisions:
 - D20260722
 read_next:
 - session-handoff.yaml
-- project-state.yaml
-updated_at: '2026-07-22T09:18:41.439220+00:00'
+- docs/plans/qbd-p3-render-layer/plan.md
+- docs/plans/qbd-p3-render-layer/step-03-fidelity-offline-spike.md
+- docs/reports/qbd-p3-render-layer/pm-20260723-0724-step-02-closure.md

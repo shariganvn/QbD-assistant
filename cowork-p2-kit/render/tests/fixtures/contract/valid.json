@@ -1,0 +1,36 @@
+{
+  "citations": [
+    {
+      "evidenceId": "evidence-001",
+      "source": "inputs/trials/formulation-trial-01.docx",
+      "location": "page 2, offset 0",
+      "excerpt": "A non-empty public evidence excerpt.",
+      "classification": { "label": "public", "citable": true },
+      "evidenceLink": "https://www.usp.org/search?query=bisoprolol"
+    },
+    {
+      "evidenceId": "evidence-002",
+      "source": "inputs/trials/formulation-trial-02.docx",
+      "location": "page 1, offset 150",
+      "excerpt": "A second non-empty public evidence excerpt.",
+      "classification": { "label": "public", "citable": true },
+      "evidenceLink": null
+    }
+  ],
+  "blocks": [
+    { "type": "heading1", "text": "P.2.2 Formulation Development" },
+    {
+      "type": "paragraph",
+      "segments": [
+        { "text": "The cited evidence supports this statement." },
+        { "citation": 0 }
+      ]
+    },
+    {
+      "type": "table",
+      "headers": ["Attribute", "Result"],
+      "rows": [["Dissolution", "93.5%"]]
+    },
+    { "type": "chờ_dữ_liệu", "text": "No Phase 4 reasoning is rendered." }
+  ]
+}

@@ -1,49 +1,53 @@
 <!-- GENERATED VIEW — do not edit manually -->
-<!-- Source: docs/test-plans/T20260722-qbd-p2-ingest-step-04.yaml -->
+<!-- Source: docs/test-plans/T20260723-qbd-p3-render-step-02.yaml -->
 <!-- Regenerate: baton render-test-plan -->
-<!-- Source fingerprint: sha256:9d81661441938c135d59ef7385b8a04644137ab9dbf69662d31f913ba2ad41f7 -->
+<!-- Source fingerprint: sha256:f49fea192d3382d3826747b753af333f21c71b6ef11fc13e6f6da23a3a836151 -->
 
 # TEST_PLAN — Active Validation Gates
 
-## T20260722-qbd-p2-ingest-step-04
+## T20260723-qbd-p3-render-step-02
 
 Status: **Executed — results recorded**
 
-- Workstream: `qbd-p2-ingest-completion`
-- Date: 2026-07-22
-- Plan: `docs/plans/qbd-p2-ingest-completion/step-04-isolated-gate-suite.md`
+- Workstream: `qbd-p3-render-layer`
+- Date: 2026-07-23
+- Plan: `docs/plans/qbd-p3-render-layer/step-02-fail-closed-renderer.md`
 
 ## Scope
 
-Verify the isolated G-01 through G-10 ingest suite, its strict retained evidence schema, hard timeouts, and real LiteParse capability semantics.
+Prove that complete draft validation happens before publication and that every invalid input preserves the injected output root byte-for-byte.
 
 ### Changed files
 
-- `cowork-p2-kit/ingest/liteparse-adapter.mjs`
-- `cowork-p2-kit/ingest/tests/`
-- `docs/reports/qbd-p2-ingest-completion/gates/`
-- `docs/plans/qbd-p2-ingest-completion/`
+- `cowork-p2-kit/render/`
+- `docs/reports/qbd-p3-render-layer/`
 
 ## Approval
 
 - **Human approval required** before running commands.
-- Approved at: 2026-07-22
+- Approved at: 2026-07-23
 - Approved by: human
 
 ## Commands
 
-### ingest-step-04-verification — Run the literal G-01 through G-10 isolated gate suite and regenerate canonical evidence.
+### render-contract-regression — Keep the frozen structured-draft and exact-host contract green.
 
 ```bash
-npm run verify:ingest
+node --test cowork-p2-kit/render/tests/contract.test.mjs
+```
+
+### render-output-preservation — Exercise every declared invalid-input code and verify the seeded output root hash map is unchanged; then verify a valid draft publishes one DOCX through the injected root.
+
+```bash
+node --test cowork-p2-kit/render/tests/output-preservation.test.mjs
 ```
 
 
 ## Results
 
 Verdict: **passed**
-Artifact: `artifacts/260722-1539/test-verdict.json`
-Counts: passed=unknown, failed=unknown, warnings=unknown
+Artifact: `artifacts/260723-0731/test-verdict.json`
+Counts: passed=10, failed=0, warnings=0
 
 ---
 

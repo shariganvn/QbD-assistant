@@ -1,0 +1,35 @@
+id: T20260722-qbd-p3-render-step-01
+date: "2026-07-22"
+workstream: qbd-p3-render-layer
+status: executed
+plan: docs/plans/qbd-p3-render-layer/step-01-freeze-render-contract.md
+scope:
+  summary: Freeze the structured citation envelope and exact-host public-link policy before any renderer behavior changes.
+  changed_files:
+    - cowork-p2-kit/render/
+    - cowork-p2-kit/README.md
+    - cowork-p2-kit/render/README.md
+    - package.json
+    - DEPENDENCIES.md
+    - docs/plans/qbd-p3-render-layer/
+    - docs/reports/qbd-p3-render-layer/
+approval:
+  required: true
+  approved_at: "2026-07-22"
+  approved_by: human
+commands:
+  - id: render-contract-verification
+    description: Validate the committed citation fixtures and exact-host policy.
+    command: [node, --test, cowork-p2-kit/render/tests/contract.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+results:
+  verdict: passed
+  artifact: artifacts/260722-p3-render-step-01/test-verdict.json
+  counts:
+    passed: 6
+    failed: 0
+    warnings: 0
+notes:
+  - The initial approved hosts are www.usp.org and dav.gov.vn only; adding any host requires reviewed policy and test updates.
+  - The Phase 2 readiness review authorizes only a public-fixture fidelity spike until the Phase 3 gates pass.

@@ -2,7 +2,19 @@
 
 Claude Cowork-runnable kit that ingests bisoprolol trial data, selects the best formulation via decision matrix, and drafts CTD P.2.2/P.2.3 in Vietnamese.
 
-## System Dependencies
+## Runtime Platform
+
+**Supported Windows deployment:** Windows host + **WSL2 Ubuntu** runtime. Run every Node/npm,
+ingest, render, and verification command inside WSL2, with the repository stored in its Linux
+filesystem (for example `~/projects/QbD-assistant`), not `/mnt/c`. Open the generated DOCX from
+Windows through `\\wsl$` for human review.
+
+Native Windows execution is not supported yet: the current ingest defaults and render spike contain
+Linux-specific paths and isolation commands. Installing Windows equivalents does not satisfy the
+offline gate. See [`../DEPENDENCIES.md`](../DEPENDENCIES.md) for the supported baseline and the
+change-control rule for future dependency decisions.
+
+## System Dependencies (WSL2 Ubuntu)
 
 | Dependency | Binary | Verified Version | Purpose |
 |------------|--------|-----------------|---------|
@@ -11,12 +23,26 @@ Claude Cowork-runnable kit that ingests bisoprolol trial data, selects the best 
 | Ghostscript | `/usr/bin/gs` | 10.06.0 | liteparse PDF conversion support |
 | Tesseract OCR | `tesseract` | 5.x | OCR for scanned pages (eng + vie models) |
 | liteparse | `@llamaindex/liteparse` | 2.5.0 (CLI 2.0.0) | Deterministic document extraction |
+| Bubblewrap | `bwrap` | record at installation | Required by the Phase 3 isolated offline-render gate |
 
 **Tessdata location:** `/usr/share/tesseract-ocr/5/tessdata/` (eng + vie verified present).
+
+Install the system baseline inside WSL2, then restore the pinned Node packages:
+
+```bash
+sudo apt update
+sudo apt install libreoffice ghostscript tesseract-ocr tesseract-ocr-vie bubblewrap
+npm ci
+```
+
+The Bubblewrap version and its usable isolation recipe are recorded only by fresh G-P3-04 evidence;
+installation alone does not pass the Phase 3 offline-render gate.
 
 ## Quick Start
 
 ```bash
+# Run these commands inside WSL2.
+
 # 1. Build .docx inputs from markdown source
 npm run inputs:build
 

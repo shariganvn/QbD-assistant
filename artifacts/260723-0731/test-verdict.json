@@ -1,0 +1,162 @@
+{
+  "adapter": {
+    "id": "exit-code",
+    "report_path": null,
+    "report_sha256": null,
+    "report_size_bytes": null,
+    "stable": null
+  },
+  "argv": [
+    "node",
+    "--test",
+    "cowork-p2-kit/render/tests/contract.test.mjs",
+    "cowork-p2-kit/render/tests/output-preservation.test.mjs"
+  ],
+  "branch": "master",
+  "command": [
+    "node",
+    "--test",
+    "cowork-p2-kit/render/tests/contract.test.mjs",
+    "cowork-p2-kit/render/tests/output-preservation.test.mjs"
+  ],
+  "counts": {
+    "collected": null,
+    "deselected": null,
+    "error": null,
+    "failed": null,
+    "passed": null,
+    "skipped": null,
+    "warnings": null,
+    "xfailed": null,
+    "xpassed": null
+  },
+  "dirty_files": {
+    "cowork-p2-kit/README.md": {
+      "sha256": "0326d64ef9e37d05a905bb20448024303b9b9f5c109287ca279d1fa5023e7ede",
+      "status": "modified"
+    },
+    "cowork-p2-kit/render/README.md": {
+      "sha256": "b355ff1e1b025dd266ccd58b9524b6d1b0d8f681599808e10c17e76d9a3d5049",
+      "status": "modified"
+    },
+    "cowork-p2-kit/render/approved-hosts.json": {
+      "sha256": "1991f4422f20f9ed455eb197858e8ce5a43d991da2b553e1b032daf400c4f498",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/contract.mjs": {
+      "sha256": "ca5c943f8734f9c561f4b2f0b5e55afe99790ddcc3e7115a79fda48a3ae3d591",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/document-builder.mjs": {
+      "sha256": "499b1e49a2221ac6e0797f955645bd03fbafcdd5af4087bcadf72f428065cf28",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/publication.mjs": {
+      "sha256": "9eb3f024b268a9114e99d53b78d66087d83dc2a15d257f2edb944919612e5bfd",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/render-docx.mjs": {
+      "sha256": "0e5cf9be6d96fd76a1cde653d512fc2169789d0dfb32d1dc6c6e1bc81dfff43b",
+      "status": "modified"
+    },
+    "cowork-p2-kit/render/tests/contract.test.mjs": {
+      "sha256": "cbea1ee0ab952a6eab4ec03d299094608e96c0f084ab6032d8f606ff69e33156",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/fixtures/contract/invalid-block.json": {
+      "sha256": "97a070a253b33ba5a7d57bd5bd1ff8e2769f04ef1fc118215ceb2122a288f86e",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/fixtures/contract/invalid-links.json": {
+      "sha256": "8332487092fc19f9653c1b029cb840820ea22126efa628fa89c2a4314b2ce836",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/fixtures/contract/invalid-source.json": {
+      "sha256": "3f5f21208d0163c1338faffe9787bc11b6b3dbe60353084da2c2ca571c670549",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/fixtures/contract/missing-classification.json": {
+      "sha256": "5d5db527a5d8a065df3a50f28ab5a061e773f0b056d056bb3f46bf797f68a1af",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/fixtures/contract/uncitable.json": {
+      "sha256": "d299595e4167d40df26d786049d70bce27685f844f1c4fb88f9765f3b05a51dc",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/fixtures/contract/unresolved-citation.json": {
+      "sha256": "eb7a62d299e9d5bbd2a09b76e8f78460ddc78fdba657af2f1b739bf7cd3e7f90",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/fixtures/contract/valid.json": {
+      "sha256": "0f5dcf2d600137fb4b4d0437e72c44c977b6de3b9560dbdf4b2d26dc52cd63c0",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/fixtures/output-preservation/invalid-json.txt": {
+      "sha256": "b2fe393e5a4fbb3465ea1e3dd5fd432d8566d3c690abc16ebad39a51e789d7d6",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/fixtures/output-preservation/valid.json": {
+      "sha256": "a0a00a07458c52082eafa8847cb77a1417b66e69575b0f8ba5c0e9b741d553f9",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/gate-evidence-validator.mjs": {
+      "sha256": "6e58e71681666a5656c5235efcdde927ad00b96c85df4f0d8deed0581d9c7dd6",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/gate-evidence.contract.test.mjs": {
+      "sha256": "80e2b1a665d3d6718f438a9712536622af90a99c766943eec9157879fdfe2b7f",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/output-preservation.test.mjs": {
+      "sha256": "1b5fb3a4f63079188b692ae31fe1108d08f2d864f5b84d1f4423414c19661fa2",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/run-gate.mjs": {
+      "sha256": "6091f885954546171463d01db244963c9dcc4f465b7e404819ba5d6033911b47",
+      "status": "added"
+    },
+    "cowork-p2-kit/render/tests/verify-render.mjs": {
+      "sha256": "9161968da06d969a19ddf904974927bb3c0281de3a7291d20f538e0f82ea44a9",
+      "status": "added"
+    },
+    "package.json": {
+      "sha256": "6a66ee5ff713cc94bfac7b32679ed85179375581f0da852837b921295f57e385",
+      "status": "modified"
+    }
+  },
+  "duration_seconds": 1.562481,
+  "evidence_level": "local-attested",
+  "evidence_quality": "exit-code-only",
+  "exit_code": 0,
+  "finished_at": "2026-07-23T00:31:55.894248+00:00",
+  "git": {
+    "branch_after": "master",
+    "branch_before": "master",
+    "head_after": "53da09d09fba0917984ba4d6d53b8408a2800d76",
+    "head_before": "53da09d09fba0917984ba4d6d53b8408a2800d76",
+    "stable": true
+  },
+  "git_head": "53da09d09fba0917984ba4d6d53b8408a2800d76",
+  "log_path": "artifacts/260723-0731/test-output.log",
+  "log_sha256": "92f40709b428119bfe39bd4d0c89eb618fcb4815a2f9ed2d4728df9273bc8b90",
+  "log_size_bytes": 2438,
+  "outcome": "passed",
+  "requested_test_targets": [],
+  "runner_id": "stdlib-popen-v3",
+  "runtime": {
+    "implementation": "CPython",
+    "version": "3.14.4"
+  },
+  "schema_version": 3,
+  "session_id": "260723-0731",
+  "started_at": "2026-07-23T00:31:54.331759+00:00",
+  "status": "passed",
+  "summary": "command exited with code 0",
+  "test_targets": [],
+  "tool": "run_tests_with_verdict.py",
+  "worktree": {
+    "after": "5a7ee9a8108577d13a82a93a3b06950090cdbcfb39c6fb656895e6785404c6e9",
+    "before": "5a7ee9a8108577d13a82a93a3b06950090cdbcfb39c6fb656895e6785404c6e9",
+    "stable": true
+  }
+}

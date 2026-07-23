@@ -1,0 +1,36 @@
+id: T20260723-qbd-p3-render-step-02
+date: "2026-07-23"
+workstream: qbd-p3-render-layer
+status: executed
+plan: docs/plans/qbd-p3-render-layer/step-02-fail-closed-renderer.md
+scope:
+  summary: Prove that complete draft validation happens before publication and that every invalid input preserves the injected output root byte-for-byte.
+  changed_files:
+    - cowork-p2-kit/render/
+    - docs/reports/qbd-p3-render-layer/
+approval:
+  required: true
+  approved_at: "2026-07-23"
+  approved_by: human
+commands:
+  - id: render-contract-regression
+    description: Keep the frozen structured-draft and exact-host contract green.
+    command: [node, --test, cowork-p2-kit/render/tests/contract.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+  - id: render-output-preservation
+    description: Exercise every declared invalid-input code and verify the seeded output root hash map is unchanged; then verify a valid draft publishes one DOCX through the injected root.
+    command: [node, --test, cowork-p2-kit/render/tests/output-preservation.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+results:
+  verdict: passed
+  artifact: artifacts/260723-0731/test-verdict.json
+  counts:
+    passed: 10
+    failed: 0
+    warnings: 0
+notes:
+  - Approval authorizes Step 2 only. G-P3-03 through G-P3-05 and the final verify:render suite remain out of scope.
+  - Tests must use the documented absolute --output-root argument; no environment-variable override is allowed.
+  - Retained gate evidence is docs/reports/qbd-p3-render-layer/gates/G-P3-01.json and G-P3-02.json; the final attested verdict is artifacts/260723-0731/test-verdict.json.

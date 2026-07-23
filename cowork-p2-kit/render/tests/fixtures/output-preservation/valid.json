@@ -1,0 +1,22 @@
+{
+  "title": "Output preservation fixture",
+  "citations": [
+    {
+      "evidenceId": "render-fixture-01",
+      "source": "inputs/trials/example.docx",
+      "location": "page 2, offset 0",
+      "excerpt": "Public fixture evidence.",
+      "classification": { "label": "public", "citable": true },
+      "evidenceLink": null
+    }
+  ],
+  "blocks": [
+    {
+      "type": "paragraph",
+      "segments": [
+        { "text": "A cited fixture claim" },
+        { "citation": 0 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+schema_version: 1
+workstream: qbd-p3-render-layer
+canonical_plan: docs/plans/qbd-p3-render-layer/plan.md
+status_rule: all blocking gates require status=pass and a readable evidence artifact
+
+gates:
+  - id: G-P3-01
+    name: render-contract-and-link-policy
+    requirement: The renderer has a complete, fail-closed citation contract and exact-host link policy.
+    invariant: Every inline citation resolves to an envelope with evidence identity, provenance, and citable=true; supplied links are HTTPS and use only approved exact hosts.
+    boundary: cowork-p2-kit/render/contract.mjs and approved-host configuration
+    fixture: cowork-p2-kit/render/tests/fixtures/contract/ plus approved-hosts.json
+    command: [node, --test, cowork-p2-kit/render/tests/contract.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - www.usp.org and dav.gov.vn are allowed exact hosts
+        - subdomains, unknown hosts, http, credentials, ports, file URLs, and non-URL evidenceLink strings are rejected
+        - relative normalized provenance source paths are accepted; absolute, traversal, dot-segment, empty-segment, and URL sources are rejected
+        - citable false, missing or malformed classification, duplicate evidence IDs, unresolved indices, unknown keys, unknown blocks, malformed segments, and ragged tables are rejected
+    evidence: docs/reports/qbd-p3-render-layer/gates/G-P3-01.json
+    owner_step: 1
+    blocks: [G-P3-02, G-P3-03]
+    status: pass
+
+  - id: G-P3-02
+    name: fail-closed-output-publication
+    requirement: Invalid structured input cannot create or replace the production DOCX output.
+    invariant: Every validation failure leaves the prior output byte-identical and emits a specific non-success result.
+    boundary: render-docx.mjs CLI, contract.mjs, publication.mjs
+    fixture: isolated output roots seeded with a known DOCX and every invalid G-P3-01 draft
+    command: [node, --test, cowork-p2-kit/render/tests/output-preservation.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - each named invalid fixture exits nonzero with its declared E_DRAFT_ or E_CITATION_ code
+        - SHA-256 hashes of every seeded output-root file are equal before and after each child CLI
+        - valid input creates one DOCX only in the injected output root through temp-file plus rename publication
+    evidence: docs/reports/qbd-p3-render-layer/gates/G-P3-02.json
+    owner_step: 2
+    blocks: [G-P3-03, G-P3-04, G-P3-05]
+    status: pass
+
+  - id: G-P3-03
+    name: ooxml-citation-fidelity
+    requirement: The committed fixture renders correct DOCX citation, TOC, and table semantics.
+    invariant: Footnotes and inline references have one-to-one positive IDs; only approved URL citations create external hyperlink relationships.
+    boundary: document construction and OOXML package inspection
+    fixture: cowork-p2-kit/render/tests/fixtures/fidelity/two-citation-draft.json with one approved HTTPS link, one local-only citation, a TOC, and a table
+    command: [node, --test, cowork-p2-kit/render/tests/ooxml-fidelity.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - exactly two unique positive footnote IDs match exactly two inline footnote references; separator IDs are excluded explicitly
+        - exactly one external hyperlink relationship in word/_rels/footnotes.xml.rels has TargetMode External and targets the approved URL
+        - the local-only citation has no hyperlink relationship
+        - document XML contains a TOC field and table markup
+    evidence: docs/reports/qbd-p3-render-layer/gates/G-P3-03.json
+    owner_step: 3
+    blocks: [G-P3-05, G-P3-06]
+    status: unverified
+
+  - id: G-P3-04
+    name: isolated-network-render
+    requirement: The actual renderer and spike execute with network access unavailable.
+    invariant: An unavailable or failing isolation runner is a failure; render success outside isolation is not proof.
+    boundary: run-isolated-spike.mjs and bwrap network namespace
+    fixture: committed fidelity draft plus test-created isolated output and report roots
+    command: [node, --test, cowork-p2-kit/render/tests/isolated-network.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - the wrapper discovers bwrap and runs render-spike.mjs once beneath bwrap --unshare-net, never from an already isolated child
+        - the wrapper read-only binds the repository at /work and runtime paths /usr, /lib, /lib64, /bin, and /etc; it bind-mounts only test-created output and report roots writable at /out and /report
+        - retained stdout, stderr, literal argument array, node/npm/bwrap versions, and output hash identify the run
+        - no root plans directory is created
+    evidence: docs/reports/qbd-p3-render-layer/gates/G-P3-04.json
+    owner_step: 3
+    blocks: [G-P3-05, G-P3-06]
+    status: unverified
+
+  - id: G-P3-05
+    name: deterministic-output-and-viewer-fidelity
+    requirement: Rendering is deterministic and the DOCX displays correctly in a supported viewer.
+    invariant: Identical input has identical normalized OOXML content, and an engineer records a completed visual checklist.
+    boundary: renderer output, normalization helper, and LibreOffice or Word viewer
+    fixture: the G-P3-03 structured draft rendered twice plus docs/reports/qbd-p3-render-layer/gates/G-P3-05-viewer.md
+    command: [npm, run, verify:render]
+    expected:
+      exit_code: 0
+      assertions:
+        - normalization compares a sorted path-to-SHA-256 manifest of every ZIP entry's uncompressed bytes and ignores only ZIP container metadata
+        - document XML, relationships, footnotes, and media entries remain byte-identical
+        - a completed checklist records reviewer, date, viewer name/version, input hash, output hash, and pass/fail observations for footnotes, approved clickable link, local plain citation, TOC, and table layout
+    evidence: docs/reports/qbd-p3-render-layer/gates/G-P3-05.json
+    owner_step: 4
+    blocks: [G-P3-06]
+    status: unverified
+
+  - id: G-P3-06
+    name: change-review-and-handoff
+    requirement: Phase 3 closes only with traceable scope review and canonical workflow routing.
+    invariant: Every requirement maps to a fixture, command, raw result, and evidence; no unapproved fallback or unrelated Phase 2 change is included.
+    boundary: Phase 3 source, tests, documentation, evidence, and repository diff
+    fixture: final Phase 3 diff and G-P3-01 through G-P3-05 evidence
+    command: [npx, gitnexus, detect-changes, --repo, QbD-assistant, --scope, all]
+    expected:
+      exit_code: 0
+      assertions:
+        - changed symbols and affected flows match the active plan
+        - a fresh review has no blocking finding
+        - canonical plan and workflow handoff match retained evidence
+    evidence: docs/reports/qbd-p3-render-layer/code-review.md
+    owner_step: 5
+    blocks: []
+    status: unverified
