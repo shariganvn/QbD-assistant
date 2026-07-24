@@ -20,6 +20,7 @@ import { createConfig } from "../config.mjs";
 import { ERROR_CODES } from "../errors.mjs";
 import { createLiteparseAdapter } from "../liteparse-adapter.mjs";
 import { buildRecords } from "../records.mjs";
+import { runIngest } from "../pipeline.mjs";
 
 const testDir = dirname(fileURLToPath(import.meta.url));
 const fixtureDir = resolve(testDir, "fixtures/happy-path");
@@ -109,6 +110,36 @@ test("happy-path fixture produces byte-identical output via child CLI", () => {
       assert.ok(found, `Representative record ${contractRec.id} not found`);
       assert.deepEqual(found, contractRec, `Representative record ${contractRec.id} differs`);
     }
+  } finally {
+    cleanupDir(tmpDir);
+  }
+});
+
+test("runIngest exposes only its fixed three-field success contract", () => {
+  const tmpDir = makeIsolatedDir("run-ingest-contract");
+  const tmpInputs = join(tmpDir, "inputs");
+  const tmpStore = join(tmpDir, "store");
+
+  try {
+    cpSync(join(fixtureDir, "inputs"), tmpInputs, { recursive: true });
+    mkdirSync(tmpStore, { recursive: true });
+    copyFileSync(join(fixtureDir, "records.schema.json"), join(tmpStore, "records.schema.json"));
+
+    const result = runIngest(createConfig({
+      inputsRoot: tmpInputs,
+      storeRoot: tmpStore,
+      kitDir: tmpDir,
+      litBinary,
+      sofficeBinary: harmlessProbeBinary,
+      ghostscriptBinary: harmlessProbeBinary,
+      tessdataRoot: "/usr/share/tesseract-ocr/5/tessdata",
+    }));
+
+    assert.deepEqual(
+      Object.keys(result).sort(),
+      ["capabilities", "records", "storeHash"],
+      "runIngest must expose only the fixed Step 2 success fields",
+    );
   } finally {
     cleanupDir(tmpDir);
   }

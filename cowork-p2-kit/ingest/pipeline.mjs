@@ -80,7 +80,7 @@ export function runIngest(config) {
   }
 
   // ─── Publication ───────────────────────────────────────────────────
-  const { storeHash, recordCount, storePath } = publishRecords(records, config);
+  const { storeHash } = publishRecords(records, config);
 
-  return { records, storeHash, capabilities, recordCount, storePath };
+  return { records, storeHash, capabilities };
 }

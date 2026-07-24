@@ -40,14 +40,14 @@ const version = adapter.getVersion();
 // Write expected.json
 const sha256 = createHash("sha256").update(recordsContent).digest("hex");
 const expected = {
-  record_count: result.recordCount,
+  record_count: result.records.length,
   sha256,
   liteparse_version: version,
 };
 writeFileSync(join(fixtureDir, "expected.json"), JSON.stringify(expected, null, 2) + "\n");
 
 console.log("Fixture generated:");
-console.log(`  Records: ${result.recordCount}`);
+console.log(`  Records: ${result.records.length}`);
 console.log(`  SHA-256: ${sha256}`);
 console.log(`  LiteParse: ${version}`);
 

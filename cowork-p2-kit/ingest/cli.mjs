@@ -12,7 +12,7 @@
  */
 
 import { readFileSync, existsSync } from "node:fs";
-import { isAbsolute, resolve } from "node:path";
+import { isAbsolute, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { IngestError } from "./errors.mjs";
 import { createConfig } from "./config.mjs";
@@ -101,8 +101,8 @@ export async function main(argv) {
     const result = runIngest(config);
 
     console.log(`\n=== Ingest Complete ===`);
-    console.log(`  Total records: ${result.recordCount}`);
-    console.log(`  Store: ${result.storePath}`);
+    console.log(`  Total records: ${result.records.length}`);
+    console.log(`  Store: ${join(config.storeRoot, "records.jsonl")}`);
     console.log(`  Store hash: ${result.storeHash}`);
     console.log(`  Capabilities: ${JSON.stringify(result.capabilities)}`);
   } catch (err) {
