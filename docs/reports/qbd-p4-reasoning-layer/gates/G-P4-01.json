@@ -1,0 +1,31 @@
+{
+  "gate_id": "G-P4-01",
+  "status": "pass",
+  "command": [
+    "/usr/bin/node",
+    "--test",
+    "--test-reporter=tap",
+    "cowork-p2-kit/reasoning/tests/contract.test.mjs",
+    "cowork-p2-kit/reasoning/tests/output-preservation.test.mjs",
+    "cowork-p2-kit/reasoning/tests/run-gate-contract.test.mjs"
+  ],
+  "exit_code": 0,
+  "raw_tap_output": "TAP version 13\n# Subtest: G-P4-01 accepts exact valid Layer B envelopes\nok 1 - G-P4-01 accepts exact valid Layer B envelopes\n  ---\n  duration_ms: 12.029217\n  type: 'test'\n  ...\n# Subtest: G-P4-01 rejects unknown keys, missing fields, and wrong types with stable E_ codes\nok 2 - G-P4-01 rejects unknown keys, missing fields, and wrong types with stable E_ codes\n  ---\n  duration_ms: 2.282296\n  type: 'test'\n  ...\n# Subtest: G-P4-01 validates fact candidate, value/unit, offset, and minimum quote bindings independently\nok 3 - G-P4-01 validates fact candidate, value/unit, offset, and minimum quote bindings independently\n  ---\n  duration_ms: 6.40913\n  type: 'test'\n  ...\n# Subtest: G-P4-01 rejects an incomplete linear attestation from its explicit required-field list\nok 4 - G-P4-01 rejects an incomplete linear attestation from its explicit required-field list\n  ---\n  duration_ms: 0.535708\n  type: 'test'\n  ...\n# Subtest: G-P4-01 each invalid CLI envelope exits 1, prints E_ code, and preserves all prior output bytes\nok 5 - G-P4-01 each invalid CLI envelope exits 1, prints E_ code, and preserves all prior output bytes\n  ---\n  duration_ms: 12.2385\n  type: 'test'\n  ...\n# Subtest: G-P4-01 refuses publication outside the declared root with one nonzero E_ failure\nok 6 - G-P4-01 refuses publication outside the declared root with one nonzero E_ failure\n  ---\n  duration_ms: 0.402156\n  type: 'test'\n  ...\n# Subtest: G-P4-01 CLI requires a JSONL store and always validates fact-card bindings against it\nok 7 - G-P4-01 CLI requires a JSONL store and always validates fact-card bindings against it\n  ---\n  duration_ms: 6.282951\n  type: 'test'\n  ...\n# Subtest: G-P4-01 valid publication creates canonical JSON only inside its declared root\nok 8 - G-P4-01 valid publication creates canonical JSON only inside its declared root\n  ---\n  duration_ms: 3.419103\n  type: 'test'\n  ...\n# Subtest: G-P4-01 canonical publication bytes do not depend on valid input object key order\nok 9 - G-P4-01 canonical publication bytes do not depend on valid input object key order\n  ---\n  duration_ms: 23.113927\n  type: 'test'\n  ...\n# Subtest: G-P4-01 a synchronous mid-rename failure restores every pre-existing publication byte\nok 10 - G-P4-01 a synchronous mid-rename failure restores every pre-existing publication byte\n  ---\n  duration_ms: 2.637918\n  type: 'test'\n  ...\n# Subtest: G-P4-01 spawned CLI ignores REASONING_PUBLICATION_ROOT and retains its fixed production root\nok 11 - G-P4-01 spawned CLI ignores REASONING_PUBLICATION_ROOT and retains its fixed production root\n  ---\n  duration_ms: 49.633913\n  type: 'test'\n  ...\n# Subtest: G-P4-01 store bytes must SHA-256 match the cohort pin before publication and preserve prior output\nok 12 - G-P4-01 store bytes must SHA-256 match the cohort pin before publication and preserve prior output\n  ---\n  duration_ms: 3.715599\n  type: 'test'\n  ...\n# Subtest: G-P4-01 runner accepts multiple test paths, forces TAP, parses its epilogue, and writes P4 evidence with store SHA\nok 13 - G-P4-01 runner accepts multiple test paths, forces TAP, parses its epilogue, and writes P4 evidence with store SHA\n  ---\n  duration_ms: 189.284856\n  type: 'test'\n  ...\n# Subtest: G-P4-01 runner rejects a non-P4 gate ID\nok 14 - G-P4-01 runner rejects a non-P4 gate ID\n  ---\n  duration_ms: 47.331111\n  type: 'test'\n  ...\n1..14\n# tests 14\n# suites 0\n# pass 14\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 332.702571\n",
+  "raw_stderr": "",
+  "timestamp": "2026-07-24T06:16:04.997Z",
+  "run_id": "57911825-c429-42d8-bc9c-6cbd2dbd3f14",
+  "suite_run_id": "ccced299-b8f7-4d8b-b03e-642b22f7b878",
+  "assertions_summary": {
+    "total": 14,
+    "passed": 14,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "cancelled": 0
+  },
+  "timeout_ms": 300000,
+  "duration_ms": 378,
+  "timed_out": false,
+  "signal": null,
+  "store_records_sha256": "6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56"
+}

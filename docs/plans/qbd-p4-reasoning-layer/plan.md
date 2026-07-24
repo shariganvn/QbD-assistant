@@ -142,7 +142,7 @@ approval and scientific adjudication.
 | Step | Execution file | Status | Blocking gate |
 |---|---|---:|---|
 | 0 | [Freeze the reasoning fixture baseline](./step-00-freeze-store-baseline.md) | completed | readiness checklist |
-| 1 | [Freeze contracts and TDD harness](./step-01-contracts-and-harness.md) | pending | G-P4-01 |
+| 1 | [Freeze contracts and TDD harness](./step-01-contracts-and-harness.md) | completed | G-P4-01 |
 | 2 | [Enforce cohort and evidence boundaries](./step-02-cohort-evidence-boundaries.md) | pending | G-P4-02 |
 | 3 | [Implement approved selection-rubric decision engine](./step-03-rubric-decision-engine.md) | pending | G-P4-03 |
 | 4 | [Rewrite Cowork skill and publish artifacts](./step-04-cowork-skill-artifacts.md) | pending | G-P4-04 |

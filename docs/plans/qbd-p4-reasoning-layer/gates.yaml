@@ -47,7 +47,7 @@ gates:
     evidence: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-01.json
     owner_step: 1
     blocks: [G-P4-02, G-P4-03, G-P4-04, G-P4-05]
-    status: pending
+    status: pass
 
   - id: G-P4-02
     name: cohort-and-evidence-boundary

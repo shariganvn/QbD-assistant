@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "rubric_id": "rubric-fixture-001",
+  "measures": ["assay"],
+  "unit_vocabulary": ["mg"],
+  "aggregation_rule": "single-value",
+  "approved_sha256": null
+}

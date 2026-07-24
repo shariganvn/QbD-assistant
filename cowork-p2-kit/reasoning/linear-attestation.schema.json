@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QbD linear-formulation attestation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "attestation_id", "candidate", "required_fields", "api", "strength", "dosage_form", "product_target", "trial_context", "approved_sha256"],
+  "properties": {
+    "schema_version": { "const": 1 }, "attestation_id": { "type": "string", "minLength": 1 },
+    "candidate": { "type": "string", "minLength": 1 }, "required_fields": { "type": "array", "minItems": 5, "items": { "type": "string" } },
+    "api": { "type": "string", "minLength": 1 }, "strength": { "type": "string", "minLength": 1 },
+    "dosage_form": { "type": "string", "minLength": 1 }, "product_target": { "type": "string", "minLength": 1 },
+    "trial_context": { "type": "string", "minLength": 1 }, "approved_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" }
+  }
+}

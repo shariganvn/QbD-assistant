@@ -1,29 +1,29 @@
 <!-- GENERATED VIEW — do not edit manually -->
-<!-- Source: docs/test-plans/T20260724-qbd-p4-reasoning-step-00.yaml -->
+<!-- Source: docs/test-plans/T20260724-qbd-p4-reasoning-step-01.yaml -->
 <!-- Regenerate: baton render-test-plan -->
-<!-- Source fingerprint: sha256:28051d345f784fb46e39b74dce74a42fc0b3ff0efa41081b83364b55613b17bc -->
+<!-- Source fingerprint: sha256:585d3506cccdf84fa5259b60acba014467d30b97251655f53af2aaa0a70710ad -->
 
 # TEST_PLAN — Active Validation Gates
 
-## T20260724-qbd-p4-reasoning-step-00
+## T20260724-qbd-p4-reasoning-step-01
 
 Status: **Executed — results recorded**
 
 - Workstream: `qbd-p4-reasoning-layer`
 - Date: 2026-07-24
-- Plan: `docs/plans/qbd-p4-reasoning-layer/step-00-freeze-store-baseline.md`
+- Plan: `docs/plans/qbd-p4-reasoning-layer/step-01-contracts-and-harness.md`
 
 ## Scope
 
-Freeze a committed, reproducible 17-record Layer B fixture from the current admitted store without changing Layer A or Layer C behavior.
+Freeze strict Layer B artifact contracts, validate-before-publication behavior, and the machine-evidence gate harness without changing Layer A or Layer C.
 
 ### Changed files
 
-- `cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl`
-- `cowork-p2-kit/reasoning/tests/fixtures/store/README.md`
-- `docs/plans/qbd-p4-reasoning-layer/gates.yaml`
-- `docs/plans/qbd-p4-reasoning-layer/plan.md`
-- `artifacts/260724-1116-qbd-p4-step-00/records.jsonl.bak`
+- `cowork-p2-kit/reasoning/`
+- `cowork-p2-kit/rubric/selection-rubric.schema.json`
+- `package.json`
+- `docs/plans/qbd-p4-reasoning-layer/`
+- `docs/decisions/D20260724-qbd-reasoning-before-rationale.md`
 
 ## Approval
 
@@ -33,18 +33,24 @@ Freeze a committed, reproducible 17-record Layer B fixture from the current admi
 
 ## Commands
 
-### ingest-record-contract-regression — Preserve the existing frozen JSONL record envelope and deterministic record identity.
+### gate-p4-01 — Run the contract, publication-preservation, and gate-runner tests through the P4 evidence wrapper.
 
 ```bash
-node --test cowork-p2-kit/ingest/tests/record-contract.test.mjs
+node cowork-p2-kit/reasoning/tests/run-gate.mjs G-P4-01 cowork-p2-kit/reasoning/tests/contract.test.mjs cowork-p2-kit/reasoning/tests/output-preservation.test.mjs cowork-p2-kit/reasoning/tests/run-gate-contract.test.mjs
+```
+
+### shared-contract-smoke — Confirm existing ingest/render contract and publication-boundary tests remain green.
+
+```bash
+node --test cowork-p2-kit/ingest/tests/record-contract.test.mjs cowork-p2-kit/render/tests/contract.test.mjs cowork-p2-kit/render/tests/output-preservation.test.mjs
 ```
 
 
 ## Results
 
 Verdict: **passed**
-Artifact: `artifacts/260724-1116/test-verdict.json`
-Counts: passed=2, failed=0, warnings=0
+Artifact: `artifacts/260724-1241/test-verdict.json`
+Counts: passed=14, failed=0, warnings=0
 
 ---
 

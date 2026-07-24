@@ -1,0 +1,50 @@
+id: T20260724-qbd-p4-reasoning-step-01
+date: "2026-07-24"
+workstream: qbd-p4-reasoning-layer
+status: executed
+plan: docs/plans/qbd-p4-reasoning-layer/step-01-contracts-and-harness.md
+scope:
+  summary: Freeze strict Layer B artifact contracts, validate-before-publication behavior, and the machine-evidence gate harness without changing Layer A or Layer C.
+  changed_files:
+    - cowork-p2-kit/reasoning/
+    - cowork-p2-kit/rubric/selection-rubric.schema.json
+    - package.json
+    - docs/plans/qbd-p4-reasoning-layer/
+    - docs/decisions/D20260724-qbd-reasoning-before-rationale.md
+approval:
+  required: true
+  approved_at: "2026-07-24"
+  approved_by: human
+commands:
+  - id: gate-p4-01
+    description: Run the contract, publication-preservation, and gate-runner tests through the P4 evidence wrapper.
+    command: [node, cowork-p2-kit/reasoning/tests/run-gate.mjs, G-P4-01, cowork-p2-kit/reasoning/tests/contract.test.mjs, cowork-p2-kit/reasoning/tests/output-preservation.test.mjs, cowork-p2-kit/reasoning/tests/run-gate-contract.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+  - id: shared-contract-smoke
+    description: Confirm existing ingest/render contract and publication-boundary tests remain green.
+    command: [node, --test, cowork-p2-kit/ingest/tests/record-contract.test.mjs, cowork-p2-kit/render/tests/contract.test.mjs, cowork-p2-kit/render/tests/output-preservation.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+acceptance:
+  gates: [G-P4-01]
+  evidence:
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-01.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/red/G-P4-01-initial-tdd.tap
+    - docs/reports/qbd-p4-reasoning-layer/gates/red/G-P4-01-agreed-command.tap
+  invariants:
+    - Every artifact envelope is exact-key and fails closed with a stable E_ error code.
+    - Publication validates a pinned store-backed fact-card binding before modifying the declared output root.
+    - Publication JSON is canonical and a synchronous rename failure restores prior artifacts.
+    - The P4 runner writes TAP-derived evidence carrying the frozen Step 0 store SHA-256.
+results:
+  verdict: passed
+  artifact: artifacts/260724-1241/test-verdict.json
+  counts:
+    passed: 14
+    failed: 0
+    warnings: 0
+  notes:
+    - The initial red tests were retained before production validators and runner were added.
+    - Independent reviewer and Devil's Advocate approved the remediated G-P4-01 slice; no Layer A/C behavior changed.
+    - The production publication root is immutable and supplied store bytes must match the cohort SHA-256 pin.

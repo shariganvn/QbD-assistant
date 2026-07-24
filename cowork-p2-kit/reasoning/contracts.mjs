@@ -1,0 +1,157 @@
+import { ReasoningContractError } from "./errors.mjs";
+
+const SHA256 = /^[0-9a-f]{64}$/;
+const isPlainObject = (value) => typeof value === "object" && value !== null
+  && !Array.isArray(value) && Object.getPrototypeOf(value) === Object.prototype;
+
+function reject(code, message) {
+  throw new ReasoningContractError(code, message);
+}
+
+function exactObject(value, keys, code, context) {
+  if (!isPlainObject(value)) reject(code, `${context} must be an object`);
+  const actual = Object.keys(value).sort();
+  if (actual.length !== keys.length || actual.some((key, index) => key !== [...keys].sort()[index])) {
+    reject(code, `${context} keys must match the contract`);
+  }
+}
+
+function string(value, code, context) {
+  if (typeof value !== "string" || value.trim() === "") reject(code, `${context} must be a non-empty string`);
+}
+
+function integer(value, code, context) {
+  if (!Number.isInteger(value) || value < 0) reject(code, `${context} must be a non-negative integer`);
+}
+
+function version(value, code, context) {
+  if (value !== 1) reject(code, `${context} must be schema version 1`);
+}
+
+function shaOrNull(value, code, context) {
+  if (value !== null && (typeof value !== "string" || !SHA256.test(value))) {
+    reject(code, `${context} must be a SHA-256 hex string or null`);
+  }
+}
+
+export function validateCohort(cohort) {
+  const code = "E_COHORT_ENVELOPE";
+  exactObject(cohort, ["schema_version", "cohort_id", "candidates", "provenance_candidate_map", "store_records_sha256"], code, "cohort");
+  version(cohort.schema_version, code, "cohort.schema_version");
+  string(cohort.cohort_id, code, "cohort.cohort_id");
+  if (!Array.isArray(cohort.candidates) || cohort.candidates.length === 0) reject(code, "cohort.candidates must be a non-empty array");
+  cohort.candidates.forEach((candidate, index) => string(candidate, code, `cohort.candidates[${index}]`));
+  if (new Set(cohort.candidates).size !== cohort.candidates.length) reject(code, "cohort.candidates must be unique");
+  if (!isPlainObject(cohort.provenance_candidate_map)) reject(code, "cohort.provenance_candidate_map must be an object");
+  for (const [file, candidate] of Object.entries(cohort.provenance_candidate_map)) {
+    string(file, code, "cohort provenance file");
+    if (!cohort.candidates.includes(candidate)) reject(code, "cohort provenance mapping must resolve a candidate");
+  }
+  if (typeof cohort.store_records_sha256 !== "string" || !SHA256.test(cohort.store_records_sha256)) reject(code, "cohort.store_records_sha256 must be a SHA-256 hex string");
+  return cohort;
+}
+
+export function validateSelectionRubric(rubric) {
+  const code = "E_RUBRIC_ENVELOPE";
+  exactObject(rubric, ["schema_version", "rubric_id", "measures", "unit_vocabulary", "aggregation_rule", "approved_sha256"], code, "selection rubric");
+  version(rubric.schema_version, code, "selection rubric.schema_version");
+  string(rubric.rubric_id, code, "selection rubric.rubric_id");
+  for (const [field, value] of [["measures", rubric.measures], ["unit_vocabulary", rubric.unit_vocabulary]]) {
+    if (!Array.isArray(value) || value.length === 0) reject(code, `selection rubric.${field} must be a non-empty array`);
+    value.forEach((entry, index) => string(entry, code, `selection rubric.${field}[${index}]`));
+  }
+  string(rubric.aggregation_rule, code, "selection rubric.aggregation_rule");
+  shaOrNull(rubric.approved_sha256, code, "selection rubric.approved_sha256");
+  return rubric;
+}
+
+export function validateLinearAttestation(attestation) {
+  const code = "E_LINEAR_ATTESTATION_ENVELOPE";
+  const required = ["api", "strength", "dosage_form", "product_target", "trial_context"];
+  if (isPlainObject(attestation) && required.some((field) => !Object.hasOwn(attestation, field))) {
+    reject("E_LINEAR_ATTESTATION_INCOMPLETE", "linear attestation is missing a declared required field");
+  }
+  exactObject(attestation, ["schema_version", "attestation_id", "candidate", "required_fields", "api", "strength", "dosage_form", "product_target", "trial_context", "approved_sha256"], code, "linear attestation");
+  version(attestation.schema_version, code, "linear attestation.schema_version");
+  string(attestation.attestation_id, code, "linear attestation.attestation_id");
+  string(attestation.candidate, code, "linear attestation.candidate");
+  if (!Array.isArray(attestation.required_fields) || attestation.required_fields.length !== required.length
+    || required.some((field) => !attestation.required_fields.includes(field))) {
+    reject("E_LINEAR_ATTESTATION_INCOMPLETE", "linear attestation.required_fields must declare every required field");
+  }
+  for (const field of required) {
+    if (typeof attestation[field] !== "string" || attestation[field].trim() === "") {
+      reject("E_LINEAR_ATTESTATION_INCOMPLETE", `linear attestation.${field} is required`);
+    }
+  }
+  shaOrNull(attestation.approved_sha256, code, "linear attestation.approved_sha256");
+  return attestation;
+}
+
+export function validateDecision(decision) {
+  const code = "E_DECISION_ENVELOPE";
+  exactObject(decision, ["schema_version", "decision_id", "status", "winner", "cohort_id", "fact_card_ids", "rubric_sha256", "fd_action"], code, "decision");
+  version(decision.schema_version, code, "decision.schema_version");
+  string(decision.decision_id, code, "decision.decision_id");
+  if (!["selected", "inconclusive"].includes(decision.status)) reject(code, "decision.status is unsupported");
+  if (decision.status === "selected") string(decision.winner, code, "decision.winner");
+  else if (decision.winner !== null) reject(code, "inconclusive decision.winner must be null");
+  string(decision.cohort_id, code, "decision.cohort_id");
+  if (!Array.isArray(decision.fact_card_ids) || decision.fact_card_ids.length === 0) reject(code, "decision.fact_card_ids must be a non-empty array");
+  decision.fact_card_ids.forEach((id, index) => string(id, code, `decision.fact_card_ids[${index}]`));
+  shaOrNull(decision.rubric_sha256, code, "decision.rubric_sha256");
+  string(decision.fd_action, code, "decision.fd_action");
+  return decision;
+}
+
+export function validateEvidenceLog(log) {
+  const code = "E_EVIDENCE_LOG_ENVELOPE";
+  exactObject(log, ["schema_version", "cohort_id", "entries"], code, "evidence log");
+  version(log.schema_version, code, "evidence log.schema_version");
+  string(log.cohort_id, code, "evidence log.cohort_id");
+  if (!Array.isArray(log.entries)) reject(code, "evidence log.entries must be an array");
+  log.entries.forEach((entry, index) => {
+    exactObject(entry, ["fact_card_id", "record_id", "candidate", "quote", "provenance"], code, `evidence log.entries[${index}]`);
+    for (const field of ["fact_card_id", "record_id", "candidate", "quote"]) string(entry[field], code, `evidence log.entries[${index}].${field}`);
+    exactObject(entry.provenance, ["file", "char_start", "char_end"], code, `evidence log.entries[${index}].provenance`);
+    string(entry.provenance.file, code, `evidence log.entries[${index}].provenance.file`);
+    integer(entry.provenance.char_start, code, `evidence log.entries[${index}].provenance.char_start`);
+    integer(entry.provenance.char_end, code, `evidence log.entries[${index}].provenance.char_end`);
+  });
+  return log;
+}
+
+export function validateFactCards(factCards, { cohort, records, minimumQuoteLength = 16 } = {}) {
+  const code = "E_FACT_CANDIDATE_BINDING";
+  validateCohort(cohort);
+  exactObject(factCards, ["schema_version", "cards"], code, "fact cards");
+  version(factCards.schema_version, code, "fact cards.schema_version");
+  if (!Array.isArray(factCards.cards) || factCards.cards.length === 0) reject(code, "fact cards.cards must be a non-empty array");
+  if (!isPlainObject(records)) reject(code, "fact-card records must be an object keyed by record ID");
+  factCards.cards.forEach((card, index) => {
+    const context = `fact cards.cards[${index}]`;
+    exactObject(card, ["id", "record_id", "candidate", "measure", "raw_text", "normalized_value", "unit", "quote", "char_start", "char_end", "provenance"], code, context);
+    for (const field of ["id", "record_id", "candidate", "measure", "raw_text", "unit", "quote"]) string(card[field], code, `${context}.${field}`);
+    if (typeof card.normalized_value !== "number" || !Number.isFinite(card.normalized_value)) reject(code, `${context}.normalized_value must be finite`);
+    integer(card.char_start, code, `${context}.char_start`);
+    integer(card.char_end, code, `${context}.char_end`);
+    exactObject(card.provenance, ["file"], code, `${context}.provenance`);
+    string(card.provenance.file, code, `${context}.provenance.file`);
+    const record = records[card.record_id];
+    const mappedCandidate = cohort.provenance_candidate_map[card.provenance.file];
+    if (!record || record.provenance?.file !== card.provenance.file || mappedCandidate !== card.candidate || !cohort.candidates.includes(card.candidate)) {
+      reject(code, `${context} does not bind its record provenance to its candidate`);
+    }
+    const valueToken = String(card.normalized_value);
+    if (!card.raw_text.includes(valueToken) || !card.quote.includes(valueToken) || !card.quote.includes(card.unit)) {
+      reject("E_FACT_QUOTE_VALUE_UNIT", `${context} quote and raw_text must contain the value and unit tokens`);
+    }
+    if (card.quote.length < minimumQuoteLength) reject("E_FACT_QUOTE_LENGTH", `${context} quote is shorter than the declared minimum`);
+    if (card.char_end < card.char_start || record.content?.slice(card.char_start, card.char_end) !== card.quote) {
+      reject("E_FACT_QUOTE_OFFSET", `${context} quote does not match the declared record offsets`);
+    }
+  });
+  return factCards;
+}
+
+export { ReasoningContractError };

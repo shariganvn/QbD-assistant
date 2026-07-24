@@ -12,11 +12,15 @@
     "verify:ingest": "node cowork-p2-kit/ingest/tests/verify-ingest.mjs",
     "verify:render": "node cowork-p2-kit/render/tests/verify-render.mjs",
     "render": "node cowork-p2-kit/render/render-docx.mjs",
-    "render:spike": "node cowork-p2-kit/render/render-spike.mjs"
+    "render:spike": "node cowork-p2-kit/render/render-spike.mjs",
+    "verify:reasoning": "node cowork-p2-kit/reasoning/tests/run-gate.mjs G-P4-01 cowork-p2-kit/reasoning/tests/contract.test.mjs cowork-p2-kit/reasoning/tests/output-preservation.test.mjs cowork-p2-kit/reasoning/tests/run-gate-contract.test.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "22.x"
+  },
   "devDependencies": {
     "@llamaindex/liteparse": "^2.5.0"
   },

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "cards": [
+    {
+      "id": "FC-F01-001",
+      "record_id": "record-f01-001",
+      "candidate": "F-01",
+      "measure": "assay",
+      "raw_text": "Assay result: 98.5 mg",
+      "normalized_value": 98.5,
+      "unit": "mg",
+      "quote": "Assay result: 98.5 mg",
+      "char_start": 0,
+      "char_end": 22,
+      "provenance": { "file": "inputs/f01-trial.docx" }
+    }
+  ]
+}

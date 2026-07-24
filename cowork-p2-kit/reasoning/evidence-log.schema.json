@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QbD reasoning evidence log",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "cohort_id", "entries"],
+  "properties": {
+    "schema_version": { "const": 1 }, "cohort_id": { "type": "string", "minLength": 1 },
+    "entries": { "type": "array", "items": { "type": "object", "additionalProperties": false,
+      "required": ["fact_card_id", "record_id", "candidate", "quote", "provenance"],
+      "properties": { "fact_card_id": { "type": "string", "minLength": 1 }, "record_id": { "type": "string", "minLength": 1 },
+        "candidate": { "type": "string", "minLength": 1 }, "quote": { "type": "string", "minLength": 1 },
+        "provenance": { "type": "object", "additionalProperties": false, "required": ["file", "char_start", "char_end"],
+          "properties": { "file": { "type": "string", "minLength": 1 }, "char_start": { "type": "integer", "minimum": 0 }, "char_end": { "type": "integer", "minimum": 0 } } }
+      }
+    } }
+  }
+}

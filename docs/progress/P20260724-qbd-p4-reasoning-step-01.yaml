@@ -1,0 +1,29 @@
+id: P20260724-qbd-p4-reasoning-step-01
+date: "2026-07-24"
+workstream: qbd-p4-reasoning-layer
+status: done
+summary: "Completed Step 1: frozen strict Layer B contracts, validate-before-publication CLI, canonical rollback-safe publication, and TAP gate evidence harness."
+changed_files:
+- cowork-p2-kit/reasoning/
+- cowork-p2-kit/rubric/selection-rubric.schema.json
+- package.json
+- docs/plans/qbd-p4-reasoning-layer/plan.md
+- docs/plans/qbd-p4-reasoning-layer/gates.yaml
+- docs/test-plans/T20260724-qbd-p4-reasoning-step-01.yaml
+- docs/decisions/D20260724-qbd-reasoning-before-rationale.md
+- docs/reports/qbd-p4-reasoning-layer/brainstorm-20260724-llm-role-separation-rationale.md
+tests_run:
+  verdict: passed
+  counts:
+    passed: 26
+    failed: 0
+    warnings: 0
+  artifact: artifacts/260724-1241/test-verdict.json
+decisions:
+- D20260724
+next_pickup:
+  files:
+  - docs/plans/qbd-p4-reasoning-layer/step-02-cohort-evidence-boundaries.md
+  - docs/plans/qbd-p4-reasoning-layer/gates.yaml
+  - cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl
+  text: "Execute Step 2 cohort/evidence boundaries against the frozen Step 0 snapshot; retain Step 1 contract invariants and do not repin the store without a recorded reason."

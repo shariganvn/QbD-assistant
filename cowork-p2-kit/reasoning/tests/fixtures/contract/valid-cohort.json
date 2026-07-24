@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "cohort_id": "cohort-5mg",
+  "candidates": ["F-01", "F-02"],
+  "provenance_candidate_map": {
+    "inputs/f01-trial.docx": "F-01",
+    "inputs/f02-trial.docx": "F-02"
+  },
+  "store_records_sha256": "7c141b7b74477b6df3f1c66872ca121679a591df74c46e097f4f4e8c89951970"
+}

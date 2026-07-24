@@ -1,0 +1,16 @@
+{
+  "schema_version": 3,
+  "session_id": "260724-1241",
+  "status": "passed",
+  "outcome": "passed",
+  "summary": "G-P4-01 passed 14/14 through the retained P4 TAP gate runner; shared ingest/render contract smoke passed 12/12.",
+  "commands": [
+    ["npm", "run", "verify:reasoning"],
+    ["node", "--test", "cowork-p2-kit/ingest/tests/record-contract.test.mjs", "cowork-p2-kit/render/tests/contract.test.mjs", "cowork-p2-kit/render/tests/output-preservation.test.mjs"]
+  ],
+  "exit_code": 0,
+  "counts": { "passed": 26, "failed": 0, "warnings": 0 },
+  "evidence": [
+    "docs/reports/qbd-p4-reasoning-layer/gates/G-P4-01.json"
+  ]
+}
