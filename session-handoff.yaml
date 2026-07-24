@@ -1,35 +1,38 @@
 {
   "branch": "master",
-  "da_review": "summary: 🔥 Independent Step 5 re-review scored 9.8/10 with zero blocking findings; no auth, schema, or security-sensitive change required a separate DA matrix.",
+  "da_review": "summary:\n⚠️ Resolved the P4 baseline scope exception in Step 0 and regenerated the P4 Step 1 handoff; no data-baseline or runtime blocker remains.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-24T00:10:46+00:00",
-  "git_head": "cdb05f4d96a043fa0698ce3c3183215941be4a3d",
+  "generated_at": "2026-07-24T04:30:01+00:00",
+  "git_head": "bcd99b005cf42fe36b9df2cddad55b23ea76dd65",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/qbd-p3-render-layer/plan.md",
-        "docs/plans/qbd-p3-render-layer/gates.yaml",
-        "docs/reports/qbd-p3-render-layer/code-review.md"
+        "docs/plans/qbd-p4-reasoning-layer/step-01-contracts-and-harness.md",
+        "docs/plans/qbd-p4-reasoning-layer/gates.yaml",
+        "cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl"
       ],
-      "text": "Phase 3 is complete; select and approve the next workstream before implementation"
+      "text": "Execute Step 1 contracts and TDD harness against the frozen fixture; do not repin without a recorded reason."
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
-    "docs/plans/qbd-p3-render-layer/gates.yaml",
-    "docs/plans/qbd-p3-render-layer/plan.md",
-    "docs/reports/qbd-p3-render-layer/code-review.md"
+    "cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl",
+    "docs/plans/qbd-p4-reasoning-layer/gates.yaml",
+    "docs/plans/qbd-p4-reasoning-layer/step-01-contracts-and-harness.md"
   ],
   "pickup_fingerprint_files": [
-    "docs/plans/qbd-p3-render-layer/gates.yaml",
-    "docs/plans/qbd-p3-render-layer/plan.md",
-    "docs/reports/qbd-p3-render-layer/code-review.md"
+    "cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl",
+    "docs/plans/qbd-p4-reasoning-layer/gates.yaml",
+    "docs/plans/qbd-p4-reasoning-layer/step-01-contracts-and-harness.md"
   ],
   "schema_version": 2,
-  "session_id": "260724-0709",
-  "summary": "Closed Phase 3 deterministic renderer: G-P3-01 through G-P3-06 pass; render suite passed 58/58 and the required ingest verification passed without retaining a Phase 2 evidence rewrite.",
-  "test_verdict": "artifacts/260724-0709/test-verdict.json",
+  "session_id": "260724-1116",
+  "summary": "Completed P4 Step 0: quarantined the redundant store backup, committed the byte-identical 17-record reasoning fixture, pinned its SHA-256, and verified the existing record contract 2/2.",
+  "test_verdict": "artifacts/260724-1116/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [],
-  "worktree_status": []
+  "worktree_status": [
+    " M AGENTS.md",
+    " M CLAUDE.md"
+  ]
 }
