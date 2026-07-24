@@ -20,6 +20,9 @@ step changes no Layer A/C behavior and creates no reasoning runtime code.
 - the committed snapshot has 17 records and hashes byte-identically to its recorded source;
 - the fixture README and `gates.yaml` contain the same SHA-256; and
 - `git diff --name-only` is confined to the Step 0 paths above plus the recoverable artifact move.
+  When this step is used to establish the first committed P4 baseline, the canonical P4 plan package,
+  its existing research reports, and required plan/progress/test-plan routing files are also allowed;
+  no runtime code outside the fixture boundary is allowed.
 
 Step 0 is setup rather than product behavior, so it has a checklist checkpoint rather than a
 `G-P4-*` runtime gate. Step 1 may begin only after this checkpoint is reviewed.
