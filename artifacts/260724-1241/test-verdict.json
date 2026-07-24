@@ -1,16 +1,71 @@
 {
+  "adapter": {
+    "id": "exit-code",
+    "report_path": null,
+    "report_sha256": null,
+    "report_size_bytes": null,
+    "stable": null
+  },
+  "argv": [
+    "env",
+    "REASONING_GATE_EVIDENCE_DIR=/tmp/qbd-p4-step1-closeout-evidence",
+    "npm",
+    "run",
+    "verify:reasoning"
+  ],
+  "branch": "master",
+  "command": [
+    "env",
+    "REASONING_GATE_EVIDENCE_DIR=/tmp/qbd-p4-step1-closeout-evidence",
+    "npm",
+    "run",
+    "verify:reasoning"
+  ],
+  "counts": {
+    "collected": null,
+    "deselected": null,
+    "error": null,
+    "failed": null,
+    "passed": null,
+    "skipped": null,
+    "warnings": null,
+    "xfailed": null,
+    "xpassed": null
+  },
+  "dirty_files": {},
+  "duration_seconds": 1.065764,
+  "evidence_level": "local-attested",
+  "evidence_quality": "exit-code-only",
+  "exit_code": 0,
+  "finished_at": "2026-07-24T06:21:10.513955+00:00",
+  "git": {
+    "branch_after": "master",
+    "branch_before": "master",
+    "head_after": "0b093ba87b34c57e5ad0b24d8800fdd7e0d42d87",
+    "head_before": "0b093ba87b34c57e5ad0b24d8800fdd7e0d42d87",
+    "stable": true
+  },
+  "git_head": "0b093ba87b34c57e5ad0b24d8800fdd7e0d42d87",
+  "log_path": "artifacts/260724-1241/test-output.log",
+  "log_sha256": "f56225faa9be31093704670c1011709c9a917425941888af3f703092b4dc86e6",
+  "log_size_bytes": 3699,
+  "outcome": "passed",
+  "requested_test_targets": [],
+  "runner_id": "stdlib-popen-v3",
+  "runtime": {
+    "implementation": "CPython",
+    "version": "3.14.4"
+  },
   "schema_version": 3,
   "session_id": "260724-1241",
+  "started_at": "2026-07-24T06:21:09.448175+00:00",
   "status": "passed",
-  "outcome": "passed",
-  "summary": "G-P4-01 passed 14/14 through the retained P4 TAP gate runner; shared ingest/render contract smoke passed 12/12.",
-  "commands": [
-    ["npm", "run", "verify:reasoning"],
-    ["node", "--test", "cowork-p2-kit/ingest/tests/record-contract.test.mjs", "cowork-p2-kit/render/tests/contract.test.mjs", "cowork-p2-kit/render/tests/output-preservation.test.mjs"]
-  ],
-  "exit_code": 0,
-  "counts": { "passed": 26, "failed": 0, "warnings": 0 },
-  "evidence": [
-    "docs/reports/qbd-p4-reasoning-layer/gates/G-P4-01.json"
-  ]
+  "summary": "command exited with code 0",
+  "test_targets": [],
+  "tool": "run_tests_with_verdict.py",
+  "worktree": {
+    "after": "e329bc02d0728bfdadc08cc4c0bb4d72dc425baac56b4c6611c3c93577d4f202",
+    "before": "e329bc02d0728bfdadc08cc4c0bb4d72dc425baac56b4c6611c3c93577d4f202",
+    "stable": true
+  }
 }
