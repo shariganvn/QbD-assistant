@@ -1,34 +1,34 @@
 {
   "branch": "master",
-  "da_review": "summary:\n⚠️ Resolved the P4 baseline scope exception in Step 0 and regenerated the P4 Step 1 handoff; no data-baseline or runtime blocker remains.",
+  "da_review": "summary:\n⚠️ Test-only factory injection can select a root in direct in-process use; production CLI entrypoint always enforces the fixed decision root.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-24T04:30:01+00:00",
-  "git_head": "bcd99b005cf42fe36b9df2cddad55b23ea76dd65",
+  "generated_at": "2026-07-24T06:21:39+00:00",
+  "git_head": "02acbe474f89a7d0d2d061140b283853551c0437",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/qbd-p4-reasoning-layer/step-01-contracts-and-harness.md",
+        "docs/plans/qbd-p4-reasoning-layer/step-02-cohort-evidence-boundaries.md",
         "docs/plans/qbd-p4-reasoning-layer/gates.yaml",
         "cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl"
       ],
-      "text": "Execute Step 1 contracts and TDD harness against the frozen fixture; do not repin without a recorded reason."
+      "text": "Execute Step 2 cohort and evidence boundaries against the frozen fixture; retain Step 1 contracts"
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
     "cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl",
     "docs/plans/qbd-p4-reasoning-layer/gates.yaml",
-    "docs/plans/qbd-p4-reasoning-layer/step-01-contracts-and-harness.md"
+    "docs/plans/qbd-p4-reasoning-layer/step-02-cohort-evidence-boundaries.md"
   ],
   "pickup_fingerprint_files": [
     "cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl",
     "docs/plans/qbd-p4-reasoning-layer/gates.yaml",
-    "docs/plans/qbd-p4-reasoning-layer/step-01-contracts-and-harness.md"
+    "docs/plans/qbd-p4-reasoning-layer/step-02-cohort-evidence-boundaries.md"
   ],
   "schema_version": 2,
-  "session_id": "260724-1116",
-  "summary": "Completed P4 Step 0: quarantined the redundant store backup, committed the byte-identical 17-record reasoning fixture, pinned its SHA-256, and verified the existing record contract 2/2.",
-  "test_verdict": "artifacts/260724-1116/test-verdict.json",
+  "session_id": "260724-1241",
+  "summary": "Completed P4 Step 1 contracts and TDD harness: G-P4-01 14/14, shared smoke 12/12, strict pinned-store publication, and reasoning-before-rationale decision.",
+  "test_verdict": "artifacts/260724-1241/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [],
   "worktree_status": [
