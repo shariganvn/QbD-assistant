@@ -2,9 +2,10 @@
 
 ## Phase 3 status
 
-`docx@9.7.1` is the Phase 3 candidate, not a selected fallback decision. The historical spike is
-quarantined and cannot satisfy a current gate. G-P3-01 (contract/link policy) and G-P3-02
-(fail-closed publication) pass; G-P3-03 through G-P3-06 remain unverified. Do not provision or name an alternative renderer without a
+`docx@9.7.1` is the verified Phase 3 Layer C renderer. G-P3-01 (contract/link policy),
+G-P3-02 (fail-closed publication), G-P3-03 (OOXML citation fidelity), G-P3-04 (isolated network
+render), G-P3-05 (deterministic output and viewer fidelity), and G-P3-06 (change review and
+handoff) pass with retained evidence. Do not provision or name an alternative renderer without a
 separately approved plan after a must-pass gate fails.
 
 ## Version Pinning
@@ -68,10 +69,20 @@ The renderer accepts a structured JSON draft (from Phase 4 SKILL output):
 - **Footnote IDs start at 1** (not 0 — 0 conflicts with DOCX continuation separator)
 - **`evidenceLink`** is optional. When present:
   - Must be HTTPS without credentials or a port, and its exact host must be `www.usp.org` or `dav.gov.vn`
-  - Renders as `ExternalHyperlink` inside the numbered footnote
+  - Renders as an `ExternalHyperlink` inside the numbered footnote and as a visible `USP reference`
+    link in the body provenance section
   - `file://` and absolute-path targets are **rejected**
-- **Local-only evidence** (no `evidenceLink`): renders as **plain provenance text** (source + location)
+- **Local-only evidence** (no `evidenceLink`): renders as **plain provenance text** (source + location),
+  never as a file hyperlink
 - Inline `citation` index is 0-based; renderer maps to footnote ID = index + 1
+
+### Reader-visible citation and navigation output
+
+- Each cited segment displays an inline `[n]` marker beside its retained DOCX footnote reference.
+- `Sources and provenance` lists each citation's evidence ID, source, location, and excerpt. Approved
+  external evidence adds the visible link above; local-only provenance remains text-only.
+- `Mục lục` contains both the native DOCX TOC field and a static list of the draft's heading levels
+  1–3, so the list is visible without a field refresh.
 
 ### Block Types
 
@@ -95,3 +106,14 @@ The render script is reusable via **shell/CLI invocation** from Python (`node re
 
 The `docx` library is pure-JS, but an offline claim requires fresh G-P3-04 evidence from the approved
 Bubblewrap isolation wrapper. A host-level installation or historical report is not proof.
+
+## Determinism
+
+The renderer post-processes the DOCX with `determinize-ooxml.mjs`: each relationship ID is derived
+within its own `.rels` part from that part's path, relationship type, target, target mode, and
+signature ordinal; duplicate approved hyperlinks in one part are collapsed. It also fixes the created
+and modified timestamps in `docProps/core.xml`. `normalize-ooxml.mjs` produces a lexically ordered
+manifest of SHA-256 hashes over every ZIP entry's uncompressed bytes; the G-P3-05 suite compares
+that manifest (and raw output) across two renders of the same input. The retained LibreOffice viewer
+checklist confirms visible footnotes, the USP link, local plain provenance, static TOC, and table
+layout.

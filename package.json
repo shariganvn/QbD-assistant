@@ -21,6 +21,7 @@
     "@llamaindex/liteparse": "^2.5.0"
   },
   "dependencies": {
-    "docx": "9.7.1"
+    "docx": "9.7.1",
+    "jszip": "3.10.1"
   }
 }

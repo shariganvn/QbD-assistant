@@ -1,0 +1,65 @@
+{
+  "manifest": {
+    "[Content_Types].xml": "ae43e954d666ed9d0adb10bc90e8445f4c0d251458535e2f359c2acb57028395",
+    "_rels/": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "_rels/.rels": "dfe8ca92b00d3513ff30194bc94c45c589f059886a3fb8055a6c069d39abd478",
+    "word/": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "word/_rels/": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "word/_rels/document.xml.rels": "b2c0821aa11dc4b5bd95c5537d057b9f9e328f1265a9936fd25398e5aae21d4d",
+    "word/document.xml": "e2a79cac4d9794c04f61df578f6b81761a0794368c6a5fd862c937cbe467283d",
+    "word/media/": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "word/media/image1.png": "e878950f8091ec010cf5cc723bdea027a8539cf7147cfea199c2f666232dcd4e"
+  },
+  "manifest_sha256": "14c4d2b606b0de7f8f704ad7f15989c957450f719cd27ec9834273a46272d700",
+  "commands": [
+    [
+      "-Z1",
+      "/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/render/tests/fixtures/normalization/with-media.docx"
+    ],
+    [
+      "-p",
+      "/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/render/tests/fixtures/normalization/with-media.docx",
+      "\\[Content_Types\\].xml"
+    ],
+    [
+      "-p",
+      "/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/render/tests/fixtures/normalization/with-media.docx",
+      "_rels/"
+    ],
+    [
+      "-p",
+      "/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/render/tests/fixtures/normalization/with-media.docx",
+      "_rels/.rels"
+    ],
+    [
+      "-p",
+      "/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/render/tests/fixtures/normalization/with-media.docx",
+      "word/"
+    ],
+    [
+      "-p",
+      "/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/render/tests/fixtures/normalization/with-media.docx",
+      "word/_rels/"
+    ],
+    [
+      "-p",
+      "/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/render/tests/fixtures/normalization/with-media.docx",
+      "word/_rels/document.xml.rels"
+    ],
+    [
+      "-p",
+      "/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/render/tests/fixtures/normalization/with-media.docx",
+      "word/document.xml"
+    ],
+    [
+      "-p",
+      "/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/render/tests/fixtures/normalization/with-media.docx",
+      "word/media/"
+    ],
+    [
+      "-p",
+      "/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/render/tests/fixtures/normalization/with-media.docx",
+      "word/media/image1.png"
+    ]
+  ]
+}

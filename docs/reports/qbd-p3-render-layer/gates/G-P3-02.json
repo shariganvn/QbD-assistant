@@ -7,11 +7,11 @@
     "cowork-p2-kit/render/tests/output-preservation.test.mjs"
   ],
   "exit_code": 0,
-  "raw_tap_output": "TAP version 13\n# Subtest: invalid draft inputs preserve every file in the injected output root and declare their failure code\nok 1 - invalid draft inputs preserve every file in the injected output root and declare their failure code\n  ---\n  duration_ms: 863.477822\n  type: 'test'\n  ...\n# Subtest: a valid draft publishes exactly one DOCX through the absolute injected output root\nok 2 - a valid draft publishes exactly one DOCX through the absolute injected output root\n  ---\n  duration_ms: 141.241396\n  type: 'test'\n  ...\n# Subtest: a non-directory output root is rejected with the declared output-root code\nok 3 - a non-directory output root is rejected with the declared output-root code\n  ---\n  duration_ms: 146.550822\n  type: 'test'\n  ...\n# Subtest: a publication write failure removes only its temporary file and preserves seeded hashes\nok 4 - a publication write failure removes only its temporary file and preserves seeded hashes\n  ---\n  duration_ms: 1.870733\n  type: 'test'\n  ...\n1..4\n# tests 4\n# suites 0\n# pass 4\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1244.51369\n",
+  "raw_tap_output": "TAP version 13\n# Subtest: invalid draft inputs preserve every file in the injected output root and declare their failure code\nok 1 - invalid draft inputs preserve every file in the injected output root and declare their failure code\n  ---\n  duration_ms: 1511.323102\n  type: 'test'\n  ...\n# Subtest: a valid draft publishes exactly one DOCX through the absolute injected output root\nok 2 - a valid draft publishes exactly one DOCX through the absolute injected output root\n  ---\n  duration_ms: 269.465736\n  type: 'test'\n  ...\n# Subtest: a non-directory output root is rejected with the declared output-root code\nok 3 - a non-directory output root is rejected with the declared output-root code\n  ---\n  duration_ms: 275.100123\n  type: 'test'\n  ...\n# Subtest: a publication write failure removes only its temporary file and preserves seeded hashes\nok 4 - a publication write failure removes only its temporary file and preserves seeded hashes\n  ---\n  duration_ms: 2.110901\n  type: 'test'\n  ...\n1..4\n# tests 4\n# suites 0\n# pass 4\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 2140.635854\n",
   "raw_stderr": "",
-  "timestamp": "2026-07-23T02:24:53.072Z",
-  "run_id": "f4fb9a41-eba9-4697-88a9-31d82f6b456b",
-  "suite_run_id": "33bdd227-4ddb-472d-bcb7-fd891f194bae",
+  "timestamp": "2026-07-23T23:22:01.179Z",
+  "run_id": "b7d82cdb-74ea-4353-afe9-3f2ab99631e6",
+  "suite_run_id": "149d53fb-6705-46d2-bde4-36f91eb8c1eb",
   "assertions_summary": {
     "total": 4,
     "passed": 4,
@@ -22,7 +22,7 @@
   },
   "snapshots": [],
   "timeout_ms": 300000,
-  "duration_ms": 1296,
+  "duration_ms": 2193,
   "timed_out": false,
   "signal": null
 }

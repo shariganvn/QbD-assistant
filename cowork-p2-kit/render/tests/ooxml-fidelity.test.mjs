@@ -4,6 +4,9 @@ import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { tmpdir } from "node:os";
+import JSZip from "jszip";
+
+import { buildDocumentBuffer } from "../document-builder.mjs";
 
 const repoRoot = resolve(import.meta.dirname, "../../..");
 const fixturePath = join(repoRoot, "cowork-p2-kit/render/tests/fixtures/fidelity/two-citation-draft.json");
@@ -135,11 +138,89 @@ test("G-P3-03: document XML contains TOC field", (t) => {
   assert.ok(docXml.includes("TOC"), "Document must contain TOC field");
 });
 
-test("G-P3-03: document XML contains table markup", (t) => {
+test("G-P3-03: cited segments expose visible inline markers before their retained footnotes", (t) => {
+  const { inspectDir } = renderAndInspect(t);
+  const documentXml = readFileSync(join(inspectDir, "word", "document.xml"), "utf-8");
+
+  for (const id of [1, 2]) {
+    const markerThenReference = new RegExp(
+      `<w:r[^>]*><w:t[^>]*>\\[${id}\\]</w:t></w:r><w:footnoteReference w:id="${id}"/>`,
+    );
+    assert.match(documentXml, markerThenReference, `citation ${id} must show [${id}] immediately before its footnote reference`);
+  }
+  assert.equal([...documentXml.matchAll(/w:footnoteReference\s+w:id="\d+"/g)].length, 2, "semantic footnote references must remain");
+});
+
+test("G-P3-03: document body exposes source provenance and only the approved USP link", (t) => {
+  const { inspectDir } = renderAndInspect(t);
+  const documentXml = readFileSync(join(inspectDir, "word", "document.xml"), "utf-8");
+  const documentRels = readFileSync(join(inspectDir, "word", "_rels", "document.xml.rels"), "utf-8");
+  const draft = JSON.parse(readFileSync(fixturePath, "utf8"));
+
+  assert.ok(documentXml.includes("Sources and provenance"), "a visible Sources and provenance heading is required");
+  for (const citation of draft.citations) {
+    for (const value of [citation.evidenceId, citation.source, citation.location, citation.excerpt]) {
+      assert.ok(documentXml.includes(value), `body must expose citation provenance: ${value}`);
+    }
+  }
+
+  const hyperlinkRels = [...documentRels.matchAll(/<Relationship\s+Id="([^"]+)"[^>]*Type="[^"]*relationships\/hyperlink"[^>]*Target="([^"]+)"[^>]*TargetMode="([^"]+)"[^>]*\/>/g)];
+  assert.equal(hyperlinkRels.length, 1, "the body must contain exactly one external hyperlink relationship");
+  assert.equal(hyperlinkRels[0][2], "https://www.usp.org/search?query=bisoprolol");
+  assert.equal(hyperlinkRels[0][3], "External");
+  assert.match(documentXml, new RegExp(`<w:hyperlink[^>]*r:id="${hyperlinkRels[0][1]}"[^>]*>[\\s\\S]*?<w:t[^>]*>USP reference</w:t>`));
+  assert.ok(!documentRels.includes("formulation-trial-02.docx"), "local-only provenance must not create a body link");
+  assert.ok(!documentRels.includes("file:"), "local-only provenance must never create a file URL");
+});
+
+test("G-P3-03: static TOC labels are visible without refreshing the native field", (t) => {
+  const { inspectDir } = renderAndInspect(t);
+  const documentXml = readFileSync(join(inspectDir, "word", "document.xml"), "utf-8");
+
+  assert.ok(documentXml.includes("TOC"), "the native TOC field remains available");
+  assert.equal((documentXml.match(/<w:t[^>]*>Mục lục<\/w:t>/g) ?? []).length, 1, "Mục lục must not be repeated as a static entry");
+  for (const label of ["P.2.2 Formulation Development", "Decision Matrix"]) {
+    const first = documentXml.indexOf(label);
+    assert.ok(first >= 0, `${label} must appear in the static TOC`);
+    assert.ok(documentXml.indexOf(label, first + label.length) > first, `${label} must also remain in the draft body`);
+  }
+});
+
+test("G-P3-03: Decision Matrix uses a fixed, full-width four-column grid", (t) => {
   const { inspectDir } = renderAndInspect(t);
   const docPath = join(inspectDir, "word", "document.xml");
   const docXml = readFileSync(docPath, "utf-8");
 
-  // Table markup should be present
-  assert.ok(docXml.includes("<w:tbl"), "Document must contain table markup (w:tbl)");
+  const table = docXml.match(/<w:tbl>.*?<\/w:tbl>/)?.[0];
+  assert.ok(table, "Decision Matrix table markup must exist");
+  assert.match(table, /<w:tblW[^>]*w:type="dxa"[^>]*w:w="9000"/, "table must be 9000 twips wide");
+  assert.match(table, /<w:tblLayout[^>]*w:type="fixed"/, "table layout must be fixed");
+
+  const gridWidths = [...table.matchAll(/<w:gridCol w:w="(\d+)"\/>/g)].map((match) => Number(match[1]));
+  assert.deepEqual(gridWidths, [2250, 2250, 2250, 2250], "table grid must have four equal columns");
+
+  const cellWidths = [...table.matchAll(/<w:tcW[^>]*w:type="dxa"[^>]*w:w="(\d+)"/g)].map((match) => Number(match[1]));
+  assert.deepEqual(cellWidths, Array(12).fill(2250), "every header and body cell must match the fixed grid");
+});
+
+test("G-P3-03: fixed table widths partition the full grid for any validated column count", async () => {
+  const draft = JSON.parse(readFileSync(fixturePath, "utf8"));
+  const headers = Array.from({ length: 7 }, (_, index) => `Column ${index + 1}`);
+  draft.blocks = [{
+    type: "table",
+    headers,
+    rows: [headers.map((_, index) => `Value ${index + 1}`)],
+  }];
+
+  const zip = await JSZip.loadAsync(await buildDocumentBuffer(draft));
+  const documentXml = await zip.file("word/document.xml").async("string");
+  const table = documentXml.match(/<w:tbl>.*?<\/w:tbl>/)?.[0];
+  assert.ok(table, "table markup must exist");
+
+  const gridWidths = [...table.matchAll(/<w:gridCol w:w="(\d+)"\/>/g)].map((match) => Number(match[1]));
+  const cellWidths = [...table.matchAll(/<w:tcW[^>]*w:type="dxa"[^>]*w:w="(\d+)"/g)].map((match) => Number(match[1]));
+  assert.equal(gridWidths.length, headers.length, "grid must have one width per header");
+  assert.ok(gridWidths.every((width) => width > 0), "every grid width must be positive");
+  assert.equal(gridWidths.reduce((sum, width) => sum + width, 0), 9000, "grid widths must total 9000 twips");
+  assert.deepEqual(cellWidths, [...gridWidths, ...gridWidths], "header and body cells must use the grid widths");
 });

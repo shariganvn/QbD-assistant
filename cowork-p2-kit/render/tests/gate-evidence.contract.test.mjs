@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
 
 import { validateGateEvidence } from "./gate-evidence-validator.mjs";
+import { FINAL_GATE_IDS, validateSuiteEvidence } from "./verify-render-evidence.mjs";
 
 function evidence(overrides = {}) {
   return {
@@ -48,4 +52,77 @@ test("G-P3-04 requires one complete isolation snapshot to pass", () => {
 
   // Empty snapshots is fine for other gates
   assert.equal(validateGateEvidence(evidence({ snapshots: [] }), "G-P3-01").valid, true);
+});
+
+test("G-P3-05 requires non-empty snapshots when status is pass", () => {
+  // Empty snapshots should fail for G-P3-05 when status is pass
+  assert.equal(validateGateEvidence(evidence({ gate_id: "G-P3-05", snapshots: [] }), "G-P3-05").valid, false);
+
+  // Non-empty snapshots with correct structure should pass
+  const validDeterminismSnapshot = {
+    fixture_sha256: "a".repeat(64),
+    render_1_raw_sha256: "b".repeat(64),
+    render_2_raw_sha256: "c".repeat(64),
+    render_1_manifest_sha256: "d".repeat(64),
+    render_2_manifest_sha256: "d".repeat(64),
+    render_1_commands: [["-Z1", "/tmp/docx"], ["-p", "/tmp/docx", "\\[Content_Types\\].xml"]],
+    render_2_commands: [["-Z1", "/tmp/docx"], ["-p", "/tmp/docx", "\\[Content_Types\\].xml"]],
+  };
+  assert.equal(validateGateEvidence(evidence({ gate_id: "G-P3-05", snapshots: [validDeterminismSnapshot] }), "G-P3-05").valid, true);
+  assert.equal(validateGateEvidence(evidence({ gate_id: "G-P3-05", snapshots: [{ ...validDeterminismSnapshot, render_2_commands: [["-Z1", "/tmp/other.docx"], ["-p", "/tmp/wrong.docx", "\\[Content_Types\\].xml"]] }] }), "G-P3-05").valid, false);
+  assert.equal(validateGateEvidence(evidence({ gate_id: "G-P3-05", snapshots: [{ ...validDeterminismSnapshot, render_1_commands: [["-Z1", "/tmp/docx"], ["-p", "/tmp/docx", "word/document.xml"]] }] }), "G-P3-05").valid, false);
+
+  // G-P3-05 with fail status does not require snapshots
+  assert.equal(validateGateEvidence(evidence({ gate_id: "G-P3-05", status: "fail", exit_code: 1 }), "G-P3-05").valid, true);
+});
+
+function validSnapshot(gateId) {
+  if (gateId === "G-P3-04") {
+    return [{
+      argv: ["/usr/bin/bwrap", "--unshare-net", "node", "render-spike.mjs"],
+      argv_hash: "a".repeat(16), stdout: "ok", stderr: "", exit_code: 0,
+      versions: { node: "v20", npm: "10", bwrap: "0.9" }, output_sha256: "a".repeat(64), timestamp: new Date().toISOString(),
+    }];
+  }
+  if (gateId === "G-P3-05") {
+    return [{
+      fixture_sha256: "a".repeat(64), render_1_raw_sha256: "b".repeat(64), render_2_raw_sha256: "c".repeat(64),
+      render_1_manifest_sha256: "d".repeat(64), render_2_manifest_sha256: "d".repeat(64),
+      render_1_commands: [["-Z1", "/tmp/one.docx"], ["-p", "/tmp/one.docx", "\\[Content_Types\\].xml"]],
+      render_2_commands: [["-Z1", "/tmp/two.docx"], ["-p", "/tmp/two.docx", "\\[Content_Types\\].xml"]],
+    }];
+  }
+  return [];
+}
+
+function writeSuite(gatesDir, suiteId, overrides = {}) {
+  for (const gateId of FINAL_GATE_IDS) {
+    const record = evidence({ gate_id: gateId, suite_run_id: suiteId, snapshots: validSnapshot(gateId), ...(overrides[gateId] ?? {}) });
+    writeFileSync(join(gatesDir, `${gateId}.json`), `${JSON.stringify(record)}\n`);
+  }
+}
+
+test("post-G-P3-05 validation rejects missing, malformed, non-pass, and mismatched suite evidence", () => {
+  const suiteId = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee";
+  const mismatchedId = "11111111-2222-3333-4444-555555555555";
+  const gatesDir = mkdtempSync(join(tmpdir(), "verify-render-evidence-"));
+  try {
+    writeSuite(gatesDir, suiteId);
+    assert.deepEqual(validateSuiteEvidence({ gatesDir, suiteRunId: suiteId }), []);
+
+    rmSync(join(gatesDir, "G-P3-03.json"));
+    assert.match(validateSuiteEvidence({ gatesDir, suiteRunId: suiteId }).join("\n"), /missing evidence file: G-P3-03.json/);
+
+    writeSuite(gatesDir, suiteId);
+    writeFileSync(join(gatesDir, "G-P3-03.json"), "not json\n");
+    assert.match(validateSuiteEvidence({ gatesDir, suiteRunId: suiteId }).join("\n"), /invalid JSON in G-P3-03.json/);
+
+    writeSuite(gatesDir, suiteId, { "G-P3-03": { status: "fail", exit_code: 1, assertions_summary: { total: 1, passed: 0, failed: 1, skipped: 0, todo: 0, cancelled: 0 } } });
+    assert.match(validateSuiteEvidence({ gatesDir, suiteRunId: suiteId }).join("\n"), /status is fail, expected pass/);
+
+    writeSuite(gatesDir, suiteId, { "G-P3-05": { suite_run_id: mismatchedId } });
+    assert.match(validateSuiteEvidence({ gatesDir, suiteRunId: suiteId }).join("\n"), /does not match suite UUID/);
+  } finally {
+    rmSync(gatesDir, { recursive: true, force: true });
+  }
 });

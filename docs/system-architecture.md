@@ -1,6 +1,6 @@
 # System Architecture — QbD P.2 dossier kit
 
-Status: active · Updated: 2026-07-13
+Status: active · Updated: 2026-07-23
 
 ## 1. Purpose & scope
 
@@ -26,14 +26,14 @@ Two-phase build (see `project-roadmap.md`):
 ```
 raw docx/pdf ─► [A] Ingest/extract ─► structured store ─► [B] Cowork reasoning ─► [C] Render ─► p2-draft.docx
                  (DETERMINISTIC)        (+provenance)       (NON-DETERMINISTIC)     (DETERMINISTIC)
-                 liteparse                                  SKILL.md                OfficeCLI
+                 liteparse                                  SKILL.md                docx + OOXML post-processing
 ```
 
 | Layer | Determinism | Role | Tool | Reused by qbd_core |
 |-------|-------------|------|------|--------------------|
 | **A — Ingest/extract** | Deterministic | raw docx/pdf → structured store, one record per extracted unit, each with provenance `{file, page, quote}` and a data-classification label | `liteparse` (`@llamaindex/liteparse`) | Yes → `KnowledgeDBPort` / `EvidenceStorePort` |
 | **B — Reasoning** | Non-deterministic | decision matrix (criteria × formulation) + prose reasoning + TL;DR → Vietnamese draft P.2.2/P.2.3, grounded + cited | Claude Cowork `SKILL.md` | Replaced by `LLMPort` |
-| **C — Render** | Deterministic | fill final `.docx` from structured draft; footnotes/hyperlinks/TOC/tables | `iOfficeAI/OfficeCLI` (candidate, gated by P1.2 spike) | Yes → `DocRenderPort` |
+| **C — Render** | Deterministic | fill final `.docx` from structured draft; visible inline/footnote citations, approved external links, plain local provenance, static TOC, and tables | `docx@9.7.1` + deterministic OOXML post-processing (verified, G-P3-01 through G-P3-05 pass) | Yes → `DocRenderPort` |
 
 **Invariant: the LLM never writes the final `.docx` directly.** Layer B emits structured
 content + citations; Layer C renders deterministically.
@@ -61,7 +61,8 @@ These are separate mechanisms and must not be conflated. A system prompt saying
 - No source → **"chờ dữ liệu"** missing-data state; never leave a claim unsourced.
 - **Never fabricate lab numbers.** Lab-experiment results stay blank/pending FD.
 - Claim-level **Accept / Edit / Reject**, evidence rendered adjacent to each claim.
-- Citations = **numbered + footnote + clickable link.**
+- Citations = **numbered inline marker + footnote**; approved external evidence also receives a
+  clickable body link, while local-only provenance remains visible plain text.
 - **Draft-only** — nothing is final without human review.
 
 ## 4. LLM provider gate (implement as CODE, not a prompt instruction)
@@ -116,7 +117,7 @@ Build order for Phase 2: target = hexagonal `qbd_core`; sequence = pipeline-firs
 |---------|----------------------|----------------------|
 | Ingest Layer A (liteparse + provenance + labels) | Build | Reuse |
 | Reasoning Layer B | Cowork SKILL | `LLMPort` adapter |
-| Render Layer C (OfficeCLI) | Build (after P1.2 spike) | Reuse |
+| Render Layer C (`docx@9.7.1` + deterministic OOXML post-processing) | Build (verified, including deterministic output and manual viewer fidelity in G-P3-05) | Reuse |
 | Data-access boundary | N/A (no internal store) | Code-enforced |
 | Egress control router | Design + document only | Implement as code |
 | Local-LLM internal worker | Benchmark only (24 GB tier) | Deploy (fail-closed) |

@@ -6,7 +6,7 @@ export const GATE_EVIDENCE_KEYS = [
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const ISO_UTC = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/;
-const SHA256 = /^[0-9a-f]{64}$/i;
+const SHA256 = /^[0-9a-f]{64}$/;
 const ARGV_HASH = /^[0-9a-f]{16}$/i;
 
 function isIsolationSnapshot(snapshot) {
@@ -21,6 +21,30 @@ function isIsolationSnapshot(snapshot) {
   if ([versions.node, versions.npm, versions.bwrap].some((version) => typeof version !== "string" || version.length === 0)) return false;
   return typeof snapshot.output_sha256 === "string" && SHA256.test(snapshot.output_sha256)
     && typeof snapshot.timestamp === "string" && ISO_UTC.test(snapshot.timestamp) && !Number.isNaN(Date.parse(snapshot.timestamp));
+}
+
+function isDeterminismSnapshot(snapshot) {
+  if (!snapshot || typeof snapshot !== "object" || Array.isArray(snapshot)) return false;
+  const keys = ["fixture_sha256", "render_1_raw_sha256", "render_2_raw_sha256", "render_1_manifest_sha256", "render_2_manifest_sha256", "render_1_commands", "render_2_commands"];
+  if (Object.keys(snapshot).sort().join("\0") !== [...keys].sort().join("\0")) return false;
+  if (typeof snapshot.fixture_sha256 !== "string" || !SHA256.test(snapshot.fixture_sha256)) return false;
+  if (typeof snapshot.render_1_raw_sha256 !== "string" || !SHA256.test(snapshot.render_1_raw_sha256)) return false;
+  if (typeof snapshot.render_2_raw_sha256 !== "string" || !SHA256.test(snapshot.render_2_raw_sha256)) return false;
+  if (typeof snapshot.render_1_manifest_sha256 !== "string" || !SHA256.test(snapshot.render_1_manifest_sha256)) return false;
+  if (typeof snapshot.render_2_manifest_sha256 !== "string" || !SHA256.test(snapshot.render_2_manifest_sha256)) return false;
+  if (snapshot.render_1_manifest_sha256 !== snapshot.render_2_manifest_sha256) return false;
+  const isCommandTrace = (commands) => {
+    if (!Array.isArray(commands) || commands.length < 2) return false;
+    const [listCommand, ...readCommands] = commands;
+    if (!Array.isArray(listCommand) || listCommand.length !== 2 || listCommand[0] !== "-Z1" || typeof listCommand[1] !== "string" || listCommand[1].length === 0) return false;
+    return readCommands.every((command) => Array.isArray(command)
+      && command.length === 3
+      && command[0] === "-p"
+      && command[1] === listCommand[1]
+      && command.every((part) => typeof part === "string" && part.length > 0))
+      && readCommands.some((command) => command[2] === "\\[Content_Types\\].xml");
+  };
+  return isCommandTrace(snapshot.render_1_commands) && isCommandTrace(snapshot.render_2_commands);
 }
 
 export function validateGateEvidence(evidence, gateId) {
@@ -48,6 +72,10 @@ export function validateGateEvidence(evidence, gateId) {
   if (gateId === "G-P3-04" && evidence.status === "pass") {
     if (!Array.isArray(evidence.snapshots) || evidence.snapshots.length !== 1) errors.push("G-P3-04 requires exactly one isolation snapshot");
     else if (!isIsolationSnapshot(evidence.snapshots[0])) errors.push("G-P3-04 isolation snapshot is invalid");
+  }
+  if (gateId === "G-P3-05" && evidence.status === "pass") {
+    if (!Array.isArray(evidence.snapshots) || evidence.snapshots.length !== 1) errors.push("G-P3-05 requires exactly one determinism snapshot");
+    else if (!isDeterminismSnapshot(evidence.snapshots[0])) errors.push("G-P3-05 determinism snapshot is invalid");
   }
   return { valid: errors.length === 0, errors };
 }

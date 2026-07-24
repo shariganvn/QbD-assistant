@@ -7,14 +7,14 @@
     "cowork-p2-kit/render/tests/ooxml-fidelity.test.mjs"
   ],
   "exit_code": 0,
-  "raw_tap_output": "TAP version 13\n# Subtest: G-P3-03: footnotes have unique positive IDs matching citation count\nok 1 - G-P3-03: footnotes have unique positive IDs matching citation count\n  ---\n  duration_ms: 163.333368\n  type: 'test'\n  ...\n# Subtest: G-P3-03: inline footnote references match footnote IDs\nok 2 - G-P3-03: inline footnote references match footnote IDs\n  ---\n  duration_ms: 154.747588\n  type: 'test'\n  ...\n# Subtest: G-P3-03: exactly one external hyperlink relationship for approved URL\nok 3 - G-P3-03: exactly one external hyperlink relationship for approved URL\n  ---\n  duration_ms: 155.797549\n  type: 'test'\n  ...\n# Subtest: G-P3-03: local-only citation has no hyperlink relationship\nok 4 - G-P3-03: local-only citation has no hyperlink relationship\n  ---\n  duration_ms: 166.957103\n  type: 'test'\n  ...\n# Subtest: G-P3-03: document XML contains TOC field\nok 5 - G-P3-03: document XML contains TOC field\n  ---\n  duration_ms: 155.52023\n  type: 'test'\n  ...\n# Subtest: G-P3-03: document XML contains table markup\nok 6 - G-P3-03: document XML contains table markup\n  ---\n  duration_ms: 162.714945\n  type: 'test'\n  ...\n1..6\n# tests 6\n# suites 0\n# pass 6\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1036.708898\n",
+  "raw_tap_output": "TAP version 13\n# Subtest: G-P3-03: footnotes have unique positive IDs matching citation count\nok 1 - G-P3-03: footnotes have unique positive IDs matching citation count\n  ---\n  duration_ms: 313.209222\n  type: 'test'\n  ...\n# Subtest: G-P3-03: inline footnote references match footnote IDs\nok 2 - G-P3-03: inline footnote references match footnote IDs\n  ---\n  duration_ms: 312.298967\n  type: 'test'\n  ...\n# Subtest: G-P3-03: exactly one external hyperlink relationship for approved URL\nok 3 - G-P3-03: exactly one external hyperlink relationship for approved URL\n  ---\n  duration_ms: 319.375886\n  type: 'test'\n  ...\n# Subtest: G-P3-03: local-only citation has no hyperlink relationship\nok 4 - G-P3-03: local-only citation has no hyperlink relationship\n  ---\n  duration_ms: 343.1239\n  type: 'test'\n  ...\n# Subtest: G-P3-03: document XML contains TOC field\nok 5 - G-P3-03: document XML contains TOC field\n  ---\n  duration_ms: 297.780115\n  type: 'test'\n  ...\n# Subtest: G-P3-03: cited segments expose visible inline markers before their retained footnotes\nok 6 - G-P3-03: cited segments expose visible inline markers before their retained footnotes\n  ---\n  duration_ms: 294.329432\n  type: 'test'\n  ...\n# Subtest: G-P3-03: document body exposes source provenance and only the approved USP link\nok 7 - G-P3-03: document body exposes source provenance and only the approved USP link\n  ---\n  duration_ms: 308.38304\n  type: 'test'\n  ...\n# Subtest: G-P3-03: static TOC labels are visible without refreshing the native field\nok 8 - G-P3-03: static TOC labels are visible without refreshing the native field\n  ---\n  duration_ms: 291.584038\n  type: 'test'\n  ...\n# Subtest: G-P3-03: Decision Matrix uses a fixed, full-width four-column grid\nok 9 - G-P3-03: Decision Matrix uses a fixed, full-width four-column grid\n  ---\n  duration_ms: 290.220206\n  type: 'test'\n  ...\n# Subtest: G-P3-03: fixed table widths partition the full grid for any validated column count\nok 10 - G-P3-03: fixed table widths partition the full grid for any validated column count\n  ---\n  duration_ms: 108.103618\n  type: 'test'\n  ...\n1..10\n# tests 10\n# suites 0\n# pass 10\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 3101.346078\n",
   "raw_stderr": "",
-  "timestamp": "2026-07-23T02:24:57.977Z",
-  "run_id": "d4576096-a682-49a1-abba-1b63e97316a0",
-  "suite_run_id": "e363520b-8b3a-43e4-8f55-073fcb04083b",
+  "timestamp": "2026-07-23T23:22:04.389Z",
+  "run_id": "0323a884-9b67-4c89-b7a5-f8aa1b9b53c5",
+  "suite_run_id": "149d53fb-6705-46d2-bde4-36f91eb8c1eb",
   "assertions_summary": {
-    "total": 6,
-    "passed": 6,
+    "total": 10,
+    "passed": 10,
     "failed": 0,
     "skipped": 0,
     "todo": 0,
@@ -22,7 +22,7 @@
   },
   "snapshots": [],
   "timeout_ms": 300000,
-  "duration_ms": 1083,
+  "duration_ms": 3153,
   "timed_out": false,
   "signal": null
 }

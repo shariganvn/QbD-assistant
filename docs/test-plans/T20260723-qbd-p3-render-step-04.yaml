@@ -1,0 +1,193 @@
+id: T20260723-qbd-p3-render-step-04
+date: "2026-07-23"
+workstream: qbd-p3-render-layer
+status: executed
+plan: docs/plans/qbd-p3-render-layer/step-04-determinism-viewer-evidence.md
+scope:
+  summary: >-
+    Test-first G-P3-05 verification for the existing Node docx candidate. It proves that two
+    renders of the committed public two-citation draft have identical normalized OOXML payloads,
+    then requires a named engineer to record a passing LibreOffice or Word review of that same
+    fixture. This plan neither selects nor provisions a fallback renderer.
+  changed_files:
+    - package.json
+    - package-lock.json
+    - cowork-p2-kit/render/document-builder.mjs
+    - cowork-p2-kit/render/tests/ooxml-fidelity.test.mjs
+    - cowork-p2-kit/render/determinize-ooxml.mjs
+    - cowork-p2-kit/render/normalize-ooxml.mjs
+    - cowork-p2-kit/render/tests/determinism.test.mjs
+    - cowork-p2-kit/render/tests/viewer-checklist.test.mjs
+    - cowork-p2-kit/render/tests/run-gate.mjs
+    - cowork-p2-kit/render/tests/gate-evidence-validator.mjs
+    - cowork-p2-kit/render/tests/gate-evidence.contract.test.mjs
+    - cowork-p2-kit/render/tests/verify-render.mjs
+    - cowork-p2-kit/render/tests/fixtures/normalization/
+    - docs/reports/qbd-p3-render-layer/gates/G-P3-05-viewer.template.md
+    - docs/reports/qbd-p3-render-layer/gates/G-P3-05-viewer.md
+    - docs/reports/qbd-p3-render-layer/gates/G-P3-05.json
+    - docs/plans/qbd-p3-render-layer/step-04-determinism-viewer-evidence.md
+    - docs/plans/qbd-p3-render-layer/step-04-viewer-patch-implementation.md
+    - docs/plans/qbd-p3-render-layer/plan.md
+    - docs/plans/qbd-p3-render-layer/gates.yaml
+    - docs/test-plans/T20260723-qbd-p3-render-step-04.yaml
+  implementation_files:
+    - package.json
+    - package-lock.json
+    - cowork-p2-kit/render/document-builder.mjs
+    - cowork-p2-kit/render/tests/ooxml-fidelity.test.mjs
+    - cowork-p2-kit/render/determinize-ooxml.mjs
+    - cowork-p2-kit/render/normalize-ooxml.mjs
+    - cowork-p2-kit/render/tests/determinism.test.mjs
+    - cowork-p2-kit/render/tests/viewer-checklist.test.mjs
+    - cowork-p2-kit/render/tests/run-gate.mjs
+    - cowork-p2-kit/render/tests/gate-evidence-validator.mjs
+    - cowork-p2-kit/render/tests/gate-evidence.contract.test.mjs
+    - cowork-p2-kit/render/tests/verify-render.mjs
+    - cowork-p2-kit/render/tests/fixtures/normalization/with-media.docx
+    - cowork-p2-kit/render/tests/fixtures/normalization/with-media.expected.json
+    - docs/reports/qbd-p3-render-layer/gates/G-P3-05-viewer.template.md
+    - docs/reports/qbd-p3-render-layer/gates/G-P3-05-viewer.md
+    - docs/reports/qbd-p3-render-layer/gates/G-P3-05.json
+    - docs/plans/qbd-p3-render-layer/step-04-viewer-patch-implementation.md
+    - cowork-p2-kit/render/README.md
+    - docs/system-architecture.md
+    - DEPENDENCIES.md
+    - docs/reports/qbd-p3-render-layer/README.md
+approval:
+  required: true
+  approved_at: "2026-07-23"
+  approved_by: human
+  rule: >-
+    While status is awaiting_approval, no implementation file, focused test, preflight command,
+    render command, canonical evidence artifact, or gate/step status may be changed. Approval is
+    required before the first TDD action.
+preflight:
+  - id: supported-viewer-discovery
+    command: [libreoffice, --version]
+    observed: LibreOffice 26.2.4.2 620(Build:2)
+    notes: >-
+      Host discovery found /usr/bin/libreoffice and /usr/bin/soffice. The approved execution must
+      retain the exact product/version in the checklist; a headless conversion is not visual proof.
+  - id: ooxml-inspection-tool
+    command: [unzip, -v]
+    observed: /usr/bin/unzip available
+    notes: >-
+      Host discovery found /usr/bin/unzip. The normalizer may invoke it with explicit argv only;
+      it must never invoke a shell or ignore XML, relationships, media, or other ZIP entry payloads.
+test_first:
+  initial_expected_failures:
+    - >-
+      node --test cowork-p2-kit/render/tests/determinism.test.mjs fails because the normalizer and
+      G-P3-05 focused test do not yet exist.
+    - >-
+      node --test cowork-p2-kit/render/tests/viewer-checklist.test.mjs fails because the committed
+      checklist is initially blank/pending and no completed human review exists.
+  rule: >-
+    Add both focused tests and the blank checklist template before implementation. The final G-P3-05
+    gate must load viewer-checklist.test.mjs from determinism.test.mjs, so the existing one-test-per-
+    gate verify-render mapping produces one evidence record containing both automated and manual
+    assertions. Do not run npm run verify:render until the checklist test is green.
+commands:
+  - id: render-contract-regression
+    description: Preserve the frozen citation envelope and exact-host policy.
+    command: [node, --test, cowork-p2-kit/render/tests/contract.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+  - id: output-preservation-regression
+    description: Preserve fail-closed publication before rendering the deterministic fixture twice.
+    command: [node, --test, cowork-p2-kit/render/tests/output-preservation.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+  - id: fidelity-and-isolation-regression
+    description: Keep G-P3-03 OOXML semantics and G-P3-04 bwrap isolation green before G-P3-05.
+    command: [node, --test, cowork-p2-kit/render/tests/ooxml-fidelity.test.mjs, cowork-p2-kit/render/tests/isolated-network.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+  - id: deterministic-ooxml
+    description: >-
+      Render the committed two-citation draft into two fresh temporary output roots. Normalize each
+      DOCX as a lexically sorted path-to-SHA-256 manifest over every ZIP entry's uncompressed bytes;
+      compare the complete manifests and assert stable document.xml, relationships, footnotes, and
+      media entries. ZIP timestamps, external attributes, entry order, and compression encoding are
+      the only ignored differences. Emit the explicit normalization command and both raw-output and
+      normalized-manifest hashes and every explicit unzip argument array as TAP diagnostics retained
+      in G-P3-05.json. A committed archive fixture with XML, relationship, and word/media entries
+      proves the normalizer does not omit any of those payload types.
+    command: [node, --test, cowork-p2-kit/render/tests/determinism.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+  - id: viewer-fidelity
+    description: >-
+      An engineer renders the committed fixture, opens that generated DOCX in LibreOffice or Word,
+      and completes G-P3-05-viewer.md from its committed template with reviewer, ISO date, exact
+      viewer/version, the literal Windows host + WSL2 Ubuntu baseline, fixture SHA-256, opened-output
+      SHA-256, normalized-manifest SHA-256, and PASS observations for positive footnotes, the exact
+      USP link, local plain provenance, TOC, and table layout. It must not navigate to the network.
+      viewer-checklist.test.mjs rejects every blank, malformed, duplicate, unknown, or non-PASS field.
+    command: [libreoffice, --version]
+    requires_live_services: false
+    mutates_datastore: false
+    manual_evidence_required: true
+  - id: render-gate-suite
+    description: >-
+      Run the ordered G-P3-01 through G-P3-05 suite once after focused tests and manual review pass.
+      All five evidence records must share one suite UUID; G-P3-05.json is the retained automated
+      result and G-P3-05-viewer.md is the retained human evidence.
+    command: [npm, run, verify:render]
+    requires_live_services: false
+    mutates_datastore: false
+acceptance:
+  gates: [G-P3-05]
+  evidence:
+    - docs/reports/qbd-p3-render-layer/gates/G-P3-05.json
+    - docs/reports/qbd-p3-render-layer/gates/G-P3-05-viewer.md
+  invariants:
+    - >-
+      normalize-ooxml.mjs enumerates every ZIP entry with explicit /usr/bin/unzip argument arrays,
+      hashes its uncompressed bytes, rejects duplicate entry paths, and neither canonicalizes XML nor
+      omits relationship/media payloads or compares raw DOCX container bytes.
+    - >-
+      determinism.test.mjs imports viewer-checklist.test.mjs so verify-render's sole G-P3-05 mapping
+      validates both required evidence types before run-gate can write a passing G-P3-05.json.
+    - >-
+      The checklist binds to the committed fidelity fixture by input hash and to its rendered content
+      by a normalized-manifest hash; the separately recorded raw opened-output hash is
+      SHA-256-shaped only.
+    - >-
+      After G-P3-05 is written, verify-render validates every G-P3-01 through G-P3-05 JSON record
+      with the shared validator and requires one current suite UUID before exiting zero.
+    - >-
+      README and system architecture wording may be corrected only after G-P3-05 passes, and must
+      identify docx@9.7.1 as the verified candidate without describing a fallback as evaluated.
+    - No Phase 2 ingest code, G-P3-01 through G-P3-04 gate definitions, or fallback renderer is changed.
+risks:
+  - >-
+    ZIP container bytes may differ while OOXML payloads are identical. Comparing raw DOCX hashes is
+    therefore diagnostic-only and cannot decide the gate.
+  - >-
+    A blank checklist, missing desktop viewer version, or a visual defect blocks G-P3-05; it cannot
+    be replaced by a headless LibreOffice conversion or deferred to Step 5.
+  - >-
+    The current README and architecture wording are stale about the renderer and completed G-P3-03/
+    G-P3-04 work. Correct them only with the fresh Step 4 evidence, not during this planning change.
+stop_conditions:
+  - >-
+    Any mismatch in a normalized entry manifest, missing required OOXML entry, incomplete/failed
+    checklist, nonmatching suite UUID, failed regression, skipped/todo/cancelled test, or incomplete
+    retained evidence leaves G-P3-05 unverified and blocks Step 5.
+  - >-
+    A failure does not authorize OfficeCLI, Pandoc, LibreOffice-as-renderer, or another fallback. A
+    fallback requires a separately approved plan after the failure evidence is retained.
+results:
+  verdict: passed
+  artifact: artifacts/260723-p3-render-step-04-evidence/test-verdict.json
+  counts:
+    passed: 58
+    failed: 0
+    warnings: 0
+  notes:
+    - >-
+      npm run verify:render passed 58/58 with retained suite UUID
+      149d53fb-6705-46d2-bde4-36f91eb8c1eb. The five retained gate JSON records are authoritative;
+      the earlier test-verdict artifact is historical development evidence and does not attest this run.

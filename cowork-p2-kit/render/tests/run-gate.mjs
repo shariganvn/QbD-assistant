@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
+import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -17,10 +18,11 @@ const command = [process.execPath, "--test", testPath];
 const timeoutMs = 300000;
 const started = Date.now();
 
-// For G-P3-04, pass a unique snapshot file path to the child test
-const snapshotFile = gateId === "G-P3-04"
-  ? join(repoRoot, `docs/reports/qbd-p3-render-layer/gates/${gateId}-snapshot-${randomUUID()}.json`)
+// G-P3-04 and G-P3-05 emit one structured snapshot through their child test.
+const snapshotRoot = ["G-P3-04", "G-P3-05"].includes(gateId)
+  ? mkdtempSync(join(tmpdir(), `${gateId}-snapshot-`))
   : undefined;
+const snapshotFile = snapshotRoot ? join(snapshotRoot, `${randomUUID()}.json`) : undefined;
 
 const result = spawnSync(command[0], command.slice(1), {
   cwd: repoRoot,
@@ -65,8 +67,8 @@ const evidence = {
   signal: timedOut ? (result.signal ?? "SIGTERM") : null,
 };
 
-// For G-P3-04, read the snapshot file if it exists
-if (gateId === "G-P3-04" && snapshotFile && existsSync(snapshotFile)) {
+// Read the required gate snapshot if it exists.
+if (["G-P3-04", "G-P3-05"].includes(gateId) && snapshotFile && existsSync(snapshotFile)) {
   try {
     const snapshotData = JSON.parse(readFileSync(snapshotFile, "utf8"));
     evidence.snapshots = [snapshotData];
@@ -76,6 +78,7 @@ if (gateId === "G-P3-04" && snapshotFile && existsSync(snapshotFile)) {
     rmSync(snapshotFile, { force: true });
   }
 }
+if (snapshotRoot) rmSync(snapshotRoot, { recursive: true, force: true });
 
 const validation = validateGateEvidence(evidence, gateId);
 if (!validation.valid) {

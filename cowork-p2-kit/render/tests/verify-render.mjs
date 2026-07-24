@@ -4,6 +4,8 @@ import { randomUUID } from "node:crypto";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { validateSuiteEvidence } from "./verify-render-evidence.mjs";
+
 export const GATE_MAP = [
   ["G-P3-01", "cowork-p2-kit/render/tests/contract.test.mjs"],
   ["G-P3-02", "cowork-p2-kit/render/tests/output-preservation.test.mjs"],
@@ -28,4 +30,14 @@ for (const [gateId, testPath] of GATE_MAP) {
   process.stdout.write(result.stdout ?? "");
   process.stderr.write(result.stderr ?? "");
   if (result.status !== 0) process.exit(result.status ?? 1);
+}
+
+const postValidationErrors = validateSuiteEvidence({
+  gatesDir: resolve(repoRoot, "docs/reports/qbd-p3-render-layer/gates"),
+  suiteRunId,
+});
+if (postValidationErrors.length > 0) {
+  for (const error of postValidationErrors) process.stderr.write(`[verify-render] ${error}\n`);
+  process.stderr.write("[verify-render] post-G-P3-05 validation failed\n");
+  process.exit(1);
 }

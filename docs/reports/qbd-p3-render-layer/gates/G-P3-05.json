@@ -1,0 +1,268 @@
+{
+  "gate_id": "G-P3-05",
+  "status": "pass",
+  "command": [
+    "/usr/bin/node",
+    "--test",
+    "cowork-p2-kit/render/tests/determinism.test.mjs"
+  ],
+  "exit_code": 0,
+  "raw_tap_output": "TAP version 13\n# \\# deterministic render diagnostics\n# \\# render 1 exit: 0\n# \\# render 2 exit: 0\n# \\# raw output 1 hash: ffca27226a5dbe67705093e0f27016651a2b8a6b535a4404f9f8c3ca15358b02\n# \\# raw output 2 hash: ffca27226a5dbe67705093e0f27016651a2b8a6b535a4404f9f8c3ca15358b02\n# \\# manifest 1 hash: ad216ba0f04bbfff7eaa5471dd780a8db97aa74a239457400aa5966146124ae8\n# \\# manifest 2 hash: ad216ba0f04bbfff7eaa5471dd780a8db97aa74a239457400aa5966146124ae8\n# \\# normalizer commands (render 1):\n# \\#   [\"-Z1\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"\\\\\\\\[Content_Types\\\\\\\\].xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"_rels/\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"_rels/.rels\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"docProps/\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"docProps/app.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"docProps/core.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"docProps/custom.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"word/\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"word/_rels/\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"word/_rels/comments.xml.rels\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"word/_rels/document.xml.rels\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"word/_rels/endnotes.xml.rels\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"word/_rels/fontTable.xml.rels\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"word/_rels/footnotes.xml.rels\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"word/comments.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"word/document.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"word/endnotes.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"word/fontTable.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"word/footnotes.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"word/numbering.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"word/settings.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-1-Ub8ais/p2-draft.docx\",\"word/styles.xml\"]\n# \\# normalizer commands (render 2):\n# \\#   [\"-Z1\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"\\\\\\\\[Content_Types\\\\\\\\].xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"_rels/\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"_rels/.rels\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"docProps/\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"docProps/app.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"docProps/core.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"docProps/custom.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"word/\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"word/_rels/\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"word/_rels/comments.xml.rels\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"word/_rels/document.xml.rels\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"word/_rels/endnotes.xml.rels\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"word/_rels/fontTable.xml.rels\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"word/_rels/footnotes.xml.rels\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"word/comments.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"word/document.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"word/endnotes.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"word/fontTable.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"word/footnotes.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"word/numbering.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"word/settings.xml\"]\n# \\#   [\"-p\",\"/tmp/render-det-2-qq0AuQ/p2-draft.docx\",\"word/styles.xml\"]\n# Subtest: G-P3-05 viewer checklist\n    # Subtest: checklist file exists and is not the blank template\n    ok 1 - checklist file exists and is not the blank template\n      ---\n      duration_ms: 2.64093\n      type: 'test'\n      ...\n    # Subtest: all required fields are present and non-blank\n    ok 2 - all required fields are present and non-blank\n      ---\n      duration_ms: 0.690126\n      type: 'test'\n      ...\n    # Subtest: reviewer is non-empty\n    ok 3 - reviewer is non-empty\n      ---\n      duration_ms: 0.414231\n      type: 'test'\n      ...\n    # Subtest: review date is a valid YYYY-MM-DD calendar date\n    ok 4 - review date is a valid YYYY-MM-DD calendar date\n      ---\n      duration_ms: 0.471529\n      type: 'test'\n      ...\n    # Subtest: viewer product is LibreOffice or Microsoft Word\n    ok 5 - viewer product is LibreOffice or Microsoft Word\n      ---\n      duration_ms: 0.348659\n      type: 'test'\n      ...\n    # Subtest: viewer version is non-empty\n    ok 6 - viewer version is non-empty\n      ---\n      duration_ms: 0.287072\n      type: 'test'\n      ...\n    # Subtest: host baseline is Windows host + WSL2 Ubuntu\n    ok 7 - host baseline is Windows host + WSL2 Ubuntu\n      ---\n      duration_ms: 0.405728\n      type: 'test'\n      ...\n    # Subtest: opened DOCX path is absolute\n    ok 8 - opened DOCX path is absolute\n      ---\n      duration_ms: 5.785907\n      type: 'test'\n      ...\n    # Subtest: SHA-256 hashes are lowercase 64-hex format\n    ok 9 - SHA-256 hashes are lowercase 64-hex format\n      ---\n      duration_ms: 3.962167\n      type: 'test'\n      ...\n    # Subtest: fixture SHA-256 matches the committed input fixture hash\n    ok 10 - fixture SHA-256 matches the committed input fixture hash\n      ---\n      duration_ms: 3.311328\n      type: 'test'\n      ...\n    # Subtest: normalized manifest SHA-256 matches a fresh normalization\n    ok 11 - normalized manifest SHA-256 matches a fresh normalization\n      ---\n      duration_ms: 0.509377\n      type: 'test'\n      ...\n    # Subtest: all five required observations are present with PASS verdicts\n    ok 12 - all five required observations are present with PASS verdicts\n      ---\n      duration_ms: 0.462587\n      type: 'test'\n      ...\n    # Subtest: no unknown observation keys are present\n    ok 13 - no unknown observation keys are present\n      ---\n      duration_ms: 0.95783\n      type: 'test'\n      ...\n    # Subtest: rejects duplicate and unknown checklist keys\n    ok 14 - rejects duplicate and unknown checklist keys\n      ---\n      duration_ms: 0.666268\n      type: 'test'\n      ...\n    # Subtest: rejects uppercase hash characters\n    ok 15 - rejects uppercase hash characters\n      ---\n      duration_ms: 0.341695\n      type: 'test'\n      ...\n    # Subtest: rejects invalid calendar dates like 2026-02-30\n    ok 16 - rejects invalid calendar dates like 2026-02-30\n      ---\n      duration_ms: 0.151123\n      type: 'test'\n      ...\n    # Subtest: normalized manifest SHA-256 matches a fresh normalization of a rendered DOCX\n    ok 17 - normalized manifest SHA-256 matches a fresh normalization of a rendered DOCX\n      ---\n      duration_ms: 359.631615\n      type: 'test'\n      ...\n    1..17\nok 1 - G-P3-05 viewer checklist\n  ---\n  duration_ms: 383.120548\n  type: 'suite'\n  ...\n# Subtest: G-P3-05 deterministic output\n    # Subtest: normalizer enumerates every ZIP entry with explicit unzip argument arrays\n    ok 1 - normalizer enumerates every ZIP entry with explicit unzip argument arrays\n      ---\n      duration_ms: 31.813297\n      type: 'test'\n      ...\n    # Subtest: media-bearing fixture contains XML, relationship, and media entries\n    ok 2 - media-bearing fixture contains XML, relationship, and media entries\n      ---\n      duration_ms: 33.182831\n      type: 'test'\n      ...\n    # Subtest: expected manifest matches actual normalization\n    ok 3 - expected manifest matches actual normalization\n      ---\n      duration_ms: 33.498214\n      type: 'test'\n      ...\n    # Subtest: two renders of the same input produce identical normalized manifests\n    ok 4 - two renders of the same input produce identical normalized manifests\n      ---\n      duration_ms: 718.754215\n      type: 'test'\n      ...\n    # Subtest: two citations with the same approved URL deduplicate each relationship part while preserving references\n    ok 5 - two citations with the same approved URL deduplicate each relationship part while preserving references\n      ---\n      duration_ms: 123.531542\n      type: 'test'\n      ...\n    # Subtest: body USP links resolve to one stable relationship per relationship part\n    ok 6 - body USP links resolve to one stable relationship per relationship part\n      ---\n      duration_ms: 81.800133\n      type: 'test'\n      ...\n    # Subtest: does not cross-rewrite equal old IDs between relationship parts\n    ok 7 - does not cross-rewrite equal old IDs between relationship parts\n      ---\n      duration_ms: 5.589172\n      type: 'test'\n      ...\n    # Subtest: normalizer commands use the actual escaped readPath for bracket entries\n    ok 8 - normalizer commands use the actual escaped readPath for bracket entries\n      ---\n      duration_ms: 48.567945\n      type: 'test'\n      ...\n    # Subtest: manifest keys are always in lexical order regardless of archive listing order\n    ok 9 - manifest keys are always in lexical order regardless of archive listing order\n      ---\n      duration_ms: 40.260529\n      type: 'test'\n      ...\n    # Subtest: rejects terminal traversal paths and hashes glob metacharacter entries literally\n    ok 10 - rejects terminal traversal paths and hashes glob metacharacter entries literally\n      ---\n      duration_ms: 23.533522\n      type: 'test'\n      ...\n    # Subtest: rejects duplicate original relationship IDs before rewriting\n    ok 11 - rejects duplicate original relationship IDs before rewriting\n      ---\n      duration_ms: 1.557022\n      type: 'test'\n      ...\n    1..11\nok 2 - G-P3-05 deterministic output\n  ---\n  duration_ms: 1142.856702\n  type: 'suite'\n  ...\n1..2\n# tests 28\n# suites 2\n# pass 28\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1740.866055\n",
+  "raw_stderr": "",
+  "timestamp": "2026-07-23T23:22:06.986Z",
+  "run_id": "1d2550d2-ceb8-4266-8150-508d5b760766",
+  "suite_run_id": "149d53fb-6705-46d2-bde4-36f91eb8c1eb",
+  "assertions_summary": {
+    "total": 28,
+    "passed": 28,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "cancelled": 0
+  },
+  "snapshots": [
+    {
+      "fixture_sha256": "4d07f24204b186c37bd1ac7697ef72df3ed5db895786961875e4cb3d9d051041",
+      "render_1_raw_sha256": "ffca27226a5dbe67705093e0f27016651a2b8a6b535a4404f9f8c3ca15358b02",
+      "render_2_raw_sha256": "ffca27226a5dbe67705093e0f27016651a2b8a6b535a4404f9f8c3ca15358b02",
+      "render_1_manifest_sha256": "ad216ba0f04bbfff7eaa5471dd780a8db97aa74a239457400aa5966146124ae8",
+      "render_2_manifest_sha256": "ad216ba0f04bbfff7eaa5471dd780a8db97aa74a239457400aa5966146124ae8",
+      "render_1_commands": [
+        [
+          "-Z1",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "\\[Content_Types\\].xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "_rels/"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "_rels/.rels"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "docProps/"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "docProps/app.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "docProps/core.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "docProps/custom.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "word/"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "word/_rels/"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "word/_rels/comments.xml.rels"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "word/_rels/document.xml.rels"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "word/_rels/endnotes.xml.rels"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "word/_rels/fontTable.xml.rels"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "word/_rels/footnotes.xml.rels"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "word/comments.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "word/document.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "word/endnotes.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "word/fontTable.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "word/footnotes.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "word/numbering.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "word/settings.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-1-Ub8ais/p2-draft.docx",
+          "word/styles.xml"
+        ]
+      ],
+      "render_2_commands": [
+        [
+          "-Z1",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "\\[Content_Types\\].xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "_rels/"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "_rels/.rels"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "docProps/"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "docProps/app.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "docProps/core.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "docProps/custom.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "word/"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "word/_rels/"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "word/_rels/comments.xml.rels"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "word/_rels/document.xml.rels"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "word/_rels/endnotes.xml.rels"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "word/_rels/fontTable.xml.rels"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "word/_rels/footnotes.xml.rels"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "word/comments.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "word/document.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "word/endnotes.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "word/fontTable.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "word/footnotes.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "word/numbering.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "word/settings.xml"
+        ],
+        [
+          "-p",
+          "/tmp/render-det-2-qq0AuQ/p2-draft.docx",
+          "word/styles.xml"
+        ]
+      ]
+    }
+  ],
+  "timeout_ms": 300000,
+  "duration_ms": 1788,
+  "timed_out": false,
+  "signal": null
+}

@@ -1,7 +1,7 @@
 ---
 title: QbD P.2 deterministic render layer
 workstream: qbd-p3-render-layer
-status: active
+status: completed
 canonical: true
 created: 2026-07-22
 scope: phase-3-render-only
@@ -128,8 +128,8 @@ by hand and do not claim a Phase 3 gate passed during this planning change.
 | 1 | [Freeze render contract and test boundary](./step-01-freeze-render-contract.md) | completed | G-P3-01 |
 | 2 | [Implement fail-closed renderer](./step-02-fail-closed-renderer.md) | completed | G-P3-02 |
 | 3 | [Run fidelity and offline spike](./step-03-fidelity-offline-spike.md) | completed | G-P3-03, G-P3-04 |
-| 4 | [Prove determinism and viewer fidelity](./step-04-determinism-viewer-evidence.md) | pending | G-P3-05 |
-| 5 | [Review closure and handoff](./step-05-review-closure-handoff.md) | pending | G-P3-06 |
+| 4 | [Prove determinism and viewer fidelity](./step-04-determinism-viewer-evidence.md) | completed | G-P3-05 |
+| 5 | [Review closure and handoff](./step-05-review-closure-handoff.md) | completed | G-P3-06 |
 
 Only this table may transition a step from `pending` to `in-progress` to `completed`. A completed
 step requires every listed gate to be `pass` with readable version-controlled evidence.
@@ -138,7 +138,9 @@ step requires every listed gate to be `pass` with readable version-controlled ev
 
 1. Step 2 may begin only after the citation contract and exact-host fixtures are frozen by G-P3-01.
 2. Step 3 may begin only after invalid input preserves the existing DOCX and G-P3-02 passes.
-3. Step 4 may begin only after OOXML semantics and isolated-network evidence pass.
+3. Step 4 may begin only after OOXML semantics and isolated-network evidence pass **and** the
+   human approval required by `T20260723-qbd-p3-render-step-04.yaml` is recorded. Its
+   `awaiting_approval` state blocks test creation, preflight, rendering, and evidence writes.
 4. If G-P3-03 or G-P3-04 fails, stop. A separate approved plan is required before provisioning or
    selecting any fallback renderer.
 5. Phase 3 is done only after all G-P3-01 through G-P3-06 gates pass; a blank viewer checklist or

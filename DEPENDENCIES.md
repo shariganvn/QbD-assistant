@@ -24,12 +24,13 @@ installing Windows equivalents alone.
 | Dependency | Baseline / pinned version | WSL2 Ubuntu provisioning | Purpose and verification |
 |---|---|---|---|
 | Node.js + npm | Node 22 LTS; current verified runtime `v22.22.2` | Install Node 22 in WSL; run `npm ci` | Executes all kit scripts. |
-| `docx` | `9.7.1` exact in `package.json` | Installed by `npm ci` | Deterministic DOCX Layer C renderer. |
+| `docx` | `9.7.1` exact in `package.json` | Installed by `npm ci` | Layer C OOXML renderer; G-P3-01 through G-P3-05 verify its contract, fidelity, isolation, deterministic output, and viewer evidence. |
+| `jszip` | `3.10.1` exact in `package.json` | Installed by `npm ci` | Deterministic Layer C post-processing: rewrites relationship IDs per OOXML relationship part and fixes core-property timestamps; verified by G-P3-05. |
 | `@llamaindex/liteparse` | lockfile-resolved `2.5.0` | Installed by `npm ci` | Layer A extraction through the repo-local `lit` CLI. |
 | LibreOffice | `soffice` | `sudo apt install libreoffice` | Markdown-to-DOCX input build and ingest prerequisite probe. |
 | Ghostscript | `gs` | `sudo apt install ghostscript` | LiteParse PDF conversion support and ingest prerequisite probe. |
 | Tesseract language data | `eng` and `vie` tessdata | `sudo apt install tesseract-ocr tesseract-ocr-vie` | Required by the current ingest prerequisite configuration; OCR execution remains deferred. |
-| Bubblewrap | `bwrap`; version recorded when installed | `sudo apt install bubblewrap` | Required by G-P3-04 for the isolated offline renderer run. It is currently absent, so that gate is unverified. |
+| Bubblewrap | `bwrap` `0.11.1` (verified 2026-07-23) | `sudo apt install bubblewrap` | Required by G-P3-04 for the isolated offline renderer run. Version retained from fresh G-P3-04 evidence. |
 
 ## Windows-host procedure
 
