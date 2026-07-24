@@ -1,7 +1,7 @@
 <!-- GENERATED VIEW — do not edit manually -->
 <!-- Source: docs/progress/*.yaml and docs/decisions/D*.md -->
 <!-- Regenerate: baton render-workflow -->
-<!-- Source fingerprint: sha256:4f5ced4e20d57684eae911db2e139e3f782f96ada58e6d4b47ae98957934043d -->
+<!-- Source fingerprint: sha256:3e1f081c4bd9db0b31d40bcc4b7ec63812f0908e952af68fdfcb3ed6abc6cc08 -->
 
 # PROGRESS
 
@@ -9,17 +9,18 @@
 
 ## Current workstream
 
-- ID: `qbd-p3-render-layer`
+- ID: `qbd-p4-reasoning-layer`
 - Status: `in-progress`
-- Plan: `docs/plans/qbd-p3-render-layer/plan.md`
-- Current pickup: Steps 1–2 passed and closed: G-P3-02 proves fail-closed publication. Step 3 needs its approved fidelity/offline test plan.
-- Pickup files: `docs/plans/qbd-p3-render-layer/step-03-fidelity-offline-spike.md`, `docs/plans/qbd-p3-render-layer/gates.yaml`, `docs/reports/qbd-p3-render-layer/pm-20260723-0724-step-02-closure.md`
+- Plan: `docs/plans/qbd-p4-reasoning-layer/plan.md`
+- Current pickup: Step 0 is complete; execute Step 1 contracts and TDD harness against the frozen fixture.
+- Pickup files: `docs/plans/qbd-p4-reasoning-layer/step-01-contracts-and-harness.md`, `docs/plans/qbd-p4-reasoning-layer/gates.yaml`, `cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl`
 
 ## Latest progress
 
 | Date | ID | Status | Summary |
 |---|---|---|---|
-| 2026-07-22 | `P20260722-qbd-p2-ingest-step-05` | done | Closed Step 5 and the Phase 2 ingest-completion plan from retained gate, impact, and review evidence. |
+| 2026-07-24 | `P20260724-qbd-p3-render-step-05` | done | Closed Phase 3 render review: restored the transient Phase 2 evidence refresh, corrected retained-suite traceability, and passed G-P3-06 review. |
+| 2026-07-24 | `P20260724-qbd-p4-reasoning-step-00` | done | Completed Step 0: quarantined the redundant live-store backup, froze the 17-record reasoning fixture, and pinned its reproducibility SHA-256. |
 
 ## Blockers
 

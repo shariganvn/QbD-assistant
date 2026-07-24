@@ -1,26 +1,27 @@
 schema_version: 1
-updated_at: '2026-07-24T00:11:43.337768+00:00'
+updated_at: '2026-07-24T04:26:52.072443+00:00'
 branch: master
-git_head: d9597e0cca50e77fcd2451b01621825db5c85e09
+git_head: f48d7a42b8bd252a19f9033304c80cb7480eb371
 worktree_id: nguyen-dell-7577:master
 active_workstream:
-  id: qbd-p3-render-layer
-  plan: docs/plans/qbd-p3-render-layer/plan.md
-  status: done
+  id: qbd-p4-reasoning-layer
+  plan: docs/plans/qbd-p4-reasoning-layer/plan.md
+  status: in-progress
 current_pickup:
   source: session-handoff.yaml
-  summary: "Phase 3 is complete; select and approve the next workstream before implementation."
+  summary: "Step 0 is complete; execute Step 1 contracts and TDD harness against the
+    frozen fixture."
   files:
-  - docs/plans/qbd-p3-render-layer/plan.md
-  - docs/plans/qbd-p3-render-layer/gates.yaml
-  - docs/reports/qbd-p3-render-layer/code-review.md
+  - docs/plans/qbd-p4-reasoning-layer/step-01-contracts-and-harness.md
+  - docs/plans/qbd-p4-reasoning-layer/gates.yaml
+  - cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl
 relevant_progress:
+- P20260724-qbd-p4-reasoning-step-00
 - P20260724-qbd-p3-render-step-05
-- P20260723-qbd-p3-render-step-03-final-verdict
 relevant_decisions:
 - D20260722
 read_next:
 - session-handoff.yaml
-- docs/plans/qbd-p3-render-layer/plan.md
-- docs/plans/qbd-p3-render-layer/gates.yaml
-- docs/reports/qbd-p3-render-layer/code-review.md
+- docs/plans/qbd-p4-reasoning-layer/plan.md
+- docs/plans/qbd-p4-reasoning-layer/step-01-contracts-and-harness.md
+- docs/plans/qbd-p4-reasoning-layer/gates.yaml

@@ -1,0 +1,42 @@
+id: T20260724-qbd-p4-reasoning-step-00
+date: "2026-07-24"
+workstream: qbd-p4-reasoning-layer
+status: executed
+plan: docs/plans/qbd-p4-reasoning-layer/step-00-freeze-store-baseline.md
+scope:
+  summary: Freeze a committed, reproducible 17-record Layer B fixture from the current admitted store without changing Layer A or Layer C behavior.
+  changed_files:
+    - cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl
+    - cowork-p2-kit/reasoning/tests/fixtures/store/README.md
+    - docs/plans/qbd-p4-reasoning-layer/gates.yaml
+    - docs/plans/qbd-p4-reasoning-layer/plan.md
+    - artifacts/260724-1116-qbd-p4-step-00/records.jsonl.bak
+approval:
+  required: true
+  approved_at: "2026-07-24"
+  approved_by: human
+commands:
+  - id: ingest-record-contract-regression
+    description: Preserve the existing frozen JSONL record envelope and deterministic record identity.
+    command: [node, --test, cowork-p2-kit/ingest/tests/record-contract.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+acceptance:
+  gates: []
+  evidence:
+    - artifacts/260724-1116/test-verdict.json
+  invariants:
+    - The live store, committed reasoning snapshot, and quarantined backup have the identical 17-record SHA-256 baseline.
+    - The snapshot README records the verified source run/date, source path, count, and hash.
+    - pins.store_records_sha256 equals the shared byte-level SHA-256 while store_records_repin_reason remains null.
+    - The live backup no longer exists beside cowork-p2-kit/store/records.jsonl.
+results:
+  verdict: passed
+  artifact: artifacts/260724-1116/test-verdict.json
+  counts:
+    passed: 2
+    failed: 0
+    warnings: 0
+  notes:
+    - Independent Step 0 verification passed 7/7 byte, JSONL, provenance, pin, and ignore-boundary checks.
+    - The retained Node contract regression passed 2/2.

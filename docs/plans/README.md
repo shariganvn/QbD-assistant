@@ -3,7 +3,7 @@
 There is exactly one active implementation plan in this repository. The root
 `IMPLEMENTATION_PLAN.md` points to it.
 
-- Active execution material: `docs/plans/qbd-p3-render-layer/`
+- Active execution material: `docs/plans/qbd-p4-reasoning-layer/`
 - Historical material: `docs/plans/OUTDATED/`
 - Review/research evidence: `docs/reports/`
 
