@@ -1,38 +1,103 @@
 {
   "branch": "master",
-  "da_review": "summary:\n⚠️ Test-only factory injection can select a root in direct in-process use; production CLI entrypoint always enforces the fixed decision root.",
+  "da_review": "summary:\n⚠️ P2 schema/runtime parity and cleanup rollback resilience are carried forward; no P0/P1 blocker.\n⚠️ Step 2 files are explicitly excluded from this closure and handoff.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-24T06:21:39+00:00",
-  "git_head": "02acbe474f89a7d0d2d061140b283853551c0437",
+  "generated_at": "2026-07-26T16:05:01+00:00",
+  "git_head": "40755b6f638ddd9d4761e3f116a0da3fff782b66",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/qbd-p4-reasoning-layer/step-02-cohort-evidence-boundaries.md",
-        "docs/plans/qbd-p4-reasoning-layer/gates.yaml",
-        "cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl"
+        "cowork-p2-kit/reasoning/cohort.schema.json",
+        "cowork-p2-kit/reasoning/decision.schema.json",
+        "cowork-p2-kit/reasoning/linear-attestation.schema.json",
+        "cowork-p2-kit/reasoning/contracts.mjs",
+        "cowork-p2-kit/reasoning/publication.mjs",
+        "cowork-p2-kit/reasoning/tests/contract.test.mjs",
+        "cowork-p2-kit/reasoning/tests/output-preservation.test.mjs",
+        "docs/reports/qbd-p4-reasoning-layer/code-review-step-01r-20260726.md"
       ],
-      "text": "Execute Step 2 cohort and evidence boundaries against the frozen fixture; retain Step 1 contracts"
+      "text": "Resolve only the two Step 1R P2 carry-forwards; Step 2 is excluded and must not be staged or modified by this pickup"
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
-    "cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl",
-    "docs/plans/qbd-p4-reasoning-layer/gates.yaml",
-    "docs/plans/qbd-p4-reasoning-layer/step-02-cohort-evidence-boundaries.md"
+    "cowork-p2-kit/reasoning/cohort.schema.json",
+    "cowork-p2-kit/reasoning/contracts.mjs",
+    "cowork-p2-kit/reasoning/decision.schema.json",
+    "cowork-p2-kit/reasoning/linear-attestation.schema.json",
+    "cowork-p2-kit/reasoning/publication.mjs",
+    "cowork-p2-kit/reasoning/tests/contract.test.mjs",
+    "cowork-p2-kit/reasoning/tests/output-preservation.test.mjs",
+    "docs/reports/qbd-p4-reasoning-layer/code-review-step-01r-20260726.md"
   ],
   "pickup_fingerprint_files": [
-    "cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl",
-    "docs/plans/qbd-p4-reasoning-layer/gates.yaml",
-    "docs/plans/qbd-p4-reasoning-layer/step-02-cohort-evidence-boundaries.md"
+    "cowork-p2-kit/reasoning/cohort.schema.json",
+    "cowork-p2-kit/reasoning/contracts.mjs",
+    "cowork-p2-kit/reasoning/decision.schema.json",
+    "cowork-p2-kit/reasoning/linear-attestation.schema.json",
+    "cowork-p2-kit/reasoning/publication.mjs",
+    "cowork-p2-kit/reasoning/tests/contract.test.mjs",
+    "cowork-p2-kit/reasoning/tests/output-preservation.test.mjs",
+    "docs/reports/qbd-p4-reasoning-layer/code-review-step-01r-20260726.md"
   ],
   "schema_version": 2,
-  "session_id": "260724-1241",
-  "summary": "Completed P4 Step 1 contracts and TDD harness: G-P4-01 14/14, shared smoke 12/12, strict pinned-store publication, and reasoning-before-rationale decision.",
-  "test_verdict": "artifacts/260724-1241/test-verdict.json",
+  "session_id": "260726-2303",
+  "summary": "Locked P4 Step 1R at C1 40755b6: G-P4-01 latest and snapshot agree at 45/45, fresh focused verification passed 45/45, shared Layer A/C smoke passed 12/12, and retained red evidence is recorded. Global workflow-state validation remains blocked by unrelated Step 2 decision-id drift; it was not modified.",
+  "test_verdict": "artifacts/260726-2303/test-verdict.json",
   "ui_verdict": null,
-  "unresolved": [],
+  "unresolved": [
+    {
+      "files": [
+        "cowork-p2-kit/reasoning/cohort.schema.json",
+        "cowork-p2-kit/reasoning/decision.schema.json",
+        "cowork-p2-kit/reasoning/linear-attestation.schema.json",
+        "cowork-p2-kit/reasoning/contracts.mjs",
+        "cowork-p2-kit/reasoning/tests/contract.test.mjs"
+      ],
+      "text": "P2 schema/runtime parity: make the published cohort, decision, and linear-attestation schemas enforce the runtime rules and add parity tests"
+    },
+    {
+      "files": [
+        "cowork-p2-kit/reasoning/publication.mjs",
+        "cowork-p2-kit/reasoning/tests/output-preservation.test.mjs"
+      ],
+      "text": "P2 cleanup rollback: inject backup-cleanup failure and prove every pre-existing publication byte is restored"
+    }
+  ],
   "worktree_status": [
     " M AGENTS.md",
-    " M CLAUDE.md"
+    " M CLAUDE.md",
+    " M DECISIONS.md",
+    " M PROGRESS.md",
+    " M cowork-p2-kit/ingest/admission.mjs",
+    " M cowork-p2-kit/ingest/config.mjs",
+    " M cowork-p2-kit/ingest/publication.mjs",
+    " M cowork-p2-kit/ingest/tests/file-boundaries.test.mjs",
+    " M cowork-p2-kit/ingest/tests/publication-concurrency.test.mjs",
+    " M cowork-p2-kit/ingest/tests/publication-failure.test.mjs",
+    " M docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
+    " M docs/plans/qbd-p2-ingest-completion/plan.md",
+    " M docs/plans/qbd-p4-reasoning-layer/gates.yaml",
+    " M docs/plans/qbd-p4-reasoning-layer/plan.md",
+    " M docs/plans/qbd-p4-reasoning-layer/step-02-cohort-evidence-boundaries.md",
+    " M docs/plans/qbd-p4-reasoning-layer/step-03-rubric-decision-engine.md",
+    " M docs/plans/qbd-p4-reasoning-layer/step-04-cowork-skill-artifacts.md",
+    " M docs/plans/qbd-p4-reasoning-layer/step-05-integrated-gates-review.md",
+    " M docs/reports/qbd-p2-ingest-completion/code-review.md",
+    "?? cowork-p2-kit/reasoning/cohort-evidence.mjs",
+    "?? cowork-p2-kit/reasoning/tests/cohort-evidence.test.mjs",
+    "?? cowork-p2-kit/reasoning/tests/fixtures/store/inadmissible-records.jsonl",
+    "?? docs/decisions/D20260724-qbd-p4-technical-prototype-fd-decision-pack.md",
+    "?? docs/decisions/D20260726-qbd-p4-fd-mvp-admission-and-linear-ranking.md",
+    "?? docs/progress/P20260724-qbd-p4-reasoning-step-02.yaml",
+    "?? docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md",
+    "?? docs/reports/qbd-p4-reasoning-layer/fd-decision-pack-bisoprolol-pilot.docx",
+    "?? docs/reports/qbd-p4-reasoning-layer/fd-decision-pack-bisoprolol-pilot.md",
+    "?? docs/reports/qbd-p4-reasoning-layer/fd-decision-pack-bisoprolol-pilot.pdf",
+    "?? docs/reports/qbd-p4-reasoning-layer/fd-response-review-20260726.md",
+    "?? docs/reports/qbd-p4-reasoning-layer/gates/G-P4-02.json",
+    "?? docs/reports/qbd-p4-reasoning-layer/gates/red/G-P4-02.json",
+    "?? docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-02.json",
+    "?? docs/reports/qbd-p4-reasoning-layer/pm-20260724-step-02-fixture-mock-closure.md"
   ]
 }
