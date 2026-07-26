@@ -1,0 +1,54 @@
+id: P20260726-qbd-p4-reasoning-step-01r
+date: "2026-07-26"
+workstream: qbd-p4-reasoning-layer
+status: done
+summary: >-
+  Closed Step 1R reasoning contracts and TDD harness with matched latest and step-close
+  G-P4-01 evidence (45/45), a fresh focused gate pass, and retained 12/12 shared Layer
+  A/C smoke.
+changed_files:
+- cowork-p2-kit/reasoning/cohort.schema.json
+- cowork-p2-kit/reasoning/decision.schema.json
+- cowork-p2-kit/reasoning/linear-attestation.schema.json
+- cowork-p2-kit/reasoning/contracts.mjs
+- cowork-p2-kit/reasoning/errors.mjs
+- cowork-p2-kit/reasoning/cli.mjs
+- cowork-p2-kit/reasoning/publication.mjs
+- cowork-p2-kit/reasoning/tests/contract.test.mjs
+- cowork-p2-kit/reasoning/tests/output-preservation.test.mjs
+- cowork-p2-kit/reasoning/tests/fixtures/contract/
+- docs/reports/qbd-p4-reasoning-layer/gates/G-P4-01.json
+- docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-01.json
+tests_run:
+  verdict: passed
+  counts:
+    passed: 57
+    failed: 0
+    warnings: 0
+  evidence:
+    focused_gate:
+      gate_id: G-P4-01
+      passed: 45
+      failed: 0
+      latest: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-01.json
+      snapshot: 
+        docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-01.json
+      sha256: 97e4e6416f0acd7820202d49fdee376af42b835abee13ddc4d805ef98ac14c89
+    shared_layer_ac_smoke:
+      passed: 12
+      failed: 0
+    red_state:
+      initial_tdd: "0/5"
+      contract_delta: "14/28"
+      publication_binding_delta: "4/15"
+  artifact: docs/reports/qbd-p4-reasoning-layer/code-review-step-01r-20260726.md
+decisions: []
+carry_forwards:
+- "P2: make JSON Schema and runtime validation parity explicit and cover it with tests."
+- "P2: inject backup-cleanup failure and prove full byte-for-byte rollback restoration."
+next_pickup:
+  files: []
+  text: >-
+    Step 1R is locked. Step 2 is excluded from this closure and was not staged; do
+    not treat this
+    record as authorization to begin, modify, or include Step 2 work.

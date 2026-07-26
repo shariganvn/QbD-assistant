@@ -20,6 +20,10 @@ function canonicalize(value) {
   return value;
 }
 
+export function canonicalBytes(value) {
+  return JSON.stringify(canonicalize(value), null, 2) + "\n";
+}
+
 export function publishArtifacts(artifacts, outputRoot, fileSystem = { mkdirSync, renameSync, rmSync, writeFileSync }) {
   const root = resolve(outputRoot);
   const temporary = [];
@@ -31,7 +35,7 @@ export function publishArtifacts(artifacts, outputRoot, fileSystem = { mkdirSync
       const target = resolve(root, name);
       if (!target.startsWith(`${root}/`)) throw new ReasoningContractError("E_PUBLICATION_PATH", "artifact escapes the publication root");
       const temp = resolve(root, `.${name}.${randomUUID()}.tmp`);
-      fileSystem.writeFileSync(temp, `${JSON.stringify(canonicalize(artifacts[key]), null, 2)}\n`, { flag: "wx" });
+      fileSystem.writeFileSync(temp, canonicalBytes(artifacts[key]), { flag: "wx" });
       temporary.push({ temp, target, name });
     }
     for (const entry of temporary) {

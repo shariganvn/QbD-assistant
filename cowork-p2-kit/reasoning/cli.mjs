@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 
 import { ReasoningContractError } from "./errors.mjs";
 import { validateCohort, validateDecision, validateEvidenceLog, validateFactCards, validateLinearAttestation } from "./contracts.mjs";
-import { publishArtifacts } from "./publication.mjs";
+import { canonicalBytes, publishArtifacts } from "./publication.mjs";
 
 const filePath = fileURLToPath(import.meta.url);
 const defaultPublicationRoot = resolve(dirname(filePath), "../../docs/reports/qbd-p4-reasoning-layer/decision");
@@ -43,6 +43,33 @@ function readRecords(path) {
   } catch (error) { throw new ReasoningContractError("E_STORE_INPUT", `cannot read store records: ${error.message}`, { cause: error }); }
 }
 
+function assertBinding(cohort, decision, linearAttestation) {
+  const code = "E_REASONING_ARTIFACT_BINDING";
+
+  if (cohort.cohort_id !== decision.cohort_id) {
+    throw new ReasoningContractError(code, "cohort and decision disagree on cohort_id");
+  }
+  if (cohort.linear_attestation_id !== decision.linear_attestation_id) {
+    throw new ReasoningContractError(code, "cohort and decision disagree on linear_attestation_id");
+  }
+  if (cohort.linear_attestation_sha256 !== decision.linear_attestation_sha256) {
+    throw new ReasoningContractError(code, "cohort and decision disagree on linear_attestation_sha256");
+  }
+  if (cohort.cohort_basis !== decision.cohort_basis) {
+    throw new ReasoningContractError(code, "cohort and decision disagree on cohort_basis");
+  }
+
+  if (cohort.linear_attestation_id !== null) {
+    if (cohort.linear_attestation_id !== linearAttestation.attestation_id) {
+      throw new ReasoningContractError(code, "cohort linear_attestation_id does not match the supplied attestation");
+    }
+    const computedHash = createHash("sha256").update(canonicalBytes(linearAttestation)).digest("hex");
+    if (cohort.linear_attestation_sha256 !== computedHash) {
+      throw new ReasoningContractError(code, "cohort linear_attestation_sha256 does not match canonical hash of supplied attestation");
+    }
+  }
+}
+
 export function createReasoningCli({ publicationRoot = defaultPublicationRoot } = {}) {
   const declaredRoot = resolve(publicationRoot);
   return {
@@ -62,6 +89,7 @@ export function createReasoningCli({ publicationRoot = defaultPublicationRoot } 
         throw new ReasoningContractError("E_STORE_SHA256", "store SHA-256 does not match the cohort pin");
       }
       validateFactCards(artifacts.factCards, { cohort: artifacts.cohort, records: store.records });
+      assertBinding(artifacts.cohort, artifacts.decision, artifacts.linearAttestation);
       return publishArtifacts(artifacts, outputRoot);
     },
   };

@@ -39,12 +39,12 @@ acceptance:
     - The P4 runner writes TAP-derived evidence carrying the frozen Step 0 store SHA-256.
 results:
   verdict: passed
-  artifact: artifacts/260724-1241/test-verdict.json
+  artifact: docs/reports/qbd-p4-reasoning-layer/code-review-step-01r-20260726.md
   counts:
-    passed: 14
+    passed: 57
     failed: 0
     warnings: 0
   notes:
-    - The initial red tests were retained before production validators and runner were added.
-    - Independent reviewer and Devil's Advocate approved the remediated G-P4-01 slice; no Layer A/C behavior changed.
-    - The production publication root is immutable and supplied store bytes must match the cohort SHA-256 pin.
+    - Step 1R closure: G-P4-01 latest and step-close evidence match at 45/45; fresh focused verification also passed 45/45.
+    - Shared ingest/render smoke passed 12/12; red evidence is retained for the initial, contract-delta, and publication/binding-delta states.
+    - Carry forward P2 schema/runtime parity and publication cleanup-rollback resilience; Step 2 is excluded from this closure.

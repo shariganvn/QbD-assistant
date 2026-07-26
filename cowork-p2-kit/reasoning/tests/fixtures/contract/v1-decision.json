@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "decision_id": "decision-fixture-001",
+  "status": "inconclusive",
+  "winner": null,
+  "cohort_id": "cohort-5mg",
+  "fact_card_ids": ["FC-F01-001"],
+  "rubric_sha256": null,
+  "fd_action": "Approve a hash-pinned selection rubric before selection."
+}

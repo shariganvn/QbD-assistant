@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "decision_id": "decision-fixture-001",
+  "decision_id": "decision-fixture-v2-001",
   "status": "inconclusive",
   "winner": null,
   "cohort_id": "cohort-5mg",

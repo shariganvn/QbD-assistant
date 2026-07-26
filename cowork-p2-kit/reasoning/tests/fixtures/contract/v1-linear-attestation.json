@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "attestation_id": "attestation-fixture-001",
+  "candidate": "F-01",
+  "required_fields": ["api", "strength", "dosage_form", "product_target", "trial_context"],
+  "api": "example-api",
+  "strength": "5 mg",
+  "dosage_form": "tablet",
+  "product_target": "example-target",
+  "trial_context": "example-trial",
+  "approved_sha256": null
+}

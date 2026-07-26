@@ -1,0 +1,443 @@
+TAP version 13
+# Subtest: G-P4-01 accepts a valid v2 cross-strength linear attestation
+not ok 1 - G-P4-01 accepts a valid v2 cross-strength linear attestation
+  ---
+  duration_ms: 2.956217
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:52:1'
+  failureType: 'testCodeFailure'
+  error: 'linear attestation is missing a declared required field'
+  code: 'E_LINEAR_ATTESTATION_INCOMPLETE'
+  name: 'ReasoningContractError'
+  stack: |-
+    reject (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:8:9)
+    validateLinearAttestation (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:72:5)
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:54:20)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: G-P4-01 rejects a v1 linear attestation with E_LINEAR_ATTESTATION_ENVELOPE
+not ok 2 - G-P4-01 rejects a v1 linear attestation with E_LINEAR_ATTESTATION_ENVELOPE
+  ---
+  duration_ms: 2.740209
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:61:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  stack: |-
+    expectCode (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:43:10)
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:63:3)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: G-P4-01 rejects an attestation with fewer than two members
+ok 3 - G-P4-01 rejects an attestation with fewer than two members
+  ---
+  duration_ms: 0.794795
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects an attestation with fewer than two distinct strengths
+ok 4 - G-P4-01 rejects an attestation with fewer than two distinct strengths
+  ---
+  duration_ms: 0.482505
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects an attestation with a duplicate candidate/strength pair
+not ok 5 - G-P4-01 rejects an attestation with a duplicate candidate/strength pair
+  ---
+  duration_ms: 2.149747
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:81:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'E_LINEAR_ATTESTATION_INCOMPLETE'
+    - 'E_LINEAR_ATTESTATION_ENVELOPE'
+                            ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'E_LINEAR_ATTESTATION_ENVELOPE'
+  actual: 'E_LINEAR_ATTESTATION_INCOMPLETE'
+  operator: 'strictEqual'
+  stack: |-
+    Object.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:45:12)
+    expectedException (node:assert:576:17)
+    expectsError (node:assert:701:21)
+    Function.throws (node:assert:757:3)
+    expectCode (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:43:10)
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:88:3)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+  ...
+# Subtest: G-P4-01 rejects an attestation with an empty candidate string
+not ok 6 - G-P4-01 rejects an attestation with an empty candidate string
+  ---
+  duration_ms: 0.59786
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:91:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'E_LINEAR_ATTESTATION_INCOMPLETE'
+    - 'E_LINEAR_ATTESTATION_ENVELOPE'
+                            ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'E_LINEAR_ATTESTATION_ENVELOPE'
+  actual: 'E_LINEAR_ATTESTATION_INCOMPLETE'
+  operator: 'strictEqual'
+  stack: |-
+    Object.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:45:12)
+    expectedException (node:assert:576:17)
+    expectsError (node:assert:701:21)
+    Function.throws (node:assert:757:3)
+    expectCode (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:43:10)
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:97:3)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+  ...
+# Subtest: G-P4-01 rejects an attestation with an empty strength string
+not ok 7 - G-P4-01 rejects an attestation with an empty strength string
+  ---
+  duration_ms: 0.498786
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:100:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'E_LINEAR_ATTESTATION_INCOMPLETE'
+    - 'E_LINEAR_ATTESTATION_ENVELOPE'
+                            ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'E_LINEAR_ATTESTATION_ENVELOPE'
+  actual: 'E_LINEAR_ATTESTATION_INCOMPLETE'
+  operator: 'strictEqual'
+  stack: |-
+    Object.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:45:12)
+    expectedException (node:assert:576:17)
+    expectsError (node:assert:701:21)
+    Function.throws (node:assert:757:3)
+    expectCode (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:43:10)
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:106:3)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+  ...
+# Subtest: G-P4-01 rejects an attestation that still carries approved_sha256
+not ok 8 - G-P4-01 rejects an attestation that still carries approved_sha256
+  ---
+  duration_ms: 0.540017
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:109:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'E_LINEAR_ATTESTATION_INCOMPLETE'
+    - 'E_LINEAR_ATTESTATION_ENVELOPE'
+                            ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'E_LINEAR_ATTESTATION_ENVELOPE'
+  actual: 'E_LINEAR_ATTESTATION_INCOMPLETE'
+  operator: 'strictEqual'
+  stack: |-
+    Object.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:45:12)
+    expectedException (node:assert:576:17)
+    expectsError (node:assert:701:21)
+    Function.throws (node:assert:757:3)
+    expectCode (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:43:10)
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:112:3)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+  ...
+# Subtest: G-P4-01 rejects an attestation with a wrong required_fields order
+ok 9 - G-P4-01 rejects an attestation with a wrong required_fields order
+  ---
+  duration_ms: 0.795019
+  type: 'test'
+  ...
+# Subtest: G-P4-01 accepts a valid v2 non-attested cohort
+not ok 10 - G-P4-01 accepts a valid v2 non-attested cohort
+  ---
+  duration_ms: 0.975792
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:123:1'
+  failureType: 'testCodeFailure'
+  error: 'cohort keys must match the contract'
+  code: 'E_COHORT_ENVELOPE'
+  name: 'ReasoningContractError'
+  stack: |-
+    reject (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:8:9)
+    exactObject (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:15:5)
+    validateCohort (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:39:3)
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:125:20)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 accepts a valid v2 attested cohort
+not ok 11 - G-P4-01 accepts a valid v2 attested cohort
+  ---
+  duration_ms: 0.644718
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:132:1'
+  failureType: 'testCodeFailure'
+  error: 'cohort keys must match the contract'
+  code: 'E_COHORT_ENVELOPE'
+  name: 'ReasoningContractError'
+  stack: |-
+    reject (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:8:9)
+    exactObject (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:15:5)
+    validateCohort (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:39:3)
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:134:20)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 rejects a v1 cohort with E_COHORT_ENVELOPE
+not ok 12 - G-P4-01 rejects a v1 cohort with E_COHORT_ENVELOPE
+  ---
+  duration_ms: 0.774267
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:139:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  stack: |-
+    expectCode (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:43:10)
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:141:3)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 rejects a cohort with half-null attestation ID (ID null, hash non-null)
+ok 13 - G-P4-01 rejects a cohort with half-null attestation ID (ID null, hash non-null)
+  ---
+  duration_ms: 0.620386
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects a cohort with half-null attestation hash (ID non-null, hash null)
+ok 14 - G-P4-01 rejects a cohort with half-null attestation hash (ID non-null, hash null)
+  ---
+  duration_ms: 0.494911
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects a cohort with empty cohort_basis
+ok 15 - G-P4-01 rejects a cohort with empty cohort_basis
+  ---
+  duration_ms: 0.345738
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects a cohort with an invalid attestation SHA-256
+ok 16 - G-P4-01 rejects a cohort with an invalid attestation SHA-256
+  ---
+  duration_ms: 2.712445
+  type: 'test'
+  ...
+# Subtest: G-P4-01 accepts a valid v2 non-attested decision
+not ok 17 - G-P4-01 accepts a valid v2 non-attested decision
+  ---
+  duration_ms: 0.486394
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:172:1'
+  failureType: 'testCodeFailure'
+  error: 'decision keys must match the contract'
+  code: 'E_DECISION_ENVELOPE'
+  name: 'ReasoningContractError'
+  stack: |-
+    reject (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:8:9)
+    exactObject (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:15:5)
+    validateDecision (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:93:3)
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:174:20)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 accepts a valid v2 attested decision
+not ok 18 - G-P4-01 accepts a valid v2 attested decision
+  ---
+  duration_ms: 0.914976
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:181:1'
+  failureType: 'testCodeFailure'
+  error: 'decision keys must match the contract'
+  code: 'E_DECISION_ENVELOPE'
+  name: 'ReasoningContractError'
+  stack: |-
+    reject (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:8:9)
+    exactObject (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:15:5)
+    validateDecision (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:93:3)
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:183:20)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 rejects a v1 decision with E_DECISION_ENVELOPE
+not ok 19 - G-P4-01 rejects a v1 decision with E_DECISION_ENVELOPE
+  ---
+  duration_ms: 0.760511
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:188:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  stack: |-
+    expectCode (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:43:10)
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:190:3)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 rejects a decision with half-null attestation ID
+ok 20 - G-P4-01 rejects a decision with half-null attestation ID
+  ---
+  duration_ms: 0.432649
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects a decision with half-null attestation hash
+ok 21 - G-P4-01 rejects a decision with half-null attestation hash
+  ---
+  duration_ms: 0.683266
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects a decision with empty cohort_basis
+ok 22 - G-P4-01 rejects a decision with empty cohort_basis
+  ---
+  duration_ms: 0.689621
+  type: 'test'
+  ...
+# Subtest: G-P4-01 retains v1 evidence-log and fact-card validation unchanged
+not ok 23 - G-P4-01 retains v1 evidence-log and fact-card validation unchanged
+  ---
+  duration_ms: 1.871187
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:215:1'
+  failureType: 'testCodeFailure'
+  error: 'cohort keys must match the contract'
+  code: 'E_COHORT_ENVELOPE'
+  name: 'ReasoningContractError'
+  stack: |-
+    reject (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:8:9)
+    exactObject (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:15:5)
+    validateCohort (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:39:3)
+    validateFactCards (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/contracts.mjs:126:3)
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:218:20)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+  ...
+# Subtest: G-P4-01 retains v1 selection-rubric validation unchanged
+ok 24 - G-P4-01 retains v1 selection-rubric validation unchanged
+  ---
+  duration_ms: 0.767725
+  type: 'test'
+  ...
+# Subtest: G-P4-01 canonical attestation hash is stable across object-key reorderings
+ok 25 - G-P4-01 canonical attestation hash is stable across object-key reorderings
+  ---
+  duration_ms: 0.954496
+  type: 'test'
+  ...
+# Subtest: G-P4-01 canonical attestation hash changes on semantic member change
+ok 26 - G-P4-01 canonical attestation hash changes on semantic member change
+  ---
+  duration_ms: 0.497911
+  type: 'test'
+  ...
+# Subtest: G-P4-01 validates fact candidate, value/unit, offset, and minimum quote bindings independently
+not ok 27 - G-P4-01 validates fact candidate, value/unit, offset, and minimum quote bindings independently
+  ---
+  duration_ms: 0.737632
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:246:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'E_COHORT_ENVELOPE'
+    - 'E_FACT_CANDIDATE_BINDING'
+         ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'E_FACT_CANDIDATE_BINDING'
+  actual: 'E_COHORT_ENVELOPE'
+  operator: 'strictEqual'
+  stack: |-
+    Object.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:45:12)
+    expectedException (node:assert:576:17)
+    expectsError (node:assert:701:21)
+    Function.throws (node:assert:757:3)
+    expectCode (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:43:10)
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/contract.test.mjs:252:3)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+  ...
+# Subtest: G-P4-01 rejects unknown keys, missing fields, and wrong types with stable E_ codes
+ok 28 - G-P4-01 rejects unknown keys, missing fields, and wrong types with stable E_ codes
+  ---
+  duration_ms: 1.024634
+  type: 'test'
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 14
+# fail 14
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 145.591701

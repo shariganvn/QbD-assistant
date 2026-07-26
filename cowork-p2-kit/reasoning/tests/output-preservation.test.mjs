@@ -38,10 +38,21 @@ function runInjected(args, publicationRoot) {
 
 function commonArgs(root) {
   return [
-    "--decision", join(root, "valid-decision.json"),
-    "--cohort", join(root, "valid-cohort.json"),
+    "--decision", join(root, "valid-decision-v2.json"),
+    "--cohort", join(root, "valid-cohort-v2.json"),
     "--fact-cards", join(root, "valid-fact-cards.json"),
-    "--linear-attestation", join(root, "valid-linear-attestation.json"),
+    "--linear-attestation", join(root, "valid-linear-attestation-v2.json"),
+    "--evidence-log", join(root, "valid-evidence-log.json"),
+    "--store", join(root, "store-records.jsonl"),
+  ];
+}
+
+function attestedArgs(root) {
+  return [
+    "--decision", join(root, "valid-decision-attested-v2.json"),
+    "--cohort", join(root, "valid-cohort-attested-v2.json"),
+    "--fact-cards", join(root, "valid-fact-cards.json"),
+    "--linear-attestation", join(root, "valid-linear-attestation-v2.json"),
     "--evidence-log", join(root, "valid-evidence-log.json"),
     "--store", join(root, "store-records.jsonl"),
   ];
@@ -53,6 +64,8 @@ function ordered(value, reverse = false) {
   return value;
 }
 
+// --- Existing output preservation tests (v2 fixtures) ---
+
 test("G-P4-01 each invalid CLI envelope exits 1, prints E_ code, and preserves all prior output bytes", () => {
   const temp = mkdtempSync(join(tmpdir(), "reasoning-output-preservation-"));
   const input = join(temp, "input");
@@ -61,7 +74,7 @@ test("G-P4-01 each invalid CLI envelope exits 1, prints E_ code, and preserves a
   mkdirSync(output, { recursive: true });
   writeFileSync(join(output, "published.json"), "{\"stable\":true}\n");
   try {
-    const badDecision = join(input, "valid-decision.json");
+    const badDecision = join(input, "valid-decision-v2.json");
     const decision = JSON.parse(readFileSync(badDecision, "utf8"));
     decision.unexpected = true;
     writeFileSync(badDecision, `${JSON.stringify(decision)}\n`);
@@ -111,7 +124,7 @@ test("G-P4-01 valid publication creates canonical JSON only inside its declared 
     const result = runInjected([...commonArgs(fixtureRoot), "--output-root", output], output);
     assert.equal(result.status, 0, result.stderr);
     const published = join(output, "formula-decision.json");
-    assert.deepEqual(JSON.parse(readFileSync(published, "utf8")), JSON.parse(readFileSync(join(fixtureRoot, "valid-decision.json"), "utf8")));
+    assert.deepEqual(JSON.parse(readFileSync(published, "utf8")), JSON.parse(readFileSync(join(fixtureRoot, "valid-decision-v2.json"), "utf8")));
     assert.match(readFileSync(published, "utf8"), /\n$/);
   } finally { rmSync(temp, { recursive: true, force: true }); }
 });
@@ -123,7 +136,7 @@ test("G-P4-01 canonical publication bytes do not depend on valid input object ke
   const secondOutput = join(temp, "second");
   cpSync(fixtureRoot, reorderedInput, { recursive: true });
   try {
-    for (const name of ["valid-decision.json", "valid-cohort.json", "valid-fact-cards.json", "valid-linear-attestation.json", "valid-evidence-log.json"]) {
+    for (const name of ["valid-decision-v2.json", "valid-cohort-v2.json", "valid-fact-cards.json", "valid-linear-attestation-v2.json", "valid-evidence-log.json"]) {
       const path = join(reorderedInput, name);
       writeFileSync(path, `${JSON.stringify(ordered(JSON.parse(readFileSync(path, "utf8")), true))}\n`);
     }
@@ -139,10 +152,10 @@ test("G-P4-01 a synchronous mid-rename failure restores every pre-existing publi
   const temp = mkdtempSync(join(tmpdir(), "reasoning-rename-rollback-"));
   const output = join(temp, "decision");
   const artifacts = {
-    decision: JSON.parse(readFileSync(join(fixtureRoot, "valid-decision.json"), "utf8")),
-    cohort: JSON.parse(readFileSync(join(fixtureRoot, "valid-cohort.json"), "utf8")),
+    decision: JSON.parse(readFileSync(join(fixtureRoot, "valid-decision-v2.json"), "utf8")),
+    cohort: JSON.parse(readFileSync(join(fixtureRoot, "valid-cohort-v2.json"), "utf8")),
     factCards: JSON.parse(readFileSync(join(fixtureRoot, "valid-fact-cards.json"), "utf8")),
-    linearAttestation: JSON.parse(readFileSync(join(fixtureRoot, "valid-linear-attestation.json"), "utf8")),
+    linearAttestation: JSON.parse(readFileSync(join(fixtureRoot, "valid-linear-attestation-v2.json"), "utf8")),
     evidenceLog: JSON.parse(readFileSync(join(fixtureRoot, "valid-evidence-log.json"), "utf8")),
   };
   mkdirSync(output, { recursive: true });
@@ -189,5 +202,140 @@ test("G-P4-01 store bytes must SHA-256 match the cohort pin before publication a
     assert.equal(result.status, 1, result.stderr);
     assert.match(result.stderr, /E_STORE_SHA256/);
     assert.deepEqual(treeHashes(output), before);
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+// --- Cross-artifact binding tests ---
+
+test("G-P4-01 rejects cohort/decision cohort_id disagreement with E_REASONING_ARTIFACT_BINDING", () => {
+  const temp = mkdtempSync(join(tmpdir(), "reasoning-binding-cohort-id-"));
+  const input = join(temp, "input");
+  const output = join(temp, "decision");
+  cpSync(fixtureRoot, input, { recursive: true });
+  mkdirSync(output, { recursive: true });
+  try {
+    const cohortPath = join(input, "valid-cohort-v2.json");
+    const cohort = JSON.parse(readFileSync(cohortPath, "utf8"));
+    cohort.cohort_id = "cohort-OTHER";
+    writeFileSync(cohortPath, `${JSON.stringify(cohort, null, 2)}\n`);
+    const before = treeHashes(output);
+    const result = runInjected([...commonArgs(input), "--output-root", output], output);
+    assert.equal(result.status, 1, result.stderr);
+    assert.match(result.stderr, /E_REASONING_ARTIFACT_BINDING/);
+    assert.deepEqual(treeHashes(output), before);
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+test("G-P4-01 rejects cohort/decision attestation ID disagreement with E_REASONING_ARTIFACT_BINDING", () => {
+  const temp = mkdtempSync(join(tmpdir(), "reasoning-binding-attest-id-"));
+  const input = join(temp, "input");
+  const output = join(temp, "decision");
+  cpSync(fixtureRoot, input, { recursive: true });
+  mkdirSync(output, { recursive: true });
+  try {
+    const cohortPath = join(input, "valid-cohort-attested-v2.json");
+    const cohort = JSON.parse(readFileSync(cohortPath, "utf8"));
+    cohort.linear_attestation_id = "wrong-id";
+    writeFileSync(cohortPath, `${JSON.stringify(cohort, null, 2)}\n`);
+    const before = treeHashes(output);
+    const result = runInjected([...attestedArgs(input), "--output-root", output], output);
+    assert.equal(result.status, 1, result.stderr);
+    assert.match(result.stderr, /E_REASONING_ARTIFACT_BINDING/);
+    assert.deepEqual(treeHashes(output), before);
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+test("G-P4-01 rejects cohort/decision attestation hash mismatch with E_REASONING_ARTIFACT_BINDING", () => {
+  const temp = mkdtempSync(join(tmpdir(), "reasoning-binding-attest-hash-"));
+  const input = join(temp, "input");
+  const output = join(temp, "decision");
+  cpSync(fixtureRoot, input, { recursive: true });
+  mkdirSync(output, { recursive: true });
+  try {
+    const cohortPath = join(input, "valid-cohort-attested-v2.json");
+    const cohort = JSON.parse(readFileSync(cohortPath, "utf8"));
+    cohort.linear_attestation_sha256 = "aa" + "0".repeat(62);
+    writeFileSync(cohortPath, `${JSON.stringify(cohort, null, 2)}\n`);
+    const before = treeHashes(output);
+    const result = runInjected([...attestedArgs(input), "--output-root", output], output);
+    assert.equal(result.status, 1, result.stderr);
+    assert.match(result.stderr, /E_REASONING_ARTIFACT_BINDING/);
+    assert.deepEqual(treeHashes(output), before);
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+test("G-P4-01 rejects non-null attestation ID that does not match the supplied attestation file", () => {
+  const temp = mkdtempSync(join(tmpdir(), "reasoning-binding-id-mismatch-"));
+  const input = join(temp, "input");
+  const output = join(temp, "decision");
+  cpSync(fixtureRoot, input, { recursive: true });
+  mkdirSync(output, { recursive: true });
+  try {
+    const cohortPath = join(input, "valid-cohort-attested-v2.json");
+    const cohort = JSON.parse(readFileSync(cohortPath, "utf8"));
+    cohort.linear_attestation_id = "attestation-NONEXISTENT";
+    writeFileSync(cohortPath, `${JSON.stringify(cohort, null, 2)}\n`);
+    const decisionPath = join(input, "valid-decision-attested-v2.json");
+    const decision = JSON.parse(readFileSync(decisionPath, "utf8"));
+    decision.linear_attestation_id = "attestation-NONEXISTENT";
+    writeFileSync(decisionPath, `${JSON.stringify(decision, null, 2)}\n`);
+    const before = treeHashes(output);
+    const result = runInjected([...attestedArgs(input), "--output-root", output], output);
+    assert.equal(result.status, 1, result.stderr);
+    assert.match(result.stderr, /E_REASONING_ARTIFACT_BINDING/);
+    assert.deepEqual(treeHashes(output), before);
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+test("G-P4-01 rejects non-null attestation hash that does not match canonical bytes of supplied attestation", () => {
+  const temp = mkdtempSync(join(tmpdir(), "reasoning-binding-hash-mismatch-"));
+  const input = join(temp, "input");
+  const output = join(temp, "decision");
+  cpSync(fixtureRoot, input, { recursive: true });
+  mkdirSync(output, { recursive: true });
+  try {
+    const cohortPath = join(input, "valid-cohort-attested-v2.json");
+    const cohort = JSON.parse(readFileSync(cohortPath, "utf8"));
+    cohort.linear_attestation_sha256 = "bb" + "0".repeat(62);
+    writeFileSync(cohortPath, `${JSON.stringify(cohort, null, 2)}\n`);
+    const decisionPath = join(input, "valid-decision-attested-v2.json");
+    const decision = JSON.parse(readFileSync(decisionPath, "utf8"));
+    decision.linear_attestation_sha256 = "bb" + "0".repeat(62);
+    writeFileSync(decisionPath, `${JSON.stringify(decision, null, 2)}\n`);
+    const before = treeHashes(output);
+    const result = runInjected([...attestedArgs(input), "--output-root", output], output);
+    assert.equal(result.status, 1, result.stderr);
+    assert.match(result.stderr, /E_REASONING_ARTIFACT_BINDING/);
+    assert.deepEqual(treeHashes(output), before);
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+test("G-P4-01 rejects cohort_basis disagreement between cohort and decision", () => {
+  const temp = mkdtempSync(join(tmpdir(), "reasoning-binding-basis-"));
+  const input = join(temp, "input");
+  const output = join(temp, "decision");
+  cpSync(fixtureRoot, input, { recursive: true });
+  mkdirSync(output, { recursive: true });
+  try {
+    const decisionPath = join(input, "valid-decision-v2.json");
+    const decision = JSON.parse(readFileSync(decisionPath, "utf8"));
+    decision.cohort_basis = "A different basis.";
+    writeFileSync(decisionPath, `${JSON.stringify(decision, null, 2)}\n`);
+    const before = treeHashes(output);
+    const result = runInjected([...commonArgs(input), "--output-root", output], output);
+    assert.equal(result.status, 1, result.stderr);
+    assert.match(result.stderr, /E_REASONING_ARTIFACT_BINDING/);
+    assert.deepEqual(treeHashes(output), before);
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+test("G-P4-01 valid attested publication succeeds and preserves attestation binding", () => {
+  const temp = mkdtempSync(join(tmpdir(), "reasoning-attested-pub-"));
+  const output = join(temp, "decision");
+  try {
+    const result = runInjected([...attestedArgs(fixtureRoot), "--output-root", output], output);
+    assert.equal(result.status, 0, result.stderr);
+    const published = join(output, "formula-decision.json");
+    assert.deepEqual(JSON.parse(readFileSync(published, "utf8")), JSON.parse(readFileSync(join(fixtureRoot, "valid-decision-attested-v2.json"), "utf8")));
   } finally { rmSync(temp, { recursive: true, force: true }); }
 });

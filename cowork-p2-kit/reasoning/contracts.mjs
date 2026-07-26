@@ -34,10 +34,18 @@ function shaOrNull(value, code, context) {
   }
 }
 
+function attestationCoupledNull(id, hash, code, context) {
+  const idNull = id === null;
+  const hashNull = hash === null;
+  if (idNull !== hashNull) {
+    reject(code, `${context} attestation ID and hash must be both null or both non-null`);
+  }
+}
+
 export function validateCohort(cohort) {
   const code = "E_COHORT_ENVELOPE";
-  exactObject(cohort, ["schema_version", "cohort_id", "candidates", "provenance_candidate_map", "store_records_sha256"], code, "cohort");
-  version(cohort.schema_version, code, "cohort.schema_version");
+  exactObject(cohort, ["schema_version", "cohort_id", "candidates", "provenance_candidate_map", "store_records_sha256", "linear_attestation_id", "linear_attestation_sha256", "cohort_basis"], code, "cohort");
+  if (cohort.schema_version !== 2) reject(code, "cohort.schema_version must be 2");
   string(cohort.cohort_id, code, "cohort.cohort_id");
   if (!Array.isArray(cohort.candidates) || cohort.candidates.length === 0) reject(code, "cohort.candidates must be a non-empty array");
   cohort.candidates.forEach((candidate, index) => string(candidate, code, `cohort.candidates[${index}]`));
@@ -48,6 +56,10 @@ export function validateCohort(cohort) {
     if (!cohort.candidates.includes(candidate)) reject(code, "cohort provenance mapping must resolve a candidate");
   }
   if (typeof cohort.store_records_sha256 !== "string" || !SHA256.test(cohort.store_records_sha256)) reject(code, "cohort.store_records_sha256 must be a SHA-256 hex string");
+  attestationCoupledNull(cohort.linear_attestation_id, cohort.linear_attestation_sha256, code, "cohort");
+  if (cohort.linear_attestation_id !== null) string(cohort.linear_attestation_id, code, "cohort.linear_attestation_id");
+  shaOrNull(cohort.linear_attestation_sha256, code, "cohort.linear_attestation_sha256");
+  string(cohort.cohort_basis, code, "cohort.cohort_basis");
   return cohort;
 }
 
@@ -67,31 +79,65 @@ export function validateSelectionRubric(rubric) {
 
 export function validateLinearAttestation(attestation) {
   const code = "E_LINEAR_ATTESTATION_ENVELOPE";
-  const required = ["api", "strength", "dosage_form", "product_target", "trial_context"];
-  if (isPlainObject(attestation) && required.some((field) => !Object.hasOwn(attestation, field))) {
-    reject("E_LINEAR_ATTESTATION_INCOMPLETE", "linear attestation is missing a declared required field");
+  const requiredCommon = ["api", "dosage_form", "product_target", "trial_context"];
+  const requiredMemberFields = ["members"];
+  const allRequired = [...requiredMemberFields, ...requiredCommon];
+
+  if (isPlainObject(attestation)) {
+    for (const field of allRequired) {
+      if (!Object.hasOwn(attestation, field)) {
+        reject("E_LINEAR_ATTESTATION_INCOMPLETE", `linear attestation is missing required field: ${field}`);
+      }
+    }
   }
-  exactObject(attestation, ["schema_version", "attestation_id", "candidate", "required_fields", "api", "strength", "dosage_form", "product_target", "trial_context", "approved_sha256"], code, "linear attestation");
-  version(attestation.schema_version, code, "linear attestation.schema_version");
+
+  exactObject(attestation, ["schema_version", "attestation_id", "required_fields", "members", "api", "dosage_form", "product_target", "trial_context"], code, "linear attestation");
+  if (attestation.schema_version !== 2) reject(code, "linear attestation.schema_version must be 2");
   string(attestation.attestation_id, code, "linear attestation.attestation_id");
-  string(attestation.candidate, code, "linear attestation.candidate");
-  if (!Array.isArray(attestation.required_fields) || attestation.required_fields.length !== required.length
-    || required.some((field) => !attestation.required_fields.includes(field))) {
-    reject("E_LINEAR_ATTESTATION_INCOMPLETE", "linear attestation.required_fields must declare every required field");
+
+  if (!Array.isArray(attestation.required_fields) || attestation.required_fields.length !== allRequired.length
+    || attestation.required_fields.some((field, index) => field !== allRequired[index])) {
+    reject("E_LINEAR_ATTESTATION_INCOMPLETE", "linear attestation.required_fields must declare every required field in order");
   }
-  for (const field of required) {
+
+  for (const field of requiredCommon) {
     if (typeof attestation[field] !== "string" || attestation[field].trim() === "") {
       reject("E_LINEAR_ATTESTATION_INCOMPLETE", `linear attestation.${field} is required`);
     }
   }
-  shaOrNull(attestation.approved_sha256, code, "linear attestation.approved_sha256");
+
+  if (!Array.isArray(attestation.members) || attestation.members.length < 2) {
+    reject("E_LINEAR_ATTESTATION_INCOMPLETE", "linear attestation.members must contain at least two entries");
+  }
+
+  const seenPairs = new Set();
+  const strengths = new Set();
+  for (const [index, member] of attestation.members.entries()) {
+    const context = `linear attestation.members[${index}]`;
+    if (!isPlainObject(member)) reject(code, `${context} must be an object`);
+    const memberKeys = Object.keys(member).sort();
+    if (memberKeys.length !== 2 || memberKeys[0] !== "candidate" || memberKeys[1] !== "strength") {
+      reject(code, `${context} must have exactly candidate and strength keys`);
+    }
+    string(member.candidate, code, `${context}.candidate`);
+    string(member.strength, code, `${context}.strength`);
+    const pair = `${member.candidate}\0${member.strength}`;
+    if (seenPairs.has(pair)) reject(code, `${context} duplicate candidate/strength pair`);
+    seenPairs.add(pair);
+    strengths.add(member.strength);
+  }
+
+  if (strengths.size < 2) {
+    reject("E_LINEAR_ATTESTATION_INCOMPLETE", "linear attestation.members must span at least two distinct strengths");
+  }
+
   return attestation;
 }
 
 export function validateDecision(decision) {
   const code = "E_DECISION_ENVELOPE";
-  exactObject(decision, ["schema_version", "decision_id", "status", "winner", "cohort_id", "fact_card_ids", "rubric_sha256", "fd_action"], code, "decision");
-  version(decision.schema_version, code, "decision.schema_version");
+  exactObject(decision, ["schema_version", "decision_id", "status", "winner", "cohort_id", "fact_card_ids", "rubric_sha256", "fd_action", "linear_attestation_id", "linear_attestation_sha256", "cohort_basis"], code, "decision");
+  if (decision.schema_version !== 2) reject(code, "decision.schema_version must be 2");
   string(decision.decision_id, code, "decision.decision_id");
   if (!["selected", "inconclusive"].includes(decision.status)) reject(code, "decision.status is unsupported");
   if (decision.status === "selected") string(decision.winner, code, "decision.winner");
@@ -101,6 +147,10 @@ export function validateDecision(decision) {
   decision.fact_card_ids.forEach((id, index) => string(id, code, `decision.fact_card_ids[${index}]`));
   shaOrNull(decision.rubric_sha256, code, "decision.rubric_sha256");
   string(decision.fd_action, code, "decision.fd_action");
+  attestationCoupledNull(decision.linear_attestation_id, decision.linear_attestation_sha256, code, "decision");
+  if (decision.linear_attestation_id !== null) string(decision.linear_attestation_id, code, "decision.linear_attestation_id");
+  shaOrNull(decision.linear_attestation_sha256, code, "decision.linear_attestation_sha256");
+  string(decision.cohort_basis, code, "decision.cohort_basis");
   return decision;
 }
 

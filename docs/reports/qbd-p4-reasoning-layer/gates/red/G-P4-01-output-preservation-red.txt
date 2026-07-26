@@ -1,0 +1,339 @@
+TAP version 13
+# Subtest: G-P4-01 each invalid CLI envelope exits 1, prints E_ code, and preserves all prior output bytes
+ok 1 - G-P4-01 each invalid CLI envelope exits 1, prints E_ code, and preserves all prior output bytes
+  ---
+  duration_ms: 13.31866
+  type: 'test'
+  ...
+# Subtest: G-P4-01 refuses publication outside the declared root with one nonzero E_ failure
+ok 2 - G-P4-01 refuses publication outside the declared root with one nonzero E_ failure
+  ---
+  duration_ms: 0.66453
+  type: 'test'
+  ...
+# Subtest: G-P4-01 CLI requires a JSONL store and always validates fact-card bindings against it
+not ok 3 - G-P4-01 CLI requires a JSONL store and always validates fact-card bindings against it
+  ---
+  duration_ms: 9.922285
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:100:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /E_FACT_CANDIDATE_BINDING/. Input:
+    
+    'E_DECISION_ENVELOPE: decision keys must match the contract\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    E_DECISION_ENVELOPE: decision keys must match the contract
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:116:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 valid publication creates canonical JSON only inside its declared root
+not ok 4 - G-P4-01 valid publication creates canonical JSON only inside its declared root
+  ---
+  duration_ms: 1.237248
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:120:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    E_DECISION_ENVELOPE: decision keys must match the contract
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:125:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 canonical publication bytes do not depend on valid input object key order
+not ok 5 - G-P4-01 canonical publication bytes do not depend on valid input object key order
+  ---
+  duration_ms: 22.900007
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:132:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    E_DECISION_ENVELOPE: decision keys must match the contract
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:145:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 a synchronous mid-rename failure restores every pre-existing publication byte
+ok 6 - G-P4-01 a synchronous mid-rename failure restores every pre-existing publication byte
+  ---
+  duration_ms: 4.989792
+  type: 'test'
+  ...
+# Subtest: G-P4-01 spawned CLI ignores REASONING_PUBLICATION_ROOT and retains its fixed production root
+ok 7 - G-P4-01 spawned CLI ignores REASONING_PUBLICATION_ROOT and retains its fixed production root
+  ---
+  duration_ms: 58.141406
+  type: 'test'
+  ...
+# Subtest: G-P4-01 store bytes must SHA-256 match the cohort pin before publication and preserve prior output
+not ok 8 - G-P4-01 store bytes must SHA-256 match the cohort pin before publication and preserve prior output
+  ---
+  duration_ms: 7.449851
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:191:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /E_STORE_SHA256/. Input:
+    
+    'E_DECISION_ENVELOPE: decision keys must match the contract\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    E_DECISION_ENVELOPE: decision keys must match the contract
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:203:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 rejects cohort/decision cohort_id disagreement with E_REASONING_ARTIFACT_BINDING
+not ok 9 - G-P4-01 rejects cohort/decision cohort_id disagreement with E_REASONING_ARTIFACT_BINDING
+  ---
+  duration_ms: 5.781597
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:210:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /E_REASONING_ARTIFACT_BINDING/. Input:
+    
+    'E_DECISION_ENVELOPE: decision keys must match the contract\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    E_DECISION_ENVELOPE: decision keys must match the contract
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:224:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 rejects cohort/decision attestation ID disagreement with E_REASONING_ARTIFACT_BINDING
+not ok 10 - G-P4-01 rejects cohort/decision attestation ID disagreement with E_REASONING_ARTIFACT_BINDING
+  ---
+  duration_ms: 6.374305
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:229:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /E_REASONING_ARTIFACT_BINDING/. Input:
+    
+    'E_DECISION_ENVELOPE: decision keys must match the contract\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    E_DECISION_ENVELOPE: decision keys must match the contract
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:243:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 rejects cohort/decision attestation hash mismatch with E_REASONING_ARTIFACT_BINDING
+not ok 11 - G-P4-01 rejects cohort/decision attestation hash mismatch with E_REASONING_ARTIFACT_BINDING
+  ---
+  duration_ms: 4.831283
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:248:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /E_REASONING_ARTIFACT_BINDING/. Input:
+    
+    'E_DECISION_ENVELOPE: decision keys must match the contract\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    E_DECISION_ENVELOPE: decision keys must match the contract
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:262:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 rejects non-null attestation ID that does not match the supplied attestation file
+not ok 12 - G-P4-01 rejects non-null attestation ID that does not match the supplied attestation file
+  ---
+  duration_ms: 4.873729
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:267:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /E_REASONING_ARTIFACT_BINDING/. Input:
+    
+    'E_DECISION_ENVELOPE: decision keys must match the contract\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    E_DECISION_ENVELOPE: decision keys must match the contract
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:285:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 rejects non-null attestation hash that does not match canonical bytes of supplied attestation
+not ok 13 - G-P4-01 rejects non-null attestation hash that does not match canonical bytes of supplied attestation
+  ---
+  duration_ms: 4.232714
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:290:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /E_REASONING_ARTIFACT_BINDING/. Input:
+    
+    'E_DECISION_ENVELOPE: decision keys must match the contract\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    E_DECISION_ENVELOPE: decision keys must match the contract
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:308:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 rejects cohort_basis disagreement between cohort and decision
+not ok 14 - G-P4-01 rejects cohort_basis disagreement between cohort and decision
+  ---
+  duration_ms: 4.361086
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:313:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /E_REASONING_ARTIFACT_BINDING/. Input:
+    
+    'E_DECISION_ENVELOPE: decision keys must match the contract\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    E_DECISION_ENVELOPE: decision keys must match the contract
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:327:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: G-P4-01 valid attested publication succeeds and preserves attestation binding
+not ok 15 - G-P4-01 valid attested publication succeeds and preserves attestation binding
+  ---
+  duration_ms: 0.541907
+  type: 'test'
+  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:332:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    E_DECISION_ENVELOPE: decision keys must match the contract
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/reasoning/tests/output-preservation.test.mjs:337:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 4
+# fail 11
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 269.341853

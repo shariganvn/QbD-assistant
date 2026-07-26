@@ -1,0 +1,13 @@
+{
+  "schema_version": 2,
+  "cohort_id": "cohort-attested",
+  "candidates": ["F-01", "F-03"],
+  "provenance_candidate_map": {
+    "inputs/f01-trial.docx": "F-01",
+    "inputs/f03-trial.docx": "F-03"
+  },
+  "store_records_sha256": "7c141b7b74477b6df3f1c66872ca121679a591df74c46e097f4f4e8c89951970",
+  "linear_attestation_id": "attestation-fixture-v2-001",
+  "linear_attestation_sha256": "fbba9e2dbffaa3c3bbe5696185e3c2c59d1e2693f14ac76b13cb09f3aa89cc95",
+  "cohort_basis": "Cross-strength cohort formed under linear attestation attestation-fixture-v2-001."
+}

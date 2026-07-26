@@ -3,12 +3,27 @@
   "title": "QbD linear-formulation attestation",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "attestation_id", "candidate", "required_fields", "api", "strength", "dosage_form", "product_target", "trial_context", "approved_sha256"],
+  "required": ["schema_version", "attestation_id", "required_fields", "members", "api", "dosage_form", "product_target", "trial_context"],
   "properties": {
-    "schema_version": { "const": 1 }, "attestation_id": { "type": "string", "minLength": 1 },
-    "candidate": { "type": "string", "minLength": 1 }, "required_fields": { "type": "array", "minItems": 5, "items": { "type": "string" } },
-    "api": { "type": "string", "minLength": 1 }, "strength": { "type": "string", "minLength": 1 },
-    "dosage_form": { "type": "string", "minLength": 1 }, "product_target": { "type": "string", "minLength": 1 },
-    "trial_context": { "type": "string", "minLength": 1 }, "approved_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" }
+    "schema_version": { "const": 2 },
+    "attestation_id": { "type": "string", "minLength": 1 },
+    "required_fields": { "type": "array", "minItems": 5, "items": { "type": "string" } },
+    "members": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["candidate", "strength"],
+        "properties": {
+          "candidate": { "type": "string", "minLength": 1 },
+          "strength": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "api": { "type": "string", "minLength": 1 },
+    "dosage_form": { "type": "string", "minLength": 1 },
+    "product_target": { "type": "string", "minLength": 1 },
+    "trial_context": { "type": "string", "minLength": 1 }
   }
 }
