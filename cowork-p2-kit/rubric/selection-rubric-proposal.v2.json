@@ -1,0 +1,96 @@
+{
+  "approval_state": "proposal",
+  "measures": [
+    {
+      "aggregation": "identity",
+      "canonical_unit": "%",
+      "conflict_tolerance": 0.5,
+      "critical": true,
+      "direction": "higher-is-better",
+      "hard_gate": {
+        "operator": ">=",
+        "threshold": 80
+      },
+      "id": "release_30m",
+      "raw_shape": "scalar",
+      "score_map": [
+        {
+          "operator": ">=",
+          "points": 10,
+          "threshold": 90
+        },
+        {
+          "operator": "<",
+          "points": 5,
+          "threshold": 90
+        }
+      ],
+      "weight": {
+        "max": 0.55,
+        "min": 0.35,
+        "nominal": 0.45
+      }
+    },
+    {
+      "aggregation": "identity",
+      "canonical_unit": "%",
+      "conflict_tolerance": 0.5,
+      "critical": true,
+      "direction": "higher-is-better",
+      "hard_gate": {
+        "operator": ">=",
+        "threshold": 95
+      },
+      "id": "assay",
+      "raw_shape": "scalar",
+      "score_map": [
+        {
+          "operator": ">=",
+          "points": 10,
+          "threshold": 97
+        },
+        {
+          "operator": "<",
+          "points": 5,
+          "threshold": 97
+        }
+      ],
+      "weight": {
+        "max": 0.45,
+        "min": 0.25,
+        "nominal": 0.35
+      }
+    },
+    {
+      "aggregation": "midpoint",
+      "canonical_unit": "N",
+      "conflict_tolerance": 1,
+      "critical": false,
+      "direction": "lower-is-better",
+      "hard_gate": null,
+      "id": "hardness",
+      "raw_shape": "range",
+      "score_map": [
+        {
+          "operator": "<=",
+          "points": 10,
+          "threshold": 10
+        },
+        {
+          "operator": ">",
+          "points": 5,
+          "threshold": 10
+        }
+      ],
+      "weight": {
+        "max": 0.3,
+        "min": 0.1,
+        "nominal": 0.2
+      }
+    }
+  ],
+  "minimum_eligible_candidates": 2,
+  "rubric_id": "test-selection-rubric-v2",
+  "schema_version": 2,
+  "tie_threshold": 0.5
+}

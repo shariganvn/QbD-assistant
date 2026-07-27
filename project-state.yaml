@@ -8,21 +8,22 @@ active_workstream:
 current_pickup:
   source: session-handoff.yaml
   summary: >-
-    Step 2 is closed with canonical G-P4-02 at 19/19. Begin Step 3 only with an
-    approved test-only selection-rubric fixture and matching pin; production rubric
-    approval remains deferred to FD.
+    Step 3 is closed with canonical G-P4-03 at 42/42. Begin Step 4 only from
+    the frozen test-only decision/evaluation contract; FD production authority remains
+    deferred.
   files:
-  - docs/plans/qbd-p4-reasoning-layer/step-03-rubric-decision-engine.md
+  - docs/plans/qbd-p4-reasoning-layer/step-04-cowork-skill-artifacts.md
   - docs/plans/qbd-p4-reasoning-layer/gates.yaml
+  - docs/decisions/D20260727-qbd-p4-reasoning-policy.md
 relevant_progress:
+- P20260727-qbd-p4-reasoning-step-03
 - P20260727-qbd-p4-reasoning-step-02-policy-revision
-- P20260727-qbd-p4-reasoning-step-01e
 relevant_decisions:
 - D20260727
 read_next:
 - session-handoff.yaml
 - docs/plans/qbd-p4-reasoning-layer/plan.md
-- docs/plans/qbd-p4-reasoning-layer/step-03-rubric-decision-engine.md
+- docs/plans/qbd-p4-reasoning-layer/step-04-cowork-skill-artifacts.md
 - docs/plans/qbd-p4-reasoning-layer/gates.yaml
-updated_at: '2026-07-27T07:12:03.283342+00:00'
-git_head: 79eff52746236a4b2da5f94827b65bf8d9004fa9
+updated_at: '2026-07-27T16:25:25.733671+00:00'
+git_head: b14e32965b76ea85cc295f3660d10db6851d56f5

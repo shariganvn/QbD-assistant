@@ -60,6 +60,30 @@ exclusions. Fact-card offsets remain their separate segment-local contract.
 - Any future rationale layer, document-control workflow, external route, rubric approval, scoring,
   ranking, or drafting behavior requires a separate approved decision and plan delta.
 
+## Amendment — Step 3 test-only decision core authorization
+
+**Approved by the maintainer on 2026-07-27.** The separate decision and plan delta required for the
+narrow test-only scoring/ranking mechanism are satisfied by this amendment and the rebuilt Step 3
+plan.
+
+1. G-P4-03 may use only the committed synthetic v2 selection-rubric fixture and its immutable
+   canonical SHA-256 test pin to prove deterministic selection behavior.
+2. That fixture is not FD approval, cannot be published, and cannot select a real formulation or
+   release a product.
+3. G-P4-01 and G-P4-02 remain completed, read-only upstream contracts and evidence. Step 3 uses its
+   isolated v2 rubric/evaluation namespace rather than reopening their v1/v2 envelopes.
+4. `pins.selection_rubric_approved_sha256` remains null. A production-shaped invocation without an
+   FD-approved rubric and matching human-committed production pin returns `inconclusive`, never a
+   winner.
+5. Step 3 completes only when the rebuilt G-P4-03 suite passes with machine-produced evidence. Real
+   FD rubric approval remains deferred work and does not block that technical closure.
+
+This amendment does not modify FD authority, MVP package admission, linear-attestation policy,
+publication behavior, Markdown generation, document control, or external egress. The implementer
+starts with the required red G-P4-03 result and runs GitNexus impact analysis before changing any
+existing symbol. Step 4 may consume the frozen `{ decision, evaluation }` output only after G-P4-03
+passes; it owns publication and deterministic Markdown.
+
 ## Rationale
 
 Separating deterministic evidence/decision logic from narrative generation prevents a narrative system

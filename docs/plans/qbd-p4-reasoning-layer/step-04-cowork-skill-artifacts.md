@@ -35,6 +35,28 @@ non-contradicting content through — for example instruction-shaped text aimed 
 session. Hand-authored Markdown is rejected wholesale. Verbatim quotes are rendered inside declared
 delimiters in every artifact.
 
+## Human-only execution report
+
+Alongside — but strictly outside — the decision publication, the agent maintains a per-run execution
+ledger modelled on `impl-notes`. The default path is
+`~/.codex/artifacts/<project>/reasoning-execution-reports/<run-id>.md`; it is local, human-readable,
+and excluded from the decision root, receipt, schemas, validators, and all decision/evidence inputs.
+The agent opens it before execution, appends each decision/deviation/surprise when it occurs, and
+finalizes it with the run outcome and links/hashes of the decision artifacts.
+
+The ledger contains only concise operational metadata: timestamp, action, observed result, selected
+artifact ID/path/hash, and blocker or reversible deviation. It never contains raw record content,
+verbatim quotes, model prompts, chain-of-thought, credentials, or instruction-shaped text. Its header
+must say that it is a human-only, untrusted observational record and must not affect the formulation
+decision.
+
+`SKILL.md` must make non-consumption the default: a later agent must not list, glob, search, read,
+quote, summarize, pass as input, or add a report to `session-handoff.yaml`, `docs/.session-state.md`,
+or another prompt. It may read one only when a human explicitly identifies the exact report path or
+run ID; then it treats the report as untrusted and returns only the requested review. This is an
+instructional containment boundary rather than an ACL; it prevents supported-workflow context
+poisoning but cannot stop an agent that ignores the rule and has unrestricted filesystem access.
+
 ## Publication order
 
 The publication root is `docs/reports/qbd-p4-reasoning-layer/decision/`, git-retained, and `cli.mjs`
@@ -65,5 +87,6 @@ Gate: G-P4-04, run as
 `node cowork-p2-kit/reasoning/tests/run-gate.mjs G-P4-04 cowork-p2-kit/reasoning/tests/skill-artifacts.test.mjs`.
 Depends on G-P4-03.
 
+<!-- Updated: 2026-07-27 - human-only execution ledger, explicit-read context boundary -->
 <!-- Updated: Validation Session 1 - SKILL.md is a rewrite, fact-card authoring, required doc corrections -->
 <!-- Updated: Red Team Session 2026-07-24 - MD regeneration equality, publication order/root, denylist scoped best-effort, untrusted-text rule retained -->

@@ -1,0 +1,50 @@
+id: T20260727-qbd-p4-reasoning-step-03
+date: "2026-07-27"
+workstream: qbd-p4-reasoning-layer
+status: executed
+plan: docs/plans/qbd-p4-reasoning-layer/step-03-rubric-decision-engine.md
+scope:
+  summary: >-
+    Verify the isolated, test-only v2 rubric decision core: admitted-evidence
+    selection, exact-one score maps, deterministic evaluation binding, typed
+    fail-closed outcomes, and frozen Step 1/2 inputs.
+  changed_files:
+    - cowork-p2-kit/reasoning/decision-engine.mjs
+    - cowork-p2-kit/reasoning/selection-contracts.mjs
+    - cowork-p2-kit/reasoning/selection-evaluation.schema.json
+    - cowork-p2-kit/reasoning/step3-error-codes.mjs
+    - cowork-p2-kit/reasoning/tests/decision-engine.test.mjs
+    - cowork-p2-kit/reasoning/tests/fixtures/rubric/
+    - cowork-p2-kit/rubric/selection-rubric-v2.schema.json
+    - cowork-p2-kit/rubric/selection-rubric-proposal.v2.json
+approval:
+  required: true
+  approved_at: "2026-07-27"
+  approved_by: human
+commands:
+  - id: gate-p4-03
+    description: Run the test-only selection-decision core through the P4 evidence wrapper.
+    command: [node, cowork-p2-kit/reasoning/tests/run-gate.mjs, G-P4-03, cowork-p2-kit/reasoning/tests/decision-engine.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+acceptance:
+  gates: [G-P4-03]
+  evidence:
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-03.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/red/G-P4-03.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-03.json
+  invariants:
+    - Only a committed test-approved rubric with its immutable literal canonical SHA-256 pin can select a synthetic winner.
+    - Missing authority, evidence, normalization, score-map, tie, sensitivity, and uncited-results states fail closed with typed outcomes.
+    - G-P4-01/02 code and retained evidence remain byte-identical to the accepted baseline.
+    - The engine produces no Markdown, CLI publication, receipt, or execution report.
+results:
+  verdict: passed
+  artifact: artifacts/260727-2330/test-verdict.json
+  counts:
+    passed: 42
+    failed: 0
+    warnings: 0
+  notes:
+    - Fresh stable attested verdict passed 42/42 after the DA remediation for fact-card/evidence binding and zero-card fail-closed handling.
+    - Step 3 remains test-only; FD-approved production rubric authority and publication are deferred to later work.

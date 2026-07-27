@@ -1,0 +1,45 @@
+id: P20260727-qbd-p4-reasoning-step-03
+date: "2026-07-27"
+workstream: qbd-p4-reasoning-layer
+status: done
+summary: >-
+  Closed the rebuilt test-only selection-decision core: G-P4-03 passed 42/42
+  with immutable rubric-pin attestation, record/candidate/card-ID evidence binding,
+  deterministic evaluation binding, and fail-closed score-map and numeric validation.
+changed_files:
+- cowork-p2-kit/reasoning/decision-engine.mjs
+- cowork-p2-kit/reasoning/selection-contracts.mjs
+- cowork-p2-kit/reasoning/selection-evaluation.schema.json
+- cowork-p2-kit/reasoning/step3-error-codes.mjs
+- cowork-p2-kit/reasoning/tests/decision-engine.test.mjs
+- cowork-p2-kit/reasoning/tests/fixtures/rubric/
+- cowork-p2-kit/rubric/selection-rubric-v2.schema.json
+- cowork-p2-kit/rubric/selection-rubric-proposal.v2.json
+- docs/plans/qbd-p4-reasoning-layer/
+- docs/reports/qbd-p4-reasoning-layer/gates/G-P4-03.json
+tests_run:
+  verdict: passed
+  counts:
+    passed: 42
+    failed: 0
+    warnings: 0
+  evidence:
+    focused_gate:
+      gate_id: G-P4-03
+      passed: 42
+      failed: 0
+      latest: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-03.json
+      snapshot: 
+        docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-03.json
+    session_verdict: artifacts/260727-2330/test-verdict.json
+decisions:
+- D20260727
+next_pickup:
+  files:
+  - docs/plans/qbd-p4-reasoning-layer/step-04-cowork-skill-artifacts.md
+  - docs/plans/qbd-p4-reasoning-layer/gates.yaml
+  - docs/decisions/D20260727-qbd-p4-reasoning-policy.md
+  text: >-
+    Begin Step 4 publication/skill work from the frozen test-only decision and
+    evaluation contract; do not treat the synthetic fixture as FD-approved production
+    authority.

@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QbD selection evaluation sidecar",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "evaluation_id", "decision_id", "decision_sha256", "cohort_id", "rubric_sha256", "matrix_cells", "candidate_reviews", "sensitivity", "outcome_code"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "evaluation_id": { "type": "string", "minLength": 1 },
+    "decision_id": { "type": "string", "minLength": 1 },
+    "decision_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "cohort_id": { "type": "string", "minLength": 1 },
+    "rubric_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+    "matrix_cells": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["candidate", "measure_id", "value", "unit", "fact_card_ids", "record_ids"],
+        "properties": {
+          "candidate": { "type": "string", "minLength": 1 },
+          "measure_id": { "type": "string", "minLength": 1 },
+          "value": { "type": "number" },
+          "unit": { "type": "string" },
+          "fact_card_ids": { "type": "array", "items": { "type": "string" } },
+          "record_ids": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "candidate_reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["candidate", "eligible", "hard_gates", "critical_evidence"],
+        "properties": {
+          "candidate": { "type": "string", "minLength": 1 },
+          "eligible": { "type": "boolean" },
+          "hard_gates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["measure_id", "passed", "value", "operator", "threshold", "record_ids"],
+              "properties": {
+                "measure_id": { "type": "string", "minLength": 1 },
+                "passed": { "type": "boolean" },
+                "value": { "type": ["number", "null"] },
+                "operator": { "enum": ["<=", ">="] },
+                "threshold": { "type": "number" },
+                "record_ids": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          },
+          "critical_evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["measure_id", "cited_record_ids", "uncited_results_record_ids"],
+              "properties": {
+                "measure_id": { "type": "string", "minLength": 1 },
+                "cited_record_ids": { "type": "array", "items": { "type": "string" } },
+                "uncited_results_record_ids": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "sensitivity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["vectors", "stable_winner"],
+      "properties": {
+        "vectors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["weights", "totals", "leader", "margin"],
+            "properties": {
+              "weights": { "type": "object", "additionalProperties": { "type": "number" } },
+              "totals": { "type": "object", "additionalProperties": { "type": "number" } },
+              "leader": { "type": ["string", "null"] },
+              "margin": { "type": "number" }
+            }
+          }
+        },
+        "stable_winner": { "type": ["string", "null"] }
+      }
+    },
+    "outcome_code": { "type": "string" }
+  }
+}

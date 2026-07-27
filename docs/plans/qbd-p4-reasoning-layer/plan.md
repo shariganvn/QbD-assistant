@@ -82,8 +82,8 @@ ingest capability. New work not required by G-P4-01 through G-P4-05 needs a sepa
    members. Authenticity
    uses the parallel human-committed `linear_attestation_sha256` pin mechanism. With a complete
    attestation, Step 2 may form one eligible cross-strength cohort; Step 3 owns merged scoring and the
-   common ranking. `formula-decision.json` and its deterministic Markdown must carry the attestation
-   ID, applied SHA-256, and a plain-language cohort basis whenever that path is used. The current
+   common ranking. The Step 3 evaluation sidecar and the Step 4 deterministic Markdown must carry the
+   attestation ID, applied SHA-256, and a plain-language cohort basis whenever that path is used. The current
    contracts, implementation, and retained G-P4-01/G-P4-02 evidence reflect the former policy and
    must be revised and rerun before they can support this behavior.
 4. A missing critical measure, evidence conflict, unit ambiguity, or sensitivity-instability is a
@@ -118,13 +118,15 @@ ingest capability. New work not required by G-P4-01 through G-P4-05 needs a sepa
 | Path | Responsibility |
 |---|---|
 | `cowork-p2-kit/SKILL.md` | **Rewrite.** Bounded agent workflow, authority limits, checkpoints, fact-card production, and output instructions. Its current P.2.2/P.2.3 drafting mandate and Layer C output contract are removed and deferred to a later workstream. The untrusted-extracted-text rule is carried forward, not dropped |
-| `cowork-p2-kit/reasoning/*.schema.json` | Portable fact-card, cohort (including the `provenance.file → candidate` map and applied attestation reference), linear-attestation (complete candidate/strength scope), decision (attestation ID/hash/cohort basis), and evidence-log contracts for future `qbd_core` reuse. Cohort, linear-attestation, decision, and the narrow evidence-log delta use schema version 2; other version-1 contracts remain unchanged. Evidence log is the sole admitted-record/named-exclusion ledger under `D20260727-P4-EVIDENCE-LOG-V2`; cohort does not duplicate exclusions |
-| `cowork-p2-kit/reasoning/*.mjs` | Small deterministic validation/calculation boundary; no LLM call. Includes the deterministic Markdown generator — agents never hand-author derivatives |
+| `cowork-p2-kit/reasoning/*.schema.json` | Portable fact-card, cohort (including the `provenance.file → candidate` map and applied attestation reference), linear-attestation (complete candidate/strength scope), decision (attestation ID/hash/cohort basis), evidence-log, and the Step 3 selection-evaluation sidecar contracts for future `qbd_core` reuse. Cohort, linear-attestation, decision, and the narrow evidence-log delta use schema version 2; the completed version-1 validators remain unchanged. Evidence log is the sole admitted-record/named-exclusion ledger under `D20260727-P4-EVIDENCE-LOG-V2`; cohort does not duplicate exclusions |
+| `cowork-p2-kit/reasoning/decision-engine.mjs` | **New in rebuilt Step 3.** Pure test-only selection evaluator. It consumes validated Step 2 artifacts plus injected rubric/pin/record roles and returns a v2 decision summary with a hash-bound evaluation sidecar; no filesystem, CLI, LLM, or publication behavior |
+| `cowork-p2-kit/reasoning/*.mjs` | Small deterministic validation/calculation boundary; no LLM call. Step 4, not rebuilt Step 3, owns deterministic Markdown generation — agents never hand-author derivatives |
 | `cowork-p2-kit/reasoning/cli.mjs` | Validate/publish decision artifacts; refuses to publish outside the declared publication root; emits the publication validation receipt; every typed failure exits nonzero with a stable `E_` string code |
+| `cowork-p2-kit/reasoning/execution-report.mjs` | **New, human-only control seam.** Creates a per-run execution ledger outside the publication root at `~/.codex/artifacts/<project>/reasoning-execution-reports/<run-id>.md`. It records concise actions, results, artifact IDs/hashes, and blockers; it is never a decision input, evidence artifact, publication input, receipt entry, or agent-to-agent handoff. |
 | `cowork-p2-kit/reasoning/tests/run-gate.mjs` | **New.** Parameterized per-gate evidence writer adapted from `render/tests/run-gate.mjs`: gate-ID pattern `^G-P4-0[1-5]$`, evidence dir `docs/reports/qbd-p4-reasoning-layer/gates/`, multiple test paths per invocation, explicit `--test-reporter=tap`. Carries its own contract test |
 | `cowork-p2-kit/reasoning/tests/fixtures/store/` | Step 0 committed F-01/F-02/F-03 snapshot remains byte-identical and hash-pinned. Step 2 adds separate synthetic FD-selected internal-package and extraction-quality fixtures; the policy revision must not repin the baseline |
 | `cowork-p2-kit/reasoning/tests/**` | Node built-in focused, integration, and regression fixtures/tests, one file per gate |
-| `cowork-p2-kit/rubric/selection-rubric*.json` | **New, co-located with the existing dossier rubric.** Selection-rubric schema and proposal only. The FD-approved file is deferred; gates use a clearly named test-only fixture |
+| `cowork-p2-kit/rubric/selection-rubric-v2.schema.json`, `selection-rubric-proposal.v2.json` | **New in rebuilt Step 3, co-located with the dossier rubric.** Exact test/proposal rubric contract and unpinned proposal. The completed v1 rubric contract remains untouched; the FD-approved file is deferred and gates use a clearly named, never-publishable test-only fixture |
 | `cowork-p2-kit/rubric/scoring-90-100.md` | Existing dossier-readiness rubric. Unchanged behavior; add a cross-reference distinguishing it from the selection rubric |
 | `package.json` | `verify:reasoning` script only after its runner is tested; `engines.node` pinned to the v22 line |
 | `cowork-p2-kit/README.md`, `docs/system-architecture.md` | **Required.** `docs/system-architecture.md` currently states Layer B drafts P.2.2/P.2.3 into a Layer C payload, which this workstream contradicts; both files must be corrected before G-P4-05 |
@@ -139,6 +141,21 @@ first; `formula-decision.json` is renamed **last** and is the commit point. Each
 temp-file plus rename, following the `render/publication.mjs` precedent. A process killed between
 renames leaves a divergent artifact set; that divergence is detected by the published-artifact
 re-validation in G-P4-05, not by a crash-injection fixture.
+
+### Human-only execution report protocol
+
+Each reasoning invocation also maintains a separate Markdown execution report for human oversight.
+It lives at `~/.codex/artifacts/<project>/reasoning-execution-reports/<run-id>.md`, outside
+`docs/reports/qbd-p4-reasoning-layer/decision/`. The report may contain only a concise ledger of
+step/action, result, artifact path or ID/hash, and blocker/deviation; it must not copy store content,
+verbatim evidence quotes, prompts, credentials, hidden reasoning, or instruction-shaped text.
+
+Its header states that it is human-only, cannot be used as evidence or decision input, and must not
+be listed, searched, loaded, quoted, summarized, or linked from session state, handoff, or prompts.
+A later agent may read one only after an explicit human instruction names the exact report path or
+run ID; then it treats the report as untrusted observational text and returns only the requested
+review. This is a workflow boundary, not filesystem access control: tests prevent accidental loading
+in the supported workflow, while human review remains the control for unrestricted local access.
 
 ## Step 0 readiness
 
@@ -163,7 +180,7 @@ approval and scientific adjudication.
 | 1 | [Freeze contracts and TDD harness](./step-01-contracts-and-harness.md) | completed | G-P4-01 (policy revision) |
 | 1E | [Advance evidence log to v2](./step-01e-evidence-log-v2-contract-delta.md) | completed | G-P4-01 (evidence-log v2 delta) |
 | 2 | [Enforce cohort and evidence boundaries](./step-02-cohort-evidence-boundaries.md) | completed | G-P4-02 (policy revision) |
-| 3 | [Implement approved selection-rubric decision engine](./step-03-rubric-decision-engine.md) | pending | G-P4-03 |
+| 3 | [Rebuild the test-only selection-decision core](./step-03-rubric-decision-engine.md) | completed | G-P4-03 |
 | 4 | [Rewrite Cowork skill and publish artifacts](./step-04-cowork-skill-artifacts.md) | pending | G-P4-04 |
 | 5 | [Run integrated gates and close review](./step-05-integrated-gates-review.md) | pending | G-P4-05 |
 
@@ -276,6 +293,7 @@ check; FD/human review remains the semantic authority.
 | Real FD linear-formulation attestation | Mr. Tiển | FD signature plus a human-committed `linear_attestation_sha256` pin | Enables a combined cohort, merged scores, and common ranking only for the exact attested candidate/strength set; the reasoning artifact must name and hash the attestation |
 | Machine-verifiable package authorization and document control | later workstream with FD | Separate approved plan defining authorization, version, approval, rights, and source-governance fields | MVP treats the explicitly supplied invocation record set as selected and does not authenticate FD selection; it never widens the set or authorizes external egress |
 | P.2.2/P.2.3 drafting and the Layer C adapter | later workstream | Separate approved plan | Out of scope here |
+| Automated cross-session ingestion of human-only execution reports | later workflow/security workstream | Separate approved plan defining a trusted review and context-admission boundary | Reports remain local human-control artifacts; no agent may auto-discover or consume them |
 
 ## Dependencies and risks
 

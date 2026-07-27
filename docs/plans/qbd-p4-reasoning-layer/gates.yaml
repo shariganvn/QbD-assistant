@@ -79,36 +79,35 @@ gates:
     status: pass
 
   - id: G-P4-03
-    name: rubric-controlled-decision
-    requirement: No selection precedes a hash-pinned FD approval, and every score, hard gate, normalization, and conclusion is explicit and traceable.
-    invariant: Without an immutable approved selection rubric whose SHA-256 matches a human-committed pin the result is inconclusive; a missing critical measure, unresolved conflict, or unnormalizable unit is a decision state, never score zero and never invented data.
-    boundary: the decision engine and the selection-rubric lifecycle under cowork-p2-kit/rubric/
-    fixture: cowork-p2-kit/rubric/selection-rubric-proposal.json with no approval; cowork-p2-kit/reasoning/tests/fixtures/rubric/selection-rubric-test-approved.json (test-only, never publishable) with matching/mismatched rubric test pins; complete/missing/mismatched linear-attestation test pins; fact-card sets with missing, conflicting, tied, mis-normalized, and uncited-record values
+    name: test-only-rubric-decision-core
+    requirement: The deterministic mechanism proves a selection only for an explicitly test-approved, hash-pinned fixture; every production-shaped or unpinned path is inconclusive, while Step 1/2 contracts remain unchanged.
+    invariant: Missing rubric authority, missing critical evidence, unresolved conflict, unsupported normalization, uncited admitted Results evidence, tie, and sensitivity instability are explicit decision states, never score zero or invented data.
+    boundary: new v2 selection-rubric and selection-evaluation contracts, decision-engine.mjs, and their isolated fixtures; completed v1 rubric/v2 decision/Step 2 artifacts are read-only upstream inputs.
+    fixture: cowork-p2-kit/rubric/selection-rubric-proposal.v2.json with approval_state proposal; cowork-p2-kit/reasoning/tests/fixtures/rubric/selection-rubric-test-approved.v2.json and immutable canonical-byte selection-rubric-test-pin.json; synthetic exact record-role maps and fact-card sets for hard-gate, missing, conflict, tie, instability, unit/normalization, and uncited-results cases; retained Step 2 non-attested and test-attested cohorts.
     command: [node, cowork-p2-kit/reasoning/tests/run-gate.mjs, G-P4-03, cowork-p2-kit/reasoning/tests/decision-engine.test.mjs]
     expected:
       exit_code: 0
       assertions:
-        - a proposal-only run emits the proposal plus an inconclusive decision and never names a winner
-        - hard gates evaluate before soft scoring, and a hard-gate failure removes eligibility regardless of weighted total
-        - every matrix cell carries its computed value and its supporting store record IDs
-        - a missing critical measure and an unresolved evidence conflict each yield inconclusive with a named FD action
-        - a margin inside the approved tie threshold, or a winner unstable across the approved weight range, yields inconclusive
-        - the engine records, per scored candidate and critical measure, which admitted records were cited and which admitted records mapping to that candidate were not; an uncited Results-type record for a scored candidate yields a named FD-review decision state
-        - an approved rubric is applied only when its SHA-256 matches the human-committed pin; a missing pin or a hash mismatch yields inconclusive, and formula-decision.json embeds the SHA-256 of the rubric actually applied
-        - without a complete linear attestation, scores and rankings remain strength-specific; with matching test-only rubric and attestation pins, all and only the candidates in the combined cohort receive merged scores and one common ranking
-        - a combined-cohort decision and its deterministic Markdown name the attestation, retain its applied SHA-256, and explain that the common ranking depends on it; a valid attestation without a valid rubric pin still yields inconclusive
-        - the selection-rubric schema owns the unit vocabulary and the range/list aggregation rule stating which statistic enters a matrix cell per measure; a card whose normalized_value disagrees with its raw_text is rejected or produces a flagged decision state, and raw_text must contain the quote's value token exactly
+        - a v2 proposal, missing pin, and mismatched pin return an inconclusive v2 decision with winner null and respectively E_RUBRIC_APPROVAL_REQUIRED, E_RUBRIC_PIN_REQUIRED, and E_RUBRIC_PIN_MISMATCH; none evaluates a score or winner
+        - only the committed test-approved fixture with its immutable matching test pin may select a synthetic winner; its decision embeds the applied canonical rubric SHA-256, while pins.selection_rubric_approved_sha256 remains null and is never read or repinned by the test
+        - every rubric measure has exact declared raw shape, aggregation, unit, hard gate, score map, weight range, and conflict tolerance; unsupported unit/raw grammar or a normalized_value inconsistent with raw_text returns its mapped inconclusive code rather than a conversion or score
+        - every matrix cell carries derived value/unit plus sorted fact-card and admitted record IDs; the hash-bound evaluation sidecar records the decision ID, canonical decision SHA-256, cohort ID, applied rubric SHA-256, candidate reviews, and sensitivity result
+        - hard gates run before soft scoring and remove the failed candidate from eligibility; missing critical evidence, an over-tolerance conflict, or an uncited admitted record explicitly marked results returns its mapped inconclusive outcome
+        - an inside-threshold nominal margin or a leader that changes or loses its strict margin at any Cartesian min/max weight vector returns E_TIE_OR_SENSITIVITY_UNSTABLE
+        - existing Step 2 non-attested and test-attested cohorts retain their cohort candidate set, attestation ID/hash, and cohort basis; this gate neither forms a cohort nor adds a cross-strength exception
+        - G-P4-01/02 validators, fixtures, implementation files, store pin, and retained evidence are byte-identical before and after the G-P4-03 run
+        - no Markdown, CLI publication, receipt, or execution report is created or asserted by G-P4-03; those behavior and artifact-boundary checks remain exclusively in G-P4-04/05
     evidence: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-03.json
     owner_step: 3
     blocks: [G-P4-04, G-P4-05]
-    status: pending
+    status: pass
 
   - id: G-P4-04
     name: skill-and-artifact-publication
-    requirement: The rewritten Cowork skill can publish only validated artifacts, cannot widen the current run, and cannot hand-author derivatives.
-    invariant: Markdown is regenerated deterministically from canonical JSON, and neither evidence outside the explicitly supplied package nor P.2.2/P.2.3 drafting can enter this workstream's output.
-    boundary: cowork-p2-kit/SKILL.md, the deterministic Markdown generator, and the cli.mjs publication path
-    fixture: the SKILL.md artifact templates in fenced blocks with declared info-string tags, an evidence sample absent from the explicitly supplied package, a selected internal-record sample, a hand-authored formula-decision.md that agrees with its JSON, and a surplus-content variant carrying non-contradicting instruction-shaped text
+    requirement: The rewritten Cowork skill can publish only validated artifacts, cannot widen the current run, cannot hand-author derivatives, and keeps its human-only execution report outside every decision path.
+    invariant: Markdown is regenerated deterministically from canonical JSON; neither evidence outside the explicitly supplied package nor P.2.2/P.2.3 drafting can enter this workstream's output; and a human-only execution report is never auto-loaded into a later agent's context.
+    boundary: cowork-p2-kit/SKILL.md, execution-report.mjs, the deterministic Markdown generator, and the cli.mjs publication path
+    fixture: the SKILL.md artifact templates in fenced blocks with declared info-string tags, an evidence sample absent from the explicitly supplied package, a selected internal-record sample, a hand-authored formula-decision.md that agrees with its JSON, a surplus-content variant carrying non-contradicting instruction-shaped text, and a human-only execution-report fixture carrying attempted instruction-shaped text
     command: [node, cowork-p2-kit/reasoning/tests/run-gate.mjs, G-P4-04, cowork-p2-kit/reasoning/tests/skill-artifacts.test.mjs]
     expected:
       exit_code: 0
@@ -121,6 +120,9 @@ gates:
         - the rewritten SKILL.md still contains the untrusted-extracted-text rule; the gate asserts its presence alongside the drafting-absence check
         - verbatim quotes are rendered inside declared delimiters in every published artifact
         - the publication path writes only inside docs/reports/qbd-p4-reasoning-layer/decision/ and refuses any other destination
+        - execution-report.mjs writes a per-run Markdown ledger only under ~/.codex/artifacts/<project>/reasoning-execution-reports/; the report has a human-only/untrusted header, contains only the permitted operational fields, and rejects record content, quotes, prompts, credentials, hidden reasoning, and instruction-shaped payloads
+        - no execution report is accepted by cli.mjs, decision/evidence schemas or validators, publication transaction, publication receipt, or deterministic decision/evidence Markdown generator; an execution-report file inside the publication root makes published-artifact re-validation fail as an unrecognized surplus file
+        - SKILL.md makes report discovery and reading forbidden by default, forbids report references in session state/handoffs/prompts, and permits reading only after a human supplies the exact report path or run ID; the test asserts these rules and that report text cannot be promoted into the decision inputs
     evidence: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-04.json
     owner_step: 4
     blocks: [G-P4-05]
