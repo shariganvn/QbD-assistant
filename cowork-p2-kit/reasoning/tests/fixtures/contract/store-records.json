@@ -1,6 +1,6 @@
 {
   "record-f01-001": {
     "content": "Assay result: 98.5 mg",
-    "provenance": { "file": "inputs/f01-trial.docx" }
+    "provenance": { "file": "inputs/f01-trial.docx", "page": 1, "char_start": 0, "char_end": 22, "quote": "Assay result: 98.5 mg" }
   }
 }

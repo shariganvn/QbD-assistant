@@ -10,6 +10,13 @@ The rewritten skill must also define how the agent produces `fact-cards.json` fr
 including the record-ID link, verbatim quote with char offsets, candidate, and normalized value/unit
 required for validation.
 
+It must define the PO-approved MVP package boundary explicitly: the records supplied to the current
+reasoning invocation are the complete selected package. The agent may use selected internal records
+without rejecting them solely for classification, `citable`, or deferred document-control metadata,
+but it may not search for additional records, widen the package, claim that FD authorization was
+machine-verified, or send any selected record to an external service. Candidate/provenance, quote,
+extraction-quality, missing-measure, and conflict controls remain in force.
+
 **Two rules from the current SKILL.md must survive the rewrite**, or the rewrite silently removes
 controls:
 

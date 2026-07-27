@@ -42,10 +42,16 @@ runtime assertions inside `npm run verify:reasoning`.
 `CLAUDE.md` and `AGENTS.md` are pre-declared expected diffs whenever `npx gitnexus analyze` runs,
 since analyze rewrites them.
 
-Confirm the end-to-end 5 mg fixture ranks only F-01 against F-02 with F-03 recorded as a separate
-cohort, that `formula-decision.md` regenerates byte-identically from `formula-decision.json`, and that
-the Step 4 documentation corrections are in place. Confirm no Layer A/C contract, provider-routing, or
-internal-data behavior was changed.
+Confirm both end-to-end policy branches: without a complete attestation, the 5 mg fixture ranks only
+F-01 against F-02 with F-03 recorded as a separate cohort; with matching test-only rubric and
+attestation pins, the exact attested F-01/F-02/F-03 set forms one cohort and receives one common
+ranking whose decision/Markdown names and hashes the attestation. Also confirm that a selected
+internal fixture is not rejected for classification/citable/document-control metadata, while quote,
+candidate, extraction-quality, missing-measure, and conflict controls still fail closed.
+
+Confirm `formula-decision.md` regenerates byte-identically from `formula-decision.json`, and that the
+Step 4 documentation corrections are in place. Confirm no Layer A/C contract, provider-routing,
+external egress, or general document-control workflow was changed.
 
 Gate: G-P4-05, run as `npm run verify:reasoning`. Depends on G-P4-04.
 

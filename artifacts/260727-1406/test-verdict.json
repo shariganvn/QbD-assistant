@@ -1,0 +1,194 @@
+{
+  "adapter": {
+    "id": "exit-code",
+    "report_path": null,
+    "report_sha256": null,
+    "report_size_bytes": null,
+    "stable": null
+  },
+  "argv": [
+    "env",
+    "REASONING_GATE_EVIDENCE_DIR=/tmp/qbd-p4-gate-verdict-260727-1406",
+    "node",
+    "cowork-p2-kit/reasoning/tests/run-gate.mjs",
+    "G-P4-02",
+    "cowork-p2-kit/reasoning/tests/cohort-evidence.test.mjs"
+  ],
+  "branch": "master",
+  "command": [
+    "env",
+    "REASONING_GATE_EVIDENCE_DIR=/tmp/qbd-p4-gate-verdict-260727-1406",
+    "node",
+    "cowork-p2-kit/reasoning/tests/run-gate.mjs",
+    "G-P4-02",
+    "cowork-p2-kit/reasoning/tests/cohort-evidence.test.mjs"
+  ],
+  "counts": {
+    "collected": null,
+    "deselected": null,
+    "error": null,
+    "failed": null,
+    "passed": null,
+    "skipped": null,
+    "warnings": null,
+    "xfailed": null,
+    "xpassed": null
+  },
+  "dirty_files": {
+    "cowork-p2-kit/ingest/admission.mjs": {
+      "sha256": "dd01f07ce28a97e0c084b9ee65c4d760a207dafd7b9513485df91facb529eb5c",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/config.mjs": {
+      "sha256": "fb50adeadbef7d4633b9a0fa0d335ab94d9d4a51121d03f3c86bb77a9e0102ef",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/publication.mjs": {
+      "sha256": "f34c6e137a8dd568974f41cb6cdafda752c7976b8495e367d9a5e3c61e1ba706",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/tests/file-boundaries.test.mjs": {
+      "sha256": "d3aed364eceb08c4011d16d4b937723bb99dd535dd8273d4d8b08db3524b6827",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/tests/publication-concurrency.test.mjs": {
+      "sha256": "bafbbe056f61316614fe5298af113371b2c5c2c0f3f7d33587e56b6fe6daf08d",
+      "status": "modified"
+    },
+    "cowork-p2-kit/ingest/tests/publication-failure.test.mjs": {
+      "sha256": "e02d87cc3b3fbab5dc60fe0d7a475e6dbc6108fde1b3b6d69d0973343e0f63c9",
+      "status": "modified"
+    },
+    "cowork-p2-kit/reasoning/cli.mjs": {
+      "sha256": "1634aefe092f401348f3912790d9730dc7d74a72af4e9766673ffd14927428a4",
+      "status": "modified"
+    },
+    "cowork-p2-kit/reasoning/cohort-evidence.mjs": {
+      "sha256": "efe96b5388d5e33558d581ccf623876e5847cd181950714f0fd908b76f0fac07",
+      "status": "added"
+    },
+    "cowork-p2-kit/reasoning/contracts.mjs": {
+      "sha256": "85e4e04b6739e43054537e4beaac3cc37d67e7877928086800cda4d4d3d943d9",
+      "status": "modified"
+    },
+    "cowork-p2-kit/reasoning/errors.mjs": {
+      "sha256": "a12de966e9b0c15465f982a6e8d4a9e9ba535070ec1de137e3617b78e078c58f",
+      "status": "modified"
+    },
+    "cowork-p2-kit/reasoning/evidence-log.schema.json": {
+      "sha256": "5f9132a4b8dcaf6654cbf9bb9e5474a1615ea37843b1b88413c9b7c0cd138136",
+      "status": "modified"
+    },
+    "cowork-p2-kit/reasoning/publication.mjs": {
+      "sha256": "1799ef5c42ec0b10f232573d7af79f4784822113ab11fae799ced28d2e392d48",
+      "status": "modified"
+    },
+    "cowork-p2-kit/reasoning/tests/cohort-evidence.test.mjs": {
+      "sha256": "3a4524351b3f5281bc110c442afb02bf7dcb5609186e48cf4c22c105d378f517",
+      "status": "added"
+    },
+    "cowork-p2-kit/reasoning/tests/contract.test.mjs": {
+      "sha256": "3b350149adc50c76be33a258606c7382971861578a0278b3191b4d5b5367822a",
+      "status": "modified"
+    },
+    "cowork-p2-kit/reasoning/tests/fixtures/contract/step-2-linear-attestation-pin.json": {
+      "sha256": "4290a61accff44bb8dcbe45bdec8361bb40c2f4c7d73ea49cadef4e6681e7166",
+      "status": "added"
+    },
+    "cowork-p2-kit/reasoning/tests/fixtures/contract/step-2-linear-attestation.json": {
+      "sha256": "2ae7326b058de8fcefc3ab073dc3b7896e63700d618fc6d0ebf779e72304e9d0",
+      "status": "added"
+    },
+    "cowork-p2-kit/reasoning/tests/fixtures/contract/store-records.json": {
+      "sha256": "3f364652517485e18021f35444714f3e23e557e37b8a695f8af43c4cc7773aa7",
+      "status": "modified"
+    },
+    "cowork-p2-kit/reasoning/tests/fixtures/contract/store-records.jsonl": {
+      "sha256": "231e49ddf09d1fbf7c75bbbad215a9f22a1f0f9c1b625d1fa6befc87ae8b61ae",
+      "status": "modified"
+    },
+    "cowork-p2-kit/reasoning/tests/fixtures/contract/v1-cohort.json": {
+      "sha256": "ac842452b3cb758c0ee2f9349d33ff24bc7caa981caf230dc3380b87ea7d6cf6",
+      "status": "modified"
+    },
+    "cowork-p2-kit/reasoning/tests/fixtures/contract/v1-evidence-log.json": {
+      "sha256": "2c142cf4dc0011e4a1bce96542203b1fcb99e8f2c2a69b9684cde6ae38c3c520",
+      "status": "added"
+    },
+    "cowork-p2-kit/reasoning/tests/fixtures/contract/valid-cohort-attested-v2.json": {
+      "sha256": "1794c03174c27f4898e47c7b6cd179c2e51422456262dc52d9ac83f58d4332f0",
+      "status": "modified"
+    },
+    "cowork-p2-kit/reasoning/tests/fixtures/contract/valid-cohort-v2.json": {
+      "sha256": "bbe47d63142971f52bd148738d1411b97c38a691146acac07078958117da9c52",
+      "status": "modified"
+    },
+    "cowork-p2-kit/reasoning/tests/fixtures/contract/valid-cohort.json": {
+      "sha256": "bbe47d63142971f52bd148738d1411b97c38a691146acac07078958117da9c52",
+      "status": "modified"
+    },
+    "cowork-p2-kit/reasoning/tests/fixtures/contract/valid-evidence-log-attested-v2.json": {
+      "sha256": "0b82f5f3da1cc42fa000bf56dae092020b4da51c89cd352373702019d765d5e9",
+      "status": "added"
+    },
+    "cowork-p2-kit/reasoning/tests/fixtures/contract/valid-evidence-log-v2.json": {
+      "sha256": "8d94ed13aac2d26a7220744661094c13b4f52d2ea4ff28abbec998035df87dd7",
+      "status": "added"
+    },
+    "cowork-p2-kit/reasoning/tests/fixtures/contract/valid-evidence-log.json": {
+      "sha256": null,
+      "status": "deleted"
+    },
+    "cowork-p2-kit/reasoning/tests/fixtures/store/extraction-quality-negatives.jsonl": {
+      "sha256": "6d7eb2e821701fcf921d6d4aeb7877a4aa4189b2741a987758624a60e2c433f1",
+      "status": "added"
+    },
+    "cowork-p2-kit/reasoning/tests/fixtures/store/inadmissible-records.jsonl": {
+      "sha256": "7932b8d9b3086d88e8f6ddba1b33c4f4de5913660d939afa16367a7bc42108d2",
+      "status": "added"
+    },
+    "cowork-p2-kit/reasoning/tests/fixtures/store/selected-internal-package.jsonl": {
+      "sha256": "f8b5302ba7275745ed7eb8ae6c85786c672ec1ee8918539b9db8cf75d78dd08c",
+      "status": "added"
+    },
+    "cowork-p2-kit/reasoning/tests/output-preservation.test.mjs": {
+      "sha256": "02be325d62fce568cd897909cb88b743998628707ab3a2ea361d9d9574a0d8f2",
+      "status": "modified"
+    }
+  },
+  "duration_seconds": 0.728809,
+  "evidence_level": "local-attested",
+  "evidence_quality": "exit-code-only",
+  "exit_code": 0,
+  "finished_at": "2026-07-27T07:07:15.733107+00:00",
+  "git": {
+    "branch_after": "master",
+    "branch_before": "master",
+    "head_after": "79eff52746236a4b2da5f94827b65bf8d9004fa9",
+    "head_before": "79eff52746236a4b2da5f94827b65bf8d9004fa9",
+    "stable": true
+  },
+  "git_head": "79eff52746236a4b2da5f94827b65bf8d9004fa9",
+  "log_path": "artifacts/260727-1406/test-output.log",
+  "log_sha256": "30f0fddef1fa0638ba19d7ed9953dbc976bef28af51d2d623ec120ce6bb67299",
+  "log_size_bytes": 3770,
+  "outcome": "passed",
+  "requested_test_targets": [],
+  "runner_id": "stdlib-popen-v3",
+  "runtime": {
+    "implementation": "CPython",
+    "version": "3.14.4"
+  },
+  "schema_version": 3,
+  "session_id": "260727-1406",
+  "started_at": "2026-07-27T07:07:15.004218+00:00",
+  "status": "passed",
+  "summary": "command exited with code 0",
+  "test_targets": [],
+  "tool": "run_tests_with_verdict.py",
+  "worktree": {
+    "after": "af8aa1c81123ca7cedb2091187391e470ad1b737508537017e72640beed8ddd0",
+    "before": "af8aa1c81123ca7cedb2091187391e470ad1b737508537017e72640beed8ddd0",
+    "stable": true
+  }
+}

@@ -10,7 +10,7 @@ scope:
     - cowork-p2-kit/rubric/selection-rubric.schema.json
     - package.json
     - docs/plans/qbd-p4-reasoning-layer/
-    - docs/decisions/D20260724-qbd-reasoning-before-rationale.md
+    - docs/decisions/D20260727-qbd-p4-reasoning-policy.md
 approval:
   required: true
   approved_at: "2026-07-24"

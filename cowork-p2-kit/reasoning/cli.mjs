@@ -11,10 +11,10 @@ import { canonicalBytes, publishArtifacts } from "./publication.mjs";
 
 const filePath = fileURLToPath(import.meta.url);
 const defaultPublicationRoot = resolve(dirname(filePath), "../../docs/reports/qbd-p4-reasoning-layer/decision");
-const required = ["decision", "cohort", "fact-cards", "linear-attestation", "evidence-log", "store"];
+const required = ["decision", "cohort", "fact-cards", "evidence-log", "store"];
 
 function parseArguments(argv) {
-  if (argv[0] !== "publish") throw new ReasoningContractError("E_INPUT_PATH", "Usage: cli.mjs publish --decision <file> --cohort <file> --fact-cards <file> --linear-attestation <file> --evidence-log <file> --store <records.jsonl> --output-root <absolute-directory>");
+  if (argv[0] !== "publish") throw new ReasoningContractError("E_INPUT_PATH", "Usage: cli.mjs publish --decision <file> --cohort <file> --fact-cards <file> [--linear-attestation <file>] --evidence-log <file> --store <records.jsonl> --output-root <absolute-directory>");
   const paths = {};
   for (let index = 1; index < argv.length; index += 2) {
     const flag = argv[index];
@@ -60,12 +60,50 @@ function assertBinding(cohort, decision, linearAttestation) {
   }
 
   if (cohort.linear_attestation_id !== null) {
+    if (linearAttestation == null) {
+      throw new ReasoningContractError(code, "attested cohort requires a supplied linear attestation");
+    }
     if (cohort.linear_attestation_id !== linearAttestation.attestation_id) {
       throw new ReasoningContractError(code, "cohort linear_attestation_id does not match the supplied attestation");
     }
     const computedHash = createHash("sha256").update(canonicalBytes(linearAttestation)).digest("hex");
     if (cohort.linear_attestation_sha256 !== computedHash) {
       throw new ReasoningContractError(code, "cohort linear_attestation_sha256 does not match canonical hash of supplied attestation");
+    }
+  } else if (linearAttestation != null) {
+    throw new ReasoningContractError(code, "non-attested cohort must not publish an unrelated linear attestation");
+  }
+}
+
+function assertEvidenceLogBinding(evidenceLog, cohort, factCards, records) {
+  const code = "E_REASONING_ARTIFACT_BINDING";
+  if (evidenceLog.cohort_id !== cohort.cohort_id) {
+    throw new ReasoningContractError(code, "evidence log and cohort disagree on cohort_id");
+  }
+  const cardsById = new Map();
+  for (const card of factCards.cards) {
+    if (cardsById.has(card.id)) {
+      throw new ReasoningContractError(code, `fact cards contain duplicate id ${card.id}`);
+    }
+    cardsById.set(card.id, card);
+  }
+  for (const entry of evidenceLog.entries) {
+    const record = records[entry.record_id];
+    const provenance = record?.provenance;
+    if (!record || provenance?.file !== entry.provenance.file
+      || provenance?.page !== entry.provenance.page
+      || provenance?.char_start !== entry.provenance.char_start
+      || provenance?.char_end !== entry.provenance.char_end
+      || provenance?.quote !== entry.quote
+      || cohort.provenance_candidate_map[entry.provenance.file] !== entry.candidate
+    ) {
+      throw new ReasoningContractError(code, `evidence log entry ${entry.record_id} does not bind the store record`);
+    }
+    for (const factCardId of entry.fact_card_ids) {
+      const card = cardsById.get(factCardId);
+      if (!card || card.record_id !== entry.record_id || card.candidate !== entry.candidate || card.provenance.file !== entry.provenance.file) {
+        throw new ReasoningContractError(code, `evidence log entry ${entry.record_id} does not bind fact card ${factCardId}`);
+      }
     }
   }
 }
@@ -81,7 +119,9 @@ export function createReasoningCli({ publicationRoot = defaultPublicationRoot } 
         decision: validateDecision(readJson(paths.decision)),
         cohort: validateCohort(readJson(paths.cohort)),
         factCards: readJson(paths["fact-cards"]),
-        linearAttestation: validateLinearAttestation(readJson(paths["linear-attestation"])),
+        linearAttestation: paths["linear-attestation"] === undefined
+          ? null
+          : validateLinearAttestation(readJson(paths["linear-attestation"])),
         evidenceLog: validateEvidenceLog(readJson(paths["evidence-log"])),
       };
       const store = readRecords(paths.store);
@@ -90,6 +130,7 @@ export function createReasoningCli({ publicationRoot = defaultPublicationRoot } 
       }
       validateFactCards(artifacts.factCards, { cohort: artifacts.cohort, records: store.records });
       assertBinding(artifacts.cohort, artifacts.decision, artifacts.linearAttestation);
+      assertEvidenceLogBinding(artifacts.evidenceLog, artifacts.cohort, artifacts.factCards, store.records);
       return publishArtifacts(artifacts, outputRoot);
     },
   };

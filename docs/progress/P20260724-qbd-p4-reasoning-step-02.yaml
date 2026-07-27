@@ -1,0 +1,31 @@
+id: P20260724-qbd-p4-reasoning-step-02
+date: "2026-07-24"
+workstream: qbd-p4-reasoning-layer
+status: done
+summary: "Completed Step 2 at fixture/mock scope: G-P4-02 enforces cohort identity, evidence admission, named exclusions, and provenance bindings. Not FD-ready and not production-publishable."
+changed_files:
+  - cowork-p2-kit/reasoning/cohort-evidence.mjs
+  - cowork-p2-kit/reasoning/tests/cohort-evidence.test.mjs
+  - cowork-p2-kit/reasoning/tests/fixtures/store/inadmissible-records.jsonl
+  - docs/plans/qbd-p4-reasoning-layer/step-02-cohort-evidence-boundaries.md
+  - docs/plans/qbd-p4-reasoning-layer/plan.md
+  - docs/plans/qbd-p4-reasoning-layer/gates.yaml
+  - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-02.json
+  - docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-02.json
+tests_run:
+  verdict: passed
+  counts:
+    passed: 5
+    failed: 0
+    warnings: 0
+  artifact: docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-02.json
+decisions: []
+closure_scope:
+  validated: "Committed F-01/F-02/F-03 public/mock baseline plus five synthetic inadmissible records."
+  excluded: "Real FD-approved source materials, real FD decision examples, production publication, and FD readiness."
+next_pickup:
+  files:
+    - docs/reports/qbd-p4-reasoning-layer/fd-decision-pack-bisoprolol-pilot.md
+    - docs/decisions/D20260724-qbd-p4-technical-prototype-fd-decision-pack.md
+    - docs/plans/qbd-p4-reasoning-layer/plan.md
+  text: "Receive the FD Decision Pack before 2026-07-27; review real examples against G-P4-01 and record keep/revise/need-more-examples before any contract or production-publication decision."

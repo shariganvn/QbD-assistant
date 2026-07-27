@@ -20,7 +20,7 @@ tests_run:
     warnings: 0
   artifact: artifacts/260724-1241/test-verdict.json
 decisions:
-- D20260724
+- D20260727
 next_pickup:
   files:
   - docs/plans/qbd-p4-reasoning-layer/step-02-cohort-evidence-boundaries.md

@@ -34,6 +34,13 @@ export function publishArtifacts(artifacts, outputRoot, fileSystem = { mkdirSync
     for (const [key, name] of artifactNames) {
       const target = resolve(root, name);
       if (!target.startsWith(`${root}/`)) throw new ReasoningContractError("E_PUBLICATION_PATH", "artifact escapes the publication root");
+      // A non-attested publication has no attestation artifact. If it replaces
+      // a prior attested package, stage removal through the same backup/rollback
+      // transaction so no unrelated attestation survives in the output set.
+      if (artifacts[key] == null) {
+        if (existsSync(target)) temporary.push({ temp: null, target, name });
+        continue;
+      }
       const temp = resolve(root, `.${name}.${randomUUID()}.tmp`);
       fileSystem.writeFileSync(temp, canonicalBytes(artifacts[key]), { flag: "wx" });
       temporary.push({ temp, target, name });
@@ -46,6 +53,7 @@ export function publishArtifacts(artifacts, outputRoot, fileSystem = { mkdirSync
       }
     }
     for (const entry of temporary) {
+      if (entry.temp === null) continue;
       fileSystem.renameSync(entry.temp, entry.target);
       committed.push(entry.target);
     }
@@ -58,6 +66,7 @@ export function publishArtifacts(artifacts, outputRoot, fileSystem = { mkdirSync
       try { fileSystem.renameSync(backup, target); } catch { /* best effort rollback */ }
     }
     for (const { temp } of temporary) {
+      if (temp === null) continue;
       try { fileSystem.rmSync(temp, { force: true }); } catch { /* invocation-owned cleanup */ }
     }
     if (error instanceof ReasoningContractError) throw error;

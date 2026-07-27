@@ -1,0 +1,47 @@
+id: T20260727-qbd-p4-reasoning-step-02
+date: "2026-07-27"
+workstream: qbd-p4-reasoning-layer
+status: executed
+plan: docs/plans/qbd-p4-reasoning-layer/step-02-cohort-evidence-boundaries.md
+scope:
+  summary: Enforce the FD-selected-package cohort boundary, hash-pinned linear-attestation scope, and published evidence-log v2 bindings without scoring or ranking.
+  changed_files:
+    - cowork-p2-kit/reasoning/cohort-evidence.mjs
+    - cowork-p2-kit/reasoning/contracts.mjs
+    - cowork-p2-kit/reasoning/tests/cohort-evidence.test.mjs
+    - cowork-p2-kit/reasoning/tests/fixtures/contract/step-2-linear-attestation.json
+    - cowork-p2-kit/reasoning/tests/fixtures/contract/step-2-linear-attestation-pin.json
+    - cowork-p2-kit/reasoning/tests/fixtures/store/selected-internal-package.jsonl
+    - cowork-p2-kit/reasoning/tests/fixtures/store/extraction-quality-negatives.jsonl
+    - docs/plans/qbd-p4-reasoning-layer/
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-02.json
+approval:
+  required: true
+  approved_at: "2026-07-27"
+  approved_by: human
+commands:
+  - id: gate-p4-02
+    description: Run the current-policy cohort and evidence-boundary suite through the P4 evidence wrapper.
+    command: [node, cowork-p2-kit/reasoning/tests/run-gate.mjs, G-P4-02, cowork-p2-kit/reasoning/tests/cohort-evidence.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+acceptance:
+  gates: [G-P4-02]
+  evidence:
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-02.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/red/G-P4-02.json
+  invariants:
+    - Evidence log v2 is the sole admitted-record and exclusion ledger and preserves page-global provenance verbatim.
+    - A complete test-only attestation plus matching canonical SHA-256 pin is required for a combined cross-strength cohort.
+    - Selected internal package records are admitted without classification or citable gating; deterministic identity and extraction-quality controls remain fail-closed.
+    - The builder returns a full v2 cohort and an exact evidence log that validate and publish with matching fact cards and store bytes.
+results:
+  verdict: passed
+  artifact: artifacts/260727-1406/test-verdict.json
+  counts:
+    passed: 19
+    failed: 0
+    warnings: 0
+  notes:
+    - Canonical G-P4-02 evidence passed 19/19 on the revised policy.
+    - Final integrity fixes prove the literal 17-record store pin, candidate-map identity enforcement, and rejection of unrelated non-attested publication input.

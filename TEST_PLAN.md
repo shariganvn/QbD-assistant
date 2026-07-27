@@ -1,56 +1,54 @@
 <!-- GENERATED VIEW — do not edit manually -->
-<!-- Source: docs/test-plans/T20260724-qbd-p4-reasoning-step-01.yaml -->
+<!-- Source: docs/test-plans/T20260727-qbd-p4-reasoning-step-02.yaml -->
 <!-- Regenerate: baton render-test-plan -->
-<!-- Source fingerprint: sha256:585d3506cccdf84fa5259b60acba014467d30b97251655f53af2aaa0a70710ad -->
+<!-- Source fingerprint: sha256:2200e227965e8c55729bda96917fe2d186cbe2b91ca70635f8897ea22cea6ad7 -->
 
 # TEST_PLAN — Active Validation Gates
 
-## T20260724-qbd-p4-reasoning-step-01
+## T20260727-qbd-p4-reasoning-step-02
 
 Status: **Executed — results recorded**
 
 - Workstream: `qbd-p4-reasoning-layer`
-- Date: 2026-07-24
-- Plan: `docs/plans/qbd-p4-reasoning-layer/step-01-contracts-and-harness.md`
+- Date: 2026-07-27
+- Plan: `docs/plans/qbd-p4-reasoning-layer/step-02-cohort-evidence-boundaries.md`
 
 ## Scope
 
-Freeze strict Layer B artifact contracts, validate-before-publication behavior, and the machine-evidence gate harness without changing Layer A or Layer C.
+Enforce the FD-selected-package cohort boundary, hash-pinned linear-attestation scope, and published evidence-log v2 bindings without scoring or ranking.
 
 ### Changed files
 
-- `cowork-p2-kit/reasoning/`
-- `cowork-p2-kit/rubric/selection-rubric.schema.json`
-- `package.json`
+- `cowork-p2-kit/reasoning/cohort-evidence.mjs`
+- `cowork-p2-kit/reasoning/contracts.mjs`
+- `cowork-p2-kit/reasoning/tests/cohort-evidence.test.mjs`
+- `cowork-p2-kit/reasoning/tests/fixtures/contract/step-2-linear-attestation.json`
+- `cowork-p2-kit/reasoning/tests/fixtures/contract/step-2-linear-attestation-pin.json`
+- `cowork-p2-kit/reasoning/tests/fixtures/store/selected-internal-package.jsonl`
+- `cowork-p2-kit/reasoning/tests/fixtures/store/extraction-quality-negatives.jsonl`
 - `docs/plans/qbd-p4-reasoning-layer/`
-- `docs/decisions/D20260724-qbd-reasoning-before-rationale.md`
+- `docs/reports/qbd-p4-reasoning-layer/gates/G-P4-02.json`
 
 ## Approval
 
 - **Human approval required** before running commands.
-- Approved at: 2026-07-24
+- Approved at: 2026-07-27
 - Approved by: human
 
 ## Commands
 
-### gate-p4-01 — Run the contract, publication-preservation, and gate-runner tests through the P4 evidence wrapper.
+### gate-p4-02 — Run the current-policy cohort and evidence-boundary suite through the P4 evidence wrapper.
 
 ```bash
-node cowork-p2-kit/reasoning/tests/run-gate.mjs G-P4-01 cowork-p2-kit/reasoning/tests/contract.test.mjs cowork-p2-kit/reasoning/tests/output-preservation.test.mjs cowork-p2-kit/reasoning/tests/run-gate-contract.test.mjs
-```
-
-### shared-contract-smoke — Confirm existing ingest/render contract and publication-boundary tests remain green.
-
-```bash
-node --test cowork-p2-kit/ingest/tests/record-contract.test.mjs cowork-p2-kit/render/tests/contract.test.mjs cowork-p2-kit/render/tests/output-preservation.test.mjs
+node cowork-p2-kit/reasoning/tests/run-gate.mjs G-P4-02 cowork-p2-kit/reasoning/tests/cohort-evidence.test.mjs
 ```
 
 
 ## Results
 
 Verdict: **passed**
-Artifact: `artifacts/260724-1241/test-verdict.json`
-Counts: passed=14, failed=0, warnings=0
+Artifact: `artifacts/260727-1406/test-verdict.json`
+Counts: passed=19, failed=0, warnings=0
 
 ---
 

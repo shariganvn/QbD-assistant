@@ -1,7 +1,7 @@
 <!-- GENERATED VIEW — do not edit manually -->
 <!-- Source: docs/progress/*.yaml and docs/decisions/D*.md -->
 <!-- Regenerate: baton render-workflow -->
-<!-- Source fingerprint: sha256:3e1f081c4bd9db0b31d40bcc4b7ec63812f0908e952af68fdfcb3ed6abc6cc08 -->
+<!-- Source fingerprint: sha256:0bec4c6cbb72db84851c84aadbd5b2bd25f724f7bc2a186ad8c6bb3c6ec18eeb -->
 
 # DECISIONS
 
@@ -11,7 +11,7 @@
 
 | ID | Date | Status | Scope | Decision | Read when |
 |---|---|---|---|---|---|
-| `D20260722` | 2026-07-22 | active | qbd-p2-ingest-completion | [LiteParse TOCTOU Hardening](docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md) | Before accepting untrusted input, production rendering, citation-contract changes, or a claim of full historical Phase 2 compliance. |
+| `D20260727` | 2026-07-27 | active | qbd-p4-reasoning-layer | [P4 Reasoning Policy Bundle](docs/decisions/D20260727-qbd-p4-reasoning-policy.md) | Changing P4 evidence admission, cohort policy, artifact contracts, publication, rationale, or FD pilot scope. |
 
 ## History
 

@@ -1,0 +1,48 @@
+id: P20260727-qbd-p4-reasoning-step-02-policy-revision
+date: "2026-07-27"
+workstream: qbd-p4-reasoning-layer
+status: done
+summary: >-
+  Closed the current-policy Step 2 cohort/evidence boundary revision: canonical G-P4-02
+  passed
+  19/19 with FD-selected internal-package admission, canonical attestation pin/scope
+  checks,
+  full cohort map retention, evidence-log v2 provenance, fact-card ID mapping, and
+  CLI publication.
+changed_files:
+- cowork-p2-kit/reasoning/cohort-evidence.mjs
+- cowork-p2-kit/reasoning/contracts.mjs
+- cowork-p2-kit/reasoning/tests/cohort-evidence.test.mjs
+- cowork-p2-kit/reasoning/tests/contract.test.mjs
+- cowork-p2-kit/reasoning/tests/fixtures/contract/step-2-linear-attestation.json
+- cowork-p2-kit/reasoning/tests/fixtures/contract/step-2-linear-attestation-pin.json
+- cowork-p2-kit/reasoning/tests/fixtures/store/selected-internal-package.jsonl
+- cowork-p2-kit/reasoning/tests/fixtures/store/extraction-quality-negatives.jsonl
+- docs/plans/qbd-p4-reasoning-layer/
+- docs/reports/qbd-p4-reasoning-layer/gates/G-P4-02.json
+tests_run:
+  verdict: passed
+  counts:
+    passed: 19
+    failed: 0
+    warnings: 0
+  evidence:
+    focused_gate:
+      gate_id: G-P4-02
+      passed: 19
+      failed: 0
+      latest: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-02.json
+      snapshot: 
+        docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-02.json
+    session_verdict: artifacts/260727-1406/test-verdict.json
+decisions: []
+next_pickup:
+  files:
+  - docs/plans/qbd-p4-reasoning-layer/step-03-rubric-decision-engine.md
+  - docs/plans/qbd-p4-reasoning-layer/gates.yaml
+  - cowork-p2-kit/rubric/selection-rubric-proposal.json
+  text: >-
+    Begin Step 3 only with an approved test-only selection-rubric fixture and matching
+    pin;
+    retain strength-specific outcomes unless the exact attestation pin and cohort
+    scope are supplied.

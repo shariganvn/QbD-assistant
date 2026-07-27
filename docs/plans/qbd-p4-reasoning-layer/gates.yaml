@@ -22,6 +22,7 @@ pins:
   selection_rubric_approved_sha256: null      # deferred, owner FD; see plan.md Deferred work
   selection_rubric_approved_pinned_by: null   # human commit author + date
   linear_attestation_sha256: null             # deferred, owner FD
+  linear_attestation_pinned_by: null          # human commit author + date
   store_records_sha256: 6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56  # Step 0 byte-identical source/snapshot SHA-256
   store_records_repin_reason: null            # required whenever store_records_sha256 changes
 
@@ -30,20 +31,26 @@ gates:
     name: contract-and-harness-freeze
     requirement: Layer B artifact envelopes are exact-key, fail-closed, and validated before any publication, and the gate harness itself is deterministic.
     invariant: Unknown keys, missing required fields, non-canonical artifacts, and unbound fact cards are rejected with a stable string error code; a failed validation leaves every previously published artifact byte-identical.
-    boundary: cowork-p2-kit/reasoning/*.schema.json, the reasoning contract module, cowork-p2-kit/reasoning/cli.mjs, and cowork-p2-kit/reasoning/tests/run-gate.mjs
-    fixture: cowork-p2-kit/reasoning/tests/fixtures/contract/ with valid and invalid decision, fact-card, cohort, linear-attestation, and evidence-log envelopes, plus a captured TAP epilogue sample for the wrapper contract test
+    boundary: cowork-p2-kit/reasoning/*.schema.json, contracts.mjs, errors.mjs, cli.mjs, publication.mjs, and the retained reasoning gate harness
+    fixture: cowork-p2-kit/reasoning/tests/fixtures/contract/ with version-2 non-attested and attested cohort/decision branches, a version-2 cross-strength linear attestation, an exact evidence-log v2 plus a rejected v1 evidence-log, retained version-1 unrelated envelopes, invalid binding variants generated in tests, and the captured TAP epilogue sample for the wrapper contract test
     command: [node, cowork-p2-kit/reasoning/tests/run-gate.mjs, G-P4-01, cowork-p2-kit/reasoning/tests/contract.test.mjs, cowork-p2-kit/reasoning/tests/output-preservation.test.mjs, cowork-p2-kit/reasoning/tests/run-gate-contract.test.mjs]
     expected:
       exit_code: 0
       assertions:
-        - every artifact validator rejects unknown keys, missing required fields, and wrong types with its declared E_ code
+        - the reopened linear-attestation, cohort, and decision validators require schema version 2 and reject version 1, unknown keys, missing required fields, and wrong types with their declared E_ codes; unrelated artifact validators remain on version 1
         - the CLI exits nonzero and prints a stable E_ string code on stderr; exit status is 1 for every failure category, matching the Layer A and Layer C convention
         - SHA-256 hashes of every file in an injected output root are equal before and after each failing CLI run
+        - one shared serializer recursively sorts object keys, preserves array order, emits two-space-indented JSON plus exactly one LF, and supplies both publication bytes and the bytes hashed for linear_attestation_sha256
         - a valid run publishes canonical JSON through temp-file plus rename, and the CLI refuses any publication path outside the declared publication root
         - a fact card is rejected unless all four bindings hold - (a) its candidate resolves through the committed provenance.file to candidate map and a numeric measure card cites only records whose provenance file maps to that candidate, (b) the card's literal value and unit token appear inside its quote string, (c) content.slice(char_start, char_end) equals the quote exactly, (d) the quote meets the declared minimum length - each violation carrying its own E_ code
-        - the linear-attestation schema defines an explicit required-field list, and an attestation missing any required field is rejected as incomplete
+        - the linear-attestation envelope contains at least two unique candidate/strength members spanning at least two strengths plus common API, dosage form, product target, and trial context; incomplete scope and duplicate pairs are rejected with the declared stable E_ code, while requested-set and candidate-profile matching remain in G-P4-02
+        - the cohort and decision envelopes carry nullable linear_attestation_id and linear_attestation_sha256 plus a non-empty cohort_basis; ID/hash are both null or both non-null
+        - before publication, cohort and decision agree on cohort_id, attestation ID/hash, and cohort basis; a non-null ID matches the supplied attestation and a non-null hash matches its canonical bytes, otherwise E_REASONING_ARTIFACT_BINDING is emitted and all prior output bytes remain unchanged
+        - evidence-log version 2 has exact top-level keys schema_version, cohort_id, entries, and exclusions; each admitted-record entry retains record_id, candidate, a unique sorted fact_card_ids array, quote, and provenance file/page/char_start/char_end; each named exclusion has exact scope/candidate/nullable-record_id/reason fields and a stable E_ reason
+        - evidence-log entries and exclusions use deterministic ordering; v1, unknown or missing keys, invalid scope/nullability/order, duplicate fact-card IDs, invalid page/offsets, and non-E_ reasons fail with E_EVIDENCE_LOG_ENVELOPE
+        - before publication, evidence-log cohort_id agrees with the cohort; every entry binds exactly to `record.provenance` file/page/char_start/char_end/quote, the candidate map, and referenced fact cards; Layer B does not slice segment-local record.content with Layer-A page-global provenance offsets; mismatches fail with E_REASONING_ARTIFACT_BINDING and preserve all prior output bytes
         - the gate evidence record carries the Step 0 store fixture SHA-256 and it equals pins.store_records_sha256
-        - the run-gate wrapper accepts only gate IDs matching ^G-P4-0[1-5]$, forwards multiple test paths in one invocation, passes --test-reporter=tap explicitly, and parses pass/fail counts from that TAP epilogue; package.json declares engines.node on the v22 line
+        - the shared version() helper, run-gate wrapper, package.json, fact-card/rubric contracts, cohort schema, Step 0 fixture, and store SHA pin remain unchanged; the retained wrapper still accepts only gate IDs matching ^G-P4-0[1-5]$, forwards multiple test paths, forces TAP, and parses the TAP epilogue
     evidence: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-01.json
     owner_step: 1
     blocks: [G-P4-02, G-P4-03, G-P4-04, G-P4-05]
@@ -51,31 +58,32 @@ gates:
 
   - id: G-P4-02
     name: cohort-and-evidence-boundary
-    requirement: Only compatible candidates and admitted public/mock evidence can enter a comparison, and candidate identity comes from a committed map rather than agent assertion.
-    invariant: Candidates differing in API, strength, dosage form, product target, or trial context are never jointly ranked without a complete FD linear-formulation attestation, and strength-specific results are never merged even when that attestation is present.
+    requirement: Only compatible candidates and FD-selected MVP evidence can enter a comparison, and candidate identity comes from a committed map rather than agent assertion.
+    invariant: Candidates differing in API, dosage form, product target, or trial context never enter one comparison cohort. Strength-specific candidates enter one cohort only when the exact candidate/strength set is covered by a complete, hash-pinned FD linear-formulation attestation. The MVP invocation record set is the selected package boundary; classification, citable, and deferred document-control fields do not gate records inside it. This gate forms eligible cohorts but does not score or rank them.
     boundary: cohort assignment and evidence admission modules under cowork-p2-kit/reasoning/
-    fixture: cowork-p2-kit/reasoning/tests/fixtures/store/ - a committed snapshot of the F-01, F-02 (5 mg) and F-03 (10 mg) records copied once from the current ingest run (copy source and date documented in that directory), plus five synthetic inadmissible records covering label internal, label internal-derived, citable false, confidence low, and extraction_status needs-ocr; plus complete and incomplete linear attestations and the provenance.file to candidate map
+    fixture: cowork-p2-kit/reasoning/tests/fixtures/store/ - keep the pinned F-01/F-02 (5 mg) and F-03 (10 mg) snapshot byte-identical; add a separate selected-internal-package fixture, low-confidence and needs-OCR negatives, complete/incomplete/scope-mismatched test attestations with matching/missing/mismatched test pins, wrong candidate/formulation identity, and unbound quotes. The 2026-07-24 public/mock gate evidence is historical only.
     command: [node, cowork-p2-kit/reasoning/tests/run-gate.mjs, G-P4-02, cowork-p2-kit/reasoning/tests/cohort-evidence.test.mjs]
     expected:
       exit_code: 0
       assertions:
-        - F-03 at 10 mg is excluded from the F-01 and F-02 5 mg ranking, and the published cohort artifact and evidence log in docs/reports/qbd-p4-reasoning-layer/decision/ each record the explicit exclusion reason
-        - an incomplete linear attestation is rejected against the linear-attestation schema; a complete one admits a platform observation but produces no merged 5 mg score
-        - each of the five synthetic inadmissible records is refused with its own named exclusion reason and cannot support a score
+        - without a complete attestation, F-03 at 10 mg is excluded from the F-01/F-02 5 mg cohort and the evidence log records the explicit named reason; the cohort artifact carries only the admitted candidate set and cohort basis
+        - an incomplete, scope-mismatched, unpinned, or hash-mismatched linear attestation is rejected; a complete test-only attestation with its matching test pin produces one cohort containing all and only its declared candidate/strength pairs and retains the attestation ID and SHA-256
+        - selected internal/internal-derived records, including citable false and absent document-control metadata, are admitted when their deterministic integrity checks pass; low-confidence, needs-OCR, wrong candidate/formulation identity, and unbound-quote cases are refused with named reasons
         - every admitted record retains provenance file, page, char offsets, and quote in the evidence log
+        - buildCohortEvidence emits the exact evidence-log v2 contract, its output passes validateEvidenceLog, and the real CLI can publish it with the matching cohort, fact cards, and store; no private in-memory-only evidence-log shape is accepted
         - a card citing record d415da715d35741b (trial-03 Results) while claiming candidate F-01 is refused with a named E_ code, because that record's provenance file maps to F-03
         - a card asserting a value or strength absent from its own quote - for example strength "5 mg" quoting "Trial Overview" from the F-03 overview record - is refused with a named E_ code
     evidence: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-02.json
     owner_step: 2
     blocks: [G-P4-03, G-P4-05]
-    status: pending
+    status: pass
 
   - id: G-P4-03
     name: rubric-controlled-decision
     requirement: No selection precedes a hash-pinned FD approval, and every score, hard gate, normalization, and conclusion is explicit and traceable.
     invariant: Without an immutable approved selection rubric whose SHA-256 matches a human-committed pin the result is inconclusive; a missing critical measure, unresolved conflict, or unnormalizable unit is a decision state, never score zero and never invented data.
     boundary: the decision engine and the selection-rubric lifecycle under cowork-p2-kit/rubric/
-    fixture: cowork-p2-kit/rubric/selection-rubric-proposal.json with no approval; cowork-p2-kit/reasoning/tests/fixtures/rubric/selection-rubric-test-approved.json (test-only, never publishable) with a matching test pin and a deliberately mismatched pin; fact-card sets with missing, conflicting, tied, mis-normalized, and uncited-record values
+    fixture: cowork-p2-kit/rubric/selection-rubric-proposal.json with no approval; cowork-p2-kit/reasoning/tests/fixtures/rubric/selection-rubric-test-approved.json (test-only, never publishable) with matching/mismatched rubric test pins; complete/missing/mismatched linear-attestation test pins; fact-card sets with missing, conflicting, tied, mis-normalized, and uncited-record values
     command: [node, cowork-p2-kit/reasoning/tests/run-gate.mjs, G-P4-03, cowork-p2-kit/reasoning/tests/decision-engine.test.mjs]
     expected:
       exit_code: 0
@@ -87,6 +95,8 @@ gates:
         - a margin inside the approved tie threshold, or a winner unstable across the approved weight range, yields inconclusive
         - the engine records, per scored candidate and critical measure, which admitted records were cited and which admitted records mapping to that candidate were not; an uncited Results-type record for a scored candidate yields a named FD-review decision state
         - an approved rubric is applied only when its SHA-256 matches the human-committed pin; a missing pin or a hash mismatch yields inconclusive, and formula-decision.json embeds the SHA-256 of the rubric actually applied
+        - without a complete linear attestation, scores and rankings remain strength-specific; with matching test-only rubric and attestation pins, all and only the candidates in the combined cohort receive merged scores and one common ranking
+        - a combined-cohort decision and its deterministic Markdown name the attestation, retain its applied SHA-256, and explain that the common ranking depends on it; a valid attestation without a valid rubric pin still yields inconclusive
         - the selection-rubric schema owns the unit vocabulary and the range/list aggregation rule stating which statistic enters a matrix cell per measure; a card whose normalized_value disagrees with its raw_text is rejected or produces a flagged decision state, and raw_text must contain the quote's value token exactly
     evidence: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-03.json
     owner_step: 3
@@ -96,16 +106,17 @@ gates:
   - id: G-P4-04
     name: skill-and-artifact-publication
     requirement: The rewritten Cowork skill can publish only validated artifacts, cannot widen the current run, and cannot hand-author derivatives.
-    invariant: Markdown is regenerated deterministically from canonical JSON, and neither raw external evidence nor P.2.2/P.2.3 drafting can enter this workstream's output.
+    invariant: Markdown is regenerated deterministically from canonical JSON, and neither evidence outside the explicitly supplied package nor P.2.2/P.2.3 drafting can enter this workstream's output.
     boundary: cowork-p2-kit/SKILL.md, the deterministic Markdown generator, and the cli.mjs publication path
-    fixture: the SKILL.md artifact templates in fenced blocks with declared info-string tags, a raw external-evidence sample never admitted to the store, a hand-authored formula-decision.md that agrees with its JSON, and a surplus-content variant carrying non-contradicting instruction-shaped text
+    fixture: the SKILL.md artifact templates in fenced blocks with declared info-string tags, an evidence sample absent from the explicitly supplied package, a selected internal-record sample, a hand-authored formula-decision.md that agrees with its JSON, and a surplus-content variant carrying non-contradicting instruction-shaped text
     command: [node, cowork-p2-kit/reasoning/tests/run-gate.mjs, G-P4-04, cowork-p2-kit/reasoning/tests/skill-artifacts.test.mjs]
     expected:
       exit_code: 0
       assertions:
         - every artifact template extracted from SKILL.md's declared fenced blocks validates against its committed schema
         - formula-decision.md and the evidence-log Markdown are generated deterministically from canonical JSON by a reasoning module; the consistency check is regeneration equality, so an agreeing but hand-authored Markdown file is rejected wholesale
-        - raw external evidence absent from the store cannot appear in a decision artifact or evidence log
+        - evidence absent from the explicitly supplied package cannot appear in a decision artifact or evidence log
+        - the skill treats only the explicitly supplied invocation records as the selected MVP package, permits selected internal records without classification/citable/document-control gating, and forbids package widening, claims of machine-verified FD authorization, and external egress
         - SKILL.md contains none of the pinned forbidden tokens - EN "P.2.2", "P.2.3", "headings[]", "prose[]", "tables[]", "citations[]"; VN "soạn thảo", "soạn nội dung", "dự thảo" - this denylist is best-effort by declaration, and FD/human review is the authority for semantic drafting drift
         - the rewritten SKILL.md still contains the untrusted-extracted-text rule; the gate asserts its presence alongside the drafting-absence check
         - verbatim quotes are rendered inside declared delimiters in every published artifact
@@ -120,7 +131,7 @@ gates:
     requirement: Phase 4 product acceptance requires the ordered suite, an end-to-end fixture, and re-validated published artifacts.
     invariant: Every product requirement maps to a fixture, command, raw result, and retained evidence; published artifacts agree with the pinned Step 0 input snapshot when re-checked.
     boundary: the verify:reasoning runner, the gate evidence validator, and the published artifacts under docs/reports/qbd-p4-reasoning-layer/decision/
-    fixture: cowork-p2-kit/reasoning/tests/e2e-decision.test.mjs driving an end-to-end 5 mg decision over F-01 and F-02 with F-03 retained as a separate cohort, plus the G-P4-01 through G-P4-04 evidence records and a tampered published-artifact variant whose receipt hash no longer matches
+    fixture: cowork-p2-kit/reasoning/tests/e2e-decision.test.mjs driving both policy branches - a 5 mg decision over F-01/F-02 with F-03 separate when no attestation exists, and a test-attested F-01/F-02/F-03 combined cohort/common ranking - plus a selected internal-package case, the G-P4-01 through G-P4-04 evidence records, and a tampered published-artifact variant whose receipt hash no longer matches
     command: [npm, run, verify:reasoning]
     expected:
       exit_code: 0
@@ -128,6 +139,8 @@ gates:
         - the runner re-runs G-P4-01 through G-P4-04 and the e2e gate in declared order through the run-gate wrapper, stopping at the first failure, so G-P4-05.json is machine-produced like the other four
         - it validates every retained gate evidence record for status pass, canonical schema, and one shared suite UUID
         - the end-to-end fixture ranks only F-01 against F-02 and records F-03 as a separate cohort
+        - the test-attested branch ranks the exact F-01/F-02/F-03 scope together, and the decision/Markdown name and hash the attestation; removing or changing the attestation prevents cross-strength ranking
+        - the selected internal-package branch is not rejected for classification, citable, or absent document-control metadata, while candidate/quote/extraction-quality controls remain enforced
         - formula-decision.md and the evidence-log Markdown regenerate byte-identically from formula-decision.json
         - cli.mjs validation is re-run over the actual published fixture artifacts in docs/reports/qbd-p4-reasoning-layer/decision/ against the Step 0 committed store snapshot - quote containment, char-offset equality, admissibility, candidate map, applied rubric hash, and input-store hash
         - the publication validation receipt is present and every artifact SHA-256 in it matches the file on disk; a missing receipt or any hash mismatch fails closed

@@ -6,7 +6,7 @@
     "inputs/f01-trial.docx": "F-01",
     "inputs/f02-trial.docx": "F-02"
   },
-  "store_records_sha256": "7c141b7b74477b6df3f1c66872ca121679a591df74c46e097f4f4e8c89951970",
+  "store_records_sha256": "231e49ddf09d1fbf7c75bbbad215a9f22a1f0f9c1b625d1fa6befc87ae8b61ae",
   "linear_attestation_id": null,
   "linear_attestation_sha256": null,
   "cohort_basis": "Strength-specific 5 mg cohort without linear attestation."

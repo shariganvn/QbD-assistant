@@ -1,7 +1,5 @@
 schema_version: 1
-updated_at: '2026-07-24T04:26:52.072443+00:00'
 branch: master
-git_head: f48d7a42b8bd252a19f9033304c80cb7480eb371
 worktree_id: nguyen-dell-7577:master
 active_workstream:
   id: qbd-p4-reasoning-layer
@@ -9,19 +7,22 @@ active_workstream:
   status: in-progress
 current_pickup:
   source: session-handoff.yaml
-  summary: "Step 0 is complete; execute Step 1 contracts and TDD harness against the
-    frozen fixture."
+  summary: >-
+    Step 2 is closed with canonical G-P4-02 at 19/19. Begin Step 3 only with an
+    approved test-only selection-rubric fixture and matching pin; production rubric
+    approval remains deferred to FD.
   files:
-  - docs/plans/qbd-p4-reasoning-layer/step-01-contracts-and-harness.md
+  - docs/plans/qbd-p4-reasoning-layer/step-03-rubric-decision-engine.md
   - docs/plans/qbd-p4-reasoning-layer/gates.yaml
-  - cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl
 relevant_progress:
-- P20260724-qbd-p4-reasoning-step-00
-- P20260724-qbd-p3-render-step-05
+- P20260727-qbd-p4-reasoning-step-02-policy-revision
+- P20260727-qbd-p4-reasoning-step-01e
 relevant_decisions:
-- D20260722
+- D20260727
 read_next:
 - session-handoff.yaml
 - docs/plans/qbd-p4-reasoning-layer/plan.md
-- docs/plans/qbd-p4-reasoning-layer/step-01-contracts-and-harness.md
+- docs/plans/qbd-p4-reasoning-layer/step-03-rubric-decision-engine.md
 - docs/plans/qbd-p4-reasoning-layer/gates.yaml
+updated_at: '2026-07-27T07:12:03.283342+00:00'
+git_head: 79eff52746236a4b2da5f94827b65bf8d9004fa9

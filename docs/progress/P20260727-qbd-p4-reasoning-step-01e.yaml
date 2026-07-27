@@ -1,0 +1,47 @@
+id: P20260727-qbd-p4-reasoning-step-01e
+date: "2026-07-27"
+workstream: qbd-p4-reasoning-layer
+status: done
+summary: >-
+  Closed the narrow Step 1E evidence-log v2 offset-authority correction: G-P4-01
+  passed 49/49 and the shared Layer A/C smoke passed, while G-P4-02 remained
+  unevaluated.
+changed_files:
+- cowork-p2-kit/reasoning/evidence-log.schema.json
+- cowork-p2-kit/reasoning/contracts.mjs
+- cowork-p2-kit/reasoning/cli.mjs
+- cowork-p2-kit/reasoning/tests/contract.test.mjs
+- cowork-p2-kit/reasoning/tests/output-preservation.test.mjs
+- cowork-p2-kit/reasoning/tests/fixtures/contract/
+- docs/decisions/D20260727-qbd-p4-evidence-log-v2-contract.md
+- docs/plans/qbd-p4-reasoning-layer/step-01e-evidence-log-v2-contract-delta.md
+- docs/reports/qbd-p4-reasoning-layer/gates/G-P4-01.json
+- docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-01.json
+tests_run:
+  verdict: passed
+  counts:
+    passed: 49
+    failed: 0
+    warnings: 0
+  evidence:
+    focused_gate:
+      gate_id: G-P4-01
+      passed: 49
+      failed: 0
+      latest: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-01.json
+      snapshot: docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-01.json
+    shared_layer_ac_smoke:
+      commands:
+      - npm run verify:ingest
+      - npm run verify:render
+      passed: true
+decisions: []
+next_pickup:
+  files:
+  - docs/plans/qbd-p4-reasoning-layer/step-02-cohort-evidence-boundaries.md
+  - docs/plans/qbd-p4-reasoning-layer/gates.yaml
+  - docs/decisions/D20260727-qbd-p4-evidence-log-v2-contract.md
+  text: >-
+    G-P4-02 remains pending and was not evaluated by Step 1E. Revise its Step 2
+    plan/fixtures separately before running it; retain Layer A as the authority
+    for page-global provenance offsets.

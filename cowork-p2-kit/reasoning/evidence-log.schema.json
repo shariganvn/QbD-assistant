@@ -3,16 +3,25 @@
   "title": "QbD reasoning evidence log",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "cohort_id", "entries"],
+  "required": ["schema_version", "cohort_id", "entries", "exclusions"],
   "properties": {
-    "schema_version": { "const": 1 }, "cohort_id": { "type": "string", "minLength": 1 },
+    "schema_version": { "const": 2 }, "cohort_id": { "type": "string", "minLength": 1 },
     "entries": { "type": "array", "items": { "type": "object", "additionalProperties": false,
-      "required": ["fact_card_id", "record_id", "candidate", "quote", "provenance"],
-      "properties": { "fact_card_id": { "type": "string", "minLength": 1 }, "record_id": { "type": "string", "minLength": 1 },
+      "required": ["record_id", "candidate", "fact_card_ids", "quote", "provenance"],
+      "properties": { "record_id": { "type": "string", "minLength": 1 },
         "candidate": { "type": "string", "minLength": 1 }, "quote": { "type": "string", "minLength": 1 },
-        "provenance": { "type": "object", "additionalProperties": false, "required": ["file", "char_start", "char_end"],
-          "properties": { "file": { "type": "string", "minLength": 1 }, "char_start": { "type": "integer", "minimum": 0 }, "char_end": { "type": "integer", "minimum": 0 } } }
+        "fact_card_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "provenance": { "type": "object", "additionalProperties": false, "required": ["file", "page", "char_start", "char_end"],
+          "properties": { "file": { "type": "string", "minLength": 1 }, "page": { "type": "integer", "minimum": 1 }, "char_start": { "type": "integer", "minimum": 0 }, "char_end": { "type": "integer", "minimum": 1 } } }
       }
-    } }
+    } },
+    "exclusions": { "type": "array", "items": { "type": "object", "additionalProperties": false,
+      "required": ["scope", "candidate", "record_id", "reason"],
+      "properties": { "scope": { "enum": ["candidate", "record"] }, "candidate": { "type": "string", "minLength": 1 },
+        "record_id": { "type": ["string", "null"] }, "reason": { "type": "string", "pattern": "^E_[A-Z0-9_]+$" } },
+      "oneOf": [
+        { "properties": { "scope": { "const": "candidate" }, "record_id": { "type": "null" } } },
+        { "properties": { "scope": { "const": "record" }, "record_id": { "type": "string", "minLength": 1 } } }
+      ] } }
   }
 }

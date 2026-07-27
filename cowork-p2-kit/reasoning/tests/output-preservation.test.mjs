@@ -13,6 +13,7 @@ import { publishArtifacts } from "../publication.mjs";
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const cli = resolve(repoRoot, "cowork-p2-kit/reasoning/cli.mjs");
 const fixtureRoot = resolve(repoRoot, "cowork-p2-kit/reasoning/tests/fixtures/contract");
+const pinnedStorePath = resolve(repoRoot, "cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl");
 const sha256 = (path) => createHash("sha256").update(readFileSync(path)).digest("hex");
 
 function treeHashes(root) {
@@ -41,8 +42,7 @@ function commonArgs(root) {
     "--decision", join(root, "valid-decision-v2.json"),
     "--cohort", join(root, "valid-cohort-v2.json"),
     "--fact-cards", join(root, "valid-fact-cards.json"),
-    "--linear-attestation", join(root, "valid-linear-attestation-v2.json"),
-    "--evidence-log", join(root, "valid-evidence-log.json"),
+    "--evidence-log", join(root, "valid-evidence-log-v2.json"),
     "--store", join(root, "store-records.jsonl"),
   ];
 }
@@ -53,7 +53,7 @@ function attestedArgs(root) {
     "--cohort", join(root, "valid-cohort-attested-v2.json"),
     "--fact-cards", join(root, "valid-fact-cards.json"),
     "--linear-attestation", join(root, "valid-linear-attestation-v2.json"),
-    "--evidence-log", join(root, "valid-evidence-log.json"),
+    "--evidence-log", join(root, "valid-evidence-log-attested-v2.json"),
     "--store", join(root, "store-records.jsonl"),
   ];
 }
@@ -62,6 +62,35 @@ function ordered(value, reverse = false) {
   if (Array.isArray(value)) return value.map((entry) => ordered(entry, reverse));
   if (value && typeof value === "object") return Object.fromEntries(Object.keys(value).sort((a, b) => reverse ? b.localeCompare(a) : a.localeCompare(b)).map((key) => [key, ordered(value[key], reverse)]));
   return value;
+}
+
+function pinnedStoreArtifacts() {
+  const records = readFileSync(pinnedStorePath, "utf8").trim().split("\n").map((line) => JSON.parse(line));
+  const entryRecord = records.find((record) => record.provenance.file.endsWith("formulation-trial-01.docx") && record.provenance.char_start > 0);
+  const factRecord = records.find((record) => record.provenance.file === entryRecord.provenance.file && record.provenance.char_start === 0);
+  assert.ok(entryRecord && factRecord, "pinned store must provide page-global and segment-local F-01 records");
+  const cohort = {
+    schema_version: 2, cohort_id: "cohort-pinned-provenance", candidates: ["F-01"],
+    provenance_candidate_map: { [entryRecord.provenance.file]: "F-01" }, store_records_sha256: sha256(pinnedStorePath),
+    linear_attestation_id: null, linear_attestation_sha256: null, cohort_basis: "Pinned provenance binding fixture.",
+  };
+  return {
+    decision: { schema_version: 2, decision_id: "decision-pinned-provenance", status: "inconclusive", winner: null, cohort_id: cohort.cohort_id, fact_card_ids: ["FC-PINNED-001"], rubric_sha256: null, fd_action: "No selection.", linear_attestation_id: null, linear_attestation_sha256: null, cohort_basis: cohort.cohort_basis },
+    cohort,
+    factCards: { schema_version: 1, cards: [{ id: "FC-PINNED-001", record_id: factRecord.id, candidate: "F-01", measure: "strength", raw_text: factRecord.content, normalized_value: 5, unit: "mg", quote: factRecord.content, char_start: 0, char_end: factRecord.content.length, provenance: { file: factRecord.provenance.file } }] },
+    evidenceLog: { schema_version: 2, cohort_id: cohort.cohort_id, entries: [{ record_id: entryRecord.id, candidate: "F-01", fact_card_ids: [], quote: entryRecord.provenance.quote, provenance: { file: entryRecord.provenance.file, page: entryRecord.provenance.page, char_start: entryRecord.provenance.char_start, char_end: entryRecord.provenance.char_end } }], exclusions: [] },
+  };
+}
+
+function writePinnedStoreArtifacts(input, artifacts) {
+  const paths = {};
+  for (const [name, value] of Object.entries(artifacts)) {
+    if (value === undefined) continue;
+    const path = join(input, `${name}.json`);
+    writeFileSync(path, `${JSON.stringify(value)}\n`);
+    paths[name] = path;
+  }
+  return ["--decision", paths.decision, "--cohort", paths.cohort, "--fact-cards", paths.factCards, "--evidence-log", paths.evidenceLog, "--store", pinnedStorePath];
 }
 
 // --- Existing output preservation tests (v2 fixtures) ---
@@ -136,7 +165,7 @@ test("G-P4-01 canonical publication bytes do not depend on valid input object ke
   const secondOutput = join(temp, "second");
   cpSync(fixtureRoot, reorderedInput, { recursive: true });
   try {
-    for (const name of ["valid-decision-v2.json", "valid-cohort-v2.json", "valid-fact-cards.json", "valid-linear-attestation-v2.json", "valid-evidence-log.json"]) {
+    for (const name of ["valid-decision-v2.json", "valid-cohort-v2.json", "valid-fact-cards.json", "valid-linear-attestation-v2.json", "valid-evidence-log-v2.json"]) {
       const path = join(reorderedInput, name);
       writeFileSync(path, `${JSON.stringify(ordered(JSON.parse(readFileSync(path, "utf8")), true))}\n`);
     }
@@ -156,7 +185,7 @@ test("G-P4-01 a synchronous mid-rename failure restores every pre-existing publi
     cohort: JSON.parse(readFileSync(join(fixtureRoot, "valid-cohort-v2.json"), "utf8")),
     factCards: JSON.parse(readFileSync(join(fixtureRoot, "valid-fact-cards.json"), "utf8")),
     linearAttestation: JSON.parse(readFileSync(join(fixtureRoot, "valid-linear-attestation-v2.json"), "utf8")),
-    evidenceLog: JSON.parse(readFileSync(join(fixtureRoot, "valid-evidence-log.json"), "utf8")),
+    evidenceLog: JSON.parse(readFileSync(join(fixtureRoot, "valid-evidence-log-v2.json"), "utf8")),
   };
   mkdirSync(output, { recursive: true });
   for (const name of ["fact-cards.json", "cohort.json", "linear-attestation.json", "evidence-log.json", "formula-decision.json"]) writeFileSync(join(output, name), `before:${name}\n`);
@@ -203,6 +232,96 @@ test("G-P4-01 store bytes must SHA-256 match the cohort pin before publication a
     assert.match(result.stderr, /E_STORE_SHA256/);
     assert.deepEqual(treeHashes(output), before);
   } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+test("G-P4-01 evidence-log v2 CLI bindings fail before a write and preserve every prior byte", () => {
+  const cases = [
+    ["historical v1", (input) => join(input, "v1-evidence-log.json"), "E_EVIDENCE_LOG_ENVELOPE"],
+    ["cohort mismatch", (input) => {
+      const path = join(input, "valid-evidence-log-v2.json");
+      const log = JSON.parse(readFileSync(path, "utf8"));
+      log.cohort_id = "cohort-other";
+      writeFileSync(path, `${JSON.stringify(log)}\n`);
+      return path;
+    }, "E_REASONING_ARTIFACT_BINDING"],
+    ["store provenance mismatch", (input) => {
+      const path = join(input, "valid-evidence-log-v2.json");
+      const log = JSON.parse(readFileSync(path, "utf8"));
+      log.entries[0].provenance.file = "inputs/f02-trial.docx";
+      writeFileSync(path, `${JSON.stringify(log)}\n`);
+      return path;
+    }, "E_REASONING_ARTIFACT_BINDING"],
+    ["store quote mismatch", (input) => {
+      const path = join(input, "valid-evidence-log-v2.json");
+      const log = JSON.parse(readFileSync(path, "utf8"));
+      log.entries[0].quote = "wrong quote";
+      writeFileSync(path, `${JSON.stringify(log)}\n`);
+      return path;
+    }, "E_REASONING_ARTIFACT_BINDING"],
+    ["unknown fact-card binding", (input) => {
+      const path = join(input, "valid-evidence-log-v2.json");
+      const log = JSON.parse(readFileSync(path, "utf8"));
+      log.entries[0].fact_card_ids = ["FC-UNKNOWN"];
+      writeFileSync(path, `${JSON.stringify(log)}\n`);
+      return path;
+    }, "E_REASONING_ARTIFACT_BINDING"],
+    ["duplicate fact-card IDs", (input) => {
+      const path = join(input, "valid-fact-cards.json");
+      const factCards = JSON.parse(readFileSync(path, "utf8"));
+      factCards.cards.push({ ...factCards.cards[0] });
+      writeFileSync(path, `${JSON.stringify(factCards)}\n`);
+      return join(input, "valid-evidence-log-v2.json");
+    }, "E_REASONING_ARTIFACT_BINDING"],
+  ];
+  for (const [, prepare, code] of cases) {
+    const temp = mkdtempSync(join(tmpdir(), "reasoning-evidence-log-binding-"));
+    const input = join(temp, "input");
+    const output = join(temp, "decision");
+    cpSync(fixtureRoot, input, { recursive: true });
+    mkdirSync(output, { recursive: true });
+    writeFileSync(join(output, "published.json"), "{\"stable\":true}\n");
+    try {
+      const evidencePath = prepare(input);
+      const before = treeHashes(output);
+      const result = runInjected([...commonArgs(input).map((value, index, args) => args[index - 1] === "--evidence-log" ? evidencePath : value), "--output-root", output], output);
+      assert.equal(result.status, 1, result.stderr);
+      assert.match(result.stderr, new RegExp(code));
+      assert.deepEqual(treeHashes(output), before);
+    } finally { rmSync(temp, { recursive: true, force: true }); }
+  }
+});
+
+test("G-P4-01 binds evidence-log page-global provenance and quote to the pinned Layer A record", () => {
+  const validTemp = mkdtempSync(join(tmpdir(), "reasoning-pinned-provenance-valid-"));
+  try {
+    const input = join(validTemp, "input");
+    const output = join(validTemp, "output");
+    mkdirSync(input, { recursive: true });
+    const result = runInjected([...writePinnedStoreArtifacts(input, pinnedStoreArtifacts()), "--output-root", output], output);
+    assert.equal(result.status, 0, result.stderr);
+  } finally { rmSync(validTemp, { recursive: true, force: true }); }
+
+  for (const mutate of [
+    (log) => { log.entries[0].provenance.file = "inputs/trials/other.docx"; },
+    (log) => { log.entries[0].provenance.page += 1; },
+    (log) => { log.entries[0].provenance.char_start += 1; },
+    (log) => { log.entries[0].provenance.char_end -= 1; },
+    (log) => { log.entries[0].quote = "mismatched quote"; },
+  ]) {
+    const temp = mkdtempSync(join(tmpdir(), "reasoning-pinned-provenance-invalid-"));
+    try {
+      const input = join(temp, "input");
+      const output = join(temp, "output");
+      mkdirSync(input, { recursive: true });
+      const artifacts = pinnedStoreArtifacts();
+      mutate(artifacts.evidenceLog);
+      const before = (() => { mkdirSync(output, { recursive: true }); writeFileSync(join(output, "published.json"), "{\"stable\":true}\n"); return treeHashes(output); })();
+      const result = runInjected([...writePinnedStoreArtifacts(input, artifacts), "--output-root", output], output);
+      assert.equal(result.status, 1, result.stderr);
+      assert.match(result.stderr, /E_REASONING_ARTIFACT_BINDING/);
+      assert.deepEqual(treeHashes(output), before);
+    } finally { rmSync(temp, { recursive: true, force: true }); }
+  }
 });
 
 // --- Cross-artifact binding tests ---

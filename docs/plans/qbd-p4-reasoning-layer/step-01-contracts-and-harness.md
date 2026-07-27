@@ -136,7 +136,12 @@ Gate: G-P4-01, run as
 
 Status: **completed**. The 2026-07-24 pass is historical evidence for the pre-clarification
 envelopes. The 2026-07-26 Step 1R pass proves the version-2 contract with 45/45 tests at
-commit `bab288c`.
+commit `40755b6`.
+
+The later evidence-log mismatch is not retroactively folded into Step 1R. Its canonical decision and
+TDD execution checkpoint are [Step 1E — Evidence-log v2 contract delta](./step-01e-evidence-log-v2-contract-delta.md).
+Until Step 1E passes, the retained 45/45 result is historical for evidence-log v1 and G-P4-01 is
+pending for the current evidence-log-v2 acceptance contract.
 
 <!-- Updated: Validation Session 1 - fact-card contract ownership, exit-code convention, split gate command -->
 <!-- Updated: Red Team Session 2026-07-24 - full fact-card binding, linear-attestation schema, run-gate wrapper, Node pin, unit fields -->

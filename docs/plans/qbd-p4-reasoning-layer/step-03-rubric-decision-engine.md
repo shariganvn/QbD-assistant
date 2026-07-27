@@ -26,6 +26,25 @@ The selection rubric also owns the unit vocabulary and the range/list aggregatio
 statistic enters a matrix cell per measure), so the validator can check a card's `normalized_value`
 against its `raw_text`.
 
+## Cross-strength scoring and ranking responsibility
+
+G-P4-02 supplies either separate strength cohorts or one combined cohort bound to an exact, valid
+linear attestation. This step owns the ranking semantics that follow:
+
+- without a complete attestation, the engine never merges 5 mg and 10 mg scores or emits a common
+  ranking;
+- with the test-only complete attestation and matching test pin, the engine may score all and only
+  the candidates named in that combined cohort under the same approved test rubric, then emit one
+  common ranking;
+- the canonical decision records the attestation ID, applied SHA-256, and cohort-basis explanation;
+  deterministic Markdown must name the same attestation and plainly state that the cross-strength
+  result depends on it;
+- an attestation cannot substitute for rubric approval. With no valid FD-approved rubric/pin, the
+  runtime remains `inconclusive` even when the combined cohort is otherwise eligible.
+
+The gate proves the selected path only with clearly test-only rubric and attestation fixtures. It
+does not claim that the real FD rubric or real linear attestation has been supplied.
+
 ## Withheld-evidence detection and its honest limit
 
 The engine records, per scored candidate and critical measure, which admitted records were cited and

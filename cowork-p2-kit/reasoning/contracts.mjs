@@ -53,7 +53,10 @@ export function validateCohort(cohort) {
   if (!isPlainObject(cohort.provenance_candidate_map)) reject(code, "cohort.provenance_candidate_map must be an object");
   for (const [file, candidate] of Object.entries(cohort.provenance_candidate_map)) {
     string(file, code, "cohort provenance file");
-    if (!cohort.candidates.includes(candidate)) reject(code, "cohort provenance mapping must resolve a candidate");
+    // This is the complete committed candidate-identity map, not a projection of
+    // the admitted cohort. It may therefore retain candidates excluded by the
+    // current cohort boundary (for example, a different-strength formulation).
+    string(candidate, code, "cohort provenance candidate");
   }
   if (typeof cohort.store_records_sha256 !== "string" || !SHA256.test(cohort.store_records_sha256)) reject(code, "cohort.store_records_sha256 must be a SHA-256 hex string");
   attestationCoupledNull(cohort.linear_attestation_id, cohort.linear_attestation_sha256, code, "cohort");
@@ -156,18 +159,44 @@ export function validateDecision(decision) {
 
 export function validateEvidenceLog(log) {
   const code = "E_EVIDENCE_LOG_ENVELOPE";
-  exactObject(log, ["schema_version", "cohort_id", "entries"], code, "evidence log");
-  version(log.schema_version, code, "evidence log.schema_version");
+  exactObject(log, ["schema_version", "cohort_id", "entries", "exclusions"], code, "evidence log");
+  if (log.schema_version !== 2) reject(code, "evidence log.schema_version must be 2");
   string(log.cohort_id, code, "evidence log.cohort_id");
   if (!Array.isArray(log.entries)) reject(code, "evidence log.entries must be an array");
   log.entries.forEach((entry, index) => {
-    exactObject(entry, ["fact_card_id", "record_id", "candidate", "quote", "provenance"], code, `evidence log.entries[${index}]`);
-    for (const field of ["fact_card_id", "record_id", "candidate", "quote"]) string(entry[field], code, `evidence log.entries[${index}].${field}`);
-    exactObject(entry.provenance, ["file", "char_start", "char_end"], code, `evidence log.entries[${index}].provenance`);
+    const context = `evidence log.entries[${index}]`;
+    exactObject(entry, ["record_id", "candidate", "fact_card_ids", "quote", "provenance"], code, context);
+    for (const field of ["record_id", "candidate", "quote"]) string(entry[field], code, `${context}.${field}`);
+    if (!Array.isArray(entry.fact_card_ids)) reject(code, `${context}.fact_card_ids must be an array`);
+    entry.fact_card_ids.forEach((id, idIndex) => string(id, code, `${context}.fact_card_ids[${idIndex}]`));
+    if (new Set(entry.fact_card_ids).size !== entry.fact_card_ids.length
+      || entry.fact_card_ids.some((id, idIndex) => idIndex > 0 && entry.fact_card_ids[idIndex - 1] >= id)) {
+      reject(code, `${context}.fact_card_ids must be unique and lexicographically sorted`);
+    }
+    exactObject(entry.provenance, ["file", "page", "char_start", "char_end"], code, `${context}.provenance`);
     string(entry.provenance.file, code, `evidence log.entries[${index}].provenance.file`);
-    integer(entry.provenance.char_start, code, `evidence log.entries[${index}].provenance.char_start`);
-    integer(entry.provenance.char_end, code, `evidence log.entries[${index}].provenance.char_end`);
+    if (!Number.isInteger(entry.provenance.page) || entry.provenance.page < 1) reject(code, `${context}.provenance.page must be a positive integer`);
+    integer(entry.provenance.char_start, code, `${context}.provenance.char_start`);
+    integer(entry.provenance.char_end, code, `${context}.provenance.char_end`);
+    if (entry.provenance.char_end <= entry.provenance.char_start) reject(code, `${context}.provenance offsets must be increasing`);
   });
+  if (log.entries.some((entry, index) => index > 0 && log.entries[index - 1].record_id >= entry.record_id)) {
+    reject(code, "evidence log.entries must be sorted by record_id without duplicates");
+  }
+  if (!Array.isArray(log.exclusions)) reject(code, "evidence log.exclusions must be an array");
+  log.exclusions.forEach((exclusion, index) => {
+    const context = `evidence log.exclusions[${index}]`;
+    exactObject(exclusion, ["scope", "candidate", "record_id", "reason"], code, context);
+    if (!['candidate', 'record'].includes(exclusion.scope)) reject(code, `${context}.scope is unsupported`);
+    string(exclusion.candidate, code, `${context}.candidate`);
+    if (exclusion.scope === 'candidate' && exclusion.record_id !== null) reject(code, `${context}.record_id must be null for a candidate exclusion`);
+    if (exclusion.scope === 'record') string(exclusion.record_id, code, `${context}.record_id`);
+    if (typeof exclusion.reason !== 'string' || !/^E_[A-Z0-9_]+$/.test(exclusion.reason)) reject(code, `${context}.reason must be a stable E_ code`);
+  });
+  const exclusionKey = (exclusion) => [exclusion.scope, exclusion.candidate, exclusion.record_id ?? "", exclusion.reason].join("\0");
+  if (log.exclusions.some((exclusion, index) => index > 0 && exclusionKey(log.exclusions[index - 1]) >= exclusionKey(exclusion))) {
+    reject(code, "evidence log.exclusions must be deterministically sorted without duplicates");
+  }
   return log;
 }
 

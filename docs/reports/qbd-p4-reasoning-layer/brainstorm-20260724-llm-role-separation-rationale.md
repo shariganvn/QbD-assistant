@@ -12,7 +12,7 @@ scope: future rationale-generation step after the evidence-bound comparison core
 
 This is a **separate-session option record**, not an approved rationale implementation design and
 not a plan delta. The sequencing decision is recorded in
-[`D20260724 — Reasoning Core Before Rationale`](../../decisions/D20260724-qbd-reasoning-before-rationale.md).
+[`D20260727 — P4 Reasoning Policy Bundle`](../../decisions/D20260727-qbd-p4-reasoning-policy.md).
 It must not change the scope or status of the active Step 1 contract-and-harness work.
 
 The active P4 plan keeps its current boundary: an LLM may create fact cards from admitted record

@@ -17,11 +17,12 @@ import {
 
 const testDir = dirname(fileURLToPath(import.meta.url));
 const fixtureDir = resolve(testDir, "fixtures/contract");
+const evidenceLogSchemaPath = resolve(testDir, "../evidence-log.schema.json");
 const records = JSON.parse(readFileSync(resolve(fixtureDir, "store-records.json"), "utf8"));
 const fixture = (name) => JSON.parse(readFileSync(resolve(fixtureDir, `${name}.json`), "utf8"));
 
 const ATTESTATION_CANONICAL_SHA256 = "fbba9e2dbffaa3c3bbe5696185e3c2c59d1e2693f14ac76b13cb09f3aa89cc95";
-const STORE_SHA256 = "7c141b7b74477b6df3f1c66872ca121679a591df74c46e097f4f4e8c89951970";
+const STORE_SHA256 = "231e49ddf09d1fbf7c75bbbad215a9f22a1f0f9c1b625d1fa6befc87ae8b61ae";
 
 function canonicalize(value) {
   if (Array.isArray(value)) return value.map(canonicalize);
@@ -46,6 +47,11 @@ function expectCode(action, code) {
     return true;
   });
 }
+
+test("G-P4-01 published evidence-log schema parses and declares v2", () => {
+  const schema = JSON.parse(readFileSync(evidenceLogSchemaPath, "utf8"));
+  assert.equal(schema.properties.schema_version.const, 2);
+});
 
 // --- V2 linear attestation ---
 
@@ -129,6 +135,12 @@ test("G-P4-01 accepts a valid v2 non-attested cohort", () => {
   assert.ok(cohort.cohort_basis.length > 0);
 });
 
+test("G-P4-01 permits a complete candidate map to retain a non-admitted candidate", () => {
+  const cohort = fixture("valid-cohort-v2");
+  cohort.provenance_candidate_map["inputs/f03-trial.docx"] = "F-03";
+  assert.deepEqual(validateCohort(cohort), cohort);
+});
+
 test("G-P4-01 accepts a valid v2 attested cohort", () => {
   const cohort = fixture("valid-cohort-attested-v2");
   assert.deepEqual(validateCohort(cohort), cohort);
@@ -210,13 +222,40 @@ test("G-P4-01 rejects a decision with empty cohort_basis", () => {
   expectCode(() => validateDecision(decision), "E_DECISION_ENVELOPE");
 });
 
-// --- Unrelated v1 artifacts remain valid ---
+// --- Evidence-log v2 ---
 
-test("G-P4-01 retains v1 evidence-log and fact-card validation unchanged", () => {
+test("G-P4-01 accepts exact evidence-log v2 and rejects historical v1", () => {
   const cohort = fixture("valid-cohort-v2");
-  assert.deepEqual(validateEvidenceLog(fixture("valid-evidence-log")), fixture("valid-evidence-log"));
+  assert.deepEqual(validateEvidenceLog(fixture("valid-evidence-log-v2")), fixture("valid-evidence-log-v2"));
+  expectCode(() => validateEvidenceLog(fixture("v1-evidence-log")), "E_EVIDENCE_LOG_ENVELOPE");
   assert.deepEqual(validateFactCards(fixture("valid-fact-cards"), { cohort, records, minimumQuoteLength: 8 }), fixture("valid-fact-cards"));
 });
+
+test("G-P4-01 rejects malformed evidence-log v2 envelopes with E_EVIDENCE_LOG_ENVELOPE", () => {
+  const cases = [
+    (log) => { log.unexpected = true; },
+    (log) => { delete log.entries[0].record_id; },
+    (log) => { log.entries[0].fact_card_ids = "FC-F01-001"; },
+    (log) => { delete log.entries[0].provenance.page; },
+    (log) => { log.entries[0].provenance.char_end = -1; },
+    (log) => { log.entries[0].provenance.char_end = 0; log.entries[0].provenance.char_start = 1; },
+    (log) => { log.entries[0].fact_card_ids = ["FC-Z", "FC-A"]; },
+    (log) => { log.entries[0].fact_card_ids = ["FC-F01-001", "FC-F01-001"]; },
+    (log) => { log.exclusions[0].scope = "invalid"; },
+    (log) => { log.exclusions[0].scope = "candidate"; log.exclusions[0].record_id = "record-f02-001"; },
+    (log) => { log.exclusions[0].scope = "record"; log.exclusions[0].record_id = null; },
+    (log) => { log.exclusions[0].reason = "reason without E prefix"; },
+    (log) => { log.entries.push({ ...log.entries[0], record_id: "a-record" }); },
+    (log) => { log.exclusions.unshift({ scope: "record", candidate: "F-01", record_id: "record-z", reason: "E_Z" }); },
+  ];
+  for (const mutate of cases) {
+    const log = fixture("valid-evidence-log-v2");
+    mutate(log);
+    expectCode(() => validateEvidenceLog(log), "E_EVIDENCE_LOG_ENVELOPE");
+  }
+});
+
+// --- Unrelated v1 artifacts remain valid ---
 
 test("G-P4-01 retains v1 selection-rubric validation unchanged", () => {
   assert.deepEqual(validateSelectionRubric(fixture("valid-selection-rubric")), fixture("valid-selection-rubric"));
@@ -283,7 +322,7 @@ test("G-P4-01 rejects unknown keys, missing fields, and wrong types with stable 
   cohort.candidates = "F-01";
   expectCode(() => validateCohort(cohort), "E_COHORT_ENVELOPE");
 
-  const log = fixture("valid-evidence-log");
+  const log = fixture("valid-evidence-log-v2");
   log.entries[0].extra = "forbidden";
   expectCode(() => validateEvidenceLog(log), "E_EVIDENCE_LOG_ENVELOPE");
 });
