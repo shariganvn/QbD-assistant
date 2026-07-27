@@ -1,39 +1,70 @@
 {
   "branch": "master",
-  "da_review": "summary:\n✅ Final integrity re-review passed after the candidate-map and non-attested-publication fixes.\n⚠️ Step 2 is test-qualified only; production rubric approval and release are deferred.",
+  "da_review": "summary:\n✅ Final DA re-check: no P0/P1 blockers; 42/42 focused tests pass.\n⚠️ Step 3 modules remain unindexed in GitNexus; focused regression tests are the current compensating evidence.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-27T07:13:11+00:00",
-  "git_head": "7e62edf8e64d7f9a91e0beb3920e78468b1e3f69",
+  "generated_at": "2026-07-27T16:36:26+00:00",
+  "git_head": "02e17223189cc04a3676130d25a03fa2f6e74720",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/qbd-p4-reasoning-layer/step-03-rubric-decision-engine.md",
-        "docs/plans/qbd-p4-reasoning-layer/gates.yaml"
+        "docs/plans/qbd-p4-reasoning-layer/step-04-cowork-skill-artifacts.md",
+        "docs/plans/qbd-p4-reasoning-layer/gates.yaml",
+        "docs/decisions/D20260727-qbd-p4-reasoning-policy.md",
+        "cowork-p2-kit/reasoning/decision-engine.mjs",
+        "cowork-p2-kit/reasoning/selection-contracts.mjs"
       ],
-      "text": "Implement Step 3 using only a test-only approved selection-rubric fixture and matching pin; production rubric remains deferred to FD"
+      "text": "Execute Step 4 publication/skill artifacts from the frozen test-only Step 3 decision/evaluation contract; do not treat the fixture as FD-approved production authority"
     }
   ],
-  "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
+  "pickup_diff_sha256": "3860fe6c135e4c3e93e11f87a61d3ae784384b3d78daf2af0322af8cf8e9f345",
   "pickup_files": [
+    "cowork-p2-kit/ingest/admission.mjs",
+    "cowork-p2-kit/ingest/config.mjs",
+    "cowork-p2-kit/ingest/publication.mjs",
+    "cowork-p2-kit/ingest/tests/file-boundaries.test.mjs",
+    "cowork-p2-kit/ingest/tests/publication-concurrency.test.mjs",
+    "cowork-p2-kit/ingest/tests/publication-failure.test.mjs",
+    "cowork-p2-kit/reasoning/decision-engine.mjs",
+    "cowork-p2-kit/reasoning/selection-contracts.mjs",
+    "docs/decisions/D20260727-qbd-p4-reasoning-policy.md",
+    "docs/plans/qbd-p2-ingest-completion/plan.md",
     "docs/plans/qbd-p4-reasoning-layer/gates.yaml",
-    "docs/plans/qbd-p4-reasoning-layer/step-03-rubric-decision-engine.md"
+    "docs/plans/qbd-p4-reasoning-layer/step-04-cowork-skill-artifacts.md",
+    "docs/reports/qbd-p2-ingest-completion"
   ],
   "pickup_fingerprint_files": [
+    "cowork-p2-kit/ingest/admission.mjs",
+    "cowork-p2-kit/ingest/config.mjs",
+    "cowork-p2-kit/ingest/publication.mjs",
+    "cowork-p2-kit/ingest/tests/file-boundaries.test.mjs",
+    "cowork-p2-kit/ingest/tests/publication-concurrency.test.mjs",
+    "cowork-p2-kit/ingest/tests/publication-failure.test.mjs",
+    "cowork-p2-kit/reasoning/decision-engine.mjs",
+    "cowork-p2-kit/reasoning/selection-contracts.mjs",
+    "docs/decisions/D20260727-qbd-p4-reasoning-policy.md",
+    "docs/plans/qbd-p2-ingest-completion/plan.md",
     "docs/plans/qbd-p4-reasoning-layer/gates.yaml",
-    "docs/plans/qbd-p4-reasoning-layer/step-03-rubric-decision-engine.md"
+    "docs/plans/qbd-p4-reasoning-layer/step-04-cowork-skill-artifacts.md",
+    "docs/reports/qbd-p2-ingest-completion"
   ],
   "schema_version": 2,
-  "session_id": "260727-1406",
-  "summary": "Closed P4 Step 2 with canonical G-P4-02 19/19, accepting attested verdict, consolidated D20260727 policy, and a validated Step 3 routing state.",
-  "test_verdict": "artifacts/260727-1406/test-verdict.json",
+  "session_id": "260727-2330",
+  "summary": "Closed Step 3 test-only decision core: strict record/candidate/card binding, frozen-contract-valid returns or fail-closed rejection, strict numeric parsing, stable 42/42 verdict, and no Step 4 implementation.",
+  "test_verdict": "artifacts/260727-2330/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
       "files": [
-        "docs/plans/qbd-p4-reasoning-layer/step-03-rubric-decision-engine.md",
-        "docs/plans/qbd-p4-reasoning-layer/gates.yaml"
+        "cowork-p2-kit/ingest/admission.mjs",
+        "cowork-p2-kit/ingest/config.mjs",
+        "cowork-p2-kit/ingest/publication.mjs",
+        "cowork-p2-kit/ingest/tests/file-boundaries.test.mjs",
+        "cowork-p2-kit/ingest/tests/publication-concurrency.test.mjs",
+        "cowork-p2-kit/ingest/tests/publication-failure.test.mjs",
+        "docs/plans/qbd-p2-ingest-completion/plan.md",
+        "docs/reports/qbd-p2-ingest-completion"
       ],
-      "text": "FD-approved production selection rubric and human-committed hash pin remain deferred; no production selection or release claim is allowed"
+      "text": "Preserve pre-existing uncommitted P2 ingest worktree changes; they are outside this Step 3 closeout and were not committed"
     }
   ],
   "worktree_status": [
