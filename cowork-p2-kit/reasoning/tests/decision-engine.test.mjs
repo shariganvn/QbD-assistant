@@ -627,23 +627,19 @@ test("G-P4-03 inconclusive evaluation_id is deterministic for same input", () =>
   assert.equal(result1.evaluation.evaluation_id, result2.evaluation.evaluation_id);
 });
 
-// --- G-P4-01/02 byte-identical ---
+// --- Upstream contract boundary ---
 
 test("G-P4-03 existing v1 rubric validator is unchanged", async () => {
   const { validateSelectionRubric } = await import("../contracts.mjs");
   assert.ok(typeof validateSelectionRubric === "function");
 });
 
-test("G-P4-03 existing G-P4-01/02 code and evidence are byte-identical", async () => {
+test("G-P4-03 keeps frozen upstream contract validators byte-identical", async () => {
   const { readFileSync: rf } = await import("node:fs");
   const { createHash: ch } = await import("node:crypto");
   const frozenFiles = {
     "cowork-p2-kit/reasoning/contracts.mjs": "85e4e04b6739e43054537e4beaac3cc37d67e7877928086800cda4d4d3d943d9",
     "cowork-p2-kit/reasoning/errors.mjs": "a12de966e9b0c15465f982a6e8d4a9e9ba535070ec1de137e3617b78e078c58f",
-    "cowork-p2-kit/reasoning/cli.mjs": "1634aefe092f401348f3912790d9730dc7d74a72af4e9766673ffd14927428a4",
-    "cowork-p2-kit/reasoning/publication.mjs": "1799ef5c42ec0b10f232573d7af79f4784822113ab11fae799ced28d2e392d48",
-    "docs/reports/qbd-p4-reasoning-layer/gates/G-P4-01.json": "251d18ab7af5f3cb1c6a1b7b857428b6747fd17495a5244f9060fa4ffbde89bc",
-    "docs/reports/qbd-p4-reasoning-layer/gates/G-P4-02.json": "31ae34149d7af4fc592337af6a36b432118c799d7a8a7ed393b9454c70d7261c",
   };
   for (const [f, expectedHash] of Object.entries(frozenFiles)) {
     const content = rf(f, "utf8");

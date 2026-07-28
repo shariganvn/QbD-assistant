@@ -1,0 +1,29 @@
+{
+  "gate_id": "G-P4-04",
+  "status": "pass",
+  "command": [
+    "/usr/bin/node",
+    "--test",
+    "--test-reporter=tap",
+    "cowork-p2-kit/reasoning/tests/skill-artifacts.test.mjs"
+  ],
+  "exit_code": 0,
+  "raw_tap_output": "TAP version 13\n# Subtest: G-P4-04 SKILL fact-card template and bounded Cowork instructions are valid\nok 1 - G-P4-04 SKILL fact-card template and bounded Cowork instructions are valid\n  ---\n  duration_ms: 3.437064\n  type: 'test'\n  ...\n# Subtest: G-P4-04 publishes only a hash-bound complete package with deterministic escaped Markdown\nok 2 - G-P4-04 publishes only a hash-bound complete package with deterministic escaped Markdown\n  ---\n  duration_ms: 20.657262\n  type: 'test'\n  ...\n# Subtest: G-P4-04 canonicalizes nested Markdown data and preserves escaped multiline quote characters\nok 3 - G-P4-04 canonicalizes nested Markdown data and preserves escaped multiline quote characters\n  ---\n  duration_ms: 9.448486\n  type: 'test'\n  ...\n# Subtest: G-P4-04 rejects each decision/evaluation/evidence binding before package publication\nok 4 - G-P4-04 rejects each decision/evaluation/evidence binding before package publication\n  ---\n  duration_ms: 7.383089\n  type: 'test'\n  ...\n# Subtest: G-P4-04 rejects hand-authored Markdown, surplus report files, stale attestation, and receipt tampering\nok 5 - G-P4-04 rejects hand-authored Markdown, surplus report files, stale attestation, and receipt tampering\n  ---\n  duration_ms: 19.086445\n  type: 'test'\n  ...\n# Subtest: G-P4-04 publish-package refuses external destinations and invalid command envelopes\nok 6 - G-P4-04 publish-package refuses external destinations and invalid command envelopes\n  ---\n  duration_ms: 3.33986\n  type: 'test'\n  ...\n# Subtest: G-P4-04 execution reports remain human-only operational ledgers outside decision publication\nok 7 - G-P4-04 execution reports remain human-only operational ledgers outside decision publication\n  ---\n  duration_ms: 2.098069\n  type: 'test'\n  ...\n1..7\n# tests 7\n# suites 0\n# pass 7\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 153.534251\n",
+  "raw_stderr": "",
+  "timestamp": "2026-07-28T02:24:33.414Z",
+  "run_id": "433fe83f-6d42-46f5-8aa6-4cddc2d52b16",
+  "suite_run_id": "668dc738-ecfe-442c-906a-b94c39a55987",
+  "assertions_summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "cancelled": 0
+  },
+  "timeout_ms": 300000,
+  "duration_ms": 199,
+  "timed_out": false,
+  "signal": null,
+  "store_records_sha256": "6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56"
+}

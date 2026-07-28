@@ -1,0 +1,52 @@
+id: T20260728-qbd-p4-reasoning-step-04
+date: "2026-07-28"
+workstream: qbd-p4-reasoning-layer
+status: executed
+plan: docs/plans/qbd-p4-reasoning-layer/step-04-cowork-skill-artifacts.md
+scope:
+  summary: >-
+    Verify the bounded Cowork instructions and publication of a complete,
+    hash-bound Step 2/3 decision package, including deterministic Markdown,
+    validation receipt, and human-only execution-report containment.
+  changed_files:
+    - cowork-p2-kit/SKILL.md
+    - cowork-p2-kit/reasoning/cli.mjs
+    - cowork-p2-kit/reasoning/publication.mjs
+    - cowork-p2-kit/reasoning/markdown.mjs
+    - cowork-p2-kit/reasoning/publication-receipt.schema.json
+    - cowork-p2-kit/reasoning/publication-receipt.mjs
+    - cowork-p2-kit/reasoning/execution-report.mjs
+    - cowork-p2-kit/reasoning/tests/skill-artifacts.test.mjs
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-04.json
+approval:
+  required: true
+  approved_at: "2026-07-28"
+  approved_by: human
+commands:
+  - id: gate-p4-04
+    description: Run bounded-skill and package-publication assertions through the P4 evidence wrapper.
+    command: [node, cowork-p2-kit/reasoning/tests/run-gate.mjs, G-P4-04, cowork-p2-kit/reasoning/tests/skill-artifacts.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+acceptance:
+  gates: [G-P4-04]
+  evidence:
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-04.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/red/G-P4-04-20260728.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-04.json
+  invariants:
+    - A complete Step 2/3 package is bound and validated before any publication byte is staged.
+    - Markdown is regenerated only from canonical JSON inputs and cannot be hand-authored.
+    - The receipt hashes every published package member and report files remain outside every decision path.
+results:
+  verdict: passed
+  artifact: artifacts/260728-0906/test-verdict.json
+  counts:
+    passed: 7
+    failed: 0
+    warnings: 0
+  notes:
+    - G-P4-04 passed 7/7; G-P4-01 through G-P4-03 were rerun successfully as Step 4 regression checks.
+    - Closeout hardening recomputes the supplied store hash, revalidates fact cards and evidence-log provenance, rejects surplus symlink/directory entries, and enforces the execution-report lifecycle.
+    - The concrete package writer is private to the publication module; the CLI compatibility export remains the only supported invocation surface.
+    - The Step 3 rubric remains test-only and does not establish FD-approved production authority.

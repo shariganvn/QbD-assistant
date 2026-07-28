@@ -8,22 +8,21 @@ active_workstream:
 current_pickup:
   source: session-handoff.yaml
   summary: >-
-    Step 3 is closed with canonical G-P4-03 at 42/42. Begin Step 4 only from
-    the frozen test-only decision/evaluation contract; FD production authority remains
-    deferred.
+    Step 4 is closed with G-P4-04 at 7/7 and final boundary hardening. Begin
+    Step 5 integrated revalidation; the test-only rubric fixture remains non-production
+    authority.
   files:
-  - docs/plans/qbd-p4-reasoning-layer/step-04-cowork-skill-artifacts.md
+  - docs/plans/qbd-p4-reasoning-layer/step-05-integrated-gates-review.md
   - docs/plans/qbd-p4-reasoning-layer/gates.yaml
   - docs/decisions/D20260727-qbd-p4-reasoning-policy.md
 relevant_progress:
-- P20260727-qbd-p4-reasoning-step-03
-- P20260727-qbd-p4-reasoning-step-02-policy-revision
+- P20260728-qbd-p4-reasoning-step-04
+- P20260728-qbd-p4-reasoning-step-04-publisher-surface
 relevant_decisions:
 - D20260727
 read_next:
 - session-handoff.yaml
-- docs/plans/qbd-p4-reasoning-layer/plan.md
-- docs/plans/qbd-p4-reasoning-layer/step-04-cowork-skill-artifacts.md
+- docs/plans/qbd-p4-reasoning-layer/step-05-integrated-gates-review.md
 - docs/plans/qbd-p4-reasoning-layer/gates.yaml
-updated_at: '2026-07-27T16:25:25.733671+00:00'
-git_head: b14e32965b76ea85cc295f3660d10db6851d56f5
+updated_at: '2026-07-28T03:04:39.133372+00:00'
+git_head: 0987a7a3e3f4e738c1dd6ef535f873a3402a5706

@@ -1,6 +1,10 @@
 # QbD P.2 Cowork MVP Kit
 
-Claude Cowork-runnable kit that ingests bisoprolol trial data, selects the best formulation via decision matrix, and drafts CTD P.2.2/P.2.3 in Vietnamese.
+Cowork-runnable kit for bounded fact-card preparation and deterministic publication
+of an evidence-bound formulation decision package. `SKILL.md` accepts only the
+records supplied to an invocation, treats extracted text as untrusted, and directs
+validated Step 2/3 artifacts to `reasoning/cli.mjs publish-package`; it does not
+authorize package widening, manual derivatives, or dossier drafting.
 
 ## Runtime Platform
 
@@ -49,7 +53,7 @@ npm run inputs:build
 # 2. Run ingest (extract → store)
 npm run ingest
 
-# 3. Run render (draft → .docx)
+# 3. Run the existing render seam when a separately authorized structured draft exists
 npm run render
 ```
 
@@ -57,7 +61,7 @@ npm run render
 
 ```
 cowork-p2-kit/
-├── SKILL.md                  # Cowork reasoning instructions
+├── SKILL.md                  # Bounded fact-card and package-publication instructions
 ├── README.md                 # This file
 ├── inputs/
 │   ├── src/                  # Authoring source (.md) — git-tracked
@@ -83,7 +87,7 @@ cowork-p2-kit/
 │   └── p2-template.md        # P.2 layout template (P0.2 caveat)
 ├── rubric/
 │   └── scoring-90-100.md     # Scoring rubric (Phase 6)
-└── outputs/                  # Final rendered output — git-ignored
+└── outputs/                  # Renderer output — git-ignored
     ├── p2-draft.docx
     ├── evidence-log.md
     └── formula-decision.md

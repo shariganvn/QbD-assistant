@@ -181,7 +181,7 @@ approval and scientific adjudication.
 | 1E | [Advance evidence log to v2](./step-01e-evidence-log-v2-contract-delta.md) | completed | G-P4-01 (evidence-log v2 delta) |
 | 2 | [Enforce cohort and evidence boundaries](./step-02-cohort-evidence-boundaries.md) | completed | G-P4-02 (policy revision) |
 | 3 | [Rebuild the test-only selection-decision core](./step-03-rubric-decision-engine.md) | completed | G-P4-03 |
-| 4 | [Rewrite Cowork skill and publish artifacts](./step-04-cowork-skill-artifacts.md) | pending | G-P4-04 |
+| 4 | [Rewrite Cowork skill and publish artifacts](./step-04-cowork-skill-artifacts.md) | completed | G-P4-04 |
 | 5 | [Run integrated gates and close review](./step-05-integrated-gates-review.md) | pending | G-P4-05 |
 
 Only this table may transition a step `pending -> in-progress -> completed`. A canonical policy

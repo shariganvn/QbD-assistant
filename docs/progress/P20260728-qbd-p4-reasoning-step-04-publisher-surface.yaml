@@ -1,0 +1,42 @@
+id: P20260728-qbd-p4-reasoning-step-04-publisher-surface
+date: "2026-07-28"
+workstream: qbd-p4-reasoning-layer
+status: done
+summary: >-
+  Finalized Step 4 publication surface: raw store bytes are parsed internally for
+  every shared validation, and the concrete package writer is private to the
+  publication module while cli.mjs retains only CLI compatibility exports.
+changed_files:
+- cowork-p2-kit/reasoning/publication.mjs
+- cowork-p2-kit/reasoning/cli.mjs
+- cowork-p2-kit/reasoning/tests/skill-artifacts.test.mjs
+- docs/test-plans/T20260728-qbd-p4-reasoning-step-04.yaml
+tests_run:
+  verdict: passed
+  counts:
+    passed: 7
+    failed: 0
+    warnings: 0
+  evidence:
+    focused_gate:
+      gate_id: G-P4-04
+      passed: 7
+      failed: 0
+      latest: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-04.json
+      snapshot: 
+        docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-04.json
+    regression_gates:
+      G-P4-01: 50
+      G-P4-02: 19
+      G-P4-03: 42
+    session_verdict: artifacts/260728-0906/test-verdict.json
+decisions:
+- D20260727
+next_pickup:
+  files:
+  - docs/plans/qbd-p4-reasoning-layer/step-05-integrated-gates-review.md
+  - docs/plans/qbd-p4-reasoning-layer/gates.yaml
+  - docs/decisions/D20260727-qbd-p4-reasoning-policy.md
+  text: >-
+    Begin Step 5 integrated revalidation from the finalized Step 4 package boundary;
+    the test-only rubric fixture remains non-production authority.

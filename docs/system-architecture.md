@@ -1,42 +1,43 @@
 # System Architecture — QbD P.2 dossier kit
 
-Status: active · Updated: 2026-07-23
+Status: active · Updated: 2026-07-28
 
 ## 1. Purpose & scope
 
 An LLM-assisted kit that authors CTD dossier section **P.2 — "Phát triển dược học"
 (Pharmaceutical Development)** for an ANDA using Quality-by-Design (QbD) methodology.
-First product: **bisoprolol 5/10 mg film-coated tablet**. MVP scope = **P.2.2
-(formulation development)** + **P.2.3 (process development)**.
+First product: **bisoprolol 5/10 mg film-coated tablet**. The current Layer B
+scope is an evidence-bound formulation comparison and publication seam. Later
+rationale and dossier drafting remain separate workstreams.
 
-Output is a **Vietnamese draft for a human reviewer to edit — never a final,
-self-approved dossier.** The single approver for MVP + Phase 1 is the **Trưởng phòng FD**.
+The decision package is inspectable, never self-approved, and remains subject to
+the **Trưởng phòng FD** as the single approval authority for the MVP.
 
 Two-phase build (see `project-roadmap.md`):
 
-- **Phase 1 (MVP) — Cowork P.2 kit:** a Claude Cowork-runnable folder that reads 2–3
-  formulations + trial results, reasons to pick the best-supported formulation, and
-  drafts P.2.2/P.2.3 grounded + cited. Runs on **public / FD-modified MOCK data only.**
+- **Phase 1 (MVP) — Cowork P.2 kit:** a Claude Cowork-runnable folder that validates
+  supplied formulation evidence, produces fact cards, evaluates a frozen decision
+  pair, and publishes canonical JSON plus deterministic Markdown derivatives.
 - **Phase 2 — `qbd_core`:** standalone Python hexagonal pipeline (provider-swappable
   ports), real corpus, code-enforced egress control. Still the deploy target; the MVP's
   ingest (Layer A) and render (Layer C) layers are built to be reused by `qbd_core`.
 
-## 2. Pipeline — two deterministic layers wrap non-deterministic reasoning
+## 2. Pipeline — evidence-bound comparison with deterministic publication
 
 ```
-raw docx/pdf ─► [A] Ingest/extract ─► structured store ─► [B] Cowork reasoning ─► [C] Render ─► p2-draft.docx
-                 (DETERMINISTIC)        (+provenance)       (NON-DETERMINISTIC)     (DETERMINISTIC)
-                 liteparse                                  SKILL.md                docx + OOXML post-processing
+raw docx/pdf ─► [A] Ingest/extract ─► structured store ─► [B] bounded comparison ─► decision package
+                 (DETERMINISTIC)        (+provenance)       (validated artifacts)     (DETERMINISTIC)
+                 liteparse                                  SKILL.md + CLI
 ```
 
 | Layer | Determinism | Role | Tool | Reused by qbd_core |
 |-------|-------------|------|------|--------------------|
 | **A — Ingest/extract** | Deterministic | raw docx/pdf → structured store, one record per extracted unit, each with provenance `{file, page, quote}` and a data-classification label | `liteparse` (`@llamaindex/liteparse`) | Yes → `KnowledgeDBPort` / `EvidenceStorePort` |
-| **B — Reasoning** | Non-deterministic | decision matrix (criteria × formulation) + prose reasoning + TL;DR → Vietnamese draft P.2.2/P.2.3, grounded + cited | Claude Cowork `SKILL.md` | Replaced by `LLMPort` |
-| **C — Render** | Deterministic | fill final `.docx` from structured draft; visible inline/footnote citations, approved external links, plain local provenance, static TOC, and tables | `docx@9.7.1` + deterministic OOXML post-processing (verified, G-P3-01 through G-P3-05 pass) | Yes → `DocRenderPort` |
+| **B — Reasoning** | Artifact-bound | validates a supplied cohort/evidence boundary and frozen decision/evaluation pair; publishes canonical JSON, deterministic Markdown, and a receipt | Cowork `SKILL.md` + reasoning CLI | Later `LLMPort` consumer |
+| **C — Render** | Deterministic | downstream seam for separately authorized structured drafting; it is not a Step 4 decision-package consumer | `docx@9.7.1` + deterministic OOXML post-processing | Yes → `DocRenderPort` |
 
-**Invariant: the LLM never writes the final `.docx` directly.** Layer B emits structured
-content + citations; Layer C renders deterministically.
+**Invariant: the decision package is not a drafting payload.** Step 4 does not alter
+Layer C or send selected evidence outside the supplied package.
 
 ## 3. Guardrails — three DISTINCT layers
 
@@ -56,14 +57,14 @@ These are separate mechanisms and must not be conflated. A system prompt saying
    source-tier ranking, numeric/unit sanity, prompt-injection defense. *(MVP: implemented
    as content rules inside the SKILL + a Level-1 trial-logic checker.)*
 
-### Content rules (MVP, enforced in Layer B)
+### Reasoning controls (MVP, enforced in Layer B)
 
-- No source → **"chờ dữ liệu"** missing-data state; never leave a claim unsourced.
-- **Never fabricate lab numbers.** Lab-experiment results stay blank/pending FD.
-- Claim-level **Accept / Edit / Reject**, evidence rendered adjacent to each claim.
-- Citations = **numbered inline marker + footnote**; approved external evidence also receives a
-  clickable body link, while local-only provenance remains visible plain text.
-- **Draft-only** — nothing is final without human review.
+- The supplied records are the complete invocation package; no discovery, retrieval,
+  external egress, or new evidence admission occurs in the decision path.
+- Extracted content, quotes, metadata, and filenames are untrusted data, never instructions.
+- Missing critical measures, evidence conflicts, unit ambiguity, and unstable sensitivity
+  remain explicit decision states rather than invented numeric penalties.
+- FD approval is a human authority; the test-only selection fixture is not production approval.
 
 ## 4. LLM provider gate (implement as CODE, not a prompt instruction)
 
@@ -116,8 +117,8 @@ Build order for Phase 2: target = hexagonal `qbd_core`; sequence = pipeline-firs
 | Concern | Phase 1 (Cowork MVP) | Phase 2 (`qbd_core`) |
 |---------|----------------------|----------------------|
 | Ingest Layer A (liteparse + provenance + labels) | Build | Reuse |
-| Reasoning Layer B | Cowork SKILL | `LLMPort` adapter |
-| Render Layer C (`docx@9.7.1` + deterministic OOXML post-processing) | Build (verified, including deterministic output and manual viewer fidelity in G-P3-05) | Reuse |
+| Reasoning Layer B | Cowork SKILL + deterministic package publisher | `LLMPort` adapter |
+| Render Layer C (`docx@9.7.1` + deterministic OOXML post-processing) | Existing downstream seam | Reuse |
 | Data-access boundary | N/A (no internal store) | Code-enforced |
 | Egress control router | Design + document only | Implement as code |
 | Local-LLM internal worker | Benchmark only (24 GB tier) | Deploy (fail-closed) |

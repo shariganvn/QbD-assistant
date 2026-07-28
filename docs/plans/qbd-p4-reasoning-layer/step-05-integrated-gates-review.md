@@ -49,9 +49,12 @@ ranking whose decision/Markdown names and hashes the attestation. Also confirm t
 internal fixture is not rejected for classification/citable/document-control metadata, while quote,
 candidate, extraction-quality, missing-measure, and conflict controls still fail closed.
 
-Confirm `formula-decision.md` regenerates byte-identically from `formula-decision.json`, and that the
-Step 4 documentation corrections are in place. Confirm no Layer A/C contract, provider-routing,
-external egress, or general document-control workflow was changed.
+Confirm `formula-decision.md` regenerates byte-identically from the published
+`formula-decision.json` plus hash-bound `selection-evaluation.json`, and that
+`evidence-log.md` regenerates byte-identically from `evidence-log.json`. Confirm the published
+allowlist is exact and every receipt hash, including the nullable attestation member, agrees with
+the on-disk package. Confirm the Step 4 documentation corrections are in place. Confirm no Layer
+A/C contract, provider-routing, external egress, or general document-control workflow was changed.
 
 Gate: G-P4-05, run as `npm run verify:reasoning`. Depends on G-P4-04.
 

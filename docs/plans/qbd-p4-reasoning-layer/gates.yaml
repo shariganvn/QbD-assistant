@@ -95,7 +95,7 @@ gates:
         - hard gates run before soft scoring and remove the failed candidate from eligibility; missing critical evidence, an over-tolerance conflict, or an uncited admitted record explicitly marked results returns its mapped inconclusive outcome
         - an inside-threshold nominal margin or a leader that changes or loses its strict margin at any Cartesian min/max weight vector returns E_TIE_OR_SENSITIVITY_UNSTABLE
         - existing Step 2 non-attested and test-attested cohorts retain their cohort candidate set, attestation ID/hash, and cohort basis; this gate neither forms a cohort nor adds a cross-strength exception
-        - G-P4-01/02 validators, fixtures, implementation files, store pin, and retained evidence are byte-identical before and after the G-P4-03 run
+        - frozen upstream contract validators (`contracts.mjs` and `errors.mjs`) remain byte-identical; `cli.mjs` and `publication.mjs` are explicitly reserved Step 4 extension seams, whose retained legacy behavior is rechecked by G-P4-01 and new package behavior by G-P4-04; machine gate evidence is regenerated per run
         - no Markdown, CLI publication, receipt, or execution report is created or asserted by G-P4-03; those behavior and artifact-boundary checks remain exclusively in G-P4-04/05
     evidence: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-03.json
     owner_step: 3
@@ -104,29 +104,32 @@ gates:
 
   - id: G-P4-04
     name: skill-and-artifact-publication
-    requirement: The rewritten Cowork skill can publish only validated artifacts, cannot widen the current run, cannot hand-author derivatives, and keeps its human-only execution report outside every decision path.
-    invariant: Markdown is regenerated deterministically from canonical JSON; neither evidence outside the explicitly supplied package nor P.2.2/P.2.3 drafting can enter this workstream's output; and a human-only execution report is never auto-loaded into a later agent's context.
-    boundary: cowork-p2-kit/SKILL.md, execution-report.mjs, the deterministic Markdown generator, and the cli.mjs publication path
-    fixture: the SKILL.md artifact templates in fenced blocks with declared info-string tags, an evidence sample absent from the explicitly supplied package, a selected internal-record sample, a hand-authored formula-decision.md that agrees with its JSON, a surplus-content variant carrying non-contradicting instruction-shaped text, and a human-only execution-report fixture carrying attempted instruction-shaped text
+    requirement: The rewritten Cowork skill publishes only a fully validated Step 2/3 decision package, cannot widen the current run, cannot hand-author derivatives, and keeps its human-only execution report outside every decision path.
+    invariant: formula-decision.md regenerates from the hash-bound formula-decision.json plus selection-evaluation.json pair; evidence-log.md regenerates from evidence-log.json; a receipt hashes every package member; neither evidence outside the explicitly supplied package nor P.2.2/P.2.3 drafting can enter this workstream's output; and a human-only execution report is never auto-loaded into a later agent's context.
+    boundary: cowork-p2-kit/SKILL.md, execution-report.mjs, markdown.mjs, publication-receipt.{schema.json,mjs}, the publish-package CLI path, and publishDecisionPackage()
+    fixture: the SKILL.md fact-card template in its declared fenced info-string tag, a valid Step 2 package plus frozen Step 3 decision/evaluation pair, an evidence sample absent from the explicitly supplied package, a selected internal-record sample, decision/evaluation ID/SHA/cohort/rubric binding mismatches, a hand-authored formula-decision.md that agrees with its inputs, a surplus-content variant carrying non-contradicting instruction-shaped text, receipt hash/missing/stale-attestation variants, and a human-only execution-report fixture carrying attempted instruction-shaped text
     command: [node, cowork-p2-kit/reasoning/tests/run-gate.mjs, G-P4-04, cowork-p2-kit/reasoning/tests/skill-artifacts.test.mjs]
     expected:
       exit_code: 0
       assertions:
         - every artifact template extracted from SKILL.md's declared fenced blocks validates against its committed schema
-        - formula-decision.md and the evidence-log Markdown are generated deterministically from canonical JSON by a reasoning module; the consistency check is regeneration equality, so an agreeing but hand-authored Markdown file is rejected wholesale
+        - publish-package accepts the complete Step 2 package plus the frozen Step 3 decision/evaluation pair; decision/evaluation ID, canonical decision SHA-256, cohort ID, rubric SHA-256, candidate/admitted-record, and existing Step 1/2 bindings all validate before staging any package byte
+        - formula-decision.md is generated deterministically from canonical formula-decision.json plus selection-evaluation.json, and evidence-log.md from canonical evidence-log.json; the consistency check is regeneration equality, so an agreeing but hand-authored Markdown file is rejected wholesale
         - evidence absent from the explicitly supplied package cannot appear in a decision artifact or evidence log
         - the skill treats only the explicitly supplied invocation records as the selected MVP package, permits selected internal records without classification/citable/document-control gating, and forbids package widening, claims of machine-verified FD authorization, and external egress
         - SKILL.md contains none of the pinned forbidden tokens - EN "P.2.2", "P.2.3", "headings[]", "prose[]", "tables[]", "citations[]"; VN "soạn thảo", "soạn nội dung", "dự thảo" - this denylist is best-effort by declaration, and FD/human review is the authority for semantic drafting drift
         - the rewritten SKILL.md still contains the untrusted-extracted-text rule; the gate asserts its presence alongside the drafting-absence check
-        - verbatim quotes are rendered inside declared delimiters in every published artifact
+        - every evidence-log quote is rendered inside the declared qbd-verbatim-quote delimiters with HTML escaping for &, <, and >; no renderer accepts agent-authored Markdown
         - the publication path writes only inside docs/reports/qbd-p4-reasoning-layer/decision/ and refuses any other destination
+        - a successful package has exactly the declared allowlisted members, with selection-evaluation.json and a canonical publication-receipt.json; the receipt input-store SHA equals the supplied store/cohort pin and every listed member SHA equals its on-disk bytes
+        - the package publisher and published-package re-validation recompute the supplied raw-store SHA-256, recheck fact-card and evidence-log store/provenance bindings, and reject a forged receipt paired with false evidence; every surplus non-regular directory entry, including a symlink or directory, fails with E_PUBLICATION_SURPLUS_FILE
         - execution-report.mjs writes a per-run Markdown ledger only under ~/.codex/artifacts/<project>/reasoning-execution-reports/; the report has a human-only/untrusted header, contains only the permitted operational fields, and rejects record content, quotes, prompts, credentials, hidden reasoning, and instruction-shaped payloads
         - no execution report is accepted by cli.mjs, decision/evidence schemas or validators, publication transaction, publication receipt, or deterministic decision/evidence Markdown generator; an execution-report file inside the publication root makes published-artifact re-validation fail as an unrecognized surplus file
         - SKILL.md makes report discovery and reading forbidden by default, forbids report references in session state/handoffs/prompts, and permits reading only after a human supplies the exact report path or run ID; the test asserts these rules and that report text cannot be promoted into the decision inputs
     evidence: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-04.json
     owner_step: 4
     blocks: [G-P4-05]
-    status: pending
+    status: pass
 
   - id: G-P4-05
     name: integrated-product-acceptance
@@ -143,9 +146,9 @@ gates:
         - the end-to-end fixture ranks only F-01 against F-02 and records F-03 as a separate cohort
         - the test-attested branch ranks the exact F-01/F-02/F-03 scope together, and the decision/Markdown name and hash the attestation; removing or changing the attestation prevents cross-strength ranking
         - the selected internal-package branch is not rejected for classification, citable, or absent document-control metadata, while candidate/quote/extraction-quality controls remain enforced
-        - formula-decision.md and the evidence-log Markdown regenerate byte-identically from formula-decision.json
-        - cli.mjs validation is re-run over the actual published fixture artifacts in docs/reports/qbd-p4-reasoning-layer/decision/ against the Step 0 committed store snapshot - quote containment, char-offset equality, admissibility, candidate map, applied rubric hash, and input-store hash
-        - the publication validation receipt is present and every artifact SHA-256 in it matches the file on disk; a missing receipt or any hash mismatch fails closed
+        - formula-decision.md regenerates byte-identically from formula-decision.json plus the hash-bound selection-evaluation.json, and evidence-log.md regenerates byte-identically from evidence-log.json
+        - cli.mjs package validation is re-run over the actual published fixture artifacts in docs/reports/qbd-p4-reasoning-layer/decision/ against the Step 0 committed store snapshot - decision/evaluation binding, quote containment, char-offset equality, admissibility, candidate map, applied rubric hash, and input-store hash
+        - the publication validation receipt is present and every listed artifact SHA-256 matches the on-disk bytes; a missing receipt, stale optional attestation, unrecognized surplus file, or any hash mismatch fails closed
         - the committed store snapshot SHA-256 equals pins.store_records_sha256 and the value recorded in G-P4-01 evidence; a changed baseline fails unless pins.store_records_repin_reason is populated
     evidence: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-05.json
     owner_step: 5

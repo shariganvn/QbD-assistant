@@ -1,53 +1,54 @@
 <!-- GENERATED VIEW — do not edit manually -->
-<!-- Source: docs/test-plans/T20260727-qbd-p4-reasoning-step-03.yaml -->
+<!-- Source: docs/test-plans/T20260728-qbd-p4-reasoning-step-04.yaml -->
 <!-- Regenerate: baton render-test-plan -->
-<!-- Source fingerprint: sha256:9a81b34b3394f9e206d023453dd066c4377577b81e5928fba31555f7d22f4cb2 -->
+<!-- Source fingerprint: sha256:847e0cb69a0cecc2e506679ca598fa44e57728de0465d5aa0b030ed393320feb -->
 
 # TEST_PLAN — Active Validation Gates
 
-## T20260727-qbd-p4-reasoning-step-03
+## T20260728-qbd-p4-reasoning-step-04
 
 Status: **Executed — results recorded**
 
 - Workstream: `qbd-p4-reasoning-layer`
-- Date: 2026-07-27
-- Plan: `docs/plans/qbd-p4-reasoning-layer/step-03-rubric-decision-engine.md`
+- Date: 2026-07-28
+- Plan: `docs/plans/qbd-p4-reasoning-layer/step-04-cowork-skill-artifacts.md`
 
 ## Scope
 
-Verify the isolated, test-only v2 rubric decision core: admitted-evidence selection, exact-one score maps, deterministic evaluation binding, typed fail-closed outcomes, and frozen Step 1/2 inputs.
+Verify the bounded Cowork instructions and publication of a complete, hash-bound Step 2/3 decision package, including deterministic Markdown, validation receipt, and human-only execution-report containment.
 
 ### Changed files
 
-- `cowork-p2-kit/reasoning/decision-engine.mjs`
-- `cowork-p2-kit/reasoning/selection-contracts.mjs`
-- `cowork-p2-kit/reasoning/selection-evaluation.schema.json`
-- `cowork-p2-kit/reasoning/step3-error-codes.mjs`
-- `cowork-p2-kit/reasoning/tests/decision-engine.test.mjs`
-- `cowork-p2-kit/reasoning/tests/fixtures/rubric/`
-- `cowork-p2-kit/rubric/selection-rubric-v2.schema.json`
-- `cowork-p2-kit/rubric/selection-rubric-proposal.v2.json`
+- `cowork-p2-kit/SKILL.md`
+- `cowork-p2-kit/reasoning/cli.mjs`
+- `cowork-p2-kit/reasoning/publication.mjs`
+- `cowork-p2-kit/reasoning/markdown.mjs`
+- `cowork-p2-kit/reasoning/publication-receipt.schema.json`
+- `cowork-p2-kit/reasoning/publication-receipt.mjs`
+- `cowork-p2-kit/reasoning/execution-report.mjs`
+- `cowork-p2-kit/reasoning/tests/skill-artifacts.test.mjs`
+- `docs/reports/qbd-p4-reasoning-layer/gates/G-P4-04.json`
 
 ## Approval
 
 - **Human approval required** before running commands.
-- Approved at: 2026-07-27
+- Approved at: 2026-07-28
 - Approved by: human
 
 ## Commands
 
-### gate-p4-03 — Run the test-only selection-decision core through the P4 evidence wrapper.
+### gate-p4-04 — Run bounded-skill and package-publication assertions through the P4 evidence wrapper.
 
 ```bash
-node cowork-p2-kit/reasoning/tests/run-gate.mjs G-P4-03 cowork-p2-kit/reasoning/tests/decision-engine.test.mjs
+node cowork-p2-kit/reasoning/tests/run-gate.mjs G-P4-04 cowork-p2-kit/reasoning/tests/skill-artifacts.test.mjs
 ```
 
 
 ## Results
 
 Verdict: **passed**
-Artifact: `artifacts/260727-2330/test-verdict.json`
-Counts: passed=42, failed=0, warnings=0
+Artifact: `artifacts/260728-0906/test-verdict.json`
+Counts: passed=7, failed=0, warnings=0
 
 ---
 

@@ -1,0 +1,48 @@
+id: P20260728-qbd-p4-reasoning-step-04
+date: "2026-07-28"
+workstream: qbd-p4-reasoning-layer
+status: done
+summary: >-
+  Closed Step 4 bounded publication and Cowork instructions: G-P4-04 passed 7/7,
+  with complete-package binding, canonical JSON and deterministic Markdown,
+  publication receipt validation, and a human-only execution-report seam.
+changed_files:
+- cowork-p2-kit/SKILL.md
+- cowork-p2-kit/reasoning/cli.mjs
+- cowork-p2-kit/reasoning/publication.mjs
+- cowork-p2-kit/reasoning/markdown.mjs
+- cowork-p2-kit/reasoning/publication-receipt.schema.json
+- cowork-p2-kit/reasoning/publication-receipt.mjs
+- cowork-p2-kit/reasoning/execution-report.mjs
+- cowork-p2-kit/reasoning/tests/skill-artifacts.test.mjs
+- docs/plans/qbd-p4-reasoning-layer/
+- docs/reports/qbd-p4-reasoning-layer/gates/G-P4-04.json
+tests_run:
+  verdict: passed
+  counts:
+    passed: 7
+    failed: 0
+    warnings: 0
+  evidence:
+    focused_gate:
+      gate_id: G-P4-04
+      passed: 7
+      failed: 0
+      latest: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-04.json
+      snapshot: 
+        docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-04.json
+    regression_gates:
+      G-P4-01: 50
+      G-P4-02: 19
+      G-P4-03: 42
+    session_verdict: artifacts/260728-0906/test-verdict.json
+decisions:
+- D20260727
+next_pickup:
+  files:
+  - docs/plans/qbd-p4-reasoning-layer/step-05-integrated-gates-review.md
+  - docs/plans/qbd-p4-reasoning-layer/gates.yaml
+  - docs/decisions/D20260727-qbd-p4-reasoning-policy.md
+  text: >-
+    Begin Step 5 integrated revalidation from the completed Step 4 package boundary;
+    do not treat the test-only rubric fixture as FD-approved production authority.

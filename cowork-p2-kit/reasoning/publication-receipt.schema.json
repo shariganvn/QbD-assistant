@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QbD reasoning publication receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "input_store_sha256", "artifacts"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "run_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$" },
+    "input_store_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cohort.json", "fact-cards.json", "evidence-log.json", "formula-decision.json", "selection-evaluation.json", "formula-decision.md", "evidence-log.md", "linear-attestation.json"],
+      "properties": {
+        "cohort.json": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "fact-cards.json": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "evidence-log.json": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "formula-decision.json": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "selection-evaluation.json": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "formula-decision.md": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "evidence-log.md": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "linear-attestation.json": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+id: P20260728-qbd-p4-reasoning-step-04-boundary-closure
+date: "2026-07-28"
+workstream: qbd-p4-reasoning-layer
+status: done
+summary: >-
+  Completed Step 4 boundary closure: the publisher now receives a root-pinned closure,
+  recomputes the raw store SHA-256, validates fact-card and evidence-log provenance
+  before
+  staging and during revalidation, and rejects forged receipt/evidence combinations.
+changed_files:
+- cowork-p2-kit/reasoning/publication.mjs
+- cowork-p2-kit/reasoning/cli.mjs
+- cowork-p2-kit/reasoning/tests/skill-artifacts.test.mjs
+- docs/plans/qbd-p4-reasoning-layer/gates.yaml
+- docs/plans/qbd-p4-reasoning-layer/step-04-cowork-skill-artifacts.md
+tests_run:
+  verdict: passed
+  counts:
+    passed: 7
+    failed: 0
+    warnings: 0
+  evidence:
+    focused_gate:
+      gate_id: G-P4-04
+      passed: 7
+      failed: 0
+      latest: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-04.json
+      snapshot: 
+        docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-04.json
+    regression_gates:
+      G-P4-01: 50
+      G-P4-02: 19
+      G-P4-03: 42
+    session_verdict: artifacts/260728-0906/test-verdict.json
+decisions:
+- D20260727
+next_pickup:
+  files:
+  - docs/plans/qbd-p4-reasoning-layer/step-05-integrated-gates-review.md
+  - docs/plans/qbd-p4-reasoning-layer/gates.yaml
+  - docs/decisions/D20260727-qbd-p4-reasoning-policy.md
+  text: >-
+    Begin Step 5 integrated revalidation from the closed Step 4 package boundary;
+    the test-only rubric fixture remains non-production authority.

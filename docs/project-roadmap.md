@@ -1,6 +1,6 @@
 # Project Roadmap — QbD P.2 dossier kit
 
-Status: active · Updated: 2026-07-13
+Status: active · Updated: 2026-07-28
 
 Two phases. Phase 1 is buildable now; Phase 2 is the deploy target, gated on external
 inputs (real corpus, procurement, ZDR contract, benchmark evidence) and **not** broken into
@@ -8,27 +8,29 @@ executable detail yet.
 
 ## Phase 1 — Cowork P.2 MVP kit  ·  state: active
 
-**Goal:** a Claude Cowork-runnable `cowork-p2-kit/` that reads 2–3 formulations + trial
-results, picks the best-supported formulation (logical, defensible), and drafts **P.2.2 +
-P.2.3** in Vietnamese — grounded, cited, draft-only. **Public / FD-modified MOCK data only.**
+**Goal:** a Claude Cowork-runnable `cowork-p2-kit/` that accepts an FD-selected,
+evidence-bound formulation package, produces traceable fact cards and a frozen
+decision/evaluation pair, and publishes an inspectable decision package. It does not
+draft **P.2.2/P.2.3**, approve a formulation, or perform external egress.
 
 Current executable work is tracked only by
-`docs/plans/qbd-p2-ingest-completion/plan.md`. The former seven-phase narrative plan is archived
-under `docs/plans/OUTDATED/` and must not be used for status or execution.
+`docs/plans/qbd-p4-reasoning-layer/plan.md` for Layer B; completed ingest and render work remains
+in its respective plan/evidence records. The former seven-phase narrative plan is archived under
+`docs/plans/OUTDATED/` and must not be used for status or execution.
 
 Roadmap phases:
 
 1. Foundation — docs + kit scaffold + data-classification convention.
 2. Ingest & store layer (liteparse + provenance).
 3. Render spike & layer (OfficeCLI docx fidelity) — **P1.2 spike runs early, gates format.**
-4. Reasoning SKILL — decision matrix + P.2.2/P.2.3 draft + citations/evidence-log.
-5. Guardrails (3-layer design + content rules) + trial-logic Level-1.
-6. Acceptance — rubric self-scoring + reference-product market-status + end-to-end mock demo.
+4. Reasoning SKILL — bounded fact cards, evidence log, frozen decision/evaluation, and deterministic package publication.
+5. Guardrails — package boundary, provenance, untrusted-content handling, and trial-logic controls.
+6. Acceptance — gate-backed decision-package validation; dossier drafting remains separately authorized work.
 7. Phase-2 prep — local-LLM 24 GB benchmark + production-tightening backlog.
 
-**Exit / acceptance:** end-to-end mock run produces `p2-draft.docx` + `evidence-log.md` +
-`formula-decision.md`; every claim sourced or marked "chờ dữ liệu"; self-scored against the
-P0.1 rubric (true 90/100 scoring blocked on FD answer key — see Risks).
+**Exit / acceptance:** an FD-selected package produces a re-validatable decision package containing
+canonical artifacts, deterministic Markdown derivatives, and a publication receipt. Any production
+selection remains subject to FD approval; the test-only rubric cannot authorize a winner.
 
 ## Phase 2 — `qbd_core` full pipeline  ·  state: planned
 
@@ -65,7 +67,8 @@ manifest + authority labels).
 
 ## Non-goals (MVP)
 
-- No review UI — claim-level Accept/Edit/Reject lives in the output structure; UI deferred.
-- No real confidential-data processing — mock/public only.
+- No review UI — FD approval remains outside the decision package; UI is deferred.
+- No autonomous corpus discovery, external egress, or general confidential-data route; Layer B accepts
+  only the FD-selected package authorized by `D20260727`.
 - No egress router / local-LLM worker implementation — Phase 2.
 - No hardware procurement — 24 GB pilot benchmark is the only actionable hardware step.

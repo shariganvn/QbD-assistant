@@ -2,6 +2,8 @@
 
 > **Status:** stub — filled in Phase 6 when the acceptance criteria are finalized.
 > True 90/100 scoring blocked on FD answer key (tracked risk P0.1).
+> This dossier-readiness rubric is distinct from the test-only Step 3 selection
+> rubric and does not authorize a formulation selection.
 
 ## Weighted Criteria
 
