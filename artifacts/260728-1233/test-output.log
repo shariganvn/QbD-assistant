@@ -1,0 +1,786 @@
+
+> module3-agent@1.0.0 verify:reasoning
+> node cowork-p2-kit/reasoning/tests/verify-reasoning.mjs
+
+TAP version 13
+# Subtest: G-P4-01 published evidence-log schema parses and declares v2
+ok 1 - G-P4-01 published evidence-log schema parses and declares v2
+  ---
+  duration_ms: 1.755978
+  type: 'test'
+  ...
+# Subtest: G-P4-01 accepts a valid v2 cross-strength linear attestation
+ok 2 - G-P4-01 accepts a valid v2 cross-strength linear attestation
+  ---
+  duration_ms: 0.996543
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects a v1 linear attestation with E_LINEAR_ATTESTATION_INCOMPLETE
+ok 3 - G-P4-01 rejects a v1 linear attestation with E_LINEAR_ATTESTATION_INCOMPLETE
+  ---
+  duration_ms: 0.791055
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects an attestation with fewer than two members
+ok 4 - G-P4-01 rejects an attestation with fewer than two members
+  ---
+  duration_ms: 0.285094
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects an attestation with fewer than two distinct strengths
+ok 5 - G-P4-01 rejects an attestation with fewer than two distinct strengths
+  ---
+  duration_ms: 0.372905
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects an attestation with a duplicate candidate/strength pair
+ok 6 - G-P4-01 rejects an attestation with a duplicate candidate/strength pair
+  ---
+  duration_ms: 0.273065
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects an attestation with an empty candidate string
+ok 7 - G-P4-01 rejects an attestation with an empty candidate string
+  ---
+  duration_ms: 0.339887
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects an attestation with an empty strength string
+ok 8 - G-P4-01 rejects an attestation with an empty strength string
+  ---
+  duration_ms: 0.26538
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects an attestation that still carries approved_sha256
+ok 9 - G-P4-01 rejects an attestation that still carries approved_sha256
+  ---
+  duration_ms: 0.590003
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects an attestation with a wrong required_fields order
+ok 10 - G-P4-01 rejects an attestation with a wrong required_fields order
+  ---
+  duration_ms: 0.652214
+  type: 'test'
+  ...
+# Subtest: G-P4-01 accepts a valid v2 non-attested cohort
+ok 11 - G-P4-01 accepts a valid v2 non-attested cohort
+  ---
+  duration_ms: 0.500741
+  type: 'test'
+  ...
+# Subtest: G-P4-01 permits a complete candidate map to retain a non-admitted candidate
+ok 12 - G-P4-01 permits a complete candidate map to retain a non-admitted candidate
+  ---
+  duration_ms: 0.225339
+  type: 'test'
+  ...
+# Subtest: G-P4-01 accepts a valid v2 attested cohort
+ok 13 - G-P4-01 accepts a valid v2 attested cohort
+  ---
+  duration_ms: 0.175013
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects a v1 cohort with E_COHORT_ENVELOPE
+ok 14 - G-P4-01 rejects a v1 cohort with E_COHORT_ENVELOPE
+  ---
+  duration_ms: 0.275618
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects a cohort with half-null attestation ID (ID null, hash non-null)
+ok 15 - G-P4-01 rejects a cohort with half-null attestation ID (ID null, hash non-null)
+  ---
+  duration_ms: 0.489518
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects a cohort with half-null attestation hash (ID non-null, hash null)
+ok 16 - G-P4-01 rejects a cohort with half-null attestation hash (ID non-null, hash null)
+  ---
+  duration_ms: 0.259547
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects a cohort with empty cohort_basis
+ok 17 - G-P4-01 rejects a cohort with empty cohort_basis
+  ---
+  duration_ms: 0.177253
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects a cohort with an invalid attestation SHA-256
+ok 18 - G-P4-01 rejects a cohort with an invalid attestation SHA-256
+  ---
+  duration_ms: 2.416526
+  type: 'test'
+  ...
+# Subtest: G-P4-01 accepts a valid v2 non-attested decision
+ok 19 - G-P4-01 accepts a valid v2 non-attested decision
+  ---
+  duration_ms: 0.331602
+  type: 'test'
+  ...
+# Subtest: G-P4-01 accepts a valid v2 attested decision
+ok 20 - G-P4-01 accepts a valid v2 attested decision
+  ---
+  duration_ms: 0.202579
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects a v1 decision with E_DECISION_ENVELOPE
+ok 21 - G-P4-01 rejects a v1 decision with E_DECISION_ENVELOPE
+  ---
+  duration_ms: 0.217496
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects a decision with half-null attestation ID
+ok 22 - G-P4-01 rejects a decision with half-null attestation ID
+  ---
+  duration_ms: 0.177651
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects a decision with half-null attestation hash
+ok 23 - G-P4-01 rejects a decision with half-null attestation hash
+  ---
+  duration_ms: 0.16092
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects a decision with empty cohort_basis
+ok 24 - G-P4-01 rejects a decision with empty cohort_basis
+  ---
+  duration_ms: 0.187371
+  type: 'test'
+  ...
+# Subtest: G-P4-01 accepts exact evidence-log v2 and rejects historical v1
+ok 25 - G-P4-01 accepts exact evidence-log v2 and rejects historical v1
+  ---
+  duration_ms: 2.715172
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects malformed evidence-log v2 envelopes with E_EVIDENCE_LOG_ENVELOPE
+ok 26 - G-P4-01 rejects malformed evidence-log v2 envelopes with E_EVIDENCE_LOG_ENVELOPE
+  ---
+  duration_ms: 1.439808
+  type: 'test'
+  ...
+# Subtest: G-P4-01 retains v1 selection-rubric validation unchanged
+ok 27 - G-P4-01 retains v1 selection-rubric validation unchanged
+  ---
+  duration_ms: 0.350941
+  type: 'test'
+  ...
+# Subtest: G-P4-01 canonical attestation hash is stable across object-key reorderings
+ok 28 - G-P4-01 canonical attestation hash is stable across object-key reorderings
+  ---
+  duration_ms: 0.763019
+  type: 'test'
+  ...
+# Subtest: G-P4-01 canonical attestation hash changes on semantic member change
+ok 29 - G-P4-01 canonical attestation hash changes on semantic member change
+  ---
+  duration_ms: 0.234543
+  type: 'test'
+  ...
+# Subtest: G-P4-01 validates fact candidate, value/unit, offset, and minimum quote bindings independently
+ok 30 - G-P4-01 validates fact candidate, value/unit, offset, and minimum quote bindings independently
+  ---
+  duration_ms: 0.55089
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects unknown keys, missing fields, and wrong types with stable E_ codes
+ok 31 - G-P4-01 rejects unknown keys, missing fields, and wrong types with stable E_ codes
+  ---
+  duration_ms: 0.402388
+  type: 'test'
+  ...
+# Subtest: G-P4-01 each invalid CLI envelope exits 1, prints E_ code, and preserves all prior output bytes
+ok 32 - G-P4-01 each invalid CLI envelope exits 1, prints E_ code, and preserves all prior output bytes
+  ---
+  duration_ms: 7.004656
+  type: 'test'
+  ...
+# Subtest: G-P4-01 refuses publication outside the declared root with one nonzero E_ failure
+ok 33 - G-P4-01 refuses publication outside the declared root with one nonzero E_ failure
+  ---
+  duration_ms: 0.42011
+  type: 'test'
+  ...
+# Subtest: G-P4-01 CLI requires a JSONL store and always validates fact-card bindings against it
+ok 34 - G-P4-01 CLI requires a JSONL store and always validates fact-card bindings against it
+  ---
+  duration_ms: 4.019424
+  type: 'test'
+  ...
+# Subtest: G-P4-01 valid publication creates canonical JSON only inside its declared root
+ok 35 - G-P4-01 valid publication creates canonical JSON only inside its declared root
+  ---
+  duration_ms: 2.184798
+  type: 'test'
+  ...
+# Subtest: G-P4-01 canonical publication bytes do not depend on valid input object key order
+ok 36 - G-P4-01 canonical publication bytes do not depend on valid input object key order
+  ---
+  duration_ms: 16.677863
+  type: 'test'
+  ...
+# Subtest: G-P4-01 a synchronous mid-rename failure restores every pre-existing publication byte
+ok 37 - G-P4-01 a synchronous mid-rename failure restores every pre-existing publication byte
+  ---
+  duration_ms: 2.247994
+  type: 'test'
+  ...
+# Subtest: G-P4-01 spawned CLI ignores REASONING_PUBLICATION_ROOT and retains its fixed production root
+ok 38 - G-P4-01 spawned CLI ignores REASONING_PUBLICATION_ROOT and retains its fixed production root
+  ---
+  duration_ms: 58.401363
+  type: 'test'
+  ...
+# Subtest: G-P4-01 store bytes must SHA-256 match the cohort pin before publication and preserve prior output
+ok 39 - G-P4-01 store bytes must SHA-256 match the cohort pin before publication and preserve prior output
+  ---
+  duration_ms: 1.939738
+  type: 'test'
+  ...
+# Subtest: G-P4-01 evidence-log v2 CLI bindings fail before a write and preserve every prior byte
+ok 40 - G-P4-01 evidence-log v2 CLI bindings fail before a write and preserve every prior byte
+  ---
+  duration_ms: 11.712691
+  type: 'test'
+  ...
+# Subtest: G-P4-01 binds evidence-log page-global provenance and quote to the pinned Layer A record
+ok 41 - G-P4-01 binds evidence-log page-global provenance and quote to the pinned Layer A record
+  ---
+  duration_ms: 12.40451
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects cohort/decision cohort_id disagreement with E_REASONING_ARTIFACT_BINDING
+ok 42 - G-P4-01 rejects cohort/decision cohort_id disagreement with E_REASONING_ARTIFACT_BINDING
+  ---
+  duration_ms: 2.246759
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects cohort/decision attestation ID disagreement with E_REASONING_ARTIFACT_BINDING
+ok 43 - G-P4-01 rejects cohort/decision attestation ID disagreement with E_REASONING_ARTIFACT_BINDING
+  ---
+  duration_ms: 1.990966
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects cohort/decision attestation hash mismatch with E_REASONING_ARTIFACT_BINDING
+ok 44 - G-P4-01 rejects cohort/decision attestation hash mismatch with E_REASONING_ARTIFACT_BINDING
+  ---
+  duration_ms: 1.624817
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects non-null attestation ID that does not match the supplied attestation file
+ok 45 - G-P4-01 rejects non-null attestation ID that does not match the supplied attestation file
+  ---
+  duration_ms: 1.656847
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects non-null attestation hash that does not match canonical bytes of supplied attestation
+ok 46 - G-P4-01 rejects non-null attestation hash that does not match canonical bytes of supplied attestation
+  ---
+  duration_ms: 1.793797
+  type: 'test'
+  ...
+# Subtest: G-P4-01 rejects cohort_basis disagreement between cohort and decision
+ok 47 - G-P4-01 rejects cohort_basis disagreement between cohort and decision
+  ---
+  duration_ms: 1.428077
+  type: 'test'
+  ...
+# Subtest: G-P4-01 valid attested publication succeeds and preserves attestation binding
+ok 48 - G-P4-01 valid attested publication succeeds and preserves attestation binding
+  ---
+  duration_ms: 1.073238
+  type: 'test'
+  ...
+# Subtest: G-P4-01 runner accepts multiple test paths, forces TAP, parses its epilogue, and writes P4 evidence with store SHA
+ok 49 - G-P4-01 runner accepts multiple test paths, forces TAP, parses its epilogue, and writes P4 evidence with store SHA
+  ---
+  duration_ms: 185.664462
+  type: 'test'
+  ...
+# Subtest: G-P4-01 runner rejects a non-P4 gate ID
+ok 50 - G-P4-01 runner rejects a non-P4 gate ID
+  ---
+  duration_ms: 47.235455
+  type: 'test'
+  ...
+1..50
+# tests 50
+# suites 0
+# pass 50
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 314.143709
+TAP version 13
+# Subtest: baseline package is the committed 17-record byte-pinned store
+ok 1 - baseline package is the committed 17-record byte-pinned store
+  ---
+  duration_ms: 1.206578
+  type: 'test'
+  ...
+# Subtest: without attestation, F-03 at 10 mg is excluded from 5 mg cohort
+ok 2 - without attestation, F-03 at 10 mg is excluded from 5 mg cohort
+  ---
+  duration_ms: 12.629027
+  type: 'test'
+  ...
+# Subtest: complete attestation with matching pin produces combined cohort
+ok 3 - complete attestation with matching pin produces combined cohort
+  ---
+  duration_ms: 1.670879
+  type: 'test'
+  ...
+# Subtest: incomplete attestation is rejected
+ok 4 - incomplete attestation is rejected
+  ---
+  duration_ms: 0.699201
+  type: 'test'
+  ...
+# Subtest: attestation scope mismatch is rejected even with a matching pin
+ok 5 - attestation scope mismatch is rejected even with a matching pin
+  ---
+  duration_ms: 0.545909
+  type: 'test'
+  ...
+# Subtest: attestation profile mismatch is rejected even with a matching pin
+ok 6 - attestation profile mismatch is rejected even with a matching pin
+  ---
+  duration_ms: 0.479565
+  type: 'test'
+  ...
+# Subtest: attestation with missing pin is rejected
+ok 7 - attestation with missing pin is rejected
+  ---
+  duration_ms: 0.21513
+  type: 'test'
+  ...
+# Subtest: attestation with wrong pin is rejected
+ok 8 - attestation with wrong pin is rejected
+  ---
+  duration_ms: 0.319824
+  type: 'test'
+  ...
+# Subtest: null attestation with non-null pin is rejected
+ok 9 - null attestation with non-null pin is rejected
+  ---
+  duration_ms: 0.372052
+  type: 'test'
+  ...
+# Subtest: selected internal records are admitted; low-confidence and needs-OCR are excluded
+ok 10 - selected internal records are admitted; low-confidence and needs-OCR are excluded
+  ---
+  duration_ms: 1.082991
+  type: 'test'
+  ...
+# Subtest: record with unknown provenance.file is excluded with E_COHORT_CANDIDATE_MAP
+ok 11 - record with unknown provenance.file is excluded with E_COHORT_CANDIDATE_MAP
+  ---
+  duration_ms: 1.22185
+  type: 'test'
+  ...
+# Subtest: admitted entries retain provenance file, page, char offsets, and quote
+ok 12 - admitted entries retain provenance file, page, char offsets, and quote
+  ---
+  duration_ms: 0.530026
+  type: 'test'
+  ...
+# Subtest: card citing wrong candidate for an admitted record is refused
+ok 13 - card citing wrong candidate for an admitted record is refused
+  ---
+  duration_ms: 0.559276
+  type: 'test'
+  ...
+# Subtest: card whose admitted-record quote omits its value is refused
+ok 14 - card whose admitted-record quote omits its value is refused
+  ---
+  duration_ms: 0.243775
+  type: 'test'
+  ...
+# Subtest: card whose admitted-record offsets do not bind content is refused
+ok 15 - card whose admitted-record offsets do not bind content is refused
+  ---
+  duration_ms: 0.38001
+  type: 'test'
+  ...
+# Subtest: cohort artifact has all required v2 fields and passes validation
+ok 16 - cohort artifact has all required v2 fields and passes validation
+  ---
+  duration_ms: 0.84931
+  type: 'test'
+  ...
+# Subtest: requested ranking candidate without a committed candidateMap entry fails closed
+ok 17 - requested ranking candidate without a committed candidateMap entry fails closed
+  ---
+  duration_ms: 0.163107
+  type: 'test'
+  ...
+# Subtest: builder output validates and publishes through the CLI
+ok 18 - builder output validates and publishes through the CLI
+  ---
+  duration_ms: 5.317514
+  type: 'test'
+  ...
+# Subtest: entries sorted by record_id, exclusions sorted deterministically
+ok 19 - entries sorted by record_id, exclusions sorted deterministically
+  ---
+  duration_ms: 0.34465
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 122.491799
+TAP version 13
+# Subtest: G-P4-03 test-approved rubric fixture and pin match the immutable canonical hash
+ok 1 - G-P4-03 test-approved rubric fixture and pin match the immutable canonical hash
+  ---
+  duration_ms: 1.759539
+  type: 'test'
+  ...
+# Subtest: G-P4-03 proposal rubric returns inconclusive with E_RUBRIC_APPROVAL_REQUIRED
+ok 2 - G-P4-03 proposal rubric returns inconclusive with E_RUBRIC_APPROVAL_REQUIRED
+  ---
+  duration_ms: 2.883335
+  type: 'test'
+  ...
+# Subtest: G-P4-03 test-approved rubric without pin returns E_RUBRIC_PIN_REQUIRED
+ok 3 - G-P4-03 test-approved rubric without pin returns E_RUBRIC_PIN_REQUIRED
+  ---
+  duration_ms: 1.532965
+  type: 'test'
+  ...
+# Subtest: G-P4-03 test-approved rubric with mismatched pin returns E_RUBRIC_PIN_MISMATCH
+ok 4 - G-P4-03 test-approved rubric with mismatched pin returns E_RUBRIC_PIN_MISMATCH
+  ---
+  duration_ms: 0.795002
+  type: 'test'
+  ...
+# Subtest: G-P4-03 test-approved rubric with matching pin produces selected result
+ok 5 - G-P4-03 test-approved rubric with matching pin produces selected result
+  ---
+  duration_ms: 1.939516
+  type: 'test'
+  ...
+# Subtest: G-P4-03 rubric validation rejects NaN and Infinity before selection
+ok 6 - G-P4-03 rubric validation rejects NaN and Infinity before selection
+  ---
+  duration_ms: 7.446223
+  type: 'test'
+  ...
+# Subtest: G-P4-03 decision passes validateDecision
+ok 7 - G-P4-03 decision passes validateDecision
+  ---
+  duration_ms: 1.186064
+  type: 'test'
+  ...
+# Subtest: G-P4-03 decision fact_card_ids are lexicographically sorted
+ok 8 - G-P4-03 decision fact_card_ids are lexicographically sorted
+  ---
+  duration_ms: 1.479691
+  type: 'test'
+  ...
+# Subtest: G-P4-03 evaluation passes validateSelectionEvaluation
+ok 9 - G-P4-03 evaluation passes validateSelectionEvaluation
+  ---
+  duration_ms: 0.876856
+  type: 'test'
+  ...
+# Subtest: G-P4-03 evaluation decision_sha256 binds to returned decision
+ok 10 - G-P4-03 evaluation decision_sha256 binds to returned decision
+  ---
+  duration_ms: 0.844958
+  type: 'test'
+  ...
+# Subtest: G-P4-03 evaluation cohort_id matches input cohort
+ok 11 - G-P4-03 evaluation cohort_id matches input cohort
+  ---
+  duration_ms: 0.636977
+  type: 'test'
+  ...
+# Subtest: G-P4-03 matrix cells carry derived value/unit with sorted IDs
+ok 12 - G-P4-03 matrix cells carry derived value/unit with sorted IDs
+  ---
+  duration_ms: 1.158614
+  type: 'test'
+  ...
+# Subtest: G-P4-03 matrix cells cover all candidate/measure combinations
+ok 13 - G-P4-03 matrix cells cover all candidate/measure combinations
+  ---
+  duration_ms: 0.626684
+  type: 'test'
+  ...
+# Subtest: G-P4-03 hard gate failure triggers before scoring and returns inconclusive
+ok 14 - G-P4-03 hard gate failure triggers before scoring and returns inconclusive
+  ---
+  duration_ms: 0.487051
+  type: 'test'
+  ...
+# Subtest: G-P4-03 eligible candidate passes all hard gates
+ok 15 - G-P4-03 eligible candidate passes all hard gates
+  ---
+  duration_ms: 0.579498
+  type: 'test'
+  ...
+# Subtest: G-P4-03 fact cards with un-admitted record_ids are excluded from scoring
+ok 16 - G-P4-03 fact cards with un-admitted record_ids are excluded from scoring
+  ---
+  duration_ms: 0.632247
+  type: 'test'
+  ...
+# Subtest: G-P4-03 cross-candidate cards are excluded unless the admitted entry binds candidate and card ID
+ok 17 - G-P4-03 cross-candidate cards are excluded unless the admitted entry binds candidate and card ID
+  ---
+  duration_ms: 1.063835
+  type: 'test'
+  ...
+# Subtest: G-P4-03 proposal and missing-pin paths never return a decision with zero processed cards
+ok 18 - G-P4-03 proposal and missing-pin paths never return a decision with zero processed cards
+  ---
+  duration_ms: 0.862542
+  type: 'test'
+  ...
+# Subtest: G-P4-03 critical evidence tracks cited and uncited record IDs
+ok 19 - G-P4-03 critical evidence tracks cited and uncited record IDs
+  ---
+  duration_ms: 0.55248
+  type: 'test'
+  ...
+# Subtest: G-P4-03 sensitivity vectors cover Cartesian product of weight endpoints
+ok 20 - G-P4-03 sensitivity vectors cover Cartesian product of weight endpoints
+  ---
+  duration_ms: 0.615268
+  type: 'test'
+  ...
+# Subtest: G-P4-03 stable_winner matches across all vectors when clear
+ok 21 - G-P4-03 stable_winner matches across all vectors when clear
+  ---
+  duration_ms: 0.515068
+  type: 'test'
+  ...
+# Subtest: G-P4-03 missing critical cell returns inconclusive
+ok 22 - G-P4-03 missing critical cell returns inconclusive
+  ---
+  duration_ms: 0.478185
+  type: 'test'
+  ...
+# Subtest: G-P4-03 unit mismatch returns E_UNIT_NORMALIZATION_REQUIRED
+ok 23 - G-P4-03 unit mismatch returns E_UNIT_NORMALIZATION_REQUIRED
+  ---
+  duration_ms: 0.792383
+  type: 'test'
+  ...
+# Subtest: G-P4-03 normalized_value mismatch returns E_NORMALIZED_VALUE_MISMATCH
+ok 24 - G-P4-03 normalized_value mismatch returns E_NORMALIZED_VALUE_MISMATCH
+  ---
+  duration_ms: 0.467081
+  type: 'test'
+  ...
+# Subtest: G-P4-03 malformed raw scalar, list, and range tokens return E_NORMALIZED_VALUE_MISMATCH
+ok 25 - G-P4-03 malformed raw scalar, list, and range tokens return E_NORMALIZED_VALUE_MISMATCH
+  ---
+  duration_ms: 1.114342
+  type: 'test'
+  ...
+# Subtest: G-P4-03 uncited results record returns E_FD_REVIEW_UNCITED_RESULTS
+ok 26 - G-P4-03 uncited results record returns E_FD_REVIEW_UNCITED_RESULTS
+  ---
+  duration_ms: 0.476889
+  type: 'test'
+  ...
+# Subtest: G-P4-03 conflict beyond tolerance returns inconclusive
+ok 27 - G-P4-03 conflict beyond tolerance returns inconclusive
+  ---
+  duration_ms: 0.425709
+  type: 'test'
+  ...
+# Subtest: G-P4-03 insufficient eligible candidates returns E_INSUFFICIENT_ELIGIBLE_CANDIDATES
+ok 28 - G-P4-03 insufficient eligible candidates returns E_INSUFFICIENT_ELIGIBLE_CANDIDATES
+  ---
+  duration_ms: 0.517523
+  type: 'test'
+  ...
+# Subtest: G-P4-03 score map with no matching rule rejects with E_RUBRIC_ENVELOPE
+ok 29 - G-P4-03 score map with no matching rule rejects with E_RUBRIC_ENVELOPE
+  ---
+  duration_ms: 0.897163
+  type: 'test'
+  ...
+# Subtest: G-P4-03 score map with overlapping rules rejects with E_RUBRIC_ENVELOPE
+ok 30 - G-P4-03 score map with overlapping rules rejects with E_RUBRIC_ENVELOPE
+  ---
+  duration_ms: 0.553782
+  type: 'test'
+  ...
+# Subtest: G-P4-03 tie or sensitivity instability returns E_TIE_OR_SENSITIVITY_UNSTABLE
+ok 31 - G-P4-03 tie or sensitivity instability returns E_TIE_OR_SENSITIVITY_UNSTABLE
+  ---
+  duration_ms: 0.606706
+  type: 'test'
+  ...
+# Subtest: G-P4-03 rejects recordRoles key not in evidence log
+ok 32 - G-P4-03 rejects recordRoles key not in evidence log
+  ---
+  duration_ms: 0.334658
+  type: 'test'
+  ...
+# Subtest: G-P4-03 rejects missing role for admitted record
+ok 33 - G-P4-03 rejects missing role for admitted record
+  ---
+  duration_ms: 0.319892
+  type: 'test'
+  ...
+# Subtest: G-P4-03 rejects recordRoles value that is not results or context
+ok 34 - G-P4-03 rejects recordRoles value that is not results or context
+  ---
+  duration_ms: 0.272547
+  type: 'test'
+  ...
+# Subtest: G-P4-03 preserves non-attested cohort candidates and basis
+ok 35 - G-P4-03 preserves non-attested cohort candidates and basis
+  ---
+  duration_ms: 0.591844
+  type: 'test'
+  ...
+# Subtest: G-P4-03 attested cohort preserves linear attestation fields
+ok 36 - G-P4-03 attested cohort preserves linear attestation fields
+  ---
+  duration_ms: 0.609475
+  type: 'test'
+  ...
+# Subtest: G-P4-03 combined cohort flows through existing attestation semantics
+ok 37 - G-P4-03 combined cohort flows through existing attestation semantics
+  ---
+  duration_ms: 0.900863
+  type: 'test'
+  ...
+# Subtest: G-P4-03 evaluation_id is deterministic for same input
+ok 38 - G-P4-03 evaluation_id is deterministic for same input
+  ---
+  duration_ms: 1.011449
+  type: 'test'
+  ...
+# Subtest: G-P4-03 inconclusive evaluation_id is deterministic for same input
+ok 39 - G-P4-03 inconclusive evaluation_id is deterministic for same input
+  ---
+  duration_ms: 0.675038
+  type: 'test'
+  ...
+# Subtest: G-P4-03 existing v1 rubric validator is unchanged
+ok 40 - G-P4-03 existing v1 rubric validator is unchanged
+  ---
+  duration_ms: 0.204077
+  type: 'test'
+  ...
+# Subtest: G-P4-03 keeps frozen upstream contract validators byte-identical
+ok 41 - G-P4-03 keeps frozen upstream contract validators byte-identical
+  ---
+  duration_ms: 0.546197
+  type: 'test'
+  ...
+# Subtest: G-P4-03 evaluateSelection returns no Markdown content
+ok 42 - G-P4-03 evaluateSelection returns no Markdown content
+  ---
+  duration_ms: 0.614752
+  type: 'test'
+  ...
+1..42
+# tests 42
+# suites 0
+# pass 42
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 153.635607
+TAP version 13
+# Subtest: G-P4-04 SKILL fact-card template and bounded Cowork instructions are valid
+ok 1 - G-P4-04 SKILL fact-card template and bounded Cowork instructions are valid
+  ---
+  duration_ms: 2.627698
+  type: 'test'
+  ...
+# Subtest: G-P4-04 publishes only a hash-bound complete package with deterministic escaped Markdown
+ok 2 - G-P4-04 publishes only a hash-bound complete package with deterministic escaped Markdown
+  ---
+  duration_ms: 18.687783
+  type: 'test'
+  ...
+# Subtest: G-P4-04 canonicalizes nested Markdown data and preserves escaped multiline quote characters
+ok 3 - G-P4-04 canonicalizes nested Markdown data and preserves escaped multiline quote characters
+  ---
+  duration_ms: 7.676323
+  type: 'test'
+  ...
+# Subtest: G-P4-04 rejects each decision/evaluation/evidence binding before package publication
+ok 4 - G-P4-04 rejects each decision/evaluation/evidence binding before package publication
+  ---
+  duration_ms: 6.275341
+  type: 'test'
+  ...
+# Subtest: G-P4-04 rejects hand-authored Markdown, surplus report files, stale attestation, and receipt tampering
+ok 5 - G-P4-04 rejects hand-authored Markdown, surplus report files, stale attestation, and receipt tampering
+  ---
+  duration_ms: 18.498158
+  type: 'test'
+  ...
+# Subtest: G-P4-04 publish-package refuses external destinations and invalid command envelopes
+ok 6 - G-P4-04 publish-package refuses external destinations and invalid command envelopes
+  ---
+  duration_ms: 2.215328
+  type: 'test'
+  ...
+# Subtest: G-P4-04 execution reports remain human-only operational ledgers outside decision publication
+ok 7 - G-P4-04 execution reports remain human-only operational ledgers outside decision publication
+  ---
+  duration_ms: 2.350461
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 150.86684
+TAP version 13
+# Subtest: G-P4-05 evidence validator rejects missing, non-pass, noncanonical, and mismatched-suite evidence
+ok 1 - G-P4-05 evidence validator rejects missing, non-pass, noncanonical, and mismatched-suite evidence
+  ---
+  duration_ms: 5.572205
+  type: 'test'
+  ...
+# Subtest: G-P4-05 runner preserves declared order, one suite UUID, and first-failure short circuit
+ok 2 - G-P4-05 runner preserves declared order, one suite UUID, and first-failure short circuit
+  ---
+  duration_ms: 1.388895
+  type: 'test'
+  ...
+# Subtest: G-P4-05 publishes then revalidates the committed-store package at the declared decision root
+ok 3 - G-P4-05 publishes then revalidates the committed-store package at the declared decision root
+  ---
+  duration_ms: 61.848009
+  type: 'test'
+  ...
+# Subtest: G-P4-05 admits selected internal records but retains candidate, quote, and extraction controls
+ok 4 - G-P4-05 admits selected internal records but retains candidate, quote, and extraction controls
+  ---
+  duration_ms: 0.723298
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 153.334982
