@@ -1,19 +1,19 @@
 {
   "branch": "master",
-  "da_review": "summary:\n⚠️ Verdict parsing is exit-code-only; gate counts are retained independently.\n⚠️ D20260722 hostile same-host identity binding remains deferred.",
+  "da_review": "summary:\n⚠️ Cooperative tests do not establish hostile same-host safety; private release-path replacement remains untested.\n⚠️ Shared-writable publication paths remain a production-blocking integrity/availability risk.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-28T06:55:05+00:00",
-  "git_head": "3079be8d70930bd89798abde1176f62fac19ed46",
+  "generated_at": "2026-07-28T07:08:15+00:00",
+  "git_head": "9025385f1a2ab0b256f230140ec2a9370a08d88c",
   "next_pickup": [
     {
       "files": [
         "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
         "docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md"
       ],
-      "text": "In a new reconciled session, review the committed P2 scope against D20260722 before updating the separate publication-lock spec-diff report"
+      "text": "Before attempting hostile same-host closure, obtain approval for an OS/filesystem-scoped identity-bound design and executable replacement tests"
     }
   ],
-  "pickup_diff_sha256": "2d84c23ee351e08399424dd3cd7ea0dd69641cd360f674c398187b1a45226d75",
+  "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
     "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
     "docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md"
@@ -23,25 +23,27 @@
     "docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md"
   ],
   "schema_version": 2,
-  "session_id": "260728-1344",
-  "summary": "Closed bounded P2 cooperative-writer and file-boundary validation: 64/64 gates pass, isolated source hashes match, and verdict 260728-1344 is accepting; D20260722 remains open.",
-  "test_verdict": "artifacts/260728-1344/test-verdict.json",
+  "session_id": "260728-1407",
+  "summary": "Published the P2 publication-lock security spec-diff: 64/64 P2 assertions remain passing, cooperative behavior is verified, and D20260722 remains active.",
+  "test_verdict": "artifacts/260728-1407/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
       "files": [
-        "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md"
+        "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
+        "docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md"
       ],
-      "text": "Hostile same-host LiteParse and publication-lock identity binding remain deferred"
+      "text": "D20260722 remains active: Node pathname operations do not provide hostile same-host identity binding for publication lifecycle or LiteParse execution"
     }
   ],
   "worktree_status": [
+    " M docs/.session-state.md",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-01.json",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-02.json",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-03.json",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-04.json",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-05.json",
-    "?? .codex/hooks.json",
-    "?? docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md"
+    " M session-handoff.yaml",
+    "?? .codex/hooks.json"
   ]
 }
