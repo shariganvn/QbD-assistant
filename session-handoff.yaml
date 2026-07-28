@@ -1,70 +1,46 @@
 {
   "branch": "master",
-  "da_review": "summary:\n✅ Final DA re-check: no P0/P1 blockers; 42/42 focused tests pass.\n⚠️ Step 3 modules remain unindexed in GitNexus; focused regression tests are the current compensating evidence.",
+  "da_review": "summary:\n🔥 RESOLVED: package-boundary validation now rejects surplus regular, directory, and symlink entries; validates raw stores and recomputes SHA-256.\n🔥 RESOLVED: fact-card/evidence-log bindings validate pre-write and on revalidation; private publisher and execution-report lifecycle are enforced.\n⚠️ Human-approved stale SessionStart baseline bypass was used for this closeout; BUG-64 is tracked in agent-baton.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-27T16:36:26+00:00",
-  "git_head": "02e17223189cc04a3676130d25a03fa2f6e74720",
+  "generated_at": "2026-07-28T03:07:03+00:00",
+  "git_head": "0933cd72ba1ce50b5f054b61e8bbb333a6071ea3",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/qbd-p4-reasoning-layer/step-04-cowork-skill-artifacts.md",
+        "docs/plans/qbd-p4-reasoning-layer/step-05-integrated-gates-review.md",
         "docs/plans/qbd-p4-reasoning-layer/gates.yaml",
-        "docs/decisions/D20260727-qbd-p4-reasoning-policy.md",
-        "cowork-p2-kit/reasoning/decision-engine.mjs",
-        "cowork-p2-kit/reasoning/selection-contracts.mjs"
+        "docs/decisions/D20260727-qbd-p4-reasoning-policy.md"
       ],
-      "text": "Execute Step 4 publication/skill artifacts from the frozen test-only Step 3 decision/evaluation contract; do not treat the fixture as FD-approved production authority"
+      "text": "Begin Step 5 integrated revalidation from the finalized Step 4 package boundary; the test-only rubric fixture remains non-production authority."
     }
   ],
-  "pickup_diff_sha256": "3860fe6c135e4c3e93e11f87a61d3ae784384b3d78daf2af0322af8cf8e9f345",
+  "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
-    "cowork-p2-kit/ingest/admission.mjs",
-    "cowork-p2-kit/ingest/config.mjs",
-    "cowork-p2-kit/ingest/publication.mjs",
-    "cowork-p2-kit/ingest/tests/file-boundaries.test.mjs",
-    "cowork-p2-kit/ingest/tests/publication-concurrency.test.mjs",
-    "cowork-p2-kit/ingest/tests/publication-failure.test.mjs",
-    "cowork-p2-kit/reasoning/decision-engine.mjs",
-    "cowork-p2-kit/reasoning/selection-contracts.mjs",
+    "artifacts/session-start/startup-baseline.json",
     "docs/decisions/D20260727-qbd-p4-reasoning-policy.md",
-    "docs/plans/qbd-p2-ingest-completion/plan.md",
     "docs/plans/qbd-p4-reasoning-layer/gates.yaml",
-    "docs/plans/qbd-p4-reasoning-layer/step-04-cowork-skill-artifacts.md",
-    "docs/reports/qbd-p2-ingest-completion"
+    "docs/plans/qbd-p4-reasoning-layer/step-05-integrated-gates-review.md",
+    "project-state.yaml"
   ],
   "pickup_fingerprint_files": [
-    "cowork-p2-kit/ingest/admission.mjs",
-    "cowork-p2-kit/ingest/config.mjs",
-    "cowork-p2-kit/ingest/publication.mjs",
-    "cowork-p2-kit/ingest/tests/file-boundaries.test.mjs",
-    "cowork-p2-kit/ingest/tests/publication-concurrency.test.mjs",
-    "cowork-p2-kit/ingest/tests/publication-failure.test.mjs",
-    "cowork-p2-kit/reasoning/decision-engine.mjs",
-    "cowork-p2-kit/reasoning/selection-contracts.mjs",
+    "artifacts/session-start/startup-baseline.json",
     "docs/decisions/D20260727-qbd-p4-reasoning-policy.md",
-    "docs/plans/qbd-p2-ingest-completion/plan.md",
     "docs/plans/qbd-p4-reasoning-layer/gates.yaml",
-    "docs/plans/qbd-p4-reasoning-layer/step-04-cowork-skill-artifacts.md",
-    "docs/reports/qbd-p2-ingest-completion"
+    "docs/plans/qbd-p4-reasoning-layer/step-05-integrated-gates-review.md",
+    "project-state.yaml"
   ],
   "schema_version": 2,
-  "session_id": "260727-2330",
-  "summary": "Closed Step 3 test-only decision core: strict record/candidate/card binding, frozen-contract-valid returns or fail-closed rejection, strict numeric parsing, stable 42/42 verdict, and no Step 4 implementation.",
-  "test_verdict": "artifacts/260727-2330/test-verdict.json",
+  "session_id": "260728-0906",
+  "summary": "Completed P4 Step 04 deterministic decision-package publication and bounded skill artifacts; verified G-P4-01 50/50, G-P4-02 19/19, G-P4-03 42/42, and G-P4-04 7/7. State write used the actual prior state tokens after the stale SessionStart baseline was detected, under explicit human approval.",
+  "test_verdict": "artifacts/260728-0906/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
       "files": [
-        "cowork-p2-kit/ingest/admission.mjs",
-        "cowork-p2-kit/ingest/config.mjs",
-        "cowork-p2-kit/ingest/publication.mjs",
-        "cowork-p2-kit/ingest/tests/file-boundaries.test.mjs",
-        "cowork-p2-kit/ingest/tests/publication-concurrency.test.mjs",
-        "cowork-p2-kit/ingest/tests/publication-failure.test.mjs",
-        "docs/plans/qbd-p2-ingest-completion/plan.md",
-        "docs/reports/qbd-p2-ingest-completion"
+        "project-state.yaml",
+        "artifacts/session-start/startup-baseline.json"
       ],
-      "text": "Preserve pre-existing uncommitted P2 ingest worktree changes; they are outside this Step 3 closeout and were not committed"
+      "text": "SessionStart baseline stale on a genuine new session; human-approved manual baseline adoption used for this closeout. BUG-64 recorded in agent-baton."
     }
   ],
   "worktree_status": [
