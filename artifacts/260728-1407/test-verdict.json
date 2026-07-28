@@ -1,0 +1,73 @@
+{
+  "adapter": {
+    "id": "not-run",
+    "report_path": null,
+    "report_sha256": null,
+    "report_size_bytes": null,
+    "stable": null
+  },
+  "argv": [
+    "/home/nguyenhp/.local/share/pipx/venvs/agent-baton/bin/python",
+    "-m",
+    "pytest"
+  ],
+  "branch": "master",
+  "command": [
+    "/home/nguyenhp/.local/share/pipx/venvs/agent-baton/bin/python",
+    "-m",
+    "pytest"
+  ],
+  "counts": {
+    "collected": null,
+    "deselected": null,
+    "error": null,
+    "failed": null,
+    "passed": null,
+    "skipped": null,
+    "warnings": null,
+    "xfailed": null,
+    "xpassed": null
+  },
+  "dirty_files": {
+    ".codex/hooks.json": {
+      "sha256": "5d89570caace282b34db63c9a468ba3f51caded1562973ec62bbbda0022b31e5",
+      "status": "added"
+    }
+  },
+  "duration_seconds": 0.419155,
+  "evidence_level": "local-attested",
+  "evidence_quality": "not-run",
+  "exit_code": null,
+  "finished_at": "2026-07-28T07:07:42.660984+00:00",
+  "git": {
+    "branch_after": "master",
+    "branch_before": "master",
+    "head_after": "ef74f177902b0d954131edbf16dcccadfce72af0",
+    "head_before": "ef74f177902b0d954131edbf16dcccadfce72af0",
+    "stable": true
+  },
+  "git_head": "ef74f177902b0d954131edbf16dcccadfce72af0",
+  "log_path": "artifacts/260728-1407/test-output.log",
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log_size_bytes": 0,
+  "outcome": "not_run",
+  "reason": "Documentation-only spec-diff; P2 runtime evidence remains artifacts/260728-1344/test-verdict.json and gate JSON.",
+  "requested_test_targets": [],
+  "runner_id": "stdlib-popen-v3",
+  "runtime": {
+    "implementation": "CPython",
+    "version": "3.14.4"
+  },
+  "schema_version": 3,
+  "session_id": "260728-1407",
+  "started_at": "2026-07-28T07:07:42.241820+00:00",
+  "status": "not_run",
+  "summary": "",
+  "test_targets": [],
+  "tool": "run_tests_with_verdict.py",
+  "worktree": {
+    "after": "adc1dc8679c7e277b599b168f2776feee069928ba2392f47501feefd2b488153",
+    "before": "adc1dc8679c7e277b599b168f2776feee069928ba2392f47501feefd2b488153",
+    "stable": true
+  }
+}
