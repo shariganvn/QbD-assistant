@@ -27,6 +27,7 @@ downstream execution flow was affected.
 
 ## Open technical debt
 
-The same-host trust-validation-to-invocation race remains open as
-[D20260722](../../decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md). It is not a claim that the
-completed Phase 2 gates resolve TOCTOU.
+The same-host trust-validation-to-invocation race and publication-lock release race remain open as
+[D20260722](../../decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md). They are not a claim that the
+completed Phase 2 gates resolve TOCTOU. The separate publication-lock spec-diff review remains deferred
+until this verified P2 scope is committed and reconciled.

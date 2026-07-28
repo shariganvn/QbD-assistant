@@ -1,0 +1,32 @@
+id: P20260728-qbd-p2-ingest-closeout-attestation
+date: "2026-07-28"
+workstream: qbd-p2-ingest-completion
+status: done
+summary: >-
+  Recorded the final accepting closeout verdict and synchronized the canonical P2
+  validation plan after the final independent review; D20260722 remains open.
+changed_files:
+- docs/test-plans/T20260728-qbd-p2-ingest-post-closure-validation.yaml
+- docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md
+- docs/progress/P20260728-qbd-p2-ingest-closeout-attestation.yaml
+- TEST_PLAN.md
+- PROGRESS.md
+- DECISIONS.md
+tests_run:
+  verdict: passed
+  counts:
+    passed: 64
+    failed: 0
+    warnings: 0
+  evidence:
+    suite: docs/reports/qbd-p2-ingest-completion/gates/suite.json
+    session_verdict: artifacts/260728-1344/test-verdict.json
+decisions:
+- D20260722
+next_pickup:
+  files:
+  - docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md
+  - docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md
+  text: >-
+    In a new reconciled session, review the committed P2 scope against D20260722
+    before updating the separate publication-lock spec-diff report.

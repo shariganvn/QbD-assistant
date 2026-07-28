@@ -1,42 +1,40 @@
 <!-- GENERATED VIEW — do not edit manually -->
-<!-- Source: docs/test-plans/T20260728-qbd-p4-reasoning-step-05.yaml -->
+<!-- Source: docs/test-plans/T20260728-qbd-p2-ingest-post-closure-validation.yaml -->
 <!-- Regenerate: baton render-test-plan -->
-<!-- Source fingerprint: sha256:28d6ef732bb159caa2e09c0c2da5710498b209df83ad7a18db7a208d76097374 -->
+<!-- Source fingerprint: sha256:d4ee84e2ff5238b6dafffa8834ec3027da9f3461719ef4759362b0e36d1b2182 -->
 
 # TEST_PLAN — Active Validation Gates
 
-## T20260728-qbd-p4-reasoning-step-05
+## T20260728-qbd-p2-ingest-post-closure-validation
 
 Status: **Executed — results recorded**
 
-- Workstream: `qbd-p4-reasoning-layer`
+- Workstream: `qbd-p2-ingest-completion`
 - Date: 2026-07-28
-- Plan: `docs/plans/qbd-p4-reasoning-layer/step-05-integrated-gates-review.md`
+- Plan: `docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md`
 
 ## Scope
 
-Run the complete ordered P4 acceptance suite, validate one machine-produced evidence set, and revalidate a temporary deterministic published package at the git-retained decision root against the committed Step 0 store bytes.
+Verify the bounded recursive-input, artifact-root, and cooperative publication-lock changes in an isolated checkout, then retain fresh canonical P2 gate evidence.
 
 ### Changed files
 
-- `package.json`
-- `cowork-p2-kit/reasoning/tests/verify-reasoning.mjs`
-- `cowork-p2-kit/reasoning/tests/verify-reasoning-evidence.mjs`
-- `cowork-p2-kit/reasoning/tests/e2e-decision.test.mjs`
-- `cowork-p2-kit/reasoning/tests/gate-evidence-validator.mjs`
+- `cowork-p2-kit/ingest/admission.mjs`
+- `cowork-p2-kit/ingest/config.mjs`
+- `cowork-p2-kit/ingest/publication.mjs`
+- `cowork-p2-kit/ingest/tests/file-boundaries.test.mjs`
+- `cowork-p2-kit/ingest/tests/publication-concurrency.test.mjs`
+- `cowork-p2-kit/ingest/tests/publication-failure.test.mjs`
+- `docs/reports/qbd-p2-ingest-completion/gates/`
+- `docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md`
+- `docs/reports/qbd-p2-ingest-completion/code-review.md`
 - `docs/test-plans/active.yaml`
-- `docs/test-plans/T20260728-qbd-p4-reasoning-step-05.yaml`
+- `docs/test-plans/T20260728-qbd-p2-ingest-post-closure-validation.yaml`
+- `docs/progress/P20260728-qbd-p2-ingest-post-closure-validation.yaml`
+- `docs/progress/P20260728-qbd-p2-ingest-closeout-attestation.yaml`
 - `TEST_PLAN.md`
-- `docs/reports/qbd-p4-reasoning-layer/gates/G-P4-01.json`
-- `docs/reports/qbd-p4-reasoning-layer/gates/G-P4-02.json`
-- `docs/reports/qbd-p4-reasoning-layer/gates/G-P4-03.json`
-- `docs/reports/qbd-p4-reasoning-layer/gates/G-P4-04.json`
-- `docs/reports/qbd-p4-reasoning-layer/gates/G-P4-05.json`
-- `docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-05.json`
-- `docs/reports/qbd-p4-reasoning-layer/code-review.md`
-- `docs/plans/qbd-p4-reasoning-layer/plan.md`
-- `docs/plans/qbd-p4-reasoning-layer/gates.yaml`
-- `docs/progress/P20260728-qbd-p4-reasoning-step-05.yaml`
+- `PROGRESS.md`
+- `DECISIONS.md`
 
 ## Approval
 
@@ -46,18 +44,18 @@ Run the complete ordered P4 acceptance suite, validate one machine-produced evid
 
 ## Commands
 
-### verify-reasoning — Run G-P4-01 through G-P4-05 in order through the P4 evidence wrapper under one suite UUID.
+### isolated-ingest-verification — Run the ordered G-01 through G-10 ingest suite from a byte-identical isolated checkout.
 
 ```bash
-npm run verify:reasoning
+npm run verify:ingest
 ```
 
 
 ## Results
 
 Verdict: **passed**
-Artifact: `artifacts/260728-0906/test-verdict.json`
-Counts: passed=122, failed=0, warnings=0
+Artifact: `artifacts/260728-1344/test-verdict.json`
+Counts: passed=64, failed=0, warnings=0
 
 ---
 

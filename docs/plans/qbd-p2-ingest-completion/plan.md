@@ -123,9 +123,18 @@ Phase 2 is complete only when all of the following are true:
 - Gate evidence must be retained as version-controlled Step 5 review input rather than ignored local
   artifacts, and the runner must enforce the approved per-gate and suite deadlines.
 - The accepted same-host TOCTOU hardening follow-up is tracked as
-  [D20260722](../../decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md). It is intentionally
-  outside this completed Phase 2 plan; green gates do not close it.
+  [D20260722](../../decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md). It covers both trusted
+  LiteParse invocation and publication-lock release against a non-cooperating same-host filesystem actor.
+  It is intentionally outside this completed Phase 2 plan; green gates demonstrate cooperative-writer
+  behaviour and do not close this debt.
 - Package scripts are a shared-file boundary; inspect the existing diff before any implementation edit.
+
+## Post-closure execution patch
+
+The historical P2 completion table remains closed. Any validation of the currently pending
+cooperative-writer/file-boundary changes follows the
+[post-closure TOCTOU validation plan patch](./post-closure-toctou-validation-plan-patch.md):
+create accepting evidence and finish session closeout **before** a separate spec-diff review.
 
 ## Design basis
 

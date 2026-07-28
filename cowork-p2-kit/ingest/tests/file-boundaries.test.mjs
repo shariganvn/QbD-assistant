@@ -8,9 +8,11 @@ import { fileURLToPath } from "node:url";
 import { admitInputs } from "../admission.mjs";
 import { createConfig } from "../config.mjs";
 import { createLiteparseAdapter } from "../liteparse-adapter.mjs";
+import { publishRecords } from "../publication.mjs";
 
 const testDir = dirname(fileURLToPath(import.meta.url));
 const recordSchema = resolve(testDir, "../../store/records.schema.json");
+const records = readFileSync(resolve(testDir, "fixtures/contract/records.jsonl"), "utf8").trim().split("\n").map(JSON.parse);
 const evidence = [];
 
 function setup(name) {
@@ -63,6 +65,23 @@ test("unsupported input is rejected before parsing or publication", () => {
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
+test("nested symlinks and unsupported files are rejected before parsing", () => {
+  const { root, inputsRoot, storeRoot } = setup("nested-boundaries");
+  try {
+    const nested = join(inputsRoot, "trials", "nested");
+    mkdirSync(nested);
+    const outside = join(root, "outside.docx");
+    writeFileSync(outside, "untrusted");
+    symlinkSync(outside, join(nested, "linked.docx"));
+    publicManifest(inputsRoot, "nested/linked.docx");
+    expectRejected("nested-symlink", storeRoot, () => admitInputs(createConfig({ inputsRoot, storeRoot, kitDir: root })), "E_SYMLINK");
+    rmSync(join(nested, "linked.docx"));
+    writeFileSync(join(nested, "payload.exe"), "not a document");
+    publicManifest(inputsRoot, "nested/payload.exe");
+    expectRejected("nested-unsupported-extension", storeRoot, () => admitInputs(createConfig({ inputsRoot, storeRoot, kitDir: root })), "E_INPUT_UNSUPPORTED");
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
 test("LiteParse receives a literal argument array and cannot parse outside the configured root", () => {
   const { root, inputsRoot, storeRoot } = setup("adapter");
   try {
@@ -108,6 +127,40 @@ test("configured traversal, manifest escape, and duplicate normalized paths fail
 
 test("adapter rejects a non-absolute binary instead of falling back to PATH", () => {
   assert.throws(() => createLiteparseAdapter({ litBinary: "lit", fileOps: { existsSync: () => true }, runProcess: () => null }), { code: "E_CONFIG" });
+});
+
+test("publication rejects a symlinked artifact root before writer side effects", () => {
+  const { root, storeRoot } = setup("artifact-symlink");
+  try {
+    const artifactTarget = join(root, "artifact-target");
+    const artifactRoot = join(root, "artifacts");
+    mkdirSync(artifactTarget);
+    symlinkSync(artifactTarget, artifactRoot);
+    const before = storeHashes(storeRoot);
+    const config = createConfig({ storeRoot, artifactRoot, kitDir: root });
+    assert.throws(() => publishRecords(records, config), { code: "E_SYMLINK" });
+    assert.deepEqual(storeHashes(storeRoot), before);
+    assert.deepEqual(readdirSync(storeRoot).filter((name) => name.includes(".tmp") || name.endsWith(".lock")), []);
+    assert.deepEqual(readdirSync(artifactTarget), []);
+    evidence.push({ case: "artifact-root-symlink", before, after: storeHashes(storeRoot) });
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test("publication rejects a missing artifact root under a symlinked ancestor without creating it", () => {
+  const { root, storeRoot } = setup("artifact-ancestor-symlink");
+  try {
+    const outside = join(root, "outside");
+    const artifactParent = join(root, "artifact-parent");
+    const artifactRoot = join(artifactParent, "runs");
+    mkdirSync(outside);
+    symlinkSync(outside, artifactParent);
+    const before = storeHashes(storeRoot);
+    const config = createConfig({ storeRoot, artifactRoot, kitDir: root });
+    assert.throws(() => publishRecords(records, config), { code: "E_SYMLINK" });
+    assert.deepEqual(storeHashes(storeRoot), before);
+    assert.equal(existsSync(join(outside, "runs")), false);
+    evidence.push({ case: "artifact-ancestor-symlink", before, after: storeHashes(storeRoot) });
+  } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
 test.after(() => {

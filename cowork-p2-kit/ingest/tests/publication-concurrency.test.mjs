@@ -71,12 +71,19 @@ test("a second synchronized writer exits locked while the first owns a unique te
       await new Promise((resolve) => setTimeout(resolve, 10));
     }
     assert.ok(existsSync(join(storeRoot, "records.jsonl.lock")), "first writer never acquired the lock");
+    while (!readdirSync(storeRoot).some((file) => file.includes(".tmp")) && Date.now() < deadline) {
+      await new Promise((resolve) => setTimeout(resolve, 10));
+    }
+    const firstTemp = readdirSync(storeRoot).find((file) => file.includes(".tmp"));
+    assert.ok(firstTemp, "first writer never created its private temp file");
     const started = Date.now();
     const before = hashes(storeRoot);
     const second = spawnSync(process.execPath, [scriptPath, storeRoot, artifactRoot, recordsPath], { encoding: "utf8" });
     assert.equal(second.status, 1);
     assert.match(second.stderr, /E_PUBLICATION_LOCKED/);
     assert.ok(Date.now() - started < 600, "second writer waited instead of returning immediately");
+    assert.deepEqual(hashes(storeRoot), before, "locked writer changed the active writer's files");
+    assert.ok(readdirSync(storeRoot).includes(firstTemp), "locked writer removed the active writer's temp file");
     const [exitCode] = await once(first, "close");
     assert.equal(exitCode, 0);
     assert.deepEqual(readdirSync(storeRoot).filter((file) => file.endsWith(".lock") || file.includes(".tmp")), []);
@@ -97,6 +104,23 @@ test("only an old lock whose owner is absent is reclaimed", () => {
     assert.equal(result.recordCount, records.length);
     assert.deepEqual(readdirSync(storeRoot).filter((name) => name.endsWith(".lock") || name.includes(".tmp")), []);
     evidence.push({ case: "stale-reclaim", before, after: hashes(storeRoot) });
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test("an old lock with a live owner fails closed without store mutation", () => {
+  const root = mkdtempSync(join(tmpdir(), "publication-old-live-"));
+  const storeRoot = join(root, "store");
+  const artifactRoot = join(root, "artifacts");
+  try {
+    mkdirSync(storeRoot);
+    copyFileSync(schema, join(storeRoot, "records.schema.json"));
+    writeFileSync(join(storeRoot, "records.jsonl"), "{\"prior\":true}\n");
+    writeFileSync(join(storeRoot, "records.jsonl.lock"), JSON.stringify({ pid: 999999, createdAt: new Date(Date.now() - 300001).toISOString(), runId: "abababababababababababababababab" }));
+    const before = hashes(storeRoot);
+    const config = createConfig({ storeRoot, artifactRoot, kitDir: root, pidIsAlive: () => true });
+    assert.throws(() => publishRecords(records, config), { code: "E_PUBLICATION_LOCKED" });
+    assert.deepEqual(hashes(storeRoot), before);
+    evidence.push({ case: "old-live-lock", before, after: hashes(storeRoot) });
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 

@@ -2,26 +2,28 @@ schema_version: 1
 branch: master
 worktree_id: nguyen-dell-7577:master
 active_workstream:
-  id: qbd-p4-reasoning-layer
-  plan: docs/plans/qbd-p4-reasoning-layer/plan.md
+  id: qbd-p2-ingest-completion
+  plan: 
+    docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md
   status: in-progress
 current_pickup:
   source: session-handoff.yaml
   summary: >-
-    P4 reasoning implementation is closed through G-P4-05. Do not treat the
-    test-only rubric fixture as FD-approved production authority; production
-    rubric, attestation, and authorization remain deferred.
+    P2 cooperative-writer and file-boundary validation is closed with an accepting
+    verdict. In a new reconciled session, review the committed scope against
+    D20260722 before updating the separate publication-lock spec-diff report.
   files:
-  - docs/plans/qbd-p4-reasoning-layer/plan.md
-  - docs/decisions/D20260727-qbd-p4-reasoning-policy.md
+  - docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md
+  - docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md
+  - docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md
 relevant_progress:
-- P20260728-qbd-p4-reasoning-step-05
-- P20260728-qbd-p4-reasoning-step-04
+- P20260728-qbd-p2-ingest-closeout-attestation
+- P20260728-qbd-p2-ingest-post-closure-validation
 relevant_decisions:
-- D20260727
+- D20260722
 read_next:
 - session-handoff.yaml
-- docs/plans/qbd-p4-reasoning-layer/plan.md
-- docs/decisions/D20260727-qbd-p4-reasoning-policy.md
-updated_at: '2026-07-28T05:37:20.650256+00:00'
-git_head: 251e2587f987b3707b19cf92193fbf541be89663
+- docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md
+- docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md
+updated_at: '2026-07-28T06:53:52.559411+00:00'
+git_head: 5a2e6253bb117a007306953ee30ba96a4ecc5349

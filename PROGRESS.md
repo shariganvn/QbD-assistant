@@ -1,7 +1,7 @@
 <!-- GENERATED VIEW — do not edit manually -->
 <!-- Source: docs/progress/*.yaml and docs/decisions/D*.md -->
 <!-- Regenerate: baton render-workflow -->
-<!-- Source fingerprint: sha256:d8334e13e84cfd1b82a8fff6bfb3bd208c52034ced8268dda1be03ee7faa3ad5 -->
+<!-- Source fingerprint: sha256:674b99fa19ee9ee667fd6e5da72f401628d9c35806cbb11863603b9dc1579c01 -->
 
 # PROGRESS
 
@@ -9,18 +9,18 @@
 
 ## Current workstream
 
-- ID: `qbd-p4-reasoning-layer`
+- ID: `qbd-p2-ingest-completion`
 - Status: `in-progress`
-- Plan: `docs/plans/qbd-p4-reasoning-layer/plan.md`
-- Current pickup: Step 4 is closed with G-P4-04 at 7/7 and final boundary hardening. Begin Step 5 integrated revalidation; the test-only rubric fixture remains non-production authority.
-- Pickup files: `docs/plans/qbd-p4-reasoning-layer/step-05-integrated-gates-review.md`, `docs/plans/qbd-p4-reasoning-layer/gates.yaml`, `docs/decisions/D20260727-qbd-p4-reasoning-policy.md`
+- Plan: `docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md`
+- Current pickup: P2 cooperative-writer and file-boundary validation is closed with an accepting verdict. In a new reconciled session, review the committed scope against D20260722 before updating the separate publication-lock spec-diff report.
+- Pickup files: `docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md`, `docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md`, `docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md`
 
 ## Latest progress
 
 | Date | ID | Status | Summary |
 |---|---|---|---|
-| 2026-07-28 | `P20260728-qbd-p4-reasoning-step-04-publisher-surface` | done | Finalized Step 4 publication surface: raw store bytes are parsed internally for every shared validation, and the concrete package writer is private to the publication module while cli.mjs retains only CLI compatibility exports. |
-| 2026-07-28 | `P20260728-qbd-p4-reasoning-step-04` | done | Closed Step 4 bounded publication and Cowork instructions: G-P4-04 passed 7/7, with complete-package binding, canonical JSON and deterministic Markdown, publication receipt validation, and a human-only execution-report seam. |
+| 2026-07-28 | `P20260728-qbd-p2-ingest-post-closure-validation` | done | Verified the bounded P2 cooperative-writer and file-boundary changes with fresh canonical G-01 through G-10 evidence, an accepting attested verdict, and an independent review; D20260722 remains open. |
+| 2026-07-28 | `P20260728-qbd-p2-ingest-closeout-attestation` | done | Recorded the final accepting closeout verdict and synchronized the canonical P2 validation plan after the final independent review; D20260722 remains open. |
 
 ## Blockers
 

@@ -8,7 +8,7 @@
 import {
   readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync,
   renameSync, unlinkSync, copyFileSync, lstatSync, readlinkSync, openSync,
-  closeSync, realpathSync,
+  closeSync, linkSync, realpathSync,
 } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -36,6 +36,7 @@ const DEFAULT_FILE_OPS = {
   readlinkSync,
   openSync,
   closeSync,
+  linkSync,
   realpathSync,
 };
 

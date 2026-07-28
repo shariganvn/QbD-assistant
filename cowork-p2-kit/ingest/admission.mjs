@@ -18,6 +18,10 @@ function filesIn(dir, root, config) {
     if (entry.name === ".gitkeep") continue;
     const path = resolve(canonicalDir, entry.name);
     if (entry.isSymbolicLink()) reject("E_SYMLINK", `Symlink rejected: ${path}`, { path });
+    if (entry.isDirectory()) {
+      files.push(...filesIn(path, root, config));
+      continue;
+    }
     if (!entry.isFile()) continue;
     const stat = fileOps.lstatSync(path);
     if (stat.isSymbolicLink() || fileOps.realpathSync(path) !== path) reject("E_SYMLINK", `Symlink rejected: ${path}`, { path });

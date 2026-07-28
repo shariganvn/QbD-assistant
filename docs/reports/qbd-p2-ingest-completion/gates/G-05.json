@@ -7,14 +7,14 @@
     "cowork-p2-kit/ingest/tests/publication-concurrency.test.mjs"
   ],
   "exit_code": 0,
-  "raw_tap_output": "TAP version 13\n# Subtest: a fresh live lock is rejected immediately and cannot be removed by another writer\nok 1 - a fresh live lock is rejected immediately and cannot be removed by another writer\n  ---\n  duration_ms: 17.217439\n  type: 'test'\n  ...\n# Subtest: a second synchronized writer exits locked while the first owns a unique temp file\nok 2 - a second synchronized writer exits locked while the first owns a unique temp file\n  ---\n  duration_ms: 964.408477\n  type: 'test'\n  ...\n# Subtest: only an old lock whose owner is absent is reclaimed\nok 3 - only an old lock whose owner is absent is reclaimed\n  ---\n  duration_ms: 3.179888\n  type: 'test'\n  ...\n# Subtest: failed stale-lock replacement restores the exact prior lock\nok 4 - failed stale-lock replacement restores the exact prior lock\n  ---\n  duration_ms: 1.368739\n  type: 'test'\n  ...\n# Subtest: reclaim collision removes only its private reclaim file, never the competing lock\nok 5 - reclaim collision removes only its private reclaim file, never the competing lock\n  ---\n  duration_ms: 2.144708\n  type: 'test'\n  ...\n# Subtest: malformed lock fails closed without store mutation\nok 6 - malformed lock fails closed without store mutation\n  ---\n  duration_ms: 1.314837\n  type: 'test'\n  ...\n# Subtest: fresh absent owner lock fails closed without store mutation\nok 7 - fresh absent owner lock fails closed without store mutation\n  ---\n  duration_ms: 1.162751\n  type: 'test'\n  ...\n# Subtest: indeterminate owner lock fails closed without store mutation\nok 8 - indeterminate owner lock fails closed without store mutation\n  ---\n  duration_ms: 1.098735\n  type: 'test'\n  ...\n1..8\n# tests 8\n# suites 0\n# pass 8\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1072.550859\n",
+  "raw_tap_output": "TAP version 13\n# Subtest: a fresh live lock is rejected immediately and cannot be removed by another writer\nok 1 - a fresh live lock is rejected immediately and cannot be removed by another writer\n  ---\n  duration_ms: 18.169333\n  type: 'test'\n  ...\n# Subtest: a second synchronized writer exits locked while the first owns a unique temp file\nok 2 - a second synchronized writer exits locked while the first owns a unique temp file\n  ---\n  duration_ms: 971.462006\n  type: 'test'\n  ...\n# Subtest: only an old lock whose owner is absent is reclaimed\nok 3 - only an old lock whose owner is absent is reclaimed\n  ---\n  duration_ms: 9.827549\n  type: 'test'\n  ...\n# Subtest: an old lock with a live owner fails closed without store mutation\nok 4 - an old lock with a live owner fails closed without store mutation\n  ---\n  duration_ms: 7.885202\n  type: 'test'\n  ...\n# Subtest: failed stale-lock replacement restores the exact prior lock\nok 5 - failed stale-lock replacement restores the exact prior lock\n  ---\n  duration_ms: 5.30261\n  type: 'test'\n  ...\n# Subtest: reclaim collision removes only its private reclaim file, never the competing lock\nok 6 - reclaim collision removes only its private reclaim file, never the competing lock\n  ---\n  duration_ms: 3.331728\n  type: 'test'\n  ...\n# Subtest: malformed lock fails closed without store mutation\nok 7 - malformed lock fails closed without store mutation\n  ---\n  duration_ms: 2.825384\n  type: 'test'\n  ...\n# Subtest: fresh absent owner lock fails closed without store mutation\nok 8 - fresh absent owner lock fails closed without store mutation\n  ---\n  duration_ms: 2.351092\n  type: 'test'\n  ...\n# Subtest: indeterminate owner lock fails closed without store mutation\nok 9 - indeterminate owner lock fails closed without store mutation\n  ---\n  duration_ms: 2.237554\n  type: 'test'\n  ...\n1..9\n# tests 9\n# suites 0\n# pass 9\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1115.016689\n",
   "raw_stderr": "",
-  "timestamp": "2026-07-22T12:19:04.145Z",
-  "run_id": "9322cd8d-ce26-4945-9145-8878cb4a3f62",
-  "suite_run_id": "6a7c250a-1613-4730-8f8a-42f444f14324",
+  "timestamp": "2026-07-28T06:33:27.872Z",
+  "run_id": "26b2b62f-eac4-428f-943c-77d78e1a28cb",
+  "suite_run_id": "38312764-079e-40f6-9ad1-b230244b41b8",
   "assertions_summary": {
-    "total": 8,
-    "passed": 8,
+    "total": 9,
+    "passed": 9,
     "failed": 0,
     "skipped": 0,
     "todo": 0,
@@ -25,20 +25,20 @@
       "case": "live-lock",
       "before": {
         "records.jsonl": "25930dbc97628788cbb0b877909fc6ffe51d0b66188d03ae6c9d07643b57bf01",
-        "records.jsonl.lock": "9371795b4dd093ed914a60c1b003741c9df9b72013ddb5ecdd72040f6e127a98",
+        "records.jsonl.lock": "303d68c972732d806dd8d849f37c2e42323c3816b26a077f011210ccbb09aacd",
         "records.schema.json": "216b47d41ec7d6a94a6cd4f9c0e2e687524f3836969f53ce66b06d8745dabc0f"
       },
       "after": {
         "records.jsonl": "25930dbc97628788cbb0b877909fc6ffe51d0b66188d03ae6c9d07643b57bf01",
-        "records.jsonl.lock": "9371795b4dd093ed914a60c1b003741c9df9b72013ddb5ecdd72040f6e127a98",
+        "records.jsonl.lock": "303d68c972732d806dd8d849f37c2e42323c3816b26a077f011210ccbb09aacd",
         "records.schema.json": "216b47d41ec7d6a94a6cd4f9c0e2e687524f3836969f53ce66b06d8745dabc0f"
       }
     },
     {
       "case": "two-writers",
       "before": {
-        "records.jsonl.91c87480-858d-4406-a434-e93b6f506803.tmp": "ea04ad7f7adbaed2d0092ecb4163926f904b810a2bb2ca2bd986c3c2b8889579",
-        "records.jsonl.lock": "980808a60383b4cbb7e8e8cfd1a4ee0964bb3ce87fe1029cee652fa8da77bf1d",
+        "records.jsonl.9e63f6ab-241e-4f8e-bf69-306c3b20503a.tmp": "ea04ad7f7adbaed2d0092ecb4163926f904b810a2bb2ca2bd986c3c2b8889579",
+        "records.jsonl.lock": "934776fe6aeb113f6bdf3f670c1310a63d27c5a85ff59df7ac55fc289728bbc6",
         "records.schema.json": "216b47d41ec7d6a94a6cd4f9c0e2e687524f3836969f53ce66b06d8745dabc0f"
       },
       "after": {
@@ -49,7 +49,7 @@
     {
       "case": "stale-reclaim",
       "before": {
-        "records.jsonl.lock": "c03bbc871d92ff42952715e83eabde0406c2052bfea7ae8d0bb67807179838b9",
+        "records.jsonl.lock": "f6f41c7266d2d24f56de481883d5ab3191b65f185a5f63ae6933812938d3573e",
         "records.schema.json": "216b47d41ec7d6a94a6cd4f9c0e2e687524f3836969f53ce66b06d8745dabc0f"
       },
       "after": {
@@ -58,13 +58,26 @@
       }
     },
     {
-      "case": "stale-replacement-rollback",
+      "case": "old-live-lock",
       "before": {
-        "records.jsonl.lock": "2e8ffa5ca6e2466025f7e8428f88600ae87efc896a4f0dacde55dc12d23ea5fe",
+        "records.jsonl": "25930dbc97628788cbb0b877909fc6ffe51d0b66188d03ae6c9d07643b57bf01",
+        "records.jsonl.lock": "6b8e96915327b594c90f9f368d83397501f4ebd16a81911d9513468e590be731",
         "records.schema.json": "216b47d41ec7d6a94a6cd4f9c0e2e687524f3836969f53ce66b06d8745dabc0f"
       },
       "after": {
-        "records.jsonl.lock": "2e8ffa5ca6e2466025f7e8428f88600ae87efc896a4f0dacde55dc12d23ea5fe",
+        "records.jsonl": "25930dbc97628788cbb0b877909fc6ffe51d0b66188d03ae6c9d07643b57bf01",
+        "records.jsonl.lock": "6b8e96915327b594c90f9f368d83397501f4ebd16a81911d9513468e590be731",
+        "records.schema.json": "216b47d41ec7d6a94a6cd4f9c0e2e687524f3836969f53ce66b06d8745dabc0f"
+      }
+    },
+    {
+      "case": "stale-replacement-rollback",
+      "before": {
+        "records.jsonl.lock": "f87c2fc98569c4f977fa7dd064b04c84db171fbb7f4b04cd12226af58fa13b75",
+        "records.schema.json": "216b47d41ec7d6a94a6cd4f9c0e2e687524f3836969f53ce66b06d8745dabc0f"
+      },
+      "after": {
+        "records.jsonl.lock": "f87c2fc98569c4f977fa7dd064b04c84db171fbb7f4b04cd12226af58fa13b75",
         "records.schema.json": "216b47d41ec7d6a94a6cd4f9c0e2e687524f3836969f53ce66b06d8745dabc0f"
       }
     },
@@ -72,7 +85,7 @@
       "case": "reclaim-collision",
       "before": {},
       "after": {
-        "records.jsonl.lock": "d163fe87cefa3800a5c4ba033113085ea3f6e46fe53c5811db91526f8810b0b9",
+        "records.jsonl.lock": "f334428f5738ae9ab4060cd2112e4a992309dae4f1a6e6000a595b550a4d2cda",
         "records.schema.json": "216b47d41ec7d6a94a6cd4f9c0e2e687524f3836969f53ce66b06d8745dabc0f"
       }
     },
@@ -93,12 +106,12 @@
       "case": "fresh absent owner",
       "before": {
         "records.jsonl": "25930dbc97628788cbb0b877909fc6ffe51d0b66188d03ae6c9d07643b57bf01",
-        "records.jsonl.lock": "47c587ffd5003f79af767dfb43bd7c7b48cf488c539329e3234a98e358debc5b",
+        "records.jsonl.lock": "164b280efbffc5ce8300dd35d19896b0b5701047b94de8fbd6ec0a458ed0cb3a",
         "records.schema.json": "216b47d41ec7d6a94a6cd4f9c0e2e687524f3836969f53ce66b06d8745dabc0f"
       },
       "after": {
         "records.jsonl": "25930dbc97628788cbb0b877909fc6ffe51d0b66188d03ae6c9d07643b57bf01",
-        "records.jsonl.lock": "47c587ffd5003f79af767dfb43bd7c7b48cf488c539329e3234a98e358debc5b",
+        "records.jsonl.lock": "164b280efbffc5ce8300dd35d19896b0b5701047b94de8fbd6ec0a458ed0cb3a",
         "records.schema.json": "216b47d41ec7d6a94a6cd4f9c0e2e687524f3836969f53ce66b06d8745dabc0f"
       }
     },
@@ -106,18 +119,18 @@
       "case": "indeterminate owner",
       "before": {
         "records.jsonl": "25930dbc97628788cbb0b877909fc6ffe51d0b66188d03ae6c9d07643b57bf01",
-        "records.jsonl.lock": "ded4738dc81b4de5d7cf6154e16715c3bc0766f5c315a028b69045d423cf1e9a",
+        "records.jsonl.lock": "7b702ee07912aea3624835e0b27301139529c9751214bd93bd7cecf7d8490161",
         "records.schema.json": "216b47d41ec7d6a94a6cd4f9c0e2e687524f3836969f53ce66b06d8745dabc0f"
       },
       "after": {
         "records.jsonl": "25930dbc97628788cbb0b877909fc6ffe51d0b66188d03ae6c9d07643b57bf01",
-        "records.jsonl.lock": "ded4738dc81b4de5d7cf6154e16715c3bc0766f5c315a028b69045d423cf1e9a",
+        "records.jsonl.lock": "7b702ee07912aea3624835e0b27301139529c9751214bd93bd7cecf7d8490161",
         "records.schema.json": "216b47d41ec7d6a94a6cd4f9c0e2e687524f3836969f53ce66b06d8745dabc0f"
       }
     }
   ],
   "timeout_ms": 300000,
-  "duration_ms": 1121,
+  "duration_ms": 1162,
   "timed_out": false,
   "signal": null
 }
