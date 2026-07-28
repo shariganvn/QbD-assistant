@@ -1,7 +1,7 @@
 <!-- GENERATED VIEW — do not edit manually -->
 <!-- Source: docs/progress/*.yaml and docs/decisions/D*.md -->
 <!-- Regenerate: baton render-workflow -->
-<!-- Source fingerprint: sha256:3176d1a33ee8db31fec040c41f606a6d67c2535c4597926387f817f9cf883fbc -->
+<!-- Source fingerprint: sha256:d8334e13e84cfd1b82a8fff6bfb3bd208c52034ced8268dda1be03ee7faa3ad5 -->
 
 # DECISIONS
 

@@ -1,0 +1,64 @@
+id: T20260728-qbd-p4-reasoning-step-05
+date: "2026-07-28"
+workstream: qbd-p4-reasoning-layer
+status: executed
+plan: docs/plans/qbd-p4-reasoning-layer/step-05-integrated-gates-review.md
+scope:
+  summary: >-
+    Run the complete ordered P4 acceptance suite, validate one machine-produced
+    evidence set, and revalidate a temporary deterministic published package at
+    the git-retained decision root against the committed Step 0 store bytes.
+  changed_files:
+    - package.json
+    - cowork-p2-kit/reasoning/tests/verify-reasoning.mjs
+    - cowork-p2-kit/reasoning/tests/verify-reasoning-evidence.mjs
+    - cowork-p2-kit/reasoning/tests/e2e-decision.test.mjs
+    - cowork-p2-kit/reasoning/tests/gate-evidence-validator.mjs
+    - docs/test-plans/active.yaml
+    - docs/test-plans/T20260728-qbd-p4-reasoning-step-05.yaml
+    - TEST_PLAN.md
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-01.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-02.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-03.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-04.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-05.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-05.json
+    - docs/reports/qbd-p4-reasoning-layer/code-review.md
+    - docs/plans/qbd-p4-reasoning-layer/plan.md
+    - docs/plans/qbd-p4-reasoning-layer/gates.yaml
+    - docs/progress/P20260728-qbd-p4-reasoning-step-05.yaml
+approval:
+  required: true
+  approved_at: "2026-07-28"
+  approved_by: human
+commands:
+  - id: verify-reasoning
+    description: Run G-P4-01 through G-P4-05 in order through the P4 evidence wrapper under one suite UUID.
+    command: [npm, run, verify:reasoning]
+    requires_live_services: false
+    mutates_datastore: false
+acceptance:
+  gates: [G-P4-01, G-P4-02, G-P4-03, G-P4-04, G-P4-05]
+  evidence:
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-01.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-02.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-03.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-04.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/G-P4-05.json
+    - docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-05.json
+  invariants:
+    - One ordered runner stops at the first failed gate and rejects missing, non-pass, noncanonical, or mismatched-suite evidence.
+    - G-P4-05 is owned only by e2e-decision.test.mjs and publishes then revalidates against the committed Step 0 store snapshot.
+    - The test-only rubric package is temporary evidence only; the decision root returns to its tracked .gitkeep and no generated package is committed.
+results:
+  verdict: passed
+  artifact: artifacts/260728-0906/test-verdict.json
+  counts:
+    passed: 122
+    failed: 0
+    warnings: 0
+  notes:
+    - The attested suite ran in an isolated Git worktree so canonical gate evidence did not change the verdict worktree.
+    - Ordered suite passed G-P4-01=50, G-P4-02=19, G-P4-03=42, G-P4-04=7, and G-P4-05=4 assertions.
+    - All five retained latest evidence records share one suite UUID and the Step 0 store SHA-256.
+    - The E2E package covers non-attested, test-attested, selected-internal, receipt-tampered, missing-receipt, missing-attestation, and surplus-file variants.

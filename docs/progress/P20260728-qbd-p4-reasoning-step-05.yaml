@@ -1,0 +1,48 @@
+id: P20260728-qbd-p4-reasoning-step-05
+date: "2026-07-28"
+workstream: qbd-p4-reasoning-layer
+status: done
+summary: >-
+  Closed P4 Step 5 and the Layer B reasoning plan with an ordered 122-assertion
+  acceptance suite, canonical shared-suite evidence, published-package revalidation,
+  and a scoped GitNexus-backed closure review.
+changed_files:
+  - package.json
+  - cowork-p2-kit/reasoning/tests/gate-evidence-validator.mjs
+  - cowork-p2-kit/reasoning/tests/verify-reasoning.mjs
+  - cowork-p2-kit/reasoning/tests/verify-reasoning-evidence.mjs
+  - cowork-p2-kit/reasoning/tests/e2e-decision.test.mjs
+  - docs/plans/qbd-p4-reasoning-layer/plan.md
+  - docs/plans/qbd-p4-reasoning-layer/gates.yaml
+  - docs/reports/qbd-p4-reasoning-layer/code-review.md
+  - docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-05.json
+  - docs/test-plans/T20260728-qbd-p4-reasoning-step-05.yaml
+  - TEST_PLAN.md
+tests_run:
+  verdict: passed
+  counts:
+    passed: 122
+    failed: 0
+    warnings: 0
+  evidence:
+    focused_gate:
+      gate_id: G-P4-05
+      passed: 4
+      failed: 0
+      latest: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-05.json
+      snapshot: docs/reports/qbd-p4-reasoning-layer/gates/step-close/G-P4-05.json
+    regression_gates:
+      G-P4-01: 50
+      G-P4-02: 19
+      G-P4-03: 42
+      G-P4-04: 7
+    session_verdict: artifacts/260728-0906/test-verdict.json
+decisions:
+  - D20260727
+next_pickup:
+  files:
+    - docs/plans/qbd-p4-reasoning-layer/plan.md
+    - docs/decisions/D20260727-qbd-p4-reasoning-policy.md
+  text: >-
+    No P4 implementation work remains; real FD rubric/attestation and production
+    authorization stay deferred, and generated test-only package bytes remain uncommitted.

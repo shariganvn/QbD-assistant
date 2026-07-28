@@ -13,7 +13,7 @@
     "verify:render": "node cowork-p2-kit/render/tests/verify-render.mjs",
     "render": "node cowork-p2-kit/render/render-docx.mjs",
     "render:spike": "node cowork-p2-kit/render/render-spike.mjs",
-    "verify:reasoning": "node cowork-p2-kit/reasoning/tests/run-gate.mjs G-P4-01 cowork-p2-kit/reasoning/tests/contract.test.mjs cowork-p2-kit/reasoning/tests/output-preservation.test.mjs cowork-p2-kit/reasoning/tests/run-gate-contract.test.mjs"
+    "verify:reasoning": "node cowork-p2-kit/reasoning/tests/verify-reasoning.mjs"
   },
   "keywords": [],
   "author": "",

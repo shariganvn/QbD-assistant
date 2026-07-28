@@ -153,4 +153,4 @@ gates:
     evidence: docs/reports/qbd-p4-reasoning-layer/gates/G-P4-05.json
     owner_step: 5
     blocks: []
-    status: pending
+    status: pass

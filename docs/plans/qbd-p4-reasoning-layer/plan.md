@@ -1,7 +1,7 @@
 ---
 title: QbD P.2 Layer B reasoning core
 workstream: qbd-p4-reasoning-layer
-status: in-progress
+status: completed
 canonical: true
 created: 2026-07-24
 scope: evidence-bound formulation comparison, FD-selected-package MVP
@@ -182,7 +182,7 @@ approval and scientific adjudication.
 | 2 | [Enforce cohort and evidence boundaries](./step-02-cohort-evidence-boundaries.md) | completed | G-P4-02 (policy revision) |
 | 3 | [Rebuild the test-only selection-decision core](./step-03-rubric-decision-engine.md) | completed | G-P4-03 |
 | 4 | [Rewrite Cowork skill and publish artifacts](./step-04-cowork-skill-artifacts.md) | completed | G-P4-04 |
-| 5 | [Run integrated gates and close review](./step-05-integrated-gates-review.md) | pending | G-P4-05 |
+| 5 | [Run integrated gates and close review](./step-05-integrated-gates-review.md) | completed | G-P4-05 |
 
 Only this table may transition a step `pending -> in-progress -> completed`. A canonical policy
 decision may reopen `completed -> pending` only when the prior closure is preserved and explicitly
