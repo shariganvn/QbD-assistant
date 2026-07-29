@@ -1,49 +1,58 @@
 {
   "branch": "master",
-  "da_review": "summary:\n⚠️ Cooperative tests do not establish hostile same-host safety; private release-path replacement remains untested.\n⚠️ Shared-writable publication paths remain a production-blocking integrity/availability risk.",
+  "da_review": "summary:\n⚠️ The selected fixture is test-only; retain the inconclusive fixture as the production-shaped path.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-28T07:08:15+00:00",
-  "git_head": "9025385f1a2ab0b256f230140ec2a9370a08d88c",
+  "generated_at": "2026-07-29T01:30:32+00:00",
+  "git_head": "eb00eed3ea6083bbcb62fd986e6e5031bb8e9dd2",
   "next_pickup": [
     {
       "files": [
-        "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
-        "docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md"
+        "docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md",
+        "docs/plans/qbd-rationale-report-layer/gates.yaml",
+        "docs/decisions/D20260728-qbd-rationale-report-layer-boundary.md"
       ],
-      "text": "Before attempting hostile same-host closure, obtain approval for an OS/filesystem-scoped identity-bound design and executable replacement tests"
+      "text": "Implement the sealed-packet contract and G-RL-01 TDD sequence from the frozen Step 0 fixtures"
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
-    "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
-    "docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md"
+    "cowork-p2-kit/rationale/tests/fixtures/decision-package/inconclusive",
+    "cowork-p2-kit/rationale/tests/fixtures/decision-package/selected",
+    "docs/decisions/D20260728-qbd-rationale-report-layer-boundary.md",
+    "docs/plans/qbd-rationale-report-layer/gates.yaml",
+    "docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md"
   ],
   "pickup_fingerprint_files": [
-    "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
-    "docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md"
+    "cowork-p2-kit/rationale/tests/fixtures/decision-package/inconclusive",
+    "cowork-p2-kit/rationale/tests/fixtures/decision-package/selected",
+    "docs/decisions/D20260728-qbd-rationale-report-layer-boundary.md",
+    "docs/plans/qbd-rationale-report-layer/gates.yaml",
+    "docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md"
   ],
   "schema_version": 2,
-  "session_id": "260728-1407",
-  "summary": "Published the P2 publication-lock security spec-diff: 64/64 P2 assertions remain passing, cooperative behavior is verified, and D20260722 remains active.",
-  "test_verdict": "artifacts/260728-1407/test-verdict.json",
+  "session_id": "260729-0832",
+  "summary": "Closed rationale Step 0: generated and receipt-pinned selected, inconclusive, and attested P4 decision-package fixtures; provenance test and isolated P4 regression passed; Step 1 is ready.",
+  "test_verdict": "artifacts/260729-0832/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
       "files": [
-        "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
-        "docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md"
+        "cowork-p2-kit/rationale/tests/fixtures/decision-package/selected",
+        "cowork-p2-kit/rationale/tests/fixtures/decision-package/inconclusive",
+        "docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md"
       ],
-      "text": "D20260722 remains active: Node pathname operations do not provide hostile same-host identity binding for publication lifecycle or LiteParse execution"
+      "text": "Keep the selected fixture test-only; the production-shaped input remains inconclusive"
     }
   ],
   "worktree_status": [
-    " M docs/.session-state.md",
+    " M AGENTS.md",
+    " M CLAUDE.md",
+    " M IMPLEMENTATION_PLAN.md",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-01.json",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-02.json",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-03.json",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-04.json",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-05.json",
-    " M session-handoff.yaml",
     "?? .codex/hooks.json"
   ]
 }
