@@ -1,42 +1,43 @@
 {
   "branch": "master",
-  "da_review": "skipped: fallback/minor-session",
+  "da_review": "summary:\n⚠️ Cowork MVP is implementation-complete only for the test-fixture/internal scope; FD approval, external display, P.2.2/P.2.3 drafting, and D20260722 remain open.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-29T05:30:11+00:00",
-  "git_head": "222ff7deec3d9965bd437979828ce5013c6cf571",
+  "generated_at": "2026-07-29T05:53:43+00:00",
+  "git_head": "2285bcef25a2f6c9223a90c37cc225dc7493be6a",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md",
-        "docs/plans/qbd-rationale-report-layer/gates.yaml",
-        "cowork-p2-kit/rationale/rationale-publication.mjs"
+        "docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md",
+        "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
+        "docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md"
       ],
-      "text": "Begin Step 5 only: integrated verify:rationale runner and end-to-end acceptance gate"
+      "text": "Review the committed P2 scope and fresh evidence for the final publication-lock spec-diff"
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
-    "cowork-p2-kit/rationale/rationale-publication.mjs",
-    "docs/plans/qbd-rationale-report-layer/gates.yaml",
-    "docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md"
+    "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
+    "docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md",
+    "docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md"
   ],
   "pickup_fingerprint_files": [
-    "cowork-p2-kit/rationale/rationale-publication.mjs",
-    "docs/plans/qbd-rationale-report-layer/gates.yaml",
-    "docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md"
+    "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
+    "docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md",
+    "docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md"
   ],
   "schema_version": 2,
   "session_id": "260729-1229",
-  "summary": "Corrected stale project-state routing to the reconciled Step 5 pickup; Step 4 remains completed with state validation passing.",
+  "summary": "Closed rationale Step 5 with five shared-UUID passing gates, a committed test-only internal reference package, and isolated P4 non-regression. Routed the next session to the final P2 publication-lock spec-diff.",
   "test_verdict": "artifacts/260729-1229/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
       "files": [
-        "docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md",
-        "docs/plans/qbd-rationale-report-layer/gates.yaml"
+        "docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md",
+        "docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md",
+        "docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md"
       ],
-      "text": "Step 5 integrated gate remains pending"
+      "text": "Complete the final P2 publication-lock spec-diff against D20260722; it may accept cooperative-writer behavior only and must not claim hostile same-host TOCTOU is resolved"
     }
   ],
   "worktree_status": [
