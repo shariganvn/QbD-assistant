@@ -1,0 +1,15 @@
+{
+  "artifacts": {
+    "cohort.json": "fc5b8c8a6de0a5eb233207a284365b2b73e069a35a6322500febb103f3fbc904",
+    "evidence-log.json": "6a8973759283b12f9fb2bd98f646986a254289141b3b31144b467598f11a1c5b",
+    "evidence-log.md": "842dc8c3c7c85376f45c31caf98438e0b7afee1316ba9bbae212941f669e252f",
+    "fact-cards.json": "e086e565b87b828273ee505fe12d0daaa5026ab08d189e9b1282570a5d0fe705",
+    "formula-decision.json": "eebee2d82c1a55c9b595cf9c2cf968e175a860662d483037f90122f080b0cf32",
+    "formula-decision.md": "698b885ba2a7e6907f367a4a7d2f5bbb7c75de5f4a0cdda8077866ab13ca523a",
+    "linear-attestation.json": "906eac3e69ab1985df3a72663ad3b215278f7102bc3e5e355b2511692076310f",
+    "selection-evaluation.json": "13224b876ad693d342d547805e21a6c72a998d1a4b5731701b9f08b5ee4a4c52"
+  },
+  "input_store_sha256": "6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56",
+  "run_id": "rationale-attested",
+  "schema_version": 1
+}

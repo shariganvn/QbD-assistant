@@ -1,0 +1,17 @@
+{
+  "candidates": [
+    "F-01",
+    "F-02"
+  ],
+  "cohort_basis": "Strength-specific cohort: F-01@5 mg, F-02@5 mg",
+  "cohort_id": "rationale-selected",
+  "linear_attestation_id": null,
+  "linear_attestation_sha256": null,
+  "provenance_candidate_map": {
+    "inputs/trials/formulation-trial-01.docx": "F-01",
+    "inputs/trials/formulation-trial-02.docx": "F-02",
+    "inputs/trials/formulation-trial-03.docx": "F-03"
+  },
+  "schema_version": 2,
+  "store_records_sha256": "6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56"
+}

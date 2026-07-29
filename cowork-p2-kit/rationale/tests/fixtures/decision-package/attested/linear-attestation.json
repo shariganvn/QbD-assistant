@@ -1,0 +1,29 @@
+{
+  "api": "bisoprolol fumarate",
+  "attestation_id": "FD-LINEAR-F01-F03-TEST-001",
+  "dosage_form": "film-coated tablet",
+  "members": [
+    {
+      "candidate": "F-01",
+      "strength": "5 mg"
+    },
+    {
+      "candidate": "F-02",
+      "strength": "5 mg"
+    },
+    {
+      "candidate": "F-03",
+      "strength": "10 mg"
+    }
+  ],
+  "product_target": "immediate release",
+  "required_fields": [
+    "members",
+    "api",
+    "dosage_form",
+    "product_target",
+    "trial_context"
+  ],
+  "schema_version": 2,
+  "trial_context": "comparative trial"
+}

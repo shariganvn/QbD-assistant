@@ -1,0 +1,15 @@
+{
+  "candidate_reviews": [],
+  "cohort_id": "rationale-inconclusive",
+  "decision_id": "decision-rationale-inconclusive",
+  "decision_sha256": "f32ef8b91d0bf911e7681416581c269c7d7da220b387abd38653ae661ebf6611",
+  "evaluation_id": "891250367426084de82cbb3ffb0da1041837",
+  "matrix_cells": [],
+  "outcome_code": "E_RUBRIC_PIN_REQUIRED",
+  "rubric_sha256": null,
+  "schema_version": 1,
+  "sensitivity": {
+    "stable_winner": null,
+    "vectors": []
+  }
+}

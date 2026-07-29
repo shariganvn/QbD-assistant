@@ -1,61 +1,53 @@
 <!-- GENERATED VIEW — do not edit manually -->
-<!-- Source: docs/test-plans/T20260728-qbd-p2-ingest-post-closure-validation.yaml -->
+<!-- Source: docs/test-plans/T20260729-qbd-rationale-step-00.yaml -->
 <!-- Regenerate: baton render-test-plan -->
-<!-- Source fingerprint: sha256:d4ee84e2ff5238b6dafffa8834ec3027da9f3461719ef4759362b0e36d1b2182 -->
+<!-- Source fingerprint: sha256:5884dab95333e94262413311569d3d75242566235bf9c44d5d11e7218e241b1d -->
 
 # TEST_PLAN — Active Validation Gates
 
-## T20260728-qbd-p2-ingest-post-closure-validation
+## T20260729-qbd-rationale-step-00
 
 Status: **Executed — results recorded**
 
-- Workstream: `qbd-p2-ingest-completion`
-- Date: 2026-07-28
-- Plan: `docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md`
+- Workstream: `qbd-rationale-report-layer`
+- Date: 2026-07-29
+- Plan: `docs/plans/qbd-rationale-report-layer/step-00-freeze-source-package-fixtures.md`
 
 ## Scope
 
-Verify the bounded recursive-input, artifact-root, and cooperative publication-lock changes in an isolated checkout, then retain fresh canonical P2 gate evidence.
+Generate and pin the selected, inconclusive, and attested P4 decision-package fixtures used as the rationale layer's immutable Step 1 input contract.
 
 ### Changed files
 
-- `cowork-p2-kit/ingest/admission.mjs`
-- `cowork-p2-kit/ingest/config.mjs`
-- `cowork-p2-kit/ingest/publication.mjs`
-- `cowork-p2-kit/ingest/tests/file-boundaries.test.mjs`
-- `cowork-p2-kit/ingest/tests/publication-concurrency.test.mjs`
-- `cowork-p2-kit/ingest/tests/publication-failure.test.mjs`
-- `docs/reports/qbd-p2-ingest-completion/gates/`
-- `docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md`
-- `docs/reports/qbd-p2-ingest-completion/code-review.md`
+- `cowork-p2-kit/rationale/tests/decision-package-fixtures.test.mjs`
+- `cowork-p2-kit/rationale/tests/fixtures/decision-package-fixtures.mjs`
+- `cowork-p2-kit/rationale/tests/fixtures/decision-package/`
+- `docs/plans/qbd-rationale-report-layer/gates.yaml`
+- `docs/reports/qbd-rationale-report-layer/gates/`
+- `docs/reports/qbd-rationale-report-layer/rationale/`
+- `docs/test-plans/T20260729-qbd-rationale-step-00.yaml`
 - `docs/test-plans/active.yaml`
-- `docs/test-plans/T20260728-qbd-p2-ingest-post-closure-validation.yaml`
-- `docs/progress/P20260728-qbd-p2-ingest-post-closure-validation.yaml`
-- `docs/progress/P20260728-qbd-p2-ingest-closeout-attestation.yaml`
-- `TEST_PLAN.md`
-- `PROGRESS.md`
-- `DECISIONS.md`
 
 ## Approval
 
 - **Human approval required** before running commands.
-- Approved at: 2026-07-28
+- Approved at: 2026-07-29
 - Approved by: human
 
 ## Commands
 
-### isolated-ingest-verification — Run the ordered G-01 through G-10 ingest suite from a byte-identical isolated checkout.
+### fixture-provenance — Regenerate every decision package through the injected P4 CLI factory and compare all bytes to the committed fixtures.
 
 ```bash
-npm run verify:ingest
+node --test cowork-p2-kit/rationale/tests/decision-package-fixtures.test.mjs
 ```
 
 
 ## Results
 
 Verdict: **passed**
-Artifact: `artifacts/260728-1344/test-verdict.json`
-Counts: passed=64, failed=0, warnings=0
+Artifact: `artifacts/260729-0832/test-verdict.json`
+Counts: passed=1, failed=0, warnings=0
 
 ---
 

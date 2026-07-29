@@ -1,0 +1,15 @@
+{
+  "candidate_reviews": [],
+  "cohort_id": "rationale-attested",
+  "decision_id": "decision-rationale-attested",
+  "decision_sha256": "eebee2d82c1a55c9b595cf9c2cf968e175a860662d483037f90122f080b0cf32",
+  "evaluation_id": "3c0c5cebd8f1bcab4f6fd26cf40989706cc4",
+  "matrix_cells": [],
+  "outcome_code": "E_TIE_OR_SENSITIVITY_UNSTABLE",
+  "rubric_sha256": "40e942181235bbe606af9f158606111f2b893a35c093e2887ff34c30c1471358",
+  "schema_version": 1,
+  "sensitivity": {
+    "stable_winner": null,
+    "vectors": []
+  }
+}

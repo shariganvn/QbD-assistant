@@ -2,28 +2,25 @@ schema_version: 1
 branch: master
 worktree_id: nguyen-dell-7577:master
 active_workstream:
-  id: qbd-p2-ingest-completion
-  plan: 
-    docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md
+  id: qbd-rationale-report-layer
+  plan: docs/plans/qbd-rationale-report-layer/plan.md
   status: in-progress
 current_pickup:
   source: session-handoff.yaml
   summary: >-
-    P2 cooperative-writer and file-boundary validation is closed with an accepting
-    verdict. In a new reconciled session, review the committed scope against
-    D20260722 before updating the separate publication-lock spec-diff report.
+    Rationale Step 0 source packages are frozen and pinned. Begin Step 1 by
+    implementing the sealed-packet contract and its G-RL-01 TDD sequence.
   files:
-  - docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md
-  - docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md
-  - docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md
+  - docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md
+  - docs/plans/qbd-rationale-report-layer/gates.yaml
+  - docs/decisions/D20260728-qbd-rationale-report-layer-boundary.md
 relevant_progress:
-- P20260728-qbd-p2-ingest-closeout-attestation
-- P20260728-qbd-p2-ingest-post-closure-validation
+- P20260729-qbd-rationale-step-00
 relevant_decisions:
-- D20260722
+- D20260728
 read_next:
 - session-handoff.yaml
-- docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md
-- docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md
-updated_at: '2026-07-28T06:53:52.559411+00:00'
-git_head: 5a2e6253bb117a007306953ee30ba96a4ecc5349
+- docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md
+- docs/decisions/D20260728-qbd-rationale-report-layer-boundary.md
+updated_at: '2026-07-29T01:28:47.951772+00:00'
+git_head: 68e0ca75c009c21e6dedf7ab5d24031d664ee712

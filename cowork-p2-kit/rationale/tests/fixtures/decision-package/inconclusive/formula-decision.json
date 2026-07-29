@@ -1,0 +1,18 @@
+{
+  "cohort_basis": "Strength-specific cohort: F-01@5 mg, F-02@5 mg",
+  "cohort_id": "rationale-inconclusive",
+  "decision_id": "decision-rationale-inconclusive",
+  "fact_card_ids": [
+    "FC-F01-assay",
+    "FC-F01-release_30m",
+    "FC-F02-assay",
+    "FC-F02-release_30m"
+  ],
+  "fd_action": "E_RUBRIC_PIN_REQUIRED",
+  "linear_attestation_id": null,
+  "linear_attestation_sha256": null,
+  "rubric_sha256": null,
+  "schema_version": 2,
+  "status": "inconclusive",
+  "winner": null
+}

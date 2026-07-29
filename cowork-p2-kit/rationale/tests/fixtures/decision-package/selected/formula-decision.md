@@ -1,0 +1,40 @@
+# Formula decision
+
+- Decision ID: decision-rationale-selected
+- Status: selected
+- Winner: F-01
+- Cohort ID: rationale-selected
+- Cohort basis: Strength-specific cohort: F-01@5 mg, F-02@5 mg
+- Rubric SHA-256: 40e942181235bbe606af9f158606111f2b893a35c093e2887ff34c30c1471358
+- FD action: selected
+- Attestation ID: null
+- Attestation SHA-256: null
+
+## Evaluation
+
+- Evaluation ID: 962455ebf500145e14f252dc1e8016577380
+- Decision SHA-256: c11ac72c03f3358c8c09d9a862f7b19314245c414b55dd66947de45809a99d0f
+- Outcome code: selected
+
+## Matrix cells
+
+- {"candidate":"F-01","fact_card_ids":["FC-F01-release_30m"],"measure_id":"release_30m","record_ids":["14d260438e82ec4f"],"unit":"%","value":93.5}
+- {"candidate":"F-01","fact_card_ids":["FC-F01-assay"],"measure_id":"assay","record_ids":["14d260438e82ec4f"],"unit":"%","value":105}
+- {"candidate":"F-02","fact_card_ids":["FC-F02-release_30m"],"measure_id":"release_30m","record_ids":["e6dd4ce195f2043a"],"unit":"%","value":85.7}
+- {"candidate":"F-02","fact_card_ids":["FC-F02-assay"],"measure_id":"assay","record_ids":["e6dd4ce195f2043a"],"unit":"%","value":105}
+
+## Candidate reviews
+
+- {"candidate":"F-01","critical_evidence":[{"cited_record_ids":["14d260438e82ec4f"],"measure_id":"release_30m","uncited_results_record_ids":[]},{"cited_record_ids":["14d260438e82ec4f"],"measure_id":"assay","uncited_results_record_ids":[]}],"eligible":true,"hard_gates":[{"measure_id":"release_30m","operator":">=","passed":true,"record_ids":["14d260438e82ec4f"],"threshold":80,"value":93.5},{"measure_id":"assay","operator":">=","passed":true,"record_ids":["14d260438e82ec4f"],"threshold":95,"value":105},{"measure_id":"hardness","operator":">=","passed":true,"record_ids":[],"threshold":0,"value":null}]}
+- {"candidate":"F-02","critical_evidence":[{"cited_record_ids":["e6dd4ce195f2043a"],"measure_id":"release_30m","uncited_results_record_ids":[]},{"cited_record_ids":["e6dd4ce195f2043a"],"measure_id":"assay","uncited_results_record_ids":[]}],"eligible":true,"hard_gates":[{"measure_id":"release_30m","operator":">=","passed":true,"record_ids":["e6dd4ce195f2043a"],"threshold":80,"value":85.7},{"measure_id":"assay","operator":">=","passed":true,"record_ids":["e6dd4ce195f2043a"],"threshold":95,"value":105},{"measure_id":"hardness","operator":">=","passed":true,"record_ids":[],"threshold":0,"value":null}]}
+
+## Sensitivity vectors
+
+- {"leader":"F-01","margin":1.75,"totals":{"F-01":6,"F-02":4.25},"weights":{"assay":0.25,"hardness":0.1,"release_30m":0.35}}
+- {"leader":"F-01","margin":1.75,"totals":{"F-01":6,"F-02":4.25},"weights":{"assay":0.25,"hardness":0.3,"release_30m":0.35}}
+- {"leader":"F-01","margin":1.75,"totals":{"F-01":8,"F-02":6.25},"weights":{"assay":0.45,"hardness":0.1,"release_30m":0.35}}
+- {"leader":"F-01","margin":1.75,"totals":{"F-01":8,"F-02":6.25},"weights":{"assay":0.45,"hardness":0.3,"release_30m":0.35}}
+- {"leader":"F-01","margin":2.75,"totals":{"F-01":8,"F-02":5.25},"weights":{"assay":0.25,"hardness":0.1,"release_30m":0.55}}
+- {"leader":"F-01","margin":2.75,"totals":{"F-01":8,"F-02":5.25},"weights":{"assay":0.25,"hardness":0.3,"release_30m":0.55}}
+- {"leader":"F-01","margin":2.75,"totals":{"F-01":10,"F-02":7.25},"weights":{"assay":0.45,"hardness":0.1,"release_30m":0.55}}
+- {"leader":"F-01","margin":2.75,"totals":{"F-01":10,"F-02":7.25},"weights":{"assay":0.45,"hardness":0.3,"release_30m":0.55}}

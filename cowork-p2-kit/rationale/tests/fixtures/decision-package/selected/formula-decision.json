@@ -1,0 +1,18 @@
+{
+  "cohort_basis": "Strength-specific cohort: F-01@5 mg, F-02@5 mg",
+  "cohort_id": "rationale-selected",
+  "decision_id": "decision-rationale-selected",
+  "fact_card_ids": [
+    "FC-F01-assay",
+    "FC-F01-release_30m",
+    "FC-F02-assay",
+    "FC-F02-release_30m"
+  ],
+  "fd_action": "selected",
+  "linear_attestation_id": null,
+  "linear_attestation_sha256": null,
+  "rubric_sha256": "40e942181235bbe606af9f158606111f2b893a35c093e2887ff34c30c1471358",
+  "schema_version": 2,
+  "status": "selected",
+  "winner": "F-01"
+}

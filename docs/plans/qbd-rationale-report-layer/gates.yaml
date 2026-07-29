@@ -1,0 +1,142 @@
+schema_version: 1
+workstream: qbd-rationale-report-layer
+canonical_plan: docs/plans/qbd-rationale-report-layer/plan.md
+status_rule: all blocking gates require status=pass and a machine-produced evidence artifact
+
+# Gate evidence is machine-produced only. Bare `node --test` writes none, so every command below
+# invokes this workstream's own wrapper. The P4 wrapper is byte-locked and must not be edited.
+runner:
+  wrapper: cowork-p2-kit/rationale/tests/run-gate.mjs
+  gate_id_pattern: ^G-RL-0[1-5]$
+  evidence_dir: docs/reports/qbd-rationale-report-layer/gates/
+  step_close_dir: docs/reports/qbd-rationale-report-layer/gates/step-close/
+  red_result_dir: docs/reports/qbd-rationale-report-layer/gates/red/
+  test_reporter: tap
+  node_engines: "22.x"
+  suite_runner: npm run verify:rationale
+  publication_root: docs/reports/qbd-rationale-report-layer/rationale/
+
+# Upstream P4 contract is read-only here. These pins are recorded, never rewritten by this workstream.
+pins:
+  source_package_selected_sha256: e2675b861a53db0293df1d9fafa7f9030fdb6d84a60cdc5060f3f17425737559
+  source_package_inconclusive_sha256: 723a7186a76ab03216bacc23f416e280899bd59eed1b030ab6cf0a456272ea50
+  source_package_attested_sha256: e85a819d6548bb3a47493ae314d443ca67f97d33bba52b53e4bdf56ad2ffdf6e
+  source_package_repin_reason: null         # required whenever any source package pin changes
+  store_records_sha256: 6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56  # P4 Step 0 baseline, read-only
+  rationale_display_state: internal_only    # schema constant; changing it requires a new approved decision
+
+gates:
+  - id: G-RL-01
+    name: sealed-packet-contract
+    requirement: A rationale packet is derivable only from a fully re-validated published decision package, is hash-bound to that package, and carries validated quotes and metadata without any raw record content.
+    invariant: A packet whose source package fails re-validation is never written; a packet that disagrees with its source receipt hash, receipt-derived run ID, or decision SHA-256 is rejected; no store bytes, record content fields, raw fact-card text, or execution-report text can enter a packet.
+    boundary: cowork-p2-kit/rationale/{rationale-packet.schema.json,packet.mjs,errors.mjs} and the seal-packet CLI path
+    fixture: cowork-p2-kit/rationale/tests/fixtures/decision-package/{selected,inconclusive,attested}/ committed source packages, plus in-test mutations - tampered member byte, forged receipt hash, missing receipt, surplus file, absent attestation for an attested cohort, mismatched store, raw-text injection, and a store record whose content differs from its admitted quote
+    command: [node, cowork-p2-kit/rationale/tests/run-gate.mjs, G-RL-01, cowork-p2-kit/rationale/tests/packet-contract.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - seal-packet calls the retained validatePublishedDecisionPackage() against the supplied package root and store, and every source-package tampering variant fails with E_PACKET_SOURCE_INVALID before a packet byte is staged
+        - the packet envelope is exact-key and validates schema_version, packet_id, run_id, source_publication_receipt_sha256, source_artifacts, decision, evaluation, cohort, fact_cards, evidence_log, nullable linear_attestation, and permitted_sources; unknown keys, missing keys, and wrong types fail with E_PACKET_ENVELOPE
+        - packet.run_id is derived from and equals the source receipt run_id, packet decision/evaluation/cohort IDs and the canonical decision SHA-256 equal the published values, and source_artifacts is the exact receipt.artifacts key set whose SHA-256 values equal both receipt entries and on-disk bytes; any disagreement fails with E_PACKET_BINDING
+        - the packet contains no store path, store bytes, record content field, raw-text field, or execution-report reference; its author-safe fact-card projection permits only authorised evidence-log quotes, including a quote equal to the complete source record
+        - permitted_sources is derived deterministically from the packet artifacts and lists exactly the admitted fact-card IDs, evaluation matrix/hard-gate/critical-evidence references, sensitivity vector indexes, exclusion references, decision-state fields, and structured exact-match citation-local value/unit sets; it invents no source, omits no admitted one, and cannot borrow a collision value from another citation
+        - sealing the same source package twice produces byte-identical canonical packet bytes and the same packet SHA-256
+        - production main refuses any output path outside docs/reports/qbd-rationale-report-layer/rationale/ with E_PACKET_PATH; the injected factory accepts only its declared test root and never writes into the P4 decision root
+    evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-01.json
+    owner_step: 1
+    blocks: [G-RL-02, G-RL-03, G-RL-04, G-RL-05]
+    status: unverified
+
+  - id: G-RL-02
+    name: claim-to-source-binding
+    requirement: Every rationale claim resolves to a permitted packet source, uses only numeric values and units reachable from its cited sources, and cannot restate or imply a different decision state.
+    invariant: Evidence outside the packet, an unresolved citation, an invented number or unit, a recommendation over an inconclusive decision, and a changed winner/status/fd_action each reject the whole rationale artifact; no claim is dropped or auto-corrected.
+    boundary: cowork-p2-kit/rationale/{rationale.schema.json,rationale-contracts.mjs,claim-binding.mjs}
+    fixture: valid claim sets for each claim kind over the selected, inconclusive, and attested packets, plus invalid variants - unknown fact-card ID, fact-card ID from a different packet, evaluation reference to an absent candidate/measure, out-of-range sensitivity index, exclusion reference with a mismatched reason code, quote text absent from the packet, a number and a unit not present in any cited source, a recommendation-token claim on an inconclusive packet, and altered winner/status/fd_action restatements
+    command: [node, cowork-p2-kit/rationale/tests/run-gate.mjs, G-RL-02, cowork-p2-kit/rationale/tests/claim-binding.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - the rationale envelope is exact-key; claims are non-empty, claim_id values are unique and sorted, and every claim declares one of the fixed kinds fact, gate, sensitivity, exclusion, or decision_state
+        - each claim kind resolves only against its declared permitted_sources slice; an unknown, foreign-packet, or absent reference fails with E_RATIONALE_CLAIM_BINDING and a quote or record ID outside the packet fails with E_RATIONALE_EVIDENCE_OUTSIDE_PACKET
+        - a fact claim cites at least one admitted fact-card ID, and every quote it reproduces is byte-identical to the packet evidence-log quote for a record bound to that card
+        - every numeric token and unit token in claim text is present in the citation-local value/unit set reachable from that claim's cited sources; a value from another packet source, an added, rounded, converted, or aggregated value fails with E_RATIONALE_INVENTED_VALUE
+        - rationale decision_status, winner, cohort_id, and fd_action restatements equal the packet values exactly; any difference fails with E_RATIONALE_DECISION_ALTERED
+        - an inconclusive packet requires an exact fd_action decision-state claim plus at least one exclusion or gate claim covering the recorded missing or conflicting evidence; a missing claim fails with E_RATIONALE_INCONCLUSIVE_EXPLANATION and an added top-level explanation fails the exact envelope
+        - an inconclusive packet rejects the declared recommendation-token denylist, which the gate records as a best-effort drift signal rather than a semantic guarantee
+        - display_state accepts only the constant internal_only; any other value, and any attempt to supply it as a CLI flag or packet field, fails with E_RATIONALE_DISPLAY_STATE
+        - claim-binding is pure - it reads no file, calls no model, performs no network access, and returns the same result for the same inputs
+    evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-02.json
+    owner_step: 2
+    blocks: [G-RL-03, G-RL-04, G-RL-05]
+    status: unverified
+
+  - id: G-RL-03
+    name: deterministic-readable-derivative
+    requirement: rationale.md is a deterministic byte-exact derivative of validated canonical JSON, renders untrusted quote text safely, and is never hand-authored.
+    invariant: Regeneration equality is the only accepted consistency check; an agreeing but hand-authored Markdown file is rejected wholesale, and untrusted quote or claim text is rendered in a deterministic literal-safe representation rather than active Markdown or HTML.
+    boundary: cowork-p2-kit/rationale/rationale-markdown.mjs
+    fixture: published rationale JSON for the selected, inconclusive, and attested branches; a hand-authored rationale.md that agrees semantically; a byte-shifted variant differing only in trailing whitespace; and a quote carrying &, <, >, backticks, and instruction-shaped text
+    command: [node, cowork-p2-kit/rationale/tests/run-gate.mjs, G-RL-03, cowork-p2-kit/rationale/tests/rationale-markdown.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - renderRationaleMarkdown(rationale, packet) is pure and deterministic; two calls on the same inputs return identical bytes and the output ends in exactly one LF
+        - the rendered document contains only rationale_id, packet ID and SHA-256, decision ID, decision SHA-256, cohort ID, decision status, winner or literal null, fd_action, display_state, cohort basis, attestation ID/SHA-256 or literal null, and each claim with its kind, text, and resolved citations in stored order
+        - the renderer does not sort, summarize, translate, infer, aggregate, or narrate; claim order and citation order come from the validated artifact
+        - every reproduced quote and claim is rendered in the declared literal-safe representation; headings, lists, links, code fences, backticks, &, <, and > never become active markup
+        - assertRegeneratedRationaleMarkdown() compares on-disk bytes with a fresh render and fails a hand-authored-but-agreeing file and a whitespace-only difference with E_RATIONALE_MARKDOWN_REGENERATION
+        - an inconclusive rationale renders the exact fd_action decision-state claim and the recorded missing/conflicting evidence, and contains no winner or recommendation line
+    evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-03.json
+    owner_step: 3
+    blocks: [G-RL-04, G-RL-05]
+    status: unverified
+
+  - id: G-RL-04
+    name: rationale-publication-and-session-boundary
+    requirement: The rationale package publishes atomically into its own root with a receipt over every member, and the Cowork rationale session is instructed and proved to consume only the sealed packet.
+    invariant: The P4 decision root and its members stay byte-identical; a partial or surplus rationale package fails re-validation; and no packet, schema, CLI input, or receipt field accepts a store path, record content, drafting output, or an execution report.
+    boundary: cowork-p2-kit/rationale/{rationale-publication.mjs,rationale-receipt.schema.json,rationale-receipt.mjs,cli.mjs} and cowork-p2-kit/RATIONALE-SKILL.md
+    fixture: a complete publish over each source branch; missing and surplus member variants; a symlink and a directory entry inside the root; a tampered member with a stale receipt hash; a failed mid-write publish; an external output root; a RATIONALE-SKILL.md template block; and skill fixtures asserting forbidden drafting and store-access tokens
+    command: [node, cowork-p2-kit/rationale/tests/run-gate.mjs, G-RL-04, cowork-p2-kit/rationale/tests/rationale-publication.test.mjs]
+    expected:
+      exit_code: 0
+      assertions:
+        - publish-rationale validates the packet, rationale artifact, and every claim binding and renders expected Markdown in memory before staging; after its commit point it fully revalidates the on-disk package and rolls back on failure
+        - a successful package under docs/reports/qbd-rationale-report-layer/rationale/ contains exactly rationale-packet.json, rationale.json, rationale.md, and rationale-receipt.json; any other regular file, directory, or symlink fails with E_RATIONALE_PUBLICATION_SURPLUS_FILE and a missing member with E_RATIONALE_PUBLICATION_MISSING_FILE
+        - every JSON member uses the canonical serializer with sorted keys, preserved array order, two-space indentation, and exactly one trailing LF
+        - the receipt is exact-key over run_id, packet_sha256, source_publication_receipt_sha256, and a SHA-256 per member; it does not hash itself; a mismatched, missing, or forged entry fails with E_RATIONALE_PUBLICATION_RECEIPT
+        - members are staged to unique temporary names, a previous target and the first-publish .gitkeep placeholder are backed up, rationale.json renames last as the commit point, post-write validation accepts only invocation-owned backup paths, and an injected write failure restores every previous byte and leaves no temporary or backup file
+        - production main accepts only the declared rationale root; the injected factory accepts only its declared temporary root, and the test asserts the P4 decision root is unchanged after every publish and failure case
+        - RATIONALE-SKILL.md instructs a session whose only input is the packet file, forbids opening the store, the ingest layer, the source DOCX files, any execution report, and any external search or egress, and states that a session that produced fact cards must not author the rationale
+        - RATIONALE-SKILL.md contains the untrusted-quote-text rule and none of the pinned forbidden tokens - EN "P.2.2", "P.2.3", "headings[]", "prose[]", "tables[]", "citations[]"; VN "soạn thảo", "soạn nội dung", "dự thảo" - declared as a best-effort drift signal with FD review as the semantic authority
+        - every qbd-template block extracted from RATIONALE-SKILL.md validates against rationale.schema.json and the claim-binding validator over the named committed selected packet fixture
+        - display_state is the schema constant internal_only, no CLI flag or input can set another value, and the published rationale.md states the internal-only label
+    evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-04.json
+    owner_step: 4
+    blocks: [G-RL-05]
+    status: unverified
+
+  - id: G-RL-05
+    name: integrated-rationale-acceptance
+    requirement: The ordered suite runs every rationale gate, drives all three source branches end to end, and re-validates the actual on-disk published package against its sealed packet and the upstream P4 package.
+    invariant: Every requirement maps to a fixture, command, raw result, and retained evidence; the published rationale agrees with the pinned source packages when re-checked; and the completed P4 gates still pass unchanged.
+    boundary: the verify:rationale runner, the rationale gate-evidence validator, and the published artifacts under docs/reports/qbd-rationale-report-layer/rationale/
+    fixture: cowork-p2-kit/rationale/tests/e2e-rationale.test.mjs driving the selected, inconclusive, and attested branches from committed source package to published rationale; the G-RL-01 through G-RL-04 evidence records; and a tampered published rationale whose receipt hash no longer matches
+    command: [npm, run, verify:rationale]
+    expected:
+      exit_code: 0
+      assertions:
+        - the runner re-runs G-RL-01 through G-RL-04 and the G-RL-05 e2e plus runner-contract tests in declared order through the wrapper, stopping at the first failure, so G-RL-05.json is machine-produced like the other four
+        - it validates the current G-RL-01 through G-RL-05 evidence records, excluding immutable red and step-close history, for status pass, canonical schema, and one shared suite UUID
+        - each branch runs seal-packet then publish-rationale and produces a package whose rationale.md regenerates byte-identically and whose receipt matches every on-disk member
+        - the inconclusive branch publishes an explanation of the recorded missing or conflicting evidence and the FD action, contains no winner and no recommendation, and is labelled internal_only
+        - the attested branch names and hashes the linear attestation carried through the packet, and removing the attestation from the source package prevents that packet from sealing
+        - published rationale re-validation recomputes the packet SHA-256, the source publication-receipt SHA-256, and each member hash; a tampered member, stale receipt, or surplus file fails closed
+        - the committed source package pins in this file equal the receipts of the committed fixtures; a changed fixture fails unless pins.source_package_repin_reason is populated
+        - the P4 suite passes in the isolated clean worktree through npm run verify:reasoning, and the active worktree's P4 boundary remains byte-identical to its pre-run hash set
+    evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-05.json
+    owner_step: 5
+    blocks: []
+    status: unverified

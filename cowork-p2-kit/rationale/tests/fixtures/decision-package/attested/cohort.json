@@ -1,0 +1,18 @@
+{
+  "candidates": [
+    "F-01",
+    "F-02",
+    "F-03"
+  ],
+  "cohort_basis": "Cross-strength cohort under linear attestation FD-LINEAR-F01-F03-TEST-001.",
+  "cohort_id": "rationale-attested",
+  "linear_attestation_id": "FD-LINEAR-F01-F03-TEST-001",
+  "linear_attestation_sha256": "906eac3e69ab1985df3a72663ad3b215278f7102bc3e5e355b2511692076310f",
+  "provenance_candidate_map": {
+    "inputs/trials/formulation-trial-01.docx": "F-01",
+    "inputs/trials/formulation-trial-02.docx": "F-02",
+    "inputs/trials/formulation-trial-03.docx": "F-03"
+  },
+  "schema_version": 2,
+  "store_records_sha256": "6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56"
+}

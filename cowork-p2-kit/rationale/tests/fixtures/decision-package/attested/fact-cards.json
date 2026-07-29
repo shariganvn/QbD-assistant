@@ -1,0 +1,95 @@
+{
+  "cards": [
+    {
+      "candidate": "F-01",
+      "char_end": 1100,
+      "char_start": 0,
+      "id": "FC-F01-release_30m",
+      "measure": "release_30m",
+      "normalized_value": 93.5,
+      "provenance": {
+        "file": "inputs/trials/formulation-trial-01.docx"
+      },
+      "quote": "Results\nTest                    Specification           Result                  Pass/Fail\nAppearance              White, round, biconvex  Conforms                Pass\n                        film-coated tablet\nAverage weight (n=20) 95.0 mg ± 5%              94.8 mg (RSD 1.2%)      Pass\nHardness (n=10)         40-100 N                68 N (range 58-78)      Pass\nFriability (n=20)       ≤ 1.0%                  0.32%                   Pass\nDisintegration          ≤ 15 min                4 min 20 sec            Pass\nAssay (HPLC)            95.0-105.0%             99.2%                   Pass\nContent uniformity      AV ≤ 15.0               AV = 6.8                Pass\n(n=10)\nDissolution (Q=80%,     Each unit ≥ 80%         92%, 95%, 91%, 94%,     Pass\n30 min, n=6)                                    93%, 96%\nDissolution mean        -                       93.5%                   -\nRelated substances      Individual ≤ 0.5%;      Max individual 0.12%;   Pass\n                        Total ≤ 1.0%            Total 0.35%\nLoss on drying          ≤ 2.0%                  0.8%                    Pass",
+      "raw_text": "93.5 %",
+      "record_id": "14d260438e82ec4f",
+      "unit": "%"
+    },
+    {
+      "candidate": "F-01",
+      "char_end": 1100,
+      "char_start": 0,
+      "id": "FC-F01-assay",
+      "measure": "assay",
+      "normalized_value": 105,
+      "provenance": {
+        "file": "inputs/trials/formulation-trial-01.docx"
+      },
+      "quote": "Results\nTest                    Specification           Result                  Pass/Fail\nAppearance              White, round, biconvex  Conforms                Pass\n                        film-coated tablet\nAverage weight (n=20) 95.0 mg ± 5%              94.8 mg (RSD 1.2%)      Pass\nHardness (n=10)         40-100 N                68 N (range 58-78)      Pass\nFriability (n=20)       ≤ 1.0%                  0.32%                   Pass\nDisintegration          ≤ 15 min                4 min 20 sec            Pass\nAssay (HPLC)            95.0-105.0%             99.2%                   Pass\nContent uniformity      AV ≤ 15.0               AV = 6.8                Pass\n(n=10)\nDissolution (Q=80%,     Each unit ≥ 80%         92%, 95%, 91%, 94%,     Pass\n30 min, n=6)                                    93%, 96%\nDissolution mean        -                       93.5%                   -\nRelated substances      Individual ≤ 0.5%;      Max individual 0.12%;   Pass\n                        Total ≤ 1.0%            Total 0.35%\nLoss on drying          ≤ 2.0%                  0.8%                    Pass",
+      "raw_text": "105 %",
+      "record_id": "14d260438e82ec4f",
+      "unit": "%"
+    },
+    {
+      "candidate": "F-02",
+      "char_end": 1100,
+      "char_start": 0,
+      "id": "FC-F02-release_30m",
+      "measure": "release_30m",
+      "normalized_value": 85.7,
+      "provenance": {
+        "file": "inputs/trials/formulation-trial-02.docx"
+      },
+      "quote": "Results\nTest                    Specification           Result                  Pass/Fail\nAppearance              White, round, biconvex  Conforms                Pass\n                        film-coated tablet\nAverage weight (n=20) 93.0 mg ± 5%              93.4 mg (RSD 1.8%)      Pass\nHardness (n=10)         40-100 N                52 N (range 42-65)      Pass\nFriability (n=20)       ≤ 1.0%                  0.68%                   Pass\nDisintegration          ≤ 15 min                6 min 45 sec            Pass\nAssay (HPLC)            95.0-105.0%             98.8%                   Pass\nContent uniformity      AV ≤ 15.0               AV = 11.2               Pass\n(n=10)\nDissolution (Q=80%,     Each unit ≥ 80%         85%, 88%, 82%, 86%,     Pass\n30 min, n=6)                                    84%, 89%\nDissolution mean        -                       85.7%                   -\nRelated substances      Individual ≤ 0.5%;      Max individual 0.15%;   Pass\n                        Total ≤ 1.0%            Total 0.42%\nLoss on drying          ≤ 2.0%                  1.1%                    Pass",
+      "raw_text": "85.7 %",
+      "record_id": "e6dd4ce195f2043a",
+      "unit": "%"
+    },
+    {
+      "candidate": "F-02",
+      "char_end": 1100,
+      "char_start": 0,
+      "id": "FC-F02-assay",
+      "measure": "assay",
+      "normalized_value": 105,
+      "provenance": {
+        "file": "inputs/trials/formulation-trial-02.docx"
+      },
+      "quote": "Results\nTest                    Specification           Result                  Pass/Fail\nAppearance              White, round, biconvex  Conforms                Pass\n                        film-coated tablet\nAverage weight (n=20) 93.0 mg ± 5%              93.4 mg (RSD 1.8%)      Pass\nHardness (n=10)         40-100 N                52 N (range 42-65)      Pass\nFriability (n=20)       ≤ 1.0%                  0.68%                   Pass\nDisintegration          ≤ 15 min                6 min 45 sec            Pass\nAssay (HPLC)            95.0-105.0%             98.8%                   Pass\nContent uniformity      AV ≤ 15.0               AV = 11.2               Pass\n(n=10)\nDissolution (Q=80%,     Each unit ≥ 80%         85%, 88%, 82%, 86%,     Pass\n30 min, n=6)                                    84%, 89%\nDissolution mean        -                       85.7%                   -\nRelated substances      Individual ≤ 0.5%;      Max individual 0.15%;   Pass\n                        Total ≤ 1.0%            Total 0.42%\nLoss on drying          ≤ 2.0%                  1.1%                    Pass",
+      "raw_text": "105 %",
+      "record_id": "e6dd4ce195f2043a",
+      "unit": "%"
+    },
+    {
+      "candidate": "F-03",
+      "char_end": 1119,
+      "char_start": 0,
+      "id": "FC-F03-release_30m",
+      "measure": "release_30m",
+      "normalized_value": 96.8,
+      "provenance": {
+        "file": "inputs/trials/formulation-trial-03.docx"
+      },
+      "quote": "Results\nTest                    Specification          Result                  Pass/Fail\nAppearance              Yellow, round,         Conforms                Pass\n                        biconvex film-coated\n                        tablet\nAverage weight (n=20) 104.5 mg ± 5%            104.2 mg (RSD 1.0%)     Pass\nHardness (n=10)         40-100 N               72 N (range 65-82)      Pass\nFriability (n=20)       ≤ 1.0%                 0.25%                   Pass\nDisintegration          ≤ 15 min               3 min 50 sec            Pass\nAssay (HPLC)            95.0-105.0%            100.1%                  Pass\nContent uniformity      AV ≤ 15.0              AV = 5.4                Pass\n(n=10)\nDissolution (Q=80%,     Each unit ≥ 80%        96%, 98%, 95%, 97%,     Pass\n30 min, n=6)                                   96%, 99%\nDissolution mean        -                      96.8%                   -\nRelated substances      Individual ≤ 0.5%;     Max individual 0.08%;   Pass\n                        Total ≤ 1.0%           Total 0.28%\nLoss on drying          ≤ 2.0%                 0.6%                    Pass",
+      "raw_text": "96.8 %",
+      "record_id": "d415da715d35741b",
+      "unit": "%"
+    },
+    {
+      "candidate": "F-03",
+      "char_end": 1119,
+      "char_start": 0,
+      "id": "FC-F03-assay",
+      "measure": "assay",
+      "normalized_value": 105,
+      "provenance": {
+        "file": "inputs/trials/formulation-trial-03.docx"
+      },
+      "quote": "Results\nTest                    Specification          Result                  Pass/Fail\nAppearance              Yellow, round,         Conforms                Pass\n                        biconvex film-coated\n                        tablet\nAverage weight (n=20) 104.5 mg ± 5%            104.2 mg (RSD 1.0%)     Pass\nHardness (n=10)         40-100 N               72 N (range 65-82)      Pass\nFriability (n=20)       ≤ 1.0%                 0.25%                   Pass\nDisintegration          ≤ 15 min               3 min 50 sec            Pass\nAssay (HPLC)            95.0-105.0%            100.1%                  Pass\nContent uniformity      AV ≤ 15.0              AV = 5.4                Pass\n(n=10)\nDissolution (Q=80%,     Each unit ≥ 80%        96%, 98%, 95%, 97%,     Pass\n30 min, n=6)                                   96%, 99%\nDissolution mean        -                      96.8%                   -\nRelated substances      Individual ≤ 0.5%;     Max individual 0.08%;   Pass\n                        Total ≤ 1.0%           Total 0.28%\nLoss on drying          ≤ 2.0%                 0.6%                    Pass",
+      "raw_text": "105 %",
+      "record_id": "d415da715d35741b",
+      "unit": "%"
+    }
+  ],
+  "schema_version": 1
+}

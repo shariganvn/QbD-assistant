@@ -1,0 +1,60 @@
+id: P20260729-qbd-rationale-step-00
+date: "2026-07-29"
+workstream: qbd-rationale-report-layer
+status: done
+summary: >-
+  Completed rationale Step 0 by freezing generated selected, inconclusive, and
+  attested P4 decision-package fixtures with receipt and source-store SHA-256 pins.
+changed_files:
+  - cowork-p2-kit/rationale/tests/decision-package-fixtures.test.mjs
+  - cowork-p2-kit/rationale/tests/fixtures/decision-package-fixtures.mjs
+  - cowork-p2-kit/rationale/tests/fixtures/decision-package/README.md
+  - cowork-p2-kit/rationale/tests/fixtures/decision-package/selected/
+  - cowork-p2-kit/rationale/tests/fixtures/decision-package/inconclusive/
+  - cowork-p2-kit/rationale/tests/fixtures/decision-package/attested/
+  - docs/plans/qbd-rationale-report-layer/gates.yaml
+  - docs/reports/qbd-rationale-report-layer/gates/.gitkeep
+  - docs/reports/qbd-rationale-report-layer/gates/red/.gitkeep
+  - docs/reports/qbd-rationale-report-layer/gates/step-close/step-00-readiness.md
+  - docs/reports/qbd-rationale-report-layer/rationale/.gitkeep
+source_packages:
+  selected:
+    path: cowork-p2-kit/rationale/tests/fixtures/decision-package/selected/
+    publication_receipt_sha256: e2675b861a53db0293df1d9fafa7f9030fdb6d84a60cdc5060f3f17425737559
+  inconclusive:
+    path: cowork-p2-kit/rationale/tests/fixtures/decision-package/inconclusive/
+    publication_receipt_sha256: 723a7186a76ab03216bacc23f416e280899bd59eed1b030ab6cf0a456272ea50
+  attested:
+    path: cowork-p2-kit/rationale/tests/fixtures/decision-package/attested/
+    publication_receipt_sha256: e85a819d6548bb3a47493ae314d443ca67f97d33bba52b53e4bdf56ad2ffdf6e
+pins:
+  source_store_sha256: 6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56
+tests_run:
+  verdict: passed
+  counts:
+    passed: 123
+    failed: 0
+    warnings: 0
+  evidence:
+    fixture_provenance:
+      command: node --test cowork-p2-kit/rationale/tests/decision-package-fixtures.test.mjs
+      passed: 1
+      failed: 0
+    upstream_regression:
+      command: npm run verify:reasoning
+      passed: 122
+      failed: 0
+      execution: isolated clean worktree
+review:
+  score: "10.0/10"
+  findings: none
+boundaries:
+  p4_code_and_report: untouched
+decisions: []
+next_pickup:
+  files:
+    - docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md
+    - docs/plans/qbd-rationale-report-layer/gates.yaml
+  text: >-
+    Begin Step 1 only after the ordered-plan transition records Step 0 as completed;
+    implement the sealed-packet contract and G-RL-01 TDD sequence.
