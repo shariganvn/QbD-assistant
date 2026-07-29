@@ -1,0 +1,61 @@
+id: T20260729-qbd-rationale-step-05
+date: "2026-07-29"
+workstream: qbd-rationale-report-layer
+status: executed
+plan: docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md
+scope:
+  summary: >-
+    Run the ordered rationale gate suite, publish and revalidate the test-only selected reference
+    package, and prove the completed P4 boundary remains unchanged in an isolated worktree.
+  changed_files:
+    - cowork-p2-kit/rationale/tests/verify-rationale.mjs
+    - cowork-p2-kit/rationale/tests/verify-rationale-evidence.mjs
+    - cowork-p2-kit/rationale/tests/verify-rationale-contract.test.mjs
+    - cowork-p2-kit/rationale/tests/e2e-rationale.test.mjs
+    - package.json
+    - docs/reports/qbd-rationale-report-layer/rationale/rationale-packet.json
+    - docs/reports/qbd-rationale-report-layer/rationale/rationale.json
+    - docs/reports/qbd-rationale-report-layer/rationale/rationale.md
+    - docs/reports/qbd-rationale-report-layer/rationale/rationale-receipt.json
+    - docs/reports/qbd-rationale-report-layer/gates/G-RL-05.json
+    - docs/plans/qbd-rationale-report-layer/plan.md
+    - docs/plans/qbd-rationale-report-layer/gates.yaml
+    - cowork-p2-kit/README.md
+    - docs/reports/qbd-rationale-report-layer/from-implementer-to-po-rationale-layer-closure.md
+approval:
+  required: true
+  approved_at: "2026-07-29"
+  approved_by: human
+commands:
+  - id: rationale-integrated-suite
+    description: Run every rationale gate in order and validate shared-UUID evidence.
+    command: [npm, run, verify:rationale]
+    requires_live_services: false
+    mutates_datastore: false
+acceptance:
+  gates: [G-RL-01, G-RL-02, G-RL-03, G-RL-04, G-RL-05]
+  evidence:
+    - docs/reports/qbd-rationale-report-layer/gates/G-RL-01.json
+    - docs/reports/qbd-rationale-report-layer/gates/G-RL-02.json
+    - docs/reports/qbd-rationale-report-layer/gates/G-RL-03.json
+    - docs/reports/qbd-rationale-report-layer/gates/G-RL-04.json
+    - docs/reports/qbd-rationale-report-layer/gates/G-RL-05.json
+    - docs/reports/qbd-rationale-report-layer/gates/step-close/G-RL-05.json
+  invariants:
+    - Every current rationale gate has pass evidence under one suite UUID.
+    - The selected reference package is internal-only, receipt-bound, byte-exactly regenerated, and test-only.
+    - Selected, inconclusive, and attested source branches complete seal then publish through the real CLI path.
+    - The active P4 reasoning/report boundary remains byte-identical after isolated verification.
+results:
+  verdict: passed
+  artifact: artifacts/260729-1229/test-verdict.json
+  counts:
+    passed: 38
+    failed: 0
+    warnings: 0
+  gates:
+    G-RL-01: { passed: 11, failed: 0 }
+    G-RL-02: { passed: 9, failed: 0 }
+    G-RL-03: { passed: 4, failed: 0 }
+    G-RL-04: { passed: 8, failed: 0 }
+    G-RL-05: { passed: 6, failed: 0 }

@@ -2,26 +2,26 @@ schema_version: 1
 branch: master
 worktree_id: nguyen-dell-7577:master
 active_workstream:
-  id: qbd-rationale-report-layer
-  plan: docs/plans/qbd-rationale-report-layer/plan.md
+  id: qbd-p2-ingest-post-closure-spec-diff
+  plan: "docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md"
   status: in-progress
 current_pickup:
   source: session-handoff.yaml
   summary: >-
-    Rationale Steps 1–4 are closed. Begin Step 5 integrated verification and
-    end-to-end acceptance from the sealed publication path only.
+    Conduct the final P2 publication-lock spec-diff against D20260722 after the completed
+    rationale layer closeout; do not claim hostile same-host TOCTOU is resolved.
   files:
-  - docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md
-  - docs/plans/qbd-rationale-report-layer/gates.yaml
-  - cowork-p2-kit/rationale/rationale-publication.mjs
+  - docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md
+  - docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md
+  - docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md
 relevant_progress:
-- P20260729-qbd-rationale-step-03
-- P20260729-qbd-rationale-step-04
+- P20260729-qbd-rationale-step-05
+- P20260728-qbd-p2-ingest-closeout-attestation
 relevant_decisions:
-- D20260728
+- D20260722
 read_next:
 - session-handoff.yaml
-- docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md
-- docs/plans/qbd-rationale-report-layer/gates.yaml
-updated_at: '2026-07-29T05:25:51.940727+00:00'
-git_head: daa62f5b309bc7952b5383a756e3e215786aaab5
+- docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md
+- docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md
+updated_at: '2026-07-29T05:52:54.803865+00:00'
+git_head: 689533fed22e88da9198e7d8898bb781f7b5d917

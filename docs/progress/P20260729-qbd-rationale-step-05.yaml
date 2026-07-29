@@ -17,6 +17,10 @@ tests_run:
   verdict: passed
   command: npm run verify:rationale
   suite_run_id: 2923d61b-ec4f-4382-a8d3-cfc43d423470
+  counts:
+    passed: 38
+    failed: 0
+    warnings: 0
   gates:
     G-RL-01: { passed: 11, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-01.json }
     G-RL-02: { passed: 9, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-02.json }
@@ -31,6 +35,7 @@ boundary:
   p4_code_and_report: unchanged
   rationale_display_state: internal_only
   reference_package: test_only_selected_fixture
+decisions: []
 next_pickup:
   files: []
   text: "Workstream completed; deferred external display and FD-approval work require a separate approved plan."

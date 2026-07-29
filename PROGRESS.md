@@ -1,7 +1,7 @@
 <!-- GENERATED VIEW — do not edit manually -->
 <!-- Source: docs/progress/*.yaml and docs/decisions/D*.md -->
 <!-- Regenerate: baton render-workflow -->
-<!-- Source fingerprint: sha256:441a1c776df45817db2bd090924dd15fe7dd878bb1f983d1b5c22b0936bf3497 -->
+<!-- Source fingerprint: sha256:58d73a2a156f9b138029f3180b439b819a5e21bfe64d5b948839005cd97cd054 -->
 
 # PROGRESS
 
@@ -9,18 +9,18 @@
 
 ## Current workstream
 
-- ID: `qbd-rationale-report-layer`
+- ID: `qbd-p2-ingest-post-closure-spec-diff`
 - Status: `in-progress`
-- Plan: `docs/plans/qbd-rationale-report-layer/plan.md`
-- Current pickup: Rationale Steps 1–4 are closed. Begin Step 5 integrated verification and end-to-end acceptance from the sealed publication path only.
-- Pickup files: `docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md`, `docs/plans/qbd-rationale-report-layer/gates.yaml`, `cowork-p2-kit/rationale/rationale-publication.mjs`
+- Plan: `docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md`
+- Current pickup: Conduct the final P2 publication-lock spec-diff against D20260722 after the completed rationale layer closeout; do not claim hostile same-host TOCTOU is resolved.
+- Pickup files: `docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md`, `docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md`, `docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md`
 
 ## Latest progress
 
 | Date | ID | Status | Summary |
 |---|---|---|---|
-| 2026-07-29 | `P20260729-qbd-rationale-step-04` | done | Completed rationale Step 4: publish-rationale atomically publishes the sealed packet, validated rationale JSON, deterministic Markdown, and a hash-bound receipt into the isolated rationale root; the dedicated Cowork skill confines authoring to the sealed packet and internal-only output. |
-| 2026-07-29 | `P20260729-qbd-rationale-step-03` | done | Completed rationale Step 3: deterministic Markdown is now a literal-safe, byte-exact derivative of validated rationale JSON and its sealed packet. |
+| 2026-07-28 | `P20260728-qbd-p2-ingest-closeout-attestation` | done | Recorded the final accepting closeout verdict and synchronized the canonical P2 validation plan after the final independent review; D20260722 remains open. |
+| 2026-07-29 | `P20260729-qbd-rationale-step-05` | done | Completed rationale Step 5: the integrated suite creates and validates shared-UUID gate evidence, exercises all sealed decision branches end to end, publishes the test-only selected reference package, and verifies P4 unchanged in an isolated clean worktree. |
 
 ## Blockers
 
