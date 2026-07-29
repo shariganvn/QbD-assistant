@@ -1,53 +1,45 @@
 {
   "branch": "master",
-  "da_review": "summary:\n⚠️ The selected fixture is test-only; retain the inconclusive fixture as the production-shaped path.",
+  "da_review": "summary:\n⚠️ No blocking findings; retain Step 2 claim-binding as the next scoped validation boundary.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-29T01:30:32+00:00",
-  "git_head": "eb00eed3ea6083bbcb62fd986e6e5031bb8e9dd2",
+  "generated_at": "2026-07-29T02:13:38+00:00",
+  "git_head": "63efcf8f98b054ced40f5749da128ef79eb818ea",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md",
+        "docs/plans/qbd-rationale-report-layer/step-02-rationale-contract-claim-binding.md",
         "docs/plans/qbd-rationale-report-layer/gates.yaml",
         "docs/decisions/D20260728-qbd-rationale-report-layer-boundary.md"
       ],
-      "text": "Implement the sealed-packet contract and G-RL-01 TDD sequence from the frozen Step 0 fixtures"
+      "text": "Execute Step 2 claim-to-source binding against sealed packets only"
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
-    "cowork-p2-kit/rationale/tests/fixtures/decision-package/inconclusive",
-    "cowork-p2-kit/rationale/tests/fixtures/decision-package/selected",
     "docs/decisions/D20260728-qbd-rationale-report-layer-boundary.md",
     "docs/plans/qbd-rationale-report-layer/gates.yaml",
-    "docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md"
+    "docs/plans/qbd-rationale-report-layer/step-02-rationale-contract-claim-binding.md"
   ],
   "pickup_fingerprint_files": [
-    "cowork-p2-kit/rationale/tests/fixtures/decision-package/inconclusive",
-    "cowork-p2-kit/rationale/tests/fixtures/decision-package/selected",
     "docs/decisions/D20260728-qbd-rationale-report-layer-boundary.md",
     "docs/plans/qbd-rationale-report-layer/gates.yaml",
-    "docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md"
+    "docs/plans/qbd-rationale-report-layer/step-02-rationale-contract-claim-binding.md"
   ],
   "schema_version": 2,
   "session_id": "260729-0832",
-  "summary": "Closed rationale Step 0: generated and receipt-pinned selected, inconclusive, and attested P4 decision-package fixtures; provenance test and isolated P4 regression passed; Step 1 is ready.",
+  "summary": "Closed rationale Step 1 sealed-packet contract: G-RL-01 11/11, isolated P4 regression 122/122, and P4 boundary unchanged.",
   "test_verdict": "artifacts/260729-0832/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
       "files": [
-        "cowork-p2-kit/rationale/tests/fixtures/decision-package/selected",
-        "cowork-p2-kit/rationale/tests/fixtures/decision-package/inconclusive",
-        "docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md"
+        "docs/plans/qbd-rationale-report-layer/step-02-rationale-contract-claim-binding.md",
+        "docs/plans/qbd-rationale-report-layer/gates.yaml"
       ],
-      "text": "Keep the selected fixture test-only; the production-shaped input remains inconclusive"
+      "text": "Step 2 claim-to-source binding remains pending by plan"
     }
   ],
   "worktree_status": [
-    " M AGENTS.md",
-    " M CLAUDE.md",
-    " M IMPLEMENTATION_PLAN.md",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-01.json",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-02.json",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-03.json",
