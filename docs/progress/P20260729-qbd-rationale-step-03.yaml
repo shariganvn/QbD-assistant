@@ -1,0 +1,41 @@
+id: P20260729-qbd-rationale-step-03
+date: "2026-07-29"
+workstream: qbd-rationale-report-layer
+status: done
+summary: >-
+  Completed rationale Step 3: deterministic Markdown is now a literal-safe,
+  byte-exact derivative of validated rationale JSON and its sealed packet.
+changed_files:
+  - cowork-p2-kit/rationale/rationale-markdown.mjs
+  - cowork-p2-kit/rationale/errors.mjs
+  - cowork-p2-kit/rationale/tests/rationale-markdown.test.mjs
+  - docs/plans/qbd-rationale-report-layer/{plan.md,gates.yaml}
+  - docs/reports/qbd-rationale-report-layer/gates/{G-RL-03.json,red/G-RL-03-20260729.json,step-close/G-RL-03.json}
+tests_run:
+  verdict: passed
+  counts:
+    passed: 25
+    failed: 0
+    warnings: 0
+  gates:
+    G-RL-01: { passed: 11, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-01.json }
+    G-RL-02: { passed: 9, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-02.json }
+    G-RL-03:
+      passed: 4
+      failed: 0
+      evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-03.json
+      red_evidence: docs/reports/qbd-rationale-report-layer/gates/red/G-RL-03-20260729.json
+      step_close_evidence: docs/reports/qbd-rationale-report-layer/gates/step-close/G-RL-03.json
+review:
+  score: "8.5/10"
+  findings: evidence closure completed
+boundary:
+  rationale_layer_only: true
+decisions: []
+next_pickup:
+  files:
+    - docs/plans/qbd-rationale-report-layer/step-04-publication-receipt-and-skill.md
+    - docs/plans/qbd-rationale-report-layer/gates.yaml
+  text: >-
+    Begin Step 4 only: publish and revalidate the rationale package while
+    preserving the sealed-packet, internal-only, and P4 read-only boundaries.

@@ -8,21 +8,20 @@ active_workstream:
 current_pickup:
   source: session-handoff.yaml
   summary: >-
-    Rationale Steps 1–2 are closed with sealed causal evidence and exact
-    claim-to-source binding. Begin Step 3 deterministic readable derivative
-    from validated rationale JSON only.
+    Rationale Steps 1–3 are closed. Begin Step 4 publication, receipt, and
+    Cowork-session boundary from the sealed packet only.
   files:
-  - docs/plans/qbd-rationale-report-layer/step-03-deterministic-readable-derivative.md
+  - docs/plans/qbd-rationale-report-layer/step-04-publication-receipt-and-skill.md
   - docs/plans/qbd-rationale-report-layer/gates.yaml
-  - cowork-p2-kit/rationale/rationale-contracts.mjs
+  - cowork-p2-kit/rationale/rationale-markdown.mjs
 relevant_progress:
-- P20260729-qbd-rationale-step-01-causal-delta
 - P20260729-qbd-rationale-step-02
+- P20260729-qbd-rationale-step-03
 relevant_decisions:
 - D20260728
 read_next:
 - session-handoff.yaml
-- docs/plans/qbd-rationale-report-layer/step-03-deterministic-readable-derivative.md
+- docs/plans/qbd-rationale-report-layer/step-04-publication-receipt-and-skill.md
 - docs/plans/qbd-rationale-report-layer/gates.yaml
-updated_at: '2026-07-29T03:06:08.185084+00:00'
-git_head: a6a19915373332b81e5de68f9f27690c70ee6ba8
+updated_at: '2026-07-29T03:29:22.349169+00:00'
+git_head: 9e8a2e6a708554adc63a63a0f98bb4fdacdcd16e
