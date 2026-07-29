@@ -117,7 +117,7 @@ gates:
     evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-04.json
     owner_step: 4
     blocks: [G-RL-05]
-    status: unverified
+    status: pass
 
   - id: G-RL-05
     name: integrated-rationale-acceptance

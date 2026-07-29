@@ -108,7 +108,7 @@ behaviour that turns it green. LLM prose is never proof of contract conformance.
 | 1 | [Seal the packet contract](./step-01-packet-contract-and-sealer.md) | completed | G-RL-01 |
 | 2 | [Bind claims to permitted sources](./step-02-rationale-contract-claim-binding.md) | completed | G-RL-02 |
 | 3 | [Derive the readable rationale](./step-03-deterministic-readable-derivative.md) | completed | G-RL-03 |
-| 4 | [Publish, receipt, and bound the Cowork session](./step-04-publication-receipt-and-skill.md) | pending | G-RL-04 |
+| 4 | [Publish, receipt, and bound the Cowork session](./step-04-publication-receipt-and-skill.md) | completed | G-RL-04 |
 | 5 | [Run integrated gates and close review](./step-05-integrated-gates-review.md) | pending | G-RL-05 |
 
 ### Step 1 contract delta — 2026-07-29

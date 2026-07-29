@@ -1,0 +1,29 @@
+{
+  "gate_id": "G-RL-04",
+  "status": "pass",
+  "command": [
+    "/usr/bin/node",
+    "--test",
+    "--test-reporter=tap",
+    "cowork-p2-kit/rationale/tests/rationale-publication.test.mjs"
+  ],
+  "exit_code": 0,
+  "raw_tap_output": "TAP version 13\n# Subtest: G-RL-04 publishes a canonical, receipt-bound package for all sealed decision branches\nok 1 - G-RL-04 publishes a canonical, receipt-bound package for all sealed decision branches\n  ---\n  duration_ms: 100.358525\n  type: 'test'\n  ...\n# Subtest: G-RL-04 fails closed for missing, surplus, stale-receipt, symlink, and directory members\nok 2 - G-RL-04 fails closed for missing, surplus, stale-receipt, symlink, and directory members\n  ---\n  duration_ms: 31.635946\n  type: 'test'\n  ...\n# Subtest: G-RL-04 publishes through the declared root only and rolls back a failed first publication including .gitkeep\nok 3 - G-RL-04 publishes through the declared root only and rolls back a failed first publication including .gitkeep\n  ---\n  duration_ms: 18.161967\n  type: 'test'\n  ...\n# Subtest: G-RL-04 publishes into a first-publish root that seal-packet already filled beside the .gitkeep placeholder\nok 4 - G-RL-04 publishes into a first-publish root that seal-packet already filled beside the .gitkeep placeholder\n  ---\n  duration_ms: 34.327415\n  type: 'test'\n  ...\n# Subtest: G-RL-04 restores both the sealed packet and the .gitkeep placeholder when a first publish fails mid-write\nok 5 - G-RL-04 restores both the sealed packet and the .gitkeep placeholder when a first publish fails mid-write\n  ---\n  duration_ms: 27.291952\n  type: 'test'\n  ...\n# Subtest: G-RL-04 rejects a packet or rationale binding failure before a publication byte is staged\nok 6 - G-RL-04 rejects a packet or rationale binding failure before a publication byte is staged\n  ---\n  duration_ms: 14.433448\n  type: 'test'\n  ...\n# Subtest: G-RL-04 restores every prior byte if backup cleanup fails, and public validation cannot allowlist a surplus file\nok 7 - G-RL-04 restores every prior byte if backup cleanup fails, and public validation cannot allowlist a surplus file\n  ---\n  duration_ms: 25.713886\n  type: 'test'\n  ...\n# Subtest: G-RL-04 skill has one valid selected-packet template and preserves the Cowork boundary\nok 8 - G-RL-04 skill has one valid selected-packet template and preserves the Cowork boundary\n  ---\n  duration_ms: 2.09785\n  type: 'test'\n  ...\n1..8\n# tests 8\n# suites 0\n# pass 8\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 354.692474\n",
+  "raw_stderr": "",
+  "timestamp": "2026-07-29T05:00:32.339Z",
+  "run_id": "87b40de2-ab40-4436-baff-b215007ff1c9",
+  "suite_run_id": "114008c2-b599-4707-9d60-fc6778dbc92b",
+  "assertions_summary": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "cancelled": 0
+  },
+  "timeout_ms": 300000,
+  "duration_ms": 402,
+  "timed_out": false,
+  "signal": null,
+  "store_records_sha256": "6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56"
+}

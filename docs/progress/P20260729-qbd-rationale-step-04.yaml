@@ -1,0 +1,51 @@
+id: P20260729-qbd-rationale-step-04
+date: "2026-07-29"
+workstream: qbd-rationale-report-layer
+status: done
+summary: >-
+  Completed rationale Step 4: publish-rationale atomically publishes the sealed
+  packet, validated rationale JSON, deterministic Markdown, and a hash-bound
+  receipt into the isolated rationale root; the dedicated Cowork skill confines
+  authoring to the sealed packet and internal-only output.
+changed_files:
+  - cowork-p2-kit/rationale/{rationale-publication.mjs,rationale-receipt.mjs,rationale-receipt.schema.json}
+  - cowork-p2-kit/rationale/{cli.mjs,errors.mjs,tests/rationale-publication.test.mjs}
+  - cowork-p2-kit/RATIONALE-SKILL.md
+  - docs/plans/qbd-rationale-report-layer/{plan.md,gates.yaml}
+  - docs/reports/qbd-rationale-report-layer/gates/{G-RL-04.json,red/G-RL-04-20260729.json,red/step4-gitkeep-sequence-20260729/G-RL-04.json,step-close/G-RL-04.json}
+tests_run:
+  verdict: passed
+  counts:
+    passed: 32
+    failed: 0
+    warnings: 0
+  gates:
+    G-RL-01: { passed: 11, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-01.json }
+    G-RL-02: { passed: 9, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-02.json }
+    G-RL-03: { passed: 4, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-03.json }
+    G-RL-04: { passed: 8, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-04.json }
+  upstream_regression:
+    command: npm run verify:reasoning
+    verdict: passed
+    passed: 122
+    worktree: isolated-clean
+review:
+  code_reviewer: approved_after_remediation
+  resolved_findings:
+    - backup-cleanup failure now restores all prior bytes
+    - public package validation no longer accepts caller-provided transient allowlists
+    - >-
+      publish rejected the real seal-then-publish sequence: the placeholder was only tolerated as the
+      sole root entry, so a root already holding the sealed packet failed E_RATIONALE_PUBLICATION_SURPLUS_FILE
+      on every clean checkout; the placeholder is now moved aside before the allowlist check, as the step spec requires
+    - RATIONALE-SKILL.md gained the runnable publish command, the required output root, and failure handling
+  claude_code: reviewed; two gate tests added for the seal-then-publish sequence and its mid-write rollback
+boundary:
+  p4_code_and_report: untouched
+  rationale_display_state: internal_only
+decisions: []
+next_pickup:
+  files:
+    - docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md
+    - docs/plans/qbd-rationale-report-layer/gates.yaml
+  text: "Begin Step 5 only: add the integrated verify:rationale runner and end-to-end acceptance gate."

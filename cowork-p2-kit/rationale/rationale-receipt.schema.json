@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "packet_sha256", "source_publication_receipt_sha256", "artifacts"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "run_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$" },
+    "packet_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "source_publication_receipt_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rationale-packet.json", "rationale.json", "rationale.md"],
+      "properties": {
+        "rationale-packet.json": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "rationale.json": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "rationale.md": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    }
+  }
+}
