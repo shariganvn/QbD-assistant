@@ -12,6 +12,12 @@ inconclusive outcomes, so the rationale validator can require exact causal citat
 granting the author access to the store or raw record content. Rationale output remains
 `internal_only`; it neither changes the decision nor authorizes dossier drafting.
 
+The two Cowork sessions remain separate: `SKILL.md` prepares fact cards and publishes the reasoning
+decision package at `docs/reports/qbd-p4-reasoning-layer/decision/`, while `RATIONALE-SKILL.md`
+accepts only the sealed packet and publishes the rationale package at
+`docs/reports/qbd-rationale-report-layer/rationale/`. A session that produced fact cards must not
+author the rationale.
+
 ## Runtime Platform
 
 **Supported Windows deployment:** Windows host + **WSL2 Ubuntu** runtime. Run every Node/npm,

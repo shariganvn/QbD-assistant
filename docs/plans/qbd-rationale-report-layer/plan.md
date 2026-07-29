@@ -1,7 +1,7 @@
 ---
 title: QbD rationale/report layer
 workstream: qbd-rationale-report-layer
-status: in-progress
+status: completed
 canonical: true
 created: 2026-07-28
 scope: LLM-authored, evidence-bound decision explanation over a sealed reasoning packet
@@ -109,7 +109,7 @@ behaviour that turns it green. LLM prose is never proof of contract conformance.
 | 2 | [Bind claims to permitted sources](./step-02-rationale-contract-claim-binding.md) | completed | G-RL-02 |
 | 3 | [Derive the readable rationale](./step-03-deterministic-readable-derivative.md) | completed | G-RL-03 |
 | 4 | [Publish, receipt, and bound the Cowork session](./step-04-publication-receipt-and-skill.md) | completed | G-RL-04 |
-| 5 | [Run integrated gates and close review](./step-05-integrated-gates-review.md) | pending | G-RL-05 |
+| 5 | [Run integrated gates and close review](./step-05-integrated-gates-review.md) | completed | G-RL-05 |
 
 ### Step 1 contract delta — 2026-07-29
 

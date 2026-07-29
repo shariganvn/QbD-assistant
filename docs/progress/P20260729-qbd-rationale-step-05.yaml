@@ -1,0 +1,36 @@
+id: P20260729-qbd-rationale-step-05
+date: "2026-07-29"
+workstream: qbd-rationale-report-layer
+status: done
+summary: >-
+  Completed rationale Step 5: the integrated suite creates and validates shared-UUID gate evidence,
+  exercises all sealed decision branches end to end, publishes the test-only selected reference
+  package, and verifies P4 unchanged in an isolated clean worktree.
+changed_files:
+  - cowork-p2-kit/rationale/tests/{verify-rationale.mjs,verify-rationale-evidence.mjs,verify-rationale-contract.test.mjs,e2e-rationale.test.mjs}
+  - package.json
+  - docs/reports/qbd-rationale-report-layer/{rationale/,gates/G-RL-0{1,2,3,4,5}.json,gates/step-close/G-RL-05.json}
+  - docs/plans/qbd-rationale-report-layer/{plan.md,gates.yaml}
+  - cowork-p2-kit/README.md
+  - docs/reports/qbd-rationale-report-layer/from-implementer-to-po-rationale-layer-closure.md
+tests_run:
+  verdict: passed
+  command: npm run verify:rationale
+  suite_run_id: 2923d61b-ec4f-4382-a8d3-cfc43d423470
+  gates:
+    G-RL-01: { passed: 11, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-01.json }
+    G-RL-02: { passed: 9, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-02.json }
+    G-RL-03: { passed: 4, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-03.json }
+    G-RL-04: { passed: 8, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-04.json }
+    G-RL-05: { passed: 6, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-05.json }
+  upstream_regression:
+    command: npm run verify:reasoning
+    verdict: passed
+    worktree: isolated-clean
+boundary:
+  p4_code_and_report: unchanged
+  rationale_display_state: internal_only
+  reference_package: test_only_selected_fixture
+next_pickup:
+  files: []
+  text: "Workstream completed; deferred external display and FD-approval work require a separate approved plan."

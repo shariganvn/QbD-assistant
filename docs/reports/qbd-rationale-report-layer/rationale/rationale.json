@@ -1,0 +1,77 @@
+{
+  "claims": [
+    {
+      "cites": {
+        "fact_card_ids": [
+          "FC-F01-release_30m"
+        ],
+        "quotes": [
+          "Results\nTest                    Specification           Result                  Pass/Fail\nAppearance              White, round, biconvex  Conforms                Pass\n                        film-coated tablet\nAverage weight (n=20) 95.0 mg ± 5%              94.8 mg (RSD 1.2%)      Pass\nHardness (n=10)         40-100 N                68 N (range 58-78)      Pass\nFriability (n=20)       ≤ 1.0%                  0.32%                   Pass\nDisintegration          ≤ 15 min                4 min 20 sec            Pass\nAssay (HPLC)            95.0-105.0%             99.2%                   Pass\nContent uniformity      AV ≤ 15.0               AV = 6.8                Pass\n(n=10)\nDissolution (Q=80%,     Each unit ≥ 80%         92%, 95%, 91%, 94%,     Pass\n30 min, n=6)                                    93%, 96%\nDissolution mean        -                       93.5%                   -\nRelated substances      Individual ≤ 0.5%;      Max individual 0.12%;   Pass\n                        Total ≤ 1.0%            Total 0.35%\nLoss on drying          ≤ 2.0%                  0.8%                    Pass"
+        ]
+      },
+      "claim_id": "claim-01",
+      "kind": "fact",
+      "text": "Admitted evidence is recorded."
+    },
+    {
+      "cites": {
+        "gate_refs": [
+          {
+            "candidate": "F-01",
+            "measure_id": "assay",
+            "ref_kind": "matrix_cell"
+          }
+        ]
+      },
+      "claim_id": "claim-02",
+      "kind": "gate",
+      "text": "Recorded evaluation evidence applies."
+    },
+    {
+      "cites": {
+        "sensitivity_vector_indexes": [
+          0
+        ]
+      },
+      "claim_id": "claim-03",
+      "kind": "sensitivity",
+      "text": "Sensitivity evidence is recorded."
+    },
+    {
+      "cites": {
+        "exclusion_refs": [
+          {
+            "candidate": "F-03",
+            "reason": "E_COHORT_STRENGTH_MISMATCH",
+            "record_id": null
+          }
+        ]
+      },
+      "claim_id": "claim-04",
+      "kind": "exclusion",
+      "text": "The exclusion is recorded."
+    },
+    {
+      "cites": {
+        "decision_state_fields": [
+          "status"
+        ]
+      },
+      "claim_id": "claim-05",
+      "kind": "decision_state",
+      "text": "selected"
+    }
+  ],
+  "cohort_id": "rationale-selected",
+  "decision_id": "decision-rationale-selected",
+  "decision_sha256": "c11ac72c03f3358c8c09d9a862f7b19314245c414b55dd66947de45809a99d0f",
+  "decision_status": "selected",
+  "display_state": "internal_only",
+  "fd_action": "selected",
+  "packet_id": "rationale-packet-rationale-selected-c11ac72c03f3358c8c09d9a862f7b19314245c414b55dd66947de45809a99d0f",
+  "packet_sha256": "c22299c8b58a0492139f8602aef98cca1c4c1b3a2aa7e2dc834c14e63b32cc1b",
+  "rationale_id": "rationale-rationale-selected",
+  "run_id": "rationale-selected",
+  "schema_version": 1,
+  "winner": "F-01"
+}

@@ -140,4 +140,4 @@ gates:
     evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-05.json
     owner_step: 5
     blocks: []
-    status: unverified
+    status: pass

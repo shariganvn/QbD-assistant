@@ -13,7 +13,8 @@
     "verify:render": "node cowork-p2-kit/render/tests/verify-render.mjs",
     "render": "node cowork-p2-kit/render/render-docx.mjs",
     "render:spike": "node cowork-p2-kit/render/render-spike.mjs",
-    "verify:reasoning": "node cowork-p2-kit/reasoning/tests/verify-reasoning.mjs"
+    "verify:reasoning": "node cowork-p2-kit/reasoning/tests/verify-reasoning.mjs",
+    "verify:rationale": "node cowork-p2-kit/rationale/tests/verify-rationale.mjs"
   },
   "keywords": [],
   "author": "",
