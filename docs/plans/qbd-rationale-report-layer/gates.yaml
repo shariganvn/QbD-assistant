@@ -46,7 +46,7 @@ gates:
     evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-01.json
     owner_step: 1
     blocks: [G-RL-02, G-RL-03, G-RL-04, G-RL-05]
-    status: unverified
+    status: pass
 
   - id: G-RL-02
     name: claim-to-source-binding

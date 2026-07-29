@@ -1,31 +1,38 @@
 <!-- GENERATED VIEW — do not edit manually -->
-<!-- Source: docs/test-plans/T20260729-qbd-rationale-step-00.yaml -->
+<!-- Source: docs/test-plans/T20260729-qbd-rationale-step-01.yaml -->
 <!-- Regenerate: baton render-test-plan -->
-<!-- Source fingerprint: sha256:5884dab95333e94262413311569d3d75242566235bf9c44d5d11e7218e241b1d -->
+<!-- Source fingerprint: sha256:cfac003959cef7ad36142bef0c6e3200fb01a150f24c613e5b89f3689306f073 -->
 
 # TEST_PLAN — Active Validation Gates
 
-## T20260729-qbd-rationale-step-00
+## T20260729-qbd-rationale-step-01
 
 Status: **Executed — results recorded**
 
 - Workstream: `qbd-rationale-report-layer`
 - Date: 2026-07-29
-- Plan: `docs/plans/qbd-rationale-report-layer/step-00-freeze-source-package-fixtures.md`
+- Plan: `docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md`
 
 ## Scope
 
-Generate and pin the selected, inconclusive, and attested P4 decision-package fixtures used as the rationale layer's immutable Step 1 input contract.
+Seal a canonical, receipt-bound rationale packet from a fully re-validated P4 decision package, without exposing store bytes, raw record content, or execution-report content to the rationale author.
 
 ### Changed files
 
-- `cowork-p2-kit/rationale/tests/decision-package-fixtures.test.mjs`
-- `cowork-p2-kit/rationale/tests/fixtures/decision-package-fixtures.mjs`
-- `cowork-p2-kit/rationale/tests/fixtures/decision-package/`
-- `docs/plans/qbd-rationale-report-layer/gates.yaml`
+- `cowork-p2-kit/rationale/rationale-packet.schema.json`
+- `cowork-p2-kit/rationale/packet.mjs`
+- `cowork-p2-kit/rationale/errors.mjs`
+- `cowork-p2-kit/rationale/cli.mjs`
+- `cowork-p2-kit/rationale/tests/packet-contract.test.mjs`
+- `cowork-p2-kit/rationale/tests/gate-evidence-validator.mjs`
+- `cowork-p2-kit/rationale/tests/run-gate.mjs`
+- `cowork-p2-kit/rationale/tests/run-gate-contract.test.mjs`
+- `cowork-p2-kit/rationale/tests/fixtures/rationale-packet/selected.json`
 - `docs/reports/qbd-rationale-report-layer/gates/`
-- `docs/reports/qbd-rationale-report-layer/rationale/`
-- `docs/test-plans/T20260729-qbd-rationale-step-00.yaml`
+- `docs/plans/qbd-rationale-report-layer/plan.md`
+- `docs/plans/qbd-rationale-report-layer/gates.yaml`
+- `docs/progress/P20260729-qbd-rationale-step-01.yaml`
+- `docs/test-plans/T20260729-qbd-rationale-step-01.yaml`
 - `docs/test-plans/active.yaml`
 
 ## Approval
@@ -36,10 +43,16 @@ Generate and pin the selected, inconclusive, and attested P4 decision-package fi
 
 ## Commands
 
-### fixture-provenance — Regenerate every decision package through the injected P4 CLI factory and compare all bytes to the committed fixtures.
+### gate-rl-01 — Run packet and local gate-runner contract assertions through the rationale evidence wrapper.
 
 ```bash
-node --test cowork-p2-kit/rationale/tests/decision-package-fixtures.test.mjs
+node cowork-p2-kit/rationale/tests/run-gate.mjs G-RL-01 cowork-p2-kit/rationale/tests/packet-contract.test.mjs cowork-p2-kit/rationale/tests/run-gate-contract.test.mjs
+```
+
+### upstream-reasoning-regression — Re-run the completed P4 reasoning suite in its isolated clean worktree.
+
+```bash
+npm run verify:reasoning
 ```
 
 
@@ -47,7 +60,7 @@ node --test cowork-p2-kit/rationale/tests/decision-package-fixtures.test.mjs
 
 Verdict: **passed**
 Artifact: `artifacts/260729-0832/test-verdict.json`
-Counts: passed=1, failed=0, warnings=0
+Counts: passed=11, failed=0, warnings=0
 
 ---
 

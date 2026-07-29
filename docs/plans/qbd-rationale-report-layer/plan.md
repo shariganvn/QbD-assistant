@@ -105,7 +105,7 @@ behaviour that turns it green. LLM prose is never proof of contract conformance.
 | Step | Execution file | Status | Blocking gate |
 |---|---|---:|---|
 | 0 | [Freeze source decision-package fixtures](./step-00-freeze-source-package-fixtures.md) | completed | readiness checklist |
-| 1 | [Seal the packet contract](./step-01-packet-contract-and-sealer.md) | pending | G-RL-01 |
+| 1 | [Seal the packet contract](./step-01-packet-contract-and-sealer.md) | completed | G-RL-01 |
 | 2 | [Bind claims to permitted sources](./step-02-rationale-contract-claim-binding.md) | pending | G-RL-02 |
 | 3 | [Derive the readable rationale](./step-03-deterministic-readable-derivative.md) | pending | G-RL-03 |
 | 4 | [Publish, receipt, and bound the Cowork session](./step-04-publication-receipt-and-skill.md) | pending | G-RL-04 |

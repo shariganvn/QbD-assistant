@@ -1,0 +1,1005 @@
+{
+  "cohort": {
+    "candidates": [
+      "F-01",
+      "F-02"
+    ],
+    "cohort_basis": "Strength-specific cohort: F-01@5 mg, F-02@5 mg",
+    "cohort_id": "rationale-selected",
+    "linear_attestation_id": null,
+    "linear_attestation_sha256": null,
+    "provenance_candidate_map": {
+      "inputs/trials/formulation-trial-01.docx": "F-01",
+      "inputs/trials/formulation-trial-02.docx": "F-02",
+      "inputs/trials/formulation-trial-03.docx": "F-03"
+    },
+    "schema_version": 2,
+    "store_records_sha256": "6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56"
+  },
+  "decision": {
+    "cohort_basis": "Strength-specific cohort: F-01@5 mg, F-02@5 mg",
+    "cohort_id": "rationale-selected",
+    "decision_id": "decision-rationale-selected",
+    "fact_card_ids": [
+      "FC-F01-assay",
+      "FC-F01-release_30m",
+      "FC-F02-assay",
+      "FC-F02-release_30m"
+    ],
+    "fd_action": "selected",
+    "linear_attestation_id": null,
+    "linear_attestation_sha256": null,
+    "rubric_sha256": "40e942181235bbe606af9f158606111f2b893a35c093e2887ff34c30c1471358",
+    "schema_version": 2,
+    "status": "selected",
+    "winner": "F-01"
+  },
+  "evaluation": {
+    "candidate_reviews": [
+      {
+        "candidate": "F-01",
+        "critical_evidence": [
+          {
+            "cited_record_ids": [
+              "14d260438e82ec4f"
+            ],
+            "measure_id": "release_30m",
+            "uncited_results_record_ids": []
+          },
+          {
+            "cited_record_ids": [
+              "14d260438e82ec4f"
+            ],
+            "measure_id": "assay",
+            "uncited_results_record_ids": []
+          }
+        ],
+        "eligible": true,
+        "hard_gates": [
+          {
+            "measure_id": "release_30m",
+            "operator": ">=",
+            "passed": true,
+            "record_ids": [
+              "14d260438e82ec4f"
+            ],
+            "threshold": 80,
+            "value": 93.5
+          },
+          {
+            "measure_id": "assay",
+            "operator": ">=",
+            "passed": true,
+            "record_ids": [
+              "14d260438e82ec4f"
+            ],
+            "threshold": 95,
+            "value": 105
+          },
+          {
+            "measure_id": "hardness",
+            "operator": ">=",
+            "passed": true,
+            "record_ids": [],
+            "threshold": 0,
+            "value": null
+          }
+        ]
+      },
+      {
+        "candidate": "F-02",
+        "critical_evidence": [
+          {
+            "cited_record_ids": [
+              "e6dd4ce195f2043a"
+            ],
+            "measure_id": "release_30m",
+            "uncited_results_record_ids": []
+          },
+          {
+            "cited_record_ids": [
+              "e6dd4ce195f2043a"
+            ],
+            "measure_id": "assay",
+            "uncited_results_record_ids": []
+          }
+        ],
+        "eligible": true,
+        "hard_gates": [
+          {
+            "measure_id": "release_30m",
+            "operator": ">=",
+            "passed": true,
+            "record_ids": [
+              "e6dd4ce195f2043a"
+            ],
+            "threshold": 80,
+            "value": 85.7
+          },
+          {
+            "measure_id": "assay",
+            "operator": ">=",
+            "passed": true,
+            "record_ids": [
+              "e6dd4ce195f2043a"
+            ],
+            "threshold": 95,
+            "value": 105
+          },
+          {
+            "measure_id": "hardness",
+            "operator": ">=",
+            "passed": true,
+            "record_ids": [],
+            "threshold": 0,
+            "value": null
+          }
+        ]
+      }
+    ],
+    "cohort_id": "rationale-selected",
+    "decision_id": "decision-rationale-selected",
+    "decision_sha256": "c11ac72c03f3358c8c09d9a862f7b19314245c414b55dd66947de45809a99d0f",
+    "evaluation_id": "962455ebf500145e14f252dc1e8016577380",
+    "matrix_cells": [
+      {
+        "candidate": "F-01",
+        "fact_card_ids": [
+          "FC-F01-release_30m"
+        ],
+        "measure_id": "release_30m",
+        "record_ids": [
+          "14d260438e82ec4f"
+        ],
+        "unit": "%",
+        "value": 93.5
+      },
+      {
+        "candidate": "F-01",
+        "fact_card_ids": [
+          "FC-F01-assay"
+        ],
+        "measure_id": "assay",
+        "record_ids": [
+          "14d260438e82ec4f"
+        ],
+        "unit": "%",
+        "value": 105
+      },
+      {
+        "candidate": "F-02",
+        "fact_card_ids": [
+          "FC-F02-release_30m"
+        ],
+        "measure_id": "release_30m",
+        "record_ids": [
+          "e6dd4ce195f2043a"
+        ],
+        "unit": "%",
+        "value": 85.7
+      },
+      {
+        "candidate": "F-02",
+        "fact_card_ids": [
+          "FC-F02-assay"
+        ],
+        "measure_id": "assay",
+        "record_ids": [
+          "e6dd4ce195f2043a"
+        ],
+        "unit": "%",
+        "value": 105
+      }
+    ],
+    "outcome_code": "selected",
+    "rubric_sha256": "40e942181235bbe606af9f158606111f2b893a35c093e2887ff34c30c1471358",
+    "schema_version": 1,
+    "sensitivity": {
+      "stable_winner": "F-01",
+      "vectors": [
+        {
+          "leader": "F-01",
+          "margin": 1.75,
+          "totals": {
+            "F-01": 6,
+            "F-02": 4.25
+          },
+          "weights": {
+            "assay": 0.25,
+            "hardness": 0.1,
+            "release_30m": 0.35
+          }
+        },
+        {
+          "leader": "F-01",
+          "margin": 1.75,
+          "totals": {
+            "F-01": 6,
+            "F-02": 4.25
+          },
+          "weights": {
+            "assay": 0.25,
+            "hardness": 0.3,
+            "release_30m": 0.35
+          }
+        },
+        {
+          "leader": "F-01",
+          "margin": 1.75,
+          "totals": {
+            "F-01": 8,
+            "F-02": 6.25
+          },
+          "weights": {
+            "assay": 0.45,
+            "hardness": 0.1,
+            "release_30m": 0.35
+          }
+        },
+        {
+          "leader": "F-01",
+          "margin": 1.75,
+          "totals": {
+            "F-01": 8,
+            "F-02": 6.25
+          },
+          "weights": {
+            "assay": 0.45,
+            "hardness": 0.3,
+            "release_30m": 0.35
+          }
+        },
+        {
+          "leader": "F-01",
+          "margin": 2.75,
+          "totals": {
+            "F-01": 8,
+            "F-02": 5.25
+          },
+          "weights": {
+            "assay": 0.25,
+            "hardness": 0.1,
+            "release_30m": 0.55
+          }
+        },
+        {
+          "leader": "F-01",
+          "margin": 2.75,
+          "totals": {
+            "F-01": 8,
+            "F-02": 5.25
+          },
+          "weights": {
+            "assay": 0.25,
+            "hardness": 0.3,
+            "release_30m": 0.55
+          }
+        },
+        {
+          "leader": "F-01",
+          "margin": 2.75,
+          "totals": {
+            "F-01": 10,
+            "F-02": 7.25
+          },
+          "weights": {
+            "assay": 0.45,
+            "hardness": 0.1,
+            "release_30m": 0.55
+          }
+        },
+        {
+          "leader": "F-01",
+          "margin": 2.75,
+          "totals": {
+            "F-01": 10,
+            "F-02": 7.25
+          },
+          "weights": {
+            "assay": 0.45,
+            "hardness": 0.3,
+            "release_30m": 0.55
+          }
+        }
+      ]
+    }
+  },
+  "evidence_log": {
+    "cohort_id": "rationale-selected",
+    "entries": [
+      {
+        "candidate": "F-01",
+        "fact_card_ids": [],
+        "provenance": {
+          "char_end": 1548,
+          "char_start": 1287,
+          "file": "inputs/trials/formulation-trial-01.docx",
+          "page": 2
+        },
+        "quote": "Observations\n Wet granulation produced good flow properties (Carr index 18%).\n Dissolution profile shows rapid release (>80% at 15 min).\n Hardness distribution is tight, indicating consistent compression.\n No sticking or picking observed during compression.",
+        "record_id": "02818ef5f8b46d68"
+      },
+      {
+        "candidate": "F-02",
+        "fact_card_ids": [],
+        "provenance": {
+          "char_end": 2081,
+          "char_start": 1806,
+          "file": "inputs/trials/formulation-trial-02.docx",
+          "page": 1
+        },
+        "quote": "Coating\nAttribute                                            Value\nCoating material                                     Opadry II White\nCoating weight gain                                  3.0% w/w\nCoating pan                                          12-inch, inlet temp 60°C",
+        "record_id": "0d8fc6d7192e6088"
+      },
+      {
+        "candidate": "F-01",
+        "fact_card_ids": [
+          "FC-F01-assay",
+          "FC-F01-release_30m"
+        ],
+        "provenance": {
+          "char_end": 1285,
+          "char_start": 185,
+          "file": "inputs/trials/formulation-trial-01.docx",
+          "page": 2
+        },
+        "quote": "Results\nTest                    Specification           Result                  Pass/Fail\nAppearance              White, round, biconvex  Conforms                Pass\n                        film-coated tablet\nAverage weight (n=20) 95.0 mg ± 5%              94.8 mg (RSD 1.2%)      Pass\nHardness (n=10)         40-100 N                68 N (range 58-78)      Pass\nFriability (n=20)       ≤ 1.0%                  0.32%                   Pass\nDisintegration          ≤ 15 min                4 min 20 sec            Pass\nAssay (HPLC)            95.0-105.0%             99.2%                   Pass\nContent uniformity      AV ≤ 15.0               AV = 6.8                Pass\n(n=10)\nDissolution (Q=80%,     Each unit ≥ 80%         92%, 95%, 91%, 94%,     Pass\n30 min, n=6)                                    93%, 96%\nDissolution mean        -                       93.5%                   -\nRelated substances      Individual ≤ 0.5%;      Max individual 0.12%;   Pass\n                        Total ≤ 1.0%            Total 0.35%\nLoss on drying          ≤ 2.0%                  0.8%                    Pass",
+        "record_id": "14d260438e82ec4f"
+      },
+      {
+        "candidate": "F-01",
+        "fact_card_ids": [],
+        "provenance": {
+          "char_end": 606,
+          "char_start": 0,
+          "file": "inputs/trials/formulation-trial-01.docx",
+          "page": 1
+        },
+        "quote": "Formulation Trial 01 - Bisoprolol 5 mg Tablet (Wet\nGranulation)\nTrial Overview\nAttribute                                            Value\nTrial ID                                             BIS-5-WG-001\nFormulation code                                     F-01\nActive ingredient                                    Bisoprolol fumarate 5 mg\nGranulation method                                   Wet granulation\nBatch size                                           10,000 tablets\nDate                                                 2025-06-15\nOperator                                             Nguyễn Văn A",
+        "record_id": "38612badbed451ab"
+      },
+      {
+        "candidate": "F-02",
+        "fact_card_ids": [],
+        "provenance": {
+          "char_end": 612,
+          "char_start": 0,
+          "file": "inputs/trials/formulation-trial-02.docx",
+          "page": 1
+        },
+        "quote": "Formulation Trial 02 - Bisoprolol 5 mg Tablet (Direct\nCompression)\nTrial Overview\nAttribute                                            Value\nTrial ID                                             BIS-5-DC-002\nFormulation code                                     F-02\nActive ingredient                                    Bisoprolol fumarate 5 mg\nGranulation method                                   Direct compression\nBatch size                                           10,000 tablets\nDate                                                 2025-06-22\nOperator                                             Nguyễn Văn A",
+        "record_id": "3943cc95d69d5bb8"
+      },
+      {
+        "candidate": "F-02",
+        "fact_card_ids": [],
+        "provenance": {
+          "char_end": 1567,
+          "char_start": 1102,
+          "file": "inputs/trials/formulation-trial-02.docx",
+          "page": 2
+        },
+        "quote": "Observations\n Direct compression showed poorer flow than wet granulation (Carr index 24%).\n Dissolution is slower than F-01 but still meets specification.\n Hardness range is wider - compression force control is more critical.\n Higher disintegrant level (5%) compensates for lack of granule bonding.\n Content uniformity AV is higher (11.2 vs 6.8), indicating mixing is less homogeneous.\n     Simplified process (fewer steps) reduces manufacturing time by ~40%.",
+        "record_id": "410e4766ea4b9e01"
+      },
+      {
+        "candidate": "F-01",
+        "fact_card_ids": [],
+        "provenance": {
+          "char_end": 1940,
+          "char_start": 1709,
+          "file": "inputs/trials/formulation-trial-01.docx",
+          "page": 1
+        },
+        "quote": "Coating\nAttribute                                            Value\nCoating material                                     Opadry II White (hypromellose, titanium\n                                                     dioxide, macrogol)",
+        "record_id": "49141ab66bcedd5a"
+      },
+      {
+        "candidate": "F-02",
+        "fact_card_ids": [],
+        "provenance": {
+          "char_end": 1804,
+          "char_start": 614,
+          "file": "inputs/trials/formulation-trial-02.docx",
+          "page": 1
+        },
+        "quote": "Formulation Composition\n#                     Ingredient            mg/tablet     % w/w              Function\n1                     Bisoprolol            5.00          5.00               Active\n                      fumarate\n2                     Microcrystalline      60.00         60.00              Filler/binder\n                      cellulose (DG                                          (direct\n                      grade)                                                 compressible)\n3                     Lactose               20.00         20.00              Filler (direct\n                      monohydrate                                            compressible)\n                      (DCL-11)\n4                     Croscarmellose        5.00          5.00               Disintegrant\n                      sodium                                                 (superdisintegrant)\n5                     Colloidal silicon     1.50          1.50               Glidant\n                      dioxide\n6                     Magnesium             1.50          1.50               Lubricant\n                      stearate\nTotal                                       93.00         100.00",
+        "record_id": "b828b09922f7e627"
+      },
+      {
+        "candidate": "F-01",
+        "fact_card_ids": [],
+        "provenance": {
+          "char_end": 183,
+          "char_start": 0,
+          "file": "inputs/trials/formulation-trial-01.docx",
+          "page": 2
+        },
+        "quote": "Attribute                                       Value\nCoating weight gain                             3.0% w/w\nCoating pan                                     12-inch, inlet temp 60°C",
+        "record_id": "db73152f45598190"
+      },
+      {
+        "candidate": "F-01",
+        "fact_card_ids": [],
+        "provenance": {
+          "char_end": 1707,
+          "char_start": 608,
+          "file": "inputs/trials/formulation-trial-01.docx",
+          "page": 1
+        },
+        "quote": "Formulation Composition\n#                     Ingredient            mg/tablet     % w/w              Function\n1                     Bisoprolol            5.00          5.00               Active\n                      fumarate\n2                     Microcrystalline      55.00         55.00              Filler/binder\n                      cellulose\n                      (PH-102)\n3                     Lactose               25.00         25.00              Filler\n                      monohydrate (200\n                      mesh)\n4                     Povidone K30          5.00          5.00               Binder\n                      (binder solution\n                      5% w/v)\n5                     Croscarmellose        3.00          3.00               Disintegrant\n                      sodium\n6                     Colloidal silicon     1.00          1.00               Glidant\n                      dioxide\n7                     Magnesium             1.00          1.00               Lubricant\n                      stearate\nTotal                                       95.00         100.00",
+        "record_id": "e2fd11b76755b0cf"
+      },
+      {
+        "candidate": "F-02",
+        "fact_card_ids": [
+          "FC-F02-assay",
+          "FC-F02-release_30m"
+        ],
+        "provenance": {
+          "char_end": 1100,
+          "char_start": 0,
+          "file": "inputs/trials/formulation-trial-02.docx",
+          "page": 2
+        },
+        "quote": "Results\nTest                    Specification           Result                  Pass/Fail\nAppearance              White, round, biconvex  Conforms                Pass\n                        film-coated tablet\nAverage weight (n=20) 93.0 mg ± 5%              93.4 mg (RSD 1.8%)      Pass\nHardness (n=10)         40-100 N                52 N (range 42-65)      Pass\nFriability (n=20)       ≤ 1.0%                  0.68%                   Pass\nDisintegration          ≤ 15 min                6 min 45 sec            Pass\nAssay (HPLC)            95.0-105.0%             98.8%                   Pass\nContent uniformity      AV ≤ 15.0               AV = 11.2               Pass\n(n=10)\nDissolution (Q=80%,     Each unit ≥ 80%         85%, 88%, 82%, 86%,     Pass\n30 min, n=6)                                    84%, 89%\nDissolution mean        -                       85.7%                   -\nRelated substances      Individual ≤ 0.5%;      Max individual 0.15%;   Pass\n                        Total ≤ 1.0%            Total 0.42%\nLoss on drying          ≤ 2.0%                  1.1%                    Pass",
+        "record_id": "e6dd4ce195f2043a"
+      }
+    ],
+    "exclusions": [
+      {
+        "candidate": "F-03",
+        "reason": "E_COHORT_STRENGTH_MISMATCH",
+        "record_id": null,
+        "scope": "candidate"
+      }
+    ],
+    "schema_version": 2
+  },
+  "fact_cards": {
+    "cards": [
+      {
+        "candidate": "F-01",
+        "char_end": 1100,
+        "char_start": 0,
+        "id": "FC-F01-release_30m",
+        "measure": "release_30m",
+        "normalized_value": 93.5,
+        "provenance": {
+          "file": "inputs/trials/formulation-trial-01.docx"
+        },
+        "quote": "Results\nTest                    Specification           Result                  Pass/Fail\nAppearance              White, round, biconvex  Conforms                Pass\n                        film-coated tablet\nAverage weight (n=20) 95.0 mg ± 5%              94.8 mg (RSD 1.2%)      Pass\nHardness (n=10)         40-100 N                68 N (range 58-78)      Pass\nFriability (n=20)       ≤ 1.0%                  0.32%                   Pass\nDisintegration          ≤ 15 min                4 min 20 sec            Pass\nAssay (HPLC)            95.0-105.0%             99.2%                   Pass\nContent uniformity      AV ≤ 15.0               AV = 6.8                Pass\n(n=10)\nDissolution (Q=80%,     Each unit ≥ 80%         92%, 95%, 91%, 94%,     Pass\n30 min, n=6)                                    93%, 96%\nDissolution mean        -                       93.5%                   -\nRelated substances      Individual ≤ 0.5%;      Max individual 0.12%;   Pass\n                        Total ≤ 1.0%            Total 0.35%\nLoss on drying          ≤ 2.0%                  0.8%                    Pass",
+        "record_id": "14d260438e82ec4f",
+        "unit": "%"
+      },
+      {
+        "candidate": "F-01",
+        "char_end": 1100,
+        "char_start": 0,
+        "id": "FC-F01-assay",
+        "measure": "assay",
+        "normalized_value": 105,
+        "provenance": {
+          "file": "inputs/trials/formulation-trial-01.docx"
+        },
+        "quote": "Results\nTest                    Specification           Result                  Pass/Fail\nAppearance              White, round, biconvex  Conforms                Pass\n                        film-coated tablet\nAverage weight (n=20) 95.0 mg ± 5%              94.8 mg (RSD 1.2%)      Pass\nHardness (n=10)         40-100 N                68 N (range 58-78)      Pass\nFriability (n=20)       ≤ 1.0%                  0.32%                   Pass\nDisintegration          ≤ 15 min                4 min 20 sec            Pass\nAssay (HPLC)            95.0-105.0%             99.2%                   Pass\nContent uniformity      AV ≤ 15.0               AV = 6.8                Pass\n(n=10)\nDissolution (Q=80%,     Each unit ≥ 80%         92%, 95%, 91%, 94%,     Pass\n30 min, n=6)                                    93%, 96%\nDissolution mean        -                       93.5%                   -\nRelated substances      Individual ≤ 0.5%;      Max individual 0.12%;   Pass\n                        Total ≤ 1.0%            Total 0.35%\nLoss on drying          ≤ 2.0%                  0.8%                    Pass",
+        "record_id": "14d260438e82ec4f",
+        "unit": "%"
+      },
+      {
+        "candidate": "F-02",
+        "char_end": 1100,
+        "char_start": 0,
+        "id": "FC-F02-release_30m",
+        "measure": "release_30m",
+        "normalized_value": 85.7,
+        "provenance": {
+          "file": "inputs/trials/formulation-trial-02.docx"
+        },
+        "quote": "Results\nTest                    Specification           Result                  Pass/Fail\nAppearance              White, round, biconvex  Conforms                Pass\n                        film-coated tablet\nAverage weight (n=20) 93.0 mg ± 5%              93.4 mg (RSD 1.8%)      Pass\nHardness (n=10)         40-100 N                52 N (range 42-65)      Pass\nFriability (n=20)       ≤ 1.0%                  0.68%                   Pass\nDisintegration          ≤ 15 min                6 min 45 sec            Pass\nAssay (HPLC)            95.0-105.0%             98.8%                   Pass\nContent uniformity      AV ≤ 15.0               AV = 11.2               Pass\n(n=10)\nDissolution (Q=80%,     Each unit ≥ 80%         85%, 88%, 82%, 86%,     Pass\n30 min, n=6)                                    84%, 89%\nDissolution mean        -                       85.7%                   -\nRelated substances      Individual ≤ 0.5%;      Max individual 0.15%;   Pass\n                        Total ≤ 1.0%            Total 0.42%\nLoss on drying          ≤ 2.0%                  1.1%                    Pass",
+        "record_id": "e6dd4ce195f2043a",
+        "unit": "%"
+      },
+      {
+        "candidate": "F-02",
+        "char_end": 1100,
+        "char_start": 0,
+        "id": "FC-F02-assay",
+        "measure": "assay",
+        "normalized_value": 105,
+        "provenance": {
+          "file": "inputs/trials/formulation-trial-02.docx"
+        },
+        "quote": "Results\nTest                    Specification           Result                  Pass/Fail\nAppearance              White, round, biconvex  Conforms                Pass\n                        film-coated tablet\nAverage weight (n=20) 93.0 mg ± 5%              93.4 mg (RSD 1.8%)      Pass\nHardness (n=10)         40-100 N                52 N (range 42-65)      Pass\nFriability (n=20)       ≤ 1.0%                  0.68%                   Pass\nDisintegration          ≤ 15 min                6 min 45 sec            Pass\nAssay (HPLC)            95.0-105.0%             98.8%                   Pass\nContent uniformity      AV ≤ 15.0               AV = 11.2               Pass\n(n=10)\nDissolution (Q=80%,     Each unit ≥ 80%         85%, 88%, 82%, 86%,     Pass\n30 min, n=6)                                    84%, 89%\nDissolution mean        -                       85.7%                   -\nRelated substances      Individual ≤ 0.5%;      Max individual 0.15%;   Pass\n                        Total ≤ 1.0%            Total 0.42%\nLoss on drying          ≤ 2.0%                  1.1%                    Pass",
+        "record_id": "e6dd4ce195f2043a",
+        "unit": "%"
+      }
+    ],
+    "schema_version": 1
+  },
+  "linear_attestation": null,
+  "packet_id": "rationale-packet-rationale-selected-c11ac72c03f3358c8c09d9a862f7b19314245c414b55dd66947de45809a99d0f",
+  "permitted_sources": {
+    "critical_evidence": [
+      {
+        "candidate": "F-01",
+        "measure_id": "assay"
+      },
+      {
+        "candidate": "F-01",
+        "measure_id": "release_30m"
+      },
+      {
+        "candidate": "F-02",
+        "measure_id": "assay"
+      },
+      {
+        "candidate": "F-02",
+        "measure_id": "release_30m"
+      }
+    ],
+    "decision_state_fields": [
+      "status",
+      "winner",
+      "cohort_id",
+      "cohort_basis",
+      "fd_action",
+      "rubric_sha256",
+      "linear_attestation_id",
+      "linear_attestation_sha256"
+    ],
+    "evidence_record_ids": [
+      "02818ef5f8b46d68",
+      "0d8fc6d7192e6088",
+      "14d260438e82ec4f",
+      "38612badbed451ab",
+      "3943cc95d69d5bb8",
+      "410e4766ea4b9e01",
+      "49141ab66bcedd5a",
+      "b828b09922f7e627",
+      "db73152f45598190",
+      "e2fd11b76755b0cf",
+      "e6dd4ce195f2043a"
+    ],
+    "exclusions": [
+      {
+        "candidate": "F-03",
+        "reason": "E_COHORT_STRENGTH_MISMATCH",
+        "record_id": null
+      }
+    ],
+    "fact_card_ids": [
+      "FC-F01-assay",
+      "FC-F01-release_30m",
+      "FC-F02-assay",
+      "FC-F02-release_30m"
+    ],
+    "hard_gates": [
+      {
+        "candidate": "F-01",
+        "measure_id": "assay"
+      },
+      {
+        "candidate": "F-01",
+        "measure_id": "hardness"
+      },
+      {
+        "candidate": "F-01",
+        "measure_id": "release_30m"
+      },
+      {
+        "candidate": "F-02",
+        "measure_id": "assay"
+      },
+      {
+        "candidate": "F-02",
+        "measure_id": "hardness"
+      },
+      {
+        "candidate": "F-02",
+        "measure_id": "release_30m"
+      }
+    ],
+    "matrix_cells": [
+      {
+        "candidate": "F-01",
+        "measure_id": "assay"
+      },
+      {
+        "candidate": "F-01",
+        "measure_id": "release_30m"
+      },
+      {
+        "candidate": "F-02",
+        "measure_id": "assay"
+      },
+      {
+        "candidate": "F-02",
+        "measure_id": "release_30m"
+      }
+    ],
+    "sensitivity_vector_count": 8,
+    "source_value_index": {
+      "decision_state": [
+        {
+          "field": "status",
+          "unit_tokens": [],
+          "value_tokens": [
+            "selected"
+          ]
+        },
+        {
+          "field": "winner",
+          "unit_tokens": [],
+          "value_tokens": [
+            "F-01"
+          ]
+        },
+        {
+          "field": "cohort_id",
+          "unit_tokens": [],
+          "value_tokens": [
+            "rationale-selected"
+          ]
+        },
+        {
+          "field": "cohort_basis",
+          "unit_tokens": [],
+          "value_tokens": [
+            "Strength-specific cohort: F-01@5 mg, F-02@5 mg"
+          ]
+        },
+        {
+          "field": "fd_action",
+          "unit_tokens": [],
+          "value_tokens": [
+            "selected"
+          ]
+        },
+        {
+          "field": "rubric_sha256",
+          "unit_tokens": [],
+          "value_tokens": [
+            "40e942181235bbe606af9f158606111f2b893a35c093e2887ff34c30c1471358"
+          ]
+        },
+        {
+          "field": "linear_attestation_id",
+          "unit_tokens": [],
+          "value_tokens": [
+            "null"
+          ]
+        },
+        {
+          "field": "linear_attestation_sha256",
+          "unit_tokens": [],
+          "value_tokens": [
+            "null"
+          ]
+        }
+      ],
+      "exclusions": [
+        {
+          "candidate": "F-03",
+          "reason": "E_COHORT_STRENGTH_MISMATCH",
+          "record_id": null,
+          "unit_tokens": [],
+          "value_tokens": []
+        }
+      ],
+      "fact_cards": [
+        {
+          "fact_card_id": "FC-F01-assay",
+          "quote_unit_tokens": [
+            "%",
+            "N",
+            "mg",
+            "min",
+            "sec"
+          ],
+          "quote_value_tokens": [],
+          "unit_tokens": [
+            "%"
+          ],
+          "value_tokens": [
+            "105"
+          ]
+        },
+        {
+          "fact_card_id": "FC-F01-release_30m",
+          "quote_unit_tokens": [
+            "%",
+            "N",
+            "mg",
+            "min",
+            "sec"
+          ],
+          "quote_value_tokens": [],
+          "unit_tokens": [
+            "%"
+          ],
+          "value_tokens": [
+            "93.5"
+          ]
+        },
+        {
+          "fact_card_id": "FC-F02-assay",
+          "quote_unit_tokens": [
+            "%",
+            "N",
+            "mg",
+            "min",
+            "sec"
+          ],
+          "quote_value_tokens": [],
+          "unit_tokens": [
+            "%"
+          ],
+          "value_tokens": [
+            "105"
+          ]
+        },
+        {
+          "fact_card_id": "FC-F02-release_30m",
+          "quote_unit_tokens": [
+            "%",
+            "N",
+            "mg",
+            "min",
+            "sec"
+          ],
+          "quote_value_tokens": [],
+          "unit_tokens": [
+            "%"
+          ],
+          "value_tokens": [
+            "85.7"
+          ]
+        }
+      ],
+      "gate_refs": [
+        {
+          "candidate": "F-01",
+          "measure_id": "assay",
+          "ref_kind": "critical_evidence",
+          "unit_tokens": [],
+          "value_tokens": []
+        },
+        {
+          "candidate": "F-01",
+          "measure_id": "assay",
+          "ref_kind": "hard_gate",
+          "unit_tokens": [],
+          "value_tokens": [
+            "105",
+            "95"
+          ]
+        },
+        {
+          "candidate": "F-01",
+          "measure_id": "assay",
+          "ref_kind": "matrix_cell",
+          "unit_tokens": [
+            "%"
+          ],
+          "value_tokens": [
+            "105"
+          ]
+        },
+        {
+          "candidate": "F-01",
+          "measure_id": "hardness",
+          "ref_kind": "hard_gate",
+          "unit_tokens": [],
+          "value_tokens": [
+            "0"
+          ]
+        },
+        {
+          "candidate": "F-01",
+          "measure_id": "release_30m",
+          "ref_kind": "critical_evidence",
+          "unit_tokens": [],
+          "value_tokens": []
+        },
+        {
+          "candidate": "F-01",
+          "measure_id": "release_30m",
+          "ref_kind": "hard_gate",
+          "unit_tokens": [],
+          "value_tokens": [
+            "80",
+            "93.5"
+          ]
+        },
+        {
+          "candidate": "F-01",
+          "measure_id": "release_30m",
+          "ref_kind": "matrix_cell",
+          "unit_tokens": [
+            "%"
+          ],
+          "value_tokens": [
+            "93.5"
+          ]
+        },
+        {
+          "candidate": "F-02",
+          "measure_id": "assay",
+          "ref_kind": "critical_evidence",
+          "unit_tokens": [],
+          "value_tokens": []
+        },
+        {
+          "candidate": "F-02",
+          "measure_id": "assay",
+          "ref_kind": "hard_gate",
+          "unit_tokens": [],
+          "value_tokens": [
+            "105",
+            "95"
+          ]
+        },
+        {
+          "candidate": "F-02",
+          "measure_id": "assay",
+          "ref_kind": "matrix_cell",
+          "unit_tokens": [
+            "%"
+          ],
+          "value_tokens": [
+            "105"
+          ]
+        },
+        {
+          "candidate": "F-02",
+          "measure_id": "hardness",
+          "ref_kind": "hard_gate",
+          "unit_tokens": [],
+          "value_tokens": [
+            "0"
+          ]
+        },
+        {
+          "candidate": "F-02",
+          "measure_id": "release_30m",
+          "ref_kind": "critical_evidence",
+          "unit_tokens": [],
+          "value_tokens": []
+        },
+        {
+          "candidate": "F-02",
+          "measure_id": "release_30m",
+          "ref_kind": "hard_gate",
+          "unit_tokens": [],
+          "value_tokens": [
+            "80",
+            "85.7"
+          ]
+        },
+        {
+          "candidate": "F-02",
+          "measure_id": "release_30m",
+          "ref_kind": "matrix_cell",
+          "unit_tokens": [
+            "%"
+          ],
+          "value_tokens": [
+            "85.7"
+          ]
+        }
+      ],
+      "sensitivity_vectors": [
+        {
+          "index": 0,
+          "unit_tokens": [],
+          "value_tokens": [
+            "0.1",
+            "0.25",
+            "0.35",
+            "1.75",
+            "4.25",
+            "6"
+          ]
+        },
+        {
+          "index": 1,
+          "unit_tokens": [],
+          "value_tokens": [
+            "0.25",
+            "0.3",
+            "0.35",
+            "1.75",
+            "4.25",
+            "6"
+          ]
+        },
+        {
+          "index": 2,
+          "unit_tokens": [],
+          "value_tokens": [
+            "0.1",
+            "0.35",
+            "0.45",
+            "1.75",
+            "6.25",
+            "8"
+          ]
+        },
+        {
+          "index": 3,
+          "unit_tokens": [],
+          "value_tokens": [
+            "0.3",
+            "0.35",
+            "0.45",
+            "1.75",
+            "6.25",
+            "8"
+          ]
+        },
+        {
+          "index": 4,
+          "unit_tokens": [],
+          "value_tokens": [
+            "0.1",
+            "0.25",
+            "0.55",
+            "2.75",
+            "5.25",
+            "8"
+          ]
+        },
+        {
+          "index": 5,
+          "unit_tokens": [],
+          "value_tokens": [
+            "0.25",
+            "0.3",
+            "0.55",
+            "2.75",
+            "5.25",
+            "8"
+          ]
+        },
+        {
+          "index": 6,
+          "unit_tokens": [],
+          "value_tokens": [
+            "0.1",
+            "0.45",
+            "0.55",
+            "10",
+            "2.75",
+            "7.25"
+          ]
+        },
+        {
+          "index": 7,
+          "unit_tokens": [],
+          "value_tokens": [
+            "0.3",
+            "0.45",
+            "0.55",
+            "10",
+            "2.75",
+            "7.25"
+          ]
+        }
+      ]
+    }
+  },
+  "run_id": "rationale-selected",
+  "schema_version": 1,
+  "source_artifacts": {
+    "cohort.json": "4284e869e36940cb776aea5b14fa6d0a42dd700f33ff68b2928a0a58ebf191be",
+    "evidence-log.json": "52832efc7e19813f442810a312390908052e2c3ea712d205d0901432ff42a860",
+    "evidence-log.md": "8c07fbba489221f6bdcd03c57ec1cd1cfcfde63061f85c73187ba9c324116558",
+    "fact-cards.json": "19ef1d743ab354a27ca99e6f9c2fbf2e578fc3b677ef39c96a6033fa4a576e66",
+    "formula-decision.json": "c11ac72c03f3358c8c09d9a862f7b19314245c414b55dd66947de45809a99d0f",
+    "formula-decision.md": "5890abb60c379cd52388fea0088bee309729f716d5afb384b5b73d77534395a9",
+    "linear-attestation.json": null,
+    "selection-evaluation.json": "9fc5d6c5e8610382ff956865544e3e6757e131ec71327591a53cca470e518002"
+  },
+  "source_publication_receipt_sha256": "e2675b861a53db0293df1d9fafa7f9030fdb6d84a60cdc5060f3f17425737559"
+}

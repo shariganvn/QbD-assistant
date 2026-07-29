@@ -1,0 +1,116 @@
+{
+  "adapter": {
+    "id": "exit-code",
+    "report_path": null,
+    "report_sha256": null,
+    "report_size_bytes": null,
+    "stable": null
+  },
+  "argv": [
+    "env",
+    "RATIONALE_GATE_EVIDENCE_DIR=/tmp/rationale-verdict.63cuIH",
+    "node",
+    "cowork-p2-kit/rationale/tests/run-gate.mjs",
+    "G-RL-01",
+    "cowork-p2-kit/rationale/tests/packet-contract.test.mjs",
+    "cowork-p2-kit/rationale/tests/run-gate-contract.test.mjs"
+  ],
+  "branch": "master",
+  "command": [
+    "env",
+    "RATIONALE_GATE_EVIDENCE_DIR=/tmp/rationale-verdict.63cuIH",
+    "node",
+    "cowork-p2-kit/rationale/tests/run-gate.mjs",
+    "G-RL-01",
+    "cowork-p2-kit/rationale/tests/packet-contract.test.mjs",
+    "cowork-p2-kit/rationale/tests/run-gate-contract.test.mjs"
+  ],
+  "counts": {
+    "collected": null,
+    "deselected": null,
+    "error": null,
+    "failed": null,
+    "passed": null,
+    "skipped": null,
+    "warnings": null,
+    "xfailed": null,
+    "xpassed": null
+  },
+  "dirty_files": {
+    ".codex/hooks.json": {
+      "sha256": "5d89570caace282b34db63c9a468ba3f51caded1562973ec62bbbda0022b31e5",
+      "status": "added"
+    },
+    "cowork-p2-kit/rationale/cli.mjs": {
+      "sha256": "8efc7ab19af7b439818b0a519d8a1c2a6e2451649d655dd4ba7e7c7f58809254",
+      "status": "added"
+    },
+    "cowork-p2-kit/rationale/errors.mjs": {
+      "sha256": "2470a58c826ebe6f5ffb850b3dab8fb91a95f7497ade61400b74d1b71d48769b",
+      "status": "added"
+    },
+    "cowork-p2-kit/rationale/packet.mjs": {
+      "sha256": "e10bccaf7a9d7ac21e0f6bd4078233d75f82a4ac9ea4f7bb0019252d785f4f3c",
+      "status": "added"
+    },
+    "cowork-p2-kit/rationale/rationale-packet.schema.json": {
+      "sha256": "42bf997ad20bd3bd8356865081cbc900823e6afa1af30187b70cf125f1b278a6",
+      "status": "added"
+    },
+    "cowork-p2-kit/rationale/tests/fixtures/rationale-packet/selected.json": {
+      "sha256": "1c3fe79214c7fc8fa8f42d9b1426002cf4e4affd2b7c48ad9f2144788be7ec3c",
+      "status": "added"
+    },
+    "cowork-p2-kit/rationale/tests/gate-evidence-validator.mjs": {
+      "sha256": "30177f450331144b2090ff9034dd4e2ef828c1eab8b1d3aa2143fdc3f2c0df6b",
+      "status": "added"
+    },
+    "cowork-p2-kit/rationale/tests/packet-contract.test.mjs": {
+      "sha256": "c7c9268d7f3a57143b76b06fba08c29362b17d0216db43bcf51639d564f415c6",
+      "status": "added"
+    },
+    "cowork-p2-kit/rationale/tests/run-gate-contract.test.mjs": {
+      "sha256": "4b2c23086fc82a0c385b86a6f035276ada0ab6343844d096bfa7dfd8ccedbd68",
+      "status": "added"
+    },
+    "cowork-p2-kit/rationale/tests/run-gate.mjs": {
+      "sha256": "30eb60c4fed791bcc7a5d41255dcddf2e7575772a7122683a2763567410219a5",
+      "status": "added"
+    }
+  },
+  "duration_seconds": 0.727684,
+  "evidence_level": "local-attested",
+  "evidence_quality": "exit-code-only",
+  "exit_code": 0,
+  "finished_at": "2026-07-29T02:10:57.950051+00:00",
+  "git": {
+    "branch_after": "master",
+    "branch_before": "master",
+    "head_after": "b17da7285cac08829f971f5d8042ea2883c247ba",
+    "head_before": "b17da7285cac08829f971f5d8042ea2883c247ba",
+    "stable": true
+  },
+  "git_head": "b17da7285cac08829f971f5d8042ea2883c247ba",
+  "log_path": "artifacts/260729-0832/test-output.log",
+  "log_sha256": "58d7dfc28b1be3c5704630a7bba939fccb7482bb20ac5882403dd5962dcf2149",
+  "log_size_bytes": 2714,
+  "outcome": "passed",
+  "requested_test_targets": [],
+  "runner_id": "stdlib-popen-v3",
+  "runtime": {
+    "implementation": "CPython",
+    "version": "3.14.4"
+  },
+  "schema_version": 3,
+  "session_id": "260729-0832",
+  "started_at": "2026-07-29T02:10:57.222346+00:00",
+  "status": "passed",
+  "summary": "command exited with code 0",
+  "test_targets": [],
+  "tool": "run_tests_with_verdict.py",
+  "worktree": {
+    "after": "e967b120c090d3a07fbb3f28e494605bffb3c953661882fe2dd4d64f1392819b",
+    "before": "e967b120c090d3a07fbb3f28e494605bffb3c953661882fe2dd4d64f1392819b",
+    "stable": true
+  }
+}

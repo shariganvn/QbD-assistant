@@ -87,7 +87,7 @@ Khi chuyển từ brainstorm --> plan, đọc rule `.claude/rules/RULE-BRAINSTOR
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
-This project is indexed by GitNexus as **QbD-assistant** (2941 symbols, 4003 relationships, 78 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
+This project is indexed by GitNexus as **QbD-assistant** (3158 symbols, 4275 relationships, 79 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
 > If any GitNexus tool warns the index is stale, run `npx gitnexus analyze` in terminal first.
 

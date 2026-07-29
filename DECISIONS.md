@@ -1,7 +1,7 @@
 <!-- GENERATED VIEW — do not edit manually -->
 <!-- Source: docs/progress/*.yaml and docs/decisions/D*.md -->
 <!-- Regenerate: baton render-workflow -->
-<!-- Source fingerprint: sha256:674b99fa19ee9ee667fd6e5da72f401628d9c35806cbb11863603b9dc1579c01 -->
+<!-- Source fingerprint: sha256:fed5c4af22b867c41f4c588b2d3f9ff4d576df0b3bb30f4747bcd1d52a44360a -->
 
 # DECISIONS
 
@@ -11,7 +11,7 @@
 
 | ID | Date | Status | Scope | Decision | Read when |
 |---|---|---|---|---|---|
-| `D20260722` | 2026-07-22 | active | qbd-p2-ingest-completion | [Same-host TOCTOU Hardening](docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md) | Before accepting untrusted input, changing publication locks, production rendering, citation-contract changes, or a claim of full historical Phase 2 compliance. |
+| `D20260728` | 2026-07-28 | active | qbd-rationale-report-layer | [Rationale/Report Layer Boundary](docs/decisions/D20260728-qbd-rationale-report-layer-boundary.md) | Planning or implementing an LLM-generated human rationale/report from reasoning artifacts. |
 
 ## History
 

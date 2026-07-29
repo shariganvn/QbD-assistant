@@ -8,19 +8,20 @@ active_workstream:
 current_pickup:
   source: session-handoff.yaml
   summary: >-
-    Rationale Step 0 source packages are frozen and pinned. Begin Step 1 by
-    implementing the sealed-packet contract and its G-RL-01 TDD sequence.
+    Rationale Step 1 sealed-packet contract is closed with G-RL-01 passing.
+    Begin Step 2 claim-to-source binding against the sealed packet only.
   files:
-  - docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md
+  - docs/plans/qbd-rationale-report-layer/step-02-rationale-contract-claim-binding.md
   - docs/plans/qbd-rationale-report-layer/gates.yaml
   - docs/decisions/D20260728-qbd-rationale-report-layer-boundary.md
 relevant_progress:
 - P20260729-qbd-rationale-step-00
+- P20260729-qbd-rationale-step-01
 relevant_decisions:
 - D20260728
 read_next:
 - session-handoff.yaml
-- docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md
+- docs/plans/qbd-rationale-report-layer/step-02-rationale-contract-claim-binding.md
 - docs/decisions/D20260728-qbd-rationale-report-layer-boundary.md
-updated_at: '2026-07-29T01:28:47.951772+00:00'
-git_head: 68e0ca75c009c21e6dedf7ab5d24031d664ee712
+updated_at: '2026-07-29T02:12:10.667643+00:00'
+git_head: b17da7285cac08829f971f5d8042ea2883c247ba

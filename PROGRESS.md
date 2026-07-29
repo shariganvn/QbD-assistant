@@ -1,7 +1,7 @@
 <!-- GENERATED VIEW — do not edit manually -->
 <!-- Source: docs/progress/*.yaml and docs/decisions/D*.md -->
 <!-- Regenerate: baton render-workflow -->
-<!-- Source fingerprint: sha256:674b99fa19ee9ee667fd6e5da72f401628d9c35806cbb11863603b9dc1579c01 -->
+<!-- Source fingerprint: sha256:fed5c4af22b867c41f4c588b2d3f9ff4d576df0b3bb30f4747bcd1d52a44360a -->
 
 # PROGRESS
 
@@ -9,18 +9,17 @@
 
 ## Current workstream
 
-- ID: `qbd-p2-ingest-completion`
+- ID: `qbd-rationale-report-layer`
 - Status: `in-progress`
-- Plan: `docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md`
-- Current pickup: P2 cooperative-writer and file-boundary validation is closed with an accepting verdict. In a new reconciled session, review the committed scope against D20260722 before updating the separate publication-lock spec-diff report.
-- Pickup files: `docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md`, `docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md`, `docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md`
+- Plan: `docs/plans/qbd-rationale-report-layer/plan.md`
+- Current pickup: Rationale Step 0 source packages are frozen and pinned. Begin Step 1 by implementing the sealed-packet contract and its G-RL-01 TDD sequence.
+- Pickup files: `docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md`, `docs/plans/qbd-rationale-report-layer/gates.yaml`, `docs/decisions/D20260728-qbd-rationale-report-layer-boundary.md`
 
 ## Latest progress
 
 | Date | ID | Status | Summary |
 |---|---|---|---|
-| 2026-07-28 | `P20260728-qbd-p2-ingest-post-closure-validation` | done | Verified the bounded P2 cooperative-writer and file-boundary changes with fresh canonical G-01 through G-10 evidence, an accepting attested verdict, and an independent review; D20260722 remains open. |
-| 2026-07-28 | `P20260728-qbd-p2-ingest-closeout-attestation` | done | Recorded the final accepting closeout verdict and synchronized the canonical P2 validation plan after the final independent review; D20260722 remains open. |
+| 2026-07-29 | `P20260729-qbd-rationale-step-00` | done | Completed rationale Step 0 by freezing generated selected, inconclusive, and attested P4 decision-package fixtures with receipt and source-store SHA-256 pins. |
 
 ## Blockers
 

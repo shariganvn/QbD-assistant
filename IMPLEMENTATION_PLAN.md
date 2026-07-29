@@ -2,7 +2,10 @@
 
 The single canonical execution plan is:
 
-`docs/plans/qbd-p4-reasoning-layer/plan.md`
+`docs/plans/qbd-rationale-report-layer/plan.md`
+
+The previous active plan, `docs/plans/qbd-p4-reasoning-layer/plan.md`, is `completed` with
+G-P4-01 through G-P4-05 passing. It is now a read-only upstream contract for the rationale layer.
 
 This file is a pointer only. It must not duplicate phase status, task status, gates, or
 acceptance results.

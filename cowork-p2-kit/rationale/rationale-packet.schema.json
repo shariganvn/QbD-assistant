@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QbD rationale packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "packet_id",
+    "run_id",
+    "source_publication_receipt_sha256",
+    "source_artifacts",
+    "decision",
+    "evaluation",
+    "cohort",
+    "fact_cards",
+    "evidence_log",
+    "linear_attestation",
+    "permitted_sources"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "packet_id": { "type": "string", "minLength": 1 },
+    "run_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$" },
+    "source_publication_receipt_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "source_artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cohort.json",
+        "fact-cards.json",
+        "evidence-log.json",
+        "formula-decision.json",
+        "selection-evaluation.json",
+        "formula-decision.md",
+        "evidence-log.md",
+        "linear-attestation.json"
+      ],
+      "properties": {
+        "cohort.json": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "fact-cards.json": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "evidence-log.json": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "formula-decision.json": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "selection-evaluation.json": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "formula-decision.md": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "evidence-log.md": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "linear-attestation.json": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "decision": { "type": "object" },
+    "evaluation": { "type": "object" },
+    "cohort": { "type": "object" },
+    "fact_cards": { "type": "object" },
+    "evidence_log": { "type": "object" },
+    "linear_attestation": { "type": ["object", "null"] },
+    "permitted_sources": { "type": "object" }
+  }
+}

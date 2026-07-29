@@ -1,0 +1,30 @@
+{
+  "gate_id": "G-RL-01",
+  "status": "fail",
+  "command": [
+    "/usr/bin/node",
+    "--test",
+    "--test-reporter=tap",
+    "cowork-p2-kit/rationale/tests/packet-contract.test.mjs",
+    "cowork-p2-kit/rationale/tests/run-gate-contract.test.mjs"
+  ],
+  "exit_code": 1,
+  "raw_tap_output": "TAP version 13\n# node:internal/modules/esm/resolve:275\n#     throw new ERR_MODULE_NOT_FOUND(\n#           ^\n# Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/rationale/cli.mjs' imported from /media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/rationale/tests/packet-contract.test.mjs\n#     at finalizeResolution (node:internal/modules/esm/resolve:275:11)\n#     at moduleResolve (node:internal/modules/esm/resolve:861:10)\n#     at defaultResolve (node:internal/modules/esm/resolve:985:11)\n#     at \\#cachedDefaultResolve (node:internal/modules/esm/loader:731:20)\n#     at ModuleLoader.resolve (node:internal/modules/esm/loader:708:38)\n#     at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:310:38)\n#     at ModuleJob._link (node:internal/modules/esm/module_job:182:49) {\n#   code: 'ERR_MODULE_NOT_FOUND',\n#   url: 'file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/rationale/cli.mjs'\n# }\n# Node.js v22.22.2\n# Subtest: cowork-p2-kit/rationale/tests/packet-contract.test.mjs\nnot ok 1 - cowork-p2-kit/rationale/tests/packet-contract.test.mjs\n  ---\n  duration_ms: 67.412676\n  type: 'test'\n  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/rationale/tests/packet-contract.test.mjs:1:1'\n  failureType: 'testCodeFailure'\n  exitCode: 1\n  signal: ~\n  error: 'test failed'\n  code: 'ERR_TEST_FAILURE'\n  ...\n# Subtest: G-RL-01 local gate runner has the isolated rationale contract\nnot ok 2 - G-RL-01 local gate runner has the isolated rationale contract\n  ---\n  duration_ms: 4.308099\n  type: 'test'\n  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/rationale/tests/run-gate-contract.test.mjs:22:1'\n  failureType: 'testCodeFailure'\n  error: |-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    \n      {\n    +   errors: [\n    +     'run UUID is invalid'\n    +   ],\n    +   valid: false\n    -   errors: [],\n    -   valid: true\n      }\n    \n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected:\n    valid: true\n    errors:\n  actual:\n    valid: false\n    errors:\n      0: 'run UUID is invalid'\n  operator: 'deepStrictEqual'\n  stack: |-\n    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/rationale/tests/run-gate-contract.test.mjs:30:10)\n    Test.runInAsyncScope (node:async_hooks:214:14)\n    Test.run (node:internal/test_runner/test:1047:25)\n    Test.start (node:internal/test_runner/test:944:17)\n    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)\n  ...\n1..2\n# tests 2\n# suites 0\n# pass 0\n# fail 2\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 91.510385\n",
+  "raw_stderr": "\n[run-gate] run UUID is invalid",
+  "timestamp": "2026-07-29T01:46:44.784Z",
+  "run_id": "36337b31-dce2-4f49-ae13-528a04307787",
+  "suite_run_id": "4fbc812e-639d-4c1d-ade4-0fd2b5b11931",
+  "assertions_summary": {
+    "total": 2,
+    "passed": 0,
+    "failed": 2,
+    "skipped": 0,
+    "todo": 0,
+    "cancelled": 0
+  },
+  "timeout_ms": 300000,
+  "duration_ms": 138,
+  "timed_out": false,
+  "signal": null,
+  "store_records_sha256": "6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56"
+}
