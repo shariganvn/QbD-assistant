@@ -1,9 +1,9 @@
 {
   "branch": "master",
-  "da_review": "summary: ⚠️ Step 5 integrated acceptance remains pending; Step 4 passed 32/32 focused tests and Claude review closed the .gitkeep transaction gap.",
+  "da_review": "skipped: fallback/minor-session",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-29T05:16:14+00:00",
-  "git_head": "a73775d71085918940892ba425d980c0bd2aadd1",
+  "generated_at": "2026-07-29T05:30:11+00:00",
+  "git_head": "222ff7deec3d9965bd437979828ce5013c6cf571",
   "next_pickup": [
     {
       "files": [
@@ -26,9 +26,9 @@
     "docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md"
   ],
   "schema_version": 2,
-  "session_id": "260729-1205",
-  "summary": "Completed Step 4 sealed rationale publication, receipt validation, Cowork session boundary, gate closure, Claude fix verification, and local commit a73775d.",
-  "test_verdict": "artifacts/260729-1205/test-verdict.json",
+  "session_id": "260729-1229",
+  "summary": "Corrected stale project-state routing to the reconciled Step 5 pickup; Step 4 remains completed with state validation passing.",
+  "test_verdict": "artifacts/260729-1229/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
