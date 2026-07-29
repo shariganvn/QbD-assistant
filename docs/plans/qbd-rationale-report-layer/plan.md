@@ -106,10 +106,18 @@ behaviour that turns it green. LLM prose is never proof of contract conformance.
 |---|---|---:|---|
 | 0 | [Freeze source decision-package fixtures](./step-00-freeze-source-package-fixtures.md) | completed | readiness checklist |
 | 1 | [Seal the packet contract](./step-01-packet-contract-and-sealer.md) | completed | G-RL-01 |
-| 2 | [Bind claims to permitted sources](./step-02-rationale-contract-claim-binding.md) | pending | G-RL-02 |
+| 2 | [Bind claims to permitted sources](./step-02-rationale-contract-claim-binding.md) | completed | G-RL-02 |
 | 3 | [Derive the readable rationale](./step-03-deterministic-readable-derivative.md) | pending | G-RL-03 |
 | 4 | [Publish, receipt, and bound the Cowork session](./step-04-publication-receipt-and-skill.md) | pending | G-RL-04 |
 | 5 | [Run integrated gates and close review](./step-05-integrated-gates-review.md) | pending | G-RL-05 |
+
+### Step 1 contract delta — 2026-07-29
+
+Step 1 remains complete after reopening G-RL-01 to add a sealed causal-reference index for
+inconclusive outcomes. Packet schema version 2 adds only `causal_evidence`; no P4 artifact, store
+access pattern, publication root, or author-safe projection changes. Step 2 must cite the exact typed
+refs from this index for its inconclusive explanation and must not treat unrelated exclusions or gates
+as causes.
 
 Only this table may transition a step `pending -> in-progress -> completed`. A step closes only when
 its gate passes with machine-produced evidence snapshotted to `gates/step-close/`. Do not begin a step

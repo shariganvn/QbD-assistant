@@ -37,10 +37,11 @@ gates:
       exit_code: 0
       assertions:
         - seal-packet calls the retained validatePublishedDecisionPackage() against the supplied package root and store, and every source-package tampering variant fails with E_PACKET_SOURCE_INVALID before a packet byte is staged
-        - the packet envelope is exact-key and validates schema_version, packet_id, run_id, source_publication_receipt_sha256, source_artifacts, decision, evaluation, cohort, fact_cards, evidence_log, nullable linear_attestation, and permitted_sources; unknown keys, missing keys, and wrong types fail with E_PACKET_ENVELOPE
+        - the version-2 packet envelope is exact-key and validates schema_version, packet_id, run_id, source_publication_receipt_sha256, source_artifacts, decision, evaluation, cohort, fact_cards, evidence_log, nullable linear_attestation, permitted_sources, and causal_evidence; unknown keys, missing keys, and wrong types fail with E_PACKET_ENVELOPE
         - packet.run_id is derived from and equals the source receipt run_id, packet decision/evaluation/cohort IDs and the canonical decision SHA-256 equal the published values, and source_artifacts is the exact receipt.artifacts key set whose SHA-256 values equal both receipt entries and on-disk bytes; any disagreement fails with E_PACKET_BINDING
         - the packet contains no store path, store bytes, record content field, raw-text field, or execution-report reference; its author-safe fact-card projection permits only authorised evidence-log quotes, including a quote equal to the complete source record
         - permitted_sources is derived deterministically from the packet artifacts and lists exactly the admitted fact-card IDs, evaluation matrix/hard-gate/critical-evidence references, sensitivity vector indexes, exclusion references, decision-state fields, and structured exact-match citation-local value/unit sets; it invents no source, omits no admitted one, and cannot borrow a collision value from another citation
+        - causal_evidence is a versioned deterministic index of exact decision_state or evaluation_state refs: selected decisions have no refs; each mapped inconclusive fd_action has only its recorded causal state refs; unrelated exclusions and gates are never relabelled; and an unmappable action fails with E_PACKET_CAUSAL_UNMAPPABLE
         - sealing the same source package twice produces byte-identical canonical packet bytes and the same packet SHA-256
         - production main refuses any output path outside docs/reports/qbd-rationale-report-layer/rationale/ with E_PACKET_PATH; the injected factory accepts only its declared test root and never writes into the P4 decision root
     evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-01.json
@@ -63,14 +64,14 @@ gates:
         - a fact claim cites at least one admitted fact-card ID, and every quote it reproduces is byte-identical to the packet evidence-log quote for a record bound to that card
         - every numeric token and unit token in claim text is present in the citation-local value/unit set reachable from that claim's cited sources; a value from another packet source, an added, rounded, converted, or aggregated value fails with E_RATIONALE_INVENTED_VALUE
         - rationale decision_status, winner, cohort_id, and fd_action restatements equal the packet values exactly; any difference fails with E_RATIONALE_DECISION_ALTERED
-        - an inconclusive packet requires an exact fd_action decision-state claim plus at least one exclusion or gate claim covering the recorded missing or conflicting evidence; a missing claim fails with E_RATIONALE_INCONCLUSIVE_EXPLANATION and an added top-level explanation fails the exact envelope
+        - an inconclusive packet requires an exact fd_action decision-state claim whose duplicate-free, order-insensitive causal_evidence_refs set exactly equals the sealed non-empty causal_evidence index; an exclusion or gate cannot substitute for a causal ref, a missing or partial citation fails with E_RATIONALE_INCONCLUSIVE_EXPLANATION, and an added top-level explanation fails the exact envelope
         - an inconclusive packet rejects the declared recommendation-token denylist, which the gate records as a best-effort drift signal rather than a semantic guarantee
         - display_state accepts only the constant internal_only; any other value, and any attempt to supply it as a CLI flag or packet field, fails with E_RATIONALE_DISPLAY_STATE
         - claim-binding is pure - it reads no file, calls no model, performs no network access, and returns the same result for the same inputs
     evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-02.json
     owner_step: 2
     blocks: [G-RL-03, G-RL-04, G-RL-05]
-    status: unverified
+    status: pass
 
   - id: G-RL-03
     name: deterministic-readable-derivative

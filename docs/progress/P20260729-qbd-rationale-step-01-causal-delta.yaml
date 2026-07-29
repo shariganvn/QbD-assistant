@@ -1,0 +1,43 @@
+id: P20260729-qbd-rationale-step-01-causal-delta
+date: "2026-07-29"
+workstream: qbd-rationale-report-layer
+status: done
+summary: >-
+  Reopened and reclosed rationale Step 1 with a sealed packet v2 causal-evidence
+  index so inconclusive explanations cannot cite unrelated gates or exclusions.
+changed_files:
+  - cowork-p2-kit/rationale/rationale-packet.schema.json
+  - cowork-p2-kit/rationale/packet.mjs
+  - cowork-p2-kit/rationale/errors.mjs
+  - cowork-p2-kit/rationale/tests/packet-contract.test.mjs
+  - cowork-p2-kit/rationale/tests/fixtures/rationale-packet/selected.json
+  - docs/plans/qbd-rationale-report-layer/{plan.md,gates.yaml,step-01-packet-contract-and-sealer.md,step-02-rationale-contract-claim-binding.md}
+  - docs/reports/qbd-rationale-report-layer/gates/{G-RL-01.json,red/step1-causal-20260729/G-RL-01.json,step-close/G-RL-01.json}
+tests_run:
+  verdict: passed
+  counts:
+    passed: 12
+    failed: 0
+    warnings: 0
+  gate:
+    id: G-RL-01
+    latest: { passed: 12, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-01.json }
+    step_close: { passed: 12, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/step-close/G-RL-01.json }
+  upstream_regression:
+    command: npm run verify:reasoning
+    verdict: passed
+    passed: 122
+boundary:
+  p4_code_and_report: untouched
+decisions: []
+causal_evidence:
+  selected: []
+  rubric_pin_required: [decision.rubric_sha256, evaluation.outcome_code]
+  tie_or_sensitivity_unstable: [evaluation.outcome_code]
+  caveat: >-
+    The attested fixture exposes only the sealed evaluation outcome code; no more
+    specific tie narrative is inferred.
+next_pickup:
+  files:
+    - docs/plans/qbd-rationale-report-layer/step-02-rationale-contract-claim-binding.md
+  text: Bind inconclusive fd_action claims to packet.causal_evidence.refs in Step 2.

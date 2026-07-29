@@ -15,10 +15,11 @@
     "fact_cards",
     "evidence_log",
     "linear_attestation",
-    "permitted_sources"
+    "permitted_sources",
+    "causal_evidence"
   ],
   "properties": {
-    "schema_version": { "const": 1 },
+    "schema_version": { "const": 2 },
     "packet_id": { "type": "string", "minLength": 1 },
     "run_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$" },
     "source_publication_receipt_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
@@ -52,6 +53,27 @@
     "fact_cards": { "type": "object" },
     "evidence_log": { "type": "object" },
     "linear_attestation": { "type": ["object", "null"] },
-    "permitted_sources": { "type": "object" }
+    "permitted_sources": { "type": "object" },
+    "causal_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "refs"],
+      "properties": {
+        "schema_version": { "const": 1 },
+        "refs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ref_kind", "field", "value"],
+            "properties": {
+              "ref_kind": { "enum": ["decision_state", "evaluation_state"] },
+              "field": { "type": "string", "minLength": 1 },
+              "value": { "type": ["string", "null"] }
+            }
+          }
+        }
+      }
+    }
   }
 }

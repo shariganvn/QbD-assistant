@@ -1,38 +1,37 @@
 <!-- GENERATED VIEW — do not edit manually -->
-<!-- Source: docs/test-plans/T20260729-qbd-rationale-step-01.yaml -->
+<!-- Source: docs/test-plans/T20260729-qbd-rationale-step-02.yaml -->
 <!-- Regenerate: baton render-test-plan -->
-<!-- Source fingerprint: sha256:cfac003959cef7ad36142bef0c6e3200fb01a150f24c613e5b89f3689306f073 -->
+<!-- Source fingerprint: sha256:7e8c861d488edabacb6d947799435a68792b644dd2e6d983338056305f2c1847 -->
 
 # TEST_PLAN — Active Validation Gates
 
-## T20260729-qbd-rationale-step-01
+## T20260729-qbd-rationale-step-02
 
 Status: **Executed — results recorded**
 
 - Workstream: `qbd-rationale-report-layer`
 - Date: 2026-07-29
-- Plan: `docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md`
+- Plan: `docs/plans/qbd-rationale-report-layer/step-02-rationale-contract-claim-binding.md`
 
 ## Scope
 
-Seal a canonical, receipt-bound rationale packet from a fully re-validated P4 decision package, without exposing store bytes, raw record content, or execution-report content to the rationale author.
+Reclose the sealed packet contract at v2 and validate pure, evidence-bound rationale claims, including causal explanations for inconclusive decisions.
 
 ### Changed files
 
 - `cowork-p2-kit/rationale/rationale-packet.schema.json`
 - `cowork-p2-kit/rationale/packet.mjs`
 - `cowork-p2-kit/rationale/errors.mjs`
-- `cowork-p2-kit/rationale/cli.mjs`
+- `cowork-p2-kit/rationale/rationale.schema.json`
+- `cowork-p2-kit/rationale/rationale-contracts.mjs`
+- `cowork-p2-kit/rationale/claim-binding.mjs`
 - `cowork-p2-kit/rationale/tests/packet-contract.test.mjs`
-- `cowork-p2-kit/rationale/tests/gate-evidence-validator.mjs`
-- `cowork-p2-kit/rationale/tests/run-gate.mjs`
-- `cowork-p2-kit/rationale/tests/run-gate-contract.test.mjs`
-- `cowork-p2-kit/rationale/tests/fixtures/rationale-packet/selected.json`
+- `cowork-p2-kit/rationale/tests/claim-binding.test.mjs`
 - `docs/reports/qbd-rationale-report-layer/gates/`
-- `docs/plans/qbd-rationale-report-layer/plan.md`
-- `docs/plans/qbd-rationale-report-layer/gates.yaml`
-- `docs/progress/P20260729-qbd-rationale-step-01.yaml`
-- `docs/test-plans/T20260729-qbd-rationale-step-01.yaml`
+- `docs/plans/qbd-rationale-report-layer/`
+- `docs/progress/P20260729-qbd-rationale-step-01-causal-delta.yaml`
+- `docs/progress/P20260729-qbd-rationale-step-02.yaml`
+- `docs/test-plans/T20260729-qbd-rationale-step-02.yaml`
 - `docs/test-plans/active.yaml`
 
 ## Approval
@@ -43,13 +42,19 @@ Seal a canonical, receipt-bound rationale packet from a fully re-validated P4 de
 
 ## Commands
 
-### gate-rl-01 — Run packet and local gate-runner contract assertions through the rationale evidence wrapper.
+### gate-rl-01 — Revalidate the packet-v2 causal-evidence contract.
 
 ```bash
-node cowork-p2-kit/rationale/tests/run-gate.mjs G-RL-01 cowork-p2-kit/rationale/tests/packet-contract.test.mjs cowork-p2-kit/rationale/tests/run-gate-contract.test.mjs
+node cowork-p2-kit/rationale/tests/run-gate.mjs G-RL-01 cowork-p2-kit/rationale/tests/packet-contract.test.mjs
 ```
 
-### upstream-reasoning-regression — Re-run the completed P4 reasoning suite in its isolated clean worktree.
+### gate-rl-02 — Validate pure claim-to-source and causal-evidence binding.
+
+```bash
+node cowork-p2-kit/rationale/tests/run-gate.mjs G-RL-02 cowork-p2-kit/rationale/tests/claim-binding.test.mjs
+```
+
+### upstream-reasoning-regression — Run P4 reasoning verification only in an isolated clean worktree.
 
 ```bash
 npm run verify:reasoning
@@ -60,7 +65,7 @@ npm run verify:reasoning
 
 Verdict: **passed**
 Artifact: `artifacts/260729-0832/test-verdict.json`
-Counts: passed=11, failed=0, warnings=0
+Counts: passed=21, failed=0, warnings=0
 
 ---
 

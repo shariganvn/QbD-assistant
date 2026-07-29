@@ -1,14 +1,14 @@
 # System Architecture — QbD P.2 dossier kit
 
-Status: active · Updated: 2026-07-28
+Status: active · Updated: 2026-07-29
 
 ## 1. Purpose & scope
 
 An LLM-assisted kit that authors CTD dossier section **P.2 — "Phát triển dược học"
 (Pharmaceutical Development)** for an ANDA using Quality-by-Design (QbD) methodology.
 First product: **bisoprolol 5/10 mg film-coated tablet**. The current Layer B
-scope is an evidence-bound formulation comparison and publication seam. Later
-rationale and dossier drafting remain separate workstreams.
+scope is an evidence-bound formulation comparison, publication seam, and a separate
+sealed-packet rationale layer. Dossier drafting remains a separate workstream.
 
 The decision package is inspectable, never self-approved, and remains subject to
 the **Trưởng phòng FD** as the single approval authority for the MVP.
@@ -25,19 +25,25 @@ Two-phase build (see `project-roadmap.md`):
 ## 2. Pipeline — evidence-bound comparison with deterministic publication
 
 ```
-raw docx/pdf ─► [A] Ingest/extract ─► structured store ─► [B] bounded comparison ─► decision package
-                 (DETERMINISTIC)        (+provenance)       (validated artifacts)     (DETERMINISTIC)
-                 liteparse                                  SKILL.md + CLI
+raw docx/pdf ─► [A] Ingest/extract ─► structured store ─► [B] bounded comparison ─► decision package ─► [R] rationale
+                 (DETERMINISTIC)        (+provenance)       (validated artifacts)     (DETERMINISTIC)       (sealed input)
+                 liteparse                                  SKILL.md + CLI                                  separate session
 ```
 
 | Layer | Determinism | Role | Tool | Reused by qbd_core |
 |-------|-------------|------|------|--------------------|
 | **A — Ingest/extract** | Deterministic | raw docx/pdf → structured store, one record per extracted unit, each with provenance `{file, page, quote}` and a data-classification label | `liteparse` (`@llamaindex/liteparse`) | Yes → `KnowledgeDBPort` / `EvidenceStorePort` |
 | **B — Reasoning** | Artifact-bound | validates a supplied cohort/evidence boundary and frozen decision/evaluation pair; publishes canonical JSON, deterministic Markdown, and a receipt | Cowork `SKILL.md` + reasoning CLI | Later `LLMPort` consumer |
+| **R — Rationale/report** | Deterministic validation over LLM-authored claims | seals an author-safe packet from the published decision package; validates each rationale claim against permitted sources and produces internal-only decision explanation | rationale CLI + separate Cowork session | Later bounded drafting consumer |
 | **C — Render** | Deterministic | downstream seam for separately authorized structured drafting; it is not a Step 4 decision-package consumer | `docx@9.7.1` + deterministic OOXML post-processing | Yes → `DocRenderPort` |
 
 **Invariant: the decision package is not a drafting payload.** Step 4 does not alter
 Layer C or send selected evidence outside the supplied package.
+
+**Rationale boundary:** the separate rationale session receives only a hash-bound,
+author-safe packet, never the store or raw record content. Packet schema v2 carries a sealed,
+deterministically derived causal-reference index for inconclusive outcomes; a rationale must cite
+those exact typed references and cannot relabel an unrelated gate or exclusion as the cause.
 
 ## 3. Guardrails — three DISTINCT layers
 

@@ -1,6 +1,6 @@
 # Project Roadmap — QbD P.2 dossier kit
 
-Status: active · Updated: 2026-07-28
+Status: active · Updated: 2026-07-29
 
 Two phases. Phase 1 is buildable now; Phase 2 is the deploy target, gated on external
 inputs (real corpus, procurement, ZDR contract, benchmark evidence) and **not** broken into
@@ -13,9 +13,12 @@ evidence-bound formulation package, produces traceable fact cards and a frozen
 decision/evaluation pair, and publishes an inspectable decision package. It does not
 draft **P.2.2/P.2.3**, approve a formulation, or perform external egress.
 
-Current executable work is tracked only by
-`docs/plans/qbd-p4-reasoning-layer/plan.md` for Layer B; completed ingest and render work remains
-in its respective plan/evidence records. The former seven-phase narrative plan is archived under
+Current executable work is tracked by the completed Layer B plan
+(`docs/plans/qbd-p4-reasoning-layer/plan.md`) and the in-progress, separate rationale/report plan
+(`docs/plans/qbd-rationale-report-layer/plan.md`). The rationale layer seals an author-safe packet
+from the published decision package before any claim validation; packet v2 includes typed causal
+references for inconclusive outcomes. Completed ingest and render work remains in its respective
+plan/evidence records. The former seven-phase narrative plan is archived under
 `docs/plans/OUTDATED/` and must not be used for status or execution.
 
 Roadmap phases:

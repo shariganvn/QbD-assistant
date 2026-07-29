@@ -1,0 +1,40 @@
+id: P20260729-qbd-rationale-step-02
+date: "2026-07-29"
+workstream: qbd-rationale-report-layer
+status: done
+summary: >-
+  Completed rationale Step 2: exact-key rationale validation and pure claim binding
+  now reject unsealed citations, invented values/units, altered decisions, and an
+  inconclusive explanation without its sealed causal-evidence reference.
+changed_files:
+  - cowork-p2-kit/rationale/rationale.schema.json
+  - cowork-p2-kit/rationale/rationale-contracts.mjs
+  - cowork-p2-kit/rationale/claim-binding.mjs
+  - cowork-p2-kit/rationale/errors.mjs
+  - cowork-p2-kit/rationale/tests/claim-binding.test.mjs
+  - docs/plans/qbd-rationale-report-layer/{plan.md,gates.yaml,step-02-rationale-contract-claim-binding.md}
+  - docs/reports/qbd-rationale-report-layer/gates/{G-RL-02.json,red/G-RL-02-20260729.json,step-close/G-RL-02.json}
+tests_run:
+  verdict: passed
+  counts:
+    passed: 21
+    failed: 0
+    warnings: 0
+  gates:
+    G-RL-01: { passed: 12, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-01.json }
+    G-RL-02: { passed: 9, failed: 0, evidence: docs/reports/qbd-rationale-report-layer/gates/G-RL-02.json }
+  upstream_regression:
+    command: npm run verify:reasoning
+    verdict: passed
+    passed: 122
+review:
+  score: "9.5/10"
+  findings: no blockers
+boundary:
+  p4_code_and_report: untouched
+decisions: []
+next_pickup:
+  files:
+    - docs/plans/qbd-rationale-report-layer/step-03-deterministic-readable-derivative.md
+    - docs/plans/qbd-rationale-report-layer/gates.yaml
+  text: Begin Step 3 deterministic readable derivative from validated rationale JSON only.

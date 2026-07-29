@@ -53,7 +53,7 @@ cites     object whose permitted keys depend on kind
 | `gate` | `gate_refs` non-empty: `{ candidate, measure_id, ref_kind: hard_gate \| critical_evidence \| matrix_cell }` | Each triple resolves exactly in the matching `permitted_sources` slice |
 | `sensitivity` | `sensitivity_vector_indexes` non-empty | Each index is an integer in `[0, permitted_sources.sensitivity_vector_count)` |
 | `exclusion` | `exclusion_refs` non-empty: `{ candidate, record_id, reason }` | Each object matches a `permitted_sources.exclusions` member exactly, including the `E_` reason code and the null/non-null `record_id` rule |
-| `decision_state` | `decision_state_fields` non-empty | Each name is in `permitted_sources.decision_state_fields`; the claim text is the exact stored value of its cited field |
+| `decision_state` | `decision_state_fields` non-empty; for an inconclusive causal explanation also `causal_evidence_refs` non-empty | Each name is in `permitted_sources.decision_state_fields`; the claim text is the exact stored value of its cited field. Each causal ref is exact-key `{ ref_kind, field, value }` and must equal a member of `packet.causal_evidence.refs` |
 
 Any other `cites` key, an empty citation array, or a citation that does not resolve fails with
 `E_RATIONALE_CLAIM_BINDING`. A quote or record ID that is not in the packet fails with
@@ -84,8 +84,11 @@ whether a true number is used fairly. That remains FD review.
 - `decision_status`, `winner`, `cohort_id`, and `fd_action` must equal the packet values. Any
   difference fails with `E_RATIONALE_DECISION_ALTERED`.
 - When `decision_status` is `inconclusive`, the artifact requires a `decision_state` claim citing only
-  `fd_action`, whose text exactly equals the packet field, **and** at least one `exclusion` or `gate`
-  claim covering the recorded missing or conflicting evidence. Missing either fails with
+  `fd_action`, whose text exactly equals the packet field, **and** one or more
+  `causal_evidence_refs` whose duplicate-free, order-insensitive set exactly equals the non-empty
+  `packet.causal_evidence.refs` index.
+  A gate or exclusion may be a separately bound claim when it is relevant, but it cannot substitute
+  for a causal ref or be relabelled as one. Missing either fails with
   `E_RATIONALE_INCONCLUSIVE_EXPLANATION`. An added top-level explanation field fails the envelope;
   there is no unbound narrative bypass.
 - When `decision_status` is `inconclusive`, claim text is scanned against a declared
@@ -111,9 +114,9 @@ Extend: `cowork-p2-kit/rationale/errors.mjs` with the Step 2 codes.
 ## TDD sequence
 
 1. Write `tests/claim-binding.test.mjs` first, covering every G-RL-02 assertion over all three
-   committed source branches, including cross-source values/units, a forbidden top-level FD
-   explanation field, and a decision-state claim that paraphrases rather than exactly restates its
-   field.
+   committed source branches, including the exact causal-evidence citation shape for both
+   inconclusive actions, cross-source values/units, a forbidden top-level FD explanation field, and
+   a decision-state claim that paraphrases rather than exactly restates its field.
 2. Record the red result as `gates/red/G-RL-02-<YYYYMMDD>.json`.
 3. Implement, pass, copy `G-RL-02.json` to `gates/step-close/`.
 4. Re-run G-RL-01 and run `npm run verify:reasoning` in the isolated clean worktree; both must pass.

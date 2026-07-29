@@ -8,12 +8,14 @@ import { RationalePacketError } from "./errors.mjs";
 const SHA256 = /^[0-9a-f]{64}$/;
 const RUN_ID = /^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/;
 const RECEIPT_ARTIFACTS = ["cohort.json", "fact-cards.json", "evidence-log.json", "formula-decision.json", "selection-evaluation.json", "formula-decision.md", "evidence-log.md", "linear-attestation.json"];
-const PACKET_KEYS = ["schema_version", "packet_id", "run_id", "source_publication_receipt_sha256", "source_artifacts", "decision", "evaluation", "cohort", "fact_cards", "evidence_log", "linear_attestation", "permitted_sources"];
+const PACKET_KEYS = ["schema_version", "packet_id", "run_id", "source_publication_receipt_sha256", "source_artifacts", "decision", "evaluation", "cohort", "fact_cards", "evidence_log", "linear_attestation", "permitted_sources", "causal_evidence"];
 const FACT_CARD_KEYS = ["id", "record_id", "candidate", "measure", "normalized_value", "unit", "quote", "char_start", "char_end", "provenance"];
 const DECISION_STATE_FIELDS = ["status", "winner", "cohort_id", "cohort_basis", "fd_action", "rubric_sha256", "linear_attestation_id", "linear_attestation_sha256"];
 const EVIDENCE_LOG_KEYS = ["schema_version", "cohort_id", "entries", "exclusions"];
 const EVIDENCE_ENTRY_KEYS = ["record_id", "candidate", "fact_card_ids", "quote", "provenance"];
 const EVIDENCE_EXCLUSION_KEYS = ["scope", "candidate", "record_id", "reason"];
+const CAUSAL_EVIDENCE_KEYS = ["schema_version", "refs"];
+const CAUSAL_REF_KEYS = ["ref_kind", "field", "value"];
 const FORBIDDEN_PACKET_KEYS = new Set(["content", "raw_text", "record_content", "store_path", "store_bytes", "execution_report", "execution_report_path"]);
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 const isObject = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
@@ -26,6 +28,10 @@ function envelope(message) {
 
 function binding(message) {
   throw new RationalePacketError("E_PACKET_BINDING", message);
+}
+
+function causal(message) {
+  throw new RationalePacketError("E_PACKET_CAUSAL_UNMAPPABLE", message);
 }
 
 function readJson(path, context) {
@@ -117,6 +123,40 @@ function derivePermittedSources({ factCards, evaluation, evidenceLog, decision }
   };
 }
 
+function deriveCausalEvidence({ decision, evaluation }) {
+  if (decision.status === "selected") {
+    if (decision.fd_action !== "selected" || evaluation.outcome_code !== "selected") causal("selected decision has an unmappable fd_action or evaluation outcome");
+    return { schema_version: 1, refs: [] };
+  }
+  if (decision.status !== "inconclusive" || evaluation.outcome_code !== decision.fd_action) causal("decision status or evaluation outcome has no causal-evidence mapping");
+  if (decision.fd_action === "E_RUBRIC_PIN_REQUIRED") {
+    if (decision.rubric_sha256 !== null || evaluation.rubric_sha256 !== null) causal("rubric-pin-required decision does not carry the required null rubric state");
+    return {
+      schema_version: 1,
+      refs: [
+        { ref_kind: "decision_state", field: "rubric_sha256", value: null },
+        { ref_kind: "evaluation_state", field: "outcome_code", value: "E_RUBRIC_PIN_REQUIRED" },
+      ],
+    };
+  }
+  if (decision.fd_action === "E_TIE_OR_SENSITIVITY_UNSTABLE") {
+    return {
+      schema_version: 1,
+      refs: [{ ref_kind: "evaluation_state", field: "outcome_code", value: "E_TIE_OR_SENSITIVITY_UNSTABLE" }],
+    };
+  }
+  causal(`fd_action has no causal-evidence mapping: ${String(decision.fd_action)}`);
+}
+
+function validateCausalEvidence(causalEvidence, { decision, evaluation }) {
+  if (!exactKeys(causalEvidence, CAUSAL_EVIDENCE_KEYS) || causalEvidence.schema_version !== 1 || !Array.isArray(causalEvidence.refs)) envelope("packet causal_evidence has an invalid envelope");
+  for (const ref of causalEvidence.refs) {
+    if (!exactKeys(ref, CAUSAL_REF_KEYS) || !["decision_state", "evaluation_state"].includes(ref.ref_kind) || typeof ref.field !== "string" || (ref.value !== null && typeof ref.value !== "string")) envelope("packet causal_evidence ref is invalid");
+    const source = ref.ref_kind === "decision_state" ? decision : evaluation;
+    if (!Object.hasOwn(source, ref.field) || source[ref.field] !== ref.value) binding(`packet causal_evidence ref does not equal its exact ${ref.ref_kind} source`);
+  }
+}
+
 function assertSourceBindings(packet, { sourcePackage }) {
   const root = resolve(sourcePackage);
   const receiptBytes = readFileSync(sourcePath(root, "publication-receipt.json"));
@@ -179,13 +219,16 @@ function validateEmbeddedEvaluation(evaluation) {
 
 export function validateRationalePacket(packet, { sourcePackage } = {}) {
   if (!exactKeys(packet, PACKET_KEYS)) envelope("packet keys must exactly match the rationale packet contract");
-  if (packet.schema_version !== 1 || typeof packet.packet_id !== "string" || packet.packet_id === "" || typeof packet.run_id !== "string" || !RUN_ID.test(packet.run_id) || typeof packet.source_publication_receipt_sha256 !== "string" || !SHA256.test(packet.source_publication_receipt_sha256)) envelope("packet envelope fields are invalid");
+  if (packet.schema_version !== 2 || typeof packet.packet_id !== "string" || packet.packet_id === "" || typeof packet.run_id !== "string" || !RUN_ID.test(packet.run_id) || typeof packet.source_publication_receipt_sha256 !== "string" || !SHA256.test(packet.source_publication_receipt_sha256)) envelope("packet envelope fields are invalid");
   if (!exactKeys(packet.source_artifacts, RECEIPT_ARTIFACTS) || RECEIPT_ARTIFACTS.some((name) => packet.source_artifacts[name] !== null && !SHA256.test(packet.source_artifacts[name]))) envelope("packet source artifacts are invalid");
-  for (const key of ["decision", "evaluation", "cohort", "fact_cards", "evidence_log", "permitted_sources"]) if (!isObject(packet[key])) envelope(`packet ${key} must be an object`);
+  for (const key of ["decision", "evaluation", "cohort", "fact_cards", "evidence_log", "permitted_sources", "causal_evidence"]) if (!isObject(packet[key])) envelope(`packet ${key} must be an object`);
   if (packet.linear_attestation !== null && !isObject(packet.linear_attestation)) envelope("packet linear_attestation must be an object or null");
   assertNoForbiddenPacketFields(packet);
   validateEmbeddedEvidenceLog(packet.evidence_log);
   validateEmbeddedEvaluation(packet.evaluation);
+  const expectedCausalEvidence = deriveCausalEvidence({ decision: packet.decision, evaluation: packet.evaluation });
+  validateCausalEvidence(packet.causal_evidence, { decision: packet.decision, evaluation: packet.evaluation });
+  if (canonicalBytes(packet.causal_evidence) !== canonicalBytes(expectedCausalEvidence)) binding("packet causal_evidence is not the exact deterministic projection of packet decision state");
   if (!Array.isArray(packet.fact_cards.cards)) envelope("packet fact_cards.cards must be an array");
   const evidenceByRecord = new Map(packet.evidence_log.entries?.map((entry) => [entry.record_id, entry]));
   for (const card of packet.fact_cards.cards) {
@@ -221,7 +264,7 @@ export function buildRationalePacket({ sourcePackage, store }) {
   const factCards = projectFactCards(readJson(sourcePath(root, "fact-cards.json"), "fact cards"), evidenceLog);
   const linearAttestation = receipt.artifacts["linear-attestation.json"] === null ? null : readJson(sourcePath(root, "linear-attestation.json"), "linear attestation");
   const packet = {
-    schema_version: 1,
+    schema_version: 2,
     packet_id: `rationale-packet-${receipt.run_id}-${sha256(canonicalBytes(decision))}`,
     run_id: receipt.run_id,
     source_publication_receipt_sha256: sha256(receiptBytes),
@@ -233,6 +276,7 @@ export function buildRationalePacket({ sourcePackage, store }) {
     evidence_log: evidenceLog,
     linear_attestation: linearAttestation,
     permitted_sources: derivePermittedSources({ factCards, evaluation, evidenceLog, decision }),
+    causal_evidence: deriveCausalEvidence({ decision, evaluation }),
   };
   return validateRationalePacket(packet, { sourcePackage: root });
 }

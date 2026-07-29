@@ -53,7 +53,7 @@ Then assert, failing with `E_PACKET_BINDING`:
 `rationale-packet.schema.json`, exact keys, `additionalProperties: false`:
 
 ```text
-schema_version                     const 1
+schema_version                     const 2
 packet_id                          non-empty string, deterministic from run_id + decision SHA-256
 run_id                             receipt run-ID pattern
 source_publication_receipt_sha256  64 lowercase hex
@@ -65,6 +65,7 @@ fact_cards                         author-safe projection of published fact card
 evidence_log                       the published evidence-log object
 linear_attestation                 the published attestation object or null
 permitted_sources                  derived index, see below
+causal_evidence                    versioned, exact causal-reference index, see below
 ```
 
 `source_artifacts` excludes `publication-receipt.json`: its hash is carried only by
@@ -72,6 +73,29 @@ permitted_sources                  derived index, see below
 deterministic: the same source package and source receipt run ID always produce byte-identical packet
 bytes and the same packet SHA-256. The packet does not hash itself, following the P4 receipt
 precedent.
+
+### `causal_evidence`
+
+`causal_evidence` is a packet-level, exact-key `{ schema_version: 1, refs: [...] }` index derived
+only from the already embedded `decision` and `evaluation` artifacts. Its ref objects are exact-key
+`{ ref_kind, field, value }`, where `ref_kind` is `decision_state` or `evaluation_state`, `field` is
+the direct source field, and `value` equals that sealed field byte-for-byte. It is never caller input,
+does not access P4 or the store beyond the sealer's existing package validation, and is compared with
+a fresh deterministic derivation on every packet validation.
+
+The only mapped actions are deliberately closed:
+
+| Decision state | Exact `causal_evidence.refs` |
+|---|---|
+| `selected` / `fd_action: selected` | `[]` |
+| `inconclusive` / `E_RUBRIC_PIN_REQUIRED` | `{ decision_state, rubric_sha256, null }`, then `{ evaluation_state, outcome_code, "E_RUBRIC_PIN_REQUIRED" }` |
+| `inconclusive` / `E_TIE_OR_SENSITIVITY_UNSTABLE` | `{ evaluation_state, outcome_code, "E_TIE_OR_SENSITIVITY_UNSTABLE" }` |
+
+Any other status/action/outcome combination fails with `E_PACKET_CAUSAL_UNMAPPABLE`. In particular,
+the `E_COHORT_STRENGTH_MISMATCH` exclusion in the rubric-pin fixture is not a causal reference to
+`E_RUBRIC_PIN_REQUIRED`, and the attested fixture has no gate or exclusion to relabel. The latter's
+recorded evaluation outcome is the only sealed cause state available to this layer; the sealer does
+not infer a more specific tie narrative.
 
 ### Forbidden packet content
 

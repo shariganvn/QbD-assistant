@@ -17,7 +17,7 @@ const selectedPacketFixture = resolve(testDir, "fixtures/rationale-packet/select
 const schemaPath = resolve(repoRoot, "cowork-p2-kit/rationale/rationale-packet.schema.json");
 const sourceStore = resolve(repoRoot, "cowork-p2-kit/reasoning/tests/fixtures/store/records.jsonl");
 const p4DecisionRoot = resolve(repoRoot, "docs/reports/qbd-p4-reasoning-layer/decision");
-const PACKET_KEYS = ["schema_version", "packet_id", "run_id", "source_publication_receipt_sha256", "source_artifacts", "decision", "evaluation", "cohort", "fact_cards", "evidence_log", "linear_attestation", "permitted_sources"];
+const PACKET_KEYS = ["schema_version", "packet_id", "run_id", "source_publication_receipt_sha256", "source_artifacts", "decision", "evaluation", "cohort", "fact_cards", "evidence_log", "linear_attestation", "permitted_sources", "causal_evidence"];
 const FACT_CARD_KEYS = ["id", "record_id", "candidate", "measure", "normalized_value", "unit", "quote", "char_start", "char_end", "provenance"];
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const readJson = (path) => JSON.parse(readFileSync(path, "utf8"));
@@ -56,10 +56,11 @@ test("G-RL-01 seals an exact, canonical, receipt-bound selected packet without r
   const receiptBytes = readFileSync(join(source, "publication-receipt.json"));
   const receipt = readJson(join(source, "publication-receipt.json"));
   assert.deepEqual(Object.keys(packet).sort(), [...PACKET_KEYS].sort());
-  assert.equal(packet.schema_version, 1);
+  assert.equal(packet.schema_version, 2);
   assert.equal(packet.run_id, receipt.run_id);
   assert.equal(packet.source_publication_receipt_sha256, sha256(receiptBytes));
   assert.deepEqual(packet.source_artifacts, receipt.artifacts);
+  assert.deepEqual(packet.causal_evidence, { schema_version: 1, refs: [] }, "selected decisions carry no causal-evidence refs");
   assert.equal(packet.evaluation.decision_sha256, sha256(Buffer.from(JSON.stringify(Object.fromEntries(Object.entries(packet.decision).sort()), null, 2) + "\n")));
   assert.ok(packet.packet_id.includes(packet.run_id));
   assert.equal(readFileSync(packetPath, "utf8"), canonicalBytes(packet), "packet uses canonical object key order");
@@ -119,6 +120,7 @@ test("G-RL-01 rejects packet envelope, receipt, identity, attestation, and raw-t
     [(value) => { value.packet_id = "caller-controlled-packet"; }, "E_PACKET_BINDING"],
     [(value) => { value.evaluation.decision_sha256 = "b".repeat(64); }, "E_PACKET_BINDING"],
     [(value) => { value.linear_attestation = null; }, "E_PACKET_BINDING"],
+    [(value) => { value.causal_evidence = { schema_version: 1, refs: [{ ref_kind: "evaluation_state", field: "outcome_code", value: "selected" }] }; }, "E_PACKET_BINDING"],
     [(value) => { value.linear_attestation.attestation_id = "foreign-attestation"; }, "E_PACKET_BINDING"],
     [(value) => { value.fact_cards.cards[0].raw_text = "forbidden source text"; }, "E_PACKET_ENVELOPE"],
     [(value) => { value.evidence_log.entries[0].record_content = "forbidden raw record"; }, "E_PACKET_ENVELOPE"],
@@ -186,8 +188,32 @@ test("G-RL-01 refuses output root and target symlinks before any packet write", 
   expectCode(() => seal({ source, output }), "E_PACKET_PATH");
 }));
 
-test("G-RL-01 seals the production-shaped inconclusive source branch", () => withFixture("inconclusive", ({ source, output }) => {
+test("G-RL-01 seals an exact causal-evidence index for each inconclusive decision without borrowing unrelated exclusions", () => {
+  const cases = [
+    ["inconclusive", [
+      { ref_kind: "decision_state", field: "rubric_sha256", value: null },
+      { ref_kind: "evaluation_state", field: "outcome_code", value: "E_RUBRIC_PIN_REQUIRED" },
+    ]],
+    ["attested", [
+      { ref_kind: "evaluation_state", field: "outcome_code", value: "E_TIE_OR_SENSITIVITY_UNSTABLE" },
+    ]],
+  ];
+  for (const [branch, refs] of cases) withFixture(branch, ({ source, output }) => {
+    const packet = readJson(seal({ source, output }));
+    assert.equal(packet.schema_version, 2);
+    assert.equal(packet.decision.status, "inconclusive");
+    assert.equal(packet.decision.winner, null);
+    assert.deepEqual(packet.causal_evidence, { schema_version: 1, refs });
+    assert.ok(packet.causal_evidence.refs.every((ref) => ref.ref_kind !== "exclusion" && ref.ref_kind !== "gate"));
+    assert.doesNotThrow(() => validateRationalePacket(packet, { sourcePackage: source }));
+  });
+});
+
+test("G-RL-01 fails closed when an inconclusive fd_action has no sealed causal-evidence mapping", () => withFixture("inconclusive", ({ source, output }) => {
   const packet = readJson(seal({ source, output }));
-  assert.equal(packet.decision.status, "inconclusive");
-  assert.equal(packet.decision.winner, null);
+  packet.decision.fd_action = "E_UNMAPPABLE_FD_ACTION";
+  packet.evaluation.outcome_code = "E_UNMAPPABLE_FD_ACTION";
+  packet.evaluation.decision_sha256 = sha256(Buffer.from(canonicalBytes(packet.decision)));
+  packet.packet_id = `rationale-packet-${packet.run_id}-${packet.evaluation.decision_sha256}`;
+  expectCode(() => validateRationalePacket(packet), "E_PACKET_CAUSAL_UNMAPPABLE");
 }));

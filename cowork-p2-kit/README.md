@@ -6,6 +6,12 @@ records supplied to an invocation, treats extracted text as untrusted, and direc
 validated Step 2/3 artifacts to `reasoning/cli.mjs publish-package`; it does not
 authorize package widening, manual derivatives, or dossier drafting.
 
+The separate `rationale/` layer consumes only a sealed, author-safe packet derived from a
+published decision package. Its v2 packet includes a deterministic causal-reference index for
+inconclusive outcomes, so the rationale validator can require exact causal citations without
+granting the author access to the store or raw record content. Rationale output remains
+`internal_only`; it neither changes the decision nor authorizes dossier drafting.
+
 ## Runtime Platform
 
 **Supported Windows deployment:** Windows host + **WSL2 Ubuntu** runtime. Run every Node/npm,
@@ -83,6 +89,9 @@ cowork-p2-kit/
 │   └── README.md
 ├── render/                   # Layer C renderer — git-ignored output
 │   └── render-docx.mjs
+├── rationale/                 # Separate sealed-packet rationale contract and validators
+│   ├── packet.mjs             # Deterministic author-safe packet sealer/validator
+│   └── claim-binding.mjs      # Pure claim-to-permitted-source validator
 ├── template/
 │   └── p2-template.md        # P.2 layout template (P0.2 caveat)
 ├── rubric/

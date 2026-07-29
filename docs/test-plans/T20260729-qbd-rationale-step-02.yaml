@@ -1,0 +1,70 @@
+id: T20260729-qbd-rationale-step-02
+date: "2026-07-29"
+workstream: qbd-rationale-report-layer
+status: executed
+plan: docs/plans/qbd-rationale-report-layer/step-02-rationale-contract-claim-binding.md
+scope:
+  summary: >-
+    Reclose the sealed packet contract at v2 and validate pure, evidence-bound
+    rationale claims, including causal explanations for inconclusive decisions.
+  changed_files:
+    - cowork-p2-kit/rationale/rationale-packet.schema.json
+    - cowork-p2-kit/rationale/packet.mjs
+    - cowork-p2-kit/rationale/errors.mjs
+    - cowork-p2-kit/rationale/rationale.schema.json
+    - cowork-p2-kit/rationale/rationale-contracts.mjs
+    - cowork-p2-kit/rationale/claim-binding.mjs
+    - cowork-p2-kit/rationale/tests/packet-contract.test.mjs
+    - cowork-p2-kit/rationale/tests/claim-binding.test.mjs
+    - docs/reports/qbd-rationale-report-layer/gates/
+    - docs/plans/qbd-rationale-report-layer/
+    - docs/progress/P20260729-qbd-rationale-step-01-causal-delta.yaml
+    - docs/progress/P20260729-qbd-rationale-step-02.yaml
+    - docs/test-plans/T20260729-qbd-rationale-step-02.yaml
+    - docs/test-plans/active.yaml
+approval:
+  required: true
+  approved_at: "2026-07-29"
+  approved_by: human
+commands:
+  - id: gate-rl-01
+    description: Revalidate the packet-v2 causal-evidence contract.
+    command: [node, cowork-p2-kit/rationale/tests/run-gate.mjs, G-RL-01, cowork-p2-kit/rationale/tests/packet-contract.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+  - id: gate-rl-02
+    description: Validate pure claim-to-source and causal-evidence binding.
+    command: [node, cowork-p2-kit/rationale/tests/run-gate.mjs, G-RL-02, cowork-p2-kit/rationale/tests/claim-binding.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+  - id: upstream-reasoning-regression
+    description: Run P4 reasoning verification only in an isolated clean worktree.
+    command: [npm, run, verify:reasoning]
+    requires_live_services: false
+    mutates_datastore: false
+acceptance:
+  gates: [G-RL-01, G-RL-02]
+  evidence:
+    - docs/reports/qbd-rationale-report-layer/gates/G-RL-01.json
+    - docs/reports/qbd-rationale-report-layer/gates/step-close/G-RL-01.json
+    - docs/reports/qbd-rationale-report-layer/gates/G-RL-02.json
+    - docs/reports/qbd-rationale-report-layer/gates/step-close/G-RL-02.json
+  invariants:
+    - Packet-v2 causal evidence is deterministic and cannot relabel unrelated gates or exclusions.
+    - Every accepted claim resolves only in its cited packet-local source slice.
+    - Inconclusive fd_action claims cite sealed causal-evidence refs and contain no recommendation drift token.
+    - P4 code and publication root remain unchanged.
+results:
+  verdict: passed
+  artifact: artifacts/260729-0832/test-verdict.json
+  counts:
+    passed: 21
+    failed: 0
+    warnings: 0
+  gates:
+    G-RL-01: { passed: 12, failed: 0 }
+    G-RL-02: { passed: 9, failed: 0 }
+  upstream_regression:
+    verdict: passed
+    passed: 122
+  source_store_sha256: 6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56

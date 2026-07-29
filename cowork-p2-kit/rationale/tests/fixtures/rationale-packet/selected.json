@@ -1,4 +1,8 @@
 {
+  "causal_evidence": {
+    "refs": [],
+    "schema_version": 1
+  },
   "cohort": {
     "candidates": [
       "F-01",
@@ -990,7 +994,7 @@
     }
   },
   "run_id": "rationale-selected",
-  "schema_version": 1,
+  "schema_version": 2,
   "source_artifacts": {
     "cohort.json": "4284e869e36940cb776aea5b14fa6d0a42dd700f33ff68b2928a0a58ebf191be",
     "evidence-log.json": "52832efc7e19813f442810a312390908052e2c3ea712d205d0901432ff42a860",
