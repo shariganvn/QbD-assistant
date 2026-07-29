@@ -1,7 +1,7 @@
 <!-- GENERATED VIEW — do not edit manually -->
 <!-- Source: docs/progress/*.yaml and docs/decisions/D*.md -->
 <!-- Regenerate: baton render-workflow -->
-<!-- Source fingerprint: sha256:af7964141c87ddd77e49a6a5eca2b2afb613d9251a7111a1f47b6bbc22e9a410 -->
+<!-- Source fingerprint: sha256:441a1c776df45817db2bd090924dd15fe7dd878bb1f983d1b5c22b0936bf3497 -->
 
 # PROGRESS
 
@@ -12,15 +12,15 @@
 - ID: `qbd-rationale-report-layer`
 - Status: `in-progress`
 - Plan: `docs/plans/qbd-rationale-report-layer/plan.md`
-- Current pickup: Rationale Steps 1–2 are closed with sealed causal evidence and exact claim-to-source binding. Begin Step 3 deterministic readable derivative from validated rationale JSON only.
-- Pickup files: `docs/plans/qbd-rationale-report-layer/step-03-deterministic-readable-derivative.md`, `docs/plans/qbd-rationale-report-layer/gates.yaml`, `cowork-p2-kit/rationale/rationale-contracts.mjs`
+- Current pickup: Rationale Steps 1–4 are closed. Begin Step 5 integrated verification and end-to-end acceptance from the sealed publication path only.
+- Pickup files: `docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md`, `docs/plans/qbd-rationale-report-layer/gates.yaml`, `cowork-p2-kit/rationale/rationale-publication.mjs`
 
 ## Latest progress
 
 | Date | ID | Status | Summary |
 |---|---|---|---|
-| 2026-07-29 | `P20260729-qbd-rationale-step-02` | done | Completed rationale Step 2: exact-key rationale validation and pure claim binding now reject unsealed citations, invented values/units, altered decisions, and an inconclusive explanation without its sealed causal-evidence reference. |
-| 2026-07-29 | `P20260729-qbd-rationale-step-01-causal-delta` | done | Reopened and reclosed rationale Step 1 with a sealed packet v2 causal-evidence index so inconclusive explanations cannot cite unrelated gates or exclusions. |
+| 2026-07-29 | `P20260729-qbd-rationale-step-04` | done | Completed rationale Step 4: publish-rationale atomically publishes the sealed packet, validated rationale JSON, deterministic Markdown, and a hash-bound receipt into the isolated rationale root; the dedicated Cowork skill confines authoring to the sealed packet and internal-only output. |
+| 2026-07-29 | `P20260729-qbd-rationale-step-03` | done | Completed rationale Step 3: deterministic Markdown is now a literal-safe, byte-exact derivative of validated rationale JSON and its sealed packet. |
 
 ## Blockers
 

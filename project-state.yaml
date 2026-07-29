@@ -8,20 +8,20 @@ active_workstream:
 current_pickup:
   source: session-handoff.yaml
   summary: >-
-    Rationale Steps 1–3 are closed. Begin Step 4 publication, receipt, and
-    Cowork-session boundary from the sealed packet only.
+    Rationale Steps 1–4 are closed. Begin Step 5 integrated verification and
+    end-to-end acceptance from the sealed publication path only.
   files:
-  - docs/plans/qbd-rationale-report-layer/step-04-publication-receipt-and-skill.md
+  - docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md
   - docs/plans/qbd-rationale-report-layer/gates.yaml
-  - cowork-p2-kit/rationale/rationale-markdown.mjs
+  - cowork-p2-kit/rationale/rationale-publication.mjs
 relevant_progress:
-- P20260729-qbd-rationale-step-02
 - P20260729-qbd-rationale-step-03
+- P20260729-qbd-rationale-step-04
 relevant_decisions:
 - D20260728
 read_next:
 - session-handoff.yaml
-- docs/plans/qbd-rationale-report-layer/step-04-publication-receipt-and-skill.md
+- docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md
 - docs/plans/qbd-rationale-report-layer/gates.yaml
-updated_at: '2026-07-29T03:29:22.349169+00:00'
-git_head: 9e8a2e6a708554adc63a63a0f98bb4fdacdcd16e
+updated_at: '2026-07-29T05:25:51.940727+00:00'
+git_head: daa62f5b309bc7952b5383a756e3e215786aaab5
