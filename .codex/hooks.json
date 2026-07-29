@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "baton codex-gate --root \"$(git rev-parse --show-toplevel)\"",
+            "statusMessage": "Validating session handoff..."
+          }
+        ]
+      }
+    ]
+  }
+}
