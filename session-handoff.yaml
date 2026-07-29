@@ -1,45 +1,51 @@
 {
   "branch": "master",
-  "da_review": "summary:\n⚠️ No blocking findings; retain Step 2 claim-binding as the next scoped validation boundary.",
+  "da_review": "summary:\n⚠️ The attested branch has outcome-only sealed evidence; it is deliberately not rendered as a more specific tie explanation.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-29T02:13:38+00:00",
-  "git_head": "63efcf8f98b054ced40f5749da128ef79eb818ea",
+  "generated_at": "2026-07-29T03:07:19+00:00",
+  "git_head": "dd81c6cf42051a47c2ca04150bd11dcfb7819169",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/qbd-rationale-report-layer/step-02-rationale-contract-claim-binding.md",
+        "docs/plans/qbd-rationale-report-layer/step-03-deterministic-readable-derivative.md",
         "docs/plans/qbd-rationale-report-layer/gates.yaml",
-        "docs/decisions/D20260728-qbd-rationale-report-layer-boundary.md"
+        "cowork-p2-kit/rationale/rationale-contracts.mjs"
       ],
-      "text": "Execute Step 2 claim-to-source binding against sealed packets only"
+      "text": "Execute Step 3 deterministic readable derivative from validated rationale JSON only"
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
-    "docs/decisions/D20260728-qbd-rationale-report-layer-boundary.md",
+    "cowork-p2-kit/rationale/packet.mjs",
+    "cowork-p2-kit/rationale/rationale-contracts.mjs",
     "docs/plans/qbd-rationale-report-layer/gates.yaml",
-    "docs/plans/qbd-rationale-report-layer/step-02-rationale-contract-claim-binding.md"
+    "docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md",
+    "docs/plans/qbd-rationale-report-layer/step-03-deterministic-readable-derivative.md"
   ],
   "pickup_fingerprint_files": [
-    "docs/decisions/D20260728-qbd-rationale-report-layer-boundary.md",
+    "cowork-p2-kit/rationale/packet.mjs",
+    "cowork-p2-kit/rationale/rationale-contracts.mjs",
     "docs/plans/qbd-rationale-report-layer/gates.yaml",
-    "docs/plans/qbd-rationale-report-layer/step-02-rationale-contract-claim-binding.md"
+    "docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md",
+    "docs/plans/qbd-rationale-report-layer/step-03-deterministic-readable-derivative.md"
   ],
   "schema_version": 2,
   "session_id": "260729-0832",
-  "summary": "Closed rationale Step 1 sealed-packet contract: G-RL-01 11/11, isolated P4 regression 122/122, and P4 boundary unchanged.",
+  "summary": "Completed rationale Steps 1–2: sealed packet v2 causal evidence and pure exact claim binding; focused gates pass 21/21 and isolated reasoning regression passes 122/122.",
   "test_verdict": "artifacts/260729-0832/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
       "files": [
-        "docs/plans/qbd-rationale-report-layer/step-02-rationale-contract-claim-binding.md",
-        "docs/plans/qbd-rationale-report-layer/gates.yaml"
+        "cowork-p2-kit/rationale/packet.mjs",
+        "docs/plans/qbd-rationale-report-layer/step-01-packet-contract-and-sealer.md"
       ],
-      "text": "Step 2 claim-to-source binding remains pending by plan"
+      "text": "Attested branch exposes only sealed evaluation.outcome_code; do not infer a more specific tie explanation"
     }
   ],
   "worktree_status": [
+    " M AGENTS.md",
+    " M CLAUDE.md",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-01.json",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-02.json",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-03.json",
