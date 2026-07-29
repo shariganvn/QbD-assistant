@@ -1,49 +1,47 @@
 {
   "branch": "master",
-  "da_review": "summary:\n⚠️ Generic verdict counts are null; the retained TAP log evidences 25/25.",
+  "da_review": "summary: ⚠️ Step 5 integrated acceptance remains pending; Step 4 passed 32/32 focused tests and Claude review closed the .gitkeep transaction gap.",
   "diff_stat": "unknown",
-  "generated_at": "2026-07-29T03:30:05+00:00",
-  "git_head": "8822b3aea20d4b215a5a863d054202edf5f52300",
+  "generated_at": "2026-07-29T05:16:14+00:00",
+  "git_head": "a73775d71085918940892ba425d980c0bd2aadd1",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/qbd-rationale-report-layer/step-04-publication-receipt-and-skill.md",
+        "docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md",
         "docs/plans/qbd-rationale-report-layer/gates.yaml",
-        "cowork-p2-kit/rationale/rationale-markdown.mjs"
+        "cowork-p2-kit/rationale/rationale-publication.mjs"
       ],
-      "text": "Implement Step 4 publication, receipt, and bounded Cowork session from sealed packet only"
+      "text": "Begin Step 5 only: integrated verify:rationale runner and end-to-end acceptance gate"
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
-    "cowork-p2-kit/rationale/rationale-markdown.mjs",
+    "cowork-p2-kit/rationale/rationale-publication.mjs",
     "docs/plans/qbd-rationale-report-layer/gates.yaml",
-    "docs/plans/qbd-rationale-report-layer/step-04-publication-receipt-and-skill.md"
+    "docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md"
   ],
   "pickup_fingerprint_files": [
-    "cowork-p2-kit/rationale/rationale-markdown.mjs",
+    "cowork-p2-kit/rationale/rationale-publication.mjs",
     "docs/plans/qbd-rationale-report-layer/gates.yaml",
-    "docs/plans/qbd-rationale-report-layer/step-04-publication-receipt-and-skill.md"
+    "docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md"
   ],
   "schema_version": 2,
-  "session_id": "260729-1024",
-  "summary": "Completed rationale Step 3 deterministic readable derivative; G-RL-01/02/03 and runner contract pass 25/25, with machine-produced red and step-close evidence.",
-  "test_verdict": "artifacts/260729-1024/test-verdict.json",
+  "session_id": "260729-1205",
+  "summary": "Completed Step 4 sealed rationale publication, receipt validation, Cowork session boundary, gate closure, Claude fix verification, and local commit a73775d.",
+  "test_verdict": "artifacts/260729-1205/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
       "files": [
-        "docs/plans/qbd-rationale-report-layer/step-04-publication-receipt-and-skill.md",
-        "docs/plans/qbd-rationale-report-layer/gates.yaml",
-        "cowork-p2-kit/rationale/rationale-markdown.mjs"
+        "docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md",
+        "docs/plans/qbd-rationale-report-layer/gates.yaml"
       ],
-      "text": "G-RL-04 and G-RL-05 remain unverified; begin Step 4 publication boundary only"
+      "text": "Step 5 integrated gate remains pending"
     }
   ],
   "worktree_status": [
     " M AGENTS.md",
     " M CLAUDE.md",
-    " M DECISIONS.md",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-01.json",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-02.json",
     " M docs/reports/qbd-p3-render-layer/gates/G-P3-03.json",
