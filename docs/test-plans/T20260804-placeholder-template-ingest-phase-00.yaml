@@ -1,0 +1,64 @@
+id: T20260804-placeholder-template-ingest-phase-00
+date: "2026-08-04"
+workstream: placeholder-template-ingest-workflow-probe
+status: executed
+plan: docs/plans/placeholder-template-ingest-workflow-probe/phase-00-cleanup-stale-probe-worktree.md
+scope:
+  summary: >-
+    Validate that the superseded wide-table probe remains recoverably quarantined
+    and absent from active paths before the placeholder-template probe advances.
+  changed_files:
+    - docs/plans/placeholder-template-ingest-workflow-probe/
+    - docs/test-plans/T20260804-placeholder-template-ingest-phase-00.yaml
+    - docs/test-plans/active.yaml
+    - docs/progress/P20260804-placeholder-template-ingest-phase-00-closeout.yaml
+approval:
+  required: true
+  approved_at: "2026-08-04"
+  approved_by: human
+commands:
+  - id: recovery-boundary-validation
+    description: Verify archived bytes, recovery checksums, stale-path absence, and diff whitespace.
+    command:
+      - bash
+      - -lc
+      - |-
+        set -euo pipefail
+        archive="artifacts/260804-1207-placeholder-template-ingest-workflow-probe/recovery/stale-wip.tar"
+        manifest="artifacts/260804-1207-placeholder-template-ingest-workflow-probe/recovery/stale-wip-sha256.txt"
+        plan_snapshot="artifacts/260804-1207-placeholder-template-ingest-workflow-probe/recovery/plan-pre-cleanup.md"
+        plan_snapshot_sha256="80eeaa3a6f94714fe3b44005b35f37ebb385e96cb6607ce1114fa861ddb75040"
+        sha256sum --check "artifacts/260804-1207-placeholder-template-ingest-workflow-probe/recovery/stale-wip.tar.sha256"
+        sha256sum --check "artifacts/260804-1207-placeholder-template-ingest-workflow-probe/recovery/phase-00-pre-cleanup.sha256"
+        test "$(sha256sum "$plan_snapshot" | awk "{print \$1}")" = "$plan_snapshot_sha256"
+        test "$(tar -xOf "artifacts/260804-1207-placeholder-template-ingest-workflow-probe/recovery/plan-pre-cleanup.tar" "docs/plans/placeholder-template-ingest-workflow-probe/plan.md" | sha256sum | awk "{print \$1}")" = "$plan_snapshot_sha256"
+        while read -r expected path
+        do
+          actual="$(tar -xOf "$archive" "$path" | sha256sum | awk "{print \$1}")"
+          test "$actual" = "$expected"
+        done < "$manifest"
+        test ! -e cowork-p2-kit/preprocess
+        test ! -e plans/260803-1903-p0-preprocess-public-formulation-docx-workflow-probe
+        test ! -e plans/reports/tester-260803-1903-p0-preprocess-public-formulation-docx-workflow-probe.md
+        ! git status --short --untracked-files=all | grep -E "(^\?\? (cowork-p2-kit/preprocess/|plans/260803-1903-p0-preprocess-public-formulation-docx-workflow-probe/|plans/reports/tester-260803-1903-p0-preprocess-public-formulation-docx-workflow-probe\.md))"
+        git diff --check
+    requires_live_services: false
+    mutates_datastore: false
+acceptance:
+  gates: []
+  evidence:
+    - artifacts/260804-1207-placeholder-template-ingest-workflow-probe/recovery/
+    - artifacts/260804-1418/test-verdict.json
+    - docs/plans/placeholder-template-ingest-workflow-probe/phase-00-cleanup-stale-probe-worktree.md
+  invariants:
+    - Every stale-WIP archive byte and recorded file checksum remains recoverable.
+    - The superseded preprocess implementation and plans are absent from active paths.
+    - No committed source, canonical input, or store content was changed by Phase 00.
+results:
+  verdict: passed
+  artifact: artifacts/260804-1418/test-verdict.json
+  evidence_quality: exit-code-only
+  counts:
+    passed: null
+    failed: null
+    warnings: null

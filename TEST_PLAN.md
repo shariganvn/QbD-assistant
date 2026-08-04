@@ -1,59 +1,67 @@
 <!-- GENERATED VIEW — do not edit manually -->
-<!-- Source: docs/test-plans/T20260729-qbd-rationale-step-05.yaml -->
+<!-- Source: docs/test-plans/T20260804-placeholder-template-ingest-phase-00.yaml -->
 <!-- Regenerate: baton render-test-plan -->
-<!-- Source fingerprint: sha256:676b7476f4fda30cdca29de588b86ba8dfc3c874f6189c00acce8684cc69075d -->
+<!-- Source fingerprint: sha256:ae222b16ed32e50e6860993cad4f5d4dbb00d8a04b451cee7671af26daacf8b6 -->
 
 # TEST_PLAN — Active Validation Gates
 
-## T20260729-qbd-rationale-step-05
+## T20260804-placeholder-template-ingest-phase-00
 
 Status: **Executed — results recorded**
 
-- Workstream: `qbd-rationale-report-layer`
-- Date: 2026-07-29
-- Plan: `docs/plans/qbd-rationale-report-layer/step-05-integrated-gates-review.md`
+- Workstream: `placeholder-template-ingest-workflow-probe`
+- Date: 2026-08-04
+- Plan: `docs/plans/placeholder-template-ingest-workflow-probe/phase-00-cleanup-stale-probe-worktree.md`
 
 ## Scope
 
-Run the ordered rationale gate suite, publish and revalidate the test-only selected reference package, and prove the completed P4 boundary remains unchanged in an isolated worktree.
+Validate that the superseded wide-table probe remains recoverably quarantined and absent from active paths before the placeholder-template probe advances.
 
 ### Changed files
 
-- `cowork-p2-kit/rationale/tests/verify-rationale.mjs`
-- `cowork-p2-kit/rationale/tests/verify-rationale-evidence.mjs`
-- `cowork-p2-kit/rationale/tests/verify-rationale-contract.test.mjs`
-- `cowork-p2-kit/rationale/tests/e2e-rationale.test.mjs`
-- `package.json`
-- `docs/reports/qbd-rationale-report-layer/rationale/rationale-packet.json`
-- `docs/reports/qbd-rationale-report-layer/rationale/rationale.json`
-- `docs/reports/qbd-rationale-report-layer/rationale/rationale.md`
-- `docs/reports/qbd-rationale-report-layer/rationale/rationale-receipt.json`
-- `docs/reports/qbd-rationale-report-layer/gates/G-RL-05.json`
-- `docs/plans/qbd-rationale-report-layer/plan.md`
-- `docs/plans/qbd-rationale-report-layer/gates.yaml`
-- `cowork-p2-kit/README.md`
-- `docs/reports/qbd-rationale-report-layer/from-implementer-to-po-rationale-layer-closure.md`
+- `docs/plans/placeholder-template-ingest-workflow-probe/`
+- `docs/test-plans/T20260804-placeholder-template-ingest-phase-00.yaml`
+- `docs/test-plans/active.yaml`
+- `docs/progress/P20260804-placeholder-template-ingest-phase-00-closeout.yaml`
 
 ## Approval
 
 - **Human approval required** before running commands.
-- Approved at: 2026-07-29
+- Approved at: 2026-08-04
 - Approved by: human
 
 ## Commands
 
-### rationale-integrated-suite — Run every rationale gate in order and validate shared-UUID evidence.
+### recovery-boundary-validation — Verify archived bytes, recovery checksums, stale-path absence, and diff whitespace.
 
 ```bash
-npm run verify:rationale
+bash -lc 'set -euo pipefail
+archive="artifacts/260804-1207-placeholder-template-ingest-workflow-probe/recovery/stale-wip.tar"
+manifest="artifacts/260804-1207-placeholder-template-ingest-workflow-probe/recovery/stale-wip-sha256.txt"
+plan_snapshot="artifacts/260804-1207-placeholder-template-ingest-workflow-probe/recovery/plan-pre-cleanup.md"
+plan_snapshot_sha256="80eeaa3a6f94714fe3b44005b35f37ebb385e96cb6607ce1114fa861ddb75040"
+sha256sum --check "artifacts/260804-1207-placeholder-template-ingest-workflow-probe/recovery/stale-wip.tar.sha256"
+sha256sum --check "artifacts/260804-1207-placeholder-template-ingest-workflow-probe/recovery/phase-00-pre-cleanup.sha256"
+test "$(sha256sum "$plan_snapshot" | awk "{print \$1}")" = "$plan_snapshot_sha256"
+test "$(tar -xOf "artifacts/260804-1207-placeholder-template-ingest-workflow-probe/recovery/plan-pre-cleanup.tar" "docs/plans/placeholder-template-ingest-workflow-probe/plan.md" | sha256sum | awk "{print \$1}")" = "$plan_snapshot_sha256"
+while read -r expected path
+do
+  actual="$(tar -xOf "$archive" "$path" | sha256sum | awk "{print \$1}")"
+  test "$actual" = "$expected"
+done < "$manifest"
+test ! -e cowork-p2-kit/preprocess
+test ! -e plans/260803-1903-p0-preprocess-public-formulation-docx-workflow-probe
+test ! -e plans/reports/tester-260803-1903-p0-preprocess-public-formulation-docx-workflow-probe.md
+! git status --short --untracked-files=all | grep -E "(^\?\? (cowork-p2-kit/preprocess/|plans/260803-1903-p0-preprocess-public-formulation-docx-workflow-probe/|plans/reports/tester-260803-1903-p0-preprocess-public-formulation-docx-workflow-probe\.md))"
+git diff --check'
 ```
 
 
 ## Results
 
 Verdict: **passed**
-Artifact: `artifacts/260729-1229/test-verdict.json`
-Counts: passed=38, failed=0, warnings=0
+Artifact: `artifacts/260804-1418/test-verdict.json`
+Counts: passed=unknown, failed=unknown, warnings=unknown
 
 ---
 

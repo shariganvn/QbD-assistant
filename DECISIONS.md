@@ -1,7 +1,7 @@
 <!-- GENERATED VIEW — do not edit manually -->
 <!-- Source: docs/progress/*.yaml and docs/decisions/D*.md -->
 <!-- Regenerate: baton render-workflow -->
-<!-- Source fingerprint: sha256:58d73a2a156f9b138029f3180b439b819a5e21bfe64d5b948839005cd97cd054 -->
+<!-- Source fingerprint: sha256:eb0cf8bf78323ec8e0d41e79f2446c705390dfbe1d527070cc5cea084dbc1702 -->
 
 # DECISIONS
 
@@ -11,7 +11,6 @@
 
 | ID | Date | Status | Scope | Decision | Read when |
 |---|---|---|---|---|---|
-| `D20260722` | 2026-07-22 | active | qbd-p2-ingest-completion | [Same-host TOCTOU Hardening](docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md) | Before accepting untrusted input, changing publication locks, production rendering, citation-contract changes, or a claim of full historical Phase 2 compliance. |
 
 ## History
 

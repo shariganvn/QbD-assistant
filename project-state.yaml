@@ -2,26 +2,24 @@ schema_version: 1
 branch: master
 worktree_id: nguyen-dell-7577:master
 active_workstream:
-  id: qbd-p2-ingest-post-closure-spec-diff
-  plan: "docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md"
-  status: in-progress
+  id: placeholder-template-ingest-workflow-probe
+  plan: docs/plans/placeholder-template-ingest-workflow-probe/plan.md
+  status: waiting-human
 current_pickup:
   source: session-handoff.yaml
   summary: >-
-    Conduct the final P2 publication-lock spec-diff against D20260722 after the completed
-    rationale layer closeout; do not claim hostile same-host TOCTOU is resolved.
+    Phase 00 is closed. Do not start Phase 01 until the user supplies the
+    official placeholder DOCX, confirms FD/PO authority, and authorizes its
+    public/mock probe use.
   files:
-  - docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md
-  - docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md
-  - docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md
+  - docs/plans/placeholder-template-ingest-workflow-probe/plan.md
+  - docs/plans/placeholder-template-ingest-workflow-probe/phase-01-freeze-official-placeholder-template.md
 relevant_progress:
-- P20260729-qbd-rationale-step-05
-- P20260728-qbd-p2-ingest-closeout-attestation
-relevant_decisions:
-- D20260722
+- P20260804-placeholder-template-ingest-phase-00-closeout
+relevant_decisions: []
 read_next:
 - session-handoff.yaml
-- docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md
-- docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md
-updated_at: '2026-07-29T05:52:54.803865+00:00'
-git_head: 689533fed22e88da9198e7d8898bb781f7b5d917
+- docs/plans/placeholder-template-ingest-workflow-probe/plan.md
+- docs/plans/placeholder-template-ingest-workflow-probe/phase-01-freeze-official-placeholder-template.md
+updated_at: '2026-08-04T07:33:20.816684+00:00'
+git_head: 317f94ff92f0c02894d587b3ca24f6f4012af578

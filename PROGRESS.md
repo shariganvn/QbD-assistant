@@ -1,7 +1,7 @@
 <!-- GENERATED VIEW — do not edit manually -->
 <!-- Source: docs/progress/*.yaml and docs/decisions/D*.md -->
 <!-- Regenerate: baton render-workflow -->
-<!-- Source fingerprint: sha256:58d73a2a156f9b138029f3180b439b819a5e21bfe64d5b948839005cd97cd054 -->
+<!-- Source fingerprint: sha256:eb0cf8bf78323ec8e0d41e79f2446c705390dfbe1d527070cc5cea084dbc1702 -->
 
 # PROGRESS
 
@@ -9,18 +9,17 @@
 
 ## Current workstream
 
-- ID: `qbd-p2-ingest-post-closure-spec-diff`
-- Status: `in-progress`
-- Plan: `docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md`
-- Current pickup: Conduct the final P2 publication-lock spec-diff against D20260722 after the completed rationale layer closeout; do not claim hostile same-host TOCTOU is resolved.
-- Pickup files: `docs/plans/qbd-p2-ingest-completion/post-closure-toctou-validation-plan-patch.md`, `docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md`, `docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md`
+- ID: `placeholder-template-ingest-workflow-probe`
+- Status: `waiting-human`
+- Plan: `docs/plans/placeholder-template-ingest-workflow-probe/plan.md`
+- Current pickup: Phase 00 is closed. Do not start Phase 01 until the user supplies the official placeholder DOCX, confirms FD/PO authority, and authorizes its public/mock probe use.
+- Pickup files: `docs/plans/placeholder-template-ingest-workflow-probe/plan.md`, `docs/plans/placeholder-template-ingest-workflow-probe/phase-01-freeze-official-placeholder-template.md`
 
 ## Latest progress
 
 | Date | ID | Status | Summary |
 |---|---|---|---|
-| 2026-07-28 | `P20260728-qbd-p2-ingest-closeout-attestation` | done | Recorded the final accepting closeout verdict and synchronized the canonical P2 validation plan after the final independent review; D20260722 remains open. |
-| 2026-07-29 | `P20260729-qbd-rationale-step-05` | done | Completed rationale Step 5: the integrated suite creates and validates shared-UUID gate evidence, exercises all sealed decision branches end to end, publishes the test-only selected reference package, and verifies P4 unchanged in an isolated clean worktree. |
+| 2026-08-04 | `P20260804-placeholder-template-ingest-phase-00-closeout` | done | Closed Phase 00 of the placeholder-template ingest workflow probe after revalidating the recoverable stale-WIP quarantine and active-worktree boundary. |
 
 ## Blockers
 

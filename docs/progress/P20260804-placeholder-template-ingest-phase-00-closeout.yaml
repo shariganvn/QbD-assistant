@@ -1,0 +1,35 @@
+id: P20260804-placeholder-template-ingest-phase-00-closeout
+date: "2026-08-04"
+workstream: placeholder-template-ingest-workflow-probe
+status: done
+summary: >-
+  Closed Phase 00 of the placeholder-template ingest workflow probe after
+  revalidating the recoverable stale-WIP quarantine and active-worktree boundary.
+changed_files:
+- docs/plans/placeholder-template-ingest-workflow-probe/
+- docs/test-plans/T20260804-placeholder-template-ingest-phase-00.yaml
+- docs/test-plans/active.yaml
+- docs/progress/P20260804-placeholder-template-ingest-phase-00-closeout.yaml
+tests_run:
+  verdict: passed
+  command: recovery-boundary-validation
+  evidence_quality: exit-code-only
+  counts:
+    passed:
+    failed:
+    warnings:
+  evidence:
+    session_verdict: artifacts/260804-1418/test-verdict.json
+    recovery_bundle: "artifacts/260804-1207-placeholder-template-ingest-workflow-probe/recovery/"
+boundaries:
+  committed_source: unchanged
+  canonical_inputs: unchanged
+  store_content: unchanged
+  stale_wip: recoverably_quarantined
+decisions: []
+next_pickup:
+  files:
+  - docs/plans/placeholder-template-ingest-workflow-probe/phase-01-freeze-official-placeholder-template.md
+  text: >-
+    Begin Phase 01 only when the user supplies the official placeholder DOCX,
+    confirms its FD/PO authority, and authorizes its public/mock probe use.
