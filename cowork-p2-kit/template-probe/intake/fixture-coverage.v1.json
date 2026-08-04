@@ -1,0 +1,76 @@
+{
+  "schema_version": "template-fixture-coverage/v1",
+  "template_sha256": "a8002623e0808cc54c870ab2f47adab44498a6c2ce5b7c4b3bd21cd99973a01d",
+  "public_mock_sha256": "01fe95607f4733e2b47a4c46f8dad5817d6014cc40f69a08631977c9d890cd8f",
+  "expected_anchor_census": {
+    "total": 146,
+    "cell_anchors": 143,
+    "cell_owner_locations": 142,
+    "paragraph_anchors": [
+      "EXPERIMENT-DISCRIPTION",
+      "BATCH-SIZE",
+      "CONCLUSION"
+    ]
+  },
+  "cases": [
+    {
+      "feature": "split_xml_runs",
+      "anchor_id": "PDS-180-CT02",
+      "expected_owner_kind": "cell"
+    },
+    {
+      "feature": "merged_cell",
+      "anchor_id": "UOM-SPEC",
+      "expected_owner_kind": "cell",
+      "expected_vertical_merge": true
+    },
+    {
+      "feature": "decimal_comma_raw_display",
+      "anchor_id": "API-CONTENT-CT01",
+      "source": "public_mock",
+      "assertion_owner": "phase-03-cell-extractor"
+    },
+    {
+      "feature": "unit_raw_display",
+      "anchor_id": "HARDNESS-AVE-CT01",
+      "assertion_owner": "phase-02-field-map"
+    },
+    {
+      "feature": "comparison_symbols",
+      "anchor_ids": [
+        "PDS-180-CT01",
+        "DISINTEGRATION-MAX-CT01"
+      ],
+      "symbols": [
+        "≥",
+        "≤"
+      ],
+      "assertion_owner": "phase-02-field-map"
+    },
+    {
+      "feature": "statistic_labels",
+      "anchor_ids": [
+        "DISSOLUTION-AVE-CT01",
+        "DISSOLUTION-MAX-CT01",
+        "DISSOLUTION-MIN-CT01",
+        "DISSOLUTION-RSD-CT01"
+      ],
+      "labels": [
+        "TB",
+        "Max",
+        "Min",
+        "RSD"
+      ],
+      "assertion_owner": "phase-02-field-map"
+    },
+    {
+      "feature": "paragraph_owners",
+      "anchor_ids": [
+        "EXPERIMENT-DISCRIPTION",
+        "BATCH-SIZE",
+        "CONCLUSION"
+      ],
+      "conclusion_policy": "reference_only"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+id: T20260804-placeholder-template-ingest-phase-01
+date: "2026-08-04"
+workstream: placeholder-template-ingest-workflow-probe
+status: executed
+plan: docs/plans/placeholder-template-ingest-workflow-probe/phase-01-freeze-official-placeholder-template.md
+scope:
+  summary: >-
+    Validate the isolated PO-supplied placeholder-template freeze contract and
+    its read-only OOXML verifier; do not run canonical ingest or Phase 02.
+  changed_files:
+    - docs/plans/placeholder-template-ingest-workflow-probe/
+    - docs/journals/2026-08-04-freeze-po-supplied-placeholder-template.md
+    - cowork-p2-kit/template-probe/intake/
+    - docs/progress/P20260804-placeholder-template-ingest-phase-01-closeout.yaml
+    - docs/test-plans/T20260804-placeholder-template-ingest-phase-01.yaml
+    - docs/test-plans/active.yaml
+approval:
+  required: true
+  approved_at: "2026-08-04"
+  approved_by: human
+commands:
+  - id: intake-contract-verification
+    description: Verify frozen hashes, OOXML ownership, grammar, and isolated input boundary.
+    command:
+      - bash
+      - -lc
+      - |-
+        set -euo pipefail
+        node --check cowork-p2-kit/template-probe/intake/verify-intake-contract.mjs
+        node cowork-p2-kit/template-probe/intake/verify-intake-contract.mjs
+    requires_live_services: false
+    mutates_datastore: false
+acceptance:
+  gates: []
+  evidence:
+    - artifacts/260804-1517/test-verdict.json
+    - cowork-p2-kit/template-probe/intake/template-freeze-manifest.v1.json
+    - cowork-p2-kit/template-probe/intake/field-grammar.v1.json
+    - cowork-p2-kit/template-probe/intake/fixture-coverage.v1.json
+    - cowork-p2-kit/template-probe/intake/verify-intake-contract.mjs
+  invariants:
+    - Both source DOCX files remain byte-identical to their frozen SHA-256 values.
+    - The contract has exactly 146 unique anchors, including only the three authorized paragraph owners.
+    - Neither source is admitted to the canonical classification manifest.
+    - The source token EXPERIMENT-DISCRIPTION aliases only to canonical EXPERIMENT-DESCRIPTION.
+results:
+  verdict: passed
+  artifact: artifacts/260804-1517/test-verdict.json
+  evidence_quality: exit-code-only
+  counts:
+    passed: null
+    failed: null
+    warnings: null

@@ -1,0 +1,41 @@
+{
+  "schema_version": "template-freeze-manifest/v1",
+  "template_version": "po-fd-like-placeholder-template-v1-040826",
+  "scope": "mvp-isolated-workflow-probe",
+  "canonical_ingest_admission": false,
+  "authorization": {
+    "authority": "PO-supplied closest FD-like template for MVP",
+    "data_basis": "public/synthetic",
+    "confirmed_on": "2026-08-04"
+  },
+  "classification": {
+    "label": "public",
+    "citable": false,
+    "ocr_language": "vie",
+    "non_citable_reason": "Isolated workflow-probe material; never dossier evidence."
+  },
+  "template": {
+    "source_path": "inputs/reference/official-placeholder-template-v1-040826.docx",
+    "immutable": true,
+    "sha256": "a8002623e0808cc54c870ab2f47adab44498a6c2ce5b7c4b3bd21cd99973a01d",
+    "document_xml_sha256": "5ee079441d5db87b7964c6f876b67c55f7b2859714763f371d1109cfbbdc4095"
+  },
+  "public_mock": {
+    "source_path": "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+    "immutable": true,
+    "sha256": "01fe95607f4733e2b47a4c46f8dad5817d6014cc40f69a08631977c9d890cd8f",
+    "document_xml_sha256": "ebefbf16e4f7bcae2907d6655d72a3e374cc4b2b6f185380203403f61a2bdf8a"
+  },
+  "structural_fingerprint": {
+    "table_count": 3,
+    "table_row_count": 43,
+    "cell_count": 263,
+    "grid_span_count": 15,
+    "vertical_merge_count": 17,
+    "anchor_count": 146,
+    "cell_anchor_count": 143,
+    "cell_owner_location_count": 142,
+    "paragraph_anchor_count": 3,
+    "owner_inventory_sha256": "927745267aab8cabe98fd35923614729638285d587b3bab249739303457e2876"
+  }
+}

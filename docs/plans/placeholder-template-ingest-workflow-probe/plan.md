@@ -1,7 +1,7 @@
 ---
 title: "Placeholder Template Ingest Workflow Probe"
-description: "Use an official placeholder-marked DOCX as a controlled schema to evaluate the ingest-to-report workflow with mock/public data."
-status: pending
+description: "Use a PO-supplied FD-like placeholder DOCX as a controlled schema to evaluate the ingest-to-report workflow with public/synthetic data."
+status: in-progress
 priority: P1
 effort: "2-3d after template receipt"
 issue: null
@@ -17,7 +17,7 @@ created: 2026-08-04
 ## Overview
 
 Replace the failed generic wide-table probe with a controlled vertical slice. A
-user-supplied official FD/PO DOCX contains semantic placeholders such as
+PO-supplied FD-like MVP DOCX contains semantic placeholders such as
 `<HAUSNER-RATIO-CT01>`. The probe compiles those anchors into a versioned field
 map, extracts exact OOXML cell values, linearizes one field per record, then runs
 the existing isolated ingest and downstream workflow.
@@ -26,7 +26,8 @@ the existing isolated ingest and downstream workflow.
 
 - Outcome: quickly assess the complete ingest-to-downstream workflow with a
   mock/public package while preserving exact field-to-value provenance.
-- Constraint: Phase 01 cannot start until the user supplies the concrete DOCX.
+- Constraint: Phase 01 is bound to the PO-supplied FD-like MVP template at
+  `cowork-p2-kit/inputs/reference/official-placeholder-template-v1-040826.docx`.
 - Constraint: original template and public package remain immutable; derived
   probe artifacts stay isolated and non-citable by default.
 - Constraint: preserve raw text, decimal comma, units, `≤`/`≥`, blanks, and
@@ -44,7 +45,7 @@ the existing isolated ingest and downstream workflow.
 | # | Phase | Status |
 |---|-------|--------|
 | 00 | [Clean up stale probe worktree](./phase-00-cleanup-stale-probe-worktree.md) | Completed |
-| 01 | [Freeze official placeholder template](./phase-01-freeze-official-placeholder-template.md) | Blocked on user input |
+| 01 | [Freeze PO-supplied FD-like placeholder template](./phase-01-freeze-official-placeholder-template.md) | Completed |
 | 02 | [Compile template field map](./phase-02-compile-template-field-map.md) | Pending |
 | 03 | [Extract linear ingest records](./phase-03-extract-linear-ingest-records.md) | Pending |
 | 04 | [Run isolated end-to-end probe](./phase-04-run-isolated-end-to-end-probe.md) | Pending |
@@ -75,9 +76,12 @@ the existing isolated ingest and downstream workflow.
 
 ## Input gate
 
-Await the concrete official placeholder DOCX from the user. Resolve its final
-repo-relative intake path, hash, sensitivity, and allowed public/mock values in
-Phase 01; do not guess a filename or begin template implementation before then.
+The PO supplied the closest FD-like template for the MVP and confirmed the
+probe inputs are public/synthetic. Phase 01 freezes its repo-relative source
+path, hash, and isolated non-citable classification without admitting either
+DOCX to the canonical ingest manifest. `EXPERIMENT-DISCRIPTION` and
+`BATCH-SIZE` are supplied data; `CONCLUSION` remains reference-only context for
+the separate rationale layer to author, never a value produced by this probe.
 
 ## Validation Log
 

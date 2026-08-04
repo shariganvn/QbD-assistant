@@ -1,0 +1,84 @@
+{
+  "adapter": {
+    "id": "exit-code",
+    "report_path": null,
+    "report_sha256": null,
+    "report_size_bytes": null,
+    "stable": null
+  },
+  "argv": [
+    "bash",
+    "-lc",
+    "set -euo pipefail; node --check cowork-p2-kit/template-probe/intake/verify-intake-contract.mjs; node cowork-p2-kit/template-probe/intake/verify-intake-contract.mjs"
+  ],
+  "branch": "master",
+  "command": [
+    "bash",
+    "-lc",
+    "set -euo pipefail; node --check cowork-p2-kit/template-probe/intake/verify-intake-contract.mjs; node cowork-p2-kit/template-probe/intake/verify-intake-contract.mjs"
+  ],
+  "counts": {
+    "collected": null,
+    "deselected": null,
+    "error": null,
+    "failed": null,
+    "passed": null,
+    "skipped": null,
+    "warnings": null,
+    "xfailed": null,
+    "xpassed": null
+  },
+  "dirty_files": {
+    "cowork-p2-kit/template-probe/intake/field-grammar.v1.json": {
+      "sha256": "51b5f1ca5438e602cf1cb39003b64dfdd8d80621ea4004efeb4b7ea422f7e5ae",
+      "status": "added"
+    },
+    "cowork-p2-kit/template-probe/intake/fixture-coverage.v1.json": {
+      "sha256": "56f5f29f69bd139dfd7c23ee442416f1800ed0ff71c78c3f5ac5ad2df902464f",
+      "status": "added"
+    },
+    "cowork-p2-kit/template-probe/intake/template-freeze-manifest.v1.json": {
+      "sha256": "f7763111d45f48352bece18221a1b5ae29e17c117cd162e71e702ca9d530eaf3",
+      "status": "added"
+    },
+    "cowork-p2-kit/template-probe/intake/verify-intake-contract.mjs": {
+      "sha256": "b3160b023206f4e5392c573a5b6c20915a25ad239c01f4a8932fe2997c88bac1",
+      "status": "added"
+    }
+  },
+  "duration_seconds": 0.696405,
+  "evidence_level": "local-attested",
+  "evidence_quality": "exit-code-only",
+  "exit_code": 0,
+  "finished_at": "2026-08-04T08:43:53.737066+00:00",
+  "git": {
+    "branch_after": "master",
+    "branch_before": "master",
+    "head_after": "0e98a8376ce0e296d87ec5d0198f12ac8f938ecf",
+    "head_before": "0e98a8376ce0e296d87ec5d0198f12ac8f938ecf",
+    "stable": true
+  },
+  "git_head": "0e98a8376ce0e296d87ec5d0198f12ac8f938ecf",
+  "log_path": "artifacts/260804-1517/test-output.log",
+  "log_sha256": "8a96197eaae41b0af5b4f6d82062f418afd7c14cbb0add7b47c6951295e445da",
+  "log_size_bytes": 295,
+  "outcome": "passed",
+  "requested_test_targets": [],
+  "runner_id": "stdlib-popen-v3",
+  "runtime": {
+    "implementation": "CPython",
+    "version": "3.14.4"
+  },
+  "schema_version": 3,
+  "session_id": "260804-1517",
+  "started_at": "2026-08-04T08:43:53.040648+00:00",
+  "status": "passed",
+  "summary": "command exited with code 0",
+  "test_targets": [],
+  "tool": "run_tests_with_verdict.py",
+  "worktree": {
+    "after": "8acc1ece4fca0897ba27a76b3dcc827d99995d097651f22ea70d07d28ec802e8",
+    "before": "8acc1ece4fca0897ba27a76b3dcc827d99995d097651f22ea70d07d28ec802e8",
+    "stable": true
+  }
+}

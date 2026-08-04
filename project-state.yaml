@@ -4,22 +4,26 @@ worktree_id: nguyen-dell-7577:master
 active_workstream:
   id: placeholder-template-ingest-workflow-probe
   plan: docs/plans/placeholder-template-ingest-workflow-probe/plan.md
-  status: waiting-human
+  status: in-progress
 current_pickup:
   source: session-handoff.yaml
   summary: >-
-    Phase 00 is closed. Do not start Phase 01 until the user supplies the
-    official placeholder DOCX, confirms FD/PO authority, and authorizes its
-    public/mock probe use.
+    Phase 01 is closed. Start Phase 02 only to compile the versioned field map
+    from the frozen intake contract; do not run canonical ingest or derive a conclusion.
   files:
   - docs/plans/placeholder-template-ingest-workflow-probe/plan.md
-  - docs/plans/placeholder-template-ingest-workflow-probe/phase-01-freeze-official-placeholder-template.md
+  - docs/plans/placeholder-template-ingest-workflow-probe/phase-02-compile-template-field-map.md
+  - cowork-p2-kit/template-probe/intake/template-freeze-manifest.v1.json
+  - cowork-p2-kit/template-probe/intake/field-grammar.v1.json
 relevant_progress:
 - P20260804-placeholder-template-ingest-phase-00-closeout
+- P20260804-placeholder-template-ingest-phase-01-closeout
 relevant_decisions: []
 read_next:
 - session-handoff.yaml
 - docs/plans/placeholder-template-ingest-workflow-probe/plan.md
-- docs/plans/placeholder-template-ingest-workflow-probe/phase-01-freeze-official-placeholder-template.md
-updated_at: '2026-08-04T07:33:20.816684+00:00'
-git_head: 317f94ff92f0c02894d587b3ca24f6f4012af578
+- docs/plans/placeholder-template-ingest-workflow-probe/phase-02-compile-template-field-map.md
+- cowork-p2-kit/template-probe/intake/template-freeze-manifest.v1.json
+- cowork-p2-kit/template-probe/intake/field-grammar.v1.json
+updated_at: '2026-08-04T08:52:43.858027+00:00'
+git_head: 0e98a8376ce0e296d87ec5d0198f12ac8f938ecf

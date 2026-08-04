@@ -1,0 +1,48 @@
+id: P20260804-placeholder-template-ingest-phase-01-closeout
+date: "2026-08-04"
+workstream: placeholder-template-ingest-workflow-probe
+status: done
+summary: >-
+  Closed Phase 01 only: the PO-supplied FD-like MVP template and public/synthetic
+  mock are frozen for an isolated, non-citable workflow probe. This is not a
+  production or FD-authority decision.
+changed_files:
+- docs/plans/placeholder-template-ingest-workflow-probe/
+- docs/journals/2026-08-04-freeze-po-supplied-placeholder-template.md
+- cowork-p2-kit/template-probe/intake/
+- docs/progress/P20260804-placeholder-template-ingest-phase-01-closeout.yaml
+tests_run:
+  verdict: passed
+  command: node cowork-p2-kit/template-probe/intake/verify-intake-contract.mjs
+  evidence_quality: contract-assertions
+  counts:
+    passed: null
+    failed: null
+    warnings: null
+  evidence:
+    template_sha256: a8002623e0808cc54c870ab2f47adab44498a6c2ce5b7c4b3bd21cd99973a01d
+    public_mock_sha256: 01fe95607f4733e2b47a4c46f8dad5817d6014cc40f69a08631977c9d890cd8f
+    anchors: 146
+    cell_anchors: 143
+    cell_owner_locations: 142
+    permitted_paragraph_source_anchors: 3
+boundaries:
+  phase_scope: "Phase 01 freeze and intake-contract validation only"
+  source_docx: immutable_and_hash_verified
+  canonical_ingest_manifest: unchanged
+  canonical_source_manifest: unchanged
+  canonical_ingest_admission: false
+  probe_material: public_synthetic_non_citable
+decisions: []
+contract_decisions:
+- source_token: EXPERIMENT-DISCRIPTION
+  canonical_id: EXPERIMENT-DESCRIPTION
+  status: accepted_alias
+  note: "Raw source token remains EXPERIMENT-DISCRIPTION."
+next_pickup:
+  files:
+  - docs/plans/placeholder-template-ingest-workflow-probe/phase-02-compile-template-field-map.md
+  text: >-
+    Phase 02 is next and remains pending; compile the versioned field map only
+    from the frozen Phase 01 contract.
+unresolved_questions: []
