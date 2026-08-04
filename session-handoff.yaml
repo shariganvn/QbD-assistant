@@ -1,40 +1,41 @@
 {
   "branch": "master",
-  "da_review": "summary:\n⚠️ Phase 01 remains intentionally blocked pending the official DOCX, FD/PO authority confirmation, and public/mock probe authorization.",
+  "da_review": "summary:\n⚠️ Exit-code-only verdict counts are unknown; Phase 02 must add compiler-focused negative tests.\n⚠️ This hash-pinned PO probe is non-production and requires Phase 02-05 before promotion.",
   "diff_stat": "unknown",
-  "generated_at": "2026-08-04T07:35:30+00:00",
-  "git_head": "fb8d8ddeeeee8bd57493326f68baf2268557944a",
+  "generated_at": "2026-08-04T08:55:32+00:00",
+  "git_head": "98a599412e561aae8292316fc4160a2a0363d965",
   "next_pickup": [
     {
       "files": [
         "docs/plans/placeholder-template-ingest-workflow-probe/plan.md",
-        "docs/plans/placeholder-template-ingest-workflow-probe/phase-01-freeze-official-placeholder-template.md"
+        "docs/plans/placeholder-template-ingest-workflow-probe/phase-02-compile-template-field-map.md",
+        "cowork-p2-kit/template-probe/intake/template-freeze-manifest.v1.json",
+        "cowork-p2-kit/template-probe/intake/field-grammar.v1.json"
       ],
-      "text": "After the user supplies and authorizes the official DOCX, execute Phase 01 intake freeze without starting Phase 02"
+      "text": "Compile the versioned field map from the frozen Phase 01 contract only; do not run canonical ingest or derive a conclusion."
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
-    "docs/plans/placeholder-template-ingest-workflow-probe/phase-01-freeze-official-placeholder-template.md",
+    "cowork-p2-kit/template-probe/intake/field-grammar.v1.json",
+    "cowork-p2-kit/template-probe/intake/template-freeze-manifest.v1.json",
+    "docs/plans/placeholder-template-ingest-workflow-probe/phase-02-compile-template-field-map.md",
     "docs/plans/placeholder-template-ingest-workflow-probe/plan.md"
   ],
   "pickup_fingerprint_files": [
-    "docs/plans/placeholder-template-ingest-workflow-probe/phase-01-freeze-official-placeholder-template.md",
+    "cowork-p2-kit/template-probe/intake/field-grammar.v1.json",
+    "cowork-p2-kit/template-probe/intake/template-freeze-manifest.v1.json",
+    "docs/plans/placeholder-template-ingest-workflow-probe/phase-02-compile-template-field-map.md",
     "docs/plans/placeholder-template-ingest-workflow-probe/plan.md"
   ],
   "schema_version": 2,
-  "session_id": "260804-1418",
-  "summary": "Closed Phase 00 of the placeholder-template ingest workflow probe; recovery boundaries and both archived plan snapshots were revalidated by an accepting exit-code-only verdict with unknown framework counts.",
-  "test_verdict": "artifacts/260804-1418/test-verdict.json",
+  "session_id": "260804-1517",
+  "summary": "Closed Phase 01 placeholder-template intake: immutable public/synthetic sources, a 146-anchor contract, read-only verification, and a Phase 02 field-map pickup.",
+  "test_verdict": "artifacts/260804-1517/test-verdict.json",
   "ui_verdict": null,
-  "unresolved": [
-    {
-      "files": [
-        "docs/plans/placeholder-template-ingest-workflow-probe/plan.md",
-        "docs/plans/placeholder-template-ingest-workflow-probe/phase-01-freeze-official-placeholder-template.md"
-      ],
-      "text": "Phase 01 is blocked pending the official placeholder DOCX, FD/PO authority confirmation, and public/mock probe authorization"
-    }
-  ],
-  "worktree_status": []
+  "unresolved": [],
+  "worktree_status": [
+    " M AGENTS.md",
+    " M CLAUDE.md"
+  ]
 }
