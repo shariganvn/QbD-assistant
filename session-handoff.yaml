@@ -1,40 +1,34 @@
 {
   "branch": "master",
-  "da_review": "summary:\n🔥 Do not deploy as production ingest while page, offset, quote, and page-kind provenance are unavailable; keep promotion held.\n⚠️ Before promotion, enforce the reusable five-entry boundary, independent owner-byte round-trip verification, unavailable projection with null record IDs, and strict template-version/map binding.",
+  "da_review": "summary:\nPatch is a low-risk input-validation guard fix with a new negative test; no auth, schema, or security-sensitive contract changed, so a fresh critical review was not required.\n🔥 Standing: keep promotion held until page, offset, quote, and page-kind provenance exists.\n⚠️ Standing: before promotion enforce the five-entry boundary, independent owner-byte round trips, unavailable projection with null record IDs, and strict template-version/map binding.",
   "diff_stat": "unknown",
-  "generated_at": "2026-08-05T04:07:29+00:00",
-  "git_head": "76d7562ce50a37daa2f71f9aa28c76ed89294cae",
+  "generated_at": "2026-08-05T05:34:06+00:00",
+  "git_head": "6a41656dba1add27fc24d7949e2b20a866ca1604",
   "next_pickup": [
     {
       "files": [
-        "cowork-p2-kit/template-probe/template-record-extractor.mjs",
         "cowork-p2-kit/template-probe/template-cell-receipt.mjs",
+        "cowork-p2-kit/template-probe/template-record-extractor.mjs",
         "cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json"
       ],
-      "text": "Harden the receipt-only contract before any promotion: enforce the exact five-entry boundary, independent owner-byte round trips, unavailable projection with null record IDs, and template-version/map binding"
+      "text": "Post-MVP hardening before any promotion: enforce the exact five-entry boundary, independent owner-byte round trips, unavailable projection with null record IDs, strict template-version/map binding, and optionally replace the key-order-sensitive receipt metadata comparison; never synthesize page/offset/quote provenance"
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
-    "cowork-p2-kit/ingest/tests/pipeline.test.mjs",
-    "cowork-p2-kit/ingest/tests/record-contract.test.mjs",
     "cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json",
     "cowork-p2-kit/template-probe/template-cell-receipt.mjs",
-    "cowork-p2-kit/template-probe/template-record-extractor.mjs",
-    "docs/test-plans/T20260805-placeholder-template-ingest-phase-02-05-closeout.yaml"
+    "cowork-p2-kit/template-probe/template-record-extractor.mjs"
   ],
   "pickup_fingerprint_files": [
-    "cowork-p2-kit/ingest/tests/pipeline.test.mjs",
-    "cowork-p2-kit/ingest/tests/record-contract.test.mjs",
     "cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json",
     "cowork-p2-kit/template-probe/template-cell-receipt.mjs",
-    "cowork-p2-kit/template-probe/template-record-extractor.mjs",
-    "docs/test-plans/T20260805-placeholder-template-ingest-phase-02-05-closeout.yaml"
+    "cowork-p2-kit/template-probe/template-record-extractor.mjs"
   ],
   "schema_version": 2,
-  "session_id": "260805-1054",
-  "summary": "Receipt-only placeholder-template MVP closed through Phase 05: five-field extraction and two isolated deterministic runs passed; production promotion remains held.",
-  "test_verdict": "artifacts/260805-1054/test-verdict.json",
+  "session_id": "260805-1231",
+  "summary": "Applied one code-review finding on the receipt-only probe: the filled-document guard now fails closed with a clear required-document message, proven by a new negative test. A second finding (repeated-token owner index) was verified unreachable via the field-map duplicate owner/token contract and left unchanged. Promotion remains held; no schema, canonical, or downstream contract changed.",
+  "test_verdict": "artifacts/260805-1231/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
@@ -43,15 +37,7 @@
         "cowork-p2-kit/template-probe/template-cell-receipt.mjs",
         "cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json"
       ],
-      "text": "Promotion remains held pending truthful first-class provenance and post-MVP receipt contract hardening"
-    },
-    {
-      "files": [
-        "docs/test-plans/T20260805-placeholder-template-ingest-phase-02-05-closeout.yaml",
-        "cowork-p2-kit/ingest/tests/record-contract.test.mjs",
-        "cowork-p2-kit/ingest/tests/pipeline.test.mjs"
-      ],
-      "text": "The side-effectful full verify:ingest runner was intentionally not rerun; direct ingest contract subset remains the validation boundary"
+      "text": "Promotion remains held pending truthful first-class provenance and post-MVP receipt contract hardening, including the key-order-sensitive receipt metadata comparison"
     }
   ],
   "worktree_status": [
