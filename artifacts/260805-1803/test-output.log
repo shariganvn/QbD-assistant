@@ -1,0 +1,14 @@
+[spike:setup] run root: /tmp/spike-e2e-9IV3al
+[spike:template] receipt built: 5 occurrences, 5 round-trip pass {"fields":["PDS-180-CT02","UOM-SPEC","API-NAME","ASSAY-SPEC","BATCH-SIZE"],"record_projection":"not_available"}
+[spike:guard] canonical inputs/store/outputs unchanged after template stage
+[spike:ingest] records produced: 21 {"storeHash":"143ac2a82a00","capabilities":{"isComplex":{"status":"available"},"ocrEligible":[{"file":"inputs/trials/filled-public-mock-document-030826.docx","page":2}]}}
+[spike:guard] canonical inputs/store/outputs unchanged after ingest stage
+[spike:upstream] UPSTREAM COMPLETE — receipt + records ready {"occurrences":5,"records":21}
+[spike:reasoning] decision: inconclusive/E_RUBRIC_PIN_REQUIRED {"candidate":"spike-candidate","fact_card_id":"FC-SPIKE-CONTEXT-001","fact_card_record_id":"d78477de2e22754b"}
+[spike:guard] canonical inputs/store/outputs unchanged after reasoning stage
+[spike:rationale] sealed and published internal-only rationale
+[spike:guard] canonical inputs/store/outputs unchanged after rationale stage
+[spike:render] internal DOCX: /tmp/spike-e2e-9IV3al/render-output/p2-draft.docx {"bytes":8947,"citations":0}
+[spike:guard] canonical inputs/store/outputs unchanged after render stage
+[spike:complete] all five stages completed; internal DOCX path: /tmp/spike-e2e-9IV3al/render-output/p2-draft.docx
+[spike:cleanup] temp root retained for inspection; remove manually when finished: /tmp/spike-e2e-9IV3al

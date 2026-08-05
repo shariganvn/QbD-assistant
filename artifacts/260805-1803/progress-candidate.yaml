@@ -1,0 +1,60 @@
+id: P20260805-template-docx-end-to-end-spike-run-closeout
+date: "2026-08-05"
+workstream: template-docx-end-to-end-spike-run
+status: done
+summary: >-
+  Completed one human-approved, five-stage template DOCX spike run. The runner
+  produced one temporary internal-only DOCX from copied inputs while canonical
+  inputs, store, and outputs remained unchanged; reasoning correctly stopped
+  inconclusive because no rubric pin was supplied. This is not a production,
+  citation, or multi-run determinism result.
+changed_files:
+  - cowork-p2-kit/workflow-trial/spike-e2e-run.mjs
+  - plans/260805-1457-template-docx-end-to-end-spike-run/
+  - artifacts/260805-1803/test-verdict.json
+  - artifacts/260805-1803/test-output.log
+  - artifacts/260805-1803/progress-candidate.yaml
+  - docs/test-plans/T20260805-template-docx-end-to-end-spike-run.yaml
+  - docs/test-plans/active.yaml
+tests_run:
+  verdict: passed
+  command: node cowork-p2-kit/workflow-trial/spike-e2e-run.mjs
+  evidence_quality: exit-code-only
+  counts:
+    passed: null
+    failed: null
+    warnings: null
+  evidence:
+    verdict_artifact: artifacts/260805-1803/test-verdict.json
+    test_output: artifacts/260805-1803/test-output.log
+    runner_id: stdlib-popen-v3
+    evidence_level: local-attested
+    exit_code: 0
+    fact_card:
+      count: 1
+      id: FC-SPIKE-CONTEXT-001
+      record_id: d78477de2e22754b
+      source: real ingested copied mock record
+    candidate_profile: spike-candidate with visibly SYNTHETIC-prefixed values
+    reasoning_decision: inconclusive/E_RUBRIC_PIN_REQUIRED
+    render_output: >-
+      Temporary internal-only DOCX at the attested temp-root render-output path;
+      the rendered draft had zero citations.
+boundaries:
+  run_count: one
+  canonical_inputs_store_outputs: unchanged
+  output: temporary_internal_only_docx
+  public_citation: none
+  production_promotion: not_claimed
+  deterministic_multi_run_proof: not_claimed
+  evergreen_docs: unchanged
+  hardened_trial_260805_1335: out_of_scope_not_a_blocker
+decisions: []
+next_pickup:
+  files:
+    - plans/260805-1335-template-to-docx-end-to-end-trial/plan.md
+  text: >-
+    No blocker remains for this completed spike. If hardening is later selected,
+    use the separate 260805-1335 trial for its own determinism, negative-test,
+    sandbox, and promotion decisions; it was out of scope here.
+unresolved_questions: []

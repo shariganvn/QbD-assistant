@@ -1,43 +1,31 @@
 <!-- GENERATED VIEW — do not edit manually -->
-<!-- Source: docs/test-plans/T20260805-placeholder-template-ingest-phase-02-05-closeout.yaml -->
+<!-- Source: docs/test-plans/T20260805-template-docx-end-to-end-spike-run.yaml -->
 <!-- Regenerate: baton render-test-plan -->
-<!-- Source fingerprint: sha256:310e33b40f07bcc4ba3faeafe48133616694a00b7d00a735cdd8607ed2517808 -->
+<!-- Source fingerprint: sha256:84ae17c06050433ec1bed4650b843d22760857a2cdd41086b47577f081ab8a3b -->
 
 # TEST_PLAN — Active Validation Gates
 
-## T20260805-placeholder-template-ingest-phase-02-05-closeout
+## T20260805-template-docx-end-to-end-spike-run
 
 Status: **Executed — results recorded**
 
-- Workstream: `placeholder-template-ingest-workflow-probe`
+- Workstream: `template-docx-end-to-end-spike-run`
 - Date: 2026-08-05
-- Plan: `docs/plans/placeholder-template-ingest-workflow-probe/plan.md`
+- Plan: `plans/260805-1457-template-docx-end-to-end-spike-run/plan.md`
 
 ## Scope
 
-Close the bounded placeholder-template MVP: Phase 02 field-map compilation, Phase 03 five-field receipt extraction, Phase 04 two-run deterministic receipt-only proof, and the Phase 05 promotion boundary review.
+Run the approved, bounded one-shot template DOCX spike through template probe, ingest, reasoning, rationale, and render using copied inputs only. It proves an observed single run and its internal-only boundary, not public citation, production promotion, or deterministic multi-run behavior.
 
 ### Changed files
 
-- `cowork-p2-kit/template-probe/intake/`
-- `cowork-p2-kit/template-probe/contracts/template-field-map.schema.v1.json`
-- `cowork-p2-kit/template-probe/intake/field-metadata.v1.json`
-- `cowork-p2-kit/template-probe/template-field-contract.mjs`
-- `cowork-p2-kit/template-probe/template-field-map.mjs`
-- `cowork-p2-kit/template-probe/template-owner-reader.mjs`
-- `cowork-p2-kit/template-probe/tests/template-field-map.test.mjs`
-- `cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json`
-- `cowork-p2-kit/template-probe/template-cell-receipt.mjs`
-- `cowork-p2-kit/template-probe/template-record-extractor.mjs`
-- `cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs`
-- `cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs`
-- `docs/plans/placeholder-template-ingest-workflow-probe/`
-- `docs/reports/qbd-placeholder-template-ingest-probe/`
-- `plans/journals/2026-08-05-placeholder-template-receipt-only-mvp-closeout.md`
-- `plans/reports/pm-260805-0942-placeholder-template-ingest-workflow-probe.md`
-- `docs/progress/P20260805-placeholder-template-ingest-phase-03-04-closeout.yaml`
-- `docs/progress/P20260805-placeholder-template-ingest-phase-02-05-closeout.yaml`
-- `docs/test-plans/T20260805-placeholder-template-ingest-phase-02-05-closeout.yaml`
+- `cowork-p2-kit/workflow-trial/spike-e2e-run.mjs`
+- `plans/260805-1457-template-docx-end-to-end-spike-run/`
+- `artifacts/260805-1803/test-verdict.json`
+- `artifacts/260805-1803/test-output.log`
+- `artifacts/260805-1803/progress-candidate.yaml`
+- `docs/test-plans/T20260805-template-docx-end-to-end-spike-run.yaml`
+- `docs/test-plans/active.yaml`
 
 ## Approval
 
@@ -47,29 +35,17 @@ Close the bounded placeholder-template MVP: Phase 02 field-map compilation, Phas
 
 ## Commands
 
-### phase-02-field-map-verification — Verify the v3 intake contract and deterministic field-map compiler.
+### template-docx-end-to-end-spike-run — Run the one-shot, isolated five-stage template DOCX visibility spike.
 
 ```bash
-node --test cowork-p2-kit/template-probe/tests/template-field-map.test.mjs
-```
-
-### phase-03-04-receipt-only-mvp — Verify the fixed five-field receipt extractor and two isolated deterministic runs.
-
-```bash
-node --test 'cowork-p2-kit/template-probe/tests/*.test.mjs'
-```
-
-### existing-ingest-regression — Run the existing ingest contract regression suite separately from probe evidence.
-
-```bash
-npm run verify:ingest
+node cowork-p2-kit/workflow-trial/spike-e2e-run.mjs
 ```
 
 
 ## Results
 
 Verdict: **passed**
-Artifact: `artifacts/260805-1054/test-verdict.json`
+Artifact: `artifacts/260805-1803/test-verdict.json`
 Counts: passed=unknown, failed=unknown, warnings=unknown
 
 ---

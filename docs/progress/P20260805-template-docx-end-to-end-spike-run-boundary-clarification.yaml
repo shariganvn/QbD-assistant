@@ -1,0 +1,27 @@
+id: P20260805-template-docx-end-to-end-spike-run-boundary-clarification
+date: "2026-08-05"
+workstream: template-docx-end-to-end-spike-run
+status: done
+summary: >-
+  Clarified the completed spike boundary after final review: its generic render
+  draft consumes the sealed rationale decision-state claim but does not
+  propagate template fields into the output DOCX. The attested result remains
+  a one-run internal orchestration proof, not semantic template transformation.
+changed_files:
+- plans/260805-1457-template-docx-end-to-end-spike-run/phase-02-wire-downstream-render-and-run-once.md
+- plans/reports/pm-260805-1803-template-docx-end-to-end-spike-run.md
+- docs/test-plans/T20260805-template-docx-end-to-end-spike-run.yaml
+- artifacts/260805-1803/progress-boundary-clarification-candidate.yaml
+tests_run:
+  verdict: passed
+  counts:
+    passed:
+    failed:
+    warnings:
+decisions: []
+next_pickup:
+  files:
+  - plans/260805-1335-template-to-docx-end-to-end-trial/plan.md
+  text: >-
+    Use the separate hardened trial if field-level template propagation,
+    determinism, negative tests, sandboxing, or promotion evidence is needed.

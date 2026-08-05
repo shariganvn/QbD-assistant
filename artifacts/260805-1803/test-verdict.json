@@ -1,0 +1,70 @@
+{
+  "adapter": {
+    "id": "exit-code",
+    "report_path": null,
+    "report_sha256": null,
+    "report_size_bytes": null,
+    "stable": null
+  },
+  "argv": [
+    "node",
+    "cowork-p2-kit/workflow-trial/spike-e2e-run.mjs"
+  ],
+  "branch": "master",
+  "command": [
+    "node",
+    "cowork-p2-kit/workflow-trial/spike-e2e-run.mjs"
+  ],
+  "counts": {
+    "collected": null,
+    "deselected": null,
+    "error": null,
+    "failed": null,
+    "passed": null,
+    "skipped": null,
+    "warnings": null,
+    "xfailed": null,
+    "xpassed": null
+  },
+  "dirty_files": {
+    "cowork-p2-kit/workflow-trial/spike-e2e-run.mjs": {
+      "sha256": "4f925113735b4d3b4117b58f5adddd0a92a274a6040a43e47564f139aa9fa389",
+      "status": "added"
+    }
+  },
+  "duration_seconds": 9.845974,
+  "evidence_level": "local-attested",
+  "evidence_quality": "exit-code-only",
+  "exit_code": 0,
+  "finished_at": "2026-08-05T11:05:07.498320+00:00",
+  "git": {
+    "branch_after": "master",
+    "branch_before": "master",
+    "head_after": "5541535f2551ea3ad1f4b31be3d7731f40dba6fc",
+    "head_before": "5541535f2551ea3ad1f4b31be3d7731f40dba6fc",
+    "stable": true
+  },
+  "git_head": "5541535f2551ea3ad1f4b31be3d7731f40dba6fc",
+  "log_path": "artifacts/260805-1803/test-output.log",
+  "log_sha256": "a44e0f9229504ee660f93729800c7e5b5b651b4924d54fa8e8ab1f49b2c469fa",
+  "log_size_bytes": 1466,
+  "outcome": "passed",
+  "requested_test_targets": [],
+  "runner_id": "stdlib-popen-v3",
+  "runtime": {
+    "implementation": "CPython",
+    "version": "3.14.4"
+  },
+  "schema_version": 3,
+  "session_id": "260805-1803",
+  "started_at": "2026-08-05T11:04:57.652335+00:00",
+  "status": "passed",
+  "summary": "command exited with code 0",
+  "test_targets": [],
+  "tool": "run_tests_with_verdict.py",
+  "worktree": {
+    "after": "7e27d6f390629af906f2878459a7b8d3ddfb6c2cb01db841a87a29a79822985c",
+    "before": "7e27d6f390629af906f2878459a7b8d3ddfb6c2cb01db841a87a29a79822985c",
+    "stable": true
+  }
+}
