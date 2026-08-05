@@ -1,48 +1,47 @@
 {
   "branch": "master",
-  "da_review": "summary:\nPatch is a low-risk input-validation guard fix with a new negative test; no auth, schema, or security-sensitive contract changed, so a fresh critical review was not required.\n🔥 Standing: keep promotion held until page, offset, quote, and page-kind provenance exists.\n⚠️ Standing: before promotion enforce the five-entry boundary, independent owner-byte round trips, unavailable projection with null record IDs, and strict template-version/map binding.",
+  "da_review": "summary: Bounded internal-only spike; candidate is visibly synthetic, the fact card remains truthful and record-bound, and output has zero citations.\n⚠️ Finding: this evidence cannot support production promotion, semantic field transformation, public citation, determinism, or sandbox hardening.",
   "diff_stat": "unknown",
-  "generated_at": "2026-08-05T05:34:06+00:00",
-  "git_head": "6a41656dba1add27fc24d7949e2b20a866ca1604",
+  "generated_at": "2026-08-05T11:24:21+00:00",
+  "git_head": "9ade95a8a2dce0d4a3da6ed312e64587efbb9984",
   "next_pickup": [
     {
       "files": [
-        "cowork-p2-kit/template-probe/template-cell-receipt.mjs",
-        "cowork-p2-kit/template-probe/template-record-extractor.mjs",
-        "cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json"
+        "plans/260805-1335-template-to-docx-end-to-end-trial/plan.md",
+        "cowork-p2-kit/workflow-trial/spike-e2e-run.mjs"
       ],
-      "text": "Post-MVP hardening before any promotion: enforce the exact five-entry boundary, independent owner-byte round trips, unavailable projection with null record IDs, strict template-version/map binding, and optionally replace the key-order-sensitive receipt metadata comparison; never synthesize page/offset/quote provenance"
+      "text": "If hardening is authorized, start the separate trial plan; retain the internal-only/non-citable boundary and do not promote this spike as production evidence"
     }
   ],
-  "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
+  "pickup_diff_sha256": "54101a55f90b42794230d169d962bf6ba315cfd78e577f416f80444b1e37c14c",
   "pickup_files": [
-    "cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json",
-    "cowork-p2-kit/template-probe/template-cell-receipt.mjs",
-    "cowork-p2-kit/template-probe/template-record-extractor.mjs"
+    "cowork-p2-kit/workflow-trial/spike-e2e-run.mjs",
+    "plans/260805-1335-template-to-docx-end-to-end-trial/plan.md",
+    "plans/260805-1457-template-docx-end-to-end-spike-run/plan.md"
   ],
   "pickup_fingerprint_files": [
-    "cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json",
-    "cowork-p2-kit/template-probe/template-cell-receipt.mjs",
-    "cowork-p2-kit/template-probe/template-record-extractor.mjs"
+    "cowork-p2-kit/workflow-trial/spike-e2e-run.mjs",
+    "plans/260805-1335-template-to-docx-end-to-end-trial/plan.md",
+    "plans/260805-1457-template-docx-end-to-end-spike-run/plan.md"
   ],
   "schema_version": 2,
-  "session_id": "260805-1231",
-  "summary": "Applied one code-review finding on the receipt-only probe: the filled-document guard now fails closed with a clear required-document message, proven by a new negative test. A second finding (repeated-token owner index) was verified unreachable via the field-map duplicate owner/token contract and left unchanged. Promotion remains held; no schema, canonical, or downstream contract changed.",
-  "test_verdict": "artifacts/260805-1231/test-verdict.json",
+  "session_id": "260805-1803",
+  "summary": "Completed and attested a one-shot isolated template DOCX spike: copied sources traversed template probe, ingest, synthetic-profile inconclusive reasoning, sealed rationale, and internal DOCX rendering while canonical roots stayed byte-unchanged. Closeout, test plan, and journal are recorded. Production promotion remains held.",
+  "test_verdict": "artifacts/260805-1803/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
       "files": [
-        "cowork-p2-kit/template-probe/template-record-extractor.mjs",
-        "cowork-p2-kit/template-probe/template-cell-receipt.mjs",
-        "cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json"
+        "plans/260805-1457-template-docx-end-to-end-spike-run/plan.md",
+        "plans/260805-1335-template-to-docx-end-to-end-trial/plan.md"
       ],
-      "text": "Promotion remains held pending truthful first-class provenance and post-MVP receipt contract hardening, including the key-order-sensitive receipt metadata comparison"
+      "text": "Spike is one-run orchestration evidence only; it does not prove semantic template-field transformation, public citation, production readiness, or deterministic multi-run behavior"
     }
   ],
   "worktree_status": [
     " M AGENTS.md",
     " M CLAUDE.md",
+    " M IMPLEMENTATION_PLAN.md",
     " M docs/reports/qbd-p2-ingest-completion/gates/G-01.json",
     " M docs/reports/qbd-p2-ingest-completion/gates/G-02.json",
     " M docs/reports/qbd-p2-ingest-completion/gates/G-03.json",
@@ -58,6 +57,18 @@
     " M docs/reports/qbd-p4-reasoning-layer/gates/G-P4-02.json",
     " M docs/reports/qbd-p4-reasoning-layer/gates/G-P4-03.json",
     " M docs/reports/qbd-p4-reasoning-layer/gates/G-P4-04.json",
-    " M docs/reports/qbd-p4-reasoning-layer/gates/G-P4-05.json"
+    " M docs/reports/qbd-p4-reasoning-layer/gates/G-P4-05.json",
+    "?? plans/260805-1335-template-to-docx-end-to-end-trial/phase-01-start.md",
+    "?? plans/260805-1335-template-to-docx-end-to-end-trial/phase-02-build-isolated-same-source-template-and-ingest-run.md",
+    "?? plans/260805-1335-template-to-docx-end-to-end-trial/phase-03-bind-receipt-occurrences-to-truthful-ingest-records.md",
+    "?? plans/260805-1335-template-to-docx-end-to-end-trial/phase-04-publish-inconclusive-reasoning-package-and-seal-packet.md",
+    "?? plans/260805-1335-template-to-docx-end-to-end-trial/phase-05-run-separate-rationale-authoring-and-publication.md",
+    "?? plans/260805-1335-template-to-docx-end-to-end-trial/phase-06-adapt-internal-rationale-and-render-docx.md",
+    "?? plans/260805-1335-template-to-docx-end-to-end-trial/phase-07-prove-full-chain-determinism-and-close-review.md",
+    "?? plans/260805-1335-template-to-docx-end-to-end-trial/plan.md",
+    "?? plans/260805-1335-template-to-docx-end-to-end-trial/research/downstream-orchestration-research.md",
+    "?? plans/260805-1335-template-to-docx-end-to-end-trial/research/evidence-isolation-research.md",
+    "?? plans/260805-1335-template-to-docx-end-to-end-trial/research/template-ingest-contract-research.md",
+    "?? plans/journals/2026-08-05-validate-template-to-docx-trial-plan.md"
   ]
 }
