@@ -1,25 +1,28 @@
 ---
 phase: 5
-title: "Review evidence and promotion boundary"
+title: "Review prior evidence and set promotion boundary"
 status: completed
 priority: P1
 effort: "2-3h"
-dependencies: [4]
+dependencies: [2]
 ---
 
-# Phase 05: Review evidence and promotion boundary
+# Phase 05: Review prior evidence and set promotion boundary
 
 <!-- Updated: Validation Session 1 - plan-review path points to relocated docs/plans/ package -->
+<!-- Updated: Validation Session 4 - prior review dependency corrected; promotion remains held after MVP -->
 
 ## Overview
 
-Audit the complete probe evidence and decide whether to promote the template
-adapter, rework it, or stop, without overstating generic ingest capability.
+Audit the evidence available through Phase 02 plus Phase 03/04 prework and set
+the rework/hold boundary without overstating generic ingest capability. This
+review occurred before the narrowed five-field MVP execution tail.
 
 ## Requirements
 
-- Functional: reconcile every opening acceptance criterion to source, tests,
-  artifacts, and hashes.
+- Functional: reconcile every acceptance criterion supported by available
+  source, tests, artifacts, and hashes; mark missing Phase 03/04 execution
+  evidence as blocking rather than infer completion.
 - Functional: classify findings as workflow-capable, template-specific debt,
   production blocker, or out of scope.
 - Functional: record one explicit decision: promote controlled probe boundary,
@@ -29,9 +32,9 @@ adapter, rework it, or stop, without overstating generic ingest capability.
 
 ## Architecture
 
-The evidence report is stateful, not evergreen authority. Promotion requires
-field-level semantic coverage, deterministic isolated runs, clean repository
-boundaries, and a reviewed threat/usage model. Generic DOCX support remains false.
+The evidence report is stateful, not evergreen authority. It records
+`REWORK / HOLD PROMOTION`; the later receipt-only proof of concept cannot by
+itself promote the adapter. Generic DOCX support remains false.
 
 ## Related code files
 
@@ -67,15 +70,16 @@ boundaries, and a reviewed threat/usage model. Generic DOCX support remains fals
   [`docs/reports/qbd-placeholder-template-ingest-probe/2026-08-04-evidence.md`](../../reports/qbd-placeholder-template-ingest-probe/2026-08-04-evidence.md).
 - Decision from the prior v1 input is superseded by the v3 contract update.
   V3 exact extraction is accepted as a rework gate; promotion remains held
-  until the isolated Phase 04 two-run workflow and downstream boundaries are
-  independently reviewed.
+  independently of the narrowed MVP result. Validation Session 4 authorizes a
+  five-field, two-run receipt-only proof of concept, explicitly excluding record
+  projection and downstream processing.
 - No evergreen documentation or public contract is updated because the probe
   has not been promoted.
 
 ## Success Criteria
 
-- Stakeholders can judge the full workflow without confusing controlled-template
-  success with arbitrary-DOCX support.
+- Stakeholders can judge the available workflow evidence without confusing
+  controlled-template prework with arbitrary-DOCX support.
 - Any remaining blocker names an owner, evidence gap, and next verification.
 - Accepted changes have focused tests and expected blast radius only.
 
@@ -88,6 +92,6 @@ contracts unchanged.
 
 ## Next steps
 
-If promoted, create a separately approved production-hardening plan. If rework
-is required, add only cause-aligned gates. If stopped, preserve the probe as a
-closed experiment and return to alternative input strategies.
+After the receipt-only MVP, keep promotion held. If first-class cell/page
+provenance is desired, create a separately approved contract plan; otherwise
+preserve the probe as a closed proof of concept.

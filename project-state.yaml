@@ -8,35 +8,36 @@ active_workstream:
 current_pickup:
   source: session-handoff.yaml
   summary: >-
-    Phase 02 field-map compilation and Phase 05 evidence review are closed.
-    Phase 03 and Phase 04 were not executed; next session must choose the
-    truthful provenance route before running extraction or downstream probe.
+    Placeholder-template MVP is complete through the receipt-only boundary:
+    all six phases are closed, the five-field two-run proof passed, and
+    promotion remains held pending independent provenance and contract-binding
+    decisions.
   files:
-  - docs/plans/placeholder-template-ingest-workflow-probe/plan.md
-  - docs/plans/placeholder-template-ingest-workflow-probe/phase-03-extract-linear-ingest-records.md
-  - docs/plans/placeholder-template-ingest-workflow-probe/phase-04-run-isolated-end-to-end-probe.md
   - cowork-p2-kit/template-probe/template-record-extractor.mjs
   - cowork-p2-kit/template-probe/template-cell-receipt.mjs
-  - cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs
-  - cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs
+  - cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json
   provenance_blocker: >-
-    The frozen records schema requires page, char_start, char_end, quote, and
-    page_kind. The template adapter currently proves table/row/cell or
-    paragraph ownership only. Keep record_projection=not_available and do not
-    fabricate page provenance; a schema migration requires an explicit decision.
+    DOCX owners provide OOXML table/row/cell or paragraph coordinates, while
+    the frozen production record contract requires truthful page, char_start,
+    char_end, quote, and page_kind provenance. Keep
+    record_projection=not_available and never synthesize page provenance.
+  da_carry_forward: >-
+    Before promotion, enforce the fixed five-entry boundary at the reusable
+    extractor API, independently verify owner-byte round trips, require
+    unavailable projection with null record IDs, and bind template version to
+    the field map.
 relevant_progress:
+- P20260805-placeholder-template-ingest-phase-03-04-closeout
 - P20260805-placeholder-template-ingest-phase-02-05-closeout
 - P20260804-placeholder-template-ingest-phase-01-closeout
-- P20260804-placeholder-template-ingest-phase-00-closeout
 relevant_decisions: []
 read_next:
 - session-handoff.yaml
 - docs/plans/placeholder-template-ingest-workflow-probe/plan.md
-- docs/plans/placeholder-template-ingest-workflow-probe/phase-03-extract-linear-ingest-records.md
-- docs/plans/placeholder-template-ingest-workflow-probe/phase-04-run-isolated-end-to-end-probe.md
 - cowork-p2-kit/template-probe/template-record-extractor.mjs
 - cowork-p2-kit/template-probe/template-cell-receipt.mjs
+- cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json
 - cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs
 - cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs
-updated_at: '2026-08-05T01:39:56.173740+00:00'
-git_head: 88471243f4fcd5887cba5426ec2282474bd05dde
+updated_at: '2026-08-05T04:05:39.542833+00:00'
+git_head: 79c4af741ea3ffd60d511d09be2662438b3592c2

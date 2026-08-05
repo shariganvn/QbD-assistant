@@ -5,9 +5,9 @@ status: executed
 plan: docs/plans/placeholder-template-ingest-workflow-probe/plan.md
 scope:
   summary: >-
-    Close Phase 02 field-map compilation and Phase 05 evidence review only.
-    Phase 03 extraction and Phase 04 isolated workflow execution are not run
-    in this session and remain pending.
+    Close the bounded placeholder-template MVP: Phase 02 field-map compilation,
+    Phase 03 five-field receipt extraction, Phase 04 two-run deterministic
+    receipt-only proof, and the Phase 05 promotion boundary review.
   changed_files:
     - cowork-p2-kit/template-probe/intake/
     - cowork-p2-kit/template-probe/contracts/template-field-map.schema.v1.json
@@ -16,8 +16,16 @@ scope:
     - cowork-p2-kit/template-probe/template-field-map.mjs
     - cowork-p2-kit/template-probe/template-owner-reader.mjs
     - cowork-p2-kit/template-probe/tests/template-field-map.test.mjs
+    - cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json
+    - cowork-p2-kit/template-probe/template-cell-receipt.mjs
+    - cowork-p2-kit/template-probe/template-record-extractor.mjs
+    - cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs
+    - cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs
     - docs/plans/placeholder-template-ingest-workflow-probe/
     - docs/reports/qbd-placeholder-template-ingest-probe/
+    - plans/journals/2026-08-05-placeholder-template-receipt-only-mvp-closeout.md
+    - plans/reports/pm-260805-0942-placeholder-template-ingest-workflow-probe.md
+    - docs/progress/P20260805-placeholder-template-ingest-phase-03-04-closeout.yaml
     - docs/progress/P20260805-placeholder-template-ingest-phase-02-05-closeout.yaml
     - docs/test-plans/T20260805-placeholder-template-ingest-phase-02-05-closeout.yaml
 approval:
@@ -33,18 +41,26 @@ commands:
       - cowork-p2-kit/template-probe/tests/template-field-map.test.mjs
     requires_live_services: false
     mutates_datastore: false
+  - id: phase-03-04-receipt-only-mvp
+    description: Verify the fixed five-field receipt extractor and two isolated deterministic runs.
+    command:
+      - node
+      - --test
+      - cowork-p2-kit/template-probe/tests/*.test.mjs
+    requires_live_services: false
+    mutates_datastore: false
   - id: existing-ingest-regression
     description: Run the existing ingest contract regression suite separately from probe evidence.
     command: [npm, run, verify:ingest]
     requires_live_services: false
     mutates_datastore: false
     note: >-
-      The suite exits 0 but rewrites its tracked gate evidence, so it is not
-      included in the stable Phase 02 verdict.
+      The suite exits 0 but rewrites its tracked gate evidence, so it remains
+      separate from the stable receipt-only MVP verdict.
 acceptance:
   gates: []
   evidence:
-    - artifacts/260805-0818/test-verdict.json
+    - artifacts/260805-1054/test-verdict.json
     - artifacts/placeholder-template-ingest-workflow-probe/field-map/c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0/template-field-map.v1.json
     - artifacts/placeholder-template-ingest-workflow-probe/field-map/c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0/template-field-map.run-2.v1.json
     - docs/reports/qbd-placeholder-template-ingest-probe/2026-08-04-evidence.md
@@ -52,42 +68,40 @@ acceptance:
     - The v3 template and public mock remain immutable and excluded from the canonical ingest manifest.
     - The field map contains 146 occurrences: 143 cell anchors and 3 approved paragraph anchors.
     - Both generated v3 field-map files are byte-identical.
-    - Phase 03 and Phase 04 remain pending; no probe extraction or downstream run is claimed here.
+    - The five-field receipt-only MVP is complete; no downstream ingest, reasoning, or render path was invoked.
+    - Record projection remains unavailable because truthful page provenance is not present.
 results:
   verdict: passed
-  artifact: artifacts/260805-0818/test-verdict.json
+  artifact: artifacts/260805-1054/test-verdict.json
   evidence_quality: exit-code-only
   counts:
     passed: null
     failed: null
     warnings: null
   regression_checks:
-    verify_ingest: passed_exit_code_0
-    probe_processing: not_run
+    direct_ingest_contract_subset: passed_14_of_14
+    verify_ingest: not_run_side_effectful_gate_evidence
+    probe_processing: not_invoked_beyond_receipt_boundary
 decisions: []
 boundaries:
   phase_02: closed
-  phase_05_review: closed_with_rework_decision
-  phase_03: pending_not_executed
-  phase_04: pending_not_executed
+  phase_03: closed_receipt_only
+  phase_04: closed_two_isolated_runs
+  phase_05_review: closed_with_promotion_held
   canonical_ingest_manifest: unchanged
   canonical_store: unchanged
   probe_material: public_synthetic_non_citable
 next_pickup:
   files:
-    - docs/plans/placeholder-template-ingest-workflow-probe/phase-03-extract-linear-ingest-records.md
-    - docs/plans/placeholder-template-ingest-workflow-probe/phase-04-run-isolated-end-to-end-probe.md
     - cowork-p2-kit/template-probe/template-record-extractor.mjs
     - cowork-p2-kit/template-probe/template-cell-receipt.mjs
-    - cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs
-    - cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs
+    - cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json
   text: >-
-    Execute Phase 03 and Phase 04 only after deciding the provenance route:
-    preserve the frozen record schema and use the isolated cell receipt with
-    record_projection=not_available, or obtain an explicit contract decision
-    and migration for truthful cell provenance. Never synthesize page/offset/quote
-    fields. Downstream processing stays not tested until a truthful projection exists.
+    Post-MVP, decide whether to bind template-version metadata more strictly
+    across independently forged map and receipt artifacts, and separately
+    decide whether first-class cell provenance is needed. Promotion remains
+    held; never synthesize page/offset/quote fields.
 unresolved_questions:
   - >-
-    Whether the future production contract should add first-class cell
-    provenance is intentionally deferred to the Phase 03/04 execution decision.
+    First-class cell provenance and promotion are intentionally deferred to a
+    separate post-MVP contract decision.

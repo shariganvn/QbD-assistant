@@ -1,9 +1,9 @@
 ---
 title: "Placeholder Template Ingest Workflow Probe"
-description: "Use a PO-supplied FD-like placeholder DOCX as a controlled schema to evaluate the ingest-to-report workflow with public/synthetic data."
-status: in-progress
+description: "Use five representative fields from a PO-supplied FD-like placeholder DOCX to prove deterministic, immutable receipt-only extraction with public/synthetic data."
+status: completed
 priority: P1
-effort: "2-3d after template receipt"
+effort: "4-6h"
 issue: null
 branch: master
 tags: [feature, experimental, ingest, docx]
@@ -16,16 +16,16 @@ created: 2026-08-04
 
 ## Overview
 
-Replace the failed generic wide-table probe with a controlled vertical slice. A
-PO-supplied FD-like MVP DOCX contains semantic placeholders such as
-`<HAUSNER-RATIO-CT01>`. The probe compiles those anchors into a versioned field
-map, extracts exact OOXML cell values, linearizes one field per record, then runs
-the existing isolated ingest and downstream workflow.
+Replace the failed generic wide-table probe with a controlled receipt-only proof
+of concept. A PO-supplied FD-like MVP DOCX contains semantic placeholders such
+as `<HAUSNER-RATIO-CT01>`. The completed compiler remains the authority for all
+146 anchors, while the remaining MVP derives a five-entry view, extracts exact
+OOXML owner values, and proves deterministic receipts in two isolated runs.
 
 ## Outcome and constraints
 
-- Outcome: quickly assess the complete ingest-to-downstream workflow with a
-  mock/public package while preserving exact field-to-value provenance.
+- Outcome: quickly prove exact field-to-value extraction for five representative
+  fields with deterministic receipt hashes and immutable canonical state.
 - Constraint: Phase 01 is bound to the PO-supplied FD-like MVP template at
   `cowork-p2-kit/inputs/reference/official-placeholder-template-v3-040826.docx`.
 - Constraint: original template and public package remain immutable; derived
@@ -35,13 +35,24 @@ the existing isolated ingest and downstream workflow.
 - Constraint: field type, unit, scope, and requiredness come only from a
   versioned per-anchor metadata catalog bound to the frozen template hash; they
   are never inferred from labels, values, or DOCX layout.
+- Constraint: the fixed MVP allowlist is `PDS-180-CT02`, `UOM-SPEC`,
+  `API-NAME`, `ASSAY-SPEC`, and `BATCH-SIZE`. It covers a decimal comma, a
+  merged cell, two placeholders sharing one cell, and a paragraph owner using
+  values already present in the frozen public/mock DOCX.
+- Constraint: keep the committed record schema, field-map schema, and receipt
+  schema unchanged. The MVP receipt must state
+  `record_projection.status = "not_available"`,
+  `reason_code = "E_PAGE_PROVENANCE_UNAVAILABLE"`, and `record_count = 0`.
 
 ## Non-goals
 
 - Generic arbitrary-DOCX ingestion or production support for edited templates.
-- Content controls, FD authoring UX, OCR expansion, or native wide-table parsing.
-- Promoting probe records as regulatory evidence or changing public contracts
-  before the evidence review in Phase 05.
+- Content controls, FD authoring UX, OCR/PDF expansion, or native wide-table parsing.
+- Record projection, schema migration, ingest CLI execution, reasoning, render,
+  or any other downstream probe-processing branch.
+- Implementing page/offset/quote provenance. The receipt retains truthful OOXML
+  owner coordinates so first-class provenance can be designed after the MVP.
+- Promoting probe output as regulatory evidence or changing public contracts.
 
 ## Phases
 
@@ -50,34 +61,41 @@ the existing isolated ingest and downstream workflow.
 | 00 | [Clean up stale probe worktree](./phase-00-cleanup-stale-probe-worktree.md) | Completed |
 | 01 | [Freeze PO-supplied FD-like placeholder template](./phase-01-freeze-official-placeholder-template.md) | Completed |
 | 02 | [Compile template field map](./phase-02-compile-template-field-map.md) | Completed |
-| 03 | [Extract linear ingest records](./phase-03-extract-linear-ingest-records.md) | Pending — v3 exact receipt verified; projection gate remains |
-| 04 | [Run isolated end-to-end probe](./phase-04-run-isolated-end-to-end-probe.md) | Pending — depends on Phase 03 |
-| 05 | [Review evidence and promotion boundary](./phase-05-review-evidence-and-promotion-boundary.md) | Completed |
+| 03 | [Extract representative receipt slice](./phase-03-extract-linear-ingest-records.md) | Completed — five-field receipt-only MVP |
+| 04 | [Run two isolated receipt-only probes](./phase-04-run-isolated-end-to-end-probe.md) | Completed — deterministic isolated runs |
+| 05 | [Review prior evidence and set promotion boundary](./phase-05-review-evidence-and-promotion-boundary.md) | Completed — promotion remains held |
 
 ## Dependencies
 
-- Phase order is sequential: `00 → 01 → 02 → 03 → 04 → 05`.
+- Actual execution order is `00 → 01 → 02 → 05 → 03 → 04`: Phase 05 recorded
+  the prior rework/hold boundary, and this validation authorizes only the
+  narrowed receipt-only execution tail.
 - The unfinished `260803-1903` probe is superseded WIP to quarantine in Phase
   00, not a cross-plan dependency.
-- Reuse the committed record schema, isolated config, round-trip verification,
-  and atomic publication boundaries unchanged. A stable `occurrence_id` binds
-  the map, sidecar receipt, and any schema-valid record projection. Cell
-  provenance and cell-level round-trip results live in that sidecar; the
-  committed record schema is not modified.
+- Reuse the completed full field map as immutable input. Each isolated run
+  derives the same canonical five-entry field-map view, recomputes its valid
+  field-map hash, and passes that view to the existing receipt extractor.
+- A stable `occurrence_id` binds each selected map entry to its receipt entry.
+  Cell provenance and cell-level round-trip results stay in the receipt; the
+  committed record schema and all canonical inputs/store files remain unchanged.
 
 ## Success Criteria
 
 - [x] Stale untracked implementation is recoverably quarantined and no longer
       contaminates the active worktree.
-- [ ] Every declared placeholder compiles exactly once to a stable
+- [x] Every declared placeholder compiles exactly once to a stable
       `occurrence_id`, canonical field ID, tagged source owner, explicit
       metadata, and template version.
-- [ ] Every filled field produces one deterministic record whose raw value
-      exactly matches its owning DOCX cell.
-- [ ] Two isolated runs produce identical records/store hashes and do not
-      mutate canonical inputs or store.
-- [ ] The final report separates workflow evidence from production-readiness
-      claims and records the explicit promote/rework/stop decision.
+- [x] Each of the five selected fields produces exactly one receipt entry whose
+      raw value matches its owning DOCX cell or paragraph byte-for-byte.
+- [x] Two clean isolated runs produce identical selected-map bytes/hash and
+      receipt bytes/hash.
+- [x] Both runs report `record_projection=not_available`, produce zero records,
+      and never invoke ingest, reasoning, or render downstream paths.
+- [x] Canonical template, mock, `cowork-p2-kit/inputs/`, and
+      `cowork-p2-kit/store/` manifests remain byte-identical.
+- [x] MVP closeout states proof-of-concept only; promotion remains held and
+      first-class provenance is a separate post-MVP decision.
 
 ## Input gate
 
@@ -87,6 +105,10 @@ path, hash, and isolated non-citable classification without admitting either
 DOCX to the canonical ingest manifest. `EXPERIMENT-DESCRIPTION` and
 `BATCH-SIZE` are supplied data; `CONCLUSION` remains reference-only context for
 the separate rationale layer to author, never a value produced by this probe.
+
+The five-field MVP selection is a derived view over the frozen full field map;
+it does not edit the template, mock, metadata catalog, grammar, or canonical map
+artifact.
 
 ## Validation Log
 
@@ -227,5 +249,112 @@ the separate rationale layer to author, never a value produced by this probe.
   schema requires truthful page/offset/quote provenance. Do not fabricate page
   fields; keep the sidecar receipt as the evidence boundary unless an approved
   schema decision changes that contract.
+
+### Session 4 — 2026-08-05 MVP slice approval
+
+**Trigger:** `/ak:plan --validate` with an explicit user-approved MVP slice.
+**Questions asked:** 0 — the invocation supplied all material scope decisions.
+
+#### Verification Results — before propagation
+
+- **Tier:** Full (6 phases; prior completed-phase evidence rechecked plus fresh
+  Fact Checker, Contract Verifier, Flow Tracer, and Scope Auditor checks for
+  Phases 03–04).
+- **Claims checked:** 90 | **Verified:** 85 | **Failed:** 5 | **Unverified:** 0
+- **Failed stale claims:** complete ingest/downstream outcome; all-occurrence
+  record output; optional schema-valid projection; ingest/reasoning/render run
+  requirements; and the sequential `03 → 04 → 05` dependency claim after Phase
+  05 had already closed with `REWORK / HOLD PROMOTION`.
+- Current source evidence confirms receipt-only extraction already reports
+  `record_projection=not_available`, `E_PAGE_PROVENANCE_UNAVAILABLE`, and zero
+  records. Focused prework tests pass 4/4, but the official workflow test still
+  covers 146 occurrences in one run; the required five-field two-run proof
+  remains pending implementation.
+
+#### User-supplied decisions
+
+1. **[Scope]** Run only 3–5 representative fields.
+   - **Answer:** fixed five-field slice for the fastest useful coverage.
+2. **[Contract]** Keep the record schema unchanged.
+   - **Answer:** no record, field-map, or receipt schema migration.
+3. **[Architecture]** Stop at the truthful receipt boundary.
+   - **Answer:** `record_projection.status = "not_available"`, reason
+     `E_PAGE_PROVENANCE_UNAVAILABLE`, and `record_count = 0`.
+4. **[Scope]** Exclude PDF, schema migration, reasoning, render, and downstream
+   probe processing.
+   - **Answer:** focused DOCX owner-to-receipt proof only.
+5. **[Evidence]** Execute two isolated runs.
+   - **Answer:** compare deterministic selected-map/receipt bytes and hashes,
+     plus before/after canonical manifests.
+6. **[Future boundary]** Prepare for provenance after MVP without implementing it.
+   - **Answer:** retain stable occurrence IDs, tagged OOXML owners, raw values,
+     and round-trip hashes in the unchanged receipt contract.
+
+#### Derived implementation choice
+
+- The fixed allowlist is `PDS-180-CT02`, `UOM-SPEC`, `API-NAME`,
+  `ASSAY-SPEC`, and `BATCH-SIZE`. These five already have real frozen-mock
+  values and focused fixtures, covering decimal comma, merged-cell ownership,
+  two values in one cell, and paragraph ownership without adding new inputs.
+
+#### Confirmed decisions
+
+- MVP output: one five-entry derived map plus one five-entry receipt per run.
+- Determinism: Run 1 and Run 2 selected-map/receipt canonical bytes and embedded
+  SHA-256 values must match.
+- Immutability: frozen template/mock and canonical inputs/store manifests must
+  match before and after.
+- Promotion: remains held regardless of MVP success.
+- Post-MVP provenance: separate approval and plan; never synthesize page data.
+
+#### Impact on phases
+
+- Phases 00–02: completed contracts and evidence remain unchanged.
+- Phase 03: narrowed to fixed five-field map selection and receipt extraction;
+  no record construction or downstream call.
+- Phase 04: narrowed to two clean receipt-only runs and deterministic/canonical
+  immutability evidence.
+- Phase 05: clarified as the already-completed prior boundary review, dependent
+  on Phase 02; Phase 03 now depends on that hold decision.
+
+#### Verification Results — after propagation
+
+- **Claims rechecked:** 90 | **Verified:** 90 | **Failed:** 0 | **Unverified:** 0
+- `ak plan validate` passes; all cited source/test/schema paths exist; the five
+  selected fields resolve exactly once in the current full map and have verified
+  values in the frozen public/mock DOCX.
+
+### Whole-Plan Consistency Sweep — Session 4
+
+- Files reread: `plan.md`, Phase 00, Phase 01, Phase 02, Phase 03, Phase 04,
+  Phase 05.
+- Decision deltas checked: 6 (field count, schema freeze, receipt boundary,
+  excluded downstream scope, two-run evidence, deferred provenance).
+- Reconciled stale references: 12 grouped scope/dependency/output claims across
+  `plan.md`, Phase 03, Phase 04, and Phase 05.
+- Unresolved contradictions: 0.
+- Open questions: None for the MVP slice.
+
+### Session 5 — 2026-08-05 Phase 03/04 execution closeout
+
+- Focused template-probe suite passed 13/13; syntax checks passed 3/3; `git diff
+  --check` passed.
+- Delegated tester passed the focused probe (5/5), field-map (8/8),
+  record-contract (2/2), and intake contract checks (146 anchors: 143 cell,
+  3 paragraph). Delegated final code review scored 9/10 and approved with no
+  blocking findings.
+- The two isolated runs produced identical selected-map and receipt canonical
+  bytes/hashes, exact values for all five fields, zero record IDs, and
+  `E_PAGE_PROVENANCE_UNAVAILABLE`; canonical template/mock/inputs/store
+  manifests remained unchanged.
+- Direct tester/debugger dispatch failed before execution because the delegated
+  runtime lacked `CODEX_LB_API_KEY`; alternate tester/debugger/reviewer runs
+  completed. The write-capable full ingest verifier was not run because it
+  writes gate evidence; direct ingest contract tests passed 2/2.
+- Docs impact: no evergreen/public docs update. The experimental probe remains
+  non-citable and unpromoted; its plan/progress/report are the stateful record.
+- Remaining post-MVP concern: bind template-version metadata more strictly
+  across all independently forged artifacts before any promotion or provenance
+  contract work.
 
 <!-- slug: placeholder-template-ingest-workflow-probe -->

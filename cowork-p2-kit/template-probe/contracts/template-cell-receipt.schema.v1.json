@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "template-cell-receipt.schema.v1",
+  "title": "Template placeholder cell extraction receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "template_version",
+    "template_sha256",
+    "field_map_sha256",
+    "source_document_sha256",
+    "occurrence_count",
+    "entries",
+    "record_projection",
+    "receipt_sha256"
+  ],
+  "properties": {
+    "schema_version": { "const": "template-cell-receipt/v1" },
+    "template_version": { "type": "string", "minLength": 1 },
+    "template_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "field_map_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "source_document_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "occurrence_count": { "type": "integer", "minimum": 0 },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["occurrence_id", "canonical_field_id", "raw_source_token", "owner", "metadata", "raw_value", "raw_value_sha256", "cell_round_trip", "record_id"],
+        "properties": {
+          "occurrence_id": { "type": "string", "pattern": "^occ-[a-f0-9]{64}$" },
+          "canonical_field_id": { "type": "string", "pattern": "^[A-Z][A-Z0-9%-]*$" },
+          "raw_source_token": { "type": "string", "pattern": "^<[A-Z][A-Z0-9%-]*>$" },
+          "owner": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["kind", "table", "row", "physical_cell", "logical_column_start", "logical_column_end", "grid_span", "vertical_merge"],
+                "properties": {
+                  "kind": { "const": "cell" },
+                  "table": { "type": "integer", "minimum": 1 },
+                  "row": { "type": "integer", "minimum": 1 },
+                  "physical_cell": { "type": "integer", "minimum": 1 },
+                  "logical_column_start": { "type": "integer", "minimum": 1 },
+                  "logical_column_end": { "type": "integer", "minimum": 1 },
+                  "grid_span": { "type": "integer", "minimum": 1 },
+                  "vertical_merge": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["state", "group_id"],
+                    "properties": {
+                      "state": { "enum": ["none", "restart"] },
+                      "group_id": { "type": ["string", "null"] }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["kind", "paragraph"],
+                "properties": {
+                  "kind": { "const": "paragraph" },
+                  "paragraph": { "type": "integer", "minimum": 1 }
+                }
+              }
+            ]
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "unit", "scope", "required"],
+            "properties": {
+              "type": { "const": "raw_text" },
+              "unit": { "type": ["string", "null"] },
+              "scope": { "type": "string", "minLength": 1 },
+              "required": { "type": "boolean" }
+            }
+          },
+          "raw_value": { "type": "string" },
+          "raw_value_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "cell_round_trip": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["status", "raw_value_sha256"],
+            "properties": {
+              "status": { "const": "pass" },
+              "raw_value_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+            }
+          },
+          "record_id": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "record_projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reason_code", "record_count"],
+      "properties": {
+        "status": { "enum": ["not_available", "available"] },
+        "reason_code": { "type": ["string", "null"] },
+        "record_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "receipt_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  }
+}

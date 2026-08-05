@@ -1,7 +1,7 @@
 <!-- GENERATED VIEW — do not edit manually -->
 <!-- Source: docs/test-plans/T20260805-placeholder-template-ingest-phase-02-05-closeout.yaml -->
 <!-- Regenerate: baton render-test-plan -->
-<!-- Source fingerprint: sha256:3ee4dbc6fb5b8722dc68b563ee7fdbba3f44ccb8c23f87bb3ef814c0b80ccad8 -->
+<!-- Source fingerprint: sha256:310e33b40f07bcc4ba3faeafe48133616694a00b7d00a735cdd8607ed2517808 -->
 
 # TEST_PLAN — Active Validation Gates
 
@@ -15,7 +15,7 @@ Status: **Executed — results recorded**
 
 ## Scope
 
-Close Phase 02 field-map compilation and Phase 05 evidence review only. Phase 03 extraction and Phase 04 isolated workflow execution are not run in this session and remain pending.
+Close the bounded placeholder-template MVP: Phase 02 field-map compilation, Phase 03 five-field receipt extraction, Phase 04 two-run deterministic receipt-only proof, and the Phase 05 promotion boundary review.
 
 ### Changed files
 
@@ -26,8 +26,16 @@ Close Phase 02 field-map compilation and Phase 05 evidence review only. Phase 03
 - `cowork-p2-kit/template-probe/template-field-map.mjs`
 - `cowork-p2-kit/template-probe/template-owner-reader.mjs`
 - `cowork-p2-kit/template-probe/tests/template-field-map.test.mjs`
+- `cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json`
+- `cowork-p2-kit/template-probe/template-cell-receipt.mjs`
+- `cowork-p2-kit/template-probe/template-record-extractor.mjs`
+- `cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs`
+- `cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs`
 - `docs/plans/placeholder-template-ingest-workflow-probe/`
 - `docs/reports/qbd-placeholder-template-ingest-probe/`
+- `plans/journals/2026-08-05-placeholder-template-receipt-only-mvp-closeout.md`
+- `plans/reports/pm-260805-0942-placeholder-template-ingest-workflow-probe.md`
+- `docs/progress/P20260805-placeholder-template-ingest-phase-03-04-closeout.yaml`
 - `docs/progress/P20260805-placeholder-template-ingest-phase-02-05-closeout.yaml`
 - `docs/test-plans/T20260805-placeholder-template-ingest-phase-02-05-closeout.yaml`
 
@@ -45,6 +53,12 @@ Close Phase 02 field-map compilation and Phase 05 evidence review only. Phase 03
 node --test cowork-p2-kit/template-probe/tests/template-field-map.test.mjs
 ```
 
+### phase-03-04-receipt-only-mvp — Verify the fixed five-field receipt extractor and two isolated deterministic runs.
+
+```bash
+node --test 'cowork-p2-kit/template-probe/tests/*.test.mjs'
+```
+
 ### existing-ingest-regression — Run the existing ingest contract regression suite separately from probe evidence.
 
 ```bash
@@ -55,7 +69,7 @@ npm run verify:ingest
 ## Results
 
 Verdict: **passed**
-Artifact: `artifacts/260805-0818/test-verdict.json`
+Artifact: `artifacts/260805-1054/test-verdict.json`
 Counts: passed=unknown, failed=unknown, warnings=unknown
 
 ---

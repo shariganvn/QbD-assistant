@@ -1,0 +1,70 @@
+id: P20260805-placeholder-template-ingest-phase-03-04-closeout
+date: "2026-08-05"
+workstream: placeholder-template-ingest-workflow-probe
+status: done
+summary: >-
+  Completed Phase 03 fixed five-field receipt extraction and Phase 04 two-run
+  isolated determinism proof. Promotion remains held and no production or
+  downstream contract is changed.
+changed_files:
+  - cowork-p2-kit/template-probe/template-record-extractor.mjs
+  - cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs
+  - cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs
+  - docs/plans/placeholder-template-ingest-workflow-probe/
+  - docs/progress/P20260805-placeholder-template-ingest-phase-03-04-closeout.yaml
+  - plans/reports/pm-260805-0942-placeholder-template-ingest-workflow-probe.md
+tests_run:
+  verdict: passed
+  counts:
+    passed: null
+    failed: null
+    warnings: null
+  commands:
+    - command: node --test cowork-p2-kit/template-probe/tests/*.test.mjs
+      exit_code: 0
+      counts: "13 passed, 0 failed"
+    - command: node --check template-record-extractor.mjs; node --check template-record-extractor.test.mjs; node --check template-workflow-probe.test.mjs
+      exit_code: 0
+      counts: "3 passed"
+    - command: node --test cowork-p2-kit/ingest/tests/record-contract.test.mjs cowork-p2-kit/ingest/tests/pipeline.test.mjs
+      exit_code: 0
+      counts: "14 passed, 0 failed"
+    - command: node cowork-p2-kit/template-probe/intake/verify-intake-contract.mjs
+      exit_code: 0
+      counts: "146 anchors; 143 cell, 3 paragraph"
+  evidence:
+    verdict_artifact: artifacts/260805-1054/test-verdict.json
+    test_output: artifacts/260805-1054/test-output.log
+    selector: "PDS-180-CT02, UOM-SPEC, API-NAME, ASSAY-SPEC, BATCH-SIZE"
+    projection: "not_available / E_PAGE_PROVENANCE_UNAVAILABLE / 0 records"
+    template_sha256: c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0
+    public_mock_sha256: 01fe95607f4733e2b47a4c46f8dad5817d6014cc40f69a08631977c9d890cd8f
+    review: "code-reviewer 9/10, approved; no blocking findings"
+boundaries:
+  phase_03: closed
+  phase_04: closed
+  phase_05_review: closed_with_rework_decision
+  promotion: held
+  canonical_ingest_manifest: unchanged
+  canonical_store: unchanged
+  probe_material: public_synthetic_non_citable
+  downstream_processing: not_invoked
+  evergreen_docs: unchanged_no_promotion
+decisions: []
+next_pickup:
+  files:
+    - cowork-p2-kit/template-probe/template-record-extractor.mjs
+    - cowork-p2-kit/template-probe/template-cell-receipt.mjs
+    - cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json
+  text: >-
+    Post-MVP, decide whether to bind template-version metadata more strictly
+    across independently forged map and receipt artifacts, and separately
+    decide whether first-class cell provenance is needed. Promotion remains
+    held; never synthesize page/offset/quote fields.
+unresolved_questions:
+  - >-
+    Post-MVP: bind template-version metadata more strictly across independently
+    forged map/receipt artifacts before any provenance or promotion work.
+  - >-
+    The full verify:ingest runner remains unrun because it writes gate evidence;
+    direct ingest contract tests passed 14/14 in the shared subset.
