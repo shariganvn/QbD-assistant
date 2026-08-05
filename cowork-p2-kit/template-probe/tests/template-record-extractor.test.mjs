@@ -208,3 +208,22 @@ test("required blank values fail closed and official v3 extracts exact paragraph
     rmSync(root, { recursive: true, force: true });
   }
 });
+
+test("absent filled document fails closed with the required-document message, not a directory read", async () => {
+  const root = mkdtempSync(join(tmpdir(), "template-record-missing-filled-test-"));
+  try {
+    const { template, contract, map } = await syntheticDocuments(root);
+    const { public_mock, ...manifestWithoutFilled } = contract.manifest;
+    await assert.rejects(
+      extractTemplateCellReceipt(map, undefined, {
+        manifest: manifestWithoutFilled,
+        grammar: contract.grammar,
+        metadata: contract.metadata,
+        templateSourcePath: template.path,
+      }),
+      (error) => error?.code === "E_DOCUMENT_READ" && /a filled public\/mock DOCX is required/.test(error.message),
+    );
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});

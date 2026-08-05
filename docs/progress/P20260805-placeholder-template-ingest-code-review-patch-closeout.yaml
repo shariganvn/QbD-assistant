@@ -1,0 +1,88 @@
+id: P20260805-placeholder-template-ingest-code-review-patch-closeout
+date: "2026-08-05"
+workstream: placeholder-template-ingest-workflow-probe
+status: done
+summary: >-
+  Applied one code-review finding on the receipt-only probe: the filled-document
+  guard now fails closed with a clear required-document message instead of a
+  confusing directory-read error, proven by a new negative test. A second review
+  finding (repeated-token owner index) was verified unreachable because the
+  field-map contract forbids duplicate owner/token pairs, so no code change was
+  made. Promotion remains held; no schema, canonical, or downstream contract
+  changed.
+changed_files:
+  - cowork-p2-kit/template-probe/template-record-extractor.mjs
+  - cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs
+  - docs/progress/P20260805-placeholder-template-ingest-code-review-patch-closeout.yaml
+tests_run:
+  verdict: passed
+  counts:
+    passed: 14
+    failed: 0
+    warnings: 0
+  commands:
+    - command: node --test cowork-p2-kit/template-probe/tests/*.test.mjs
+      exit_code: 0
+      counts: "14 passed, 0 failed"
+    - command: node --check on the touched extractor and test files
+      exit_code: 0
+      counts: "2 passed"
+    - command: git diff --check
+      exit_code: 0
+      counts: "no whitespace errors"
+  evidence:
+    verdict_artifact: artifacts/260805-1231/test-verdict.json
+    test_output: artifacts/260805-1231/test-output.log
+    new_negative_test: >-
+      absent filled document fails closed with the required-document message,
+      not a directory read
+    review_source: "code-review low (phase 3-4 MVP)"
+findings:
+  applied:
+    - id: filled-document-guard
+      file: cowork-p2-kit/template-probe/template-record-extractor.mjs
+      change: >-
+        Compare the provided filled source and the manifest relative path before
+        resolving, so the E_DOCUMENT_READ check fires with "a filled public/mock
+        DOCX is required" rather than a downstream directory read when no filled
+        document is available.
+  rejected:
+    - id: repeated-token-owner-index
+      file: cowork-p2-kit/template-probe/template-record-extractor.mjs
+      reason: >-
+        Unreachable. occurrence_id derives from template hash, token, and owner
+        with no positional component, and assertFieldMap rejects duplicate
+        owner/token pairs before extraction runs. Each owner/token is therefore
+        unique, so the first-match token search is unambiguous. No defensive
+        change was made.
+  deferred:
+    - id: receipt-metadata-json-equality
+      file: cowork-p2-kit/template-probe/template-cell-receipt.mjs
+      reason: >-
+        Key-order-sensitive JSON metadata comparison is fragile but not a live
+        defect today; recorded as a hardening note, no change requested.
+boundaries:
+  promotion: held
+  schema: unchanged
+  canonical_ingest_manifest: unchanged
+  canonical_store: unchanged
+  downstream_processing: not_invoked
+  evergreen_docs: unchanged_no_promotion
+  scope: within-approved-probe-review
+decisions: []
+next_pickup:
+  files:
+    - cowork-p2-kit/template-probe/template-cell-receipt.mjs
+    - cowork-p2-kit/template-probe/template-record-extractor.mjs
+    - cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json
+  text: >-
+    Post-MVP hardening before any promotion: enforce the exact five-entry
+    boundary, independent owner-byte round trips, unavailable projection with
+    null record IDs, strict template-version/map binding, and optionally replace
+    the key-order-sensitive receipt metadata comparison. Never synthesize
+    page/offset/quote provenance.
+unresolved_questions:
+  - >-
+    Pre-existing worktree churn (AGENTS.md, CLAUDE.md, and qbd-p2/p4 gate JSON
+    timestamp regeneration) remained uncommitted from a prior session and was
+    intentionally left untouched by this patch commit.

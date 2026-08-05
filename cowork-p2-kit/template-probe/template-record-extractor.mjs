@@ -169,8 +169,9 @@ export async function extractTemplateCellReceipt(fieldMapOrPath, filledSourcePat
     fail("E_MAP_JOIN", "owner context map is bound to another template");
   }
   const templatePath = options.templateSourcePath ?? resolveKitPath(manifest.template.source_path);
-  const filledPath = filledSourcePath ?? resolveKitPath(manifest.public_mock?.source_path ?? "");
-  if (!filledPath) fail("E_DOCUMENT_READ", "a filled public/mock DOCX is required");
+  const filledRelativePath = manifest.public_mock?.source_path;
+  if (!filledSourcePath && !filledRelativePath) fail("E_DOCUMENT_READ", "a filled public/mock DOCX is required");
+  const filledPath = filledSourcePath ?? resolveKitPath(filledRelativePath);
 
   const [template, filled] = await Promise.all([readDocx(templatePath), readDocx(filledPath)]);
   assertTemplateBinding(manifest, grammar, metadata, sha256(template.bytes), sha256(template.documentXml));
