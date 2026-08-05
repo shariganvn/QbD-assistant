@@ -1,52 +1,61 @@
 <!-- GENERATED VIEW — do not edit manually -->
-<!-- Source: docs/test-plans/T20260804-placeholder-template-ingest-phase-01.yaml -->
+<!-- Source: docs/test-plans/T20260805-placeholder-template-ingest-phase-02-05-closeout.yaml -->
 <!-- Regenerate: baton render-test-plan -->
-<!-- Source fingerprint: sha256:ec66b47300edb20930686b6cee6fbbf177d7284e34d5809a3bee67eb4bf0a37e -->
+<!-- Source fingerprint: sha256:3ee4dbc6fb5b8722dc68b563ee7fdbba3f44ccb8c23f87bb3ef814c0b80ccad8 -->
 
 # TEST_PLAN — Active Validation Gates
 
-## T20260804-placeholder-template-ingest-phase-01
+## T20260805-placeholder-template-ingest-phase-02-05-closeout
 
 Status: **Executed — results recorded**
 
 - Workstream: `placeholder-template-ingest-workflow-probe`
-- Date: 2026-08-04
-- Plan: `docs/plans/placeholder-template-ingest-workflow-probe/phase-01-freeze-official-placeholder-template.md`
+- Date: 2026-08-05
+- Plan: `docs/plans/placeholder-template-ingest-workflow-probe/plan.md`
 
 ## Scope
 
-Validate the isolated PO-supplied placeholder-template freeze contract and its read-only OOXML verifier; do not run canonical ingest or Phase 02.
+Close Phase 02 field-map compilation and Phase 05 evidence review only. Phase 03 extraction and Phase 04 isolated workflow execution are not run in this session and remain pending.
 
 ### Changed files
 
-- `docs/plans/placeholder-template-ingest-workflow-probe/`
-- `docs/journals/2026-08-04-freeze-po-supplied-placeholder-template.md`
 - `cowork-p2-kit/template-probe/intake/`
-- `docs/progress/P20260804-placeholder-template-ingest-phase-01-closeout.yaml`
-- `docs/test-plans/T20260804-placeholder-template-ingest-phase-01.yaml`
-- `docs/test-plans/active.yaml`
+- `cowork-p2-kit/template-probe/contracts/template-field-map.schema.v1.json`
+- `cowork-p2-kit/template-probe/intake/field-metadata.v1.json`
+- `cowork-p2-kit/template-probe/template-field-contract.mjs`
+- `cowork-p2-kit/template-probe/template-field-map.mjs`
+- `cowork-p2-kit/template-probe/template-owner-reader.mjs`
+- `cowork-p2-kit/template-probe/tests/template-field-map.test.mjs`
+- `docs/plans/placeholder-template-ingest-workflow-probe/`
+- `docs/reports/qbd-placeholder-template-ingest-probe/`
+- `docs/progress/P20260805-placeholder-template-ingest-phase-02-05-closeout.yaml`
+- `docs/test-plans/T20260805-placeholder-template-ingest-phase-02-05-closeout.yaml`
 
 ## Approval
 
 - **Human approval required** before running commands.
-- Approved at: 2026-08-04
+- Approved at: 2026-08-05
 - Approved by: human
 
 ## Commands
 
-### intake-contract-verification — Verify frozen hashes, OOXML ownership, grammar, and isolated input boundary.
+### phase-02-field-map-verification — Verify the v3 intake contract and deterministic field-map compiler.
 
 ```bash
-bash -lc 'set -euo pipefail
-node --check cowork-p2-kit/template-probe/intake/verify-intake-contract.mjs
-node cowork-p2-kit/template-probe/intake/verify-intake-contract.mjs'
+node --test cowork-p2-kit/template-probe/tests/template-field-map.test.mjs
+```
+
+### existing-ingest-regression — Run the existing ingest contract regression suite separately from probe evidence.
+
+```bash
+npm run verify:ingest
 ```
 
 
 ## Results
 
 Verdict: **passed**
-Artifact: `artifacts/260804-1517/test-verdict.json`
+Artifact: `artifacts/260805-0818/test-verdict.json`
 Counts: passed=unknown, failed=unknown, warnings=unknown
 
 ---

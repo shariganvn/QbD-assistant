@@ -12,9 +12,9 @@ dependencies: [0]
 ## Context links
 
 - Plan: `./plan.md`
-- Frozen template: `cowork-p2-kit/inputs/reference/official-placeholder-template-v1-040826.docx`
+- Frozen template: `cowork-p2-kit/inputs/reference/official-placeholder-template-v3-040826.docx`
   (PO-supplied closest FD-like MVP template; SHA-256
-  `a8002623e0808cc54c870ab2f47adab44498a6c2ce5b7c4b3bd21cd99973a01d`).
+  `c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0`).
 - Frozen mock: `cowork-p2-kit/inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx`
   (public/synthetic, non-citable; SHA-256
   `01fe95607f4733e2b47a4c46f8dad5817d6014cc40f69a08631977c9d890cd8f`).
@@ -32,11 +32,11 @@ and define the smallest placeholder grammar needed for the mock/public probe.
 - Functional: preserve the original byte-for-byte. Phase 01 opens it read-only;
   any later writeable operation must use a derived copy.
 - Functional: define ASCII semantic field IDs using
-  `^[A-Z][A-Z0-9%-]*$`, allowed multiplicity, required vs optional fields,
-  formula scope, type, unit, and raw-display rules. The immutable source token
-  `EXPERIMENT-DISCRIPTION` aliases to the corrected canonical semantic ID
-  `EXPERIMENT-DESCRIPTION`.
-- Functional: accept `EXPERIMENT-DISCRIPTION`, `BATCH-SIZE`, and `CONCLUSION`
+  `^[A-Z][A-Z0-9%-]*$`, allowed multiplicity, owner rules, and raw-display
+  rules. Phase 02 adds a separate per-anchor metadata catalog for explicit
+  requiredness, scope, type, and unit. V3 uses the canonical source token
+  `EXPERIMENT-DESCRIPTION` directly.
+- Functional: accept `EXPERIMENT-DESCRIPTION`, `BATCH-SIZE`, and `CONCLUSION`
   as the only paragraph-owned anchors. The first two are supplied data;
   `CONCLUSION` is optional reference-only context and must not be written or
   derived by this probe.
@@ -49,12 +49,13 @@ The immutable DOCX is the template authority for this MVP probe. Placeholder
 tokens are authoring anchors; a later compiler resolves logical cell ownership
 across OOXML runs and merged cells, plus the three approved paragraph owners.
 Template hash plus a structural fingerprint bind every derived artifact to this
-exact version.
+exact version. The grammar is the immutable baseline; a later versioned
+metadata catalog may only add explicitly approved per-anchor properties.
 
 ## Related code files
 
 - Read: `/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/inputs/` (existing boundary patterns)
-- Input: `cowork-p2-kit/inputs/reference/official-placeholder-template-v1-040826.docx`
+- Input: `cowork-p2-kit/inputs/reference/official-placeholder-template-v3-040826.docx`
 - Input: `cowork-p2-kit/inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx`
 - Create: `cowork-p2-kit/template-probe/intake/` isolated freeze contracts and
   read-only verifier

@@ -27,11 +27,14 @@ the existing isolated ingest and downstream workflow.
 - Outcome: quickly assess the complete ingest-to-downstream workflow with a
   mock/public package while preserving exact field-to-value provenance.
 - Constraint: Phase 01 is bound to the PO-supplied FD-like MVP template at
-  `cowork-p2-kit/inputs/reference/official-placeholder-template-v1-040826.docx`.
+  `cowork-p2-kit/inputs/reference/official-placeholder-template-v3-040826.docx`.
 - Constraint: original template and public package remain immutable; derived
   probe artifacts stay isolated and non-citable by default.
 - Constraint: preserve raw text, decimal comma, units, `≤`/`≥`, blanks, and
   source-cell identity without inference or normalization.
+- Constraint: field type, unit, scope, and requiredness come only from a
+  versioned per-anchor metadata catalog bound to the frozen template hash; they
+  are never inferred from labels, values, or DOCX layout.
 
 ## Non-goals
 
@@ -46,10 +49,10 @@ the existing isolated ingest and downstream workflow.
 |---|-------|--------|
 | 00 | [Clean up stale probe worktree](./phase-00-cleanup-stale-probe-worktree.md) | Completed |
 | 01 | [Freeze PO-supplied FD-like placeholder template](./phase-01-freeze-official-placeholder-template.md) | Completed |
-| 02 | [Compile template field map](./phase-02-compile-template-field-map.md) | Pending |
-| 03 | [Extract linear ingest records](./phase-03-extract-linear-ingest-records.md) | Pending |
-| 04 | [Run isolated end-to-end probe](./phase-04-run-isolated-end-to-end-probe.md) | Pending |
-| 05 | [Review evidence and promotion boundary](./phase-05-review-evidence-and-promotion-boundary.md) | Pending |
+| 02 | [Compile template field map](./phase-02-compile-template-field-map.md) | Completed |
+| 03 | [Extract linear ingest records](./phase-03-extract-linear-ingest-records.md) | Pending — v3 exact receipt verified; projection gate remains |
+| 04 | [Run isolated end-to-end probe](./phase-04-run-isolated-end-to-end-probe.md) | Pending — depends on Phase 03 |
+| 05 | [Review evidence and promotion boundary](./phase-05-review-evidence-and-promotion-boundary.md) | Completed |
 
 ## Dependencies
 
@@ -57,16 +60,18 @@ the existing isolated ingest and downstream workflow.
 - The unfinished `260803-1903` probe is superseded WIP to quarantine in Phase
   00, not a cross-plan dependency.
 - Reuse the committed record schema, isolated config, round-trip verification,
-  and atomic publication boundaries unchanged. Cell provenance (table/row/cell)
-  and cell-level round-trip results live in an isolated sidecar receipt; the
-  committed record schema is not modified (Validation Session 1).
+  and atomic publication boundaries unchanged. A stable `occurrence_id` binds
+  the map, sidecar receipt, and any schema-valid record projection. Cell
+  provenance and cell-level round-trip results live in that sidecar; the
+  committed record schema is not modified.
 
 ## Success Criteria
 
 - [x] Stale untracked implementation is recoverably quarantined and no longer
       contaminates the active worktree.
-- [ ] Every declared placeholder compiles exactly once to a stable field ID,
-      source cell, type, scope, and template version.
+- [ ] Every declared placeholder compiles exactly once to a stable
+      `occurrence_id`, canonical field ID, tagged source owner, explicit
+      metadata, and template version.
 - [ ] Every filled field produces one deterministic record whose raw value
       exactly matches its owning DOCX cell.
 - [ ] Two isolated runs produce identical records/store hashes and do not
@@ -79,7 +84,7 @@ the existing isolated ingest and downstream workflow.
 The PO supplied the closest FD-like template for the MVP and confirmed the
 probe inputs are public/synthetic. Phase 01 freezes its repo-relative source
 path, hash, and isolated non-citable classification without admitting either
-DOCX to the canonical ingest manifest. `EXPERIMENT-DISCRIPTION` and
+DOCX to the canonical ingest manifest. `EXPERIMENT-DESCRIPTION` and
 `BATCH-SIZE` are supplied data; `CONCLUSION` remains reference-only context for
 the separate rationale layer to author, never a value produced by this probe.
 
@@ -149,5 +154,78 @@ the separate rationale layer to author, never a value produced by this probe.
 - Decision deltas checked: 4 (sidecar schema, plan location, probe dir, review-only scope)
 - Reconciled stale references: 6 (dependencies bullet, phase-00 links, phase-02 paths, phase-03 sidecar + paths, phase-04 path, phase-05 path)
 - Unresolved contradictions: 0
+
+### Session 2 — 2026-08-04
+**Trigger:** Full read-only `/ak:plan validate` assessment before Phase 02.
+**Questions asked:** 5
+
+#### Verification Results
+- **Tier:** Full (6 phases; Fact Checker + Contract Verifier + Flow Tracer + Scope Auditor)
+- **Claims checked:** 90 | **Verified:** 80 | **Failed:** 4 | **Unverified:** 6
+- The frozen template, grammar, immutable-input boundary, isolated config, and
+  existing ingest schema were verified. The four failed claims were missing
+  planning contracts, not source failures; the accepted decisions below define
+  them without changing canonical ingest or store contracts.
+
+#### Questions & Answers
+1. **[Contract]** What is the authority for type, unit, scope, and requiredness?
+   - Options: A Versioned per-anchor metadata catalog | B Derive from labels | C Raw-only map
+   - **Answer:** A — Versioned per-anchor metadata catalog.
+2. **[Architecture]** How are cell and paragraph owners represented?
+   - Options: A Tagged cell/paragraph owner union | B Physical OOXML owner only | C Exclude paragraph anchors
+   - **Answer:** A — Tagged cell/paragraph owner union.
+3. **[Contract]** How is the generated field map made durable and deterministic?
+   - Options: A Versioned JSON artifact plus JSON Schema and canonical bytes | B Unschematized JSON | C Module-only API
+   - **Answer:** A — Versioned JSON artifact plus JSON Schema and canonical bytes.
+4. **[Traceability]** How are map, receipt, and record projection joined?
+   - Options: A Stable occurrence_id | B Canonical field ID only | C Existing record ID
+   - **Answer:** A — Stable occurrence_id, with canonical field ID retained separately.
+5. **[Testing]** How are malformed DOCX cases tested?
+   - Options: A Minimal synthetic OOXML/DOCX fixtures | B Derived official-template copies | C XML strings only
+   - **Answer:** A — Minimal synthetic OOXML/DOCX fixtures.
+
+#### Confirmed Decisions
+- Per-anchor metadata is a versioned input contract, never inferred.
+- Owners use an explicit tagged union for logical cells and approved paragraphs.
+- The map uses a versioned schema, canonical serialization, and hash comparison.
+- The receipt is the join authority from occurrence_id to any schema-valid record.
+- Negative fixtures are synthetic and never modify or copy the frozen sources.
+
+#### Impact on Phases
+- Phase 01: baseline grammar intentionally excludes per-anchor metadata; its
+  completed freeze remains immutable.
+- Phase 02: add the metadata catalog, tagged owner contract, map schema,
+  isolated artifact path, deterministic bytes, and synthetic negative fixtures.
+- Phase 03: join map, receipt, and optional record projection by occurrence_id;
+  fail closed rather than fabricate page provenance.
+- Phase 04: use a named ignored artifact root and distinguish probe evidence
+  from unrelated downstream regression suites.
+- Phase 05: remove unsupported historic gap counts and assess only reproduced,
+  evidence-backed gaps.
+
+### Whole-Plan Consistency Sweep — Session 2
+- Files reread: plan.md, phase-00, phase-01, phase-02, phase-03, phase-04, phase-05
+- Decision deltas checked: 5 (metadata authority, owner union, map schema,
+  occurrence identity, synthetic fixtures)
+- Reconciled stale references: 11 (Phase 01 metadata boundary; Phase 02 map
+  contract and fixtures; Phase 03 receipt join and provenance; Phase 04 run
+  root and downstream evidence; Phase 05 unsupported historic counts).
+- Unresolved contradictions: 0
+
+### Session 3 — 2026-08-05 closeout boundary
+
+- Phase 02 is closed for this session after regenerating the v3 field-map
+  artifacts and rerunning the intake, compiler, and existing ingest regression
+  checks.
+- Phase 05 review is closed for this session with the existing
+  `REWORK / HOLD PROMOTION` decision; no production contract or canonical
+  manifest/store admission is implied.
+- Phase 03 and Phase 04 remain **Pending and not executed**. Their existing
+  adapter/test files are pickup material only, not phase-completion evidence.
+- The next execution must resolve or explicitly carry the provenance blocker:
+  cell owners provide OOXML table/row/cell coordinates, while the frozen record
+  schema requires truthful page/offset/quote provenance. Do not fabricate page
+  fields; keep the sidecar receipt as the evidence boundary unless an approved
+  schema decision changes that contract.
 
 <!-- slug: placeholder-template-ingest-workflow-probe -->

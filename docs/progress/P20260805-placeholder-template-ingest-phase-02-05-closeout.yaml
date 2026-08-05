@@ -1,0 +1,63 @@
+id: P20260805-placeholder-template-ingest-phase-02-05-closeout
+date: "2026-08-05"
+workstream: placeholder-template-ingest-workflow-probe
+status: done
+summary: >-
+  Closed Phase 02 field-map compilation and Phase 05 evidence review only.
+  Phase 03 and Phase 04 were intentionally not executed and remain the next
+  pickup because the frozen record schema requires truthful page provenance
+  that DOCX cell owners do not currently provide.
+changed_files:
+- cowork-p2-kit/template-probe/intake/
+- cowork-p2-kit/template-probe/contracts/template-field-map.schema.v1.json
+- cowork-p2-kit/template-probe/intake/field-metadata.v1.json
+- cowork-p2-kit/template-probe/template-field-contract.mjs
+- cowork-p2-kit/template-probe/template-field-map.mjs
+- cowork-p2-kit/template-probe/template-owner-reader.mjs
+- cowork-p2-kit/template-probe/tests/template-field-map.test.mjs
+- docs/plans/placeholder-template-ingest-workflow-probe/
+- docs/reports/qbd-placeholder-template-ingest-probe/
+- docs/test-plans/T20260805-placeholder-template-ingest-phase-02-05-closeout.yaml
+- docs/progress/P20260805-placeholder-template-ingest-phase-02-05-closeout.yaml
+tests_run:
+  verdict: passed
+  command: node --test
+    cowork-p2-kit/template-probe/tests/template-field-map.test.mjs
+  evidence_quality: exit-code-only
+  counts:
+    passed:
+    failed:
+    warnings:
+  evidence:
+    artifact: artifacts/260805-0818/test-verdict.json
+    intake_contract: "146 anchors; template c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0"
+    map_file_hash: "1f74f21bc5ca89acdf958db247693ceb3bae0c8fe34fdd69ba819eb278667cf2"
+    map_repeat_hash: "1f74f21bc5ca89acdf958db247693ceb3bae0c8fe34fdd69ba819eb278667cf2"
+    existing_ingest_regression: passed_exit_code_0
+boundaries:
+  phase_02: closed
+  phase_05_review: closed_with_rework_decision
+  phase_03: pending_not_executed
+  phase_04: pending_not_executed
+  promotion: held
+  canonical_ingest_manifest: unchanged
+  canonical_store: unchanged
+  probe_material: public_synthetic_non_citable
+decisions: []
+next_pickup:
+  files:
+  - docs/plans/placeholder-template-ingest-workflow-probe/phase-03-extract-linear-ingest-records.md
+  - docs/plans/placeholder-template-ingest-workflow-probe/phase-04-run-isolated-end-to-end-probe.md
+  - cowork-p2-kit/template-probe/template-record-extractor.mjs
+  - cowork-p2-kit/template-probe/template-cell-receipt.mjs
+  - cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs
+  - cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs
+  text: >-
+    Phase 03/04 next: decide whether to keep the record schema frozen and
+    close the controlled probe as receipt-only, or open an explicit schema
+    migration for first-class cell provenance. Do not claim downstream ingest
+    until page/offset/quote provenance is truthful.
+unresolved_questions:
+- >-
+  Future first-class cell provenance is a separate contract decision and is
+  not part of this closeout.

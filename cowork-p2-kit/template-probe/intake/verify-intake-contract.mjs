@@ -123,7 +123,7 @@ function assertStructure(xml, expected) {
   assert.equal(count(xml, /<w:tr(?:\s|>)/g), expected.table_row_count, "table-row count changed");
   assert.equal(count(xml, /<w:tc(?:\s|>)/g), expected.cell_count, "cell count changed");
   assert.equal(count(xml, /<w:gridSpan(?:\s|>)/g), expected.grid_span_count, "grid-span count changed");
-  assert.equal(count(xml, /<w:vMerge(?:\s|>)/g), expected.vertical_merge_count, "vertical-merge count changed");
+  assert.equal(count(xml, /<w:vMerge(?:\s|\/|>)/g), expected.vertical_merge_count, "vertical-merge count changed");
 }
 
 function assertContract(entries) {
@@ -144,9 +144,9 @@ function assertContract(entries) {
 
   const canonicalOwners = entries.map(({ kind, owner, token }) => `${kind}\t${owner}\t${token}`).sort().join("\n") + "\n";
   assert.equal(sha256(canonicalOwners), manifest.structural_fingerprint.owner_inventory_sha256, "owner inventory fingerprint changed");
-  const sourceAlias = grammar.canonical_id_aliases["EXPERIMENT-DISCRIPTION"];
+  const sourceAlias = grammar.canonical_id_aliases["EXPERIMENT-DESCRIPTION"];
   assert.equal(sourceAlias, "EXPERIMENT-DESCRIPTION", "experiment-description canonical spelling changed");
-  assert.ok(actualIds.includes("EXPERIMENT-DISCRIPTION"), "source experiment-description anchor missing");
+  assert.ok(actualIds.includes("EXPERIMENT-DESCRIPTION"), "source experiment-description anchor missing");
   assert.match(sourceAlias, TOKEN_PATTERN, "experiment-description canonical spelling violates token grammar");
   const conclusion = grammar.owner_policy.paragraph_exceptions.CONCLUSION;
   assert.equal(conclusion.role, "reference_only", "CONCLUSION role changed");
@@ -156,7 +156,7 @@ function assertContract(entries) {
 
 function assertCoverage(entries) {
   const byToken = new Map(entries.map((entry) => [entry.token, entry]));
-  assert.equal(byToken.get("PDS-180-CT02")?.splitAcrossRuns, true, "split-run fixture no longer crosses XML runs");
+  assert.equal(byToken.get("EXCIPIENT-1-CONTENT-CT02")?.splitAcrossRuns, true, "split-run fixture no longer crosses XML runs");
   assert.equal(byToken.get("UOM-SPEC")?.verticalMerge, "restart", "merged-cell fixture lost restart ownership");
   for (const token of coverage.expected_anchor_census.paragraph_anchors) {
     assert.equal(byToken.get(token)?.kind, "paragraph", `paragraph fixture changed: ${token}`);
@@ -165,7 +165,7 @@ function assertCoverage(entries) {
 
 function assertFrozenBoundary() {
   assert.equal(manifest.schema_version, "template-freeze-manifest/v1", "freeze-manifest schema changed");
-  assert.equal(manifest.template_version, "po-fd-like-placeholder-template-v1-040826", "template version changed");
+  assert.equal(manifest.template_version, "po-fd-like-placeholder-template-v3-040826", "template version changed");
   assert.equal(manifest.scope, "mvp-isolated-workflow-probe", "intake scope changed");
   assert.equal(manifest.canonical_ingest_admission, false, "freeze manifest must stay isolated from canonical ingest");
   assert.deepEqual(manifest.authorization, {
@@ -180,10 +180,10 @@ function assertFrozenBoundary() {
     non_citable_reason: "Isolated workflow-probe material; never dossier evidence.",
   }, "isolated classification changed");
   assert.deepEqual(manifest.template, {
-    source_path: "inputs/reference/official-placeholder-template-v1-040826.docx",
+    source_path: "inputs/reference/official-placeholder-template-v3-040826.docx",
     immutable: true,
-    sha256: "a8002623e0808cc54c870ab2f47adab44498a6c2ce5b7c4b3bd21cd99973a01d",
-    document_xml_sha256: "5ee079441d5db87b7964c6f876b67c55f7b2859714763f371d1109cfbbdc4095",
+    sha256: "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+    document_xml_sha256: "4f04eaf0076fcf6b5adfa0b5132b2b02e0b0e8b50051da2b2cc9b620b9e6a5d9",
   }, "template source boundary changed");
   assert.deepEqual(manifest.public_mock, {
     source_path: "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
@@ -198,10 +198,10 @@ function assertFrozenBoundary() {
   assert.equal(coverage.template_sha256, manifest.template.sha256, "fixture coverage template hash changed");
   assert.equal(coverage.public_mock_sha256, manifest.public_mock.sha256, "fixture coverage public mock hash changed");
   assert.deepEqual(grammar.canonical_id_aliases, {
-    "EXPERIMENT-DISCRIPTION": "EXPERIMENT-DESCRIPTION",
+    "EXPERIMENT-DESCRIPTION": "EXPERIMENT-DESCRIPTION",
   }, "canonical alias boundary changed");
   assert.deepEqual(grammar.owner_policy.paragraph_exceptions, {
-    "EXPERIMENT-DISCRIPTION": {
+    "EXPERIMENT-DESCRIPTION": {
       canonical_id: "EXPERIMENT-DESCRIPTION",
       role: "supplied_data",
       required: true,

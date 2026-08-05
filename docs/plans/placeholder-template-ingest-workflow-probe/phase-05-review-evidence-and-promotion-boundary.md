@@ -1,7 +1,7 @@
 ---
 phase: 5
 title: "Review evidence and promotion boundary"
-status: pending
+status: completed
 priority: P1
 effort: "2-3h"
 dependencies: [4]
@@ -54,10 +54,23 @@ boundaries, and a reviewed threat/usage model. Generic DOCX support remains fals
 
 ## Todo
 
-- [ ] Every success claim has reproducible evidence.
-- [ ] Prior 68/103 and 4/4 semantic gaps are either fixed or explicitly blocking.
-- [ ] No probe-only data becomes citable or canonical by implication.
-- [ ] Promotion decision, rollback, and follow-up scope are explicit.
+- [x] Every success claim has reproducible evidence.
+- [x] Any reproduced field-association, raw-value continuity, or round-trip gap
+      is either fixed or explicitly blocking; unsupported historic counts are
+      not treated as evidence.
+- [x] No probe-only data becomes citable or canonical by implication.
+- [x] Promotion decision, rollback, and follow-up scope are explicit.
+
+## Evidence — 2026-08-04
+
+- Full evidence is recorded in
+  [`docs/reports/qbd-placeholder-template-ingest-probe/2026-08-04-evidence.md`](../../reports/qbd-placeholder-template-ingest-probe/2026-08-04-evidence.md).
+- Decision from the prior v1 input is superseded by the v3 contract update.
+  V3 exact extraction is accepted as a rework gate; promotion remains held
+  until the isolated Phase 04 two-run workflow and downstream boundaries are
+  independently reviewed.
+- No evergreen documentation or public contract is updated because the probe
+  has not been promoted.
 
 ## Success Criteria
 

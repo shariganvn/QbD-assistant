@@ -7,19 +7,28 @@ effort: "4-6h"
 dependencies: [3]
 ---
 
+<!-- Session 3 boundary: Phase 04 is intentionally not executed; existing
+     workflow test code is pickup material, not two-run probe evidence. -->
+
 # Phase 04: Run isolated end-to-end probe
 
-<!-- Updated: Validation Session 1 - probe test under cowork-p2-kit/template-probe/; evidence binds the isolated sidecar cell-level receipt -->
+<!-- Updated: Validation Sessions 1–2 - named ignored artifact root; probe evidence is distinct from unrelated downstream regression suites -->
 
 ## Overview
 
-Run the template-aware public/mock package twice through isolated ingest and the
-available downstream verification path, proving reproducibility and boundaries.
+Run the template-aware public/mock package twice through isolated ingest and
+state each downstream branch's availability without treating a regression suite
+as proof that it processed the probe.
 
 ## Requirements
 
-- Functional: run approved ingest, retrieval/reasoning/render checks needed to
-  exercise the complete workflow without promoting outputs.
+- Functional: run the approved isolated ingest path twice from clean roots and
+  capture whether a truthful schema-valid projection was available. Run
+  `npm run verify:ingest` as an existing boundary regression suite.
+- Functional: run `npm run verify:reasoning` and `npm run verify:render`
+  only as existing regression suites; they are not evidence that those layers
+  processed the probe unless a separately authorized compatible input contract
+  exists.
 - Functional: capture exact counts, hashes, round-trip results, downstream
   branch coverage, and field-level traceability.
 - Non-functional: use isolated input/store/artifact roots; canonical inputs and
@@ -30,7 +39,8 @@ available downstream verification path, proving reproducibility and boundaries.
 The probe uses an explicit temporary config and immutable source snapshot. Run
 1 and Run 2 start from equivalent isolated state. Evidence binds source,
 template, field map, records, the isolated sidecar cell-level receipt, store,
-and downstream output hashes.
+and an output hash only for a separately authorized downstream branch that
+actually processed the probe.
 
 ## Related code files
 
@@ -38,17 +48,19 @@ and downstream output hashes.
 - Read: `/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/ingest/config.mjs`
 - Read: `/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/ingest/tests/verify-ingest.mjs`
 - Create: `/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs`
-- Create: `TBD ignored artifact root after template identity is frozen`
+- Create: ignored run roots under `artifacts/placeholder-template-ingest-workflow-probe/<run-id>/`
 
 ## Implementation Steps
 
 1. Snapshot canonical input/store manifests and hashes.
 2. Create isolated run roots and stage only the authorized template-derived
    package, field map, and classification metadata.
-3. Run focused contract tests, then isolated ingest twice from clean run roots.
-4. Exercise downstream verification sufficient to evaluate the full vertical
-   workflow; record unavailable branches as not tested, never as pass.
-5. Compare record/store/output hashes and exact field-level receipts.
+3. Run focused map/extractor/workflow tests and `npm run verify:ingest`, then
+   invoke the ingest CLI with an absolute isolated config twice from clean run roots.
+4. Run the reasoning and render regression suites separately; record each
+   unavailable probe-processing branch as not tested, never as pass.
+5. Compare map, receipt, record, and store hashes, plus an output hash only for
+   an authorized downstream branch that actually processed the probe.
 6. Recompute canonical snapshots and fail on any mutation.
 
 ## Todo
@@ -57,7 +69,24 @@ and downstream output hashes.
 - [ ] Both runs have identical record counts and hashes.
 - [ ] Field-level reconciliation reports zero failure.
 - [ ] Downstream branch results are explicit and evidence-backed.
+- [ ] Regression-suite results are not represented as probe-processing results.
 - [ ] Canonical inputs/store remain byte-identical.
+
+## Prework evidence — not Phase 04 execution (2026-08-04)
+
+The entries below are retained as prework evidence for the next pickup. They
+do not represent the required two-run Phase 04 execution or closeout in this
+session.
+
+- Focused v3 workflow prework passes 1/1 and proves exact receipt extraction
+  without mutating canonical inputs or `cowork-p2-kit/store`.
+- Existing ingest and reasoning verification suites were previously run as regression
+  checks. Render regression has 48/48 remaining tests passing plus one unrelated
+  baseline failure caused by the pre-existing untracked `plans/` directory;
+  none of these suites processed the blocked probe package.
+- The two-run isolated ingest, record/store hash comparison, and downstream
+  probe coverage remain pending; Phase 03 prework can produce a truthful receipt, but
+  the existing record projection still lacks page provenance.
 
 ## Success Criteria
 

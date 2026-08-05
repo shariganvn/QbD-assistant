@@ -1,0 +1,1175 @@
+{
+  "schema_version": "template-field-metadata/v1",
+  "template_version": "po-fd-like-placeholder-template-v3-040826",
+  "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+  "entries": [
+    {
+      "source_token": "ANY-IMPURITIES-CT01",
+      "canonical_field_id": "ANY-IMPURITIES-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "ANY-IMPURITIES-CT02",
+      "canonical_field_id": "ANY-IMPURITIES-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "ANY-IMPURITIES-CT03",
+      "canonical_field_id": "ANY-IMPURITIES-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "ANY-IMPURITIES-SPEC",
+      "canonical_field_id": "ANY-IMPURITIES-SPEC",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    },
+    {
+      "source_token": "API",
+      "canonical_field_id": "API",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    },
+    {
+      "source_token": "API%-CT01",
+      "canonical_field_id": "API%-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "API%-CT02",
+      "canonical_field_id": "API%-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "API%-CT03",
+      "canonical_field_id": "API%-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "API-CONTENT-CT01",
+      "canonical_field_id": "API-CONTENT-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "API-CONTENT-CT02",
+      "canonical_field_id": "API-CONTENT-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "API-CONTENT-CT03",
+      "canonical_field_id": "API-CONTENT-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "API-NAME",
+      "canonical_field_id": "API-NAME",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    },
+    {
+      "source_token": "ASSAY-CT01",
+      "canonical_field_id": "ASSAY-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "ASSAY-CT02",
+      "canonical_field_id": "ASSAY-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "ASSAY-CT03",
+      "canonical_field_id": "ASSAY-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "ASSAY-SPEC",
+      "canonical_field_id": "ASSAY-SPEC",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    },
+    {
+      "source_token": "AV-CT01",
+      "canonical_field_id": "AV-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "AV-CT02",
+      "canonical_field_id": "AV-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "AV-CT03",
+      "canonical_field_id": "AV-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "AV-SPEC",
+      "canonical_field_id": "AV-SPEC",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    },
+    {
+      "source_token": "BATCH-SIZE",
+      "canonical_field_id": "BATCH-SIZE",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    },
+    {
+      "source_token": "BULK-DENSITY-CT01",
+      "canonical_field_id": "BULK-DENSITY-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "BULK-DENSITY-CT02",
+      "canonical_field_id": "BULK-DENSITY-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "BULK-DENSITY-CT03",
+      "canonical_field_id": "BULK-DENSITY-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "CONCLUSION",
+      "canonical_field_id": "CONCLUSION",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "reference-only",
+      "required": false
+    },
+    {
+      "source_token": "DISINTEGRATION-MAX-CT01",
+      "canonical_field_id": "DISINTEGRATION-MAX-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "DISINTEGRATION-MAX-CT02",
+      "canonical_field_id": "DISINTEGRATION-MAX-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "DISINTEGRATION-MAX-CT03",
+      "canonical_field_id": "DISINTEGRATION-MAX-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "DISINTEGRATION-MIN-CT01",
+      "canonical_field_id": "DISINTEGRATION-MIN-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "DISINTEGRATION-MIN-CT02",
+      "canonical_field_id": "DISINTEGRATION-MIN-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "DISINTEGRATION-MIN-CT03",
+      "canonical_field_id": "DISINTEGRATION-MIN-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "DISSOLUTION-AVE-CT01",
+      "canonical_field_id": "DISSOLUTION-AVE-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "DISSOLUTION-AVE-CT02",
+      "canonical_field_id": "DISSOLUTION-AVE-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "DISSOLUTION-AVE-CT03",
+      "canonical_field_id": "DISSOLUTION-AVE-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "DISSOLUTION-MAX-CT01",
+      "canonical_field_id": "DISSOLUTION-MAX-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "DISSOLUTION-MAX-CT02",
+      "canonical_field_id": "DISSOLUTION-MAX-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "DISSOLUTION-MAX-CT03",
+      "canonical_field_id": "DISSOLUTION-MAX-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "DISSOLUTION-MIN-CT01",
+      "canonical_field_id": "DISSOLUTION-MIN-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "DISSOLUTION-MIN-CT02",
+      "canonical_field_id": "DISSOLUTION-MIN-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "DISSOLUTION-MIN-CT03",
+      "canonical_field_id": "DISSOLUTION-MIN-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "DISSOLUTION-RSD-CT01",
+      "canonical_field_id": "DISSOLUTION-RSD-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "DISSOLUTION-RSD-CT02",
+      "canonical_field_id": "DISSOLUTION-RSD-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "DISSOLUTION-RSD-CT03",
+      "canonical_field_id": "DISSOLUTION-RSD-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "DISSOLUTION-SPEC",
+      "canonical_field_id": "DISSOLUTION-SPEC",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-1",
+      "canonical_field_id": "EXCIPIENT-1",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-1-%-CT01",
+      "canonical_field_id": "EXCIPIENT-1-%-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-1-%-CT02",
+      "canonical_field_id": "EXCIPIENT-1-%-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-1-%-CT03",
+      "canonical_field_id": "EXCIPIENT-1-%-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-1-CONTENT-CT01",
+      "canonical_field_id": "EXCIPIENT-1-CONTENT-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-1-CONTENT-CT02",
+      "canonical_field_id": "EXCIPIENT-1-CONTENT-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-1-CONTENT-CT03",
+      "canonical_field_id": "EXCIPIENT-1-CONTENT-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-2",
+      "canonical_field_id": "EXCIPIENT-2",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-2-%-CT01",
+      "canonical_field_id": "EXCIPIENT-2-%-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-2-%-CT02",
+      "canonical_field_id": "EXCIPIENT-2-%-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-2-%-CT03",
+      "canonical_field_id": "EXCIPIENT-2-%-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-2-CONTENT-CT01",
+      "canonical_field_id": "EXCIPIENT-2-CONTENT-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-2-CONTENT-CT02",
+      "canonical_field_id": "EXCIPIENT-2-CONTENT-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-2-CONTENT-CT03",
+      "canonical_field_id": "EXCIPIENT-2-CONTENT-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-3",
+      "canonical_field_id": "EXCIPIENT-3",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-3-%-CT01",
+      "canonical_field_id": "EXCIPIENT-3-%-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-3-%-CT02",
+      "canonical_field_id": "EXCIPIENT-3-%-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-3-%-CT03",
+      "canonical_field_id": "EXCIPIENT-3-%-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-3-CONTENT-CT01",
+      "canonical_field_id": "EXCIPIENT-3-CONTENT-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-3-CONTENT-CT02",
+      "canonical_field_id": "EXCIPIENT-3-CONTENT-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-3-CONTENT-CT03",
+      "canonical_field_id": "EXCIPIENT-3-CONTENT-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-4",
+      "canonical_field_id": "EXCIPIENT-4",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-4-%-CT01",
+      "canonical_field_id": "EXCIPIENT-4-%-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-4-%-CT02",
+      "canonical_field_id": "EXCIPIENT-4-%-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-4-%-CT03",
+      "canonical_field_id": "EXCIPIENT-4-%-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-4-CONTENT-CT01",
+      "canonical_field_id": "EXCIPIENT-4-CONTENT-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-4-CONTENT-CT02",
+      "canonical_field_id": "EXCIPIENT-4-CONTENT-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-4-CONTENT-CT03",
+      "canonical_field_id": "EXCIPIENT-4-CONTENT-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-5",
+      "canonical_field_id": "EXCIPIENT-5",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-5-%-CT01",
+      "canonical_field_id": "EXCIPIENT-5-%-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-5-%-CT02",
+      "canonical_field_id": "EXCIPIENT-5-%-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-5-%-CT03",
+      "canonical_field_id": "EXCIPIENT-5-%-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-5-CONTENT-CT01",
+      "canonical_field_id": "EXCIPIENT-5-CONTENT-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-5-CONTENT-CT02",
+      "canonical_field_id": "EXCIPIENT-5-CONTENT-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-5-CONTENT-CT03",
+      "canonical_field_id": "EXCIPIENT-5-CONTENT-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-6",
+      "canonical_field_id": "EXCIPIENT-6",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-6-%-CT01",
+      "canonical_field_id": "EXCIPIENT-6-%-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-6-%-CT02",
+      "canonical_field_id": "EXCIPIENT-6-%-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-6-%-CT03",
+      "canonical_field_id": "EXCIPIENT-6-%-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-6-CONTENT-CT01",
+      "canonical_field_id": "EXCIPIENT-6-CONTENT-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-6-CONTENT-CT02",
+      "canonical_field_id": "EXCIPIENT-6-CONTENT-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "EXCIPIENT-6-CONTENT-CT03",
+      "canonical_field_id": "EXCIPIENT-6-CONTENT-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "EXPERIMENT-DESCRIPTION",
+      "canonical_field_id": "EXPERIMENT-DESCRIPTION",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    },
+    {
+      "source_token": "FRIABILITY-CT01",
+      "canonical_field_id": "FRIABILITY-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "FRIABILITY-CT02",
+      "canonical_field_id": "FRIABILITY-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "FRIABILITY-CT03",
+      "canonical_field_id": "FRIABILITY-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "HARDNESS-AVE-CT01",
+      "canonical_field_id": "HARDNESS-AVE-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "HARDNESS-AVE-CT02",
+      "canonical_field_id": "HARDNESS-AVE-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "HARDNESS-AVE-CT03",
+      "canonical_field_id": "HARDNESS-AVE-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "HARDNESS-MAX-CT01",
+      "canonical_field_id": "HARDNESS-MAX-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "HARDNESS-MAX-CT02",
+      "canonical_field_id": "HARDNESS-MAX-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "HARDNESS-MAX-CT03",
+      "canonical_field_id": "HARDNESS-MAX-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "HARDNESS-MIN-CT01",
+      "canonical_field_id": "HARDNESS-MIN-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "HARDNESS-MIN-CT02",
+      "canonical_field_id": "HARDNESS-MIN-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "HARDNESS-MIN-CT03",
+      "canonical_field_id": "HARDNESS-MIN-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "HAUSNER-RATIO-CT01",
+      "canonical_field_id": "HAUSNER-RATIO-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "HAUSNER-RATIO-CT02",
+      "canonical_field_id": "HAUSNER-RATIO-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "HAUSNER-RATIO-CT03",
+      "canonical_field_id": "HAUSNER-RATIO-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "LOD-CT01",
+      "canonical_field_id": "LOD-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "LOD-CT02",
+      "canonical_field_id": "LOD-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "LOD-CT03",
+      "canonical_field_id": "LOD-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "PDS-125-75-CT01",
+      "canonical_field_id": "PDS-125-75-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "PDS-125-75-CT02",
+      "canonical_field_id": "PDS-125-75-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "PDS-125-75-CT03",
+      "canonical_field_id": "PDS-125-75-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "PDS-150-125-CT01",
+      "canonical_field_id": "PDS-150-125-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "PDS-150-125-CT02",
+      "canonical_field_id": "PDS-150-125-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "PDS-150-125-CT03",
+      "canonical_field_id": "PDS-150-125-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "PDS-180-150-CT01",
+      "canonical_field_id": "PDS-180-150-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "PDS-180-150-CT02",
+      "canonical_field_id": "PDS-180-150-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "PDS-180-150-CT03",
+      "canonical_field_id": "PDS-180-150-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "PDS-180-CT01",
+      "canonical_field_id": "PDS-180-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "PDS-180-CT02",
+      "canonical_field_id": "PDS-180-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "PDS-180-CT03",
+      "canonical_field_id": "PDS-180-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "PDS-75-CT01",
+      "canonical_field_id": "PDS-75-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "PDS-75-CT02",
+      "canonical_field_id": "PDS-75-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "PDS-75-CT03",
+      "canonical_field_id": "PDS-75-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "TAP-DENSITY-CT01",
+      "canonical_field_id": "TAP-DENSITY-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "TAP-DENSITY-CT02",
+      "canonical_field_id": "TAP-DENSITY-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "TAP-DENSITY-CT03",
+      "canonical_field_id": "TAP-DENSITY-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "THICKNESS-AVE-CT01",
+      "canonical_field_id": "THICKNESS-AVE-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "THICKNESS-AVE-CT02",
+      "canonical_field_id": "THICKNESS-AVE-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "THICKNESS-AVE-CT03",
+      "canonical_field_id": "THICKNESS-AVE-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "THICKNESS-MAX-CT01",
+      "canonical_field_id": "THICKNESS-MAX-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "THICKNESS-MAX-CT02",
+      "canonical_field_id": "THICKNESS-MAX-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "THICKNESS-MAX-CT03",
+      "canonical_field_id": "THICKNESS-MAX-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "THICKNESS-MIN-CT01",
+      "canonical_field_id": "THICKNESS-MIN-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "THICKNESS-MIN-CT02",
+      "canonical_field_id": "THICKNESS-MIN-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "THICKNESS-MIN-CT03",
+      "canonical_field_id": "THICKNESS-MIN-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "TOTAL-IMPURITIES-CT01",
+      "canonical_field_id": "TOTAL-IMPURITIES-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "TOTAL-IMPURITIES-CT02",
+      "canonical_field_id": "TOTAL-IMPURITIES-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "TOTAL-IMPURITIES-CT03",
+      "canonical_field_id": "TOTAL-IMPURITIES-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "TOTAL-IMPURITIES-SPEC",
+      "canonical_field_id": "TOTAL-IMPURITIES-SPEC",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    },
+    {
+      "source_token": "UOM-AVE-CT01",
+      "canonical_field_id": "UOM-AVE-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "UOM-AVE-CT02",
+      "canonical_field_id": "UOM-AVE-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "UOM-AVE-CT03",
+      "canonical_field_id": "UOM-AVE-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "UOM-MAX-CT01",
+      "canonical_field_id": "UOM-MAX-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "UOM-MAX-CT02",
+      "canonical_field_id": "UOM-MAX-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "UOM-MAX-CT03",
+      "canonical_field_id": "UOM-MAX-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "UOM-MIN-CT01",
+      "canonical_field_id": "UOM-MIN-CT01",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-01",
+      "required": true
+    },
+    {
+      "source_token": "UOM-MIN-CT02",
+      "canonical_field_id": "UOM-MIN-CT02",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-02",
+      "required": true
+    },
+    {
+      "source_token": "UOM-MIN-CT03",
+      "canonical_field_id": "UOM-MIN-CT03",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "FORMULA-03",
+      "required": true
+    },
+    {
+      "source_token": "UOM-SPEC",
+      "canonical_field_id": "UOM-SPEC",
+      "type": "raw_text",
+      "unit": null,
+      "scope": "all-formulations",
+      "required": true
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "template-freeze-manifest/v1",
-  "template_version": "po-fd-like-placeholder-template-v1-040826",
+  "template_version": "po-fd-like-placeholder-template-v3-040826",
   "scope": "mvp-isolated-workflow-probe",
   "canonical_ingest_admission": false,
   "authorization": {
@@ -15,10 +15,10 @@
     "non_citable_reason": "Isolated workflow-probe material; never dossier evidence."
   },
   "template": {
-    "source_path": "inputs/reference/official-placeholder-template-v1-040826.docx",
+    "source_path": "inputs/reference/official-placeholder-template-v3-040826.docx",
     "immutable": true,
-    "sha256": "a8002623e0808cc54c870ab2f47adab44498a6c2ce5b7c4b3bd21cd99973a01d",
-    "document_xml_sha256": "5ee079441d5db87b7964c6f876b67c55f7b2859714763f371d1109cfbbdc4095"
+    "sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+    "document_xml_sha256": "4f04eaf0076fcf6b5adfa0b5132b2b02e0b0e8b50051da2b2cc9b620b9e6a5d9"
   },
   "public_mock": {
     "source_path": "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
@@ -31,11 +31,11 @@
     "table_row_count": 43,
     "cell_count": 263,
     "grid_span_count": 15,
-    "vertical_merge_count": 17,
+    "vertical_merge_count": 51,
     "anchor_count": 146,
     "cell_anchor_count": 143,
     "cell_owner_location_count": 142,
     "paragraph_anchor_count": 3,
-    "owner_inventory_sha256": "927745267aab8cabe98fd35923614729638285d587b3bab249739303457e2876"
+    "owner_inventory_sha256": "85f551e49dd238fea081f3864e0724bf4eca9021259a7ca203c6950aaed85b61"
   }
 }

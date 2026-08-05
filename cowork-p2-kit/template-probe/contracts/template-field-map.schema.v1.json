@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "template-field-map.schema.v1",
+  "title": "Versioned placeholder template field map",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "template_version",
+    "template_sha256",
+    "metadata_catalog_version",
+    "metadata_catalog_sha256",
+    "grammar_schema_version",
+    "occurrence_count",
+    "entries",
+    "field_map_sha256"
+  ],
+  "properties": {
+    "schema_version": { "const": "template-field-map/v1" },
+    "template_version": { "type": "string", "minLength": 1 },
+    "template_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "metadata_catalog_version": { "const": "template-field-metadata/v1" },
+    "metadata_catalog_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "grammar_schema_version": { "const": "template-field-grammar/v1" },
+    "occurrence_count": { "type": "integer", "minimum": 0 },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["raw_source_token", "canonical_field_id", "occurrence_id", "template_version", "template_sha256", "metadata", "owner"],
+        "properties": {
+          "raw_source_token": { "type": "string", "pattern": "^<[A-Z][A-Z0-9%-]*>$" },
+          "canonical_field_id": { "type": "string", "pattern": "^[A-Z][A-Z0-9%-]*$" },
+          "occurrence_id": { "type": "string", "pattern": "^occ-[a-f0-9]{64}$" },
+          "template_version": { "type": "string", "minLength": 1 },
+          "template_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "unit", "scope", "required"],
+            "properties": {
+              "type": { "const": "raw_text" },
+              "unit": { "type": ["string", "null"] },
+              "scope": { "type": "string", "minLength": 1 },
+              "required": { "type": "boolean" }
+            }
+          },
+          "owner": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["kind", "table", "row", "physical_cell", "logical_column_start", "logical_column_end", "grid_span", "vertical_merge"],
+                "properties": {
+                  "kind": { "const": "cell" },
+                  "table": { "type": "integer", "minimum": 1 },
+                  "row": { "type": "integer", "minimum": 1 },
+                  "physical_cell": { "type": "integer", "minimum": 1 },
+                  "logical_column_start": { "type": "integer", "minimum": 1 },
+                  "logical_column_end": { "type": "integer", "minimum": 1 },
+                  "grid_span": { "type": "integer", "minimum": 1 },
+                  "vertical_merge": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["state", "group_id"],
+                    "properties": {
+                      "state": { "enum": ["none", "restart"] },
+                      "group_id": { "type": ["string", "null"] }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["kind", "paragraph"],
+                "properties": {
+                  "kind": { "const": "paragraph" },
+                  "paragraph": { "type": "integer", "minimum": 1 }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "field_map_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  }
+}

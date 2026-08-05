@@ -1,13 +1,13 @@
 {
   "schema_version": "template-fixture-coverage/v1",
-  "template_sha256": "a8002623e0808cc54c870ab2f47adab44498a6c2ce5b7c4b3bd21cd99973a01d",
+  "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
   "public_mock_sha256": "01fe95607f4733e2b47a4c46f8dad5817d6014cc40f69a08631977c9d890cd8f",
   "expected_anchor_census": {
     "total": 146,
     "cell_anchors": 143,
     "cell_owner_locations": 142,
     "paragraph_anchors": [
-      "EXPERIMENT-DISCRIPTION",
+      "EXPERIMENT-DESCRIPTION",
       "BATCH-SIZE",
       "CONCLUSION"
     ]
@@ -15,7 +15,7 @@
   "cases": [
     {
       "feature": "split_xml_runs",
-      "anchor_id": "PDS-180-CT02",
+      "anchor_id": "EXCIPIENT-1-CONTENT-CT02",
       "expected_owner_kind": "cell"
     },
     {
@@ -66,7 +66,7 @@
     {
       "feature": "paragraph_owners",
       "anchor_ids": [
-        "EXPERIMENT-DISCRIPTION",
+        "EXPERIMENT-DESCRIPTION",
         "BATCH-SIZE",
         "CONCLUSION"
       ],

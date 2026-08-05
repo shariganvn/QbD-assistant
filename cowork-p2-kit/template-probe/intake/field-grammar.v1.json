@@ -1,6 +1,6 @@
 {
   "schema_version": "template-field-grammar/v1",
-  "template_sha256": "a8002623e0808cc54c870ab2f47adab44498a6c2ce5b7c4b3bd21cd99973a01d",
+  "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
   "visible_token": {
     "open_delimiter": "<",
     "close_delimiter": ">",
@@ -10,12 +10,12 @@
     "raw_display_policy": "preserve verbatim; no normalization, calculation, translation, or unit conversion"
   },
   "canonical_id_aliases": {
-    "EXPERIMENT-DISCRIPTION": "EXPERIMENT-DESCRIPTION"
+    "EXPERIMENT-DESCRIPTION": "EXPERIMENT-DESCRIPTION"
   },
   "owner_policy": {
     "default_kind": "cell",
     "paragraph_exceptions": {
-      "EXPERIMENT-DISCRIPTION": {
+      "EXPERIMENT-DESCRIPTION": {
         "canonical_id": "EXPERIMENT-DESCRIPTION",
         "role": "supplied_data",
         "required": true,
@@ -130,7 +130,7 @@
     "EXCIPIENT-6-CONTENT-CT01",
     "EXCIPIENT-6-CONTENT-CT02",
     "EXCIPIENT-6-CONTENT-CT03",
-    "EXPERIMENT-DISCRIPTION",
+    "EXPERIMENT-DESCRIPTION",
     "FRIABILITY-CT01",
     "FRIABILITY-CT02",
     "FRIABILITY-CT03",

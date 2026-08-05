@@ -8,22 +8,35 @@ active_workstream:
 current_pickup:
   source: session-handoff.yaml
   summary: >-
-    Phase 01 is closed. Start Phase 02 only to compile the versioned field map
-    from the frozen intake contract; do not run canonical ingest or derive a conclusion.
+    Phase 02 field-map compilation and Phase 05 evidence review are closed.
+    Phase 03 and Phase 04 were not executed; next session must choose the
+    truthful provenance route before running extraction or downstream probe.
   files:
   - docs/plans/placeholder-template-ingest-workflow-probe/plan.md
-  - docs/plans/placeholder-template-ingest-workflow-probe/phase-02-compile-template-field-map.md
-  - cowork-p2-kit/template-probe/intake/template-freeze-manifest.v1.json
-  - cowork-p2-kit/template-probe/intake/field-grammar.v1.json
+  - docs/plans/placeholder-template-ingest-workflow-probe/phase-03-extract-linear-ingest-records.md
+  - docs/plans/placeholder-template-ingest-workflow-probe/phase-04-run-isolated-end-to-end-probe.md
+  - cowork-p2-kit/template-probe/template-record-extractor.mjs
+  - cowork-p2-kit/template-probe/template-cell-receipt.mjs
+  - cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs
+  - cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs
+  provenance_blocker: >-
+    The frozen records schema requires page, char_start, char_end, quote, and
+    page_kind. The template adapter currently proves table/row/cell or
+    paragraph ownership only. Keep record_projection=not_available and do not
+    fabricate page provenance; a schema migration requires an explicit decision.
 relevant_progress:
-- P20260804-placeholder-template-ingest-phase-00-closeout
+- P20260805-placeholder-template-ingest-phase-02-05-closeout
 - P20260804-placeholder-template-ingest-phase-01-closeout
+- P20260804-placeholder-template-ingest-phase-00-closeout
 relevant_decisions: []
 read_next:
 - session-handoff.yaml
 - docs/plans/placeholder-template-ingest-workflow-probe/plan.md
-- docs/plans/placeholder-template-ingest-workflow-probe/phase-02-compile-template-field-map.md
-- cowork-p2-kit/template-probe/intake/template-freeze-manifest.v1.json
-- cowork-p2-kit/template-probe/intake/field-grammar.v1.json
-updated_at: '2026-08-04T08:52:43.858027+00:00'
-git_head: 0e98a8376ce0e296d87ec5d0198f12ac8f938ecf
+- docs/plans/placeholder-template-ingest-workflow-probe/phase-03-extract-linear-ingest-records.md
+- docs/plans/placeholder-template-ingest-workflow-probe/phase-04-run-isolated-end-to-end-probe.md
+- cowork-p2-kit/template-probe/template-record-extractor.mjs
+- cowork-p2-kit/template-probe/template-cell-receipt.mjs
+- cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs
+- cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs
+updated_at: '2026-08-05T01:39:56.173740+00:00'
+git_head: 88471243f4fcd5887cba5426ec2282474bd05dde
