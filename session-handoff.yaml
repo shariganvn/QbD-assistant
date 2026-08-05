@@ -1,41 +1,89 @@
 {
   "branch": "master",
-  "da_review": "summary:\n⚠️ Exit-code-only verdict counts are unknown; Phase 02 must add compiler-focused negative tests.\n⚠️ This hash-pinned PO probe is non-production and requires Phase 02-05 before promotion.",
+  "da_review": "summary:\n🔥 Blocking: resolve truthful cell/page provenance before promotion; never synthesize page, offset, quote, or page-kind fields.\n⚠️ Blocking: Phase 03/04 execution evidence and downstream coverage are still absent; keep promotion held.\n⚠️ Non-blocking: structured verdict is exit-code-only with null counts.",
   "diff_stat": "unknown",
-  "generated_at": "2026-08-04T08:55:32+00:00",
-  "git_head": "98a599412e561aae8292316fc4160a2a0363d965",
+  "generated_at": "2026-08-05T01:40:47+00:00",
+  "git_head": "67151a3bc35f8471aad9460324421df685cc017a",
   "next_pickup": [
     {
       "files": [
-        "docs/plans/placeholder-template-ingest-workflow-probe/plan.md",
-        "docs/plans/placeholder-template-ingest-workflow-probe/phase-02-compile-template-field-map.md",
-        "cowork-p2-kit/template-probe/intake/template-freeze-manifest.v1.json",
-        "cowork-p2-kit/template-probe/intake/field-grammar.v1.json"
+        "docs/plans/placeholder-template-ingest-workflow-probe/phase-03-extract-linear-ingest-records.md",
+        "docs/plans/placeholder-template-ingest-workflow-probe/phase-04-run-isolated-end-to-end-probe.md",
+        "cowork-p2-kit/template-probe/template-record-extractor.mjs",
+        "cowork-p2-kit/template-probe/template-cell-receipt.mjs",
+        "cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs",
+        "cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs"
       ],
-      "text": "Compile the versioned field map from the frozen Phase 01 contract only; do not run canonical ingest or derive a conclusion."
+      "text": "Choose receipt-only record_projection=not_available or approve a schema migration for truthful cell provenance, then execute Phase 03 and Phase 04"
     }
   ],
-  "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
+  "pickup_diff_sha256": "8ebabddab66314d52260ef2db653f75c60c8865378e3837784dc21fd1b9bc350",
   "pickup_files": [
-    "cowork-p2-kit/template-probe/intake/field-grammar.v1.json",
-    "cowork-p2-kit/template-probe/intake/template-freeze-manifest.v1.json",
-    "docs/plans/placeholder-template-ingest-workflow-probe/phase-02-compile-template-field-map.md",
-    "docs/plans/placeholder-template-ingest-workflow-probe/plan.md"
+    "cowork-p2-kit/template-probe/template-cell-receipt.mjs",
+    "cowork-p2-kit/template-probe/template-record-extractor.mjs",
+    "cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs",
+    "cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs",
+    "docs/plans/placeholder-template-ingest-workflow-probe/phase-03-extract-linear-ingest-records.md",
+    "docs/plans/placeholder-template-ingest-workflow-probe/phase-04-run-isolated-end-to-end-probe.md"
   ],
   "pickup_fingerprint_files": [
-    "cowork-p2-kit/template-probe/intake/field-grammar.v1.json",
-    "cowork-p2-kit/template-probe/intake/template-freeze-manifest.v1.json",
-    "docs/plans/placeholder-template-ingest-workflow-probe/phase-02-compile-template-field-map.md",
-    "docs/plans/placeholder-template-ingest-workflow-probe/plan.md"
+    "cowork-p2-kit/template-probe/template-cell-receipt.mjs",
+    "cowork-p2-kit/template-probe/template-record-extractor.mjs",
+    "cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs",
+    "cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs",
+    "docs/plans/placeholder-template-ingest-workflow-probe/phase-03-extract-linear-ingest-records.md",
+    "docs/plans/placeholder-template-ingest-workflow-probe/phase-04-run-isolated-end-to-end-probe.md"
   ],
   "schema_version": 2,
-  "session_id": "260804-1517",
-  "summary": "Closed Phase 01 placeholder-template intake: immutable public/synthetic sources, a 146-anchor contract, read-only verification, and a Phase 02 field-map pickup.",
-  "test_verdict": "artifacts/260804-1517/test-verdict.json",
+  "session_id": "260805-0818",
+  "summary": "Phase 02 field-map compilation and bounded Phase 05 evidence review closed; Phase 03/04 remain pending and promotion is held.",
+  "test_verdict": "artifacts/260805-0818/test-verdict.json",
   "ui_verdict": null,
-  "unresolved": [],
+  "unresolved": [
+    {
+      "files": [
+        "docs/plans/placeholder-template-ingest-workflow-probe/phase-03-extract-linear-ingest-records.md",
+        "cowork-p2-kit/template-probe/template-record-extractor.mjs",
+        "cowork-p2-kit/template-probe/template-cell-receipt.mjs"
+      ],
+      "text": "Provenance contract is unresolved; do not fabricate page/offset/quote/page_kind provenance"
+    },
+    {
+      "files": [
+        "docs/plans/placeholder-template-ingest-workflow-probe/phase-03-extract-linear-ingest-records.md",
+        "docs/plans/placeholder-template-ingest-workflow-probe/phase-04-run-isolated-end-to-end-probe.md",
+        "cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs",
+        "cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs"
+      ],
+      "text": "Phase 03 extraction and Phase 04 isolated two-run/downstream probe were not executed"
+    }
+  ],
   "worktree_status": [
     " M AGENTS.md",
-    " M CLAUDE.md"
+    " M CLAUDE.md",
+    " M docs/reports/qbd-p2-ingest-completion/gates/G-01.json",
+    " M docs/reports/qbd-p2-ingest-completion/gates/G-02.json",
+    " M docs/reports/qbd-p2-ingest-completion/gates/G-03.json",
+    " M docs/reports/qbd-p2-ingest-completion/gates/G-04.json",
+    " M docs/reports/qbd-p2-ingest-completion/gates/G-05.json",
+    " M docs/reports/qbd-p2-ingest-completion/gates/G-06.json",
+    " M docs/reports/qbd-p2-ingest-completion/gates/G-07.json",
+    " M docs/reports/qbd-p2-ingest-completion/gates/G-08.json",
+    " M docs/reports/qbd-p2-ingest-completion/gates/G-09.json",
+    " M docs/reports/qbd-p2-ingest-completion/gates/G-10.json",
+    " M docs/reports/qbd-p2-ingest-completion/gates/suite.json",
+    " M docs/reports/qbd-p4-reasoning-layer/gates/G-P4-01.json",
+    " M docs/reports/qbd-p4-reasoning-layer/gates/G-P4-02.json",
+    " M docs/reports/qbd-p4-reasoning-layer/gates/G-P4-03.json",
+    " M docs/reports/qbd-p4-reasoning-layer/gates/G-P4-04.json",
+    " M docs/reports/qbd-p4-reasoning-layer/gates/G-P4-05.json",
+    "?? cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json",
+    "?? cowork-p2-kit/template-probe/template-cell-receipt.mjs",
+    "?? cowork-p2-kit/template-probe/template-record-extractor.mjs",
+    "?? cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs",
+    "?? cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs",
+    "?? plans/journals/2026-08-04-placeholder-template-probe-rework-boundary.md",
+    "?? plans/reports/context-260804-1613-workflow-state-consolidation-migration-decision.md",
+    "?? plans/reports/pm-260804-1322-placeholder-template-ingest-workflow-probe.md"
   ]
 }
