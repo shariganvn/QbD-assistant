@@ -1,0 +1,57 @@
+{
+  "status": "pass",
+  "run_id": "template-docx-content-demo",
+  "output": "/media/E/VIBECODING/MODULE3-agent/artifacts/template-docx-content-demo/run-msgvldj7/p2-draft.docx",
+  "output_sha256": "2a47ab07b52f6e1fa0ccd7f56b43a7b360d97fe5e7d9428068fd009ee6c00b95",
+  "output_bytes": 9805,
+  "normalized_ooxml_sha256": "9c5836848c2517b7cb9ad2450468b739a26efcd1ff0a106f2b590416ad4d59ab",
+  "normalized_ooxml_manifest": {
+    "[Content_Types].xml": "685dca5eb0e6688c9f4218f6810f21fdf6e86a4b8bf1d7bf74c9eb667ebc2c09",
+    "_rels/": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "_rels/.rels": "d5835ba96e212e656fa3e39905db3de8c09f5406a78312ca9d4041b2386e99e7",
+    "docProps/": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docProps/app.xml": "579eba9a8d602575736c3880cf5b529aabbadee0e8cc0e4df8573db0ceadbd4b",
+    "docProps/core.xml": "a0f352a34fc6231f57cd5347067562cff44c332cecebd48f4ec8c9d0a8e1bc96",
+    "docProps/custom.xml": "8ec73cc7ce297e42cc652a1d1884d4ffb18ffa0ba7a6502a36f8da90d1be61a1",
+    "word/": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "word/_rels/": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "word/_rels/comments.xml.rels": "bf64631f0bc7bd46712fef822bcfb22e069fa5779e133980ca0c9d81f00efc09",
+    "word/_rels/document.xml.rels": "5bb177c6f6300be2bd0367029e902d5d7250a1b2c50086deb7feb9692a3c898c",
+    "word/_rels/endnotes.xml.rels": "bf64631f0bc7bd46712fef822bcfb22e069fa5779e133980ca0c9d81f00efc09",
+    "word/_rels/fontTable.xml.rels": "bf64631f0bc7bd46712fef822bcfb22e069fa5779e133980ca0c9d81f00efc09",
+    "word/_rels/footnotes.xml.rels": "bf64631f0bc7bd46712fef822bcfb22e069fa5779e133980ca0c9d81f00efc09",
+    "word/comments.xml": "dd2d62f68c6fd01fc4d7d44081587af54ea3e135b9486cc44fa3c62d087adfec",
+    "word/document.xml": "94cb835eebb332f94302153f68f00786312292bd0ea47e0bdb08914c4a0e695c",
+    "word/endnotes.xml": "52f6c33e62c233e0d9f9c41ec259ffd943ea9cdc413293d43e6ffb213682a5cf",
+    "word/fontTable.xml": "a746dbb577ec5d68983d659707c0750ca89d40b9d3316e31af331d5e1c736bad",
+    "word/footnotes.xml": "809907a9505ac148d3ed637c128e1ba6f6f50da45b702c647019fcb752244143",
+    "word/numbering.xml": "aae067c32dd80d876358a0cc5ecef7f7442662e3648c0ecd9f1888677ddb4a6e",
+    "word/settings.xml": "7fc7b64a8db3d7a315143624f352546ec42be9f8f4133341a993c91e9cff3e9a",
+    "word/styles.xml": "afa039a904677e09ceebd82646b4245cf773c6a09d50324e304a016703632538"
+  },
+  "sandbox": {
+    "argv_hash": "d36146d4b8929a70",
+    "unshare_net": true,
+    "exit_code": 0,
+    "versions": {
+      "node": "v22.22.2",
+      "npm": "10.9.7",
+      "bwrap": "bubblewrap 0.11.1"
+    }
+  },
+  "receipt_join": {
+    "exact": 3,
+    "ambiguous": 0,
+    "unmapped": 2
+  },
+  "citation_count": 3,
+  "record_count": 23,
+  "decision": {
+    "status": "selected",
+    "winner": "demo-real-candidate",
+    "comparator_marker": "demo-comparator"
+  },
+  "rendered_first_text": "SYNTHETIC / DEMO — không dùng để nộp hoặc trích dẫn",
+  "canonical_unchanged": true,
+  "dirty_tracked_files_unchanged": true
+}
