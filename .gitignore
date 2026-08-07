@@ -2,11 +2,8 @@ node_modules/
 .liteparse/
 *.log
 
-# Local agent-baton session state and generated evidence
+# Leftover local baton verdict evidence (agent-baton removed from repo)
 artifacts/
-project-state.yaml
-session-handoff.yaml
-docs/.session-state.md
 
 # Tài sản riêng — không thuộc về project
 .claude/skills/

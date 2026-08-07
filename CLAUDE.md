@@ -37,7 +37,7 @@ Mọi phản hồi cho HUMAN tuân theo 5 nguyên tắc:
 - `docs/raw/` — source of example file to work with.
 - `docs/` — project docs, active plans, and reports live here. Do not create project Markdown
   outside `docs/` except the root workflow pointers named below.
-- `baton state` — quản lý workflow state, handoff, và evidence qua agent-baton CLI. Dùng `baton state startup` để nạp context và `baton state validate` để kiểm tra ledger khi workflow state thay đổi.
+- Workflow state & handoff — dùng skill `ak-project-management` (`/ck:project-management`): hydrate Claude Tasks từ các mục `[ ]` chưa xong trong `plan.md`, sync-back khi hoàn thành, ghi report ở `docs/reports/<workstream>/`. Nguồn sự thật là `IMPLEMENTATION_PLAN.md` → `plan.md` + `gates.yaml`; không có file state routing riêng.
 - `IMPLEMENTATION_PLAN.md` — pointer to the single canonical active plan; never duplicate status here.
 - `docs/plans/<workstream>/` — active plan package. Read `plan.md`, then only the current step.
 - `docs/reports/<workstream>/` — current evidence and review artifacts.
@@ -45,11 +45,12 @@ Mọi phản hồi cho HUMAN tuân theo 5 nguyên tắc:
   these directories unless the user explicitly requests historical investigation.**
 - `.claude/rules/` — the always-loaded engineering contract; open the linked on-demand rule files only when the task needs them.
 
-## Session handoff discipline (baton)
+## Session handoff discipline (ak-project-management)
 
-- **Two-phase commit:** commit work + closeout artifacts trước (C1) → `HEAD_C1=$(git rev-parse HEAD)` → `baton handoff --expected-git-head "$HEAD_C1" ...` → `baton reconcile`. Chỉ khi kết quả clean/benign mới commit C2 = riêng `session-handoff.yaml` + `docs/.session-state.md`. Không gộp C1/C2 vào một commit.
-- **Critical/DA review bắt buộc trước khi đóng session** nếu diff chạm: auth, schema/migration, đường dẫn security-sensitive, `baton verdict` báo warning/fail, quyết định kiến trúc mới, hoặc scope vượt plan đã duyệt. Các trường hợp khác có thể bỏ qua.
-- **Exit-3 / handoff conflict:** KHÔNG BAO GIỜ `git reset` hay `git commit --amend` để xử lý — orphan commit mà `git_head` đang trỏ tới, gây lặp stale-loop ở session sau. Dùng `baton reconcile --repair` (forward-repoint, tự refuse nếu có content drift thật), rồi commit tiếp bình thường.
+- **Nguồn sự thật:** `IMPLEMENTATION_PLAN.md` trỏ tới đúng một active `plan.md`. Trạng thái nằm ở checkbox `[ ]`/`[x]` trong các phase file + `gates.yaml` — không có file state routing riêng, không có SessionStart gate hook.
+- **Pickup session sau:** đọc active `plan.md` → chỉ đọc current step → hydrate Task từ các mục `[ ]` chưa xong (skill `ak-project-management`).
+- **Closeout:** commit work trước; ghi evidence/report ở `docs/reports/<workstream>/pm-*.md`; sync-back checkbox `[ ]`→`[x]` và cập nhật `status` trong frontmatter của `plan.md`.
+- **Critical/DA review bắt buộc trước khi đóng session** nếu diff chạm: auth, schema/migration, đường dẫn security-sensitive, quyết định kiến trúc mới, hoặc scope vượt plan đã duyệt. Các trường hợp khác có thể bỏ qua.
 
 ## Nguyên Tắc Làm việc
 

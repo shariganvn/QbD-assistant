@@ -119,7 +119,7 @@ The detailed gap register and test seeds are in
 | Understand PO/FD/Engineering responsibilities | [Preparation guide — roles](docs/reports/qbd-p4-reasoning-layer/po-junior-mock-package-preparation-guide-20260729.md#8-ai-lam-gi) |
 | Understand current P2 security boundary | [D20260722](docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md) |
 | Understand why approval and data-gap work is next | [Gap review](docs/reports/qbd-p4-reasoning-layer/missing-data-human-approval-gap-review-20260729.md) |
-| Inspect live routing for the next coding session | [session handoff](session-handoff.yaml) and [project state](project-state.yaml) |
+| Inspect the active plan and next steps | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) → active `plan.md` |
 
 ## Non-negotiable rules for a PO-facing agent
 
