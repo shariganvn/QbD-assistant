@@ -1,90 +1,50 @@
 {
   "branch": "master",
-  "da_review": "summary:\n⚠️ F-001 is a semantic blocker: demo fact cards treat the filled-mock assay specification 90–110% as observed values 90 and 110.\n⚠️ Full P.2 must use formula-specific real evidence and an FD-approved rubric before declaring a winner.",
+  "da_review": "summary:\n🔥 restoreTextFidelity page-global exact-one-match: repeated markers -> E_PARSE; scope to owning table/page first.\n🔥 numberValue silently mis-parses dot-decimal/space-thousands (\"1.23\"->123); strict validation required.\n⚠️ restoreTextFidelity and G-00 negatives lack direct unit tests; verdict counts exit-code-only (null).\n⚠️ liteparse version unpinned; NBSP/dash untested — determinism machine-local.\n⚠️ Receipt provenance hashes restored quote only; raw diff not kept.",
   "diff_stat": "unknown",
-  "generated_at": "2026-08-06T02:47:30+00:00",
-  "git_head": "29575457f0afb98b275bba79b96ce6e09ff35149",
+  "generated_at": "2026-08-07T01:11:59+00:00",
+  "git_head": "46b886fc49069e54a257b57f50975c057dd794bf",
   "next_pickup": [
     {
       "files": [
-        "plans/reports/handoff-20260806-0936-full-p2-reasoning-rationale.md",
-        "plans/reports/spec-review-260806-0936-template-docx-demo-full-p2-gap.md",
-        "cowork-p2-kit/inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
-        "cowork-p2-kit/template-probe/template-record-extractor.mjs",
-        "cowork-p2-kit/ingest/pipeline.mjs",
-        "cowork-p2-kit/reasoning/decision-engine.mjs",
-        "cowork-p2-kit/rationale/claim-binding.mjs"
+        "docs/plans/qbd-p221-formulation-selection/phase-01-real-data-layer.md",
+        "docs/reports/qbd-p221-formulation-selection/formula-evidence-matrix.json",
+        "docs/reports/qbd-p221-formulation-selection/result-inventory.json"
       ],
-      "text": "Create a separate full P.2 plan, then map formula 01/02/03 results into real fact cards and build reasoning plus same-packet rationale"
+      "text": "Begin Phase 1 typed evidence only from G-00 receipts, evidence matrix, and result inventory; preserve XML-owner vs generic-record boundary. Resolve phase-00 DA risks (quote-scoped restore, strict number validation) before real data."
     }
   ],
   "pickup_diff_sha256": "e087217b990b6b011ef8a7638545762c31e2ecbf8f84eab36c8a2592381204be",
   "pickup_files": [
-    "cowork-p2-kit/ingest/pipeline.mjs",
-    "cowork-p2-kit/inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
-    "cowork-p2-kit/rationale/claim-binding.mjs",
-    "cowork-p2-kit/reasoning/decision-engine.mjs",
-    "cowork-p2-kit/template-probe/template-record-extractor.mjs",
-    "cowork-p2-kit/workflow-trial/demo-data-pack.mjs",
-    "cowork-p2-kit/workflow-trial/demo-rationale.mjs",
-    "plans/reports/handoff-20260806-0936-full-p2-reasoning-rationale.md",
-    "plans/reports/spec-review-260806-0936-template-docx-demo-full-p2-gap.md"
+    "cowork-p2-kit/ingest/liteparse-adapter.mjs",
+    "cowork-p2-kit/workflow-trial/formula-cell-receipt.mjs",
+    "cowork-p2-kit/workflow-trial/tests/formulation-spike-run.test.mjs",
+    "docs/plans/qbd-p221-formulation-selection/phase-01-real-data-layer.md",
+    "docs/reports/qbd-p221-formulation-selection/formula-evidence-matrix.json",
+    "docs/reports/qbd-p221-formulation-selection/result-inventory.json"
   ],
   "pickup_fingerprint_files": [
-    "cowork-p2-kit/ingest/pipeline.mjs",
-    "cowork-p2-kit/inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
-    "cowork-p2-kit/rationale/claim-binding.mjs",
-    "cowork-p2-kit/reasoning/decision-engine.mjs",
-    "cowork-p2-kit/template-probe/template-record-extractor.mjs",
-    "cowork-p2-kit/workflow-trial/demo-data-pack.mjs",
-    "cowork-p2-kit/workflow-trial/demo-rationale.mjs",
-    "plans/reports/handoff-20260806-0936-full-p2-reasoning-rationale.md",
-    "plans/reports/spec-review-260806-0936-template-docx-demo-full-p2-gap.md"
+    "cowork-p2-kit/ingest/liteparse-adapter.mjs",
+    "cowork-p2-kit/workflow-trial/formula-cell-receipt.mjs",
+    "cowork-p2-kit/workflow-trial/tests/formulation-spike-run.test.mjs",
+    "docs/plans/qbd-p221-formulation-selection/phase-01-real-data-layer.md",
+    "docs/reports/qbd-p221-formulation-selection/formula-evidence-matrix.json",
+    "docs/reports/qbd-p221-formulation-selection/result-inventory.json"
   ],
   "schema_version": 2,
-  "session_id": "260806-0936",
-  "summary": "Closed the synthetic template DOCX content demo and recorded a spec review proving that full P.2 reasoning and rationale from the filled mock remain open.",
-  "test_verdict": "artifacts/260806-0936/test-verdict.json",
+  "session_id": "260806-1550",
+  "summary": "Closed qbd-p221 Phase 0 with G-00 GO: hash-pinned isolated ingest produced a deterministic three-formula matrix with 21 DOCX cell receipts and 21 exact admitted-record bindings; verdict passed 10/10 with exit 0. Gate G-00 flipped to pass and project state re-pointed to qbd-p221; phase-01 real-data layer remains next, gated on resolving phase-00 DA risks.",
+  "test_verdict": "artifacts/260806-1550/test-verdict.json",
   "ui_verdict": null,
   "unresolved": [
     {
       "files": [
-        "plans/reports/spec-review-260806-0936-template-docx-demo-full-p2-gap.md",
-        "cowork-p2-kit/workflow-trial/demo-data-pack.mjs",
-        "cowork-p2-kit/workflow-trial/demo-rationale.mjs"
+        "cowork-p2-kit/workflow-trial/formula-cell-receipt.mjs",
+        "cowork-p2-kit/ingest/liteparse-adapter.mjs",
+        "cowork-p2-kit/workflow-trial/tests/formulation-spike-run.test.mjs"
       ],
-      "text": "Full P.2 semantic reasoning and explanatory rationale are not implemented; the demo remains synthetic and non-citable"
+      "text": "Full P.2.2.1 real-data layer is not built; phase-00 risks must be resolved first: restoreTextFidelity exact-one-match page-global, numberValue silent decimal mis-parse, missing direct negative/unit tests, unpinned liteparse version, and provenance raw-quote not retained. Verdict counts remain exit-code-only (null)."
     }
   ],
-  "worktree_status": [
-    " M AGENTS.md",
-    " M CLAUDE.md",
-    " M docs/.session-state.md",
-    " M docs/reports/qbd-p2-ingest-completion/gates/G-01.json",
-    " M docs/reports/qbd-p2-ingest-completion/gates/G-02.json",
-    " M docs/reports/qbd-p2-ingest-completion/gates/G-03.json",
-    " M docs/reports/qbd-p2-ingest-completion/gates/G-04.json",
-    " M docs/reports/qbd-p2-ingest-completion/gates/G-05.json",
-    " M docs/reports/qbd-p2-ingest-completion/gates/G-06.json",
-    " M docs/reports/qbd-p2-ingest-completion/gates/G-07.json",
-    " M docs/reports/qbd-p2-ingest-completion/gates/G-08.json",
-    " M docs/reports/qbd-p2-ingest-completion/gates/G-09.json",
-    " M docs/reports/qbd-p2-ingest-completion/gates/G-10.json",
-    " M docs/reports/qbd-p2-ingest-completion/gates/suite.json",
-    " M docs/reports/qbd-p3-render-layer/gates/G-P3-01.json",
-    " M docs/reports/qbd-p3-render-layer/gates/G-P3-02.json",
-    " M docs/reports/qbd-p3-render-layer/gates/G-P3-03.json",
-    " M docs/reports/qbd-p3-render-layer/gates/G-P3-04.json",
-    " M docs/reports/qbd-p4-reasoning-layer/gates/G-P4-01.json",
-    " M docs/reports/qbd-p4-reasoning-layer/gates/G-P4-02.json",
-    " M docs/reports/qbd-p4-reasoning-layer/gates/G-P4-03.json",
-    " M docs/reports/qbd-p4-reasoning-layer/gates/G-P4-04.json",
-    " M docs/reports/qbd-p4-reasoning-layer/gates/G-P4-05.json",
-    " M docs/reports/qbd-rationale-report-layer/gates/G-RL-01.json",
-    " M docs/reports/qbd-rationale-report-layer/gates/G-RL-02.json",
-    " M docs/reports/qbd-rationale-report-layer/gates/G-RL-03.json",
-    " M docs/reports/qbd-rationale-report-layer/gates/G-RL-04.json",
-    " M docs/reports/qbd-rationale-report-layer/gates/G-RL-05.json",
-    " M session-handoff.yaml"
-  ]
+  "worktree_status": []
 }
