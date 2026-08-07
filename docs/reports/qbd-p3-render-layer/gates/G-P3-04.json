@@ -1,21 +1,21 @@
 {
   "gate_id": "G-P3-04",
-  "status": "pass",
+  "status": "fail",
   "command": [
     "/usr/bin/node",
     "--test",
     "cowork-p2-kit/render/tests/isolated-network.test.mjs"
   ],
-  "exit_code": 0,
-  "raw_tap_output": "TAP version 13\n# Subtest: G-P3-04: wrapper discovers bwrap and runs render-spike.mjs\nok 1 - G-P3-04: wrapper discovers bwrap and runs render-spike.mjs\n  ---\n  duration_ms: 1.307499\n  type: 'test'\n  ...\n# Subtest: G-P3-04: wrapper uses read-only binds for repo and runtime\nok 2 - G-P3-04: wrapper uses read-only binds for repo and runtime\n  ---\n  duration_ms: 0.32219\n  type: 'test'\n  ...\n# Subtest: G-P3-04: wrapper uses writable binds only for output and report\nok 3 - G-P3-04: wrapper uses writable binds only for output and report\n  ---\n  duration_ms: 0.334637\n  type: 'test'\n  ...\n# Subtest: G-P3-04: wrapper uses tmpfs, proc, and dev\nok 4 - G-P3-04: wrapper uses tmpfs, proc, and dev\n  ---\n  duration_ms: 0.176287\n  type: 'test'\n  ...\n# Subtest: G-P3-04: wrapper changes to /work directory\nok 5 - G-P3-04: wrapper changes to /work directory\n  ---\n  duration_ms: 0.381137\n  type: 'test'\n  ...\n# Subtest: G-P3-04: snapshot contains required metadata\nok 6 - G-P3-04: snapshot contains required metadata\n  ---\n  duration_ms: 0.193969\n  type: 'test'\n  ...\n# Subtest: G-P3-04: snapshot contains output hash\nok 7 - G-P3-04: snapshot contains output hash\n  ---\n  duration_ms: 0.230284\n  type: 'test'\n  ...\n# Subtest: G-P3-04: no root plans directory is created\nok 8 - G-P3-04: no root plans directory is created\n  ---\n  duration_ms: 0.779138\n  type: 'test'\n  ...\n# Subtest: G-P3-04: wrapper rejects a writable repository bind\nok 9 - G-P3-04: wrapper rejects a writable repository bind\n  ---\n  duration_ms: 60.528234\n  type: 'test'\n  ...\n# Subtest: G-P3-04: wrapper rejects a draft symlink that resolves outside /work\nok 10 - G-P3-04: wrapper rejects a draft symlink that resolves outside /work\n  ---\n  duration_ms: 59.163653\n  type: 'test'\n  ...\n1..10\n# tests 10\n# suites 0\n# pass 10\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 767.794826\n",
+  "exit_code": 1,
+  "raw_tap_output": "TAP version 13\n# Subtest: G-P3-04: wrapper discovers bwrap and runs render-spike.mjs\nok 1 - G-P3-04: wrapper discovers bwrap and runs render-spike.mjs\n  ---\n  duration_ms: 1.398382\n  type: 'test'\n  ...\n# Subtest: G-P3-04: wrapper uses read-only binds for repo and runtime\nok 2 - G-P3-04: wrapper uses read-only binds for repo and runtime\n  ---\n  duration_ms: 0.359228\n  type: 'test'\n  ...\n# Subtest: G-P3-04: wrapper uses writable binds only for output and report\nok 3 - G-P3-04: wrapper uses writable binds only for output and report\n  ---\n  duration_ms: 0.36938\n  type: 'test'\n  ...\n# Subtest: G-P3-04: wrapper uses tmpfs, proc, and dev\nok 4 - G-P3-04: wrapper uses tmpfs, proc, and dev\n  ---\n  duration_ms: 0.206176\n  type: 'test'\n  ...\n# Subtest: G-P3-04: wrapper changes to /work directory\nok 5 - G-P3-04: wrapper changes to /work directory\n  ---\n  duration_ms: 0.323206\n  type: 'test'\n  ...\n# Subtest: G-P3-04: snapshot contains required metadata\nok 6 - G-P3-04: snapshot contains required metadata\n  ---\n  duration_ms: 0.217288\n  type: 'test'\n  ...\n# Subtest: G-P3-04: snapshot contains output hash\nok 7 - G-P3-04: snapshot contains output hash\n  ---\n  duration_ms: 0.269528\n  type: 'test'\n  ...\n# Subtest: G-P3-04: no root plans directory is created\nnot ok 8 - G-P3-04: no root plans directory is created\n  ---\n  duration_ms: 1.964389\n  type: 'test'\n  location: '/media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/render/tests/isolated-network.test.mjs:158:1'\n  failureType: 'testCodeFailure'\n  error: 'No root plans/ directory should be created'\n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: true\n  actual: false\n  operator: '=='\n  stack: |-\n    TestContext.<anonymous> (file:///media/E/VIBECODING/MODULE3-agent/cowork-p2-kit/render/tests/isolated-network.test.mjs:163:10)\n    Test.runInAsyncScope (node:async_hooks:214:14)\n    Test.run (node:internal/test_runner/test:1047:25)\n    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)\n  ...\n# Subtest: G-P3-04: wrapper rejects a writable repository bind\nok 9 - G-P3-04: wrapper rejects a writable repository bind\n  ---\n  duration_ms: 70.798425\n  type: 'test'\n  ...\n# Subtest: G-P3-04: wrapper rejects a draft symlink that resolves outside /work\nok 10 - G-P3-04: wrapper rejects a draft symlink that resolves outside /work\n  ---\n  duration_ms: 95.317445\n  type: 'test'\n  ...\n1..10\n# tests 10\n# suites 0\n# pass 9\n# fail 1\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 898.242679\n",
   "raw_stderr": "",
-  "timestamp": "2026-07-27T05:17:12.730Z",
-  "run_id": "57167b7b-1f6a-40ff-8e6e-39819a75d7d1",
-  "suite_run_id": "f2164e59-c598-488c-9b59-0acbd2095e50",
+  "timestamp": "2026-08-06T07:59:45.268Z",
+  "run_id": "302708c0-2384-4375-a9ce-5ce06b2d5171",
+  "suite_run_id": "db33974a-4e85-4942-9b93-a0970d8bd521",
   "assertions_summary": {
     "total": 10,
-    "passed": 10,
-    "failed": 0,
+    "passed": 9,
+    "failed": 1,
     "skipped": 0,
     "todo": 0,
     "cancelled": 0
@@ -44,10 +44,10 @@
         "/etc",
         "/etc",
         "--bind",
-        "/tmp/isolated-output-1785129432031-uwipn86p9nn",
+        "/tmp/isolated-output-1786003184437-2fu5ruuen0f",
         "/out",
         "--bind",
-        "/tmp/isolated-report-1785129432031-hrhowlg53ln",
+        "/tmp/isolated-report-1786003184437-sbfj63tb7wf",
         "/report",
         "--tmpfs",
         "/tmp",
@@ -66,8 +66,8 @@
         "--report-root",
         "/report"
       ],
-      "argv_hash": "b850284276d5c4e5",
-      "stdout": "Render spike completed\n  Output: /out/p2-draft.docx\n  SHA-256: ae271e8d2fc4ab7f4418ab830f7251a45bbf2c747b66c6d31ec37e12bef61bd2\n  Size: 10017 bytes\n  Report: /report/render-spike-report.json\n",
+      "argv_hash": "312284a10ba48124",
+      "stdout": "Render spike completed\n  Output: /out/p2-draft.docx\n  SHA-256: 985e39006b1856c805668c02bb3a07fd4b93025a534a82be15e69afd8bbedaf5\n  Size: 10017 bytes\n  Report: /report/render-spike-report.json\n",
       "stderr": "",
       "exit_code": 0,
       "versions": {
@@ -75,12 +75,12 @@
         "npm": "10.9.7",
         "bwrap": "bubblewrap 0.11.1"
       },
-      "output_sha256": "ae271e8d2fc4ab7f4418ab830f7251a45bbf2c747b66c6d31ec37e12bef61bd2",
-      "timestamp": "2026-07-27T05:17:12.561Z"
+      "output_sha256": "985e39006b1856c805668c02bb3a07fd4b93025a534a82be15e69afd8bbedaf5",
+      "timestamp": "2026-08-06T07:59:45.035Z"
     }
   ],
   "timeout_ms": 300000,
-  "duration_ms": 820,
+  "duration_ms": 959,
   "timed_out": false,
   "signal": null
 }

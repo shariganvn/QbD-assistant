@@ -1,0 +1,64 @@
+id: T20260806-qbd-p221-phase-00
+date: "2026-08-06"
+workstream: qbd-p221-formulation-selection
+status: executed
+plan: docs/plans/qbd-p221-formulation-selection/plan.md
+phase: docs/plans/qbd-p221-formulation-selection/phase-00-discovery-spike-formula-matrix.md
+scope:
+  summary: >-
+    Verify the hash-pinned, isolated Phase 0 formula-cell extraction. The DOCX
+    XML receipt is authority for table/row/column ownership; ingest records
+    prove one admitted page/quote binding and are not cell-owner authority.
+  changed_files:
+    - cowork-p2-kit/workflow-trial/formulation-spike-run.mjs
+    - cowork-p2-kit/workflow-trial/formula-cell-receipt.mjs
+    - cowork-p2-kit/workflow-trial/contracts/formula-cell-receipt.schema.v1.json
+    - cowork-p2-kit/workflow-trial/tests/formulation-spike-run.test.mjs
+approval:
+  required: true
+  approved_at: "2026-08-06"
+  approved_by: human
+commands:
+  - id: qbd-p221-phase-00-tests
+    description: Run the focused G-00 test suite.
+    command: [node, --test, cowork-p2-kit/workflow-trial/tests/formulation-spike-run.test.mjs]
+    requires_live_services: false
+    mutates_datastore: false
+  - id: qbd-p221-phase-00-evidence
+    description: Emit G-00 evidence from two fresh isolated ingests.
+    command: [node, cowork-p2-kit/workflow-trial/formulation-spike-run.mjs, --out, docs/reports/qbd-p221-formulation-selection]
+    requires_live_services: false
+    mutates_datastore: false
+acceptance:
+  gates: [G-00]
+  evidence:
+    - artifacts/260806-1550/test-verdict.json
+    - docs/reports/qbd-p221-formulation-selection/go-no-go.json
+  invariants:
+    - Frozen source and document.xml pins match before ingest.
+    - All 21 critical cells have one source-derived cell receipt and one admitted ingest-record binding.
+    - Formula headers and composition percentage leaves are derived uniquely from OOXML; unsupported symbols, header drift, and duplicate criterion rows fail closed.
+    - A specification record binds only when its parsed quote projection exactly equals the XML-derived specification; `= 80%` cannot bind `≥ 80%`.
+    - Two fresh isolated ingest stores are byte-identical.
+    - Canonical inputs, manifest, store, and outputs stay unchanged.
+results:
+  verdict: passed
+  artifact: artifacts/260806-1550/test-verdict.json
+  evidence_quality: exit-code-only
+  evidence_level: local-attested
+  runner_id: stdlib-popen-v3
+  exit_code: 0
+  counts: {passed: null, failed: null, warnings: null}
+boundaries:
+  source_material: public_synthetic_non_citable
+  cell_ownership_authority: docx_xml_receipt
+  ingest_record_authority: admitted_page_quote_binding_only
+  fd_decision: not_evaluated
+next_pickup:
+  files:
+    - docs/plans/qbd-p221-formulation-selection/phase-01-real-data-layer.md
+    - cowork-p2-kit/workflow-trial/formulation-spike-run.mjs
+  text: >-
+    Begin Phase 1 only from G-00 receipts, evidence matrix, and result
+    inventory; preserve the XML-owner versus generic-record boundary.
+unresolved_questions: []

@@ -2,42 +2,34 @@ schema_version: 1
 branch: master
 worktree_id: nguyen-dell-7577:master
 active_workstream:
-  id: placeholder-template-ingest-workflow-probe
-  plan: docs/plans/placeholder-template-ingest-workflow-probe/plan.md
+  id: qbd-p221-formulation-selection
+  plan: docs/plans/qbd-p221-formulation-selection/plan.md
   status: in-progress
 current_pickup:
   source: session-handoff.yaml
   summary: >-
-    Placeholder-template MVP is complete through the receipt-only boundary:
-    all six phases are closed, the five-field two-run proof passed, and
-    promotion remains held pending independent provenance and contract-binding
-    decisions.
+    P.2.2.1 Phase 0 G-00 is complete and GO: use its hash-pinned evidence
+    matrix, receipt set, and inventory to begin Phase 1 typed evidence.
   files:
-  - cowork-p2-kit/template-probe/template-record-extractor.mjs
-  - cowork-p2-kit/template-probe/template-cell-receipt.mjs
-  - cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json
+  - docs/plans/qbd-p221-formulation-selection/phase-01-real-data-layer.md
+  - docs/reports/qbd-p221-formulation-selection/formula-evidence-matrix.json
+  - docs/reports/qbd-p221-formulation-selection/result-inventory.json
   provenance_blocker: >-
-    DOCX owners provide OOXML table/row/cell or paragraph coordinates, while
-    the frozen production record contract requires truthful page, char_start,
-    char_end, quote, and page_kind provenance. Keep
-    record_projection=not_available and never synthesize page provenance.
+    XML receipts are the authority for DOCX table/row/column ownership. Generic
+    ingest records bind admission/page/quote only and must never be presented
+    as independent cell-owner provenance.
   da_carry_forward: >-
-    Before promotion, enforce the fixed five-entry boundary at the reusable
-    extractor API, independently verify owner-byte round trips, require
-    unavailable projection with null record IDs, and bind template version to
-    the field map.
+    Preserve the Phase 0 source-versus-record authority split while building
+    typed evidence and fact-card bindings in Phase 1.
 relevant_progress:
-- P20260805-placeholder-template-ingest-phase-03-04-closeout
-- P20260805-placeholder-template-ingest-phase-02-05-closeout
-- P20260804-placeholder-template-ingest-phase-01-closeout
+- P20260806-qbd-p221-phase-00-g00
 relevant_decisions: []
 read_next:
 - session-handoff.yaml
-- docs/plans/placeholder-template-ingest-workflow-probe/plan.md
-- cowork-p2-kit/template-probe/template-record-extractor.mjs
-- cowork-p2-kit/template-probe/template-cell-receipt.mjs
-- cowork-p2-kit/template-probe/contracts/template-cell-receipt.schema.v1.json
-- cowork-p2-kit/template-probe/tests/template-record-extractor.test.mjs
-- cowork-p2-kit/template-probe/tests/template-workflow-probe.test.mjs
-updated_at: '2026-08-05T04:05:39.542833+00:00'
-git_head: 79c4af741ea3ffd60d511d09be2662438b3592c2
+- docs/plans/qbd-p221-formulation-selection/plan.md
+- docs/plans/qbd-p221-formulation-selection/phase-01-real-data-layer.md
+- docs/reports/qbd-p221-formulation-selection/formula-evidence-matrix.json
+- docs/reports/qbd-p221-formulation-selection/result-inventory.json
+- docs/reports/qbd-p221-formulation-selection/formula-cell-receipts.json
+updated_at: '2026-08-07T00:56:44.664603+00:00'
+git_head: 991eac9206733856b228afc5c6c1c92955d8c226

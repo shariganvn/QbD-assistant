@@ -26,6 +26,35 @@ function extractJson(raw, type = "object") {
   return JSON.parse(raw.slice(first, last + 1));
 }
 
+function restoreTextFidelity(parsed, replacements) {
+  if (!replacements) return parsed;
+  if (!Array.isArray(replacements) || replacements.length === 0) {
+    throw new IngestError("E_PARSE", "Text-fidelity replacements must be a non-empty array");
+  }
+  const pages = parsed?.pages;
+  if (!Array.isArray(pages)) throw new IngestError("E_PARSE", "LiteParse result has no pages for text-fidelity restoration");
+  const restored = pages.map((page) => ({ ...page }));
+  for (const replacement of replacements) {
+    const { from, to, context = "" } = replacement ?? {};
+    if (typeof from !== "string" || !from || typeof to !== "string" || !to) {
+      throw new IngestError("E_PARSE", "Text-fidelity replacement must be a non-empty string pair");
+    }
+    if (typeof context !== "string") throw new IngestError("E_PARSE", "Text-fidelity replacement context must be a string");
+    const escapedFrom = from.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replaceAll(" ", "\\s*");
+    const escapedContext = context.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const matcher = new RegExp(`(?<![<>=])${escapedFrom}(?![<>=])${context ? `(?=\\s*${escapedContext})` : ""}`, "g");
+    const matches = restored.flatMap((page, pageIndex) => [...String(page.text ?? "").matchAll(matcher)]
+      .map((match) => ({ pageIndex, offset: match.index, length: match[0].length })));
+    if (matches.length !== 1) {
+      throw new IngestError("E_PARSE", `Text-fidelity replacement ${JSON.stringify(from)} matched ${matches.length} locations`, { details: { from, matches } });
+    }
+    const { pageIndex, offset, length } = matches[0];
+    const text = String(restored[pageIndex].text ?? "");
+    restored[pageIndex].text = `${text.slice(0, offset)}${to}${text.slice(offset + length)}`;
+  }
+  return { ...parsed, pages: restored };
+}
+
 /**
  * @param {object} config — from createConfig
  * @returns {{ parse: Function, isComplex: Function, getVersion: Function, getBinary: Function }}
@@ -89,7 +118,7 @@ export function createLiteparseAdapter(config) {
       }
 
       try {
-        return extractJson(result.stdout, "object");
+        return restoreTextFidelity(extractJson(result.stdout, "object"), config.textFidelityReplacements);
       } catch (err) {
         throw new IngestError("E_PARSE", `Failed to parse liteparse JSON output for ${filePath}: ${err.message}`, {
           cause: err,

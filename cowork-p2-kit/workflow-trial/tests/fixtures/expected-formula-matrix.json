@@ -1,0 +1,14 @@
+{
+  "schema_version": "formula-evidence-matrix/v1",
+  "formula_ids": ["formula-01", "formula-02", "formula-03"],
+  "formulas": {
+    "formula-01": { "dissolution_mean": 73.89, "dissolution_max": 79.33, "dissolution_min": 65.15, "assay": 100.31, "content_uniformity_av": 3.71, "croscarmellose_sodium": 1 },
+    "formula-02": { "dissolution_mean": 81.4, "dissolution_max": 87.67, "dissolution_min": 79.12, "assay": 100.02, "content_uniformity_av": 2.79, "croscarmellose_sodium": 3 },
+    "formula-03": { "dissolution_mean": 98.64, "dissolution_max": 100.98, "dissolution_min": 96.15, "assay": 99.99, "content_uniformity_av": 3.04, "croscarmellose_sodium": 5 }
+  },
+  "specifications": {
+    "dissolution": { "operator": ">=", "threshold": 80, "unit": "percent" },
+    "assay": { "operator": "range-inclusive", "lower": 90, "upper": 110, "unit": "percent" },
+    "content_uniformity_av": { "operator": "<", "threshold": 15, "unit": "percent" }
+  }
+}

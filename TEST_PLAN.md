@@ -1,51 +1,54 @@
 <!-- GENERATED VIEW — do not edit manually -->
-<!-- Source: docs/test-plans/T20260805-template-docx-end-to-end-spike-run.yaml -->
+<!-- Source: docs/test-plans/T20260806-qbd-p221-phase-00.yaml -->
 <!-- Regenerate: baton render-test-plan -->
-<!-- Source fingerprint: sha256:84ae17c06050433ec1bed4650b843d22760857a2cdd41086b47577f081ab8a3b -->
+<!-- Source fingerprint: sha256:67c57ff56c91006cdc56ab6111d3f997c6f3c6f6b53650c824987f68d66ceff1 -->
 
 # TEST_PLAN — Active Validation Gates
 
-## T20260805-template-docx-end-to-end-spike-run
+## T20260806-qbd-p221-phase-00
 
 Status: **Executed — results recorded**
 
-- Workstream: `template-docx-end-to-end-spike-run`
-- Date: 2026-08-05
-- Plan: `plans/260805-1457-template-docx-end-to-end-spike-run/plan.md`
+- Workstream: `qbd-p221-formulation-selection`
+- Date: 2026-08-06
+- Plan: `docs/plans/qbd-p221-formulation-selection/plan.md`
 
 ## Scope
 
-Run the approved, bounded one-shot template DOCX spike through template probe, ingest, reasoning, rationale, and render using copied inputs only. It proves an observed single run and its internal-only boundary, not public citation, production promotion, or deterministic multi-run behavior.
+Verify the hash-pinned, isolated Phase 0 formula-cell extraction. The DOCX XML receipt is authority for table/row/column ownership; ingest records prove one admitted page/quote binding and are not cell-owner authority.
 
 ### Changed files
 
-- `cowork-p2-kit/workflow-trial/spike-e2e-run.mjs`
-- `plans/260805-1457-template-docx-end-to-end-spike-run/`
-- `artifacts/260805-1803/test-verdict.json`
-- `artifacts/260805-1803/test-output.log`
-- `artifacts/260805-1803/progress-candidate.yaml`
-- `docs/test-plans/T20260805-template-docx-end-to-end-spike-run.yaml`
-- `docs/test-plans/active.yaml`
+- `cowork-p2-kit/workflow-trial/formulation-spike-run.mjs`
+- `cowork-p2-kit/workflow-trial/formula-cell-receipt.mjs`
+- `cowork-p2-kit/workflow-trial/contracts/formula-cell-receipt.schema.v1.json`
+- `cowork-p2-kit/workflow-trial/tests/formulation-spike-run.test.mjs`
 
 ## Approval
 
 - **Human approval required** before running commands.
-- Approved at: 2026-08-05
+- Approved at: 2026-08-06
 - Approved by: human
 
 ## Commands
 
-### template-docx-end-to-end-spike-run — Run the one-shot, isolated five-stage template DOCX visibility spike.
+### qbd-p221-phase-00-tests — Run the focused G-00 test suite.
 
 ```bash
-node cowork-p2-kit/workflow-trial/spike-e2e-run.mjs
+node --test cowork-p2-kit/workflow-trial/tests/formulation-spike-run.test.mjs
+```
+
+### qbd-p221-phase-00-evidence — Emit G-00 evidence from two fresh isolated ingests.
+
+```bash
+node cowork-p2-kit/workflow-trial/formulation-spike-run.mjs --out docs/reports/qbd-p221-formulation-selection
 ```
 
 
 ## Results
 
 Verdict: **passed**
-Artifact: `artifacts/260805-1803/test-verdict.json`
+Artifact: `artifacts/260806-1550/test-verdict.json`
 Counts: passed=unknown, failed=unknown, warnings=unknown
 
 ---

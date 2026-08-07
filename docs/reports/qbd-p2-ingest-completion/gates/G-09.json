@@ -7,11 +7,11 @@
     "cowork-p2-kit/ingest/tests/determinism.integration.test.mjs"
   ],
   "exit_code": 0,
-  "raw_tap_output": "TAP version 13\n# Subtest: two independent real-LiteParse runs produce byte-identical schema-valid JSONL\nok 1 - two independent real-LiteParse runs produce byte-identical schema-valid JSONL\n  ---\n  duration_ms: 57142.883446\n  type: 'test'\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 1\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 57240.036725\n",
+  "raw_tap_output": "TAP version 13\n# Subtest: two independent real-LiteParse runs produce byte-identical schema-valid JSONL\nok 1 - two independent real-LiteParse runs produce byte-identical schema-valid JSONL\n  ---\n  duration_ms: 63359.67711\n  type: 'test'\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 1\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 63514.597616\n",
   "raw_stderr": "",
-  "timestamp": "2026-07-28T06:35:07.461Z",
-  "run_id": "6379755b-9f9b-452b-88b1-e51c76793f4d",
-  "suite_run_id": "38312764-079e-40f6-9ad1-b230244b41b8",
+  "timestamp": "2026-08-06T08:01:34.983Z",
+  "run_id": "46d30cf4-96fe-4a67-8084-16448d763e20",
+  "suite_run_id": "fd3e62c0-dbd7-417e-b966-1c67f23bcc10",
   "assertions_summary": {
     "total": 1,
     "passed": 1,
@@ -22,7 +22,7 @@
   },
   "snapshots": [],
   "timeout_ms": 300000,
-  "duration_ms": 57284,
+  "duration_ms": 63567,
   "timed_out": false,
   "signal": null
 }

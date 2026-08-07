@@ -1,0 +1,223 @@
+# Executable acceptance gates for qbd-p221-formulation-selection.
+# This file owns gate bodies. Phase files describe implementation, not duplicate
+# full acceptance. Status stays unverified until machine evidence exists.
+
+version: 2
+workstream: qbd-p221-formulation-selection
+evidence_root: docs/reports/qbd-p221-formulation-selection
+
+source_authority:
+  file: cowork-p2-kit/inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx
+  sha256: 01fe95607f4733e2b47a4c46f8dad5817d6014cc40f69a08631977c9d890cd8f
+  document_xml_sha256: ebefbf16e4f7bcae2907d6655d72a3e374cc4b2b6f185380203403f61a2bdf8a
+  classification: {label: public, citable: false}
+
+gates:
+  - id: G-00
+    title: Hash-pinned isolated formula-cell extraction (GO/NO-GO)
+    invariant: >
+      Before parsing, source and document.xml hashes match independent frozen
+      pins. A fresh isolated staging root admits only that mock through a minimal
+      temporary manifest/config. Two complete ingests are byte-identical. A
+      targeted DOCX table extractor reconstructs exact formula-01/02/03 values,
+      specs and 1%/3%/5% composition levels. Every value owns one formula-cell
+      receipt and joins exactly one admitted record. Any ambiguity is NO-GO.
+    boundary_owner: >
+      formulation-spike-run + formula-cell-receipt; canonical ingest remains unchanged
+    fixture: >
+      frozen public mock plus expected-value fixture used only for comparison
+    command: >
+      node --test cowork-p2-kit/workflow-trial/tests/formulation-spike-run.test.mjs
+      && node cowork-p2-kit/workflow-trial/formulation-spike-run.mjs
+      --out docs/reports/qbd-p221-formulation-selection
+    expected: >
+      exit 0; exact frozen hashes; isolated manifest preserves public/citable:false;
+      exact candidates formula-01/02/03; dissolution min/mean/max
+      {65.15/73.89/79.33, 79.12/81.40/87.67, 96.15/98.64/100.98};
+      assay {100.31,100.02,99.99}; CU AV {3.71,2.79,3.04}; croscarmellose
+      {1,3,5}%; distinct DISSOLUTION/ASSAY/CU specs; one cell receipt and one
+      record binding per critical value; two full-ingest store hashes equal; GO.
+    negative_cases:
+      - Source or document.xml hash differs -> reject before parser execution.
+      - Bare/canonical broad ingest root is used -> reject test setup.
+      - Formula row/column/cell owner is missing, duplicated or mismatched -> NO-GO.
+      - Receipt joins zero or multiple admitted records -> NO-GO.
+      - Two fresh full ingests differ -> NO-GO; snapshot fallback cannot pass G-00.
+    evidence: >
+      source-hashes.json + isolated-config-receipt.json + formula-evidence-matrix.json
+      + result-inventory.json + formula-cell-receipts.json + two-run-ingest-hashes.json
+      + go-no-go.json
+    blocks: [G-01, G-02, G-03, G-04, G-05]
+    status: pass
+
+  - id: G-01
+    title: Typed evidence, exact cohort, complete inventory and fact-card bindings
+    invariant: >
+      The real-data package machine-distinguishes specification, observed_result
+      and composition_context. Scoring fact cards bind only observed_result IDs.
+      Candidate IDs equal formula-01/02/03. Source-derived result inventory is
+      fully reconciled and recordRoles is derived, so omission or role downgrade
+      cannot hide adverse evidence. Package hashes bind source/store/receipts.
+    boundary_owner: real-data-pack + formulation data contracts
+    fixture: G-00 receipts, matrix and result inventory
+    command: >
+      node --test cowork-p2-kit/workflow-trial/tests/real-data-pack.test.mjs
+    expected: >
+      deterministic package with exact three candidates; dissolution min/mean/max,
+      assay and CU observed results; separate specs; source-bound 1%/3%/5%
+      composition context; complete inventory reconciliation; derived roles;
+      every scoring card bound to one observed result.
+    negative_cases:
+      - Directly constructed fact card bound to a specification -> E_SPEC_AS_RESULT.
+      - Missing/extra/duplicated formula -> exact-cohort reject.
+      - Omitted result or results-to-context role downgrade -> inventory reject.
+      - Binding points to wrong kind/source/store/receipt -> reject.
+      - Ambiguous receipt-to-record join -> reject.
+    evidence: >
+      formulation-data-package.json + formulation-evidence.json + fact-cards.json
+      + fact-card-evidence-bindings.json + inventory-reconciliation.json + hashes.json
+    blocks: [G-02, G-03, G-04, G-05]
+    status: unverified
+
+  - id: G-02
+    title: Additive v3 rubric, strict spec compilation and MVP FD-confirm flag
+    invariant: >
+      Frozen v2 behavior is unchanged. V3 requires the exact three-candidate set,
+      supports single-survivor selection only after completeness, multiple hard
+      gates and strict operators. Operators/thresholds compile from bound spec
+      evidence. A compile receipt atomically binds source/store/spec/rubric.
+      Proposal keeps fd_decision inconclusive; an fd-confirmed flag (who + when +
+      note) is the only way past proposal and the runner refuses caller-supplied
+      approval state. Cryptographic FD receipts/pins are deferred.
+    boundary_owner: >
+      selection-rubric-v3 + compiler + additive selection contract/engine paths + fd-confirm flag
+    fixture: G-01 data package; proposal v3 rubric; unset fd-confirm flag
+    command: >
+      node --test cowork-p2-kit/workflow-trial/tests/spec-compiled-rubric.test.mjs
+      cowork-p2-kit/reasoning/tests/decision-engine.test.mjs
+      cowork-p2-kit/reasoning/tests/e2e-decision.test.mjs
+    expected: >
+      v2 regressions unchanged; v3 measures map dissolution_min gate,
+      dissolution_mean score, dissolution_max diagnostic, paired assay gates and
+      strict CU <15; compile receipt hashes match; exact complete cohort plus the
+      proposed rule computes CT03 as sole survivor for the engineering proposal;
+      with the fd-confirm flag unset, fd_decision stays inconclusive.
+    negative_cases:
+      - One/two candidate input with minimum eligible 1 -> incomplete cohort, no selection.
+      - Threshold/operator/spec/store hash drift -> E_RUBRIC_SPEC_DRIFT.
+      - CU AV exactly 15 -> fails strict <15.
+      - Caller-supplied --rubric-state / approval override -> rejected.
+      - fd-confirm flag unset -> fd_decision inconclusive.
+    evidence: >
+      v2-regression.log + compiled-rubric.v3.json + spec-compile-receipt.json
+      + proposal-decision.json + fd-confirm-flag-negatives.log
+    blocks: [G-03, G-04, G-05]
+    status: unverified
+
+  - id: G-03
+    title: Raw diagnostic, inconclusive fd_decision and watermarked CT03 engineering proposal
+    invariant: >
+      Proposal runner emits a complete raw evidence/spec/composition diagnostic
+      (decision_status not-evaluated, winner null, no pass/fail/score fields) and
+      a SEPARATE engineering_proposal object naming CT03 as sole survivor under the
+      proposed rule (fd_approved:false, no selected/winner/decision wording). The
+      engine fd_decision stays inconclusive with empty selection evaluation. The
+      engineering proposal is computed only after exact-cohort/inventory/spec
+      bindings pass. All artifacts are atomically sealed to one source/store/spec/
+      rubric run.
+    boundary_owner: formulation-selection-run + diagnostic builder + engineering-proposal builder
+    fixture: G-01 package + G-02 proposal rubric artifacts
+    command: >
+      node cowork-p2-kit/workflow-trial/formulation-selection-run.mjs
+      --out docs/reports/qbd-p221-formulation-selection/proposal-run
+      && node --test cowork-p2-kit/workflow-trial/tests/formulation-selection-decision.test.mjs
+    expected: >
+      diagnostic contains all three candidates and raw evidence but no decision
+      semantics; fd_decision inconclusive/winner null with empty selection arrays;
+      engineering_proposal reports CT01/CT02 fail the dissolution min-gate and CT03
+      sole survivor, marked fd_approved:false; no output field uses
+      selected/winner/decision for CT03.
+    negative_cases:
+      - Diagnostic contains eligible/passed/score or non-null winner -> schema reject.
+      - engineering_proposal uses selected/winner/decision wording -> schema reject.
+      - engineering_proposal emitted while cohort/inventory/spec binding fails -> reject.
+      - Missing/extra formula, omitted inventory record or role downgrade -> reject.
+      - Cross-run source/data/spec/rubric/diagnostic substitution -> publication reject.
+      - Runner accepts rubric-state or approval CLI override -> contract test fail.
+    evidence: >
+      proposal-run/formula-evidence-diagnostic.json + proposal-run/formula-decision.json
+      + proposal-run/engineering-proposal.json + proposal-run/selection-evaluation.json
+      + proposal-run/publication-receipt.json
+    blocks: [G-04, G-05]
+    status: unverified
+
+  - id: G-04
+    title: Same-run rationale and watermarked non-citable review DOCX with engineering proposal
+    invariant: >
+      Rationale binds all numeric/composition/spec claims to the Phase 3 receipt
+      and explains why fd_decision is inconclusive. It may state that CT03 is the
+      sole survivor under the proposed (FD-unapproved) rule, but never uses
+      selected/winner/decision. Review DOCX shows raw evidence/spec/missing states
+      plus a dedicated watermarked "ĐỀ XUẤT KỸ THUẬT — CHƯA ĐƯỢC FD DUYỆT" block
+      naming CT03, and a page-level REVIEW ONLY / NON-CITABLE / NOT FD APPROVED
+      marker. Source classification stays citable:false; draft has zero public
+      citation objects and uses validated internal provenance references.
+      Rationale/render receipts are same-run bound and normalized OOXML is deterministic.
+    boundary_owner: formulation rationale/review adapter + additive packet sealing + existing render
+    fixture: G-03 proposal publication receipt + engineering proposal
+    command: >
+      node cowork-p2-kit/workflow-trial/formulation-selection-run.mjs
+      --emit rationale,render
+      --out docs/reports/qbd-p221-formulation-selection/review-run
+      && node --test cowork-p2-kit/workflow-trial/tests/formulation-selection-rationale.test.mjs
+      cowork-p2-kit/workflow-trial/tests/formulation-selection-render.test.mjs
+    expected: >
+      source-bound inconclusive explanation; watermarked engineering-proposal
+      block naming CT03 with fd_approved:false; 1%/3%/5% claims bound; raw
+      formula/spec table; zero public citations; complete internal provenance
+      references; unchanged citable:false; same-run receipts; two normalized
+      OOXML hashes equal.
+    negative_cases:
+      - selected/winner/decision language for CT03 anywhere in rationale/render -> reject.
+      - Engineering-proposal block or the REVIEW-ONLY/NOT-FD-APPROVED marker missing -> reject.
+      - Numeric/composition claim missing permitted binding -> reject.
+      - Mock represented with citable:true or public citation object -> reject.
+      - Swapped decision/diagnostic/data/compile/rationale/DOCX artifact -> reject.
+      - Missing missing-data state -> reject.
+    evidence: >
+      review-run/rationale-package.json + review-run/rationale-receipt.json
+      + review-run/p2.2.1-review.docx + review-run/render-receipt.json
+      + review-run/two-run-normalized-ooxml-hashes.json
+    blocks: [G-05]
+    status: unverified
+
+  - id: G-05
+    title: Legitimacy-negative and split determinism regression suite
+    invariant: >
+      Focused and aggregate tests cover the legitimacy backbone: source hashes,
+      isolated admission, cell ownership, typed evidence (spec-not-result), exact
+      cohort, full inventory/derived roles, strict spec compilation, single-
+      survivor safety, no selected/winner language for CT03, engineering-proposal
+      schema, watermarked non-citable render, rationale grounding and all prior v2
+      regressions. Full-ingest determinism is separate from downstream-from-pinned-
+      store determinism; snapshot fallback cannot hide a full-ingest failure. The
+      full cryptographic-forgery/publication adversarial matrix is deferred to the
+      authorization module.
+    boundary_owner: tests across Phases 0-4
+    fixture: real frozen mock + legitimacy-negative fixtures; synthetic demo only for v2 regression
+    command: >
+      node --test cowork-p2-kit/workflow-trial/tests/formulation-selection-*.test.mjs
+      && node --test cowork-p2-kit/reasoning/tests/*.test.mjs
+      cowork-p2-kit/rationale/tests/*.test.mjs cowork-p2-kit/render/tests/*.test.mjs
+    expected: >
+      every listed legitimacy negative asserts a specific code/state; two fresh
+      complete ingests match; two downstream runs match; verdict labels both lanes;
+      existing v2 reasoning/rationale/render tests pass.
+    negative_cases:
+      - Any required legitimacy negative missing from verdict -> gate fail.
+      - Full-ingest hashes differ -> gate fail, even if snapshot downstream is stable.
+      - Downstream snapshot result labeled full-run -> gate fail.
+      - Existing v2 regression changes -> gate fail.
+    evidence: docs/reports/qbd-p221-formulation-selection/test-verdict.json
+    blocks: [exit-acceptance]
+    status: unverified

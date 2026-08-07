@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "formula-cell-receipt.schema.v1",
+  "title": "Formula-selection DOCX cell receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "receipt_id", "formula_id", "evidence_kind", "source_file", "source_document_sha256", "document_xml_sha256", "owner", "raw_cell_text", "raw_cell_sha256", "raw_cell_xml_sha256", "normalized_value", "normalized_value_sha256", "classification", "record_binding"],
+  "properties": {
+    "schema_version": { "const": "formula-cell-receipt/v1" },
+    "receipt_id": { "type": "string", "minLength": 1 },
+    "formula_id": { "type": ["string", "null"] },
+    "evidence_kind": { "enum": ["observed_result", "composition_context", "specification"] },
+    "source_file": { "const": "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx" },
+    "source_document_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "document_xml_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "owner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["table_index", "table_signature_sha256", "row", "row_key", "formula_column_header", "physical_cell", "logical_column_start", "logical_column_end", "grid_span", "vertical_merge"],
+      "properties": {
+        "table_index": { "type": "integer", "minimum": 1 },
+        "table_signature_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "row": { "type": "integer", "minimum": 1 },
+        "row_key": { "type": "string", "minLength": 1 },
+        "formula_column_header": { "type": ["string", "null"] },
+        "physical_cell": { "type": "integer", "minimum": 1 },
+        "logical_column_start": { "type": "integer", "minimum": 1 },
+        "logical_column_end": { "type": "integer", "minimum": 1 },
+        "grid_span": { "type": "integer", "minimum": 1 },
+        "vertical_merge": { "enum": ["none", "restart", "continue"] }
+      }
+    },
+    "raw_cell_text": { "type": "string", "minLength": 1 },
+    "raw_cell_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "raw_cell_xml_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "normalized_value": { "type": "object" },
+    "normalized_value_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "citable"],
+      "properties": { "label": { "const": "public" }, "citable": { "const": false } }
+    },
+    "record_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "match_basis", "record_id", "store_records_sha256", "source_document_sha256", "raw_cell_sha256", "page", "quote", "quote_sha256", "quote_projection_sha256", "char_start", "char_end"],
+      "properties": {
+        "status": { "const": "exact" },
+        "match_basis": { "enum": ["raw-cell-text", "semantic-specification"] },
+        "record_id": { "type": "string", "minLength": 1 },
+        "store_records_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "source_document_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "raw_cell_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "page": { "type": "integer", "minimum": 1 },
+        "quote": { "type": "string", "minLength": 1 },
+        "quote_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "quote_projection_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "char_start": { "type": "integer", "minimum": 0 },
+        "char_end": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

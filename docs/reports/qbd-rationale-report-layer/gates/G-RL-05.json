@@ -9,11 +9,11 @@
     "cowork-p2-kit/rationale/tests/e2e-rationale.test.mjs"
   ],
   "exit_code": 0,
-  "raw_tap_output": "TAP version 13\n# Subtest: G-RL-05 seals and publishes all committed branches, retaining their exact boundaries\nok 1 - G-RL-05 seals and publishes all committed branches, retaining their exact boundaries\n  ---\n  duration_ms: 105.987346\n  type: 'test'\n  ...\n# Subtest: G-RL-05 publishes and revalidates the committed selected reference package byte-exactly\nok 2 - G-RL-05 publishes and revalidates the committed selected reference package byte-exactly\n  ---\n  duration_ms: 72.053578\n  type: 'test'\n  ...\n# Subtest: G-RL-05 fails closed for a missing attestation, tampered member, stale receipt, and surplus file\nok 3 - G-RL-05 fails closed for a missing attestation, tampered member, stale receipt, and surplus file\n  ---\n  duration_ms: 15.309908\n  type: 'test'\n  ...\n# Subtest: G-RL-05 rejects production roots other than the declared rationale root and preserves P4 during isolated regression\nok 4 - G-RL-05 rejects production roots other than the declared rationale root and preserves P4 during isolated regression\n  ---\n  duration_ms: 1799.520396\n  type: 'test'\n  ...\n# Subtest: G-RL-05 runner uses the declared gate order, a shared suite ID, and first-failure stop\nok 5 - G-RL-05 runner uses the declared gate order, a shared suite ID, and first-failure stop\n  ---\n  duration_ms: 3.409689\n  type: 'test'\n  ...\n# Subtest: G-RL-05 runner rejects a missing test and failed post-suite evidence validation\nok 6 - G-RL-05 runner rejects a missing test and failed post-suite evidence validation\n  ---\n  duration_ms: 1.17438\n  type: 'test'\n  ...\n1..6\n# tests 6\n# suites 0\n# pass 6\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 2087.605517\n",
+  "raw_tap_output": "TAP version 13\n# Subtest: G-RL-05 seals and publishes all committed branches, retaining their exact boundaries\nok 1 - G-RL-05 seals and publishes all committed branches, retaining their exact boundaries\n  ---\n  duration_ms: 557.465215\n  type: 'test'\n  ...\n# Subtest: G-RL-05 publishes and revalidates the committed selected reference package byte-exactly\nok 2 - G-RL-05 publishes and revalidates the committed selected reference package byte-exactly\n  ---\n  duration_ms: 144.355498\n  type: 'test'\n  ...\n# Subtest: G-RL-05 fails closed for a missing attestation, tampered member, stale receipt, and surplus file\nok 3 - G-RL-05 fails closed for a missing attestation, tampered member, stale receipt, and surplus file\n  ---\n  duration_ms: 21.961689\n  type: 'test'\n  ...\n# Subtest: G-RL-05 rejects production roots other than the declared rationale root and preserves P4 during isolated regression\nok 4 - G-RL-05 rejects production roots other than the declared rationale root and preserves P4 during isolated regression\n  ---\n  duration_ms: 11157.718018\n  type: 'test'\n  ...\n# Subtest: G-RL-05 runner uses the declared gate order, a shared suite ID, and first-failure stop\nok 5 - G-RL-05 runner uses the declared gate order, a shared suite ID, and first-failure stop\n  ---\n  duration_ms: 3.751574\n  type: 'test'\n  ...\n# Subtest: G-RL-05 runner rejects a missing test and failed post-suite evidence validation\nok 6 - G-RL-05 runner rejects a missing test and failed post-suite evidence validation\n  ---\n  duration_ms: 1.546948\n  type: 'test'\n  ...\n1..6\n# tests 6\n# suites 0\n# pass 6\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 12068.571497\n",
   "raw_stderr": "",
-  "timestamp": "2026-07-29T05:46:36.715Z",
-  "run_id": "2b298dab-4445-4fea-9c81-7399cb00a5e1",
-  "suite_run_id": "794338e6-758f-44b5-911e-1b7ca691b641",
+  "timestamp": "2026-08-06T07:59:42.118Z",
+  "run_id": "b06d6641-a15b-4748-a68b-32fd121a0bdb",
+  "suite_run_id": "a5e2d739-ca79-42df-9f3e-5521907759ba",
   "assertions_summary": {
     "total": 6,
     "passed": 6,
@@ -23,7 +23,7 @@
     "cancelled": 0
   },
   "timeout_ms": 300000,
-  "duration_ms": 2132,
+  "duration_ms": 12139,
   "timed_out": false,
   "signal": null,
   "store_records_sha256": "6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56"

@@ -7,11 +7,11 @@
     "cowork-p2-kit/ingest/tests/capability-discovery.test.mjs"
   ],
   "exit_code": 0,
-  "raw_tap_output": "TAP version 13\n# Subtest: valid JSON array with exit 0 is available\nok 1 - valid JSON array with exit 0 is available\n  ---\n  duration_ms: 2.366158\n  type: 'test'\n  ...\n# Subtest: valid JSON array with exit 1 is available (complex pages)\nok 2 - valid JSON array with exit 1 is available (complex pages)\n  ---\n  duration_ms: 0.718097\n  type: 'test'\n  ...\n# Subtest: valid JSON array with ENOENT error is available\nok 3 - valid JSON array with ENOENT error is available\n  ---\n  duration_ms: 0.446399\n  type: 'test'\n  ...\n# Subtest: ENOENT without valid JSON is unsupported\nok 4 - ENOENT without valid JSON is unsupported\n  ---\n  duration_ms: 0.279657\n  type: 'test'\n  ...\n# Subtest: exit 127 without valid JSON is unsupported\nok 5 - exit 127 without valid JSON is unsupported\n  ---\n  duration_ms: 0.2353\n  type: 'test'\n  ...\n# Subtest: malformed output is invalid\nok 6 - malformed output is invalid\n  ---\n  duration_ms: 0.208806\n  type: 'test'\n  ...\n# Subtest: other nonzero exit without valid JSON is invalid\nok 7 - other nonzero exit without valid JSON is invalid\n  ---\n  duration_ms: 0.211745\n  type: 'test'\n  ...\n# Subtest: signal termination is invalid\nok 8 - signal termination is invalid\n  ---\n  duration_ms: 0.201453\n  type: 'test'\n  ...\n# Subtest: timeout is invalid\nok 9 - timeout is invalid\n  ---\n  duration_ms: 0.516284\n  type: 'test'\n  ...\n# Subtest: input-path trust-validation failure is invalid, never unsupported\nok 10 - input-path trust-validation failure is invalid, never unsupported\n  ---\n  duration_ms: 0.527943\n  type: 'test'\n  ...\n# Subtest: required parse failure returns E_PARSE\nok 11 - required parse failure returns E_PARSE\n  ---\n  duration_ms: 0.641535\n  type: 'test'\n  ...\n# Subtest: invocation recorder observes argument arrays and no ocr subcommand\nok 12 - invocation recorder observes argument arrays and no ocr subcommand\n  ---\n  duration_ms: 0.340701\n  type: 'test'\n  ...\n# Subtest: all unsupported stays unsupported\nok 13 - all unsupported stays unsupported\n  ---\n  duration_ms: 1.059451\n  type: 'test'\n  ...\n# Subtest: available plus unsupported is available\nok 14 - available plus unsupported is available\n  ---\n  duration_ms: 10.005333\n  type: 'test'\n  ...\n# Subtest: any invalid is invalid\nok 15 - any invalid is invalid\n  ---\n  duration_ms: 0.275111\n  type: 'test'\n  ...\n# Subtest: real product-profile DOCX precheck emits valid JSON and child CLI reports isComplex available\nok 16 - real product-profile DOCX precheck emits valid JSON and child CLI reports isComplex available\n  ---\n  duration_ms: 20811.441347\n  type: 'test'\n  ...\n1..16\n# tests 16\n# suites 0\n# pass 16\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 20939.484237\n",
+  "raw_tap_output": "TAP version 13\n# Subtest: valid JSON array with exit 0 is available\nok 1 - valid JSON array with exit 0 is available\n  ---\n  duration_ms: 2.526398\n  type: 'test'\n  ...\n# Subtest: valid JSON array with exit 1 is available (complex pages)\nok 2 - valid JSON array with exit 1 is available (complex pages)\n  ---\n  duration_ms: 3.055933\n  type: 'test'\n  ...\n# Subtest: valid JSON array with ENOENT error is available\nok 3 - valid JSON array with ENOENT error is available\n  ---\n  duration_ms: 0.475204\n  type: 'test'\n  ...\n# Subtest: ENOENT without valid JSON is unsupported\nok 4 - ENOENT without valid JSON is unsupported\n  ---\n  duration_ms: 0.379624\n  type: 'test'\n  ...\n# Subtest: exit 127 without valid JSON is unsupported\nok 5 - exit 127 without valid JSON is unsupported\n  ---\n  duration_ms: 0.254581\n  type: 'test'\n  ...\n# Subtest: malformed output is invalid\nok 6 - malformed output is invalid\n  ---\n  duration_ms: 0.247353\n  type: 'test'\n  ...\n# Subtest: other nonzero exit without valid JSON is invalid\nok 7 - other nonzero exit without valid JSON is invalid\n  ---\n  duration_ms: 0.233836\n  type: 'test'\n  ...\n# Subtest: signal termination is invalid\nok 8 - signal termination is invalid\n  ---\n  duration_ms: 0.228584\n  type: 'test'\n  ...\n# Subtest: timeout is invalid\nok 9 - timeout is invalid\n  ---\n  duration_ms: 0.610957\n  type: 'test'\n  ...\n# Subtest: input-path trust-validation failure is invalid, never unsupported\nok 10 - input-path trust-validation failure is invalid, never unsupported\n  ---\n  duration_ms: 0.70989\n  type: 'test'\n  ...\n# Subtest: required parse failure returns E_PARSE\nok 11 - required parse failure returns E_PARSE\n  ---\n  duration_ms: 0.799834\n  type: 'test'\n  ...\n# Subtest: invocation recorder observes argument arrays and no ocr subcommand\nok 12 - invocation recorder observes argument arrays and no ocr subcommand\n  ---\n  duration_ms: 0.410639\n  type: 'test'\n  ...\n# Subtest: all unsupported stays unsupported\nok 13 - all unsupported stays unsupported\n  ---\n  duration_ms: 1.217329\n  type: 'test'\n  ...\n# Subtest: available plus unsupported is available\nok 14 - available plus unsupported is available\n  ---\n  duration_ms: 11.603335\n  type: 'test'\n  ...\n# Subtest: any invalid is invalid\nok 15 - any invalid is invalid\n  ---\n  duration_ms: 0.436534\n  type: 'test'\n  ...\n# Subtest: real product-profile DOCX precheck emits valid JSON and child CLI reports isComplex available\nok 16 - real product-profile DOCX precheck emits valid JSON and child CLI reports isComplex available\n  ---\n  duration_ms: 24721.764705\n  type: 'test'\n  ...\n1..16\n# tests 16\n# suites 0\n# pass 16\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 24862.365563\n",
   "raw_stderr": "",
-  "timestamp": "2026-07-28T06:34:10.124Z",
-  "run_id": "d8abda4c-1a3a-4e28-aeaf-a1903a15036d",
-  "suite_run_id": "38312764-079e-40f6-9ad1-b230244b41b8",
+  "timestamp": "2026-08-06T08:00:31.326Z",
+  "run_id": "4c42f9d7-7ccd-4922-b0be-e82494db8bed",
+  "suite_run_id": "fd3e62c0-dbd7-417e-b966-1c67f23bcc10",
   "assertions_summary": {
     "total": 16,
     "passed": 16,
@@ -24,7 +24,7 @@
     {
       "precheck": {
         "stdout": "[{\"pageNumber\":1,\"textLength\":1111,\"textCoverage\":0.16965845227241516,\"hasSubstantialImages\":false,\"imageBlockCount\":0,\"imageCoverage\":0,\"largestImageCoverage\":0,\"fullPageImage\":false,\"uncoveredVectorArea\":0,\"isGarbled\":false,\"pageArea\":501180.3125,\"needsOcr\":false,\"reasons\":[]},{\"pageNumber\":2,\"textLength\":414,\"textCoverage\":0.06011079251766205,\"hasSubstantialImages\":false,\"imageBlockCount\":0,\"imageCoverage\":0,\"largestImageCoverage\":0,\"fullPageImage\":false,\"isGarbled\":false,\"pageArea\":501180.3125,\"needsOcr\":true,\"reasons\":[\"sparse-text\"]}]\n",
-        "stderr": "[liteparse] extract: 669.4ms (2 pages)\n[liteparse] complexity: 0.0ms\nCOMPLEX — 1/2 page(s) need OCR\n",
+        "stderr": "[liteparse] extract: 801.4ms (2 pages)\n[liteparse] complexity: 0.0ms\nCOMPLEX — 1/2 page(s) need OCR\n",
         "exitCode": 1,
         "json": [
           {
@@ -61,14 +61,14 @@
         ]
       },
       "child": {
-        "stdout": "\n=== Ingest Complete ===\n  Total records: 17\n  Store: /tmp/ingest-g08-QLCn5r/store/records.jsonl\n  Store hash: 6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56\n  Capabilities: {\"isComplex\":{\"status\":\"available\"},\"ocrEligible\":[]}\n",
+        "stdout": "\n=== Ingest Complete ===\n  Total records: 17\n  Store: /tmp/ingest-g08-fwE739/store/records.jsonl\n  Store hash: 6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56\n  Capabilities: {\"isComplex\":{\"status\":\"available\"},\"ocrEligible\":[]}\n",
         "stderr": "",
         "exitCode": 0
       }
     }
   ],
   "timeout_ms": 300000,
-  "duration_ms": 20990,
+  "duration_ms": 24921,
   "timed_out": false,
   "signal": null
 }

@@ -2,24 +2,30 @@
 
 The single canonical **active** plan is:
 
-`plans/260805-1815-template-docx-content-demo/plan.md`
+`docs/plans/qbd-p221-formulation-selection/plan.md`
 
-Fill one representative P.2 dossier slice with visibly-synthetic content plus
-footnoted citations through the existing five-stage chain, so a Product Owner can
-review content and format. Review-only, watermarked, never citable, never
-promoted. Builds on the completed end-to-end spike.
+Produce a real formulation-selection decision (ICH P.2.2.1) from the filled
+mock's three-formula cohort, reusing the existing five-stage pipeline. Replaces
+the synthetic demo data path with truthful, source-bound evidence; thresholds are
+compiled from extracted specification evidence (never hardcoded); the winner is
+gated on FD rubric approval. Read `plan.md`, then `gates.yaml`, then only the
+current step file.
+
+## Completed (read-only)
+
+- `plans/260805-1815-template-docx-content-demo/plan.md` — filled one P.2 slice
+  with visibly-synthetic content through the five-stage chain so a Product Owner
+  could review content and format. Proved content flows end-to-end; its data path
+  is synthetic and superseded by the active plan above. Never citable/promoted.
+- `plans/260805-1457-template-docx-end-to-end-spike-run/plan.md` — throwaway
+  end-to-end spike; produced one empty-by-design internal DOCX proving the pipe
+  connects.
 
 ## Queued next (activate later)
 
 - `plans/260805-1335-template-to-docx-end-to-end-trial/plan.md` — the hardened
   end-to-end trial (two-run determinism, forge negatives, Bubblewrap render,
-  red-team gates). Activate only if we choose to harden after the demo.
-
-## Completed (read-only)
-
-- `plans/260805-1457-template-docx-end-to-end-spike-run/plan.md` — throwaway
-  end-to-end spike; produced one empty-by-design internal DOCX proving the pipe
-  connects. Superseded as active by the content demo above.
+  red-team gates). Activate only if we choose to harden the pipeline.
 
 ## Completed upstream (read-only)
 

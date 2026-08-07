@@ -7,11 +7,11 @@
     "cowork-p2-kit/render/tests/contract.test.mjs"
   ],
   "exit_code": 0,
-  "raw_tap_output": "TAP version 13\n# Subtest: accepts the committed public citation envelope and supported block shapes\nok 1 - accepts the committed public citation envelope and supported block shapes\n  ---\n  duration_ms: 3.385209\n  type: 'test'\n  ...\n# Subtest: preserves the existing optional title boundary and Phase 2 evidence identity mapping\nok 2 - preserves the existing optional title boundary and Phase 2 evidence identity mapping\n  ---\n  duration_ms: 0.902777\n  type: 'test'\n  ...\n# Subtest: accepts only the two exact HTTPS hosts without credentials or ports\nok 3 - accepts only the two exact HTTPS hosts without credentials or ports\n  ---\n  duration_ms: 5.395375\n  type: 'test'\n  ...\n# Subtest: rejects the committed citation deny fixtures with declared codes\nok 4 - rejects the committed citation deny fixtures with declared codes\n  ---\n  duration_ms: 2.431008\n  type: 'test'\n  ...\n# Subtest: rejects duplicate evidence IDs, unknown keys, malformed segments, and ragged tables\nok 5 - rejects duplicate evidence IDs, unknown keys, malformed segments, and ragged tables\n  ---\n  duration_ms: 1.198657\n  type: 'test'\n  ...\n# Subtest: rejects non-object drafts, top-level extras, path escapes, and malformed nested shapes\nok 6 - rejects non-object drafts, top-level extras, path escapes, and malformed nested shapes\n  ---\n  duration_ms: 2.26688\n  type: 'test'\n  ...\n1..6\n# tests 6\n# suites 0\n# pass 6\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 101.409616\n",
+  "raw_tap_output": "TAP version 13\n# Subtest: accepts the committed public citation envelope and supported block shapes\nok 1 - accepts the committed public citation envelope and supported block shapes\n  ---\n  duration_ms: 5.223195\n  type: 'test'\n  ...\n# Subtest: preserves the existing optional title boundary and Phase 2 evidence identity mapping\nok 2 - preserves the existing optional title boundary and Phase 2 evidence identity mapping\n  ---\n  duration_ms: 2.016146\n  type: 'test'\n  ...\n# Subtest: accepts only the two exact HTTPS hosts without credentials or ports\nok 3 - accepts only the two exact HTTPS hosts without credentials or ports\n  ---\n  duration_ms: 9.1309\n  type: 'test'\n  ...\n# Subtest: rejects the committed citation deny fixtures with declared codes\nok 4 - rejects the committed citation deny fixtures with declared codes\n  ---\n  duration_ms: 13.346334\n  type: 'test'\n  ...\n# Subtest: rejects duplicate evidence IDs, unknown keys, malformed segments, and ragged tables\nok 5 - rejects duplicate evidence IDs, unknown keys, malformed segments, and ragged tables\n  ---\n  duration_ms: 4.462337\n  type: 'test'\n  ...\n# Subtest: rejects non-object drafts, top-level extras, path escapes, and malformed nested shapes\nok 6 - rejects non-object drafts, top-level extras, path escapes, and malformed nested shapes\n  ---\n  duration_ms: 10.586829\n  type: 'test'\n  ...\n1..6\n# tests 6\n# suites 0\n# pass 6\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 233.319346\n",
   "raw_stderr": "",
-  "timestamp": "2026-07-27T05:17:05.850Z",
-  "run_id": "7a7f2505-de82-4ee2-9ee4-7523f3bd66d9",
-  "suite_run_id": "f2164e59-c598-488c-9b59-0acbd2095e50",
+  "timestamp": "2026-08-06T07:59:26.183Z",
+  "run_id": "e6a245bd-c7ed-497a-9f6f-88dc8fc36419",
+  "suite_run_id": "db33974a-4e85-4942-9b93-a0970d8bd521",
   "assertions_summary": {
     "total": 6,
     "passed": 6,
@@ -22,7 +22,7 @@
   },
   "snapshots": [],
   "timeout_ms": 300000,
-  "duration_ms": 149,
+  "duration_ms": 366,
   "timed_out": false,
   "signal": null
 }

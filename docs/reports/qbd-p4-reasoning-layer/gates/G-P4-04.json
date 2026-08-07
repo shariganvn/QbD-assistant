@@ -8,11 +8,11 @@
     "cowork-p2-kit/reasoning/tests/skill-artifacts.test.mjs"
   ],
   "exit_code": 0,
-  "raw_tap_output": "TAP version 13\n# Subtest: G-P4-04 SKILL fact-card template and bounded Cowork instructions are valid\nok 1 - G-P4-04 SKILL fact-card template and bounded Cowork instructions are valid\n  ---\n  duration_ms: 2.776608\n  type: 'test'\n  ...\n# Subtest: G-P4-04 publishes only a hash-bound complete package with deterministic escaped Markdown\nok 2 - G-P4-04 publishes only a hash-bound complete package with deterministic escaped Markdown\n  ---\n  duration_ms: 21.413042\n  type: 'test'\n  ...\n# Subtest: G-P4-04 canonicalizes nested Markdown data and preserves escaped multiline quote characters\nok 3 - G-P4-04 canonicalizes nested Markdown data and preserves escaped multiline quote characters\n  ---\n  duration_ms: 9.462159\n  type: 'test'\n  ...\n# Subtest: G-P4-04 rejects each decision/evaluation/evidence binding before package publication\nok 4 - G-P4-04 rejects each decision/evaluation/evidence binding before package publication\n  ---\n  duration_ms: 7.603331\n  type: 'test'\n  ...\n# Subtest: G-P4-04 rejects hand-authored Markdown, surplus report files, stale attestation, and receipt tampering\nok 5 - G-P4-04 rejects hand-authored Markdown, surplus report files, stale attestation, and receipt tampering\n  ---\n  duration_ms: 21.100422\n  type: 'test'\n  ...\n# Subtest: G-P4-04 publish-package refuses external destinations and invalid command envelopes\nok 6 - G-P4-04 publish-package refuses external destinations and invalid command envelopes\n  ---\n  duration_ms: 5.611737\n  type: 'test'\n  ...\n# Subtest: G-P4-04 execution reports remain human-only operational ledgers outside decision publication\nok 7 - G-P4-04 execution reports remain human-only operational ledgers outside decision publication\n  ---\n  duration_ms: 1.908115\n  type: 'test'\n  ...\n1..7\n# tests 7\n# suites 0\n# pass 7\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 163.252853\n",
+  "raw_tap_output": "TAP version 13\n# Subtest: G-P4-04 SKILL fact-card template and bounded Cowork instructions are valid\nok 1 - G-P4-04 SKILL fact-card template and bounded Cowork instructions are valid\n  ---\n  duration_ms: 20.355747\n  type: 'test'\n  ...\n# Subtest: G-P4-04 publishes only a hash-bound complete package with deterministic escaped Markdown\nok 2 - G-P4-04 publishes only a hash-bound complete package with deterministic escaped Markdown\n  ---\n  duration_ms: 35.849164\n  type: 'test'\n  ...\n# Subtest: G-P4-04 canonicalizes nested Markdown data and preserves escaped multiline quote characters\nok 3 - G-P4-04 canonicalizes nested Markdown data and preserves escaped multiline quote characters\n  ---\n  duration_ms: 16.937265\n  type: 'test'\n  ...\n# Subtest: G-P4-04 rejects each decision/evaluation/evidence binding before package publication\nok 4 - G-P4-04 rejects each decision/evaluation/evidence binding before package publication\n  ---\n  duration_ms: 10.568824\n  type: 'test'\n  ...\n# Subtest: G-P4-04 rejects hand-authored Markdown, surplus report files, stale attestation, and receipt tampering\nok 5 - G-P4-04 rejects hand-authored Markdown, surplus report files, stale attestation, and receipt tampering\n  ---\n  duration_ms: 35.196043\n  type: 'test'\n  ...\n# Subtest: G-P4-04 publish-package refuses external destinations and invalid command envelopes\nok 6 - G-P4-04 publish-package refuses external destinations and invalid command envelopes\n  ---\n  duration_ms: 11.358717\n  type: 'test'\n  ...\n# Subtest: G-P4-04 execution reports remain human-only operational ledgers outside decision publication\nok 7 - G-P4-04 execution reports remain human-only operational ledgers outside decision publication\n  ---\n  duration_ms: 1.999775\n  type: 'test'\n  ...\n1..7\n# tests 7\n# suites 0\n# pass 7\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 338.50575\n",
   "raw_stderr": "",
-  "timestamp": "2026-07-28T05:34:16.534Z",
-  "run_id": "b4169ee6-2f64-400a-8f09-e6c490e18900",
-  "suite_run_id": "fd3d7e05-220c-464a-9417-9436eec6d7ee",
+  "timestamp": "2026-08-06T07:59:28.600Z",
+  "run_id": "4c1decda-adc3-43b4-a505-aad26cf776a5",
+  "suite_run_id": "d8a716f4-7c07-4c54-a821-ca6b43986b69",
   "assertions_summary": {
     "total": 7,
     "passed": 7,
@@ -22,7 +22,7 @@
     "cancelled": 0
   },
   "timeout_ms": 300000,
-  "duration_ms": 216,
+  "duration_ms": 430,
   "timed_out": false,
   "signal": null,
   "store_records_sha256": "6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56"

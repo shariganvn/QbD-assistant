@@ -7,11 +7,11 @@
     "cowork-p2-kit/ingest/tests/publication-failure.test.mjs"
   ],
   "exit_code": 0,
-  "raw_tap_output": "TAP version 13\n# Subtest: publication schema failure preserves store and emits an external diagnostic\nok 1 - publication schema failure preserves store and emits an external diagnostic\n  ---\n  duration_ms: 19.450865\n  type: 'test'\n  ...\n# Subtest: publication round-trip failure preserves store and emits an external diagnostic\nok 2 - publication round-trip failure preserves store and emits an external diagnostic\n  ---\n  duration_ms: 3.012798\n  type: 'test'\n  ...\n# Subtest: publication rename failure preserves store and emits an external diagnostic\nok 3 - publication rename failure preserves store and emits an external diagnostic\n  ---\n  duration_ms: 3.228148\n  type: 'test'\n  ...\n# Subtest: publication rejects an artifact root inside the store without mutation\nok 4 - publication rejects an artifact root inside the store without mutation\n  ---\n  duration_ms: 1.845306\n  type: 'test'\n  ...\n# Subtest: lock-metadata write failure removes the lock before reporting failure\nok 5 - lock-metadata write failure removes the lock before reporting failure\n  ---\n  duration_ms: 1.90904\n  type: 'test'\n  ...\n# Subtest: publication does not introduce a failure after a successful rename\nok 6 - publication does not introduce a failure after a successful rename\n  ---\n  duration_ms: 2.07288\n  type: 'test'\n  ...\n# Subtest: publication cleanup retains a lock replaced by another writer\nok 7 - publication cleanup retains a lock replaced by another writer\n  ---\n  duration_ms: 1.736058\n  type: 'test'\n  ...\n# Subtest: publication cleanup does not unlink a lock created after ownership verification\nok 8 - publication cleanup does not unlink a lock created after ownership verification\n  ---\n  duration_ms: 1.858526\n  type: 'test'\n  ...\n# Subtest: publication cleanup removes its private lock when ownership inspection fails\nok 9 - publication cleanup removes its private lock when ownership inspection fails\n  ---\n  duration_ms: 2.02748\n  type: 'test'\n  ...\n1..9\n# tests 9\n# suites 0\n# pass 9\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 129.073523\n",
+  "raw_tap_output": "TAP version 13\n# Subtest: publication schema failure preserves store and emits an external diagnostic\nok 1 - publication schema failure preserves store and emits an external diagnostic\n  ---\n  duration_ms: 21.673047\n  type: 'test'\n  ...\n# Subtest: publication round-trip failure preserves store and emits an external diagnostic\nok 2 - publication round-trip failure preserves store and emits an external diagnostic\n  ---\n  duration_ms: 3.005608\n  type: 'test'\n  ...\n# Subtest: publication rename failure preserves store and emits an external diagnostic\nok 3 - publication rename failure preserves store and emits an external diagnostic\n  ---\n  duration_ms: 3.639817\n  type: 'test'\n  ...\n# Subtest: publication rejects an artifact root inside the store without mutation\nok 4 - publication rejects an artifact root inside the store without mutation\n  ---\n  duration_ms: 2.058083\n  type: 'test'\n  ...\n# Subtest: lock-metadata write failure removes the lock before reporting failure\nok 5 - lock-metadata write failure removes the lock before reporting failure\n  ---\n  duration_ms: 2.151285\n  type: 'test'\n  ...\n# Subtest: publication does not introduce a failure after a successful rename\nok 6 - publication does not introduce a failure after a successful rename\n  ---\n  duration_ms: 2.285934\n  type: 'test'\n  ...\n# Subtest: publication cleanup retains a lock replaced by another writer\nok 7 - publication cleanup retains a lock replaced by another writer\n  ---\n  duration_ms: 2.005229\n  type: 'test'\n  ...\n# Subtest: publication cleanup does not unlink a lock created after ownership verification\nok 8 - publication cleanup does not unlink a lock created after ownership verification\n  ---\n  duration_ms: 2.203777\n  type: 'test'\n  ...\n# Subtest: publication cleanup removes its private lock when ownership inspection fails\nok 9 - publication cleanup removes its private lock when ownership inspection fails\n  ---\n  duration_ms: 2.493029\n  type: 'test'\n  ...\n1..9\n# tests 9\n# suites 0\n# pass 9\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 139.510581\n",
   "raw_stderr": "",
-  "timestamp": "2026-07-28T06:33:26.644Z",
-  "run_id": "c8070fc8-1386-41c1-8c80-ffa2b66bdd5a",
-  "suite_run_id": "38312764-079e-40f6-9ad1-b230244b41b8",
+  "timestamp": "2026-08-06T08:00:24.481Z",
+  "run_id": "113fb6fc-3370-460d-a70d-4578a2a5d906",
+  "suite_run_id": "83366412-f7ae-4d11-918e-be293f17779e",
   "assertions_summary": {
     "total": 9,
     "passed": 9,
@@ -88,7 +88,7 @@
     }
   ],
   "timeout_ms": 300000,
-  "duration_ms": 172,
+  "duration_ms": 191,
   "timed_out": false,
   "signal": null
 }

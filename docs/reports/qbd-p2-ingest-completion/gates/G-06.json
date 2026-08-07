@@ -7,11 +7,11 @@
     "cowork-p2-kit/ingest/tests/file-boundaries.test.mjs"
   ],
   "exit_code": 0,
-  "raw_tap_output": "TAP version 13\n# Subtest: admission rejects every symlink before the parser can run\nok 1 - admission rejects every symlink before the parser can run\n  ---\n  duration_ms: 6.666851\n  type: 'test'\n  ...\n# Subtest: unsupported input is rejected before parsing or publication\nok 2 - unsupported input is rejected before parsing or publication\n  ---\n  duration_ms: 1.676461\n  type: 'test'\n  ...\n# Subtest: nested symlinks and unsupported files are rejected before parsing\nok 3 - nested symlinks and unsupported files are rejected before parsing\n  ---\n  duration_ms: 2.380582\n  type: 'test'\n  ...\n# Subtest: LiteParse receives a literal argument array and cannot parse outside the configured root\nok 4 - LiteParse receives a literal argument array and cannot parse outside the configured root\n  ---\n  duration_ms: 1.672834\n  type: 'test'\n  ...\n# Subtest: configured traversal, manifest escape, and duplicate normalized paths fail closed\nok 5 - configured traversal, manifest escape, and duplicate normalized paths fail closed\n  ---\n  duration_ms: 2.298792\n  type: 'test'\n  ...\n# Subtest: adapter rejects a non-absolute binary instead of falling back to PATH\nok 6 - adapter rejects a non-absolute binary instead of falling back to PATH\n  ---\n  duration_ms: 0.283113\n  type: 'test'\n  ...\n# Subtest: publication rejects a symlinked artifact root before writer side effects\nok 7 - publication rejects a symlinked artifact root before writer side effects\n  ---\n  duration_ms: 1.850731\n  type: 'test'\n  ...\n# Subtest: publication rejects a missing artifact root under a symlinked ancestor without creating it\nok 8 - publication rejects a missing artifact root under a symlinked ancestor without creating it\n  ---\n  duration_ms: 2.038284\n  type: 'test'\n  ...\n1..8\n# tests 8\n# suites 0\n# pass 8\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 107.077563\n",
+  "raw_tap_output": "TAP version 13\n# Subtest: admission rejects every symlink before the parser can run\nok 1 - admission rejects every symlink before the parser can run\n  ---\n  duration_ms: 8.37674\n  type: 'test'\n  ...\n# Subtest: unsupported input is rejected before parsing or publication\nok 2 - unsupported input is rejected before parsing or publication\n  ---\n  duration_ms: 2.201148\n  type: 'test'\n  ...\n# Subtest: nested symlinks and unsupported files are rejected before parsing\nok 3 - nested symlinks and unsupported files are rejected before parsing\n  ---\n  duration_ms: 3.038029\n  type: 'test'\n  ...\n# Subtest: LiteParse receives a literal argument array and cannot parse outside the configured root\nok 4 - LiteParse receives a literal argument array and cannot parse outside the configured root\n  ---\n  duration_ms: 2.128767\n  type: 'test'\n  ...\n# Subtest: configured traversal, manifest escape, and duplicate normalized paths fail closed\nok 5 - configured traversal, manifest escape, and duplicate normalized paths fail closed\n  ---\n  duration_ms: 2.948719\n  type: 'test'\n  ...\n# Subtest: adapter rejects a non-absolute binary instead of falling back to PATH\nok 6 - adapter rejects a non-absolute binary instead of falling back to PATH\n  ---\n  duration_ms: 0.33119\n  type: 'test'\n  ...\n# Subtest: publication rejects a symlinked artifact root before writer side effects\nok 7 - publication rejects a symlinked artifact root before writer side effects\n  ---\n  duration_ms: 2.414471\n  type: 'test'\n  ...\n# Subtest: publication rejects a missing artifact root under a symlinked ancestor without creating it\nok 8 - publication rejects a missing artifact root under a symlinked ancestor without creating it\n  ---\n  duration_ms: 2.496369\n  type: 'test'\n  ...\n1..8\n# tests 8\n# suites 0\n# pass 8\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 128.446074\n",
   "raw_stderr": "",
-  "timestamp": "2026-07-28T06:33:28.086Z",
-  "run_id": "8972f41d-e4b9-4ba0-9a86-6e2744186d7b",
-  "suite_run_id": "38312764-079e-40f6-9ad1-b230244b41b8",
+  "timestamp": "2026-08-06T08:00:25.901Z",
+  "run_id": "a90962ba-b702-4976-ab7c-a3775727e5eb",
+  "suite_run_id": "83366412-f7ae-4d11-918e-be293f17779e",
   "assertions_summary": {
     "total": 8,
     "passed": 8,
@@ -133,7 +133,7 @@
     }
   ],
   "timeout_ms": 300000,
-  "duration_ms": 158,
+  "duration_ms": 180,
   "timed_out": false,
   "signal": null
 }

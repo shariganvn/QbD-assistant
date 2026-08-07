@@ -1,0 +1,43 @@
+id: P20260806-qbd-p221-phase-00-g00
+date: "2026-08-06"
+workstream: qbd-p221-formulation-selection
+status: done
+summary: >-
+  Closed P.2.2.1 Phase 0 with G-00 GO. The frozen public synthetic mock was
+  hash-pinned, ingested twice from fresh isolated roots, and produced a
+  deterministic three-formula matrix with 21 DOCX cell receipts and 21 exact
+  admitted-record bindings. Headers/leaves and specification semantics are
+  derived from OOXML; quote semantic projections must match exactly.
+changed_files:
+  - cowork-p2-kit/workflow-trial/formulation-spike-run.mjs
+  - cowork-p2-kit/workflow-trial/formula-cell-receipt.mjs
+  - cowork-p2-kit/workflow-trial/contracts/formula-cell-receipt.schema.v1.json
+  - cowork-p2-kit/workflow-trial/tests/formulation-spike-run.test.mjs
+  - docs/reports/qbd-p221-formulation-selection/
+tests_run:
+  verdict: passed
+  command: node --test cowork-p2-kit/workflow-trial/tests/formulation-spike-run.test.mjs
+  evidence_quality: exit-code-only
+  counts: {passed: null, failed: null, warnings: null}
+  evidence:
+    verdict_artifact: artifacts/260806-1550/test-verdict.json
+    gate_verdict: docs/reports/qbd-p221-formulation-selection/go-no-go.json
+    receipt_count: 21
+    exact_record_bindings: 21
+    full_ingest_deterministic: true
+boundaries:
+  canonical_inputs_manifest_store_outputs: unchanged
+  source_material: public_synthetic_non_citable
+  cell_ownership_authority: docx_xml_receipt
+  generic_ingest_record: admitted_page_quote_binding_only
+  fd_decision: not_evaluated
+decisions: []
+next_pickup:
+  files:
+    - docs/plans/qbd-p221-formulation-selection/phase-01-real-data-layer.md
+    - docs/reports/qbd-p221-formulation-selection/formula-evidence-matrix.json
+    - docs/reports/qbd-p221-formulation-selection/result-inventory.json
+  text: >-
+    Start Phase 1 typed evidence and inventory work only from G-00 artifacts;
+    do not turn specifications into observed results.
+unresolved_questions: []

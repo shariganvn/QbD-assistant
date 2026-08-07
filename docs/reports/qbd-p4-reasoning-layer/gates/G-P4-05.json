@@ -8,11 +8,11 @@
     "cowork-p2-kit/reasoning/tests/e2e-decision.test.mjs"
   ],
   "exit_code": 0,
-  "raw_tap_output": "TAP version 13\n# Subtest: G-P4-05 evidence validator rejects missing, non-pass, noncanonical, and mismatched-suite evidence\nok 1 - G-P4-05 evidence validator rejects missing, non-pass, noncanonical, and mismatched-suite evidence\n  ---\n  duration_ms: 6.144987\n  type: 'test'\n  ...\n# Subtest: G-P4-05 runner preserves declared order, one suite UUID, and first-failure short circuit\nok 2 - G-P4-05 runner preserves declared order, one suite UUID, and first-failure short circuit\n  ---\n  duration_ms: 2.101402\n  type: 'test'\n  ...\n# Subtest: G-P4-05 publishes then revalidates the committed-store package at the declared decision root\nok 3 - G-P4-05 publishes then revalidates the committed-store package at the declared decision root\n  ---\n  duration_ms: 334.835103\n  type: 'test'\n  ...\n# Subtest: G-P4-05 admits selected internal records but retains candidate, quote, and extraction controls\nok 4 - G-P4-05 admits selected internal records but retains candidate, quote, and extraction controls\n  ---\n  duration_ms: 1.004103\n  type: 'test'\n  ...\n1..4\n# tests 4\n# suites 0\n# pass 4\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 438.441762\n",
+  "raw_tap_output": "TAP version 13\n# Subtest: G-P4-05 evidence validator rejects missing, non-pass, noncanonical, and mismatched-suite evidence\nok 1 - G-P4-05 evidence validator rejects missing, non-pass, noncanonical, and mismatched-suite evidence\n  ---\n  duration_ms: 11.121966\n  type: 'test'\n  ...\n# Subtest: G-P4-05 runner preserves declared order, one suite UUID, and first-failure short circuit\nok 2 - G-P4-05 runner preserves declared order, one suite UUID, and first-failure short circuit\n  ---\n  duration_ms: 2.330509\n  type: 'test'\n  ...\n# Subtest: G-P4-05 publishes then revalidates the committed-store package at the declared decision root\nok 3 - G-P4-05 publishes then revalidates the committed-store package at the declared decision root\n  ---\n  duration_ms: 331.266008\n  type: 'test'\n  ...\n# Subtest: G-P4-05 admits selected internal records but retains candidate, quote, and extraction controls\nok 4 - G-P4-05 admits selected internal records but retains candidate, quote, and extraction controls\n  ---\n  duration_ms: 2.129839\n  type: 'test'\n  ...\n1..4\n# tests 4\n# suites 0\n# pass 4\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 530.459481\n",
   "raw_stderr": "",
-  "timestamp": "2026-07-28T05:34:17.072Z",
-  "run_id": "d17a8f9b-7863-4c07-90a3-f1c181ec2bd4",
-  "suite_run_id": "fd3d7e05-220c-464a-9417-9436eec6d7ee",
+  "timestamp": "2026-08-06T07:59:29.276Z",
+  "run_id": "d7da98da-7e63-4a58-8806-0c4487b79845",
+  "suite_run_id": "d8a716f4-7c07-4c54-a821-ca6b43986b69",
   "assertions_summary": {
     "total": 4,
     "passed": 4,
@@ -22,7 +22,7 @@
     "cancelled": 0
   },
   "timeout_ms": 300000,
-  "duration_ms": 488,
+  "duration_ms": 614,
   "timed_out": false,
   "signal": null,
   "store_records_sha256": "6a16599838b8335e58f4e4f985c78d089cdd55e1a9b11696d240414b2fc28c56"
