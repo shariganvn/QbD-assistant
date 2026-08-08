@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "fact-card-evidence-bindings.schema.v1",
+  "title": "Fact-card to evidence bindings",
+  "description": "Mandatory binding map between v1 fact cards and formulation evidence envelopes. scoring bindings may reference only observed_result evidence; composition_context supports rationale only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "bindings"],
+  "properties": {
+    "schema_version": { "const": "fact-card-evidence-bindings/v1" },
+    "bindings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["card_id", "evidence_id", "kind", "binding_role"],
+        "properties": {
+          "card_id": { "type": "string", "minLength": 1 },
+          "evidence_id": { "type": "string", "minLength": 1 },
+          "kind": { "enum": ["observed_result", "composition_context"] },
+          "binding_role": { "enum": ["scoring", "rationale_support"] }
+        }
+      }
+    }
+  }
+}

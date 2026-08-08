@@ -1,7 +1,7 @@
 ---
 phase: 1
 title: "Typed evidence, complete inventory and safe fact-card bindings"
-status: pending
+status: completed
 priority: P1
 effort: "1-2d"
 dependencies: [0]
@@ -88,12 +88,15 @@ rejects a missing or wrong-kind binding.
 
 ## Success criteria
 
-- [ ] G-01 passes.
-- [ ] Candidate set equals the exact expected three IDs.
-- [ ] Spec-as-result fails even when the caller bypasses the normal constructor.
-- [ ] Omitted or downgraded adverse records fail inventory reconciliation.
-- [ ] 1%/3%/5% composition claims have source-bound context evidence.
-- [ ] Package hashes bind source/store/receipts/evidence/fact-card mappings.
+- [x] G-01 passes (evidence under `docs/reports/qbd-p221-formulation-selection/`).
+- [x] Candidate set equals the exact expected three IDs (`E_EXACT_COHORT` guard).
+- [x] Spec-as-result fails even when the caller bypasses the normal constructor
+      (`E_SPEC_AS_RESULT`, tested on a directly-constructed card).
+- [x] Omitted or downgraded adverse records fail inventory reconciliation
+      (`E_INVENTORY_RECONCILIATION`, `E_ROLE_OVERRIDE`).
+- [x] 1%/3%/5% composition claims have source-bound context evidence.
+- [x] Package hashes bind source/store/receipts/evidence/fact-card mappings
+      (`formulation-data-package.json` + `hashes.json`).
 
 ## Risk assessment
 

@@ -77,7 +77,7 @@ gates:
       formulation-data-package.json + formulation-evidence.json + fact-cards.json
       + fact-card-evidence-bindings.json + inventory-reconciliation.json + hashes.json
     blocks: [G-02, G-03, G-04, G-05]
-    status: unverified
+    status: pass
 
   - id: G-02
     title: Additive v3 rubric, strict spec compilation and MVP FD-confirm flag

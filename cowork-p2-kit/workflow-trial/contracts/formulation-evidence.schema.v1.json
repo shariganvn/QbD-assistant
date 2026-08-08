@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "formulation-evidence.schema.v1",
+  "title": "Formulation typed evidence envelope",
+  "description": "Machine-distinguishes specification, observed_result and composition_context. Structural guard: scoring bindings may reference only observed_result evidence IDs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "exact_cohort", "observed_results", "specifications", "composition_context"],
+  "properties": {
+    "schema_version": { "const": "formulation-evidence/v1" },
+    "exact_cohort": {
+      "type": "array",
+      "const": ["formula-01", "formula-02", "formula-03"],
+      "items": { "type": "string" }
+    },
+    "observed_results": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/observed_result" } },
+    "specifications": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/specification" } },
+    "composition_context": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/composition_context" } }
+  },
+  "definitions": {
+    "observed_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "kind", "candidate", "measure", "statistic", "value", "unit", "raw_cell_text", "receipt_id", "record_id", "source_document_sha256", "store_records_sha256", "raw_cell_sha256", "normalized_value_sha256", "source_file", "quote_sha256", "page", "char_start", "char_end"],
+      "properties": {
+        "evidence_id": { "type": "string", "pattern": "^observed-result:" },
+        "kind": { "const": "observed_result" },
+        "candidate": { "enum": ["formula-01", "formula-02", "formula-03"] },
+        "measure": { "enum": ["dissolution_min", "dissolution_mean", "dissolution_max", "assay", "content_uniformity_av"] },
+        "statistic": { "enum": ["minimum", "mean", "maximum", "raw", "average"] },
+        "value": { "type": "number" },
+        "unit": { "const": "percent" },
+        "raw_cell_text": { "type": "string", "minLength": 1 },
+        "receipt_id": { "type": "string", "minLength": 1 },
+        "record_id": { "type": "string", "minLength": 1 },
+        "source_document_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "store_records_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "raw_cell_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "normalized_value_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "source_file": { "type": "string", "minLength": 1 },
+        "quote_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "page": { "type": "integer", "minimum": 1 },
+        "char_start": { "type": "integer", "minimum": 0 },
+        "char_end": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "specification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "kind", "measure", "operator", "unit", "basis", "raw_cell_text", "receipt_id", "record_id", "source_document_sha256", "store_records_sha256", "raw_cell_sha256", "normalized_value_sha256", "source_file", "quote_sha256", "page", "char_start", "char_end"],
+      "properties": {
+        "evidence_id": { "type": "string", "pattern": "^specification:" },
+        "kind": { "const": "specification" },
+        "measure": { "enum": ["dissolution", "assay", "content_uniformity_av"] },
+        "operator": { "type": "string", "enum": [">=", "<", "range-inclusive"] },
+        "lower": { "type": "number" },
+        "upper": { "type": "number" },
+        "threshold": { "type": "number" },
+        "unit": { "const": "percent" },
+        "basis": { "type": "string", "minLength": 1 },
+        "raw_cell_text": { "type": "string", "minLength": 1 },
+        "receipt_id": { "type": "string", "pattern": "^specification:" },
+        "record_id": { "type": "string", "minLength": 1 },
+        "source_document_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "store_records_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "raw_cell_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "normalized_value_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "source_file": { "type": "string", "minLength": 1 },
+        "quote_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "page": { "type": "integer", "minimum": 1 },
+        "char_start": { "type": "integer", "minimum": 0 },
+        "char_end": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "composition_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "kind", "candidate", "measure", "value", "unit", "raw_cell_text", "receipt_id", "record_id", "source_document_sha256", "store_records_sha256", "raw_cell_sha256", "normalized_value_sha256", "source_file", "quote_sha256", "page", "char_start", "char_end"],
+      "properties": {
+        "evidence_id": { "type": "string", "pattern": "^composition-context:" },
+        "kind": { "const": "composition_context" },
+        "candidate": { "enum": ["formula-01", "formula-02", "formula-03"] },
+        "measure": { "const": "croscarmellose_sodium" },
+        "value": { "type": "number" },
+        "unit": { "const": "percent" },
+        "raw_cell_text": { "type": "string", "minLength": 1 },
+        "receipt_id": { "type": "string", "minLength": 1 },
+        "record_id": { "type": "string", "minLength": 1 },
+        "source_document_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "store_records_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "raw_cell_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "normalized_value_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "source_file": { "type": "string", "minLength": 1 },
+        "quote_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "page": { "type": "integer", "minimum": 1 },
+        "char_start": { "type": "integer", "minimum": 0 },
+        "char_end": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

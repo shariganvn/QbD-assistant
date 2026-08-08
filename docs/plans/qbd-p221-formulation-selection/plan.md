@@ -206,7 +206,7 @@ module** (see Deferred follow-on).
 | Phase | File | Gate | Status |
 |---:|---|---|---|
 | 0 | [Hash-pinned isolated extraction and cell receipts](phase-00-discovery-spike-formula-matrix.md) | G-00 | Complete |
-| 1 | [Typed evidence, inventory and safe fact-card bindings](phase-01-real-data-layer.md) | G-01 | Pending |
+| 1 | [Typed evidence, inventory and safe fact-card bindings](phase-01-real-data-layer.md) | G-01 | Complete |
 | 2 | [Formulation v3 rubric and MVP FD-confirm flag](phase-02-spec-compiled-rubric-and-approval.md) | G-02 | Pending |
 | 3 | [Proposal diagnostic and watermarked CT03 engineering proposal](phase-03-reasoning-decision-matrix.md) | G-03 | Pending |
 | 4 | [Bound rationale and watermarked non-citable review render](phase-04-rationale-and-render.md) | G-04 | Pending |
@@ -315,6 +315,53 @@ exit; gates G-02/G-03/G-04/G-05; phase files 02-05.
   aligned the FD-confirm flag across G-02 and phase 2; kept determinism,
   spec-not-result and exact-cohort intact.
 - Unresolved contradictions: 0.
+
+### Session 2 — 2026-08-07 (Phase 1 readiness verification)
+
+**Scope:** focused readiness check of Phase 1 only (no re-interview; Session 1
+guard applies). Verification pass against the actual repo.
+
+- Phase 0 verdict `GO`; all 7 G-00 evidence artifacts present.
+- Phase 1 inputs complete: matrix carries exact cohort formula-01/02/03 with all
+  six per-candidate metrics (dissolution min/mean/max, assay,
+  `content_uniformity_av`, `croscarmellose_sodium`); specs are distinct
+  (`dissolution >=80`, `assay range 90-110`, strict `content_uniformity_av < 15`).
+- Inventory reconciliation exact: the 4 source-quote records reference all 21
+  cell-receipt IDs (union covers dissolution-min and dissolution-max, not only
+  mean); 0 missing, 0 extra. Cell-receipt set carries `receipt_set_sha256`.
+- `recordRoles` absent in Phase 0 output — correct; Phase 1 derives them.
+- Two-run ingest `byte_identical:true` (determinism holds).
+- All five Phase 1 create-targets absent (correct); all reuse files present
+  (`fact-cards.schema.json`, `contracts.mjs`, `cohort-evidence.mjs` under
+  `reasoning/`, `demo-data-pack.mjs`).
+- Failures: 0. No open decision points specific to Phase 1. **Verdict: ready to
+  implement.**
+
+### Session 3 — 2026-08-08 (Phase 1 implemented, G-01 pass)
+
+**Scope:** full Phase 1 implementation via the validated plan (code mode).
+Evidence under `docs/reports/qbd-p221-formulation-selection/`.
+
+- Five create-targets landed: `real-data-pack.mjs`, three v1 JSON contracts
+  (`formulation-evidence`, `fact-card-evidence-bindings`,
+  `formulation-data-package`), and `tests/real-data-pack.test.mjs`.
+- G-01 test suite 18/18 pass: exact cohort, spec-as-result, inventory omission,
+  role downgrade, wrong-kind binding, dropped-binding coverage
+  (`E_BINDING_INCOMPLETE`), ambiguous receipt join. Determinism asserted across
+  two in-process builds; CLI re-emission byte-identical
+  (`package_sha256 0d6620d2…`).
+- G-00 regression 10/10 pass; reasoning 73/73 pass (pre-existing `G-P4-04`
+  stale baton-era test excluded, unrelated).
+- Code review (`code-reviewer`) DONE_WITH_CONCERNS; no critical issues.
+  Resolved: H2 binding-coverage completeness + negative test; M2 pinned
+  `receiptSetSha256` required (fail-closed). Documented: H1 — emitted fact
+  cards are binding-validator-only by design (comma-decimal raw cells cannot
+  carry the dot-decimal token the canonical `validateFactCards` requires);
+  structural safety lives in the evidence envelope + bindings. Noted for G-02:
+  M1 — Phase 1 roles are `record_id → [evidence kinds]`, the v2 engine expects
+  `results|context`, a translation is needed at the G-02 boundary. Final
+  remediation also pins every evidence item, including specifications, to the
+  exact G-00 receipt authority before bindings are accepted.
 
 ## Deferred follow-on — Authorization module
 

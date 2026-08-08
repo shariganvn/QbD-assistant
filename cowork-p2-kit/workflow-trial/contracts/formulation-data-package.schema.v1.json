@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "formulation-data-package.schema.v1",
+  "title": "Sealed formulation data package",
+  "description": "Seals one real-data evidence package: exact cohort, artifact hashes and bound source/store/receipt hashes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "exact_cohort", "candidate_ids", "record_count", "evidence_envelope_sha256", "fact_cards_sha256", "fact_card_bindings_sha256", "inventory_reconciliation_sha256", "bound_hashes"],
+  "properties": {
+    "schema_version": { "const": "formulation-data-package/v1" },
+    "exact_cohort": {
+      "type": "array",
+      "const": ["formula-01", "formula-02", "formula-03"],
+      "items": { "type": "string" }
+    },
+    "candidate_ids": {
+      "type": "array",
+      "const": ["formula-01", "formula-02", "formula-03"],
+      "items": { "type": "string" }
+    },
+    "record_count": { "type": "integer", "minimum": 1 },
+    "evidence_envelope_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "fact_cards_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "fact_card_bindings_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "inventory_reconciliation_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "bound_hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_document_sha256", "document_xml_sha256", "store_records_sha256", "receipt_set_sha256"],
+      "properties": {
+        "source_document_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "document_xml_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "store_records_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "receipt_set_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    }
+  }
+}

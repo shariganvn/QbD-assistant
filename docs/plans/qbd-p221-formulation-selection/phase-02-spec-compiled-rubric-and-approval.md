@@ -58,6 +58,21 @@ separate module.
   only approval input is the fd-confirm flag artifact.
 - Deferred: cryptographic FD receipt + human-committed, insider-proof pin.
 
+## Phase 1 handoff notes (G-01 pass, 2026-08-08)
+
+- **recordRoles translation (M1):** Phase 1 derives roles as
+  `record_id → [observed_result, specification, composition_context]`
+  (`inventory-reconciliation.json`). The frozen v2 engine expects
+  `record_id → "results"|"context"`. Define the kinds→results/context mapping
+  when wiring the G-01 data package into the evaluator.
+- **Binding-validator-only cards (H1):** the emitted v1 fact cards satisfy the
+  fact-card JSON schema but are NOT fed to the canonical reasoning
+  `validateFactCards` (comma-decimal raw cells cannot carry the dot-decimal
+  `String(value)` token). The formulation path consumes the evidence envelope +
+  `fact-card-evidence-bindings.json` exclusively. Compile/rubric work must reuse
+  the binding validator with the exact G-00 `formula-cell-receipts.json` receipt
+  authority, never the legacy validator.
+
 ## Architecture
 
 ```text
