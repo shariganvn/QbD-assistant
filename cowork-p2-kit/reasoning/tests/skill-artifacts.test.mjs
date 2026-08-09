@@ -81,7 +81,7 @@ function assertSkillContract() {
   }
   for (const required of [
     /complete package/i, /do not locate any other record/i, /do not write JSON\/Markdown package files\s+manually/i,
-    /report discovery/i, /session-handoff\.yaml/i, /docs\/\.session-state\.md/i, /human supplies/i,
+    /report discovery/i, /any session-state or handoff artifact/i, /human supplies/i,
   ]) assert.match(skill, required);
 }
 
