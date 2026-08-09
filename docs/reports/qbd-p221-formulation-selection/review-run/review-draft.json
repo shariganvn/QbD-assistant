@@ -1,0 +1,341 @@
+{
+  "blocks": [
+    {
+      "text": "P.2.2.1 Formulation selection — review-only evidence",
+      "type": "heading1"
+    },
+    {
+      "text": "REVIEW ONLY — NON-CITABLE — NOT FD APPROVED. This document describes source-bound engineering evidence and does not create a dossier decision.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Raw evidence and formula context",
+      "type": "heading2"
+    },
+    {
+      "headers": [
+        "Formula",
+        "Dissolution min %",
+        "Dissolution mean %",
+        "Dissolution max %",
+        "Assay %",
+        "CU AV",
+        "Croscarmellose sodium %"
+      ],
+      "rows": [
+        [
+          "formula-01",
+          "65.15",
+          "73.89",
+          "79.33",
+          "100.31",
+          "3.71",
+          "1"
+        ],
+        [
+          "formula-02",
+          "79.12",
+          "81.4",
+          "87.67",
+          "100.02",
+          "2.79",
+          "3"
+        ],
+        [
+          "formula-03",
+          "96.15",
+          "98.64",
+          "100.98",
+          "99.99",
+          "3.04",
+          "5"
+        ]
+      ],
+      "type": "table"
+    },
+    {
+      "text": "Extracted specifications",
+      "type": "heading2"
+    },
+    {
+      "headers": [
+        "Measure",
+        "Operator",
+        "Threshold/range",
+        "Source evidence"
+      ],
+      "rows": [
+        [
+          "Dissolution",
+          ">=",
+          "80",
+          "specification:dissolution"
+        ],
+        [
+          "Assay",
+          "90–110",
+          "inclusive",
+          "specification:assay"
+        ],
+        [
+          "Content uniformity AV",
+          "<",
+          "15",
+          "specification:content-uniformity-av"
+        ]
+      ],
+      "type": "table"
+    },
+    {
+      "text": "FD decision state",
+      "type": "heading2"
+    },
+    {
+      "text": "fd_decision: inconclusive; winner: null; action: E_RUBRIC_APPROVAL_REQUIRED. The proposal lane has no FD confirmation.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Missing/conflicting data state: none in the admitted package. Any missing or conflicting source binding withholds the engineering proposal.",
+      "type": "paragraph"
+    },
+    {
+      "text": "ĐỀ XUẤT KỸ THUẬT — CHƯA ĐƯỢC FD DUYỆT",
+      "type": "heading2"
+    },
+    {
+      "text": "Proposed survivor under the proposed rule: formula-03 (CT03). FD approved: false. This conditional engineering proposal is not an FD-approved outcome.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Internal provenance references — non-citable",
+      "type": "heading2"
+    },
+    {
+      "headers": [
+        "Reference ID",
+        "Evidence ID",
+        "Source file",
+        "Record",
+        "Page",
+        "Offsets",
+        "Quote SHA-256",
+        "Cell receipt"
+      ],
+      "rows": [
+        [
+          "internal:observed-result:assay:formula-01",
+          "observed-result:assay:formula-01",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "b1e2267ee51496e9",
+          "2",
+          "1922–2268",
+          "2a4f9f618b889f479833edf6492d5d0005ea4718140971ae5194a05d14c42108",
+          "assay:formula-01"
+        ],
+        [
+          "internal:observed-result:assay:formula-02",
+          "observed-result:assay:formula-02",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "b1e2267ee51496e9",
+          "2",
+          "1922–2268",
+          "2a4f9f618b889f479833edf6492d5d0005ea4718140971ae5194a05d14c42108",
+          "assay:formula-02"
+        ],
+        [
+          "internal:observed-result:assay:formula-03",
+          "observed-result:assay:formula-03",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "b1e2267ee51496e9",
+          "2",
+          "1922–2268",
+          "2a4f9f618b889f479833edf6492d5d0005ea4718140971ae5194a05d14c42108",
+          "assay:formula-03"
+        ],
+        [
+          "internal:observed-result:content-uniformity-av:formula-01",
+          "observed-result:content-uniformity-av:formula-01",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "1c7e3d79e2bbaaf7",
+          "3",
+          "0–187",
+          "9487a84e9a63bbd8f886f2f410a7e29930c31181ae6af8687de7673e9f8710f0",
+          "content-uniformity-av:formula-01"
+        ],
+        [
+          "internal:observed-result:content-uniformity-av:formula-02",
+          "observed-result:content-uniformity-av:formula-02",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "1c7e3d79e2bbaaf7",
+          "3",
+          "0–187",
+          "9487a84e9a63bbd8f886f2f410a7e29930c31181ae6af8687de7673e9f8710f0",
+          "content-uniformity-av:formula-02"
+        ],
+        [
+          "internal:observed-result:content-uniformity-av:formula-03",
+          "observed-result:content-uniformity-av:formula-03",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "1c7e3d79e2bbaaf7",
+          "3",
+          "0–187",
+          "9487a84e9a63bbd8f886f2f410a7e29930c31181ae6af8687de7673e9f8710f0",
+          "content-uniformity-av:formula-03"
+        ],
+        [
+          "internal:observed-result:dissolution-max:formula-01",
+          "observed-result:dissolution-max:formula-01",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "1af35f108df257cd",
+          "2",
+          "2330–2799",
+          "22e8f8dde90f7a6e168c1d962d23581d8411fd69fcb040c3380f8d4dafd7bf33",
+          "dissolution-max:formula-01"
+        ],
+        [
+          "internal:observed-result:dissolution-max:formula-02",
+          "observed-result:dissolution-max:formula-02",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "1af35f108df257cd",
+          "2",
+          "2330–2799",
+          "22e8f8dde90f7a6e168c1d962d23581d8411fd69fcb040c3380f8d4dafd7bf33",
+          "dissolution-max:formula-02"
+        ],
+        [
+          "internal:observed-result:dissolution-max:formula-03",
+          "observed-result:dissolution-max:formula-03",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "1af35f108df257cd",
+          "2",
+          "2330–2799",
+          "22e8f8dde90f7a6e168c1d962d23581d8411fd69fcb040c3380f8d4dafd7bf33",
+          "dissolution-max:formula-03"
+        ],
+        [
+          "internal:observed-result:dissolution-mean:formula-01",
+          "observed-result:dissolution-mean:formula-01",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "1af35f108df257cd",
+          "2",
+          "2330–2799",
+          "22e8f8dde90f7a6e168c1d962d23581d8411fd69fcb040c3380f8d4dafd7bf33",
+          "dissolution-mean:formula-01"
+        ],
+        [
+          "internal:observed-result:dissolution-mean:formula-02",
+          "observed-result:dissolution-mean:formula-02",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "1af35f108df257cd",
+          "2",
+          "2330–2799",
+          "22e8f8dde90f7a6e168c1d962d23581d8411fd69fcb040c3380f8d4dafd7bf33",
+          "dissolution-mean:formula-02"
+        ],
+        [
+          "internal:observed-result:dissolution-mean:formula-03",
+          "observed-result:dissolution-mean:formula-03",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "1af35f108df257cd",
+          "2",
+          "2330–2799",
+          "22e8f8dde90f7a6e168c1d962d23581d8411fd69fcb040c3380f8d4dafd7bf33",
+          "dissolution-mean:formula-03"
+        ],
+        [
+          "internal:observed-result:dissolution-min:formula-01",
+          "observed-result:dissolution-min:formula-01",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "1af35f108df257cd",
+          "2",
+          "2330–2799",
+          "22e8f8dde90f7a6e168c1d962d23581d8411fd69fcb040c3380f8d4dafd7bf33",
+          "dissolution-min:formula-01"
+        ],
+        [
+          "internal:observed-result:dissolution-min:formula-02",
+          "observed-result:dissolution-min:formula-02",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "1af35f108df257cd",
+          "2",
+          "2330–2799",
+          "22e8f8dde90f7a6e168c1d962d23581d8411fd69fcb040c3380f8d4dafd7bf33",
+          "dissolution-min:formula-02"
+        ],
+        [
+          "internal:observed-result:dissolution-min:formula-03",
+          "observed-result:dissolution-min:formula-03",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "1af35f108df257cd",
+          "2",
+          "2330–2799",
+          "22e8f8dde90f7a6e168c1d962d23581d8411fd69fcb040c3380f8d4dafd7bf33",
+          "dissolution-min:formula-03"
+        ],
+        [
+          "internal:specification:assay",
+          "specification:assay",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "b1e2267ee51496e9",
+          "2",
+          "1922–2268",
+          "2a4f9f618b889f479833edf6492d5d0005ea4718140971ae5194a05d14c42108",
+          "specification:assay"
+        ],
+        [
+          "internal:specification:content-uniformity-av",
+          "specification:content-uniformity-av",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "1c7e3d79e2bbaaf7",
+          "3",
+          "0–187",
+          "9487a84e9a63bbd8f886f2f410a7e29930c31181ae6af8687de7673e9f8710f0",
+          "specification:content-uniformity-av"
+        ],
+        [
+          "internal:specification:dissolution",
+          "specification:dissolution",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "1af35f108df257cd",
+          "2",
+          "2330–2799",
+          "22e8f8dde90f7a6e168c1d962d23581d8411fd69fcb040c3380f8d4dafd7bf33",
+          "specification:dissolution"
+        ],
+        [
+          "internal:composition-context:croscarmellose-sodium:formula-01",
+          "composition-context:croscarmellose-sodium:formula-01",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "03d71cae3495ddf6",
+          "1",
+          "9–1346",
+          "fd6ca1db41398238dcc21ff978912ff886f094fe2679595fd1bcef4983d2ab0e",
+          "croscarmellose-sodium:formula-01"
+        ],
+        [
+          "internal:composition-context:croscarmellose-sodium:formula-02",
+          "composition-context:croscarmellose-sodium:formula-02",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "03d71cae3495ddf6",
+          "1",
+          "9–1346",
+          "fd6ca1db41398238dcc21ff978912ff886f094fe2679595fd1bcef4983d2ab0e",
+          "croscarmellose-sodium:formula-02"
+        ],
+        [
+          "internal:composition-context:croscarmellose-sodium:formula-03",
+          "composition-context:croscarmellose-sodium:formula-03",
+          "inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx",
+          "03d71cae3495ddf6",
+          "1",
+          "9–1346",
+          "fd6ca1db41398238dcc21ff978912ff886f094fe2679595fd1bcef4983d2ab0e",
+          "croscarmellose-sodium:formula-03"
+        ]
+      ],
+      "type": "table"
+    }
+  ],
+  "citations": [],
+  "title": "REVIEW ONLY — NON-CITABLE — NOT FD APPROVED"
+}

@@ -1,0 +1,153 @@
+{
+  "approval_state": "proposal",
+  "measures": [
+    {
+      "canonical_unit": "percent",
+      "conflict_tolerance": 0,
+      "critical": true,
+      "direction": "higher-is-better",
+      "hard_gates": [
+        {
+          "operator": ">=",
+          "specification_evidence_id": "specification:dissolution",
+          "threshold": 80
+        }
+      ],
+      "id": "dissolution_min",
+      "score_map": [
+        {
+          "operator": ">=",
+          "points": 0,
+          "threshold": 0
+        }
+      ],
+      "source_measure": "dissolution_min",
+      "statistic": "minimum",
+      "weight": {
+        "max": 0,
+        "min": 0,
+        "nominal": 0
+      }
+    },
+    {
+      "canonical_unit": "percent",
+      "conflict_tolerance": 0,
+      "critical": true,
+      "direction": "higher-is-better",
+      "hard_gates": [],
+      "id": "dissolution_mean",
+      "score_map": [
+        {
+          "operator": "<",
+          "points": 2,
+          "threshold": 90
+        },
+        {
+          "operator": ">=",
+          "points": 3,
+          "threshold": 90
+        }
+      ],
+      "source_measure": "dissolution_mean",
+      "statistic": "mean",
+      "weight": {
+        "max": 1,
+        "min": 1,
+        "nominal": 1
+      }
+    },
+    {
+      "canonical_unit": "percent",
+      "conflict_tolerance": 0,
+      "critical": false,
+      "direction": "higher-is-better",
+      "hard_gates": [],
+      "id": "dissolution_max",
+      "score_map": [
+        {
+          "operator": ">=",
+          "points": 0,
+          "threshold": 0
+        }
+      ],
+      "source_measure": "dissolution_max",
+      "statistic": "maximum",
+      "weight": {
+        "max": 0,
+        "min": 0,
+        "nominal": 0
+      }
+    },
+    {
+      "canonical_unit": "percent",
+      "conflict_tolerance": 0,
+      "critical": true,
+      "direction": "higher-is-better",
+      "hard_gates": [
+        {
+          "operator": ">=",
+          "specification_evidence_id": "specification:assay",
+          "threshold": 90
+        },
+        {
+          "operator": "<=",
+          "specification_evidence_id": "specification:assay",
+          "threshold": 110
+        }
+      ],
+      "id": "assay",
+      "score_map": [
+        {
+          "operator": ">=",
+          "points": 0,
+          "threshold": 0
+        }
+      ],
+      "source_measure": "assay",
+      "statistic": "raw",
+      "weight": {
+        "max": 0,
+        "min": 0,
+        "nominal": 0
+      }
+    },
+    {
+      "canonical_unit": "percent",
+      "conflict_tolerance": 0,
+      "critical": true,
+      "direction": "higher-is-better",
+      "hard_gates": [
+        {
+          "operator": "<",
+          "specification_evidence_id": "specification:content-uniformity-av",
+          "threshold": 15
+        }
+      ],
+      "id": "content_uniformity_av",
+      "score_map": [
+        {
+          "operator": ">=",
+          "points": 0,
+          "threshold": 0
+        }
+      ],
+      "source_measure": "content_uniformity_av",
+      "statistic": "average",
+      "weight": {
+        "max": 0,
+        "min": 0,
+        "nominal": 0
+      }
+    }
+  ],
+  "minimum_eligible_candidates": 1,
+  "required_candidate_ids": [
+    "formula-01",
+    "formula-02",
+    "formula-03"
+  ],
+  "rubric_id": "qbd-p221-formulation-selection-v3",
+  "schema_version": 3,
+  "selection_mode": "single-survivor-after-complete-cohort",
+  "tie_threshold": 0
+}

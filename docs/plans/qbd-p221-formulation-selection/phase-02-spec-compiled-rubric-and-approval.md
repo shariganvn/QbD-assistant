@@ -1,7 +1,7 @@
 ---
 phase: 2
 title: "Formulation v3 rubric, strict spec compilation and MVP FD-confirm flag"
-status: pending
+status: completed
 priority: P1
 effort: "2-3d"
 dependencies: [1]
@@ -37,7 +37,7 @@ separate module.
 |---|---|---|---|
 | `dissolution_min` | observed minimum | compiled `>=80` proposal | zero weight; eligibility only |
 | `dissolution_mean` | observed mean | none | comparison score |
-| `dissolution_max` | observed maximum | none | zero weight; diagnostic/critical evidence |
+| `dissolution_max` | observed maximum | none | zero weight; raw diagnostic number only (scientific significance is a human/FD call, never system-flagged) |
 | `assay` | observed scalar | compiled `>=90` and `<=110` | zero weight; eligibility only |
 | `content_uniformity_av` | observed scalar | compiled strict `<15` | zero weight; eligibility only |
 
@@ -47,15 +47,21 @@ separate module.
 - Emit `spec-compile-receipt.json` binding source DOCX hash, store hash,
   cell-receipt-set hash, spec-evidence IDs/hash, compiler version, canonical
   rubric hash and the fd-confirm flag state.
+<!-- Updated: Spec-review closeout - confirmed v3 rubric is source-compiled and receipt-bound -->
 - Authorization rules (MVP):
   - `proposal` (default): engine keeps `fd_decision` inconclusive
     (`E_RUBRIC_APPROVAL_REQUIRED`), no winner; the engineering proposal is built
     separately in Phase 3;
   - `fd-confirmed`: a trusted FD user sets a flag recording `confirmed_by`,
-    `confirmed_at` and a note; only then may `fd_decision` reflect the confirmed
-    rule outcome. This slice ships with the flag UNSET.
-- The runner must not accept `--rubric-state` or arbitrary approval values; the
-  only approval input is the fd-confirm flag artifact.
+    `confirmed_at` and a note. When set, the v3 source compiler materializes
+    `approval_state: test-approved`; the compile receipt, published rubric,
+    decision and evaluation all carry the same rubric hash. This slice ships
+    with the flag UNSET.
+- The same-run hashes prove byte-identity, not authority — accepted as MVP-grade
+  trust; cryptographic authority is the deferred module's job.
+- The runner must not accept `--rubric-state` or arbitrary approval values from
+  the caller; the fd-confirm flag is the only thing that authorizes the runner to
+  emit a test-approved rubric.
 - Deferred: cryptographic FD receipt + human-committed, insider-proof pin.
 
 ## Phase 1 handoff notes (G-01 pass, 2026-08-08)
@@ -146,16 +152,17 @@ The evaluator order is mandatory:
 
 ## Success criteria
 
-- [ ] G-02 passes.
-- [ ] Existing v2 results remain byte-equivalent.
-- [ ] Exact three candidates + proposed rule computes CT03 as sole survivor.
-- [ ] Missing candidate still returns inconclusive; minimum 1 cannot bypass it.
-- [ ] `assay` uses two gates on one observed value without duplicate cards.
-- [ ] CU exactly 15 fails strict `<15`.
-- [ ] Caller-supplied approval state is rejected; only the fd-confirm flag moves
-  past proposal.
-- [ ] With the fd-confirm flag unset, `fd_decision` stays inconclusive.
-- [ ] Cross-store or modified spec evidence invalidates the compile receipt.
+- [x] G-02 passes.
+- [x] Existing v2 results remain byte-equivalent.
+- [x] Exact three candidates + proposed rule computes CT03 as sole survivor.
+- [x] Missing candidate still returns inconclusive; minimum 1 cannot bypass it.
+- [x] `assay` uses two gates on one observed value without duplicate cards.
+- [x] CU exactly 15 fails strict `<15`.
+- [x] Caller-supplied approval state (CLI/arbitrary) is rejected; the fd-confirm
+  flag is the only thing that authorizes the v3 source compiler to materialize
+  and receipt-bind a `test-approved` rubric.
+- [x] With the fd-confirm flag unset, `fd_decision` stays inconclusive.
+- [x] Cross-store or modified spec evidence invalidates the compile receipt.
 
 ## Risk assessment
 
@@ -169,7 +176,8 @@ The evaluator order is mandatory:
 ## Security considerations
 
 - Authorization cannot come from CLI strings or caller-provided approval values;
-  the only approval input is the fd-confirm flag artifact.
+  the fd-confirm flag is the only input that authorizes the source compiler to
+  materialize and publish the v3 test-approved rubric.
 - The fd-confirm flag is MVP-grade trust; it is not a defense against a
   malicious insider. Tamper-proof authorization is the deferred module.
 - Hashes prove identity, not authority.

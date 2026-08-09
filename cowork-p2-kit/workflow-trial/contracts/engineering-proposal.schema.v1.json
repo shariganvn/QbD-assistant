@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "engineering-proposal.schema.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "artifact_kind", "proposed_survivor", "conditional_on", "fd_approved", "excluded_candidates", "bound_hashes"],
+  "properties": {
+    "schema_version": { "const": "engineering-proposal/v1" },
+    "artifact_kind": { "const": "engineering-proposal-not-fd-approved" },
+    "proposed_survivor": { "type": ["string", "null"] },
+    "conditional_on": { "const": "proposed rule (dissolution min-gate + mean-score, strict CU<15), NOT FD-approved" },
+    "fd_approved": { "const": false },
+    "excluded_candidates": { "type": "array" },
+    "bound_hashes": { "type": "object" }
+  }
+}

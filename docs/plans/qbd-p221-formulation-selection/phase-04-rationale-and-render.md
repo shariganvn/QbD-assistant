@@ -1,7 +1,7 @@
 ---
 phase: 4
 title: "Source-bound rationale and watermarked non-citable review render with engineering proposal"
-status: pending
+status: completed
 priority: P1
 effort: "1-2d"
 dependencies: [3]
@@ -33,7 +33,9 @@ and render artifacts to the same Phase 3 receipt.
   proposed rule, but every sentence in it is wrapped by the watermark and the
   `fd_approved:false` framing; it must not say winner, best choice, eligible/
   ineligible, decision, recommendation or selection.
-- Render shows:
+- Render starts from the frozen filled DOCX only after the official template and
+  all 146 resolved fields are revalidated, preserving the complete P.2.2.1
+  structure. It then shows:
   - exact three-formula raw evidence table;
   - extracted specs next to observations;
   - explicit missing/conflicting-data states;
@@ -42,6 +44,8 @@ and render artifacts to the same Phase 3 receipt.
     `NOT FD APPROVED`;
   - visible `REVIEW ONLY — NON-CITABLE — NOT FD APPROVED` marker and the
     Vietnamese `ĐỀ XUẤT KỸ THUẬT — CHƯA ĐƯỢC FD DUYỆT` block header.
+- The review-only marker is attached through a real DOCX header relationship so
+  it is page-level, not only a paragraph on the first page.
 - Because the source is `citable:false`, the render draft contains zero public
   `citations`. Formula-level provenance appears in a separate internal-reference
   block as record/page/offset/quote/cell-receipt identifiers.
@@ -79,8 +83,15 @@ keys `title`, `citations`, and `blocks`; no render-contract escape hatch is adde
   seal diagnostic/proposal/data/compile receipts.
 - Modify: `cowork-p2-kit/workflow-trial/formulation-selection-run.mjs` to emit
   rationale and render from the Phase 3 receipt (decision + proposal).
-- Read/reuse unchanged: `cowork-p2-kit/render/document-builder.mjs`; internal
-  references are ordinary validated paragraph/table blocks.
+- Create: `cowork-p2-kit/render/template-bound-review-docx.mjs` and
+  `run-isolated-template-review.mjs` to retain the complete filled-template
+  structure and append validated paragraph/table blocks under no-network isolation.
+- Create: `cowork-p2-kit/render/formulation-review-contract.mjs` to require every
+  P.2.2.1 section, missing-data state, watermark and provenance table.
+- Create: `cowork-p2-kit/workflow-trial/formulation-review-verifier.mjs` to
+  regenerate rationale/draft bindings and verify the materialized DOCX/receipts.
+- Read/reuse unchanged: `cowork-p2-kit/render/contract.mjs` and
+  `determinize-ooxml.mjs`.
 - Do not modify: `cowork-p2-kit/render/contract.mjs` citation eligibility rules.
 - Read/reuse: `cowork-p2-kit/render/normalize-ooxml.mjs` and isolated Bubblewrap path.
 - Create tests: `cowork-p2-kit/workflow-trial/tests/formulation-selection-rationale.test.mjs` and render integration cases.
@@ -112,15 +123,18 @@ keys `title`, `citations`, and `blocks`; no render-contract escape hatch is adde
 
 ## Success criteria
 
-- [ ] G-04 passes.
-- [ ] Rationale explains evidence and the withheld FD decision without recommendation.
-- [ ] The render contains a watermarked engineering-proposal block that names CT03
+- [x] G-04 passes.
+- [x] Rationale explains evidence and the withheld FD decision without recommendation.
+- [x] The render contains a watermarked engineering-proposal block that names CT03
   with `NOT FD APPROVED`, and no winner/decision language elsewhere.
-- [ ] Every numeric/composition claim is source-bound.
-- [ ] Render has zero public citation objects and complete internal provenance refs.
-- [ ] Source classification remains `public`, `citable:false` end to end.
-- [ ] Same-run/cross-artifact substitution tests fail closed.
-- [ ] Two normalized renders are identical.
+- [x] Every numeric/composition claim is source-bound.
+- [x] Render has zero public citation objects and complete internal provenance refs.
+- [x] Source classification remains `public`, `citable:false` end to end.
+- [x] Same-run/cross-artifact substitution tests fail closed.
+- [x] Two normalized renders are identical.
+- [x] Final DOCX is bound to both frozen DOCX files, retains all required filled
+  values, and contains no unresolved semantic placeholder.
+- [x] Page-level header marker and post-render rationale/DOCX substitution checks pass.
 
 ## Risk assessment
 

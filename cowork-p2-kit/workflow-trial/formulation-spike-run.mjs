@@ -9,6 +9,7 @@ import JSZip from "jszip";
 import { createConfig } from "../ingest/config.mjs";
 import { runIngest } from "../ingest/pipeline.mjs";
 import { buildFormulaEvidenceMatrix, canonicalJson, deriveQuoteFidelityReplacements, extractFormulaCellReceipts, reconcileFormulaReceipts, sha256 } from "./formula-cell-receipt.mjs";
+import { buildFormulationTemplateBinding } from "./formulation-template-binding.mjs";
 
 const repoRoot = resolve(import.meta.dirname, "../..");
 const kitRoot = resolve(repoRoot, "cowork-p2-kit");
@@ -102,6 +103,15 @@ export function assertIsolatedConfig(config) {
   }
 }
 
+export function assertIsolatedManifest(manifest) {
+  const entries = Object.entries(manifest ?? {});
+  if (entries.length !== 1 || entries[0][0] !== sourceFile
+    || canonicalJson(entries[0][1]) !== canonicalJson({ label: "public", citable: false, ocr_language: "vie" })) {
+    fail("E_ISOLATED_MANIFEST", "isolated manifest must admit only the frozen filled mock with public/non-citable classification");
+  }
+  return manifest;
+}
+
 async function stageIsolatedRun(root) {
   const inputsRoot = join(root, "inputs");
   const storeRoot = join(root, "store");
@@ -113,6 +123,7 @@ async function stageIsolatedRun(root) {
   const manifest = {
     [sourceFile]: { label: "public", citable: false, ocr_language: "vie" },
   };
+  assertIsolatedManifest(manifest);
   writeCanonicalJson(join(inputsRoot, "classification-manifest.json"), manifest);
   const sourceZip = await JSZip.loadAsync(readFileSync(sourcePath));
   const documentXml = await sourceZip.file("word/document.xml")?.async("string");
@@ -181,6 +192,7 @@ export async function runFormulationSpike({ outDir }) {
   assertSafeOutputRoot(outDir);
   const canonicalBefore = Object.fromEntries(canonicalRoots.map((root) => [root, snapshotTree(root)]));
   const sourceHashes = await verifyFrozenSource();
+  const templateBinding = await buildFormulationTemplateBinding();
   const first = await runIsolatedIngest();
   const second = await runIsolatedIngest();
   if (!first.store_bytes.equals(second.store_bytes) || first.result.storeHash !== second.result.storeHash) {
@@ -196,6 +208,8 @@ export async function runFormulationSpike({ outDir }) {
   if (canonicalJson(canonicalBefore) !== canonicalJson(canonicalAfter)) fail("E_CANONICAL_MUTATION", "isolated run changed canonical inputs or store");
 
   const evidence = {
+    "template-field-map.v1.json": templateBinding.fieldMap,
+    "template-cell-receipt.v1.json": templateBinding.receipt,
     "source-hashes.json": sourceHashes,
     "isolated-config-receipt.json": {
       source_file: sourceFile,
@@ -227,10 +241,12 @@ export async function runFormulationSpike({ outDir }) {
       formula_ids: matrix.formula_ids,
       record_bindings: receipts.filter((entry) => entry.record_binding.status === "exact").length,
       full_ingest_deterministic: true,
+      template_field_count: templateBinding.fieldMap.occurrence_count,
+      template_receipt_count: templateBinding.receipt.occurrence_count,
     },
   };
   for (const [name, value] of Object.entries(evidence)) writeCanonicalJson(join(outDir, name), value);
-  return { sourceHashes, matrix, receipts, inventory, evidence };
+  return { sourceHashes, matrix, receipts, inventory, evidence, templateBinding };
 }
 
 if (import.meta.url === new URL(process.argv[1] ?? "", "file:").href) {

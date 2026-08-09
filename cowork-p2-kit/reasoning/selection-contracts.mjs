@@ -110,6 +110,87 @@ export function validateSelectionRubricV2(rubric) {
   return rubric;
 }
 
+function validateV3HardGate(gate, code, context) {
+  exactObject(gate, ["operator", "threshold", "specification_evidence_id"], code, context);
+  if (!["<", "<=", ">=", ">"].includes(gate.operator)) {
+    reject(code, `${context}.operator is not supported`);
+  }
+  finiteNumber(gate.threshold, code, `${context}.threshold`);
+  string(gate.specification_evidence_id, code, `${context}.specification_evidence_id`);
+}
+
+function validateV3ScoreRule(rule, code, context) {
+  exactObject(rule, ["operator", "threshold", "points"], code, context);
+  if (!["<", "<=", ">=", ">"].includes(rule.operator)) reject(code, `${context}.operator is not supported`);
+  finiteNumber(rule.threshold, code, `${context}.threshold`);
+  finiteNumber(rule.points, code, `${context}.points`);
+}
+
+export function validateSelectionRubricV3(rubric) {
+  const code = "E_RUBRIC_ENVELOPE";
+  exactObject(rubric, [
+    "schema_version",
+    "rubric_id",
+    "approval_state",
+    "required_candidate_ids",
+    "minimum_eligible_candidates",
+    "selection_mode",
+    "measures",
+    "tie_threshold",
+  ], code, "selection rubric v3");
+  if (rubric.schema_version !== 3) reject(code, "selection rubric v3.schema_version must be 3");
+  string(rubric.rubric_id, code, "selection rubric v3.rubric_id");
+  if (rubric.approval_state !== "proposal" && rubric.approval_state !== "test-approved") {
+    reject(code, "selection rubric v3.approval_state must be proposal or test-approved");
+  }
+  if (!Array.isArray(rubric.required_candidate_ids) || rubric.required_candidate_ids.length === 0) {
+    reject(code, "selection rubric v3.required_candidate_ids must be a non-empty array");
+  }
+  rubric.required_candidate_ids.forEach((candidate, index) => string(candidate, code, `selection rubric v3.required_candidate_ids[${index}]`));
+  if (new Set(rubric.required_candidate_ids).size !== rubric.required_candidate_ids.length) {
+    reject(code, "selection rubric v3.required_candidate_ids must be unique");
+  }
+  if (!Number.isInteger(rubric.minimum_eligible_candidates) || rubric.minimum_eligible_candidates < 1) {
+    reject(code, "selection rubric v3.minimum_eligible_candidates must be an integer >= 1");
+  }
+  if (rubric.selection_mode !== "single-survivor-after-complete-cohort") {
+    reject(code, "selection rubric v3.selection_mode is unsupported");
+  }
+  if (!Array.isArray(rubric.measures) || rubric.measures.length === 0) reject(code, "selection rubric v3.measures must be non-empty");
+  const ids = new Set();
+  for (const [index, measure] of rubric.measures.entries()) {
+    const context = `selection rubric v3.measures[${index}]`;
+    exactObject(measure, ["id", "source_measure", "statistic", "critical", "direction", "canonical_unit", "hard_gates", "score_map", "weight", "conflict_tolerance"], code, context);
+    string(measure.id, code, `${context}.id`);
+    if (ids.has(measure.id)) reject(code, `rubric v3 measure id "${measure.id}" is duplicated`);
+    ids.add(measure.id);
+    string(measure.source_measure, code, `${context}.source_measure`);
+    string(measure.statistic, code, `${context}.statistic`);
+    if (typeof measure.critical !== "boolean") reject(code, `${context}.critical must be boolean`);
+    if (!["higher-is-better", "lower-is-better"].includes(measure.direction)) reject(code, `${context}.direction is unsupported`);
+    string(measure.canonical_unit, code, `${context}.canonical_unit`);
+    if (!Array.isArray(measure.hard_gates)) reject(code, `${context}.hard_gates must be an array`);
+    measure.hard_gates.forEach((gate, gateIndex) => validateV3HardGate(gate, code, `${context}.hard_gates[${gateIndex}]`));
+    if (!Array.isArray(measure.score_map) || measure.score_map.length === 0) reject(code, `${context}.score_map must be non-empty`);
+    measure.score_map.forEach((rule, ruleIndex) => validateV3ScoreRule(rule, code, `${context}.score_map[${ruleIndex}]`));
+    exactObject(measure.weight, ["nominal", "min", "max"], code, `${context}.weight`);
+    for (const field of ["nominal", "min", "max"]) {
+      finiteNumber(measure.weight[field], code, `${context}.weight.${field}`);
+      if (measure.weight[field] < 0) reject(code, `${context}.weight.${field} must be non-negative`);
+    }
+    if (measure.weight.min > measure.weight.nominal || measure.weight.nominal > measure.weight.max) {
+      reject(code, `${context}.weight must satisfy min <= nominal <= max`);
+    }
+    finiteNumber(measure.conflict_tolerance, code, `${context}.conflict_tolerance`);
+    if (measure.conflict_tolerance < 0) reject(code, `${context}.conflict_tolerance must be non-negative`);
+  }
+  finiteNumber(rubric.tie_threshold, code, "selection rubric v3.tie_threshold");
+  if (rubric.tie_threshold < 0) reject(code, "selection rubric v3.tie_threshold must be non-negative");
+  const weightSum = rubric.measures.reduce((sum, measure) => sum + measure.weight.nominal, 0);
+  if (Math.abs(weightSum - 1) > 1e-10) reject(code, "selection rubric v3 measure nominal weights must sum to 1");
+  return rubric;
+}
+
 export function validateSelectionEvaluation(evaluation) {
   const code = "E_RUBRIC_ENVELOPE";
   exactObject(evaluation, ["schema_version", "evaluation_id", "decision_id", "decision_sha256", "cohort_id", "rubric_sha256", "matrix_cells", "candidate_reviews", "sensitivity", "outcome_code"], code, "selection evaluation");

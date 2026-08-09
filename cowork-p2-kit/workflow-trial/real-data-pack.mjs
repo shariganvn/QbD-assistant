@@ -180,6 +180,27 @@ export function validateEvidenceEnvelope(evidence) {
       resultKeys.add(key);
     }
   }
+  // Statistical validity barrier at the extraction boundary. A candidate's
+  // dissolution minimum, mean, and maximum are three independently extracted
+  // cells; the provenance and hash checks above cannot catch an extraction slip
+  // that inverts their order. Left unguarded, such a slip passes structurally and
+  // only surfaces far downstream as a cryptic scoring failure. Reject it here so
+  // an inconsistent source is refused at the door, not mid-evaluation.
+  const dissolutionByCandidate = new Map();
+  for (const entry of evidence.observed_results) {
+    if (!entry.measure.startsWith("dissolution_")) continue;
+    if (!dissolutionByCandidate.has(entry.candidate)) dissolutionByCandidate.set(entry.candidate, {});
+    dissolutionByCandidate.get(entry.candidate)[entry.measure] = entry.value;
+  }
+  for (const [candidate, stats] of dissolutionByCandidate) {
+    const { dissolution_min: min, dissolution_mean: mean, dissolution_max: max } = stats;
+    if (typeof min !== "number" || typeof mean !== "number" || typeof max !== "number") {
+      fail("E_EVIDENCE_STATISTIC_CONSISTENCY", `dissolution statistics for ${candidate} are incomplete`);
+    }
+    if (!(min <= mean && mean <= max)) {
+      fail("E_EVIDENCE_STATISTIC_CONSISTENCY", `dissolution statistics for ${candidate} must satisfy min <= mean <= max`);
+    }
+  }
   return evidence;
 }
 

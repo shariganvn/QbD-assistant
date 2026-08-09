@@ -1,7 +1,7 @@
 ---
 title: "QbD P.2.2.1 real-evidence formulation-selection evaluation"
-description: "Build a source-bound three-formula evaluation and a review-only P.2.2.1 output that surfaces CT03 as a watermarked engineering proposal while the FD decision stays inconclusive. MVP scope: simple FD-confirm flag; cryptographic authorization and the full adversarial matrix are deferred to a follow-on module."
-status: in-progress
+description: "Build a template-and-filled-source-bound three-formula evaluation and a complete review-only P.2.2.1 output that surfaces CT03 as a watermarked engineering proposal while the FD decision stays inconclusive. MVP scope: simple FD-confirm flag; cryptographic authorization and the full adversarial matrix are deferred to a follow-on module."
+status: completed
 priority: P1
 effort: "6-7d"
 issue: null
@@ -18,9 +18,12 @@ blocks: []
 
 ## Outcome
 
-Use the filled public mock's three formula columns to build truthful typed
-evidence, an exact three-candidate matrix, and an explanatory review-only
-P.2.2.1 DOCX. The output surfaces CT03 as an explicit **engineering proposal**
+Use the frozen official placeholder template and the filled public mock's three
+formula columns to build truthful typed evidence, an exact three-candidate
+matrix, and a complete explanatory review-only P.2.2.1 DOCX. All 146 template
+fields must round-trip from the filled mock before reasoning or render. The
+output retains the complete filled-template structure and surfaces CT03 as an
+explicit **engineering proposal**
 ("sole survivor under the proposed, FD-unapproved rule") inside a watermarked
 `ĐỀ XUẤT KỸ THUẬT — CHƯA ĐƯỢC FD DUYỆT` block, while the official `fd_decision`
 stays `inconclusive` with `winner:null`. The engineering proposal and the FD
@@ -42,6 +45,12 @@ full adversarial forgery matrix are deferred to a separate authorization module
   they do not redefine complete gate bodies.
 - Frozen mock:
   `cowork-p2-kit/inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx`.
+- Frozen official template:
+  `cowork-p2-kit/inputs/reference/official-placeholder-template-v3-040826.docx`.
+- Required template SHA-256:
+  `c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0`.
+- Required template `document.xml` SHA-256:
+  `4f04eaf0076fcf6b5adfa0b5132b2b02e0b0e8b50051da2b2cc9b620b9e6a5d9`.
 - Required source SHA-256:
   `01fe95607f4733e2b47a4c46f8dad5817d6014cc40f69a08631977c9d890cd8f`.
 - Required `document.xml` SHA-256:
@@ -194,7 +203,9 @@ module** (see Deferred follow-on).
 
 ## Non-goals
 
-- Complete P.2 or all 146 template fields.
+- Complete P.2 sections outside P.2.2.1. The 146 official-template fields are
+  preserved and round-trip-validated from the filled mock; this slice does not
+  invent or newly author their source values.
 - Creating or impersonating FD approval, or labeling CT03 "selected/winner".
 - Cryptographic, insider-proof authorization (deferred to a separate module).
 - Changing the mock classification to citable.
@@ -207,10 +218,10 @@ module** (see Deferred follow-on).
 |---:|---|---|---|
 | 0 | [Hash-pinned isolated extraction and cell receipts](phase-00-discovery-spike-formula-matrix.md) | G-00 | Complete |
 | 1 | [Typed evidence, inventory and safe fact-card bindings](phase-01-real-data-layer.md) | G-01 | Complete |
-| 2 | [Formulation v3 rubric and MVP FD-confirm flag](phase-02-spec-compiled-rubric-and-approval.md) | G-02 | Pending |
-| 3 | [Proposal diagnostic and watermarked CT03 engineering proposal](phase-03-reasoning-decision-matrix.md) | G-03 | Pending |
-| 4 | [Bound rationale and watermarked non-citable review render](phase-04-rationale-and-render.md) | G-04 | Pending |
-| 5 | [Legitimacy-negative and determinism regression suite](phase-05-negative-path-tests.md) | G-05 | Pending |
+| 2 | [Formulation v3 rubric and MVP FD-confirm flag](phase-02-spec-compiled-rubric-and-approval.md) | G-02 | Complete |
+| 3 | [Proposal diagnostic and watermarked CT03 engineering proposal](phase-03-reasoning-decision-matrix.md) | G-03 | Complete |
+| 4 | [Bound rationale and watermarked non-citable review render](phase-04-rationale-and-render.md) | G-04 | Complete |
+| 5 | [Legitimacy-negative and determinism regression suite](phase-05-negative-path-tests.md) | G-05 | Complete |
 
 ## Dependencies
 
@@ -362,6 +373,143 @@ Evidence under `docs/reports/qbd-p221-formulation-selection/`.
   `results|context`, a translation is needed at the G-02 boundary. Final
   remediation also pins every evidence item, including specifications, to the
   exact G-00 receipt authority before bindings are accepted.
+
+### Session 4 — 2026-08-08 (Phase 2 readiness validate, PO)
+
+**Scope:** focused readiness verification of Phase 2 (G-02) before cook. Full
+verification pass against the actual repo; 0 failures.
+
+- All 7 reuse/modify targets exist; all 6 create-targets absent (correct).
+- `selection-contracts.mjs:102` enforces `minimum_eligible_candidates >= 2`
+  (frozen v2 cannot yield a single survivor); `decision-engine.mjs:127` returns
+  `E_RUBRIC_APPROVAL_REQUIRED` for `approval_state:"proposal"`.
+- Blast radius confirmed: `evaluateSelection` reached via `buildDecisionArtifacts`,
+  `packageInput`, `runReasoningStage` plus `content-demo-run` / `spike-e2e-run`.
+- Discovery: frozen v2 already exposes `approval_state:"test-approved"` + a
+  self-computed `rubricPin` (`selection-contracts.mjs:86`) — the exact self-hash
+  seam Critical 4 named.
+
+**PO decisions (3 questions):**
+
+1. Approval mechanism → **reuse the frozen v2 `test-approved` + `rubricPin` path
+   in v3** (parallel to the fd-confirm flag), rather than adding a contract-level
+   `proposal`-only lock. The self-hash pin proves byte-identity, not authority;
+   accepted as MVP-grade trust, cryptographic authority stays deferred. The
+   runner still refuses caller-supplied `--rubric-state`; the fd-confirm flag is
+   the only thing that authorizes the runner to emit a test-approved rubric, and
+   ships UNSET.
+2. Confirmed-lane demo → **proposal lane only + one test-only assertion** that
+   setting the flag flips `fd_decision` to confirmed. No external "approved"
+   artifact is emitted (matches existing plan scope).
+3. `dissolution_max` (CT03 = 100.98% > 100) → **plain diagnostic number, no hard
+   gate, no system-generated "critical" flag.** Scientific significance is the
+   human/FD's judgment, not the system's; the mock value is already a
+   human-written report summary, not raw instrument input. The system displays
+   the number and never editorializes its meaning.
+
+**Propagated to:** Phase 2 (measures table for `dissolution_max`; authorization
+rules; success criteria) and G-02 invariant.
+
+### Whole-Plan Consistency Sweep (post Session 4)
+
+- Files reread: `plan.md`, `gates.yaml`, all six `phase-*.md`.
+- Reconciled: Phase 2 `dissolution_max` role reworded (raw diagnostic, no
+  system-generated criticality); Phase 2 authorization + success criteria now
+  state v3 reuses the v2 `test-approved` + `rubricPin` mechanism gated by the
+  fd-confirm flag; G-02 invariant notes the reuse and the identity-not-authority
+  caveat. Determinism, spec-not-result, exact-cohort and the MVP-not-crypto
+  boundary unchanged.
+- Unresolved contradictions: 0.
+
+### Session 5 — 2026-08-08 (Phases 2–5 implementation and gate verification)
+
+**Scope:** implementation of the additive v3 rubric/FD-confirm seam, proposal
+diagnostic and CT03 engineering proposal, source-bound review rationale/render,
+and the legitimacy-negative/publication/determinism suite.
+
+- G-02 focused suite: 5/5; v2 plus v3 reasoning suites: 51/51.
+- G-03 focused suite: 5/5; proposal lane receipt materialized under
+  `docs/reports/qbd-p221-formulation-selection/proposal-run/`.
+- G-04 focused rationale/render suite: 4/4, plus the dedicated G-05 render
+  check; review receipt and DOCX materialized under `review-run/`.
+- G-05 formulation aggregate: 17/17; full isolated ingest determinism and
+  downstream-from-pinned-store determinism are reported separately. The
+  publication suite rejects both cross-run artifact and run-identity substitution.
+- GitNexus `detect_changes({scope:"all"})` was run after implementation. It
+  reports a planned `critical` shared-contract scope through
+  `validateSelectionEvaluation`; all affected v2/v3 reasoning tests pass.
+- **Unresolved baseline gate:** the repository-wide rationale/render aggregate
+  still has two pre-existing failures unrelated to this slice: the render test
+  asserts that root `plans/` does not exist although `plans/` is tracked at
+  `HEAD`, and the skill-artifacts test expects `session-handoff.yaml` in the
+  existing `RATIONALE-SKILL.md`. G-05 remains unverified until those baseline
+  contracts are reconciled; no unrelated test or document was weakened here.
+
+### Session 6 — 2026-08-08 (Binding hardening and closeout tracking)
+
+- Hardened publication bindings require the diagnostic, engineering proposal,
+  decision and evaluation to be regenerated from source and carry run identity
+  and hash bindings; the receipt set is pinned to that run.
+- Publication entries are required rather than optional. Provenance now records
+  `source_file` and `quote_sha256` for source-backed claims.
+- Materialized review-run revalidation confirms the focused formulation suite is
+  79/79 passing. G-05 remains unverified because the repository-wide aggregate
+  still includes the two unrelated baseline failures documented in Session 5.
+
+### Session 7 — 2026-08-09 (G-05 gate closure)
+
+- Fresh root-cause check confirmed the only reproduced aggregate failure was the
+  G-P3-04 assertion that required tracked `plans/` to be absent. The test now
+  snapshots root `plans/` entries before the isolated render and requires them
+  to remain unchanged; output/report roots must still contain no `plans/`.
+- GitNexus impact for `runIsolatedSpike` was **LOW**: one upstream test-file
+  caller, no production module or execution-flow impact.
+- Focused verification: formulation-selection 29/29, v2/v3 reasoning 51/51,
+  rationale 40/40, render 79/79, and synthetic demo compatibility 11/11.
+- G-05 aggregate: **271/271 pass**, 0 failed, 0 skipped, 0 todo. Full-ingest
+  and `downstream-from-pinned-store` determinism remain separately reported.
+- Refreshed `test-verdict.json`, set G-05 to `pass`, and closed Phase 5 and the
+  canonical plan. No `RATIONALE-SKILL.md` or tracked `plans/` deletion was used.
+
+### Session 8 — 2026-08-09 (spec-review: complete template + filled P.2.2.1)
+
+- Spec review found that the prior runner bound only the filled mock and built a
+  new generic DOCX; the official template was absent from the P221 receipt chain.
+- Added a full 146-field template map and filled-template round-trip receipt,
+  both sealed into the Phase 3 publication receipt.
+- The final review DOCX now retains the complete filled official-template
+  structure, replaces the source conclusion with the proposal-only watermark,
+  and appends the bound review rationale under no-network isolation.
+- Added template/filled drift, completeness and deterministic-render coverage.
+
+### Session 9 — 2026-08-09 (spec-review remediation and evidence refresh)
+
+- Closed coordinated rubric+receipt drift by regenerating and comparing the
+  compiler output from the bound data package at the reasoning boundary.
+- Replaced identifier-only rationale checks with an exact claim contract,
+  non-empty evidence bindings, validated provenance ranges and public-citation
+  rejection.
+- Added a P.2.2.1-specific draft contract, real page-level DOCX header marker,
+  and independent post-render verifier for rationale/draft/receipt/DOCX swaps.
+- G-00 now materializes the 146-field map and filled-template receipt directly;
+  canonical proposal/review runs were regenerated after a recoverable backup.
+- Fresh verification: G-00 14/14, G-01 18/18, formulation-selection 41/41,
+  v2/v3 reasoning 52/52, focused G-03/G-04 19/19, and aggregate 289/289.
+
+### Session 10 — 2026-08-09 (final code-quality remediation)
+
+- The post-render verifier now rejoins all 145 required filled values to their
+  exact template owners and rejects owner-level DOCX content substitution even
+  when render hashes are refreshed.
+- Removed the redundant body-prefix marker that shifted paragraph owner
+  coordinates; the marker remains attached through the real DOCX header and in
+  the validated review addendum.
+- The `fd-confirmed` lane now source-compiles and publishes the exact
+  `test-approved` v3 rubric sealed by its compile receipt, decision and
+  evaluation; rationale/render regeneration succeeds in that lane.
+- `test-verdict.json` records explicit pass/fail evidence for every required
+  negative boundary. Fresh aggregate: 291/291; independent canonical verifier:
+  page marker, P.2.2.1 sections and internal provenance all complete.
 
 ## Deferred follow-on — Authorization module
 

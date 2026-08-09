@@ -1,0 +1,10 @@
+{
+  "docx_sha256": "6a0a1ec323085af3698b33947e55a6da2ad908b4c845429ae93ece9340df7947",
+  "internal_provenance_complete": true,
+  "normalized_ooxml_sha256": "c45e123d6d20b05aa67ebdd09a0e759e0420b1464178aa9169b686a2ee1e7785",
+  "p221_sections_complete": true,
+  "page_level_marker": true,
+  "rationale_sha256": "c08c6ddfce2c21451072fe26acafc5d01686c42aeb83edce155a4153a4a404f2",
+  "run_id": "qbd-p221-formulation-selection",
+  "schema_version": "formulation-review-verification/v1"
+}

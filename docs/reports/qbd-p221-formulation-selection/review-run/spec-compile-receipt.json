@@ -1,0 +1,25 @@
+{
+  "approval_state": "proposal",
+  "compiler_version": "qbd-p221-spec-compiler/v1",
+  "document_xml_sha256": "ebefbf16e4f7bcae2907d6655d72a3e374cc4b2b6f185380203403f61a2bdf8a",
+  "evidence_envelope_sha256": "0bbcff5b1c2942b225cd78c04d147beeb04dfc498a8a89dc785c9eea24516bd0",
+  "fd_confirm_flag": {
+    "confirmed_at": null,
+    "confirmed_by": null,
+    "flag_state": "unset",
+    "note": null,
+    "schema_version": "fd-confirm-flag/v1"
+  },
+  "receipt_id": "spec-compile-b765ad0ec1842ce23e2298df",
+  "receipt_set_sha256": "e2264be13ad19fd4495a1925ba17163de9e710edda5760616dbd996c35222211",
+  "rubric_sha256": "b765ad0ec1842ce23e2298dfd38b78a9a773963d310d0dd7e00d4755a19bce64",
+  "schema_version": "spec-compile-receipt/v1",
+  "source_document_sha256": "01fe95607f4733e2b47a4c46f8dad5817d6014cc40f69a08631977c9d890cd8f",
+  "specification_evidence_ids": [
+    "specification:assay",
+    "specification:content-uniformity-av",
+    "specification:dissolution"
+  ],
+  "specification_evidence_sha256": "6b9d4c953b4926f3be0d4c2e0de750492714f6a820bf8f46fbdc57e2367f65f7",
+  "store_records_sha256": "9660f38d1234373c06aaee6e85c4e6c64478aa7ba1ab04546137c2428735b1fb"
+}

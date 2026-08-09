@@ -1,0 +1,78 @@
+{
+  "schema_version": 3,
+  "rubric_id": "qbd-p221-formulation-selection-v3",
+  "approval_state": "proposal",
+  "required_candidate_ids": ["formula-01", "formula-02", "formula-03"],
+  "minimum_eligible_candidates": 1,
+  "selection_mode": "single-survivor-after-complete-cohort",
+  "measures": [
+    {
+      "id": "dissolution_min",
+      "source_measure": "dissolution_min",
+      "statistic": "minimum",
+      "critical": true,
+      "direction": "higher-is-better",
+      "canonical_unit": "percent",
+      "hard_gates": [{ "operator": ">=", "threshold": 80, "specification_evidence_id": "specification:dissolution" }],
+      "score_map": [{ "operator": ">=", "threshold": 0, "points": 0 }],
+      "weight": { "nominal": 0, "min": 0, "max": 0 },
+      "conflict_tolerance": 0
+    },
+    {
+      "id": "dissolution_mean",
+      "source_measure": "dissolution_mean",
+      "statistic": "mean",
+      "critical": true,
+      "direction": "higher-is-better",
+      "canonical_unit": "percent",
+      "hard_gates": [],
+      "score_map": [
+        { "operator": "<", "threshold": 80, "points": 1 },
+        { "operator": "<", "threshold": 90, "points": 2 },
+        { "operator": ">=", "threshold": 90, "points": 3 }
+      ],
+      "weight": { "nominal": 1, "min": 1, "max": 1 },
+      "conflict_tolerance": 0
+    },
+    {
+      "id": "dissolution_max",
+      "source_measure": "dissolution_max",
+      "statistic": "maximum",
+      "critical": false,
+      "direction": "higher-is-better",
+      "canonical_unit": "percent",
+      "hard_gates": [],
+      "score_map": [{ "operator": ">=", "threshold": 0, "points": 0 }],
+      "weight": { "nominal": 0, "min": 0, "max": 0 },
+      "conflict_tolerance": 0
+    },
+    {
+      "id": "assay",
+      "source_measure": "assay",
+      "statistic": "raw",
+      "critical": true,
+      "direction": "higher-is-better",
+      "canonical_unit": "percent",
+      "hard_gates": [
+        { "operator": ">=", "threshold": 90, "specification_evidence_id": "specification:assay" },
+        { "operator": "<=", "threshold": 110, "specification_evidence_id": "specification:assay" }
+      ],
+      "score_map": [{ "operator": ">=", "threshold": 0, "points": 0 }],
+      "weight": { "nominal": 0, "min": 0, "max": 0 },
+      "conflict_tolerance": 0
+    },
+    {
+      "id": "content_uniformity_av",
+      "source_measure": "content_uniformity_av",
+      "statistic": "average",
+      "critical": true,
+      "direction": "higher-is-better",
+      "canonical_unit": "percent",
+      "hard_gates": [{ "operator": "<", "threshold": 15, "specification_evidence_id": "specification:content-uniformity-av" }],
+      "score_map": [{ "operator": ">=", "threshold": 0, "points": 0 }],
+      "weight": { "nominal": 0, "min": 0, "max": 0 },
+      "conflict_tolerance": 0
+    }
+  ],
+  "tie_threshold": 0
+}

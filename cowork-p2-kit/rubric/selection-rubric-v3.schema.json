@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "selection-rubric-v3.schema.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "rubric_id", "approval_state", "required_candidate_ids", "minimum_eligible_candidates", "selection_mode", "measures", "tie_threshold"],
+  "properties": {
+    "schema_version": { "const": 3 },
+    "rubric_id": { "type": "string", "minLength": 1 },
+    "approval_state": { "enum": ["proposal", "test-approved"] },
+    "required_candidate_ids": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+    "minimum_eligible_candidates": { "type": "integer", "minimum": 1 },
+    "selection_mode": { "const": "single-survivor-after-complete-cohort" },
+    "tie_threshold": { "type": "number", "minimum": 0 },
+    "measures": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "source_measure", "statistic", "critical", "direction", "canonical_unit", "hard_gates", "score_map", "weight", "conflict_tolerance"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "source_measure": { "type": "string", "minLength": 1 },
+          "statistic": { "type": "string", "minLength": 1 },
+          "critical": { "type": "boolean" },
+          "direction": { "enum": ["higher-is-better", "lower-is-better"] },
+          "canonical_unit": { "type": "string", "minLength": 1 },
+          "hard_gates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["operator", "threshold", "specification_evidence_id"],
+              "properties": {
+                "operator": { "enum": ["<", "<=", ">=", ">"] },
+                "threshold": { "type": "number" },
+                "specification_evidence_id": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "score_map": { "type": "array", "minItems": 1 },
+          "weight": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["nominal", "min", "max"],
+            "properties": {
+              "nominal": { "type": "number", "minimum": 0 },
+              "min": { "type": "number", "minimum": 0 },
+              "max": { "type": "number", "minimum": 0 }
+            }
+          },
+          "conflict_tolerance": { "type": "number", "minimum": 0 }
+        }
+      }
+    }
+  }
+}

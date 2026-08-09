@@ -1,0 +1,113 @@
+{
+  "bindings": [
+    {
+      "binding_role": "rationale_support",
+      "card_id": "FC-CROSCARMELLOSE_SODIUM-formula-01",
+      "evidence_id": "composition-context:croscarmellose-sodium:formula-01",
+      "kind": "composition_context"
+    },
+    {
+      "binding_role": "rationale_support",
+      "card_id": "FC-CROSCARMELLOSE_SODIUM-formula-02",
+      "evidence_id": "composition-context:croscarmellose-sodium:formula-02",
+      "kind": "composition_context"
+    },
+    {
+      "binding_role": "rationale_support",
+      "card_id": "FC-CROSCARMELLOSE_SODIUM-formula-03",
+      "evidence_id": "composition-context:croscarmellose-sodium:formula-03",
+      "kind": "composition_context"
+    },
+    {
+      "binding_role": "scoring",
+      "card_id": "FC-ASSAY-formula-01",
+      "evidence_id": "observed-result:assay:formula-01",
+      "kind": "observed_result"
+    },
+    {
+      "binding_role": "scoring",
+      "card_id": "FC-ASSAY-formula-02",
+      "evidence_id": "observed-result:assay:formula-02",
+      "kind": "observed_result"
+    },
+    {
+      "binding_role": "scoring",
+      "card_id": "FC-ASSAY-formula-03",
+      "evidence_id": "observed-result:assay:formula-03",
+      "kind": "observed_result"
+    },
+    {
+      "binding_role": "scoring",
+      "card_id": "FC-CONTENT_UNIFORMITY_AV-formula-01",
+      "evidence_id": "observed-result:content-uniformity-av:formula-01",
+      "kind": "observed_result"
+    },
+    {
+      "binding_role": "scoring",
+      "card_id": "FC-CONTENT_UNIFORMITY_AV-formula-02",
+      "evidence_id": "observed-result:content-uniformity-av:formula-02",
+      "kind": "observed_result"
+    },
+    {
+      "binding_role": "scoring",
+      "card_id": "FC-CONTENT_UNIFORMITY_AV-formula-03",
+      "evidence_id": "observed-result:content-uniformity-av:formula-03",
+      "kind": "observed_result"
+    },
+    {
+      "binding_role": "scoring",
+      "card_id": "FC-DISSOLUTION_MAX-formula-01",
+      "evidence_id": "observed-result:dissolution-max:formula-01",
+      "kind": "observed_result"
+    },
+    {
+      "binding_role": "scoring",
+      "card_id": "FC-DISSOLUTION_MAX-formula-02",
+      "evidence_id": "observed-result:dissolution-max:formula-02",
+      "kind": "observed_result"
+    },
+    {
+      "binding_role": "scoring",
+      "card_id": "FC-DISSOLUTION_MAX-formula-03",
+      "evidence_id": "observed-result:dissolution-max:formula-03",
+      "kind": "observed_result"
+    },
+    {
+      "binding_role": "scoring",
+      "card_id": "FC-DISSOLUTION_MEAN-formula-01",
+      "evidence_id": "observed-result:dissolution-mean:formula-01",
+      "kind": "observed_result"
+    },
+    {
+      "binding_role": "scoring",
+      "card_id": "FC-DISSOLUTION_MEAN-formula-02",
+      "evidence_id": "observed-result:dissolution-mean:formula-02",
+      "kind": "observed_result"
+    },
+    {
+      "binding_role": "scoring",
+      "card_id": "FC-DISSOLUTION_MEAN-formula-03",
+      "evidence_id": "observed-result:dissolution-mean:formula-03",
+      "kind": "observed_result"
+    },
+    {
+      "binding_role": "scoring",
+      "card_id": "FC-DISSOLUTION_MIN-formula-01",
+      "evidence_id": "observed-result:dissolution-min:formula-01",
+      "kind": "observed_result"
+    },
+    {
+      "binding_role": "scoring",
+      "card_id": "FC-DISSOLUTION_MIN-formula-02",
+      "evidence_id": "observed-result:dissolution-min:formula-02",
+      "kind": "observed_result"
+    },
+    {
+      "binding_role": "scoring",
+      "card_id": "FC-DISSOLUTION_MIN-formula-03",
+      "evidence_id": "observed-result:dissolution-min:formula-03",
+      "kind": "observed_result"
+    }
+  ],
+  "schema_version": "fact-card-evidence-bindings/v1"
+}

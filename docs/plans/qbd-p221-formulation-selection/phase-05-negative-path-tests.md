@@ -1,7 +1,7 @@
 ---
 phase: 5
 title: "Legitimacy-negative and split determinism regression suite"
-status: pending
+status: completed
 priority: P1
 effort: "1-2d"
 dependencies: [0, 1, 2, 3, 4]
@@ -28,6 +28,7 @@ forgery/publication adversarial matrix is deferred to the authorization module.
 | Boundary | Negative | Expected result |
 |---|---|---|
 | Source | DOCX or `document.xml` hash mismatch | reject before parse |
+| Template binding | template hash/owner drift, incomplete 146-field receipt or unresolved placeholder | reject |
 | Isolated ingest | canonical/broad root used or fixture absent from temp manifest | reject |
 | Cell ownership | wrong/duplicate formula column, row, cell hash or record join | NO-GO |
 | Typed evidence | specification bound as observed result | `E_SPEC_AS_RESULT` |
@@ -88,12 +89,15 @@ evidence or winner for this plan.
 
 ## Success criteria
 
-- [ ] G-05 passes.
-- [ ] Every negative above asserts the expected error/state, not only “throws”.
-- [ ] Full-ingest and downstream determinism have separate verdict fields.
-- [ ] Any ingest nondeterminism fails the plan instead of activating a snapshot bypass.
-- [ ] Existing v2 reasoning, demo rationale and render regression suites pass.
-- [ ] The engineering_proposal naming CT03 cannot be published or read as an FD decision.
+- [x] G-05 passes.
+- [x] Every negative above asserts the expected error/state, not only “throws”.
+- [x] Full-ingest and downstream determinism have separate verdict fields.
+- [x] Any ingest nondeterminism fails the plan instead of activating a snapshot bypass.
+- [x] Existing v2 reasoning, demo rationale and render regression suites pass;
+  fresh aggregate is 291/291 with no remaining baseline failures.
+- [x] Complete template+filled binding and final resolved P.2.2.1 render are
+  covered by focused drift/completeness tests.
+- [x] The engineering_proposal naming CT03 cannot be published or read as an FD decision.
 
 ## Risk assessment
 

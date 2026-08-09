@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "fd-confirm-flag.schema.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "flag_state", "confirmed_by", "confirmed_at", "note"],
+  "properties": {
+    "schema_version": { "const": "fd-confirm-flag/v1" },
+    "flag_state": { "enum": ["unset", "confirmed"] },
+    "confirmed_by": { "type": ["string", "null"] },
+    "confirmed_at": { "type": ["string", "null"] },
+    "note": { "type": ["string", "null"] }
+  }
+}

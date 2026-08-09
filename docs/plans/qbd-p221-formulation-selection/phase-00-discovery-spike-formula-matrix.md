@@ -25,7 +25,10 @@ phases.
 
 ## Requirements
 
-- Verify source SHA-256 and `document.xml` SHA-256 before parsing.
+- Verify official-template and filled-source SHA-256 plus `document.xml` SHA-256
+  before parsing.
+- Compile the complete 146-field template map and require every filled-template
+  field to round-trip with no blank required value.
 - Stage only the mock under a fresh temporary trial root with a minimal temporary
   classification manifest; do not edit canonical inputs/manifests.
 - Run the existing ingest pipeline through the temporary config.
@@ -101,6 +104,8 @@ pattern and treats the generic `record.table` structure only as a hint.
 
 - [x] G-00 passes.
 - [x] Source and `document.xml` hashes equal frozen independent pins.
+- [x] Official template and filled source are both frozen and 146/146 fields
+  round-trip before reasoning.
 - [x] Exact three formulas and all required values/specs/composition levels found.
 - [x] Every value has exactly one cell receipt and exactly one record binding.
 - [x] Formula headers/leaves, source specifications, and quote projections are

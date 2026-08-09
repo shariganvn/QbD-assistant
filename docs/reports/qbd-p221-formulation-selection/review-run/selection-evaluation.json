@@ -1,0 +1,15 @@
+{
+  "candidate_reviews": [],
+  "decision_id": "qbd-p221-formulation-selection-fd-decision",
+  "decision_sha256": "7ecbec0f9382595d0cff935a44197c79680c3cc9057138696695e845dc40b348",
+  "evaluation_id": "formulation-evaluation-qbd-p221-formulation-selection-fd-decision",
+  "matrix_cells": [],
+  "outcome_code": "E_RUBRIC_APPROVAL_REQUIRED",
+  "rubric_sha256": null,
+  "schema_version": "formulation-selection-evaluation/v1",
+  "selection_evaluated": false,
+  "sensitivity": {
+    "stable_winner": null,
+    "vectors": []
+  }
+}

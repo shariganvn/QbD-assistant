@@ -1,0 +1,67 @@
+{
+  "schema_version": "qbd-p221-formulation-selection-test-verdict/v1",
+  "gate": "G-05",
+  "verdict": "pass",
+  "runtime": {"node": "v22.22.2", "npm": "10.9.7"},
+  "focused": {
+    "g00_source_and_template_binding": {"command": "node --test cowork-p2-kit/workflow-trial/tests/formulation-spike-run.test.mjs cowork-p2-kit/workflow-trial/tests/formulation-selection-template-binding.test.mjs", "tests": 14, "passed": 14, "failed": 0},
+    "g01_real_data_layer": {"command": "node --test cowork-p2-kit/workflow-trial/tests/real-data-pack.test.mjs", "tests": 18, "passed": 18, "failed": 0},
+    "formulation_selection_tests": {"command": "node --test cowork-p2-kit/workflow-trial/tests/formulation-selection-*.test.mjs", "tests": 43, "passed": 43, "failed": 0},
+    "v2_and_v3_reasoning": {"command": "node --test cowork-p2-kit/workflow-trial/tests/spec-compiled-rubric.test.mjs cowork-p2-kit/reasoning/tests/decision-engine.test.mjs cowork-p2-kit/reasoning/tests/e2e-decision.test.mjs", "tests": 52, "passed": 52, "failed": 0},
+    "g03_g04_render": {"command": "node --test cowork-p2-kit/workflow-trial/tests/formulation-selection-decision.test.mjs cowork-p2-kit/workflow-trial/tests/formulation-selection-rationale.test.mjs cowork-p2-kit/workflow-trial/tests/formulation-selection-render.test.mjs", "tests": 20, "passed": 20, "failed": 0},
+    "rationale_regression": {"command": "node --test cowork-p2-kit/rationale/tests/*.test.mjs", "tests": 40, "passed": 40, "failed": 0},
+    "render_regression": {"command": "node --test cowork-p2-kit/render/tests/*.test.mjs", "tests": 79, "passed": 79, "failed": 0},
+    "demo_compatibility": {"command": "node --test cowork-p2-kit/workflow-trial/tests/content-demo.test.mjs cowork-p2-kit/workflow-trial/tests/decision-shape-probe.test.mjs", "tests": 11, "passed": 11, "failed": 0}
+  },
+  "aggregate": {"command": "node --test cowork-p2-kit/workflow-trial/tests/formulation-selection-*.test.mjs cowork-p2-kit/workflow-trial/tests/spec-compiled-rubric.test.mjs cowork-p2-kit/reasoning/tests/*.test.mjs cowork-p2-kit/rationale/tests/*.test.mjs cowork-p2-kit/render/tests/*.test.mjs", "tests": 291, "passed": 291, "failed": 0, "skipped": 0, "todo": 0},
+  "determinism": {
+    "full_ingest": {"label": "full-ingest", "status": "pass", "source": "formulation-selection-determinism.test.mjs"},
+    "downstream": {"label": "downstream-from-pinned-store", "status": "pass", "source": "formulation-selection-determinism.test.mjs"}
+  },
+  "materialized_artifact_hashes": {
+    "filled_docx_sha256": "01fe95607f4733e2b47a4c46f8dad5817d6014cc40f69a08631977c9d890cd8f",
+    "template_docx_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+    "template_field_map_file_sha256": "16b336385c62c64887dfbda502ba6b29bf768c42ade0f89aaa851db95e485634",
+    "template_cell_receipt_file_sha256": "cbf6a9670e22628518c304ef45630b1031a57dc3adc6c2a94adbca47929115a5",
+    "proposal_publication_receipt_sha256": "11618ee477a8dbcd5f72c93a2140ebe3f223bcde9bbef0f9d9278e542ce54bee",
+    "review_publication_receipt_sha256": "11618ee477a8dbcd5f72c93a2140ebe3f223bcde9bbef0f9d9278e542ce54bee",
+    "rationale_receipt_sha256": "6da75e7901958d3a7750c217d587582664bae93cd8e8c93073ed2e461a3c4483",
+    "render_receipt_sha256": "ec2d89f5648937285318e367f1dc0123ec638e185d00eeb4caaa3ff376c96bc9",
+    "review_verification_sha256": "8684b075de83c65d3489067780155b2b9a671e76a6107dfe3e3e0f96e0828bfc",
+    "review_docx_sha256": "6a0a1ec323085af3698b33947e55a6da2ad908b4c845429ae93ece9340df7947",
+    "normalized_ooxml_sha256": "c45e123d6d20b05aa67ebdd09a0e759e0420b1464178aa9169b686a2ee1e7785"
+  },
+  "preexisting_failures": [],
+  "negative_cases": {
+    "source_hash_drift": {"status": "pass", "test": "G-05 source hash mismatch and canonical ingest roots fail closed", "expected_code": "E_SOURCE_HASH", "source": "cowork-p2-kit/workflow-trial/tests/formulation-selection-negatives.test.mjs"},
+    "document_xml_hash_drift": {"status": "pass", "test": "G-00 rejects a changed frozen document.xml hash before ingest", "expected_code": "E_DOCUMENT_HASH", "source": "cowork-p2-kit/workflow-trial/tests/formulation-spike-run.test.mjs"},
+    "template_binding_drift": {"status": "pass", "test": "G-04 isolated template render rejects a receipt that no longer matches the frozen DOCX pair", "expected_codes": ["E_RATIONALE_SOURCE_BINDING", "E_FORMULATION_RENDER"], "source": "cowork-p2-kit/workflow-trial/tests/formulation-selection-template-binding.test.mjs"},
+    "missing_isolated_manifest_fixture": {"status": "pass", "test": "G-00 rejects an isolated manifest that omits the frozen filled mock", "expected_code": "E_ISOLATED_MANIFEST", "source": "cowork-p2-kit/workflow-trial/tests/formulation-spike-run.test.mjs"},
+    "cell_ownership_drift": {"status": "pass", "test": "G-00 rejects wrong formula headers and unrelated receipt-to-record ownership", "expected_codes": ["E_FORMULA_HEADER", "E_RECEIPT_JOIN_CARDINALITY"], "source": "cowork-p2-kit/workflow-trial/tests/formulation-spike-run.test.mjs"},
+    "spec_as_result": {"status": "pass", "test": "G-05 typed evidence and exact cohort negatives retain their specific failures", "expected_code": "E_SPEC_AS_RESULT", "source": "cowork-p2-kit/workflow-trial/tests/formulation-selection-negatives.test.mjs"},
+    "inventory_or_role_downgrade": {"status": "pass", "test": "G-01 rejects omitted inventory records and result-to-context role downgrade", "expected_code": "E_INVENTORY_RECONCILIATION", "source": "cowork-p2-kit/workflow-trial/tests/real-data-pack.test.mjs"},
+    "incomplete_one_or_two_candidate_cohort": {"status": "pass", "test": "G-02 rejects one- and two-candidate cohorts before minimum-eligible-candidates can select one", "expected_code": "E_PACKAGE_SCHEMA", "source": "cowork-p2-kit/workflow-trial/tests/spec-compiled-rubric.test.mjs"},
+    "coordinated_rubric_receipt_drift": {"status": "pass", "test": "G-02 rejects coordinated rubric and receipt drift from the bound specification", "expected_code": "E_RUBRIC_SPEC_DRIFT", "source": "cowork-p2-kit/workflow-trial/tests/spec-compiled-rubric.test.mjs"},
+    "strict_cu_boundary": {"status": "pass", "test": "G-02 preserves the strict CU gate at the exact threshold", "expected_state": "compare(<, 15, 15) === false", "source": "cowork-p2-kit/workflow-trial/tests/spec-compiled-rubric.test.mjs"},
+    "approval_unset_or_override": {"status": "pass", "test": "G-02 rejects caller approval override and leaves the unset lane inconclusive", "expected_codes": ["E_RUBRIC_APPROVAL_INPUT", "E_RUBRIC_APPROVAL_REQUIRED"], "source": "cowork-p2-kit/workflow-trial/tests/spec-compiled-rubric.test.mjs"},
+    "proposal_language": {"status": "pass", "test": "G-05 rejects decision language in the engineering proposal", "expected_code": "E_PROPOSAL_LANGUAGE", "source": "cowork-p2-kit/workflow-trial/tests/formulation-selection-negatives.test.mjs"},
+    "proposal_partial_or_forged_cohort": {"status": "pass", "test": "G-05 rejects a forged proposed survivor", "expected_code": "E_PROPOSAL_BINDING", "source": "cowork-p2-kit/workflow-trial/tests/formulation-selection-negatives.test.mjs"},
+    "cross_run_publication_substitution": {"status": "pass", "test": "G-05 rejects cross-run artifacts and coordinated decision/evaluation substitution", "expected_code": "E_RATIONALE_SOURCE_BINDING", "source": "cowork-p2-kit/workflow-trial/tests/formulation-selection-publication.test.mjs"},
+    "empty_or_invented_rationale_claim": {"status": "pass", "test": "G-04 rejects empty bindings, invented claim text, and recommendation wording", "expected_codes": ["E_RATIONALE_CLAIM_BINDING", "E_RATIONALE_CLAIM_CONTRACT"], "source": "cowork-p2-kit/workflow-trial/tests/formulation-selection-rationale.test.mjs"},
+    "invalid_provenance_range": {"status": "pass", "test": "G-04 rationale rejects invalid provenance ranges", "expected_code": "E_INTERNAL_PROVENANCE", "source": "cowork-p2-kit/workflow-trial/tests/formulation-selection-rationale.test.mjs"},
+    "public_citation_injection": {"status": "pass", "test": "G-04 rationale rejects public citation-object injection", "expected_code": "E_RATIONALE_CITATION_POLICY", "source": "cowork-p2-kit/workflow-trial/tests/formulation-selection-rationale.test.mjs"},
+    "missing_p221_blocks": {"status": "pass", "test": "G-05 P.2.2.1 draft contract rejects required marker, watermark, missing-data, and provenance removal", "expected_code": "E_FORMULATION_DRAFT_CONTRACT", "source": "cowork-p2-kit/workflow-trial/tests/formulation-selection-render.test.mjs"},
+    "rationale_substitution": {"status": "pass", "test": "G-05 post-render verifier rejects rationale substitution", "expected_code": "E_FORMULATION_REVIEW_VERIFY", "source": "cowork-p2-kit/workflow-trial/tests/formulation-selection-render.test.mjs"},
+    "docx_or_owner_content_substitution": {"status": "pass", "test": "G-05 verifier rejects whole-DOCX and owner-level content substitution even with refreshed render hashes", "expected_code": "E_FORMULATION_REVIEW_VERIFY", "source": "cowork-p2-kit/workflow-trial/tests/formulation-selection-render.test.mjs"},
+    "confirmed_lane_rubric_binding": {"status": "pass", "test": "G-03 confirmed lane publishes and renders the source-compiled authorized rubric", "expected_state": "rubric == receipt == decision hash", "source": "cowork-p2-kit/workflow-trial/tests/formulation-selection-publication.test.mjs"}
+  },
+  "evidence": {
+    "source_hashes": "docs/reports/qbd-p221-formulation-selection/source-hashes.json",
+    "full_ingest_hashes": "docs/reports/qbd-p221-formulation-selection/two-run-ingest-hashes.json",
+    "negative_tests": "cowork-p2-kit/workflow-trial/tests/formulation-selection-negatives.test.mjs",
+    "publication_tests": "cowork-p2-kit/workflow-trial/tests/formulation-selection-publication.test.mjs",
+    "determinism_tests": "cowork-p2-kit/workflow-trial/tests/formulation-selection-determinism.test.mjs",
+    "review_verification": "docs/reports/qbd-p221-formulation-selection/review-run/review-verification.json"
+  },
+  "cryptographic_authorization": "deferred-to-qbd-authorization-module"
+}

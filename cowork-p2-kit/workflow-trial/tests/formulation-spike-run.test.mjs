@@ -7,7 +7,7 @@ import test from "node:test";
 import JSZip from "jszip";
 import { createLiteparseAdapter } from "../../ingest/liteparse-adapter.mjs";
 import { canonicalJson, deriveFormulaColumns, locateFormulaOwnership, parseFormulaTables, parseQuoteSpecification, parseSourceSpecification, reconcileFormulaReceipts, sha256 } from "../formula-cell-receipt.mjs";
-import { assertIsolatedConfig, runFormulationSpike, verifyFrozenSource } from "../formulation-spike-run.mjs";
+import { assertIsolatedConfig, assertIsolatedManifest, runFormulationSpike, verifyFrozenSource } from "../formulation-spike-run.mjs";
 
 const repoRoot = resolve(import.meta.dirname, "../../..");
 const expected = JSON.parse(readFileSync(resolve(import.meta.dirname, "fixtures/expected-formula-matrix.json"), "utf8"));
@@ -37,9 +37,11 @@ test("G-00 runs two source-pinned isolated ingests and binds every critical cell
     assert.ok(first.receipts.every((entry) => entry.classification.citable === false));
     assert.deepEqual(first.evidence["two-run-ingest-hashes.json"], second.evidence["two-run-ingest-hashes.json"]);
     assert.equal(first.evidence["go-no-go.json"].verdict, "GO");
-    for (const name of ["source-hashes.json", "isolated-config-receipt.json", "formula-evidence-matrix.json", "result-inventory.json", "formula-cell-receipts.json", "two-run-ingest-hashes.json", "go-no-go.json"]) {
+    for (const name of ["template-field-map.v1.json", "template-cell-receipt.v1.json", "source-hashes.json", "isolated-config-receipt.json", "formula-evidence-matrix.json", "result-inventory.json", "formula-cell-receipts.json", "two-run-ingest-hashes.json", "go-no-go.json"]) {
       assert.equal(existsSync(join(root, "first", name)), true, `${name} was not emitted`);
     }
+    assert.equal(first.templateBinding.fieldMap.occurrence_count, 146);
+    assert.equal(first.templateBinding.receipt.occurrence_count, 146);
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
@@ -50,6 +52,14 @@ test("G-00 rejects a changed frozen hash before an ingest configuration can be u
     () => verifyFrozenSource({ expectedPins: { source_document_sha256: "0".repeat(64), document_xml_sha256: "0".repeat(64) } }),
     (error) => error.code === "E_SOURCE_HASH",
   );
+  await assert.rejects(
+    () => verifyFrozenSource({ expectedPins: { source_document_sha256: "01fe95607f4733e2b47a4c46f8dad5817d6014cc40f69a08631977c9d890cd8f", document_xml_sha256: "0".repeat(64) } }),
+    (error) => error.code === "E_DOCUMENT_HASH",
+  );
+});
+
+test("G-00 rejects an isolated manifest that omits the frozen filled mock", () => {
+  assert.throws(() => assertIsolatedManifest({}), (error) => error.code === "E_ISOLATED_MANIFEST");
 });
 
 test("G-00 forbids canonical ingest roots", () => {

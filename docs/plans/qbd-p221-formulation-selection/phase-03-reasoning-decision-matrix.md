@@ -1,7 +1,7 @@
 ---
 phase: 3
 title: "Proposal diagnostics, inconclusive fd_decision and watermarked CT03 engineering proposal"
-status: pending
+status: completed
 priority: P1
 effort: "1-2d"
 dependencies: [1, 2]
@@ -65,7 +65,8 @@ inconclusive/`winner:null`, and the proposal is explicitly `fd_approved:false`.
   computation; a partial cohort yields no proposed survivor.
 - Publish diagnostic, inconclusive `fd_decision`, empty selection evaluation,
   `engineering_proposal`, data package, compile receipt and store/source hashes
-  atomically in one receipt.
+  plus the complete template field map/filled-template receipt atomically in one
+  receipt.
 
 ## Architecture
 
@@ -111,15 +112,17 @@ validated real-data package + v3 proposal rubric (fd-confirm flag UNSET)
 
 ## Success criteria
 
-- [ ] G-03 passes.
-- [ ] Evidence diagnostic has all evidence but no pass/fail/eligibility/winner.
-- [ ] `fd_decision` is valid inconclusive with empty selection evaluation.
-- [ ] `engineering_proposal` names CT03 with `fd_approved:false`, derived only
+- [x] G-03 passes.
+- [x] Evidence diagnostic has all evidence but no pass/fail/eligibility/winner.
+- [x] `fd_decision` is valid inconclusive with empty selection evaluation.
+- [x] `engineering_proposal` names CT03 with `fd_approved:false`, derived only
   from exact three-candidate real-mock evidence.
-- [ ] The proposal object contains no winner/selected/decision/recommendation token.
-- [ ] Omitted formula, omitted record, role downgrade and cross-run substitution
+- [x] The proposal object contains no winner/selected/decision/recommendation token.
+- [x] Omitted formula, omitted record, role downgrade and cross-run substitution
   fail with specific codes, and a partial cohort yields no proposed survivor.
-- [ ] `fd_decision` and `engineering_proposal` are separate objects in the receipt.
+- [x] `fd_decision` and `engineering_proposal` are separate objects in the receipt.
+- [x] The official template map and all 146 filled values are sealed into the
+  same publication receipt.
 
 ## Risk assessment
 

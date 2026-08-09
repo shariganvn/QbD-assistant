@@ -1,0 +1,26 @@
+{
+  "citations_count": 0,
+  "classification": {
+    "citable": false,
+    "label": "public"
+  },
+  "docx_sha256": "6a0a1ec323085af3698b33947e55a6da2ad908b4c845429ae93ece9340df7947",
+  "isolated_render": {
+    "argv_hash": "5416c2c01ad8e536",
+    "exit_code": 0,
+    "unshare_net": true,
+    "versions": {
+      "bwrap": "bubblewrap 0.11.1",
+      "node": "v22.22.2",
+      "npm": "10.9.7"
+    }
+  },
+  "normalized_ooxml_sha256": "c45e123d6d20b05aa67ebdd09a0e759e0420b1464178aa9169b686a2ee1e7785",
+  "rationale_receipt_sha256": "6da75e7901958d3a7750c217d587582664bae93cd8e8c93073ed2e461a3c4483",
+  "run_id": "qbd-p221-formulation-selection",
+  "schema_version": "formulation-render-receipt/v1",
+  "source_publication_receipt_sha256": "11618ee477a8dbcd5f72c93a2140ebe3f223bcde9bbef0f9d9278e542ce54bee",
+  "template_cell_receipt_sha256": "19c71b12f438c424475fbbe43574660a741bb1d63b27ee091f28d00546386ac1",
+  "template_field_map_sha256": "1f74f21bc5ca89acdf958db247693ceb3bae0c8fe34fdd69ba819eb278667cf2",
+  "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0"
+}

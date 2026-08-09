@@ -1,0 +1,34 @@
+{
+  "artifact_hashes": {
+    "compiled-rubric.v3.json": "4deae0d177f8172d6b84af76182316e310c2482aa67d45dde37dd4b25219daa7",
+    "engineering-proposal.json": "c8bc9197296a40aa33109c751cc15ee8b3a0266b0b77905044c5d6684e02c719",
+    "fact-card-evidence-bindings.json": "819a3d30438b4c6a3651758043f2b5c23bc6d05147b5e5b3b7a113fdb1212b83",
+    "fact-cards.json": "55b4260e5a72a5daee7e9a38f768d43a440cbce1493b1186f0694407b273814b",
+    "formula-cell-receipts.json": "9cdd8d4a6a7a59f678575632868790f2ed22452945b06f0794d436f932098636",
+    "formula-decision.json": "8e287b77a031686049705c88ea0d8ad6fb5a3bac4b9d17e5b821a2af5036be63",
+    "formula-evidence-diagnostic.json": "22fbb2c501b28ab810b514ba2d49eae4c3137415b0b42487cc045f0b9bef2bff",
+    "formulation-data-package.json": "e18a7b495c7826e62bc7b9e66a7123632d63e154bbf32d23ee251d100cf137f1",
+    "formulation-evidence.json": "aa614cff4c5a20bb429d3654fab280cc6587bc6879bfd09e3410853748a03c18",
+    "inventory-reconciliation.json": "a8496dc063501af5f8caac39b72460411547dfe3ff5e889e44ee2d867025ae79",
+    "selection-evaluation.json": "846a0f5542d75d2de3d9cd71fe543edfe3539d1e439df2071ea667af06c3e959",
+    "spec-compile-receipt.json": "bb4efbbab1e0b1e18bf98ad827a5a715ed678e31986c65ec50d87357af8c6df5",
+    "template-cell-receipt.v1.json": "19c71b12f438c424475fbbe43574660a741bb1d63b27ee091f28d00546386ac1",
+    "template-field-map.v1.json": "1f74f21bc5ca89acdf958db247693ceb3bae0c8fe34fdd69ba819eb278667cf2"
+  },
+  "compile_receipt_sha256": "bb4efbbab1e0b1e18bf98ad827a5a715ed678e31986c65ec50d87357af8c6df5",
+  "diagnostic_sha256": "22fbb2c501b28ab810b514ba2d49eae4c3137415b0b42487cc045f0b9bef2bff",
+  "engineering_proposal_sha256": "c8bc9197296a40aa33109c751cc15ee8b3a0266b0b77905044c5d6684e02c719",
+  "fd_decision_sha256": "8e287b77a031686049705c88ea0d8ad6fb5a3bac4b9d17e5b821a2af5036be63",
+  "package_sha256": "0d6620d284c21cbb8258b60086cd12027d774b77568948cdfb1055f7b62aad05",
+  "run_id": "qbd-p221-formulation-selection",
+  "schema_version": "formulation-selection-publication-receipt/v1",
+  "source_hashes": {
+    "document_xml_sha256": "ebefbf16e4f7bcae2907d6655d72a3e374cc4b2b6f185380203403f61a2bdf8a",
+    "receipt_set_sha256": "e2264be13ad19fd4495a1925ba17163de9e710edda5760616dbd996c35222211",
+    "source_document_sha256": "01fe95607f4733e2b47a4c46f8dad5817d6014cc40f69a08631977c9d890cd8f",
+    "store_records_sha256": "9660f38d1234373c06aaee6e85c4e6c64478aa7ba1ab04546137c2428735b1fb"
+  },
+  "template_cell_receipt_sha256": "19c71b12f438c424475fbbe43574660a741bb1d63b27ee091f28d00546386ac1",
+  "template_field_map_sha256": "1f74f21bc5ca89acdf958db247693ceb3bae0c8fe34fdd69ba819eb278667cf2",
+  "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0"
+}

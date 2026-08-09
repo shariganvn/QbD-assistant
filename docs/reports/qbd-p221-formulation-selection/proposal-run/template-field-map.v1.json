@@ -1,0 +1,3781 @@
+{
+  "entries": [
+    {
+      "canonical_field_id": "UOM-AVE-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-06be0fc602f9ae94749463573408c6d03177f000d4c8aac3b1a5c6911f45a07a",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 3,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<UOM-AVE-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "THICKNESS-MIN-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-086577f8facf60b0aa82a1c896ae2d2a91f7657e9861fe1382f936c5d58754f6",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 11,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<THICKNESS-MIN-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "AV-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-0e5e1acf60509b40fdb4affd8ff46fffefacfb6de2f3e4920dbff73602bb8c1c",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 5,
+        "row": 23,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<AV-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "PDS-180-150-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-1506f082e3d0da98719f8cdd309614d35059f840d8b3e415cc3bd533aff35be5",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 6,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<PDS-180-150-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "UOM-AVE-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-16ee7f4c3eb9bdbbe38c8105292d2bce9fe8c902e1baa7aa2987cf2348317c7b",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 3,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<UOM-AVE-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "API-CONTENT-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-16f5b58d279caa9585d957df4411e5307f55d4e23b3c2ae9f18950571e6dc5bf",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 3,
+        "logical_column_start": 3,
+        "physical_cell": 3,
+        "row": 3,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<API-CONTENT-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "FRIABILITY-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-17e5474e93cc803b86c5c76dff31135470eaeb82d832e6a270d4b02e237f0def",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 4,
+        "row": 12,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<FRIABILITY-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-4-%-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-1ab339f0b54a1085b6934636e284987a6d62ceb31f462e8da80f667d8ef465f6",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 7,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-4-%-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISSOLUTION-MAX-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-22061b1aef32801662711703876e47bfca8bb1a4600760b7567be5085a325670",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 17,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISSOLUTION-MAX-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "ASSAY-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-233e809dcc680a4a923757adc34592a7be3323c1bdea33c63e21c7b0216c5f31",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 5,
+        "row": 15,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<ASSAY-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-6",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-246a5f060cb6046fb4679b3f796385ef171eb507ea97c84e022a3a492765139e",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 2,
+        "logical_column_start": 2,
+        "physical_cell": 2,
+        "row": 9,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-6>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-5-CONTENT-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-24d5355ff89e99300bdcbd4438efbc8db3e17a8059d8e327a2a83804c45873f8",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 3,
+        "logical_column_start": 3,
+        "physical_cell": 3,
+        "row": 8,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-5-CONTENT-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "TOTAL-IMPURITIES-SPEC",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-260e349774209ef3e9c950f5d5da1c6cc60f9f1653d43eda342d7113fe1d4b9d",
+      "owner": {
+        "grid_span": 2,
+        "kind": "cell",
+        "logical_column_end": 3,
+        "logical_column_start": 2,
+        "physical_cell": 2,
+        "row": 22,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<TOTAL-IMPURITIES-SPEC>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "API-CONTENT-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-2780c223587f2ed5230449e5e6c17fb2ed447d618f9a3ed3762ad950c3307093",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 7,
+        "logical_column_start": 7,
+        "physical_cell": 7,
+        "row": 3,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<API-CONTENT-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "PDS-150-125-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-29d0f9f155bf907510514f4be28011b6aa08897534b3425563153709a712fcf7",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 7,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<PDS-150-125-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISINTEGRATION-MIN-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-2a6eb90ffd6a86ca81138cd920d09e460507f565c5a0089f13fae9d2ec80aeef",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 14,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISINTEGRATION-MIN-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "HARDNESS-AVE-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-2c492a8d052a5f42d485adcd183dd0141613fbf0028bb344a3c2a9782ee15fe1",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 6,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<HARDNESS-AVE-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-1-%-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-2e7c53a7427d3cd61de69b3892bdeb98a3331d4a1c511f1b46297d1674d3a1df",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 8,
+        "logical_column_start": 8,
+        "physical_cell": 8,
+        "row": 4,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-1-%-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "BULK-DENSITY-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-3369943de0f53c71c334d7e76a020479965317cfff4494563115e215847d513b",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 2,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<BULK-DENSITY-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "THICKNESS-MAX-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-34cd91247c402feceba1ad975a7f9421cfad6ad5e88258a095553e541566fe5a",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 10,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<THICKNESS-MAX-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISSOLUTION-SPEC",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-353dcf2b30214a425b36f900d4c4bac81e99026e534387a6bd6750edc9feb55a",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 2,
+        "logical_column_start": 2,
+        "physical_cell": 2,
+        "row": 16,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": "VM-T03-R16-C02",
+          "state": "restart"
+        }
+      },
+      "raw_source_token": "<DISSOLUTION-SPEC>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "PDS-180-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-35d4a077c752a746cc072add3e88c074af419847c03da9c61b7afc41747c89a7",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 5,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<PDS-180-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "LOD-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-36f1e536926dba9f03990569d99eab3f8c07739910ab128da3971becd6ce0851",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 4,
+        "row": 10,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<LOD-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "PDS-180-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-3919303b7289c1d96b4f56ea7b099f0d8304770248d47c2d659c4e9b86bb61c2",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 5,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<PDS-180-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "ANY-IMPURITIES-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-3a22508c71b5c04db22fa35446927222f16ec966f74fab4a7c32c9f545454c24",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 3,
+        "row": 21,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<ANY-IMPURITIES-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-6-%-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-3b7397c7e9bb3fb9edec323460a0459736667337239a358743effc222808185a",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 9,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-6-%-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "FRIABILITY-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-3c8565825d76db2fab25c120eb4b3cc4fc8ee51843e175d39abee2b5c12b4416",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 3,
+        "row": 12,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<FRIABILITY-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "ASSAY-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-3e30b92204d8167f3c9da3a8f44eaff8ac102bfad607992b3e98368bd2b8245c",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 4,
+        "row": 15,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<ASSAY-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-2",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-3e47ca80416be536bd57fff82031b8e87817858c1777e9f1d654f6025780efc3",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 2,
+        "logical_column_start": 2,
+        "physical_cell": 2,
+        "row": 5,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-2>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "PDS-125-75-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-40a1127d3fd01301be2b2a46765d1b326eee58362813b09f8e741012cc54da28",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 8,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<PDS-125-75-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-2-%-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-4103a7568afda820ff97e9e18a94f2f302df432f470170f091a683249b74a115",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 5,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-2-%-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-6-%-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-4283da03a178c60f3c03bfb406135a5cbbe3a381b0c509ccb8931fed818b3d98",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 9,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-6-%-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "UOM-MAX-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-43d9a7e4a39576db63eeb06965da746de205ccaee20c64f7c71fad14a928f64b",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 4,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<UOM-MAX-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "API-NAME",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-477d9cbcc8796da4df5067be2967cdeaceb3e2cd28248cfddd2e120a8fd466fe",
+      "owner": {
+        "grid_span": 2,
+        "kind": "cell",
+        "logical_column_end": 3,
+        "logical_column_start": 2,
+        "physical_cell": 2,
+        "row": 15,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<API-NAME>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "THICKNESS-AVE-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-47ae5ebb6181528dc82f652906963752ab79dff557984503a687b28a6f103fde",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 9,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<THICKNESS-AVE-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "LOD-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-4950645e270eaedbd1a8a54300172012d7c7ec1a855dc7af74d4bbc985ea2d1b",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 5,
+        "row": 10,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<LOD-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "THICKNESS-MIN-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-49acad1fb33fe3498008e07d02c74600ebab5d6b98687c8b4fa6da18089f95d9",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 11,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<THICKNESS-MIN-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "HAUSNER-RATIO-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-49b8bc8bbcd442befb032741094e69d70b11fe604c046f8ab99d263f7ae09a5a",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 3,
+        "row": 4,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<HAUSNER-RATIO-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-2-CONTENT-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-4a14e1abc686577474b8ce760d0200987c47e2aaa5c0b9ff3e3c437d61a614cc",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 7,
+        "logical_column_start": 7,
+        "physical_cell": 7,
+        "row": 5,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-2-CONTENT-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "PDS-75-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-4a952c087eb17c9ca8d01e29ec9fee2a8ed0624a1b8acc575e1342259df09ce3",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 9,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<PDS-75-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-1-%-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-4bd0fa7f8e736918d615fc3ed5da604e006f70d3d087ee32688f1656551c0ae4",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 4,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-1-%-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-2-CONTENT-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-4fbac59a67243395053d4ec7e7c804ead533898ea98a6377a59aaf228ae3a479",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 3,
+        "logical_column_start": 3,
+        "physical_cell": 3,
+        "row": 5,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-2-CONTENT-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "ANY-IMPURITIES-SPEC",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-515ab0b41eeea7804c1a7030e560b88b9b4ffa479dcfbc0e12e971e88c13039c",
+      "owner": {
+        "grid_span": 2,
+        "kind": "cell",
+        "logical_column_end": 3,
+        "logical_column_start": 2,
+        "physical_cell": 2,
+        "row": 21,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<ANY-IMPURITIES-SPEC>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "BATCH-SIZE",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-5355a5e218565618d9389dc6b13a1b52695f16aafc6b511d5af5798ecbc7742a",
+      "owner": {
+        "kind": "paragraph",
+        "paragraph": 1
+      },
+      "raw_source_token": "<BATCH-SIZE>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-3-%-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-53e001a2823e0d03da4c63db19084f1864a705cf8d12a1900943953d096550b8",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 6,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-3-%-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-5-%-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-53fdc39cbcb7fc2343afa0f2054c7d39c5b0a7665cc298310e0c6a24214f4854",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 8,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-5-%-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "PDS-180-150-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-56231288f03dcbfbe22298e87309b78ed76a45a1ff0ad44667c9d0036e9a2b38",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 6,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<PDS-180-150-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "PDS-125-75-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-5668dead63bff114edab04e1ad66d8864b431f4d413e943c07ba96a3d9ace223",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 8,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<PDS-125-75-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "PDS-75-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-5d7a1764e9f23de028a6818bd9f65839d435dd7980d29ec96d0313925227fe96",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 9,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<PDS-75-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-6-CONTENT-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-5e3d472aa9fde33d94e786ff0feddb1c58134775cdab6b208cc96b763f26169a",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 9,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-6-CONTENT-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-3-CONTENT-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-5f1c945dd9c96e5ba61e7c8b50116f8b888eea4d11687535a8b897693d34d151",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 7,
+        "logical_column_start": 7,
+        "physical_cell": 7,
+        "row": 6,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-3-CONTENT-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-2-CONTENT-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-61637294529a5d2dbb4eb0e4c40a37eef7cfb9ec7e442131c578ce01165e81c7",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 5,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-2-CONTENT-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "API%-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-62a2ecfbd8923d7158ab3f0de2104e69630b9b5d84232318e6d7fb7e68df4ef9",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 8,
+        "logical_column_start": 8,
+        "physical_cell": 8,
+        "row": 3,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<API%-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "ANY-IMPURITIES-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-63f816b12a3bba6c66c8b1b68a63d285df3883e01f6a133be70f47812e0429e3",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 4,
+        "row": 21,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<ANY-IMPURITIES-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISSOLUTION-RSD-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-6e668ecb67d4f3438c6fd64d22cad6ebd555006b3ec2e203f2636481c5c95bf1",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 19,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISSOLUTION-RSD-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "THICKNESS-MAX-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-6e79756279dac6f37e52090e18b097fa44dcd4cb3adc8d33d4c3ed3cf08cb631",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 10,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<THICKNESS-MAX-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-5-%-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-703cefb334be2ecbb62bc2dd9992b443dac1b8c6a5ba5bb26d3e773b58ec221f",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 8,
+        "logical_column_start": 8,
+        "physical_cell": 8,
+        "row": 8,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-5-%-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISSOLUTION-AVE-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-730319b7f55387d13c1f872f720506510b0871811a8ad7f3beb8bec409ded67e",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 16,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISSOLUTION-AVE-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISSOLUTION-MIN-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-7316cc1c9c5634145a2b7f7bfbec7e2ebd56ba674e537249c6db573b72122639",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 18,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISSOLUTION-MIN-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-4-CONTENT-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-74991296e82fd5750da6c2efa23674eed717783f466b232ed6c31c6da15a301f",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 7,
+        "logical_column_start": 7,
+        "physical_cell": 7,
+        "row": 7,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-4-CONTENT-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISINTEGRATION-MAX-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-75c6435eb8f0149bbb6963cced00feaf4f6c180d6428568b13aa1a6408cb655c",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 13,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISINTEGRATION-MAX-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "HARDNESS-MIN-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-761893ad0d61ac2f5ea5c0c295101b0fe3297e4e46ec765039899f20dd2a37ca",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 8,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<HARDNESS-MIN-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "THICKNESS-MIN-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-76ae28adbfa10f1e416b4b06ce04f36cd61f5c37c7d6c793db5d85b3411e726d",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 11,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<THICKNESS-MIN-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "FRIABILITY-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-7748fa4c655358c58a3773914ebfd54e0727e34c8c37fbf178f5c897c26a45d8",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 5,
+        "row": 12,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<FRIABILITY-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "CONCLUSION",
+      "metadata": {
+        "required": false,
+        "scope": "reference-only",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-775a9f6da492b45c9b053a2ec7d0028b1b76c20c68156f9510fdb90a57e8619b",
+      "owner": {
+        "kind": "paragraph",
+        "paragraph": 6
+      },
+      "raw_source_token": "<CONCLUSION>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "HAUSNER-RATIO-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-778aba30044442e203cb11f410a8557d03f017650a615cbc9c15dad17418e0fa",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 4,
+        "row": 4,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<HAUSNER-RATIO-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "UOM-MIN-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-784ee56e6c1ae55f43ee440f1941536844eaacdaee88d2bf5e0f45c132c481e7",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 5,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<UOM-MIN-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-1-CONTENT-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-7c0d03927dde41eb096e99cd6cca4a4db4dc283be8f520fef8d77e1c2209563e",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 7,
+        "logical_column_start": 7,
+        "physical_cell": 7,
+        "row": 4,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-1-CONTENT-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "ASSAY-SPEC",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-7d521d9bc50f1b023f35ac7c15d1878c58a612e48c2c24a65da119af338bf12c",
+      "owner": {
+        "grid_span": 2,
+        "kind": "cell",
+        "logical_column_end": 3,
+        "logical_column_start": 2,
+        "physical_cell": 2,
+        "row": 15,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<ASSAY-SPEC>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "HARDNESS-AVE-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-7d93c5263949eecf70aa0cedde1df212913481759892657c3b463bc26da89107",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 6,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<HARDNESS-AVE-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "AV-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-7ec457ae45c52e542084b8b1ba77634691005a5fcd79767d9927c2d9e9353c68",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 4,
+        "row": 23,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<AV-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-3-%-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-7f481c6e471632cfcc524ecaabe0b443c6e71996f8916fb4d80016fa85d83648",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 6,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-3-%-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "TOTAL-IMPURITIES-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-7fe4254867fe4e2535eb1f6428a56285db78a0c45ef3988ec20fb86b137a53d9",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 3,
+        "row": 22,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<TOTAL-IMPURITIES-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISSOLUTION-MIN-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-823ab3ad17433c0aeef41edc43fd67d932c471d4fd386e728ca7b3475f6a998c",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 18,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISSOLUTION-MIN-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-1-CONTENT-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-83f4e607e6b12127a27526d2cc4f5a331f5fb77ad197a292a50a1b3a7a553b00",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 4,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-1-CONTENT-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-1",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-8471077c680177fdd7df5153c72770f804aa3b9636d2b09d8b54fe795825e5cc",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 2,
+        "logical_column_start": 2,
+        "physical_cell": 2,
+        "row": 4,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-1>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-4",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-86e9aaee5bd40a6724322aba141d3237e4657993fe75e548705ee3089058a77b",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 2,
+        "logical_column_start": 2,
+        "physical_cell": 2,
+        "row": 7,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-4>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "UOM-AVE-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-87b8c23d9a8375febb6aaaeaa0ef46ed8d45a0cdf6c0d5a566b6b0f025aae58d",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 3,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<UOM-AVE-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "UOM-MAX-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-87c6bbe72ba049a16cd85d9bc0e0e885a70091a4e0a38831cc83bdd65c627df0",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 4,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<UOM-MAX-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "HAUSNER-RATIO-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-891bfca44eb162ad5cb1ce1fbe0ed0be5f5d6ec8a69ea39977b9f1acf201b1a4",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 5,
+        "row": 4,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<HAUSNER-RATIO-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "ASSAY-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-89d8aaf54a9731771823a7782bb743b137cb49c829720ff840066bfa506e4a94",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 3,
+        "row": 15,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<ASSAY-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "TAP-DENSITY-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-8d9c5cd0abd84653d69eef423d443ddd04739b84695e6e0bbd165097907419b1",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 3,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<TAP-DENSITY-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-6-CONTENT-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-8f4b6494c084bfc44701661fa6cc299e2ac87bef112297fbd30414fda8aefdbe",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 7,
+        "logical_column_start": 7,
+        "physical_cell": 7,
+        "row": 9,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-6-CONTENT-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-6-%-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-9149fa6cd0686438488d586c13bd88ef4b9bf2bb8a0288292331582785739dbf",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 8,
+        "logical_column_start": 8,
+        "physical_cell": 8,
+        "row": 9,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-6-%-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "THICKNESS-MAX-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-930978c53f63260a5dd47419134dfa929ef081978f5ac96e200f8e0dff649e06",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 10,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<THICKNESS-MAX-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "HARDNESS-MAX-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-958dc64950f26371812c4f14fcb53634be2e6ff3e16ab17e4ec56acb6e0d23be",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 7,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<HARDNESS-MAX-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "HARDNESS-MAX-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-9b0d04406689c6744592d6974470e02701732d03f13466d4f8b7bc7b4b847bd5",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 7,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<HARDNESS-MAX-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "PDS-180-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-9e70d13fe18be5e6249ab3483f977ea85bbaf59b5981ef7930f39c2f766d9d38",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 5,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<PDS-180-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "UOM-MAX-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-9ec5f1d0dc2cf2fceb2cc0dca617a487af2f7465e0884fcabc2300911d2af677",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 4,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<UOM-MAX-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "BULK-DENSITY-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-9fe7c65025bbe9859428c37bc8d7397e04b3355929a4468bdafff8579d262cf9",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 2,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<BULK-DENSITY-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "HARDNESS-MIN-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-a32f195e8c4e76f0e6fb91338c4b292cc02a53c6f6b5ebd95ff44895abe503e0",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 8,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<HARDNESS-MIN-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-3-CONTENT-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-a37daa6242838022688b0931da54077b2f306b66dade1c1a4c3ff1efd333a0c3",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 6,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-3-CONTENT-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISSOLUTION-MIN-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-a442cb44d67b07cd848ec48a0efa0a9d3beb4af0fcf65cb0eb57426251d0fcb0",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 18,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISSOLUTION-MIN-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "API-CONTENT-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-a5cd28bc00d152a09f2084f38d4156f37402bd588648edb022f1f9b1aa6fd53a",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 3,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<API-CONTENT-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "THICKNESS-AVE-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-a88a6b53c7b695b4f6c9425b98e90c48bdb9a61afd55b6aa32e4892ebc2fb7f1",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 9,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<THICKNESS-AVE-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "TOTAL-IMPURITIES-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-a88ed602e3d8882cf639dcd148d943007872d468696ebf10f3c8b928d9a07782",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 4,
+        "row": 22,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<TOTAL-IMPURITIES-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-5-CONTENT-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-a89a7701599962de8ffe688832b42825361899d1e991c365b28f52c4698b2335",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 8,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-5-CONTENT-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-4-%-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-abc19decf5a9c49af69b6ccbaf61e75e3b1b75344e87f4d631609c4deecbdf42",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 8,
+        "logical_column_start": 8,
+        "physical_cell": 8,
+        "row": 7,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-4-%-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "PDS-75-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-ac7992ad1e921df443433bfd095a69283c5d0e36fb8f0225f98887d70983e0aa",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 9,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<PDS-75-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISSOLUTION-MAX-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-ad32c6130aadc8a8fa723dda55edf6607b9a2839d9aec74c7cfad24db0bdea20",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 17,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISSOLUTION-MAX-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "PDS-125-75-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-ae024fbcd12b163105a4f7ee462f61394d185bf5005c7b2dd535be93904c4e60",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 8,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<PDS-125-75-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "UOM-MIN-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-ae0624d38e1b2ec550827a9793658b3a5541d8c908bdef48875995abf8020968",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 5,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<UOM-MIN-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "API%-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-ae3ec6d19421f9e8677e8a9d8f866d83ee72fe84ff578a1f8e1c3d56ecac7f13",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 3,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<API%-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-1-CONTENT-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-aea7c40210511efed9f525c2932584a81fac0c2177400ebe61683b6f5402622f",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 3,
+        "logical_column_start": 3,
+        "physical_cell": 3,
+        "row": 4,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-1-CONTENT-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "LOD-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-aeaec235d7c24e9261e8f4243e323424816beb0262c5666cef9a188fdefee1b1",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 3,
+        "row": 10,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<LOD-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "API%-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-af78085bc151cfbdf9798c25a79e0fcc8dd12719d87e206df0b8429d33f06349",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 3,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<API%-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISINTEGRATION-MAX-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-b0e59ef5bc44346c7e4e349161080c38cd0b598d2c85b4198b5c4dd5f9d525b3",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 13,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISINTEGRATION-MAX-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "PDS-180-150-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-b3a236bb3193e6d6a0bc2ba5c1da12a68457f7f0a3af1f03ddc1b35f446ddbba",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 6,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<PDS-180-150-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-5-%-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-b8d8f53af34a97de93c037dc579d6491e83ec34a7e539e80f6d104d863816413",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 8,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-5-%-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-3-CONTENT-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-b9dfe947bcb5af6e7e7b2148ca66cc0661e15a21e482efbfc1d03f488aa61baa",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 3,
+        "logical_column_start": 3,
+        "physical_cell": 3,
+        "row": 6,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-3-CONTENT-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISSOLUTION-MAX-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-ba6c2fbbccd0309b2ef465bfa956158faf58ca03499d699ac3fe77e90efe3fe1",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 17,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISSOLUTION-MAX-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISINTEGRATION-MIN-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-bc3ed6e682a7d992e62b8f05e5e85b0c7fae1431a43b6b73b34b645b37700b55",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 14,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISINTEGRATION-MIN-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISSOLUTION-RSD-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-bfd3e19b58376686687f844b2d4f09afc9d636f0e90a52b9450112f6f43d4366",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 19,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISSOLUTION-RSD-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "THICKNESS-AVE-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-c13a3d28ce1433257b5f5b9d8e7d9aca1b56625bf37d7c83a638e1308d488dd7",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 9,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<THICKNESS-AVE-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "BULK-DENSITY-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-c3b732f6c7123d20da822d3ce0f2c8a130bb08defef763159f3cfe7700b0796d",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 2,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<BULK-DENSITY-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "TOTAL-IMPURITIES-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-c4d09070bb23619073750c154c7a489efb5714c08d253d480c37696fd48752c8",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 5,
+        "row": 22,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<TOTAL-IMPURITIES-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "TAP-DENSITY-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-c5651295c8982a218d2ba7e240a7fb4368b02b39f3e5baee700678e1b24d1cb4",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 3,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<TAP-DENSITY-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "UOM-SPEC",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-c62818f8eae7ecc00a6da96eaffe22bccc8b0ef05164ae9ae876f5e0b781def2",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 2,
+        "logical_column_start": 2,
+        "physical_cell": 2,
+        "row": 3,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": "VM-T03-R03-C02",
+          "state": "restart"
+        }
+      },
+      "raw_source_token": "<UOM-SPEC>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-3",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-ca574c4c679b8f76777eef7de9e982a6186fa434dbf272772b723b9f21ab5e3f",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 2,
+        "logical_column_start": 2,
+        "physical_cell": 2,
+        "row": 6,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-3>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "TAP-DENSITY-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-ca9928fba4b8a06058a0739ec9c41b0b0cdc384006228527b2329cb27cd6ec90",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 3,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<TAP-DENSITY-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "UOM-MIN-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-cabff52855baef4bb7290ff9844e0bd699694952dc6ee2d9062eed5372990e9b",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 5,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<UOM-MIN-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-6-CONTENT-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-cb0c7f670699b9b9a1e9987f641751b9b9543ea9ae5c4567f94fa6162e098663",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 3,
+        "logical_column_start": 3,
+        "physical_cell": 3,
+        "row": 9,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-6-CONTENT-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "API",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-cc7d09b3398ccc8a312fe96a7192007c0427571320ffae691b25e3d876956e4f",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 2,
+        "logical_column_start": 2,
+        "physical_cell": 2,
+        "row": 3,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<API>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-2-%-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-cfa8f3def8dfe62bafb096710a5319aed3bc1076590a81eacb0ad0bebf981f87",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 5,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-2-%-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISSOLUTION-AVE-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-cfb563997e2e1b0f21c3faa3ae18d0b27f26feed8a0d348d3e8ef61557356f11",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 16,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISSOLUTION-AVE-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISSOLUTION-AVE-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-d36adb403d85f56e4648a3da36f9433f4372ed98e6f6f10d1cbf97cedf3bc702",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 16,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISSOLUTION-AVE-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-4-%-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-d3d713cd6e272351dbe2186e75e23f66aa13d7835620670e2876393b7acd5459",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 7,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-4-%-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-2-%-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-d4754a2e995a5074e4647a2d5925712b8b083399f3314f5627c80a35f944bca7",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 8,
+        "logical_column_start": 8,
+        "physical_cell": 8,
+        "row": 5,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-2-%-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "ANY-IMPURITIES-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-d483f5f1cf68b5dcc70b5206d2ecc9ca4dda5390181a6689dd98c9f9dcb702f1",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 5,
+        "row": 21,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<ANY-IMPURITIES-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "HARDNESS-MAX-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-d4de3b3dfb61217eb79147a4de6519e58f57ee9cba413cb277a3645cf41a5613",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 7,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<HARDNESS-MAX-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "AV-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-d521b6ad4120c449143986d03caabf797c7255536c752be3c1ce00adfed32154",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 3,
+        "row": 23,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<AV-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISINTEGRATION-MAX-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-d736a0a685d89649973cf5f396f1bb432ed59f485b7ccd9ba674052f92c5f9e2",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 13,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISINTEGRATION-MAX-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXPERIMENT-DESCRIPTION",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-d7fd6ba145119a7bd82c316ab916538363e6baf8fcf58622837875b3bb9ae550",
+      "owner": {
+        "kind": "paragraph",
+        "paragraph": 1
+      },
+      "raw_source_token": "<EXPERIMENT-DESCRIPTION>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "PDS-150-125-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-ded877d02031db3034d1f212f8592f7de9a98c3230244aceb13caadf011be0cd",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 7,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<PDS-150-125-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-4-CONTENT-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-e00fe70bc07796a2f4ea8e52c9f03fd3278780e84f4dfd583a1c95b93b67c224",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 7,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-4-CONTENT-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISSOLUTION-RSD-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-e191290c965a084b3a9844347404332fec8b2d09fbf7d4018f44a1801a819026",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 19,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISSOLUTION-RSD-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "AV-SPEC",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-e1e6286470a4635f97af62e91fcc3e78cfdafff0d108b5e9180d48077aab4487",
+      "owner": {
+        "grid_span": 2,
+        "kind": "cell",
+        "logical_column_end": 3,
+        "logical_column_start": 2,
+        "physical_cell": 2,
+        "row": 23,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<AV-SPEC>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "HARDNESS-MIN-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-e7428b93c545abbcedcd66242077bc4860667dc684ef96597fd14766db9490dd",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 8,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<HARDNESS-MIN-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-4-CONTENT-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-ea38ebcc339e2818a5306dad043ef255ea6dc4327449df9bb2cd61fd2971a473",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 3,
+        "logical_column_start": 3,
+        "physical_cell": 3,
+        "row": 7,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-4-CONTENT-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-1-%-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-ecdd8ca61df6c30a4628aed7c8af146eb545212461d5efe3fc43045a2ed08a02",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 4,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-1-%-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "PDS-150-125-CT02",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-02",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-f01d41e95c1c47ebc887282a1d230da39eb444217e6af01e938661052867bea2",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 5,
+        "logical_column_start": 5,
+        "physical_cell": 5,
+        "row": 7,
+        "table": 2,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<PDS-150-125-CT02>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-5",
+      "metadata": {
+        "required": true,
+        "scope": "all-formulations",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-f0bc03d4a37bcd22cf4a008db4d38bfcf6f6a3d2ac1b2b32d75e9ac8d37a9a13",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 2,
+        "logical_column_start": 2,
+        "physical_cell": 2,
+        "row": 8,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-5>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-3-%-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-f3f12fbc5f16b466e8cf2196f53db3f501181a529282a700f39f654ab1e24ba2",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 8,
+        "logical_column_start": 8,
+        "physical_cell": 8,
+        "row": 6,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-3-%-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "EXCIPIENT-5-CONTENT-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-f62e37766f9f3160b49acba94113fc660c94dd4b07cccb99c51362c918bf6da4",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 7,
+        "logical_column_start": 7,
+        "physical_cell": 7,
+        "row": 8,
+        "table": 1,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<EXCIPIENT-5-CONTENT-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "HARDNESS-AVE-CT01",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-01",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-f6637a5b3ef09d191b25c8fb824b6900531067f459a9e077383dfd0a79bfbb45",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 4,
+        "logical_column_start": 4,
+        "physical_cell": 4,
+        "row": 6,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<HARDNESS-AVE-CT01>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    },
+    {
+      "canonical_field_id": "DISINTEGRATION-MIN-CT03",
+      "metadata": {
+        "required": true,
+        "scope": "FORMULA-03",
+        "type": "raw_text",
+        "unit": null
+      },
+      "occurrence_id": "occ-fd50fd7e047720216d7a4c4ab695f402d15ef57f263e42cb904fc145d425e769",
+      "owner": {
+        "grid_span": 1,
+        "kind": "cell",
+        "logical_column_end": 6,
+        "logical_column_start": 6,
+        "physical_cell": 6,
+        "row": 14,
+        "table": 3,
+        "vertical_merge": {
+          "group_id": null,
+          "state": "none"
+        }
+      },
+      "raw_source_token": "<DISINTEGRATION-MIN-CT03>",
+      "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+      "template_version": "po-fd-like-placeholder-template-v3-040826"
+    }
+  ],
+  "field_map_sha256": "3f0f5120d345e182e868f65720a2656a7e061346e75ca8f9636cbd7bab41761b",
+  "grammar_schema_version": "template-field-grammar/v1",
+  "metadata_catalog_sha256": "2a3165903d952eea7eca8ce166f8890061342531c448e6c98f9e61f38ededaed",
+  "metadata_catalog_version": "template-field-metadata/v1",
+  "occurrence_count": 146,
+  "schema_version": "template-field-map/v1",
+  "template_sha256": "c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0",
+  "template_version": "po-fd-like-placeholder-template-v3-040826"
+}

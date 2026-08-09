@@ -1,0 +1,240 @@
+{
+  "artifact_kind": "non-decisional-evidence-diagnostic",
+  "bound_hashes": {
+    "document_xml_sha256": "ebefbf16e4f7bcae2907d6655d72a3e374cc4b2b6f185380203403f61a2bdf8a",
+    "receipt_set_sha256": "e2264be13ad19fd4495a1925ba17163de9e710edda5760616dbd996c35222211",
+    "source_document_sha256": "01fe95607f4733e2b47a4c46f8dad5817d6014cc40f69a08631977c9d890cd8f",
+    "store_records_sha256": "9660f38d1234373c06aaee6e85c4e6c64478aa7ba1ab04546137c2428735b1fb"
+  },
+  "candidates": [
+    {
+      "candidate": "formula-01",
+      "composition_context": [
+        {
+          "evidence_id": "composition-context:croscarmellose-sodium:formula-01",
+          "measure": "croscarmellose_sodium",
+          "receipt_id": "croscarmellose-sodium:formula-01",
+          "record_id": "03d71cae3495ddf6",
+          "unit": "percent",
+          "value": 1
+        }
+      ],
+      "observed_results": [
+        {
+          "evidence_id": "observed-result:assay:formula-01",
+          "measure": "assay",
+          "receipt_id": "assay:formula-01",
+          "record_id": "b1e2267ee51496e9",
+          "statistic": "raw",
+          "unit": "percent",
+          "value": 100.31
+        },
+        {
+          "evidence_id": "observed-result:content-uniformity-av:formula-01",
+          "measure": "content_uniformity_av",
+          "receipt_id": "content-uniformity-av:formula-01",
+          "record_id": "1c7e3d79e2bbaaf7",
+          "statistic": "average",
+          "unit": "percent",
+          "value": 3.71
+        },
+        {
+          "evidence_id": "observed-result:dissolution-max:formula-01",
+          "measure": "dissolution_max",
+          "receipt_id": "dissolution-max:formula-01",
+          "record_id": "1af35f108df257cd",
+          "statistic": "maximum",
+          "unit": "percent",
+          "value": 79.33
+        },
+        {
+          "evidence_id": "observed-result:dissolution-mean:formula-01",
+          "measure": "dissolution_mean",
+          "receipt_id": "dissolution-mean:formula-01",
+          "record_id": "1af35f108df257cd",
+          "statistic": "mean",
+          "unit": "percent",
+          "value": 73.89
+        },
+        {
+          "evidence_id": "observed-result:dissolution-min:formula-01",
+          "measure": "dissolution_min",
+          "receipt_id": "dissolution-min:formula-01",
+          "record_id": "1af35f108df257cd",
+          "statistic": "minimum",
+          "unit": "percent",
+          "value": 65.15
+        }
+      ]
+    },
+    {
+      "candidate": "formula-02",
+      "composition_context": [
+        {
+          "evidence_id": "composition-context:croscarmellose-sodium:formula-02",
+          "measure": "croscarmellose_sodium",
+          "receipt_id": "croscarmellose-sodium:formula-02",
+          "record_id": "03d71cae3495ddf6",
+          "unit": "percent",
+          "value": 3
+        }
+      ],
+      "observed_results": [
+        {
+          "evidence_id": "observed-result:assay:formula-02",
+          "measure": "assay",
+          "receipt_id": "assay:formula-02",
+          "record_id": "b1e2267ee51496e9",
+          "statistic": "raw",
+          "unit": "percent",
+          "value": 100.02
+        },
+        {
+          "evidence_id": "observed-result:content-uniformity-av:formula-02",
+          "measure": "content_uniformity_av",
+          "receipt_id": "content-uniformity-av:formula-02",
+          "record_id": "1c7e3d79e2bbaaf7",
+          "statistic": "average",
+          "unit": "percent",
+          "value": 2.79
+        },
+        {
+          "evidence_id": "observed-result:dissolution-max:formula-02",
+          "measure": "dissolution_max",
+          "receipt_id": "dissolution-max:formula-02",
+          "record_id": "1af35f108df257cd",
+          "statistic": "maximum",
+          "unit": "percent",
+          "value": 87.67
+        },
+        {
+          "evidence_id": "observed-result:dissolution-mean:formula-02",
+          "measure": "dissolution_mean",
+          "receipt_id": "dissolution-mean:formula-02",
+          "record_id": "1af35f108df257cd",
+          "statistic": "mean",
+          "unit": "percent",
+          "value": 81.4
+        },
+        {
+          "evidence_id": "observed-result:dissolution-min:formula-02",
+          "measure": "dissolution_min",
+          "receipt_id": "dissolution-min:formula-02",
+          "record_id": "1af35f108df257cd",
+          "statistic": "minimum",
+          "unit": "percent",
+          "value": 79.12
+        }
+      ]
+    },
+    {
+      "candidate": "formula-03",
+      "composition_context": [
+        {
+          "evidence_id": "composition-context:croscarmellose-sodium:formula-03",
+          "measure": "croscarmellose_sodium",
+          "receipt_id": "croscarmellose-sodium:formula-03",
+          "record_id": "03d71cae3495ddf6",
+          "unit": "percent",
+          "value": 5
+        }
+      ],
+      "observed_results": [
+        {
+          "evidence_id": "observed-result:assay:formula-03",
+          "measure": "assay",
+          "receipt_id": "assay:formula-03",
+          "record_id": "b1e2267ee51496e9",
+          "statistic": "raw",
+          "unit": "percent",
+          "value": 99.99
+        },
+        {
+          "evidence_id": "observed-result:content-uniformity-av:formula-03",
+          "measure": "content_uniformity_av",
+          "receipt_id": "content-uniformity-av:formula-03",
+          "record_id": "1c7e3d79e2bbaaf7",
+          "statistic": "average",
+          "unit": "percent",
+          "value": 3.04
+        },
+        {
+          "evidence_id": "observed-result:dissolution-max:formula-03",
+          "measure": "dissolution_max",
+          "receipt_id": "dissolution-max:formula-03",
+          "record_id": "1af35f108df257cd",
+          "statistic": "maximum",
+          "unit": "percent",
+          "value": 100.98
+        },
+        {
+          "evidence_id": "observed-result:dissolution-mean:formula-03",
+          "measure": "dissolution_mean",
+          "receipt_id": "dissolution-mean:formula-03",
+          "record_id": "1af35f108df257cd",
+          "statistic": "mean",
+          "unit": "percent",
+          "value": 98.64
+        },
+        {
+          "evidence_id": "observed-result:dissolution-min:formula-03",
+          "measure": "dissolution_min",
+          "receipt_id": "dissolution-min:formula-03",
+          "record_id": "1af35f108df257cd",
+          "statistic": "minimum",
+          "unit": "percent",
+          "value": 96.15
+        }
+      ]
+    }
+  ],
+  "decision_status": "not-evaluated",
+  "evidence_envelope_sha256": "0bbcff5b1c2942b225cd78c04d147beeb04dfc498a8a89dc785c9eea24516bd0",
+  "exact_cohort": [
+    "formula-01",
+    "formula-02",
+    "formula-03"
+  ],
+  "missing_states": [],
+  "package_sha256": "0d6620d284c21cbb8258b60086cd12027d774b77568948cdfb1055f7b62aad05",
+  "schema_version": "formula-evidence-diagnostic/v1",
+  "specifications": [
+    {
+      "basis": "ASSAY.SPEC 90-110",
+      "evidence_id": "specification:assay",
+      "lower": 90,
+      "measure": "assay",
+      "operator": "range-inclusive",
+      "receipt_id": "specification:assay",
+      "record_id": "b1e2267ee51496e9",
+      "threshold": null,
+      "unit": "percent",
+      "upper": 110
+    },
+    {
+      "basis": "CONTENT_UNIFORMITY_AV.SPEC <15",
+      "evidence_id": "specification:content-uniformity-av",
+      "lower": null,
+      "measure": "content_uniformity_av",
+      "operator": "<",
+      "receipt_id": "specification:content-uniformity-av",
+      "record_id": "1c7e3d79e2bbaaf7",
+      "threshold": 15,
+      "unit": "percent",
+      "upper": null
+    },
+    {
+      "basis": "DISSOLUTION.SPEC >=80",
+      "evidence_id": "specification:dissolution",
+      "lower": null,
+      "measure": "dissolution",
+      "operator": ">=",
+      "receipt_id": "specification:dissolution",
+      "record_id": "1af35f108df257cd",
+      "threshold": 80,
+      "unit": "percent",
+      "upper": null
+    }
+  ],
+  "winner": null
+}

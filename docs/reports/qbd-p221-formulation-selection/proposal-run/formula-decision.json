@@ -1,0 +1,42 @@
+{
+  "cohort_id": "qbd-p221-formulation-cohort",
+  "decision_id": "qbd-p221-formulation-selection-fd-decision",
+  "decision_sha256": "7ecbec0f9382595d0cff935a44197c79680c3cc9057138696695e845dc40b348",
+  "exact_cohort": [
+    "formula-01",
+    "formula-02",
+    "formula-03"
+  ],
+  "fact_card_ids": [
+    "FC-ASSAY-formula-01",
+    "FC-ASSAY-formula-02",
+    "FC-ASSAY-formula-03",
+    "FC-CONTENT_UNIFORMITY_AV-formula-01",
+    "FC-CONTENT_UNIFORMITY_AV-formula-02",
+    "FC-CONTENT_UNIFORMITY_AV-formula-03",
+    "FC-CROSCARMELLOSE_SODIUM-formula-01",
+    "FC-CROSCARMELLOSE_SODIUM-formula-02",
+    "FC-CROSCARMELLOSE_SODIUM-formula-03",
+    "FC-DISSOLUTION_MAX-formula-01",
+    "FC-DISSOLUTION_MAX-formula-02",
+    "FC-DISSOLUTION_MAX-formula-03",
+    "FC-DISSOLUTION_MEAN-formula-01",
+    "FC-DISSOLUTION_MEAN-formula-02",
+    "FC-DISSOLUTION_MEAN-formula-03",
+    "FC-DISSOLUTION_MIN-formula-01",
+    "FC-DISSOLUTION_MIN-formula-02",
+    "FC-DISSOLUTION_MIN-formula-03"
+  ],
+  "fd_action": "E_RUBRIC_APPROVAL_REQUIRED",
+  "fd_confirm_flag": {
+    "confirmed_at": null,
+    "confirmed_by": null,
+    "flag_state": "unset",
+    "note": null,
+    "schema_version": "fd-confirm-flag/v1"
+  },
+  "rubric_sha256": null,
+  "schema_version": "formulation-fd-decision/v1",
+  "status": "inconclusive",
+  "winner": null
+}

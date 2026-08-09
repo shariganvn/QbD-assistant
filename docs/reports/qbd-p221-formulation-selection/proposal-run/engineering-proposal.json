@@ -1,0 +1,39 @@
+{
+  "artifact_kind": "engineering-proposal-not-fd-approved",
+  "bound_hashes": {
+    "document_xml_sha256": "ebefbf16e4f7bcae2907d6655d72a3e374cc4b2b6f185380203403f61a2bdf8a",
+    "receipt_set_sha256": "e2264be13ad19fd4495a1925ba17163de9e710edda5760616dbd996c35222211",
+    "source_document_sha256": "01fe95607f4733e2b47a4c46f8dad5817d6014cc40f69a08631977c9d890cd8f",
+    "store_records_sha256": "9660f38d1234373c06aaee6e85c4e6c64478aa7ba1ab04546137c2428735b1fb"
+  },
+  "conditional_on": "proposed rule (dissolution min-gate + mean-score, strict CU<15), NOT FD-approved",
+  "excluded_candidates": [
+    {
+      "candidate": "formula-01",
+      "failed_gates": [
+        {
+          "measure_id": "dissolution_min",
+          "operator": ">=",
+          "specification_evidence_id": "specification:dissolution",
+          "threshold": 80,
+          "value": 65.15
+        }
+      ]
+    },
+    {
+      "candidate": "formula-02",
+      "failed_gates": [
+        {
+          "measure_id": "dissolution_min",
+          "operator": ">=",
+          "specification_evidence_id": "specification:dissolution",
+          "threshold": 80,
+          "value": 79.12
+        }
+      ]
+    }
+  ],
+  "fd_approved": false,
+  "proposed_survivor": "formula-03",
+  "schema_version": "engineering-proposal/v1"
+}

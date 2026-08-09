@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "internal-provenance-reference.schema.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reference_id", "evidence_id", "receipt_id", "record_id", "source_file", "page", "char_start", "char_end", "quote_sha256", "cell_receipt_id"],
+  "properties": {
+    "reference_id": { "type": "string", "minLength": 1 },
+    "evidence_id": { "type": "string", "minLength": 1 },
+    "receipt_id": { "type": "string", "minLength": 1 },
+    "record_id": { "type": "string", "minLength": 1 },
+    "source_file": { "type": "string", "minLength": 1 },
+    "page": { "type": "integer", "minimum": 1 },
+    "char_start": { "type": "integer", "minimum": 0 },
+    "char_end": { "type": "integer", "minimum": 1 },
+    "quote_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "cell_receipt_id": { "type": "string", "minLength": 1 }
+  }
+}

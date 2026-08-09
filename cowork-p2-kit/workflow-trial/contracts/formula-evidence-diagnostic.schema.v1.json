@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "formula-evidence-diagnostic.schema.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "artifact_kind", "decision_status", "winner", "exact_cohort", "candidates", "specifications", "missing_states", "bound_hashes", "evidence_envelope_sha256", "package_sha256"],
+  "properties": {
+    "schema_version": { "const": "formula-evidence-diagnostic/v1" },
+    "artifact_kind": { "const": "non-decisional-evidence-diagnostic" },
+    "decision_status": { "const": "not-evaluated" },
+    "winner": { "type": "null" },
+    "exact_cohort": { "const": ["formula-01", "formula-02", "formula-03"] },
+    "candidates": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["candidate", "observed_results", "composition_context"],
+        "properties": {
+          "candidate": { "type": "string" },
+          "observed_results": { "type": "array", "minItems": 1 },
+          "composition_context": { "type": "array", "minItems": 1 }
+        }
+      }
+    },
+    "specifications": { "type": "array", "minItems": 1 },
+    "missing_states": { "type": "array" },
+    "bound_hashes": { "type": "object" },
+    "evidence_envelope_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "package_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  }
+}

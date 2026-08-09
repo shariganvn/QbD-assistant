@@ -1,8 +1,12 @@
 import { createHash } from "node:crypto";
 import { ReasoningContractError } from "./step3-error-codes.mjs";
 import { validateCohort, validateDecision, validateEvidenceLog } from "./contracts.mjs";
-import { validateSelectionRubricV2, validateSelectionEvaluation } from "./selection-contracts.mjs";
+import { validateSelectionRubricV2, validateSelectionEvaluation, validateSelectionRubricV3 } from "./selection-contracts.mjs";
 import { canonicalBytes } from "./publication.mjs";
+import { validateBindings, validateDataPackage, validateEvidenceEnvelope } from "../workflow-trial/real-data-pack.mjs";
+import { canonicalJson } from "../workflow-trial/formula-cell-receipt.mjs";
+import { createFdConfirmFlag, validateFdConfirmFlag } from "../rubric/fd-confirm-flag.mjs";
+import { compileRubricFromSpec, validateSpecCompileReceipt } from "../rubric/compile-rubric-from-spec.mjs";
 
 const isPlainObject = (value) => typeof value === "object" && value !== null
   && !Array.isArray(value) && Object.getPrototypeOf(value) === Object.prototype;
@@ -412,4 +416,242 @@ function buildInconclusive(outcomeCode, { cohort, decisionId, rubricSha256, fact
 
   validateSelectionEvaluation(evaluation);
   return { decision, evaluation };
+}
+
+const FORMULATION_COHORT = ["formula-01", "formula-02", "formula-03"];
+const FORMULATION_DECISION_SCHEMA = "formulation-fd-decision/v1";
+const FORMULATION_EVALUATION_SCHEMA = "formulation-selection-evaluation/v1";
+const sha256Json = (value) => createHash("sha256").update(canonicalJson(value)).digest("hex");
+
+function v3Fail(code, message) {
+  const error = new Error(`[${code}] ${message}`);
+  error.code = code;
+  throw error;
+}
+
+function exactCandidateSet(actual, expected, code = "E_EXACT_COHORT") {
+  if (!Array.isArray(actual) || actual.length !== expected.length || actual.some((id, index) => id !== expected[index])) {
+    v3Fail(code, `candidate set must be exactly ${expected.join(", ")}`);
+  }
+}
+
+function v3PackageParts(dataPackage) {
+  const parts = dataPackage?.package ? dataPackage : { package: dataPackage };
+  const required = ["package", "evidence", "cards", "bindings", "reconciliation", "receipts"];
+  if (required.some((key) => parts[key] === undefined)) v3Fail("E_RUBRIC_PACKAGE_INPUT", "a complete real-data package and trusted receipts are required");
+  validateDataPackage(parts.package);
+  validateEvidenceEnvelope(parts.evidence);
+  validateBindings({ bindings: parts.bindings, evidence: parts.evidence, cards: parts.cards, receipts: parts.receipts });
+  if (sha256Json(parts.evidence) !== parts.package.evidence_envelope_sha256
+    || sha256Json(parts.cards) !== parts.package.fact_cards_sha256
+    || sha256Json(parts.bindings) !== parts.package.fact_card_bindings_sha256
+    || sha256Json(parts.reconciliation) !== parts.package.inventory_reconciliation_sha256) {
+    v3Fail("E_RUBRIC_PACKAGE_HASH", "real-data package member hash does not match its sealed package");
+  }
+  exactCandidateSet(parts.package.exact_cohort, FORMULATION_COHORT);
+  exactCandidateSet(parts.evidence.exact_cohort, FORMULATION_COHORT);
+  if (parts.reconciliation.record_count !== parts.package.record_count) v3Fail("E_INVENTORY_RECONCILIATION", "inventory record count disagrees with package");
+  return parts;
+}
+
+function validateV3Bindings({ parts, rubric, compileReceipt, fdConfirmFlag }) {
+  validateSelectionRubricV3(rubric);
+  validateSpecCompileReceipt(compileReceipt);
+  validateFdConfirmFlag(fdConfirmFlag);
+  if (compileReceipt.source_document_sha256 !== parts.package.bound_hashes.source_document_sha256
+    || compileReceipt.document_xml_sha256 !== parts.package.bound_hashes.document_xml_sha256
+    || compileReceipt.store_records_sha256 !== parts.package.bound_hashes.store_records_sha256
+    || compileReceipt.receipt_set_sha256 !== parts.package.bound_hashes.receipt_set_sha256
+    || compileReceipt.evidence_envelope_sha256 !== parts.package.evidence_envelope_sha256) {
+    v3Fail("E_RUBRIC_SPEC_DRIFT", "spec compile receipt is not bound to the real-data package");
+  }
+  const specs = parts.evidence.specifications.slice().sort((left, right) => left.evidence_id.localeCompare(right.evidence_id));
+  if (sha256Json(specs) !== compileReceipt.specification_evidence_sha256
+    || sha256Json(rubric) !== compileReceipt.rubric_sha256
+    || JSON.stringify(compileReceipt.specification_evidence_ids) !== JSON.stringify(specs.map((entry) => entry.evidence_id))) {
+    v3Fail("E_RUBRIC_SPEC_DRIFT", "specification evidence or rubric hash does not match the compile receipt");
+  }
+  if (JSON.stringify(compileReceipt.fd_confirm_flag) !== JSON.stringify(fdConfirmFlag)) {
+    v3Fail("E_FD_CONFIRM_FLAG", "fd-confirm flag differs from the compile receipt");
+  }
+  let expected;
+  try {
+    expected = compileRubricFromSpec({ dataPackage: parts, fdConfirmFlag });
+  } catch (error) {
+    v3Fail("E_RUBRIC_SPEC_DRIFT", `source-derived rubric cannot be regenerated: ${error.message}`);
+  }
+  if (canonicalJson(expected.rubric) !== canonicalJson(rubric)
+    || canonicalJson(expected.receipt) !== canonicalJson(compileReceipt)) {
+    v3Fail("E_RUBRIC_SPEC_DRIFT", "rubric or compile receipt differs from the source-derived compiler output");
+  }
+  exactCandidateSet(rubric.required_candidate_ids, FORMULATION_COHORT);
+}
+
+export function compare(operator, value, threshold) {
+  if (operator === "<") return value < threshold;
+  if (operator === "<=") return value <= threshold;
+  if (operator === ">=") return value >= threshold;
+  if (operator === ">") return value > threshold;
+  return false;
+}
+
+function formulationEvidenceIndex(evidence) {
+  const index = new Map();
+  for (const entry of evidence.observed_results) {
+    index.set(`${entry.candidate}:${entry.measure}:${entry.statistic}`, entry);
+  }
+  return index;
+}
+
+function scoreV3(value, rules, measureId) {
+  const matches = rules.filter((rule) => compare(rule.operator, value, rule.threshold));
+  if (matches.length !== 1) v3Fail("E_RUBRIC_ENVELOPE", `score_map for ${measureId} must match exactly one rule`);
+  return matches[0].points;
+}
+
+function buildFormulationEvaluation(parts, rubric, decisionId) {
+  const index = formulationEvidenceIndex(parts.evidence);
+  const matrixCells = [];
+  const candidateReviews = FORMULATION_COHORT.map((candidate) => ({ candidate, eligible: true, hard_gates: [], critical_evidence: [] }));
+  for (const review of candidateReviews) {
+    for (const measure of rubric.measures) {
+      const evidence = index.get(`${review.candidate}:${measure.source_measure}:${measure.statistic}`);
+      if (!evidence) v3Fail("E_RUBRIC_ENVELOPE", `missing observed evidence for ${review.candidate}/${measure.id}`);
+      const cell = {
+        candidate: review.candidate,
+        measure_id: measure.id,
+        value: evidence.value,
+        unit: evidence.unit,
+        fact_card_ids: parts.bindings.bindings.filter((binding) => binding.evidence_id === evidence.evidence_id).map((binding) => binding.card_id).sort(),
+        record_ids: [evidence.record_id],
+        evidence_id: evidence.evidence_id,
+      };
+      matrixCells.push(cell);
+      for (const gate of measure.hard_gates) {
+        const passed = compare(gate.operator, evidence.value, gate.threshold);
+        review.hard_gates.push({
+          measure_id: measure.id,
+          passed,
+          value: evidence.value,
+          operator: gate.operator,
+          threshold: gate.threshold,
+          record_ids: [evidence.record_id],
+          specification_evidence_id: gate.specification_evidence_id,
+        });
+        if (!passed) review.eligible = false;
+      }
+    }
+  }
+  const eligibleCandidates = candidateReviews.filter((review) => review.eligible).map((review) => review.candidate);
+  if (eligibleCandidates.length < rubric.minimum_eligible_candidates) {
+    return { matrixCells, candidateReviews, eligibleCandidates, winner: null, outcomeCode: "E_INSUFFICIENT_ELIGIBLE_CANDIDATES" };
+  }
+  const totals = Object.fromEntries(eligibleCandidates.map((candidate) => [candidate, 0]));
+  for (const cell of matrixCells) {
+    if (!Object.hasOwn(totals, cell.candidate)) continue;
+    const measure = rubric.measures.find((entry) => entry.id === cell.measure_id);
+    totals[cell.candidate] += scoreV3(cell.value, measure.score_map, measure.id) * measure.weight.nominal;
+  }
+  const ordered = eligibleCandidates.slice().sort((left, right) => totals[right] - totals[left] || left.localeCompare(right));
+  const winner = ordered[0] ?? null;
+  const margin = winner === null ? 0 : totals[winner] - (ordered[1] === undefined ? 0 : totals[ordered[1]]);
+  const sensitivity = [{ weights: Object.fromEntries(rubric.measures.map((measure) => [measure.id, measure.weight.nominal])), totals, leader: winner, margin }];
+  if (winner === null || margin <= rubric.tie_threshold) return { matrixCells, candidateReviews, eligibleCandidates, winner: null, outcomeCode: "E_TIE_OR_SENSITIVITY_UNSTABLE", sensitivity };
+  return { matrixCells, candidateReviews, eligibleCandidates, winner, outcomeCode: "selected", sensitivity };
+}
+
+function emptyFormulationEvaluation({ decisionId, decisionSha256 = null, rubricSha256 = null, outcomeCode }) {
+  return {
+    schema_version: FORMULATION_EVALUATION_SCHEMA,
+    evaluation_id: `formulation-evaluation-${decisionId}`,
+    decision_id: decisionId,
+    decision_sha256: decisionSha256,
+    rubric_sha256: rubricSha256,
+    matrix_cells: [],
+    candidate_reviews: [],
+    sensitivity: { vectors: [], stable_winner: null },
+    outcome_code: outcomeCode,
+    selection_evaluated: false,
+  };
+}
+
+function formulationDecision({ decisionId, status, winner, rubricSha256, fdAction, fdConfirmFlag, package: packageArtifact }) {
+  const decision = {
+    schema_version: FORMULATION_DECISION_SCHEMA,
+    decision_id: decisionId,
+    status,
+    winner,
+    cohort_id: "qbd-p221-formulation-cohort",
+    exact_cohort: FORMULATION_COHORT,
+    fact_card_ids: packageArtifact.cards.cards.map((card) => card.id).sort(),
+    rubric_sha256: rubricSha256,
+    fd_action: fdAction,
+    fd_confirm_flag: fdConfirmFlag,
+  };
+  return { ...decision, decision_sha256: sha256Json(decision) };
+}
+
+export function evaluateSelectionV3({ dataPackage, rubric, compileReceipt, fdConfirmFlag = createFdConfirmFlag(), decisionId = "qbd-p221-formulation-decision" } = {}) {
+  const parts = v3PackageParts(dataPackage);
+  if (arguments[0]?.rubricPin !== undefined || arguments[0]?.approval_state !== undefined) {
+    v3Fail("E_RUBRIC_APPROVAL_INPUT", "caller-supplied approval state or rubric pin is not accepted");
+  }
+  validateV3Bindings({ parts, rubric, compileReceipt, fdConfirmFlag });
+  if (fdConfirmFlag.flag_state !== "confirmed") {
+    const decision = formulationDecision({ decisionId, status: "inconclusive", winner: null, rubricSha256: null, fdAction: "E_RUBRIC_APPROVAL_REQUIRED", fdConfirmFlag, package: parts });
+    return { fd_decision: decision, selection_evaluation: emptyFormulationEvaluation({ decisionId, decisionSha256: decision.decision_sha256, outcomeCode: decision.fd_action }), authorized_rubric: null };
+  }
+  if (rubric.approval_state !== "test-approved") {
+    v3Fail("E_RUBRIC_SPEC_DRIFT", "confirmed FD evaluation requires the source-compiled test-approved rubric");
+  }
+  const authorizedRubric = rubric;
+  validateSelectionRubricV3(authorizedRubric);
+  const computed = buildFormulationEvaluation(parts, authorizedRubric, decisionId);
+  if (computed.winner === null) {
+    const decision = formulationDecision({ decisionId, status: "inconclusive", winner: null, rubricSha256: sha256Json(authorizedRubric), fdAction: computed.outcomeCode, fdConfirmFlag, package: parts });
+    return {
+      fd_decision: decision,
+      selection_evaluation: {
+        ...emptyFormulationEvaluation({ decisionId, decisionSha256: decision.decision_sha256, rubricSha256: decision.rubric_sha256, outcomeCode: computed.outcomeCode }),
+        matrix_cells: computed.matrixCells,
+        candidate_reviews: computed.candidateReviews,
+        sensitivity: { vectors: computed.sensitivity ?? [], stable_winner: null },
+        selection_evaluated: true,
+      },
+      authorized_rubric: authorizedRubric,
+    };
+  }
+  const decision = formulationDecision({ decisionId, status: "selected", winner: computed.winner, rubricSha256: sha256Json(authorizedRubric), fdAction: "selected", fdConfirmFlag, package: parts });
+  return {
+    fd_decision: decision,
+    selection_evaluation: {
+      schema_version: FORMULATION_EVALUATION_SCHEMA,
+      evaluation_id: `formulation-evaluation-${decisionId}`,
+      decision_id: decisionId,
+      decision_sha256: decision.decision_sha256,
+      rubric_sha256: decision.rubric_sha256,
+      matrix_cells: computed.matrixCells,
+      candidate_reviews: computed.candidateReviews,
+      sensitivity: { vectors: computed.sensitivity, stable_winner: computed.winner },
+      outcome_code: "selected",
+      selection_evaluated: true,
+    },
+    authorized_rubric: authorizedRubric,
+  };
+}
+
+export function computeFormulationProposal({ dataPackage, rubric, compileReceipt, fdConfirmFlag = createFdConfirmFlag(), decisionId = "qbd-p221-formulation-decision" } = {}) {
+  const parts = v3PackageParts(dataPackage);
+  validateV3Bindings({ parts, rubric, compileReceipt, fdConfirmFlag });
+  const proposed = buildFormulationEvaluation(parts, rubric, decisionId);
+  return {
+    proposed_survivor: proposed.winner,
+    excluded_candidates: proposed.candidateReviews.filter((review) => !review.eligible).map((review) => ({
+      candidate: review.candidate,
+      failed_gates: review.hard_gates.filter((gate) => !gate.passed).map(({ measure_id, operator, threshold, value, specification_evidence_id }) => ({ measure_id, operator, threshold, value, specification_evidence_id })),
+    })),
+    matrix_cells: proposed.matrixCells,
+    candidate_reviews: proposed.candidateReviews,
+    sensitivity: proposed.sensitivity ?? [],
+  };
 }

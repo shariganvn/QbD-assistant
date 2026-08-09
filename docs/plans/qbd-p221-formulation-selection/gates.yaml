@@ -12,12 +12,20 @@ source_authority:
   document_xml_sha256: ebefbf16e4f7bcae2907d6655d72a3e374cc4b2b6f185380203403f61a2bdf8a
   classification: {label: public, citable: false}
 
+template_authority:
+  file: cowork-p2-kit/inputs/reference/official-placeholder-template-v3-040826.docx
+  sha256: c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0
+  document_xml_sha256: 4f04eaf0076fcf6b5adfa0b5132b2b02e0b0e8b50051da2b2cc9b620b9e6a5d9
+  field_count: 146
+
 gates:
   - id: G-00
     title: Hash-pinned isolated formula-cell extraction (GO/NO-GO)
     invariant: >
-      Before parsing, source and document.xml hashes match independent frozen
-      pins. A fresh isolated staging root admits only that mock through a minimal
+      Before parsing, official-template and filled-source bytes/document.xml
+      hashes match independent frozen pins. All 146 template fields round-trip
+      from the filled mock with no blank required value. A fresh isolated staging
+      root admits only that mock through a minimal
       temporary manifest/config. Two complete ingests are byte-identical. A
       targeted DOCX table extractor reconstructs exact formula-01/02/03 values,
       specs and 1%/3%/5% composition levels. Every value owns one formula-cell
@@ -28,10 +36,12 @@ gates:
       frozen public mock plus expected-value fixture used only for comparison
     command: >
       node --test cowork-p2-kit/workflow-trial/tests/formulation-spike-run.test.mjs
+      cowork-p2-kit/workflow-trial/tests/formulation-selection-template-binding.test.mjs
       && node cowork-p2-kit/workflow-trial/formulation-spike-run.mjs
       --out docs/reports/qbd-p221-formulation-selection
     expected: >
-      exit 0; exact frozen hashes; isolated manifest preserves public/citable:false;
+      exit 0; exact frozen template + filled hashes; 146/146 fields round-trip;
+      no blank required value; isolated manifest preserves public/citable:false;
       exact candidates formula-01/02/03; dissolution min/mean/max
       {65.15/73.89/79.33, 79.12/81.40/87.67, 96.15/98.64/100.98};
       assay {100.31,100.02,99.99}; CU AV {3.71,2.79,3.04}; croscarmellose
@@ -39,12 +49,15 @@ gates:
       record binding per critical value; two full-ingest store hashes equal; GO.
     negative_cases:
       - Source or document.xml hash differs -> reject before parser execution.
+      - Official template hash, owner map or filled-template receipt differs -> reject.
+      - Any required template field is blank or any semantic placeholder remains -> reject.
       - Bare/canonical broad ingest root is used -> reject test setup.
       - Formula row/column/cell owner is missing, duplicated or mismatched -> NO-GO.
       - Receipt joins zero or multiple admitted records -> NO-GO.
       - Two fresh full ingests differ -> NO-GO; snapshot fallback cannot pass G-00.
     evidence: >
-      source-hashes.json + isolated-config-receipt.json + formula-evidence-matrix.json
+      template-field-map.v1.json + template-cell-receipt.v1.json
+      + source-hashes.json + isolated-config-receipt.json + formula-evidence-matrix.json
       + result-inventory.json + formula-cell-receipts.json + two-run-ingest-hashes.json
       + go-no-go.json
     blocks: [G-01, G-02, G-03, G-04, G-05]
@@ -87,8 +100,11 @@ gates:
       gates and strict operators. Operators/thresholds compile from bound spec
       evidence. A compile receipt atomically binds source/store/spec/rubric.
       Proposal keeps fd_decision inconclusive; an fd-confirmed flag (who + when +
-      note) is the only way past proposal and the runner refuses caller-supplied
-      approval state. Cryptographic FD receipts/pins are deferred.
+      note) authorizes the source compiler to materialize the v3 test-approved
+      rubric and bind that exact rubric to the compile receipt, decision,
+      evaluation and publication. The runner refuses caller-supplied approval
+      state. These hashes prove identity not authority; cryptographic FD receipts/
+      pins are deferred.
     boundary_owner: >
       selection-rubric-v3 + compiler + additive selection contract/engine paths + fd-confirm flag
     fixture: G-01 data package; proposal v3 rubric; unset fd-confirm flag
@@ -112,7 +128,7 @@ gates:
       v2-regression.log + compiled-rubric.v3.json + spec-compile-receipt.json
       + proposal-decision.json + fd-confirm-flag-negatives.log
     blocks: [G-03, G-04, G-05]
-    status: unverified
+    status: pass
 
   - id: G-03
     title: Raw diagnostic, inconclusive fd_decision and watermarked CT03 engineering proposal
@@ -123,8 +139,8 @@ gates:
       proposed rule (fd_approved:false, no selected/winner/decision wording). The
       engine fd_decision stays inconclusive with empty selection evaluation. The
       engineering proposal is computed only after exact-cohort/inventory/spec
-      bindings pass. All artifacts are atomically sealed to one source/store/spec/
-      rubric run.
+      bindings pass. The complete official-template map and filled-template
+      receipt are atomically sealed to the same source/store/spec/rubric run.
     boundary_owner: formulation-selection-run + diagnostic builder + engineering-proposal builder
     fixture: G-01 package + G-02 proposal rubric artifacts
     command: >
@@ -147,9 +163,10 @@ gates:
     evidence: >
       proposal-run/formula-evidence-diagnostic.json + proposal-run/formula-decision.json
       + proposal-run/engineering-proposal.json + proposal-run/selection-evaluation.json
+      + proposal-run/template-field-map.v1.json + proposal-run/template-cell-receipt.v1.json
       + proposal-run/publication-receipt.json
     blocks: [G-04, G-05]
-    status: unverified
+    status: pass
 
   - id: G-04
     title: Same-run rationale and watermarked non-citable review DOCX with engineering proposal
@@ -157,7 +174,8 @@ gates:
       Rationale binds all numeric/composition/spec claims to the Phase 3 receipt
       and explains why fd_decision is inconclusive. It may state that CT03 is the
       sole survivor under the proposed (FD-unapproved) rule, but never uses
-      selected/winner/decision. Review DOCX shows raw evidence/spec/missing states
+      selected/winner/decision. Review DOCX retains the complete filled official-
+      template structure and all 146 resolved fields, then shows raw evidence/spec/missing states
       plus a dedicated watermarked "ĐỀ XUẤT KỸ THUẬT — CHƯA ĐƯỢC FD DUYỆT" block
       naming CT03, and a page-level REVIEW ONLY / NON-CITABLE / NOT FD APPROVED
       marker. Source classification stays citable:false; draft has zero public
@@ -176,7 +194,7 @@ gates:
       block naming CT03 with fd_approved:false; 1%/3%/5% claims bound; raw
       formula/spec table; zero public citations; complete internal provenance
       references; unchanged citable:false; same-run receipts; two normalized
-      OOXML hashes equal.
+      OOXML hashes equal; no unresolved semantic placeholder remains.
     negative_cases:
       - selected/winner/decision language for CT03 anywhere in rationale/render -> reject.
       - Engineering-proposal block or the REVIEW-ONLY/NOT-FD-APPROVED marker missing -> reject.
@@ -184,12 +202,13 @@ gates:
       - Mock represented with citable:true or public citation object -> reject.
       - Swapped decision/diagnostic/data/compile/rationale/DOCX artifact -> reject.
       - Missing missing-data state -> reject.
+      - Template/filled hash, 146-field receipt or resolved output completeness drifts -> reject.
     evidence: >
       review-run/rationale-package.json + review-run/rationale-receipt.json
       + review-run/p2.2.1-review.docx + review-run/render-receipt.json
-      + review-run/two-run-normalized-ooxml-hashes.json
+      + review-run/review-verification.json
     blocks: [G-05]
-    status: unverified
+    status: pass
 
   - id: G-05
     title: Legitimacy-negative and split determinism regression suite
@@ -198,7 +217,8 @@ gates:
       isolated admission, cell ownership, typed evidence (spec-not-result), exact
       cohort, full inventory/derived roles, strict spec compilation, single-
       survivor safety, no selected/winner language for CT03, engineering-proposal
-      schema, watermarked non-citable render, rationale grounding and all prior v2
+      schema, complete template+filled binding, watermarked non-citable render,
+      rationale grounding and all prior v2
       regressions. Full-ingest determinism is separate from downstream-from-pinned-
       store determinism; snapshot fallback cannot hide a full-ingest failure. The
       full cryptographic-forgery/publication adversarial matrix is deferred to the
@@ -207,8 +227,9 @@ gates:
     fixture: real frozen mock + legitimacy-negative fixtures; synthetic demo only for v2 regression
     command: >
       node --test cowork-p2-kit/workflow-trial/tests/formulation-selection-*.test.mjs
-      && node --test cowork-p2-kit/reasoning/tests/*.test.mjs
-      cowork-p2-kit/rationale/tests/*.test.mjs cowork-p2-kit/render/tests/*.test.mjs
+      cowork-p2-kit/workflow-trial/tests/spec-compiled-rubric.test.mjs
+      cowork-p2-kit/reasoning/tests/*.test.mjs cowork-p2-kit/rationale/tests/*.test.mjs
+      cowork-p2-kit/render/tests/*.test.mjs
     expected: >
       every listed legitimacy negative asserts a specific code/state; two fresh
       complete ingests match; two downstream runs match; verdict labels both lanes;
@@ -220,4 +241,4 @@ gates:
       - Existing v2 regression changes -> gate fail.
     evidence: docs/reports/qbd-p221-formulation-selection/test-verdict.json
     blocks: [exit-acceptance]
-    status: unverified
+    status: pass

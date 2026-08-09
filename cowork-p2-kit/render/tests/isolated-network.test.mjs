@@ -1,13 +1,15 @@
 import assert from "node:assert/strict";
 import test, { after, before } from "node:test";
 import { execFileSync, spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { tmpdir } from "node:os";
 
 const repoRoot = resolve(import.meta.dirname, "../../..");
 const fixturePath = join(repoRoot, "cowork-p2-kit/render/tests/fixtures/fidelity/two-citation-draft.json");
 const isolatedSpikeScript = join(repoRoot, "cowork-p2-kit/render/run-isolated-spike.mjs");
+const rootPlansPath = join(repoRoot, "plans");
+const rootPlansEntriesBefore = existsSync(rootPlansPath) ? readdirSync(rootPlansPath).sort() : null;
 
 function runIsolatedSpike() {
   const outputRoot = join(tmpdir(), `isolated-output-${Date.now()}-${Math.random().toString(36).slice(2)}`);
@@ -155,12 +157,12 @@ test("G-P3-04: snapshot contains output hash", () => {
   assert.ok(snapshot.output_sha256.length === 64, "output_sha256 must be 64 hex chars (SHA-256)");
 });
 
-test("G-P3-04: no root plans directory is created", () => {
+test("G-P3-04: isolated render does not change the root plans directory", () => {
   const { outputRoot, reportRoot } = isolatedRun;
 
-  // Check that no plans directory was created at the repo root
-  const rootPlansPath = join(repoRoot, "plans");
-  assert.ok(!existsSync(rootPlansPath), "No root plans/ directory should be created");
+  // The repository may already track plans/. The isolated render must not add or remove entries.
+  const rootPlansEntriesAfter = existsSync(rootPlansPath) ? readdirSync(rootPlansPath).sort() : null;
+  assert.deepEqual(rootPlansEntriesAfter, rootPlansEntriesBefore, "Root plans/ entries must remain unchanged");
 
   // Also check output and report roots
   const outputPlansPath = join(outputRoot, "plans");

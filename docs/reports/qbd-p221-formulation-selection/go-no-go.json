@@ -1,1 +1,1 @@
-{"formula_ids":["formula-01","formula-02","formula-03"],"full_ingest_deterministic":true,"gate":"G-00","receipt_count":21,"receipt_set_sha256":"e2264be13ad19fd4495a1925ba17163de9e710edda5760616dbd996c35222211","record_bindings":21,"verdict":"GO"}
+{"formula_ids":["formula-01","formula-02","formula-03"],"full_ingest_deterministic":true,"gate":"G-00","receipt_count":21,"receipt_set_sha256":"e2264be13ad19fd4495a1925ba17163de9e710edda5760616dbd996c35222211","record_bindings":21,"template_field_count":146,"template_receipt_count":146,"verdict":"GO"}
