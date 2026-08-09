@@ -26,19 +26,13 @@ Mọi phản hồi cho HUMAN tuân theo 5 nguyên tắc:
 
 ---
 
-## ⛔ CONTEXT OVERFLOW RECOVERY
-
-**Khi context đầy hoặc mất phương hướng trong session dài:**
-
-1. Re-read `CLAUDE.md` (file này) — nắm lại project identity & phase.
-
 ## Where things live
 
 - `docs/raw/` — source of example file to work with.
 - `docs/` — project docs, active plans, and reports live here. Do not create project Markdown
   outside `docs/` except the root workflow pointers named below.
-- Workflow state & handoff — dùng skill `ak-project-management` (`/ck:project-management`): hydrate Claude Tasks từ các mục `[ ]` chưa xong trong `plan.md`, sync-back khi hoàn thành, ghi report ở `docs/reports/<workstream>/`. Nguồn sự thật là `IMPLEMENTATION_PLAN.md` → `plan.md` + `gates.yaml`; không có file state routing riêng.
-- `IMPLEMENTATION_PLAN.md` — pointer to the single canonical active plan; never duplicate status here.
+- Workflow state & handoff — dùng skill `ak-project-management` (`/ak-project-management`): hydrate Claude Tasks từ các mục `[ ]` chưa xong trong `plan.md`, sync-back khi hoàn thành, ghi report ở `docs/reports/<workstream>/`. Nguồn sự thật cho implementation routing là `IMPLEMENTATION_PLAN.md`; khi có active plan, nó trỏ tới `plan.md` + `gates.yaml`. Không có alternate machine-readable route.
+- `IMPLEMENTATION_PLAN.md` — sole implementation router; it may state that there is no active plan and must not duplicate plan status.
 - `docs/plans/<workstream>/` — active plan package. Read `plan.md`, then only the current step.
 - `docs/reports/<workstream>/` — current evidence and review artifacts.
 - `docs/plans/OUTDATED/`, `docs/reports/OUTDATED/` — historical quarantine. **Do not scan or read
@@ -47,8 +41,8 @@ Mọi phản hồi cho HUMAN tuân theo 5 nguyên tắc:
 
 ## Session handoff discipline (ak-project-management)
 
-- **Nguồn sự thật:** `IMPLEMENTATION_PLAN.md` trỏ tới đúng một active `plan.md`. Trạng thái nằm ở checkbox `[ ]`/`[x]` trong các phase file + `gates.yaml` — không có file state routing riêng, không có SessionStart gate hook.
-- **Pickup session sau:** đọc active `plan.md` → chỉ đọc current step → hydrate Task từ các mục `[ ]` chưa xong (skill `ak-project-management`).
+- **Nguồn sự thật:** `IMPLEMENTATION_PLAN.md` là sole implementation router. Nếu có active `plan.md`, trạng thái nằm ở checkbox `[ ]`/`[x]` trong các phase file + `gates.yaml`; nếu không có active plan, không có implementation pickup để hydrate. Không có alternate machine-readable route hoặc SessionStart gate hook.
+- **Pickup session sau:** kiểm tra `IMPLEMENTATION_PLAN.md`; chỉ đọc current step và hydrate Task từ các mục `[ ]` chưa xong khi router liên kết một active `plan.md`. Khi không có active plan, chờ scope/plan được chấp nhận.
 - **Closeout:** commit work trước; ghi evidence/report ở `docs/reports/<workstream>/pm-*.md`; sync-back checkbox `[ ]`→`[x]` và cập nhật `status` trong frontmatter của `plan.md`.
 - **Critical/DA review bắt buộc trước khi đóng session** nếu diff chạm: auth, schema/migration, đường dẫn security-sensitive, quyết định kiến trúc mới, hoặc scope vượt plan đã duyệt. Các trường hợp khác có thể bỏ qua.
 
@@ -62,21 +56,11 @@ Khi làm việc/scout/đọc dữ liệu với file docx, excel, pdf:
 
 Khi chuyển từ brainstorm --> plan, đọc rule `.claude/rules/RULE-BRAINSTORM-PLAN.md`
 
-## qbd_core module boundaries (Phase 2 — proposed, xem ADR)
+## qbd_core module boundaries (Phase 2)
 
-> Áp dụng cho `qbd_core/` (Phase 2 roadmap, Python, chưa bắt đầu code). **Không áp dụng cho
-> `cowork-p2-kit/`** (Phase 1 MVP, giữ nguyên layer A/B/C như hiện tại).
-
-- Monolith, chia module theo **nghiệp vụ** (không theo layer kỹ thuật), 5–7 module.
-- Mỗi module: `SPEC.md` (nguồn sự thật) + `service.py` + `models.py` (bảng DB riêng) +
-  `api.py` (cổng vào/ra duy nhất) + `tests/`. Module khác chỉ được gọi qua `api.py`.
-- DB dùng chung được. `shared/` chỉ chứa thứ thật sự dùng chung (auth, db connection) —
-  không chứa business logic. Chia sẻ file ngoài `api.py`/`shared/` phải khai permission
-  trong `SPEC.md` của module bị đọc.
-- SDD: đổi hành vi = đổi `SPEC.md` trước, code sau. Review phải đối chiếu **spec-diff**
-  với code-diff, không chỉ đọc code-diff.
-- Chi tiết đầy đủ + module list đề xuất + thứ tự implement:
-  `docs/architecture/ADR-qbd-core-module-boundaries.md` (draft, chờ confirm).
+Chưa bắt đầu code. Luật module boundary sống ở
+`docs/architecture/ADR-qbd-core-module-boundaries.md` (draft, chờ confirm) — đọc khi thật sự
+bắt đầu `qbd_core/`. Không áp dụng cho `cowork-p2-kit/` (Phase 1 MVP).
 
 ## GitNexus — Known Issues (human-owned, outside generated block)
 
@@ -88,7 +72,7 @@ Khi chuyển từ brainstorm --> plan, đọc rule `.claude/rules/RULE-BRAINSTOR
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
-This project is indexed by GitNexus as **QbD-assistant** (3682 symbols, 6641 relationships, 209 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
+This project is indexed by GitNexus as **QbD-assistant** (4199 symbols, 8057 relationships, 233 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
 > Index stale? Run `node .gitnexus/run.cjs analyze` from the project root — it auto-selects an available runner. No `.gitnexus/run.cjs` yet? `npx gitnexus analyze` (npm 11 crash → `npm i -g gitnexus`; #1939).
 

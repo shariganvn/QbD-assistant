@@ -14,7 +14,9 @@
     "render": "node cowork-p2-kit/render/render-docx.mjs",
     "render:spike": "node cowork-p2-kit/render/render-spike.mjs",
     "verify:reasoning": "node cowork-p2-kit/reasoning/tests/verify-reasoning.mjs",
-    "verify:rationale": "node cowork-p2-kit/rationale/tests/verify-rationale.mjs"
+    "verify:rationale": "node cowork-p2-kit/rationale/tests/verify-rationale.mjs",
+    "preflight:formulation": "node cowork-p2-kit/workflow-trial/formulation-preflight.mjs",
+    "test:formulation": "node --test cowork-p2-kit/workflow-trial/tests/*.test.mjs"
   },
   "keywords": [],
   "author": "",

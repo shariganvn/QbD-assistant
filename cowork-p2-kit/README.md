@@ -56,18 +56,21 @@ installation alone does not pass the Phase 3 offline-render gate.
 
 ## Quick Start
 
+From the repository root, install dependencies and run the formulation preflight and tests:
+
 ```bash
 # Run these commands inside WSL2.
-
-# 1. Build .docx inputs from markdown source
-npm run inputs:build
-
-# 2. Run ingest (extract → store)
-npm run ingest
-
-# 3. Run the existing render seam when a separately authorized structured draft exists
-npm run render
+npm ci
+npm run preflight:formulation
+npm run test:formulation
 ```
+
+`preflight:formulation` is read-only. It fails if either frozen DOCX authority is absent or
+mismatched. The approved public/synthetic fixtures are tracked in Git at
+`inputs/reference/official-placeholder-template-v3-040826.docx` and
+`inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx`; do not regenerate or
+replace them. Their SHA-256 pins are machine-owned by
+[`workflow-trial/formulation-preflight.mjs`](workflow-trial/formulation-preflight.mjs).
 
 ## Folder Structure
 
@@ -79,8 +82,8 @@ cowork-p2-kit/
 │   ├── src/                  # Authoring source (.md) — git-tracked
 │   │   ├── product-profile.md
 │   │   └── formulation-trial-*.md
-│   ├── trials/               # Generated trial .docx — git-ignored
-│   ├── reference/            # Reference docs .docx — git-ignored
+│   ├── trials/               # Generated trial .docx — except the frozen public mock
+│   ├── reference/            # Reference docs .docx — except the frozen public template
 │   ├── build-inputs.mjs      # .md → .docx converter
 │   └── classification-manifest.json
 ├── ingest/                   # Tracked Layer A ingest source
@@ -115,5 +118,6 @@ See `data-classification.md` for the two-axis classification system (sensitivity
 ## Retention
 
 Generated artifacts under `store/` and `outputs/` are kept for project duration (configurable) and
-git-ignored to prevent committing extracted content. The ingest source under `ingest/`, the store
-schema, and store documentation remain tracked. See P0.5 tracked risk.
+git-ignored to prevent committing extracted content. Generated DOCX inputs remain git-ignored too;
+only the two frozen public/synthetic fixtures named in Quick Start are tracked. The ingest source
+under `ingest/`, the store schema, and store documentation remain tracked. See P0.5 tracked risk.

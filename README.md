@@ -10,9 +10,9 @@ FD-defined rubric, and explained with every claim traceable to its source.
 It is **not** a system that approves a formulation, drafts P.2.2/P.2.3, releases a dossier, or
 publishes external-facing content.
 
-The immediate operational dependency is a **public/synthetic mock-document package from PO/FD**. Once
-that package arrives, Engineering can run the isolated pilot and document the gaps found. Do not send
-confidential, internal, or production-controlled records for this pilot.
+The bounded pilot uses the approved **public/synthetic mock-document fixture handoff**. Engineering can
+run the isolated pilot and document the gaps found. Do not send confidential, internal, or
+production-controlled records for this pilot.
 
 ## What the project does today
 
@@ -42,10 +42,10 @@ proof of an FD-approved scientific decision or a production deployment.
 
 ## Current state
 
-### What is waiting on PO/FD
+### Current pilot intake
 
-Prepare and deliver one **public/synthetic-only** mock package. The complete, PO-friendly checklist is
-[the mock-package preparation guide](docs/reports/qbd-p4-reasoning-layer/po-junior-mock-package-preparation-guide-20260729.md).
+The bounded pilot accepts only the approved **public/synthetic-only** fixture handoff. The complete,
+PO-friendly intake boundary is in [the mock-package preparation guide](docs/reports/qbd-p4-reasoning-layer/po-junior-mock-package-preparation-guide-20260729.md).
 
 At minimum, it needs:
 
@@ -56,6 +56,30 @@ At minimum, it needs:
 5. UAT expected results for: comparable candidates, non-comparable candidates, and missing/conflicting evidence.
 6. A linear-formulation confirmation only if different strengths are expected to share a cohort.
 
+### Frozen fixture handoff (tracked in Git)
+
+The two approved public/synthetic DOCX fixtures below are now tracked in Git so a clean clone is
+runnable without a private restore step. They are the only DOCX exceptions to the broad input ignore
+rule. Do not regenerate, replace, or add production/internal documents to these paths.
+
+| Fixture | Git path | SHA-256 |
+|---|---|---|
+| Official placeholder template | `cowork-p2-kit/inputs/reference/official-placeholder-template-v3-040826.docx` | `c492532054d9ba04d2dbd5c3d03706c423534cce5329d2657b2588760e0087e0` |
+| Filled public mock document | `cowork-p2-kit/inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx` | `01fe95607f4733e2b47a4c46f8dad5817d6014cc40f69a08631977c9d890cd8f` |
+
+After cloning, the PO or junior agent can verify and run the bounded formulation trial with:
+
+```bash
+npm ci
+npm run preflight:formulation
+npm run test:formulation
+```
+
+The preflight is read-only and fails closed on a missing or changed fixture. It also checks Node 22,
+`/usr/bin/unzip`, and `bwrap`; see [`cowork-p2-kit/README.md`](cowork-p2-kit/README.md) for the
+WSL2 runtime boundary. These fixtures remain public/synthetic, `citable:false`, review-only, and
+cannot authorize an FD decision, production use, dossier drafting, or external display.
+
 PO owns scope, file list, UAT cases, and coordination. FD owns the scientific comparison rules and
 evidence interpretation. Engineering packages the manifest, runs the isolated pilot, and reports
 reproducible failures; it must not choose thresholds, change classifications, or declare a winner.
@@ -64,20 +88,20 @@ reproducible failures; it must not choose thresholds, change classifications, or
 
 | Workstream | State | Meaning |
 |---|---|---|
-| P2 ingest/publication | Closed for the cooperative-writer test scope | 64 assertions passed in the final isolated closeout. |
+| P2 ingest/publication | Closed for the cooperative-writer test scope | See the canonical [gate definition](docs/plans/qbd-p2-ingest-completion/gates.yaml) and retained [evidence](docs/reports/qbd-p2-ingest-completion/). |
 | Same-host TOCTOU debt (`D20260722`) | Open | Cooperative locking is covered; hostile same-host filesystem races are **not** solved. |
 | P4 reasoning core | Completed for fixture/internal scope | It evaluates supplied packages deterministically; it does not draft dossier prose. |
-| Rationale/report layer | Completed for fixture/internal scope | 38 assertions passed; its published reference package is test-only and internal-only. |
+| Rationale/report layer | Completed for fixture/internal scope | Its published reference package is test-only and internal-only; see the retained [gate evidence](docs/reports/qbd-rationale-report-layer/gates/). |
 | PO pilot readiness | GO with boundaries | Safe to receive public/synthetic mocks and run an isolated trial; not ready for production or direct PO installation. |
 
-The machine-readable session state still routes the next formal technical pickup to the P2
-publication-lock spec-diff. That review may accept the bounded cooperative behavior, but must never
-claim that hostile same-host TOCTOU is resolved. See [D20260722](docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md)
-and [the spec-diff](docs/reports/qbd-p2-ingest-completion/spec-diff-step-03-publication-lock-debt-20260724.md).
+Implementation routing has no alternate machine-readable route: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md)
+is authoritative and currently records no active plan. Reports and reviews are evidence, not pickup
+authority. The cooperative-writer boundary remains limited; hostile same-host TOCTOU is not resolved.
+See [D20260722](docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md) for that boundary.
 
-## Next steps after the mock package arrives
+## Next steps for the bounded pilot
 
-1. Validate the intake checklist and confirm every file is public/synthetic.
+1. Validate the approved fixture handoff and confirm every file is public/synthetic.
 2. Convert the PO document list to the technical manifest without broadening permissions or citation status.
 3. Run the pilot in an isolated workspace; retain provenance and do not overwrite historical evidence.
 4. Compare the outputs with the three UAT cases. A missing, conflicting, or unapproved input must lead to an explicit stop or `inconclusive`, never an invented winner.
@@ -119,7 +143,7 @@ The detailed gap register and test seeds are in
 | Understand PO/FD/Engineering responsibilities | [Preparation guide — roles](docs/reports/qbd-p4-reasoning-layer/po-junior-mock-package-preparation-guide-20260729.md#8-ai-lam-gi) |
 | Understand current P2 security boundary | [D20260722](docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md) |
 | Understand why approval and data-gap work is next | [Gap review](docs/reports/qbd-p4-reasoning-layer/missing-data-human-approval-gap-review-20260729.md) |
-| Inspect the active plan and next steps | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) → active `plan.md` |
+| Inspect implementation routing | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) → follow an active `plan.md` only when one is linked |
 
 ## Non-negotiable rules for a PO-facing agent
 

@@ -1,5 +1,8 @@
 # Generated .docx inputs (rebuild from inputs/src/*.md via npm run inputs:build)
 inputs/**/*.docx
+# The two approved public/synthetic pilot fixtures are the only tracked DOCX exceptions.
+!inputs/reference/official-placeholder-template-v3-040826.docx
+!inputs/trials/placeholder-probe/filled-public-mock-document-030826.docx
 
 # Extracted store artifacts (regenerated per ingest run)
 store/records.jsonl
