@@ -1,8 +1,8 @@
 # Implementation Plan
 
-There is currently no active implementation plan. This file is the single
-authoritative router; a new plan must be linked here before implementation
-resumes.
+The active implementation plan is
+`plans/260809-2001-rationale-explanation/plan.md`. This file remains the
+single authoritative router; follow that plan for the current change.
 
 ## Latest completed
 

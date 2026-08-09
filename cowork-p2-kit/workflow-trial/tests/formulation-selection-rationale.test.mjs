@@ -30,7 +30,7 @@ test("G-04 rationale is source-bound, non-citable, and keeps proposal separate f
   assert.equal(result.renderReceipt.isolated_render.unshare_net, true);
 });
 
-test("G-04 review DOCX contains the required watermarks, evidence table, and internal references", async () => {
+test("G-04 review DOCX contains the required watermarks, evidence table, and concise source basis", async () => {
   const result = await renderOnce();
   const zip = await JSZip.loadAsync(readFileSync(result.outputDocx));
   const documentXml = await zip.file("word/document.xml").async("string");
@@ -41,7 +41,9 @@ test("G-04 review DOCX contains the required watermarks, evidence table, and int
   assert.match(text, /ĐỀ XUẤT KỸ THUẬT/);
   assert.match(text, /formula-03/);
   assert.match(text, /98\.64/);
-  assert.match(text, /internal:observed-result:dissolution-mean:formula-03/);
+  assert.match(text, /filled-public-mock-document-030826\.docx/);
+  assert.match(text, /P\.2\.2\.1 results table/);
+  assert.doesNotMatch(text, /internal:observed|Quote SHA-256|Cell receipt/);
   assert.doesNotMatch(text, /CT03[^.\n]*(winner|selected|decision)/i);
 });
 

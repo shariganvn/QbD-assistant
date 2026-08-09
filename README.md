@@ -34,7 +34,7 @@ FD/PO reviews the evidence, gaps, and inconclusive outcomes
 | Preserve source provenance | Ready | Evidence remains tied to its source file/page/quote. |
 | Compare formulations | Prototype ready | A real selection needs an FD-approved, hash-pinned rubric; otherwise the correct outcome is `inconclusive`. |
 | Detect some missing/conflicting evidence | Partially ready | The system can stop, but it does not yet manage the full human gap-resolution lifecycle. |
-| Generate rationale | Ready for internal review | Output is permanently `internal_only` in the current implementation. |
+| Generate rationale | Ready for internal review | The review DOCX includes a concise source-bound rule/evidence summary; machine provenance remains in the internal artifacts. Output is permanently `internal_only`. |
 | Approve a formula, draft P.2.2/P.2.3, or display externally | Not available | These require separately approved work and controls. |
 
 The completed reasoning and rationale suites validate the test-fixture/internal scope. They are not
@@ -91,7 +91,7 @@ reproducible failures; it must not choose thresholds, change classifications, or
 | P2 ingest/publication | Closed for the cooperative-writer test scope | See the canonical [gate definition](docs/plans/qbd-p2-ingest-completion/gates.yaml) and retained [evidence](docs/reports/qbd-p2-ingest-completion/). |
 | Same-host TOCTOU debt (`D20260722`) | Open | Cooperative locking is covered; hostile same-host filesystem races are **not** solved. |
 | P4 reasoning core | Completed for fixture/internal scope | It evaluates supplied packages deterministically; it does not draft dossier prose. |
-| Rationale/report layer | Completed for fixture/internal scope | Its published reference package is test-only and internal-only; see the retained [gate evidence](docs/reports/qbd-rationale-report-layer/gates/). |
+| Rationale/report layer | Completed for fixture/internal scope | Its published reference package is test-only and internal-only; the human-facing DOCX keeps reasoning/provenance concise while retaining full machine bindings separately. See the retained [gate evidence](docs/reports/qbd-rationale-report-layer/gates/). |
 | PO pilot readiness | GO with boundaries | Safe to receive public/synthetic mocks and run an isolated trial; not ready for production or direct PO installation. |
 
 Implementation routing has no alternate machine-readable route: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md)

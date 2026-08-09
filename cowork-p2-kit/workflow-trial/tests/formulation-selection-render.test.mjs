@@ -26,11 +26,14 @@ test("G-05 review render stays watermarked, non-citable, and internally source-b
     assert.ok(review.draft.title.includes("NON-CITABLE"));
     assert.ok(review.draft.blocks.some((block) => block.text?.includes("ĐỀ XUẤT KỸ THUẬT")));
     assert.ok(review.rationale.internal_provenance_references.every((reference) => reference.reference_id.startsWith("internal:")));
-    const provenanceTable = review.draft.blocks.find((block) => block.type === "table" && block.headers.includes("Quote SHA-256"));
+    const provenanceTable = review.draft.blocks.find((block) => block.type === "table" && block.headers.join("|") === "Cơ sở bằng chứng|Nguồn");
     assert.ok(provenanceTable);
-    assert.ok(provenanceTable.headers.includes("Source file"));
-    assert.equal(provenanceTable.rows[0][2], review.rationale.internal_provenance_references[0].source_file);
-    assert.equal(provenanceTable.rows[0][6], review.rationale.internal_provenance_references[0].quote_sha256);
+    assert.equal(provenanceTable.rows.length, 2);
+    assert.ok(provenanceTable.rows.every((row) => row[1].includes("P.2.2.1")));
+    assert.equal(provenanceTable.rows.flat().some((cell) => /sha|record|offset|receipt|hash/i.test(cell)), false);
+    const reasoningTable = review.draft.blocks.find((block) => block.type === "table" && block.headers[0] === "Công thức" && block.headers[1] === "Dẫn chứng theo quy tắc đề xuất");
+    assert.deepEqual(reasoningTable.rows.map((row) => row[0]), ["CT01", "CT02", "CT03"]);
+    assert.match(review.draft.blocks.find((block) => block.text?.startsWith("Tóm tắt reasoning:"))?.text ?? "", /chỉ mang tính chẩn đoán/);
     validateDraft(review.draft);
     assert.equal(review.renderReceipt.citations_count, 0);
     assert.equal(review.renderReceipt.isolated_render.unshare_net, true);
@@ -50,7 +53,7 @@ test("G-05 P.2.2.1 draft contract rejects required marker, watermark, missing-da
     missingState.blocks = missingState.blocks.filter((block) => !block.text?.startsWith("Missing/conflicting data state:"));
     assert.throws(() => validateFormulationReviewDraft(missingState), (error) => error.code === "E_FORMULATION_DRAFT_CONTRACT");
     const missingProvenance = structuredClone(review.draft);
-    missingProvenance.blocks = missingProvenance.blocks.filter((block) => !(block.type === "table" && block.headers.includes("Quote SHA-256")));
+    missingProvenance.blocks = missingProvenance.blocks.filter((block) => !(block.type === "table" && block.headers.join("|") === "Cơ sở bằng chứng|Nguồn"));
     assert.throws(() => validateFormulationReviewDraft(missingProvenance), (error) => error.code === "E_FORMULATION_DRAFT_CONTRACT");
     const missingMarker = structuredClone(review.draft);
     missingMarker.blocks = missingMarker.blocks.filter((block) => !block.text?.startsWith("REVIEW ONLY — NON-CITABLE — NOT FD APPROVED"));

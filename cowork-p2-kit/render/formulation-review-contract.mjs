@@ -1,4 +1,5 @@
 import { validateDraft } from "./contract.mjs";
+import { PROPOSAL_REASONING_HEADERS } from "./formulation-proposal-reasoning.mjs";
 import { ownerKey } from "../template-probe/template-field-contract.mjs";
 import { readOwnerTexts, visibleText } from "../template-probe/template-owner-reader.mjs";
 
@@ -11,11 +12,11 @@ const REQUIRED_HEADINGS = [
   "Extracted specifications",
   "FD decision state",
   PROPOSAL_WATERMARK,
-  "Internal provenance references — non-citable",
+  "Cơ sở bằng chứng — ngắn gọn, không trích dẫn công khai",
 ];
-const EVIDENCE_HEADERS = ["Formula", "Dissolution min %", "Dissolution mean %", "Dissolution max %", "Assay %", "CU AV", "Croscarmellose sodium %"];
-const SPECIFICATION_HEADERS = ["Measure", "Operator", "Threshold/range", "Source evidence"];
-const PROVENANCE_HEADERS = ["Reference ID", "Evidence ID", "Source file", "Record", "Page", "Offsets", "Quote SHA-256", "Cell receipt"];
+const EVIDENCE_HEADERS = ["Formula", "Dissolution min %", "Dissolution mean %", "Assay %", "CU AV"];
+const SPECIFICATION_HEADERS = ["Measure", "Operator", "Threshold/range", "Source"];
+const PROVENANCE_HEADERS = ["Cơ sở bằng chứng", "Nguồn"];
 const semanticPlaceholder = /<[A-Z][A-Z0-9%-]*>/;
 
 function fail(message) {
@@ -76,6 +77,16 @@ export function validateFormulationReviewDraft(draft) {
   if (!proposal || !proposal.text.includes("formula-03 (CT03)") || !proposal.text.includes("FD approved: false")) fail("engineering-proposal block is missing or untruthful");
   if (/CT03[^.\n]*(winner|selected|decision|recommendation)/i.test(proposal.text)) fail("engineering-proposal block uses forbidden decision language");
 
+  const reasoningSummary = draft.blocks.find((block) => block.type === "paragraph" && block.text.startsWith("Tóm tắt reasoning:"));
+  if (!reasoningSummary || !reasoningSummary.text.includes("dissolution tối thiểu") || !reasoningSummary.text.includes("chỉ mang tính chẩn đoán")) fail("reasoning summary is missing or incomplete");
+  const reasoning = tableByHeaders(draft, PROPOSAL_REASONING_HEADERS);
+  if (!reasoning || !sameArray(reasoning.rows.map((row) => row[0]), ["CT01", "CT02", "CT03"])
+    || reasoning.rows.some((row) => row.some((cell) => String(cell).trim() === ""))) {
+    fail("complete proposed-rule reasoning table is required");
+  }
+  const reasoningBoundary = draft.blocks.find((block) => block.type === "paragraph" && block.text.startsWith("Giới hạn reasoning:"));
+  if (!reasoningBoundary || !reasoningBoundary.text.includes("FD chưa xác nhận")) fail("reasoning boundary is missing");
+
   const evidence = tableByHeaders(draft, EVIDENCE_HEADERS);
   if (!evidence || !sameArray(evidence.rows.map((row) => row[0]), ["formula-01", "formula-02", "formula-03"])
     || evidence.rows.some((row) => row.some((cell) => cell === "—" || String(cell).trim() === ""))) {
@@ -86,11 +97,10 @@ export function validateFormulationReviewDraft(draft) {
     fail("complete specification table is required");
   }
   const provenance = tableByHeaders(draft, PROVENANCE_HEADERS);
-  if (!provenance || provenance.rows.length === 0 || provenance.rows.some((row) => (
-    !String(row[0]).startsWith("internal:")
-    || row.some((cell) => String(cell).trim() === "")
-    || !/^\d+–\d+$/.test(String(row[5]))
-    || !/^[a-f0-9]{64}$/.test(String(row[6]))
-  ))) fail("complete internal-provenance table is required");
+  if (!provenance || provenance.rows.length !== 2 || provenance.rows.some((row) => (
+    row.some((cell) => String(cell).trim() === "")
+    || !String(row[1]).includes("P.2.2.1")
+    || /sha|record|offset|receipt|hash/i.test(row.join(" "))
+  ))) fail("concise evidence-basis table is required");
   return draft;
 }

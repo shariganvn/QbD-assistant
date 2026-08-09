@@ -60,8 +60,9 @@ function verifyRenderedDraft({ draft, rationale, documentXml }) {
       }
     }
   }
-  for (const reference of rationale.internal_provenance_references) {
-    if (!text.includes(reference.reference_id) || !text.includes(reference.quote_sha256)) fail(`rendered DOCX is missing internal provenance ${reference.evidence_id}`);
+  const sourceFile = rationale.internal_provenance_references[0]?.source_file?.split("/").at(-1);
+  if (!sourceFile || !text.includes(sourceFile) || !text.includes("P.2.2.1")) {
+    fail("rendered DOCX is missing the concise source-basis marker");
   }
 }
 

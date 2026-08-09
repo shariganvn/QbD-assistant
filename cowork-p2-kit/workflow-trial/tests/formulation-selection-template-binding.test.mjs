@@ -59,8 +59,13 @@ test("G-04 final P.2.2.1 review retains the complete filled template and appends
       "3,04",
       "REVIEW ONLY — NON-CITABLE — NOT FD APPROVED",
       "ĐỀ XUẤT KỸ THUẬT — CHƯA ĐƯỢC FD DUYỆT",
+      "CT01 không đạt dissolution tối thiểu (65,15% < 80%)",
+      "CT02 cũng không đạt (79,12% < 80%)",
+      "CT03 là ứng viên duy nhất còn lại",
+      "filled-public-mock-document-030826.docx — P.2.2.1 results table",
       "formula-03",
     ]) assert.ok(text.includes(expected), `missing rendered text: ${expected}`);
+    assert.doesNotMatch(text, /Quote SHA-256|Cell receipt|internal:observed|char_start|record_id/);
     assert.doesNotMatch(text, /<[A-Z][A-Z0-9%-]*>/);
     assert.match(visibleText(headerXml), /REVIEW ONLY — NON-CITABLE — NOT FD APPROVED/);
     assert.match(relationshipsXml, /relationships\/header/);

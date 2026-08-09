@@ -13,6 +13,10 @@ import { compileTemplateFieldMap } from "../template-probe/template-field-map.mj
 import { extractTemplateCellReceipt } from "../template-probe/template-record-extractor.mjs";
 import { inspectFilledTemplateContent, REVIEW_TITLE, validateFormulationReviewDraft } from "./formulation-review-contract.mjs";
 import { determinizeDocx } from "./determinize-ooxml.mjs";
+import {
+  buildProposalConclusion,
+  buildProposalReasoning,
+} from "./formulation-proposal-reasoning.mjs";
 
 const repoRoot = resolve(import.meta.dirname, "../..");
 const templatePath = resolve(repoRoot, "cowork-p2-kit/inputs/reference/official-placeholder-template-v3-040826.docx");
@@ -139,6 +143,20 @@ function parseArguments(argv) {
 
 export async function renderTemplateBoundReview({ draftPath, fieldMapPath, receiptPath, outputRoot }) {
   const draft = validateFormulationReviewDraft(JSON.parse(readFileSync(resolve(draftPath), "utf8")));
+  const evidenceTable = draft.blocks.find((block) => block.type === "table"
+    && block.headers[0] === "Formula"
+    && block.headers[1] === "Dissolution min %");
+  const specificationTable = draft.blocks.find((block) => block.type === "table"
+    && block.headers[0] === "Measure"
+    && block.headers[1] === "Operator");
+  const proposalBlock = draft.blocks.find((block) => block.type === "paragraph"
+    && block.text.startsWith("Proposed survivor under the proposed rule:"));
+  const proposedSurvivor = proposalBlock?.text.match(/: (formula-\d+) \(/)?.[1];
+  const reasoning = buildProposalReasoning({
+    evidenceRows: evidenceTable?.rows,
+    specificationRows: specificationTable?.rows,
+    proposedSurvivor,
+  });
   const fieldMap = JSON.parse(readFileSync(resolve(fieldMapPath), "utf8"));
   const receipt = JSON.parse(readFileSync(resolve(receiptPath), "utf8"));
   assertFieldMap(fieldMap);
@@ -173,7 +191,7 @@ export async function renderTemplateBoundReview({ draftPath, fieldMapPath, recei
   documentXml = replaceOutsideParagraph(
     documentXml,
     conclusion.owner.paragraph,
-    "Nhận xét (REVIEW ONLY): CT03 là công thức duy nhất đáp ứng quy tắc đề xuất dựa trên dữ liệu nguồn. ĐỀ XUẤT KỸ THUẬT — CHƯA ĐƯỢC FD DUYỆT; FD approved: false.",
+    buildProposalConclusion(reasoning),
   );
   if (!documentXml.includes("<w:body>")) fail("E_TEMPLATE_RENDER_DOCX", "word/document.xml has no body");
   const sectionIndex = documentXml.lastIndexOf("<w:sectPr");
