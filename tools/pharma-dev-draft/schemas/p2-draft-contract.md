@@ -80,8 +80,12 @@ Every `rows[i]` must have the same length as `headers`. Cell values are always s
 numbers exactly as they appear in the source — e.g. `"98,64"` for Vietnamese comma-decimal, not
 `98.64`).
 
-A `\n` inside a cell value renders as a line break within that cell, so a cell can carry a short
-bullet list (write the bullet character into the text yourself, e.g. `"• Điểm chảy: …"`).
+A `\n` inside a cell value starts a new paragraph within that cell. A line that opens with `"- "`
+becomes a real Word list item (the prefix is stripped and Word draws the bullet); any other line
+renders plain. That mix is what lets one cell carry bulleted property lines around an unbulleted
+lead-in, e.g. `"Giới hạn sử dụng:\n- Viên nén: 0,5 – 5,0%\n- Viên nang: 10 – 25%"`. Newlines are
+only meaningful in cells — the validator rejects them in heading and paragraph text, where Word
+would swallow them.
 
 `columnWidths` and `columnAlign` are both optional and both must have exactly one entry per
 header when present:
@@ -89,9 +93,10 @@ header when present:
 - `columnWidths` — positive integers in DXA units that must sum to `10000` (the renderer's page
   width budget). Omit it and the renderer gives the first column 34% and splits the rest evenly,
   which suits short label/number tables but not tables with several prose columns.
-- `columnAlign` — `"left"` or `"center"` per column. Omit it and the first column is left-aligned
-  with the rest centred; centring is unreadable for long prose, so set it explicitly on any table
-  with paragraph-length cells.
+- `columnAlign` — `"left"`, `"center"` or `"justify"` per column. Omit it and the first column is
+  left-aligned with the rest centred; centring is unreadable for long prose, so set it explicitly on
+  any table with paragraph-length cells (`"justify"` matches how the department's reference tables
+  set prose columns).
 
 ## What Stage C always adds regardless of the draft (not part of this contract)
 

@@ -7,7 +7,7 @@
 
 import {
   Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell,
-  WidthType, ShadingType, BorderStyle, AlignmentType, VerticalAlign,
+  WidthType, ShadingType, BorderStyle, AlignmentType, VerticalAlign, LevelFormat,
 } from "docx";
 
 import { TABLE_WIDTH_DXA as TABLE_WIDTH } from "../schemas/layout.mjs";
@@ -51,9 +51,28 @@ const ABBREVIATIONS = [
   ["RSD", "Relative Standard Deviation – Độ lệch chuẩn tương đối"],
 ];
 
-// A newline in cell text becomes a separate paragraph inside the cell, so a cell can hold a short
-// bullet list (excipient properties, for example) instead of one run-on line. Word ignores "\n"
-// inside a single run, so splitting here is what actually produces the line break.
+// One Word list definition, referenced by every bulleted line in every cell. Registered on the
+// Document below; without that registration the paragraphs render unbulleted.
+const CELL_BULLET_REFERENCE = "cell-bullet";
+const CELL_BULLET_PREFIX = "- ";
+
+const NUMBERING_CONFIG = {
+  config: [{
+    reference: CELL_BULLET_REFERENCE,
+    levels: [{
+      level: 0,
+      format: LevelFormat.BULLET,
+      text: "\u2022",
+      alignment: AlignmentType.LEFT,
+      style: { paragraph: { indent: { left: 180, hanging: 180 } } },
+    }],
+  }],
+};
+
+// A newline in cell text starts a new paragraph inside the cell, and a line opening with "- "
+// becomes a real Word list item rather than a literal bullet character — matching how the
+// department's reference table is built. Word ignores "\n" inside a single run, so splitting here
+// is what actually produces the line break.
 function cellText(text, opts = {}) {
   const lines = String(text).split("\n");
   return new TableCell({
@@ -61,18 +80,30 @@ function cellText(text, opts = {}) {
     borders: allBorders,
     shading: opts.header ? { type: ShadingType.CLEAR, fill: HEADER_FILL } : undefined,
     verticalAlign: VerticalAlign.CENTER,
-    children: lines.map((line, index) => new Paragraph({
-      alignment: opts.align || AlignmentType.LEFT,
-      spacing: { after: index === lines.length - 1 ? 0 : 40 },
-      children: [new TextRun({ text: line, bold: !!opts.header, size: opts.size || 20 })],
-    })),
+    children: lines.map((line, index) => {
+      const bulleted = line.startsWith(CELL_BULLET_PREFIX);
+      return new Paragraph({
+        alignment: opts.align || AlignmentType.LEFT,
+        spacing: { after: index === lines.length - 1 ? 0 : 40 },
+        numbering: bulleted ? { reference: CELL_BULLET_REFERENCE, level: 0 } : undefined,
+        children: [new TextRun({
+          text: bulleted ? line.slice(CELL_BULLET_PREFIX.length) : line,
+          bold: !!opts.header,
+          size: opts.size || 20,
+        })],
+      });
+    }),
   });
 }
 
-const ALIGNMENTS = { left: AlignmentType.LEFT, center: AlignmentType.CENTER };
+const ALIGNMENTS = {
+  left: AlignmentType.LEFT,
+  center: AlignmentType.CENTER,
+  justify: AlignmentType.JUSTIFIED,
+};
 
-// `align` is an optional per-column array of "left"/"center". Without it, the first column is
-// left-aligned and the rest centred — right for short numeric tables, wrong for prose columns.
+// `align` is an optional per-column array of "left"/"center"/"justify". Without it, the first
+// column is left-aligned and the rest centred — right for short numeric tables, wrong for prose.
 function makeTable(headers, rows, widths, align) {
   const alignFor = (i) => (align ? ALIGNMENTS[align[i]] : (i === 0 ? AlignmentType.LEFT : AlignmentType.CENTER));
   const headerRow = new TableRow({
@@ -232,6 +263,7 @@ export async function buildDocumentBuffer(draft, outline) {
   ));
 
   const doc = new Document({
+    numbering: NUMBERING_CONFIG,
     sections: [{ properties: { page: { margin: { top: 900, bottom: 900, left: 900, right: 900 } } }, children }],
   });
   return Packer.toBuffer(doc);

@@ -98,3 +98,19 @@ test("the renderer's own hardcoded table widths fill the table exactly", () => {
     assert.equal(widths.reduce((sum, w) => sum + w, 0), TABLE_WIDTH_DXA, `${name} widths do not fill the table`);
   }
 });
+
+test("justify is an accepted column alignment", () => {
+  const draft = loadExample();
+  const table = excipientTable(draft);
+  table.columnAlign = table.headers.map(() => "justify");
+  assert.doesNotThrow(() => validateDraft(draft));
+});
+
+test("P.2.1.2 stays a single table with no sub-part headings", () => {
+  const section = loadExample().sections.find((s) => s.id === "P.2.1.2");
+  const tables = section.blocks.filter((b) => b.type === "table");
+  const headings = section.blocks.filter((b) => b.type === "heading2" || b.type === "heading3");
+  assert.equal(tables.length, 1, "the excipient section should hold exactly one table");
+  assert.equal(headings.length, 0, "the excipient section should not be split into sub-parts");
+  assert.deepEqual(tables[0].headers, ["STT", "Tên tá dược", "Đặc tính lý hóa", "Ứng dụng", "Chức năng"]);
+});

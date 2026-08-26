@@ -21,7 +21,7 @@ export class DraftContractError extends Error {
 }
 
 const VALID_BLOCK_TYPES = new Set(["heading2", "heading3", "paragraph", "table"]);
-const VALID_COLUMN_ALIGN = new Set(["left", "center"]);
+const VALID_COLUMN_ALIGN = new Set(["left", "center", "justify"]);
 // Keys the renderer actually reads. Anything else in a block is a typo the renderer would silently
 // ignore (falling back to default widths/alignment), so it is rejected rather than dropped.
 const ALLOWED_BLOCK_KEYS = {
