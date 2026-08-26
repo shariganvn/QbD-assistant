@@ -1,0 +1,72 @@
+{
+  "_caveat": "Taxonomy nguồn: docs/raw/135-00-Pharmaceutical Development-example.docx (worked CTD 3.2.P.2 example). Đánh số/phạm vi mục kế thừa cùng caveat với cowork-p2-kit/template/p2-template.md: chưa được FD/regulatory affairs xác nhận chính thức là taxonomy bắt buộc — dùng làm khung sắp xếp nội dung, không phải authority.",
+  "schemaVersion": "1.0",
+  "sections": [
+    {
+      "id": "P.2.1.1",
+      "ctdReference": "3.2.P.2.1.1",
+      "headingVi": "Dược chất (Drug Substance)",
+      "description": "Tính chất lý hóa và sinh học của API: INN/CAS/công thức/KLPT, độ tan, pKa, LogP, đa hình, phân bố cỡ hạt, BCS, độ ổn định/phân hủy."
+    },
+    {
+      "id": "P.2.1.2",
+      "ctdReference": "3.2.P.2.1.2",
+      "headingVi": "Tá dược (Excipients)",
+      "description": "Danh mục tá dược, chức năng, lý do lựa chọn, khoảng hàm lượng khuyến cáo, và nghiên cứu tương hợp tá dược – dược chất."
+    },
+    {
+      "id": "P.2.2.1.1",
+      "ctdReference": "3.2.P.2.2.1.1",
+      "headingVi": "Đặc tính sản phẩm đối chiếu (Characterization of Reference Product)",
+      "description": "Thành phần định tính/định lượng và kết quả thử nghiệm của sản phẩm đối chiếu (RMP) dùng để so sánh."
+    },
+    {
+      "id": "P.2.2.1.2",
+      "ctdReference": "3.2.P.2.2.1.2",
+      "headingVi": "Hồ sơ chất lượng mục tiêu và CQA (QTPP / CQA)",
+      "description": "Bảng QTPP (dạng bào chế, đường dùng, PK/BE, độ ổn định, bao bì...) và bảng CQA với biện luận \"có phải CQA hay không\", đã được FD phê duyệt."
+    },
+    {
+      "id": "P.2.2.1.3",
+      "ctdReference": "3.2.P.2.2.1.3",
+      "headingVi": "Nghiên cứu phát triển công thức (Formulation Development Study)",
+      "description": "Các thử nghiệm sàng lọc/khảo sát công thức: thông số cố định, bảng thành phần từng công thức, kết quả IPC/QC, đánh giá rủi ro trước/sau, kết luận và công thức được chọn mang sang giai đoạn tiếp theo."
+    },
+    {
+      "id": "P.2.2.2",
+      "ctdReference": "3.2.P.2.2.2",
+      "headingVi": "Overages",
+      "description": "Có/không sử dụng overage cho dược chất hoặc tá dược, và lý do."
+    },
+    {
+      "id": "P.2.2.3",
+      "ctdReference": "3.2.P.2.2.3",
+      "headingVi": "Tính chất lý hóa và sinh học (Physicochemical and Biological Properties)",
+      "description": "Phát triển phương pháp hòa tan (sink condition, điều kiện thiết bị, khả năng phân biệt) và hồ sơ tạp chất viên."
+    },
+    {
+      "id": "P.2.3",
+      "ctdReference": "3.2.P.2.3",
+      "headingVi": "Phát triển quy trình sản xuất (Manufacturing Process Development)",
+      "description": "Đánh giá rủi ro quy trình, nghiên cứu phát triển từng công đoạn (trộn, xát hạt, dập viên, bao phim...), scale-up từ lab lên pilot/thương mại."
+    },
+    {
+      "id": "P.2.4",
+      "ctdReference": "3.2.P.2.4",
+      "headingVi": "Hệ thống bao bì (Container Closure System)",
+      "description": "Bao bì sơ cấp/thứ cấp, vật liệu, độ dày/khối lượng, khả năng bảo vệ/tương thích."
+    },
+    {
+      "id": "P.2.5",
+      "ctdReference": "3.2.P.2.5",
+      "headingVi": "Đặc tính vi sinh (Microbiological Attributes)",
+      "description": "Giới hạn vi sinh áp dụng (ICH Q6A, Ph.Eur. 5.1.4...) và kết quả thử nghiệm thực tế."
+    },
+    {
+      "id": "P.2.6",
+      "ctdReference": "3.2.P.2.6",
+      "headingVi": "Khả năng tương thích (Compatibility)",
+      "description": "Tương thích với dung môi/thiết bị hoàn nguyên/pha loãng nếu sản phẩm cần pha trước khi dùng; ghi \"không áp dụng\" kèm lý do nếu sản phẩm dùng trực tiếp."
+    }
+  ]
+}
