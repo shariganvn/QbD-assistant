@@ -61,12 +61,29 @@ Rules **not** enforced by the validator (judgment calls — see `draft/checklist
 { "type": "heading2", "text": "string" }
 { "type": "heading3", "text": "string" }
 { "type": "paragraph", "text": "string", "italic": false, "bold": false }   // italic/bold optional, default false
-{ "type": "table", "headers": ["string", "..."], "rows": [["string", "..."], "..."] }
+{ "type": "table",
+  "headers": ["string", "..."],
+  "rows": [["string", "..."], "..."],
+  "columnWidths": [520, 1680, "..."],          // optional, see below
+  "columnAlign": ["center", "left", "..."] }   // optional, see below
 ```
 
 Every `rows[i]` must have the same length as `headers`. Cell values are always strings (format
 numbers exactly as they appear in the source — e.g. `"98,64"` for Vietnamese comma-decimal, not
 `98.64`).
+
+A `\n` inside a cell value renders as a line break within that cell, so a cell can carry a short
+bullet list (write the bullet character into the text yourself, e.g. `"• Điểm chảy: …"`).
+
+`columnWidths` and `columnAlign` are both optional and both must have exactly one entry per
+header when present:
+
+- `columnWidths` — positive integers in DXA units that must sum to `10000` (the renderer's page
+  width budget). Omit it and the renderer gives the first column 34% and splits the rest evenly,
+  which suits short label/number tables but not tables with several prose columns.
+- `columnAlign` — `"left"` or `"center"` per column. Omit it and the first column is left-aligned
+  with the rest centred; centring is unreadable for long prose, so set it explicitly on any table
+  with paragraph-length cells.
 
 ## What Stage C always adds regardless of the draft (not part of this contract)
 

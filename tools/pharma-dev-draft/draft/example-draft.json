@@ -13,42 +13,202 @@
       "id": "P.2.1.1",
       "status": "covered",
       "blocks": [
-        { "type": "paragraph", "text": "Tính chất lý hóa dưới đây là kiến thức tham khảo phổ biến/dược điển, KHÔNG có trong Thử nghiệm 1 — CẦN đối chiếu trực tiếp với chuyên luận USP/BP/Ph.Eur. hiện hành và CoA của nhà cung cấp API trước khi đưa vào hồ sơ chính thức." },
+        {
+          "type": "paragraph",
+          "text": "Tính chất lý hóa dưới đây là kiến thức tham khảo phổ biến/dược điển, KHÔNG có trong Thử nghiệm 1 — CẦN đối chiếu trực tiếp với chuyên luận USP/BP/Ph.Eur. hiện hành và CoA của nhà cung cấp API trước khi đưa vào hồ sơ chính thức."
+        },
         {
           "type": "table",
-          "headers": ["Thuộc tính", "Giá trị tham khảo (cần đối chiếu)"],
+          "headers": [
+            "Thuộc tính",
+            "Giá trị tham khảo (cần đối chiếu)"
+          ],
           "rows": [
-            ["Tên INN", "Bisoprolol fumarate"],
-            ["Số CAS", "104344-23-2 (dạng hemifumarat)"],
-            ["Công thức phân tử", "(C18H31NO4)2·C4H4O4"],
-            ["Khối lượng phân tử", "≈ 766,96 g/mol"],
-            ["Cảm quan", "Bột kết tinh màu trắng hoặc gần như trắng"],
-            ["Độ tan", "Dễ tan trong nước và ethanol; thường được xếp BCS Class I"],
-            ["pKa", "≈ 9,5 (tham khảo, cần xác nhận)"]
+            [
+              "Tên INN",
+              "Bisoprolol fumarate"
+            ],
+            [
+              "Số CAS",
+              "104344-23-2 (dạng hemifumarat)"
+            ],
+            [
+              "Công thức phân tử",
+              "(C18H31NO4)2·C4H4O4"
+            ],
+            [
+              "Khối lượng phân tử",
+              "≈ 766,96 g/mol"
+            ],
+            [
+              "Cảm quan",
+              "Bột kết tinh màu trắng hoặc gần như trắng"
+            ],
+            [
+              "Độ tan",
+              "Dễ tan trong nước và ethanol; thường được xếp BCS Class I"
+            ],
+            [
+              "pKa",
+              "≈ 9,5 (tham khảo, cần xác nhận)"
+            ]
           ]
         },
-        { "type": "paragraph", "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phân bố cỡ hạt API, tính chất chảy, đa hình tinh thể, độ thấm/BCS thực nghiệm, độ tan theo pH, dữ liệu ổn định/phân hủy của dược chất, và tính chất sinh học/dược lý lâm sàng — không có trong Thử nghiệm 1." }
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phân bố cỡ hạt API, tính chất chảy, đa hình tinh thể, độ thấm/BCS thực nghiệm, độ tan theo pH, dữ liệu ổn định/phân hủy của dược chất, và tính chất sinh học/dược lý lâm sàng — không có trong Thử nghiệm 1."
+        }
       ]
     },
     {
       "id": "P.2.1.2",
       "status": "covered",
       "blocks": [
-        { "type": "paragraph", "text": "Danh mục tá dược sử dụng trong Thử nghiệm 1 (3 công thức), theo mg/viên (cỡ lô 1.000 viên, khối lượng viên 100 mg — do đó mg/viên trùng số với % kl/kl)." },
+        {
+          "type": "heading3",
+          "text": "a) Thành phần định lượng tá dược theo công thức (nguồn: Thử nghiệm 1)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Danh mục tá dược sử dụng trong Thử nghiệm 1 (3 công thức), theo mg/viên (cỡ lô 1.000 viên, khối lượng viên 100 mg — do đó mg/viên trùng số với % kl/kl)."
+        },
         {
           "type": "table",
-          "headers": ["Tá dược", "CT01 (mg)", "CT02 (mg)", "CT03 (mg)", "Chức năng (suy luận)"],
+          "headers": [
+            "Tá dược",
+            "CT01 (mg)",
+            "CT02 (mg)",
+            "CT03 (mg)"
+          ],
           "rows": [
-            ["Lactose monohydrate", "17,70", "15,70", "13,70", "Tá dược độn (điều chỉnh bù trừ)"],
-            ["Lactose monohydrate & cellulose powder 75:25 (Cellactose 80)", "63,00", "63,00", "63,00", "Tá dược độn đồng xử lý"],
-            ["Croscarmellose sodium (Primellose)", "1,00", "3,00", "5,00", "Tá dược rã — biến số khảo sát chính"],
-            ["Magnesium oxide (MgO XP 103)", "3,30", "3,30", "3,30", "Ổn định/kiềm hóa (suy luận)"],
-            ["Povidone K30", "2,00", "2,00", "2,00", "Tá dược dính"],
-            ["Magnesium stearate", "3,00", "3,00", "3,00", "Tá dược trơn"]
+            [
+              "Lactose monohydrat",
+              "17,70",
+              "15,70",
+              "13,70"
+            ],
+            [
+              "Lactose monohydrat & cellulose bột 75:25 (Cellactose 80)",
+              "63,00",
+              "63,00",
+              "63,00"
+            ],
+            [
+              "Croscarmellose sodium (Primellose)",
+              "1,00",
+              "3,00",
+              "5,00"
+            ],
+            [
+              "Magnesi oxyd (MgO XP 103)",
+              "3,30",
+              "3,30",
+              "3,30"
+            ],
+            [
+              "Povidon K30",
+              "2,00",
+              "2,00",
+              "2,00"
+            ],
+            [
+              "Magnesi stearat",
+              "3,00",
+              "3,00",
+              "3,00"
+            ]
           ]
         },
-        { "type": "paragraph", "text": "Cột \"Chức năng\" là suy luận từ vai trò thông dụng của từng tá dược; Thử nghiệm 1 không có cột chức năng — cần FD xác nhận, kèm lý do lựa chọn và khoảng hàm lượng khuyến cáo (Handbook of Pharmaceutical Excipients / FDA IID)." },
-        { "type": "paragraph", "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nghiên cứu tương hợp tá dược – dược chất (ví dụ DSC hỗn hợp nhị phân 1:1) — không có trong Thử nghiệm 1." }
+        {
+          "type": "heading3",
+          "text": "b) Bảng tổng hợp thông tin tá dược"
+        },
+        {
+          "type": "paragraph",
+          "text": "Cột \"Đặc tính lý hóa\" và \"Ứng dụng trong công thức dược phẩm\" tổng hợp theo Handbook of Pharmaceutical Excipients (HPE); cột \"Chức năng trong công thức này\" là thuyết minh vai trò của từng tá dược trong Thử nghiệm 1, suy ra từ đặc tính lý hóa, ứng dụng thông dụng và hàm lượng thực tế trong công thức."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "STT",
+            "Tên tá dược",
+            "Đặc tính lý hóa",
+            "Ứng dụng trong công thức dược phẩm",
+            "Chức năng trong công thức này"
+          ],
+          "columnWidths": [
+            520,
+            1680,
+            2900,
+            2600,
+            2300
+          ],
+          "columnAlign": [
+            "center",
+            "left",
+            "left",
+            "left",
+            "left"
+          ],
+          "rows": [
+            [
+              "1",
+              "Lactose monohydrat",
+              "• Cảm quan: bột kết tinh trắng đến trắng ngà, không mùi, vị hơi ngọt\n• Độ tan: tan trong nước (khoảng 1 g/5 mL ở 20 °C); thực tế không tan trong ethanol, cloroform, ether\n• Điểm chảy: 201 – 202 °C (dạng monohydrat)\n• pH (dung dịch 10% kl/tt): 4,0 – 6,5\n• Hút ẩm: thấp; ổn định ở điều kiện bảo quản thường",
+              "Tá dược độn/pha loãng thông dụng nhất cho viên nén và viên nang. Grade nghiền – rây dùng cho xát hạt ướt; grade phun sấy dùng cho dập thẳng. Tỷ lệ điển hình 65 – 85% kl/kl trong viên nén và viên nang. Ngoài ra làm chất mang trong thuốc hít bột khô.",
+              "Tá dược độn bù trừ. Hàm lượng giảm dần 17,70 → 15,70 → 13,70 mg/viên, đúng bằng phần tăng của croscarmellose sodium (1,00 → 3,00 → 5,00 mg), giữ khối lượng viên cố định 100 mg. Nhờ vậy croscarmellose sodium là biến số độc lập duy nhất giữa CT01 – CT03 — điều kiện cần để quy kết khác biệt thời gian rã cho tỷ lệ tá dược rã."
+            ],
+            [
+              "2",
+              "Lactose monohydrat & cellulose bột 75:25 (Cellactose 80) — tá dược đồng xử lý",
+              "• Cảm quan: bột kết tụ (agglomerate) trắng đến trắng ngà, chảy tự do\n• Độ tan: phần lactose tan trong nước, phần cellulose không tan → tạo phân tán/huyền phù\n• Điểm chảy: không có điểm chảy xác định; phần lactose chảy ở 201 – 202 °C, cellulose phân hủy trước khi chảy\n• pH (phân tán 10% kl/tt): khoảng trung tính, 4,0 – 8,0\n• Đặc tính chịu nén: kép — vỡ giòn (lactose) kết hợp biến dạng dẻo (cellulose)",
+              "Tá dược độn – dính (filler-binder) cho dập thẳng. Nhóm lactose đồng xử lý với cellulose cho độ chịu nén và độ chảy tốt hơn rõ rệt so với lactose đơn thuần ở cùng lực dập, nhờ đó giảm nhu cầu tá dược dính. Tỷ lệ sử dụng thường 20 – 80% kl/kl.",
+              "Thành phần độn chính, 63,00 mg/viên (63% kl/kl), giữ cố định ở cả ba công thức. Cơ chế nén kép tạo nền viên đạt độ cứng yêu cầu mà không phải tăng tá dược dính; phần cellulose đồng thời hỗ trợ rã theo cơ chế mao dẫn, tạo nền thuận lợi cho croscarmellose sodium phát huy tác dụng."
+            ],
+            [
+              "3",
+              "Croscarmellose sodium (Primellose)",
+              "• Cảm quan: bột trắng đến trắng ngà, không mùi, cấu trúc dạng sợi\n• Độ tan: không tan trong nước nhưng trương nở nhanh 4 – 8 lần thể tích ban đầu; không tan trong ethanol, ether\n• Điểm chảy: không chảy rõ rệt; than hóa ở khoảng 252 °C\n• pH (phân tán 1% kl/tt): 5,0 – 7,0\n• Hút ẩm: có hút ẩm nhưng không làm mất hiệu lực rã",
+              "Tá dược siêu rã (superdisintegrant) cho viên nén và viên nang. Tỷ lệ 0,5 – 5,0% kl/kl trong viên nén — thông dụng 2% cho dập thẳng và 3% cho xát hạt ướt; tới 5% khi yêu cầu rã nhanh. Vượt khoảng này hiệu quả rã không tăng tương ứng.",
+              "BIẾN SỐ KHẢO SÁT CHÍNH của Thử nghiệm 1: 1,00 / 3,00 / 5,00 mg/viên tương ứng 1% / 3% / 5% kl/kl — quét trọn khoảng khuyến cáo, từ dưới mức thông dụng (1%) đến giới hạn trên (5%). Cơ chế rã kép: trương nở nhanh kết hợp dẫn nước theo mao dẫn nhờ cấu trúc sợi. Đây là tá dược quyết định CQA thời gian rã và tốc độ hòa tan."
+            ],
+            [
+              "4",
+              "Magnesi oxyd (MgO XP 103)",
+              "• Cảm quan: bột rất mịn, màu trắng, không mùi (có grade nhẹ và grade nặng khác nhau về tỷ trọng khối)\n• Độ tan: thực tế không tan trong nước (khoảng 0,0006 g/100 mL) và ethanol; tan trong acid loãng\n• Điểm chảy: khoảng 2.800 °C — bền nhiệt trong mọi điều kiện bào chế\n• pH: huyền phù nước bão hòa có tính kiềm, pH khoảng 10,3\n• Hoạt tính: hấp thụ CO₂ và hơi ẩm từ không khí, cần bảo quản kín",
+              "Tác nhân kiềm hóa (alkalizing agent), chất hấp phụ, tá dược độn cho viên nén/viên nang, và là dược chất kháng acid. Trong bào chế thường dùng để kiềm hóa vi môi trường viên nhằm ổn định dược chất nhạy cảm với môi trường acid; tỷ lệ tùy mục đích, thường vài phần trăm khi đóng vai trò ổn định.",
+              "3,30 mg/viên (3,3% kl/kl), giữ cố định ở cả ba công thức. Suy luận chức năng: kiềm hóa vi môi trường để ổn định bisoprolol fumarat — fumarat là muối của acid hữu cơ, môi trường acid tại chỗ có thể thúc đẩy phân hủy. Thử nghiệm 1 KHÔNG nêu mục đích sử dụng của MgO; cần FD xác nhận vai trò thiết kế và dữ liệu độ ổn định chứng minh."
+            ],
+            [
+              "5",
+              "Povidon K30",
+              "• Cảm quan: bột mịn trắng đến trắng kem, không mùi hoặc mùi rất nhẹ\n• Độ tan: tan tự do trong nước, ethanol, methanol, cloroform; không tan trong ether và hydrocarbon\n• Điểm chảy: hóa mềm ở khoảng 150 °C, không có điểm chảy sắc nét\n• pH (dung dịch 5% kl/tt): 3,0 – 7,0\n• Hút ẩm: rất hút ẩm, phải bảo quản trong bao bì kín\n• Trị số K 30 tương ứng khối lượng phân tử trung bình khoảng 50.000",
+              "Tá dược dính cho xát hạt ướt ở 0,5 – 5,0% kl/kl, dùng dưới dạng dung dịch nước hoặc dung dịch cồn. Ngoài ra dùng làm chất tăng độ tan, chất ổn định hỗn dịch và tá dược tạo màng bao.",
+              "Tá dược dính, 2,00 mg/viên (2% kl/kl) — nằm giữa khoảng khuyến cáo, giữ cố định ở cả ba công thức. Tạo cầu nối kết dính giữa các tiểu phân khi xát hạt, cho hạt đủ bền cơ học để dập viên. Do povidon tan tốt trong nước, ở tỷ lệ này nó không cản trở nước thấm vào viên nên không đối kháng cơ chế rã của croscarmellose sodium."
+            ],
+            [
+              "6",
+              "Magnesi stearat",
+              "• Cảm quan: bột rất mịn, trắng sáng, sờ có cảm giác nhờn, mùi nhẹ đặc trưng của acid stearic\n• Độ tan: thực tế không tan trong nước, ethanol và ether; ít tan trong benzen nóng và ethanol 95% nóng\n• Điểm chảy: 117 – 150 °C tùy nguồn và grade thương mại\n• pH: không áp dụng (không tan trong nước)\n• Đặc tính: kỵ nước, cấu trúc phiến mỏng nên dễ trải thành màng trên bề mặt tiểu phân",
+              "Tá dược trơn (lubricant) cho viên nén và viên nang ở 0,25 – 5,0% kl/kl, thông dụng nhất là 0,5 – 2,0%. Do bản chất kỵ nước, nồng độ cao và/hoặc thời gian trộn trơn kéo dài làm chậm rã và giảm tốc độ hòa tan.",
+              "Tá dược trơn, 3,00 mg/viên (3% kl/kl), giữ cố định ở cả ba công thức; giảm ma sát chày – cối và chống dính khi dập. LƯU Ý KỸ THUẬT: 3% nằm ở nửa trên khoảng khuyến cáo và cao hơn mức thông dụng 0,5 – 2%; kết hợp bản chất kỵ nước, đây là yếu tố có thể làm chậm rã/hòa tan và là biến nhiễu tiềm tàng khi diễn giải kết quả Thử nghiệm 1. Cần FD xác nhận thời gian trộn trơn và đánh giá lại tỷ lệ này ở bước tối ưu công thức."
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nguồn dữ liệu và mức độ tin cậy: các giá trị lý hóa và khoảng tỷ lệ sử dụng nêu trên là dữ liệu tham chiếu chung theo Handbook of Pharmaceutical Excipients, KHÔNG lấy từ Thử nghiệm 1 và CHƯA được đối chiếu với bản in HPE cụ thể. Trước khi đưa vào hồ sơ, cần: (i) xác minh từng giá trị theo đúng ấn bản HPE đang lưu hành tại đơn vị và ghi rõ số ấn bản/số trang; (ii) đối chiếu chuyên luận dược điển tương ứng (USP-NF/Ph.Eur./DĐVN) cho các chỉ tiêu có trong tiêu chuẩn; (iii) kiểm tra giới hạn dùng theo FDA IID cho đường dùng uống.",
+          "italic": true
+        },
+        {
+          "type": "paragraph",
+          "text": "Cột \"Chức năng\" là thuyết minh kỹ thuật, chưa được FD phê duyệt. Riêng vai trò của magnesi oxyd và mức 3% magnesi stearat là hai điểm cần FD xác nhận và bổ sung dữ liệu chứng minh trước khi chốt công thức.",
+          "italic": true
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nghiên cứu tương hợp tá dược – dược chất (ví dụ DSC hỗn hợp nhị phân 1:1, hoặc theo dõi hỗn hợp ở điều kiện lão hóa cấp tốc) — không có trong Thử nghiệm 1."
+        }
       ]
     },
     {
@@ -60,110 +220,385 @@
       "id": "P.2.2.1.2",
       "status": "covered",
       "blocks": [
-        { "type": "paragraph", "text": "Đây KHÔNG phải bảng QTPP/CQA chính thức (chưa có xác nhận mục tiêu/biện luận CQA từ FD) — đây là tổng hợp các chỉ tiêu và tiêu chuẩn thực tế đã dùng để đánh giá 3 công thức trong Thử nghiệm 1." },
+        {
+          "type": "paragraph",
+          "text": "Đây KHÔNG phải bảng QTPP/CQA chính thức (chưa có xác nhận mục tiêu/biện luận CQA từ FD) — đây là tổng hợp các chỉ tiêu và tiêu chuẩn thực tế đã dùng để đánh giá 3 công thức trong Thử nghiệm 1."
+        },
         {
           "type": "table",
-          "headers": ["Chỉ tiêu", "Tiêu chuẩn áp dụng trong Thử nghiệm 1"],
+          "headers": [
+            "Chỉ tiêu",
+            "Tiêu chuẩn áp dụng trong Thử nghiệm 1"
+          ],
           "rows": [
-            ["Cảm quan", "Viên nén tròn, bao phim trắng, hai mặt khum, khắc số \"10\" một mặt"],
-            ["Đồng đều khối lượng", "KLTB ± 5%"],
-            ["Độ rã", "≤ 15 phút"],
-            ["Định lượng (Assay)", "90–110% so với hàm lượng ghi nhãn"],
-            ["Độ hòa tan (30 phút)", "≥ 80% (Q) bisoprolol fumarate hòa tan"],
-            ["Tạp chất liên quan", "Tạp đơn ≤ 0,2%; tổng tạp ≤ 3,0%"],
-            ["Độ đồng đều hàm lượng", "AV < 15 (Ph.Eur./EP 2.9.40)"]
+            [
+              "Cảm quan",
+              "Viên nén tròn, bao phim trắng, hai mặt khum, khắc số \"10\" một mặt"
+            ],
+            [
+              "Đồng đều khối lượng",
+              "KLTB ± 5%"
+            ],
+            [
+              "Độ rã",
+              "≤ 15 phút"
+            ],
+            [
+              "Định lượng (Assay)",
+              "90–110% so với hàm lượng ghi nhãn"
+            ],
+            [
+              "Độ hòa tan (30 phút)",
+              "≥ 80% (Q) bisoprolol fumarate hòa tan"
+            ],
+            [
+              "Tạp chất liên quan",
+              "Tạp đơn ≤ 0,2%; tổng tạp ≤ 3,0%"
+            ],
+            [
+              "Độ đồng đều hàm lượng",
+              "AV < 15 (Ph.Eur./EP 2.9.40)"
+            ]
           ]
         },
-        { "type": "paragraph", "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] QTPP đầy đủ (dạng bào chế, đường dùng, PK/BE với RMP, độ ổn định ICH Q1A...) và bảng CQA có biện luận \"có phải CQA hay không\" — cần FD xây dựng và phê duyệt." }
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] QTPP đầy đủ (dạng bào chế, đường dùng, PK/BE với RMP, độ ổn định ICH Q1A...) và bảng CQA có biện luận \"có phải CQA hay không\" — cần FD xây dựng và phê duyệt."
+        }
       ]
     },
     {
       "id": "P.2.2.1.3",
       "status": "covered",
       "blocks": [
-        { "type": "heading3", "text": "Thử nghiệm 1: Khảo sát tỷ lệ tá dược rã" },
-        { "type": "paragraph", "text": "Mục tiêu: Khảo sát ảnh hưởng của tỷ lệ tá dược rã croscarmellose sodium (Primellose) đến độ rã và độ hòa tan của viên nén bisoprolol fumarate 10 mg." },
-        { "type": "paragraph", "text": "Thông số cố định: cỡ lô 1.000 viên/công thức; khối lượng viên 100 mg; giữ nguyên các tá dược khác (Cellactose 80, MgO XP 103, Povidone K30, magnesium stearate); biến số khảo sát là tỷ lệ Primellose (1% / 3% / 5%), bù trừ bằng lactose monohydrate để giữ tổng khối lượng viên không đổi." },
-        { "type": "heading3", "text": "Bảng thành phần công thức (mg/viên = % kl/kl)" },
+        {
+          "type": "heading3",
+          "text": "Thử nghiệm 1: Khảo sát tỷ lệ tá dược rã"
+        },
+        {
+          "type": "paragraph",
+          "text": "Mục tiêu: Khảo sát ảnh hưởng của tỷ lệ tá dược rã croscarmellose sodium (Primellose) đến độ rã và độ hòa tan của viên nén bisoprolol fumarate 10 mg."
+        },
+        {
+          "type": "paragraph",
+          "text": "Thông số cố định: cỡ lô 1.000 viên/công thức; khối lượng viên 100 mg; giữ nguyên các tá dược khác (Cellactose 80, MgO XP 103, Povidone K30, magnesium stearate); biến số khảo sát là tỷ lệ Primellose (1% / 3% / 5%), bù trừ bằng lactose monohydrate để giữ tổng khối lượng viên không đổi."
+        },
+        {
+          "type": "heading3",
+          "text": "Bảng thành phần công thức (mg/viên = % kl/kl)"
+        },
         {
           "type": "table",
-          "headers": ["Thành phần", "CT01", "CT02", "CT03"],
+          "headers": [
+            "Thành phần",
+            "CT01",
+            "CT02",
+            "CT03"
+          ],
           "rows": [
-            ["Bisoprolol fumarate", "10,00", "10,00", "10,00"],
-            ["Lactose monohydrate", "17,70", "15,70", "13,70"],
-            ["Lactose monohydrate & cellulose powder 75:25 (Cellactose 80)", "63,00", "63,00", "63,00"],
-            ["Croscarmellose sodium (Primellose)", "1,00", "3,00", "5,00"],
-            ["Magnesium oxide (MgO XP 103)", "3,30", "3,30", "3,30"],
-            ["Povidone K30", "2,00", "2,00", "2,00"],
-            ["Magnesium stearate", "3,00", "3,00", "3,00"],
-            ["Tổng cộng", "100,00", "100,00", "100,00"]
+            [
+              "Bisoprolol fumarate",
+              "10,00",
+              "10,00",
+              "10,00"
+            ],
+            [
+              "Lactose monohydrate",
+              "17,70",
+              "15,70",
+              "13,70"
+            ],
+            [
+              "Lactose monohydrate & cellulose powder 75:25 (Cellactose 80)",
+              "63,00",
+              "63,00",
+              "63,00"
+            ],
+            [
+              "Croscarmellose sodium (Primellose)",
+              "1,00",
+              "3,00",
+              "5,00"
+            ],
+            [
+              "Magnesium oxide (MgO XP 103)",
+              "3,30",
+              "3,30",
+              "3,30"
+            ],
+            [
+              "Povidone K30",
+              "2,00",
+              "2,00",
+              "2,00"
+            ],
+            [
+              "Magnesium stearate",
+              "3,00",
+              "3,00",
+              "3,00"
+            ],
+            [
+              "Tổng cộng",
+              "100,00",
+              "100,00",
+              "100,00"
+            ]
           ]
         },
-        { "type": "heading3", "text": "Kết quả — Tính chất vật lý cốm (in-process control)" },
+        {
+          "type": "heading3",
+          "text": "Kết quả — Tính chất vật lý cốm (in-process control)"
+        },
         {
           "type": "table",
-          "headers": ["Chỉ tiêu", "CT01", "CT02", "CT03"],
+          "headers": [
+            "Chỉ tiêu",
+            "CT01",
+            "CT02",
+            "CT03"
+          ],
           "rows": [
-            ["Tỷ trọng biểu kiến – tĩnh (g/ml)", "0,521", "0,511", "0,518"],
-            ["Tỷ trọng biểu kiến – gõ (g/ml)", "0,695", "0,672", "0,682"],
-            ["Tỉ số Hausner", "1,33", "1,32", "1,32"],
-            ["Cỡ hạt ≥ 180 µm (%)", "28,11", "29,08", "30,07"],
-            ["Cỡ hạt 180–150 µm (%)", "19,33", "19,11", "18,21"],
-            ["Cỡ hạt 150–125 µm (%)", "13,17", "13,49", "14,67"],
-            ["Cỡ hạt 125–75 µm (%)", "16,98", "17,20", "17,35"],
-            ["Cỡ hạt < 75 µm (%)", "22,41", "21,12", "19,70"],
-            ["Độ ẩm (105°C, cân ẩm Halogen) (%)", "2,39", "2,37", "2,41"]
+            [
+              "Tỷ trọng biểu kiến – tĩnh (g/ml)",
+              "0,521",
+              "0,511",
+              "0,518"
+            ],
+            [
+              "Tỷ trọng biểu kiến – gõ (g/ml)",
+              "0,695",
+              "0,672",
+              "0,682"
+            ],
+            [
+              "Tỉ số Hausner",
+              "1,33",
+              "1,32",
+              "1,32"
+            ],
+            [
+              "Cỡ hạt ≥ 180 µm (%)",
+              "28,11",
+              "29,08",
+              "30,07"
+            ],
+            [
+              "Cỡ hạt 180–150 µm (%)",
+              "19,33",
+              "19,11",
+              "18,21"
+            ],
+            [
+              "Cỡ hạt 150–125 µm (%)",
+              "13,17",
+              "13,49",
+              "14,67"
+            ],
+            [
+              "Cỡ hạt 125–75 µm (%)",
+              "16,98",
+              "17,20",
+              "17,35"
+            ],
+            [
+              "Cỡ hạt < 75 µm (%)",
+              "22,41",
+              "21,12",
+              "19,70"
+            ],
+            [
+              "Độ ẩm (105°C, cân ẩm Halogen) (%)",
+              "2,39",
+              "2,37",
+              "2,41"
+            ]
           ]
         },
-        { "type": "heading3", "text": "Kết quả — Chỉ tiêu chất lượng viên thành phẩm" },
+        {
+          "type": "heading3",
+          "text": "Kết quả — Chỉ tiêu chất lượng viên thành phẩm"
+        },
         {
           "type": "table",
-          "headers": ["Chỉ tiêu (tiêu chuẩn)", "CT01", "CT02", "CT03"],
+          "headers": [
+            "Chỉ tiêu (tiêu chuẩn)",
+            "CT01",
+            "CT02",
+            "CT03"
+          ],
           "rows": [
-            ["Cảm quan", "Đạt", "Đạt", "Đạt"],
-            ["Đồng đều khối lượng – TB (mg)", "100,3", "100,4", "100,1"],
-            ["Đồng đều khối lượng – Max (mg, %)", "103 (+2,69%)", "102 (+1,59%)", "102 (+1,90%)"],
-            ["Đồng đều khối lượng – Min (mg, %)", "98 (−2,29%)", "99 (−1,39%)", "98 (−2,10%)"],
-            ["Độ cứng – TB (N)", "87,9", "90,1", "91,4"],
-            ["Độ cứng – Max/Min (N)", "94 / 84", "96 / 85", "96 / 86"],
-            ["Độ dày – TB (mm)", "2,75", "2,75", "2,76"],
-            ["Độ dày – Max/Min (mm)", "2,77 / 2,73", "2,78 / 2,73", "2,78 / 2,75"],
-            ["Độ mài mòn (%)", "0,05", "0,02", "0,01"],
-            ["Độ rã – Max", "13'28\"", "8'57\"", "4'18\""],
-            ["Độ rã – Min (spec ≤ 15 phút)", "11'05\"", "8'19\"", "3'37\""],
-            ["Định lượng (spec 90–110%) (%)", "100,31", "100,02", "99,99"],
-            ["Độ hòa tan 30 phút – TB (spec ≥ 80% Q) (%)", "73,89", "81,40", "98,64"],
-            ["Độ hòa tan – Max/Min (%)", "79,33 / 65,15", "87,67 / 79,12", "100,98 / 96,15"],
-            ["Độ hòa tan – RSD (%)", "7,57", "4,76", "2,70"],
-            ["Tạp đơn bất kỳ (spec ≤ 0,2%) (%)", "0,0544", "0,0514", "0,0508"],
-            ["Tổng tạp chất (spec ≤ 3,0%) (%)", "0,1916", "0,1918", "0,1839"],
-            ["Đồng đều hàm lượng – AV (spec < 15)", "3,71", "2,79", "3,04"]
+            [
+              "Cảm quan",
+              "Đạt",
+              "Đạt",
+              "Đạt"
+            ],
+            [
+              "Đồng đều khối lượng – TB (mg)",
+              "100,3",
+              "100,4",
+              "100,1"
+            ],
+            [
+              "Đồng đều khối lượng – Max (mg, %)",
+              "103 (+2,69%)",
+              "102 (+1,59%)",
+              "102 (+1,90%)"
+            ],
+            [
+              "Đồng đều khối lượng – Min (mg, %)",
+              "98 (−2,29%)",
+              "99 (−1,39%)",
+              "98 (−2,10%)"
+            ],
+            [
+              "Độ cứng – TB (N)",
+              "87,9",
+              "90,1",
+              "91,4"
+            ],
+            [
+              "Độ cứng – Max/Min (N)",
+              "94 / 84",
+              "96 / 85",
+              "96 / 86"
+            ],
+            [
+              "Độ dày – TB (mm)",
+              "2,75",
+              "2,75",
+              "2,76"
+            ],
+            [
+              "Độ dày – Max/Min (mm)",
+              "2,77 / 2,73",
+              "2,78 / 2,73",
+              "2,78 / 2,75"
+            ],
+            [
+              "Độ mài mòn (%)",
+              "0,05",
+              "0,02",
+              "0,01"
+            ],
+            [
+              "Độ rã – Max",
+              "13'28\"",
+              "8'57\"",
+              "4'18\""
+            ],
+            [
+              "Độ rã – Min (spec ≤ 15 phút)",
+              "11'05\"",
+              "8'19\"",
+              "3'37\""
+            ],
+            [
+              "Định lượng (spec 90–110%) (%)",
+              "100,31",
+              "100,02",
+              "99,99"
+            ],
+            [
+              "Độ hòa tan 30 phút – TB (spec ≥ 80% Q) (%)",
+              "73,89",
+              "81,40",
+              "98,64"
+            ],
+            [
+              "Độ hòa tan – Max/Min (%)",
+              "79,33 / 65,15",
+              "87,67 / 79,12",
+              "100,98 / 96,15"
+            ],
+            [
+              "Độ hòa tan – RSD (%)",
+              "7,57",
+              "4,76",
+              "2,70"
+            ],
+            [
+              "Tạp đơn bất kỳ (spec ≤ 0,2%) (%)",
+              "0,0544",
+              "0,0514",
+              "0,0508"
+            ],
+            [
+              "Tổng tạp chất (spec ≤ 3,0%) (%)",
+              "0,1916",
+              "0,1918",
+              "0,1839"
+            ],
+            [
+              "Đồng đều hàm lượng – AV (spec < 15)",
+              "3,71",
+              "2,79",
+              "3,04"
+            ]
           ]
         },
-        { "type": "heading3", "text": "Nhận xét / Kết luận (nguyên văn từ Thử nghiệm 1)" },
-        { "type": "paragraph", "text": "\"Khi tăng tỷ lệ tá dược rã croscarmellose sodium thì độ hòa tan của bisoprolol fumarate tăng lên đáng kể. Ở tỷ lệ 1% và 3%, độ hòa tan không đạt tiêu chuẩn. Do đó, chọn tỷ lệ tá dược rã trong công thức là 5% để thực hiện tiếp cho thử nghiệm 2.\"", "italic": true },
-        { "type": "paragraph", "text": "Diễn giải: CT01 (1%) không đạt độ hòa tan (TB 73,89% < 80% Q). CT02 (3%) đạt trung bình (81,40%) nhưng Min (79,12%) sát dưới ngưỡng — không ổn định. CT03 (5%) đạt cả độ hòa tan (TB 98,64%, Min 96,15%) và độ rã (max 4'18\" << 15 phút) với biên độ an toàn rõ rệt. CT03 được chọn mang sang Thử nghiệm 2." },
-        { "type": "paragraph", "text": "Công thức tạm thời sau Thử nghiệm 1: CT03 (Primellose 5%) là điểm khởi đầu cho Thử nghiệm 2, chưa phải công thức thương mại/biobatch cuối cùng — cần các thử nghiệm tiếp theo để hoàn thiện." }
+        {
+          "type": "heading3",
+          "text": "Nhận xét / Kết luận (nguyên văn từ Thử nghiệm 1)"
+        },
+        {
+          "type": "paragraph",
+          "text": "\"Khi tăng tỷ lệ tá dược rã croscarmellose sodium thì độ hòa tan của bisoprolol fumarate tăng lên đáng kể. Ở tỷ lệ 1% và 3%, độ hòa tan không đạt tiêu chuẩn. Do đó, chọn tỷ lệ tá dược rã trong công thức là 5% để thực hiện tiếp cho thử nghiệm 2.\"",
+          "italic": true
+        },
+        {
+          "type": "paragraph",
+          "text": "Diễn giải: CT01 (1%) không đạt độ hòa tan (TB 73,89% < 80% Q). CT02 (3%) đạt trung bình (81,40%) nhưng Min (79,12%) sát dưới ngưỡng — không ổn định. CT03 (5%) đạt cả độ hòa tan (TB 98,64%, Min 96,15%) và độ rã (max 4'18\" << 15 phút) với biên độ an toàn rõ rệt. CT03 được chọn mang sang Thử nghiệm 2."
+        },
+        {
+          "type": "paragraph",
+          "text": "Công thức tạm thời sau Thử nghiệm 1: CT03 (Primellose 5%) là điểm khởi đầu cho Thử nghiệm 2, chưa phải công thức thương mại/biobatch cuối cùng — cần các thử nghiệm tiếp theo để hoàn thiện."
+        }
       ]
     },
     {
       "id": "P.2.2.2",
       "status": "covered",
       "blocks": [
-        { "type": "paragraph", "text": "Không thấy dược chất/tá dược bổ sung theo tỷ lệ overage trong công thức được cung cấp (tổng bisoprolol fumarate = 10,00 mg đúng bằng hàm lượng ghi nhãn dự kiến). Đây là quan sát dựa trên bảng thành phần, chưa phải xác nhận chính thức." },
-        { "type": "paragraph", "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác nhận chính thức từ FD về việc có/không áp dụng overage và lý do." }
+        {
+          "type": "paragraph",
+          "text": "Không thấy dược chất/tá dược bổ sung theo tỷ lệ overage trong công thức được cung cấp (tổng bisoprolol fumarate = 10,00 mg đúng bằng hàm lượng ghi nhãn dự kiến). Đây là quan sát dựa trên bảng thành phần, chưa phải xác nhận chính thức."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác nhận chính thức từ FD về việc có/không áp dụng overage và lý do."
+        }
       ]
     },
     {
       "id": "P.2.2.3",
       "status": "covered",
       "blocks": [
-        { "type": "heading3", "text": "Phương pháp hòa tan" },
-        { "type": "paragraph", "text": "Tiêu chuẩn đã áp dụng: ≥ 80% (Q) bisoprolol fumarate hòa tan trong 30 phút." },
-        { "type": "paragraph", "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Điều kiện phương pháp hòa tan cụ thể (thiết bị, tốc độ khuấy, môi trường, thể tích) và khả năng phân biệt của phương pháp (discriminatory power) — không có trong Thử nghiệm 1." },
-        { "type": "heading3", "text": "Hồ sơ tạp chất" },
-        { "type": "paragraph", "text": "Kết quả tạp chất (tạp đơn, tổng tạp) đã có trong bảng kết quả viên thành phẩm ở mục P.2.2.1.3." },
-        { "type": "paragraph", "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phương pháp phân tích tạp chất cụ thể (tham chiếu 3.2.P.5.2) chưa được nêu trong Thử nghiệm 1." }
+        {
+          "type": "heading3",
+          "text": "Phương pháp hòa tan"
+        },
+        {
+          "type": "paragraph",
+          "text": "Tiêu chuẩn đã áp dụng: ≥ 80% (Q) bisoprolol fumarate hòa tan trong 30 phút."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Điều kiện phương pháp hòa tan cụ thể (thiết bị, tốc độ khuấy, môi trường, thể tích) và khả năng phân biệt của phương pháp (discriminatory power) — không có trong Thử nghiệm 1."
+        },
+        {
+          "type": "heading3",
+          "text": "Hồ sơ tạp chất"
+        },
+        {
+          "type": "paragraph",
+          "text": "Kết quả tạp chất (tạp đơn, tổng tạp) đã có trong bảng kết quả viên thành phẩm ở mục P.2.2.1.3."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phương pháp phân tích tạp chất cụ thể (tham chiếu 3.2.P.5.2) chưa được nêu trong Thử nghiệm 1."
+        }
       ]
     },
     {
@@ -185,7 +620,10 @@
       "id": "P.2.6",
       "status": "covered",
       "blocks": [
-        { "type": "paragraph", "text": "Không áp dụng — sản phẩm là viên nén bao phim dùng đường uống trực tiếp, không cần pha hoàn nguyên với dung môi/chất pha loãng trước khi sử dụng. Đây là suy luận dựa trên dạng bào chế đã nêu trong Thử nghiệm 1 (viên nén bao phim); cần FD xác nhận chính thức." }
+        {
+          "type": "paragraph",
+          "text": "Không áp dụng — sản phẩm là viên nén bao phim dùng đường uống trực tiếp, không cần pha hoàn nguyên với dung môi/chất pha loãng trước khi sử dụng. Đây là suy luận dựa trên dạng bào chế đã nêu trong Thử nghiệm 1 (viên nén bao phim); cần FD xác nhận chính thức."
+        }
       ]
     }
   ]

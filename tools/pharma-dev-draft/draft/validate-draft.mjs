@@ -19,6 +19,10 @@ export class DraftContractError extends Error {
 }
 
 const VALID_BLOCK_TYPES = new Set(["heading2", "heading3", "paragraph", "table"]);
+const VALID_COLUMN_ALIGN = new Set(["left", "center"]);
+// Mirrors TABLE_WIDTH in render/builder.mjs — a draft that declares columnWidths must add up to
+// the same page-width budget the renderer lays tables out against.
+const TABLE_WIDTH_DXA = 10000;
 const REQUIRED_META_FIELDS = ["productName", "apiName", "sourceFile", "draftDate", "preparer", "extractionMethod"];
 
 function loadOutline() {
@@ -51,6 +55,28 @@ function validateBlock(block, sectionId, index) {
         fail("E_TABLE_ROW_WIDTH", `${where}.rows[${rowIndex}] must have ${block.headers.length} cells (one per header)`);
       }
     });
+    if (block.columnWidths !== undefined) {
+      const widths = block.columnWidths;
+      if (!Array.isArray(widths) || widths.length !== block.headers.length) {
+        fail("E_TABLE_COLUMN_WIDTHS", `${where}.columnWidths must have ${block.headers.length} entries (one per header)`);
+      }
+      if (!widths.every((width) => Number.isInteger(width) && width > 0)) {
+        fail("E_TABLE_COLUMN_WIDTHS", `${where}.columnWidths entries must be positive integers (DXA units)`);
+      }
+      const total = widths.reduce((sum, width) => sum + width, 0);
+      if (total !== TABLE_WIDTH_DXA) {
+        fail("E_TABLE_COLUMN_WIDTHS", `${where}.columnWidths must sum to ${TABLE_WIDTH_DXA}, got ${total}`);
+      }
+    }
+    if (block.columnAlign !== undefined) {
+      const align = block.columnAlign;
+      if (!Array.isArray(align) || align.length !== block.headers.length) {
+        fail("E_TABLE_COLUMN_ALIGN", `${where}.columnAlign must have ${block.headers.length} entries (one per header)`);
+      }
+      if (!align.every((value) => VALID_COLUMN_ALIGN.has(value))) {
+        fail("E_TABLE_COLUMN_ALIGN", `${where}.columnAlign entries must be one of ${[...VALID_COLUMN_ALIGN].join(", ")}`);
+      }
+    }
   }
 }
 

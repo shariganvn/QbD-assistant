@@ -42,33 +42,44 @@ const ABBREVIATIONS = [
   ["RSD", "Relative Standard Deviation – Độ lệch chuẩn tương đối"],
 ];
 
+// A newline in cell text becomes a separate paragraph inside the cell, so a cell can hold a short
+// bullet list (excipient properties, for example) instead of one run-on line. Word ignores "\n"
+// inside a single run, so splitting here is what actually produces the line break.
 function cellText(text, opts = {}) {
+  const lines = String(text).split("\n");
   return new TableCell({
     width: { size: opts.width || 1000, type: WidthType.DXA },
     borders: allBorders,
     shading: opts.header ? { type: ShadingType.CLEAR, fill: HEADER_FILL } : undefined,
     verticalAlign: VerticalAlign.CENTER,
-    children: [new Paragraph({
+    children: lines.map((line, index) => new Paragraph({
       alignment: opts.align || AlignmentType.LEFT,
-      children: [new TextRun({ text: String(text), bold: !!opts.header, size: opts.size || 20 })],
-    })],
+      spacing: { after: index === lines.length - 1 ? 0 : 40 },
+      children: [new TextRun({ text: line, bold: !!opts.header, size: opts.size || 20 })],
+    })),
   });
 }
 
-function makeTable(headers, rows, widths) {
+const ALIGNMENTS = { left: AlignmentType.LEFT, center: AlignmentType.CENTER };
+
+// `align` is an optional per-column array of "left"/"center". Without it, the first column is
+// left-aligned and the rest centred — right for short numeric tables, wrong for prose columns.
+function makeTable(headers, rows, widths, align) {
+  const alignFor = (i) => (align ? ALIGNMENTS[align[i]] : (i === 0 ? AlignmentType.LEFT : AlignmentType.CENTER));
   const headerRow = new TableRow({
     tableHeader: true,
     children: headers.map((h, i) => cellText(h, { header: true, width: widths[i], align: AlignmentType.CENTER })),
   });
   const bodyRows = rows.map((r) => new TableRow({
-    children: r.map((c, i) => cellText(c, { width: widths[i], align: i === 0 ? AlignmentType.LEFT : AlignmentType.CENTER })),
+    children: r.map((c, i) => cellText(c, { width: widths[i], align: alignFor(i) })),
   }));
   return new Table({ width: { size: TABLE_WIDTH, type: WidthType.DXA }, columnWidths: widths, rows: [headerRow, ...bodyRows] });
 }
 
-// Column widths sum to TABLE_WIDTH; first column gets extra room for labels, remaining columns
-// split the rest evenly. Works for draft tables of arbitrary column count (unlike the hand-written
-// scratchpad version, which had one hardcoded width array per specific table).
+// Default when a table block declares no columnWidths: widths sum to TABLE_WIDTH; first column
+// gets extra room for labels, remaining columns split the rest evenly. Works for draft tables of
+// arbitrary column count (unlike the hand-written scratchpad version, which had one hardcoded
+// width array per specific table).
 function widthsFor(headerCount) {
   if (headerCount <= 1) return [TABLE_WIDTH];
   const firstColumn = Math.round(TABLE_WIDTH * 0.34);
@@ -129,7 +140,12 @@ function renderBlock(block) {
     case "heading2": return [h2(block.text)];
     case "heading3": return [h3(block.text)];
     case "paragraph": return [bodyParagraph(block.text, { italic: block.italic, bold: block.bold })];
-    case "table": return [makeTable(block.headers, block.rows, widthsFor(block.headers.length))];
+    case "table": return [makeTable(
+      block.headers,
+      block.rows,
+      block.columnWidths ?? widthsFor(block.headers.length),
+      block.columnAlign,
+    )];
     default: throw new Error(`unknown block type: ${block.type}`);
   }
 }
