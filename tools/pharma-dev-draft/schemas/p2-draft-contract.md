@@ -8,9 +8,16 @@ a live Claude session), following `draft/checklist.md`.
 
 This contract is intentionally **not** shaped like `cowork-p2-kit/render/contract.mjs`'s
 `validateDraft()` (no `citations`, `evidenceLink`, `classification`, `citable` fields). That
-contract encodes the rationale pipeline's public-citation approval semantics; a P.2 draft has
-nothing external to cite — every fact traces back to exactly one supplied internal trial file,
-named once in `meta.sourceFile`.
+contract encodes the rationale pipeline's public-citation approval semantics, which a P.2 draft has
+no use for: there is no approval state, no citable/public classification, and no evidence-host
+allow-list.
+
+Provenance here is simpler but still explicit. Trial data comes from exactly one supplied file,
+named in `meta.sourceFile`. Where a section additionally states something from a reference work
+(excipient properties from a pharmacopoeial handbook, for example), every such work must be listed
+in `meta.referenceSources` and cited in the section text; the renderer prints that list on the
+cover page. A fact that is in neither the source file nor a declared reference source does not
+belong in the draft — mark the section `gap` instead.
 
 ## Top-level shape
 
@@ -23,7 +30,8 @@ named once in `meta.sourceFile`.
     "sourceFile": "string — filename of the trial docx this draft was built from",
     "draftDate": "YYYY-MM-DD",
     "preparer": "string — free text, e.g. \"Claude (session ...)\" or a person's name",
-    "extractionMethod": "xml-walk | liteparse — from Stage A's extracted.json"
+    "extractionMethod": "xml-walk | liteparse — from Stage A's extracted.json",
+    "referenceSources": ["string — optional; one entry per reference work a section quotes"]
   },
   "sections": [ /* see below — one entry per id in schemas/p2-outline.json, in that order */ ]
 }

@@ -10,10 +10,19 @@ import {
   WidthType, ShadingType, BorderStyle, AlignmentType, VerticalAlign,
 } from "docx";
 
-const TABLE_WIDTH = 10000;
+import { TABLE_WIDTH_DXA as TABLE_WIDTH } from "../schemas/layout.mjs";
+
 const HEADER_FILL = "D9D9D9";
 const NOTICE_FILL = "FFF2CC";
 const GAP_COLOR = "C00000";
+
+// The renderer's own tables (not driven by a draft) declare their widths here, named, so one test
+// can assert they all still fill TABLE_WIDTH if that budget ever changes.
+export const FIXED_TABLE_WIDTHS = {
+  gapRegister: [4200, 2400, 3400],
+  abbreviations: [2500, 7500],
+  signoff: [3600, 2400, 2400, 1600],
+};
 
 const cellBorder = { style: BorderStyle.SINGLE, size: 4, color: "999999" };
 const allBorders = { top: cellBorder, bottom: cellBorder, left: cellBorder, right: cellBorder };
@@ -80,7 +89,7 @@ function makeTable(headers, rows, widths, align) {
 // gets extra room for labels, remaining columns split the rest evenly. Works for draft tables of
 // arbitrary column count (unlike the hand-written scratchpad version, which had one hardcoded
 // width array per specific table).
-function widthsFor(headerCount) {
+export function widthsFor(headerCount) {
   if (headerCount <= 1) return [TABLE_WIDTH];
   const firstColumn = Math.round(TABLE_WIDTH * 0.34);
   const remaining = TABLE_WIDTH - firstColumn;
@@ -157,7 +166,7 @@ function gapRegisterTable(outline, draftSectionsById) {
     const note = draftSection?.status === "gap" ? draftSection.gapReason : "—";
     return [`${section.ctdReference} ${section.headingVi}`, status, note];
   });
-  return makeTable(["Mục CTD", "Trạng thái dữ liệu", "Ghi chú"], rows, [4200, 2400, 3400]);
+  return makeTable(["Mục CTD", "Trạng thái dữ liệu", "Ghi chú"], rows, FIXED_TABLE_WIDTHS.gapRegister);
 }
 
 export async function buildDocumentBuffer(draft, outline) {
@@ -169,6 +178,19 @@ export async function buildDocumentBuffer(draft, outline) {
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 80 }, children: [new TextRun({ text: "(PHARMACEUTICAL DEVELOPMENT – CTD 3.2.P.2)", bold: true, size: 24, color: "555555" })] }),
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 40 }, children: [new TextRun({ text: `${draft.meta.productName} — Dược chất: ${draft.meta.apiName}`, bold: true, size: 22 })] }),
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 40 }, children: [new TextRun({ text: `Cơ sở dữ liệu: ${draft.meta.sourceFile}`, size: 20, italics: true })] }),
+  );
+
+  // The cover must name every source the document draws on, not just the trial file, so a reader
+  // is never told the content traces back to one source when a section quotes a reference work.
+  if (draft.meta.referenceSources) {
+    children.push(new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { after: 40 },
+      children: [new TextRun({ text: `Tài liệu tham chiếu: ${draft.meta.referenceSources.join("; ")}`, size: 20, italics: true })],
+    }));
+  }
+
+  children.push(
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 300 }, children: [new TextRun({ text: `${DRAFT_STATUS_LABEL} — Ngày soạn: ${draft.meta.draftDate}`, bold: true, size: 20, color: GAP_COLOR })] }),
   );
 
@@ -176,7 +198,7 @@ export async function buildDocumentBuffer(draft, outline) {
   children.push(spacer());
 
   children.push(h2("Danh mục chữ viết tắt"));
-  children.push(makeTable(["Viết tắt", "Giải thích"], ABBREVIATIONS, [2500, 7500]));
+  children.push(makeTable(["Viết tắt", "Giải thích"], ABBREVIATIONS, FIXED_TABLE_WIDTHS.abbreviations));
   children.push(spacer());
 
   children.push(h1("3.2.P.2 PHÁT TRIỂN DƯỢC HỌC (PHARMACEUTICAL DEVELOPMENT)"));
@@ -206,7 +228,7 @@ export async function buildDocumentBuffer(draft, outline) {
       ["Rà soát FD", "________________", "________________", ""],
       ["Phê duyệt QA/PO", "________________", "________________", ""],
     ],
-    [3600, 2400, 2400, 1600],
+    FIXED_TABLE_WIDTHS.signoff,
   ));
 
   const doc = new Document({

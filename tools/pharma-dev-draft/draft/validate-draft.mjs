@@ -7,6 +7,8 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { TABLE_WIDTH_DXA } from "../schemas/layout.mjs";
+
 const draftDir = dirname(fileURLToPath(import.meta.url));
 const toolRoot = join(draftDir, "..");
 
@@ -20,9 +22,14 @@ export class DraftContractError extends Error {
 
 const VALID_BLOCK_TYPES = new Set(["heading2", "heading3", "paragraph", "table"]);
 const VALID_COLUMN_ALIGN = new Set(["left", "center"]);
-// Mirrors TABLE_WIDTH in render/builder.mjs — a draft that declares columnWidths must add up to
-// the same page-width budget the renderer lays tables out against.
-const TABLE_WIDTH_DXA = 10000;
+// Keys the renderer actually reads. Anything else in a block is a typo the renderer would silently
+// ignore (falling back to default widths/alignment), so it is rejected rather than dropped.
+const ALLOWED_BLOCK_KEYS = {
+  heading2: new Set(["type", "text"]),
+  heading3: new Set(["type", "text"]),
+  paragraph: new Set(["type", "text", "italic", "bold"]),
+  table: new Set(["type", "headers", "rows", "columnWidths", "columnAlign"]),
+};
 const REQUIRED_META_FIELDS = ["productName", "apiName", "sourceFile", "draftDate", "preparer", "extractionMethod"];
 
 function loadOutline() {
@@ -40,20 +47,40 @@ function validateBlock(block, sectionId, index) {
   if (!VALID_BLOCK_TYPES.has(block.type)) {
     fail("E_BLOCK_TYPE", `${where}.type must be one of ${[...VALID_BLOCK_TYPES].join(", ")}, got: ${block.type}`);
   }
+  for (const key of Object.keys(block)) {
+    if (!ALLOWED_BLOCK_KEYS[block.type].has(key)) {
+      fail("E_BLOCK_UNKNOWN_FIELD", `${where} has unknown field "${key}" for a ${block.type} block — the renderer would ignore it`);
+    }
+  }
   if (block.type === "heading2" || block.type === "heading3" || block.type === "paragraph") {
     if (typeof block.text !== "string" || block.text.trim() === "") {
       fail("E_BLOCK_TEXT", `${where}.text must be a non-empty string`);
+    }
+    // Only table cells render a newline as a line break; here Word would swallow it and join the
+    // text, so reject it instead of producing prose the author did not write.
+    if (block.text.includes("\n")) {
+      fail("E_BLOCK_TEXT", `${where}.text must not contain a newline — only table cells render line breaks`);
     }
   }
   if (block.type === "table") {
     if (!Array.isArray(block.headers) || block.headers.length === 0) {
       fail("E_TABLE_HEADERS", `${where}.headers must be a non-empty array`);
     }
+    if (!block.headers.every((header) => typeof header === "string" && header.trim() !== "")) {
+      fail("E_TABLE_HEADERS", `${where}.headers entries must be non-empty strings`);
+    }
     if (!Array.isArray(block.rows)) fail("E_TABLE_ROWS", `${where}.rows must be an array`);
     block.rows.forEach((row, rowIndex) => {
       if (!Array.isArray(row) || row.length !== block.headers.length) {
         fail("E_TABLE_ROW_WIDTH", `${where}.rows[${rowIndex}] must have ${block.headers.length} cells (one per header)`);
       }
+      // Cells must already be strings: the renderer stringifies whatever it gets, so a number
+      // would silently render with a decimal point where the source uses a comma.
+      row.forEach((cell, cellIndex) => {
+        if (typeof cell !== "string") {
+          fail("E_TABLE_CELL_TYPE", `${where}.rows[${rowIndex}][${cellIndex}] must be a string, got ${typeof cell}`);
+        }
+      });
     });
     if (block.columnWidths !== undefined) {
       const widths = block.columnWidths;
@@ -92,6 +119,16 @@ export function validateDraft(draft) {
   }
   if (!["xml-walk", "liteparse"].includes(draft.meta.extractionMethod)) {
     fail("E_META_FIELD", `draft.meta.extractionMethod must be "xml-walk" or "liteparse"`);
+  }
+  // Anything a section states that did not come out of sourceFile must be named here, so the
+  // rendered cover page declares every source the document draws on rather than only the trial file.
+  if (draft.meta.referenceSources !== undefined) {
+    if (!Array.isArray(draft.meta.referenceSources) || draft.meta.referenceSources.length === 0) {
+      fail("E_META_REFERENCE_SOURCES", "draft.meta.referenceSources must be a non-empty array when present");
+    }
+    if (!draft.meta.referenceSources.every((source) => typeof source === "string" && source.trim() !== "")) {
+      fail("E_META_REFERENCE_SOURCES", "draft.meta.referenceSources entries must be non-empty strings");
+    }
   }
 
   if (!Array.isArray(draft.sections)) fail("E_SECTIONS_SHAPE", "draft.sections must be an array");
