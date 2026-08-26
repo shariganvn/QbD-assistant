@@ -27,6 +27,11 @@ deliberately.
    API's CAS number or molecular weight) — if you supply such a value from general/pharmacopeial
    knowledge rather than from `extracted.json`, say so explicitly in the text ("nguồn: kiến thức
    tham khảo phổ biến — cần đối chiếu dược điển gốc") so a reviewer knows it wasn't in the source.
+   Prefer a reference document the repo actually holds over recalled knowledge: excipient
+   properties and use concentrations come from the Handbook of Pharmaceutical Excipients PDF at the
+   repo root, cited by monograph name and printed page (see P.2.1.2 in `example-draft.json`). When
+   the reference has no entry for a property, write "HPE không nêu" rather than filling it from
+   elsewhere.
 6. **Every outline id must appear exactly once**, `covered` or `gap` — never omit one just because
    nothing seemed to fit. An empty CTD section is itself information (a real gap for FD to close).
 7. **Fill `meta` completely**, including `extractionMethod` copied from `extracted.json` and a

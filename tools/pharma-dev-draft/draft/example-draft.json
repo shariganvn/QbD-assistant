@@ -88,7 +88,7 @@
               "13,70"
             ],
             [
-              "Lactose monohydrat & cellulose bột 75:25 (Cellactose 80)",
+              "Lactose monohydrat và cellulose bột (Cellactose 80)",
               "63,00",
               "63,00",
               "63,00"
@@ -125,7 +125,7 @@
         },
         {
           "type": "paragraph",
-          "text": "Cột \"Đặc tính lý hóa\" và \"Ứng dụng trong công thức dược phẩm\" tổng hợp theo Handbook of Pharmaceutical Excipients (HPE); cột \"Chức năng trong công thức này\" là thuyết minh vai trò của từng tá dược trong Thử nghiệm 1, suy ra từ đặc tính lý hóa, ứng dụng thông dụng và hàm lượng thực tế trong công thức."
+          "text": "Cột \"Đặc tính lý hóa\" và \"Ứng dụng trong công thức dược phẩm\" được trích từ Handbook of Pharmaceutical Excipients, 6th Edition (HPE), theo đúng chuyên luận của từng tá dược — số trang ghi kèm tên tá dược ở cột 2. Cột \"Chức năng trong công thức này\" là thuyết minh vai trò của từng tá dược trong Thử nghiệm 1, lập luận từ dữ liệu HPE và hàm lượng thực tế trong công thức."
         },
         {
           "type": "table",
@@ -153,56 +153,56 @@
           "rows": [
             [
               "1",
-              "Lactose monohydrat",
-              "• Cảm quan: bột kết tinh trắng đến trắng ngà, không mùi, vị hơi ngọt\n• Độ tan: tan trong nước (khoảng 1 g/5 mL ở 20 °C); thực tế không tan trong ethanol, cloroform, ether\n• Điểm chảy: 201 – 202 °C (dạng monohydrat)\n• pH (dung dịch 10% kl/tt): 4,0 – 6,5\n• Hút ẩm: thấp; ổn định ở điều kiện bảo quản thường",
-              "Tá dược độn/pha loãng thông dụng nhất cho viên nén và viên nang. Grade nghiền – rây dùng cho xát hạt ướt; grade phun sấy dùng cho dập thẳng. Tỷ lệ điển hình 65 – 85% kl/kl trong viên nén và viên nang. Ngoài ra làm chất mang trong thuốc hít bột khô.",
-              "Tá dược độn bù trừ. Hàm lượng giảm dần 17,70 → 15,70 → 13,70 mg/viên, đúng bằng phần tăng của croscarmellose sodium (1,00 → 3,00 → 5,00 mg), giữ khối lượng viên cố định 100 mg. Nhờ vậy croscarmellose sodium là biến số độc lập duy nhất giữa CT01 – CT03 — điều kiện cần để quy kết khác biệt thời gian rã cho tỷ lệ tá dược rã."
+              "Lactose monohydrat\n(HPE tr. 364 – 369)",
+              "• Cảm quan: tiểu phân hoặc bột kết tinh màu trắng đến trắng ngà; không mùi, vị hơi ngọt (α-lactose ngọt bằng khoảng 20% sucrose)\n• Độ tan (Bảng IV): nước 1 phần trong 5,24 ở 20 °C (1 trong 3,05 ở 40 °C; 1 trong 1,71 ở 60 °C); thực tế không tan trong cloroform, ethanol, ether\n• Điểm chảy: 201 – 202 °C (α-lactose monohydrat đã khử nước)\n• Hàm ẩm: chứa khoảng 5% kl/kl nước kết tinh, thường 4,5 – 5,5% kl/kl\n• Tỷ trọng thật: 1,545 g/cm³\n• Chỉ số vỡ giòn (brittle fracture index): 0,0749 ở lực nén 189,5 MPa\n• HPE không nêu chỉ tiêu pH cho chuyên luận này",
+              "Phân loại chức năng (HPE mục 6): chất mang thuốc hít bột khô; phụ gia đông khô; tá dược dính; tá dược pha loãng và tá dược độn cho viên nén, viên nang.\nỨng dụng (HPE mục 7): dùng rộng rãi làm tá dược độn và pha loãng cho viên nén, viên nang. Grade mịn thường dùng khi bào chế viên nén bằng phương pháp xát hạt ướt hoặc khi có nghiền trong quá trình, vì cỡ hạt nhỏ giúp trộn đều hơn với các thành phần khác và sử dụng tá dược dính hiệu quả hơn. HPE không quy định một khoảng % cố định cho vai trò tá dược độn.",
+              "Tá dược độn bù trừ. Hàm lượng giảm dần 17,70 → 15,70 → 13,70 mg/viên, đúng bằng phần tăng của croscarmellose sodium (1,00 → 3,00 → 5,00 mg), giữ khối lượng viên cố định 100 mg. Nhờ vậy croscarmellose sodium là biến số độc lập duy nhất giữa CT01 – CT03 — điều kiện cần để quy kết khác biệt thời gian rã cho tỷ lệ tá dược rã. Đặc tính vỡ giòn khi nén của lactose bổ trợ cho thành phần biến dạng dẻo trong Cellactose 80."
             ],
             [
               "2",
-              "Lactose monohydrat & cellulose bột 75:25 (Cellactose 80) — tá dược đồng xử lý",
-              "• Cảm quan: bột kết tụ (agglomerate) trắng đến trắng ngà, chảy tự do\n• Độ tan: phần lactose tan trong nước, phần cellulose không tan → tạo phân tán/huyền phù\n• Điểm chảy: không có điểm chảy xác định; phần lactose chảy ở 201 – 202 °C, cellulose phân hủy trước khi chảy\n• pH (phân tán 10% kl/tt): khoảng trung tính, 4,0 – 8,0\n• Đặc tính chịu nén: kép — vỡ giòn (lactose) kết hợp biến dạng dẻo (cellulose)",
-              "Tá dược độn – dính (filler-binder) cho dập thẳng. Nhóm lactose đồng xử lý với cellulose cho độ chịu nén và độ chảy tốt hơn rõ rệt so với lactose đơn thuần ở cùng lực dập, nhờ đó giảm nhu cầu tá dược dính. Tỷ lệ sử dụng thường 20 – 80% kl/kl.",
-              "Thành phần độn chính, 63,00 mg/viên (63% kl/kl), giữ cố định ở cả ba công thức. Cơ chế nén kép tạo nền viên đạt độ cứng yêu cầu mà không phải tăng tá dược dính; phần cellulose đồng thời hỗ trợ rã theo cơ chế mao dẫn, tạo nền thuận lợi cho croscarmellose sodium phát huy tác dụng."
+              "Lactose monohydrat và cellulose bột (Cellactose 80)\n(HPE tr. 374 – 375)",
+              "• Cảm quan: bột màu trắng hoặc gần như trắng, không mùi; chứa 73 – 77% lactose monohydrat và 23 – 27% cellulose bột\n• Độ tan: tan một phần trong nước (phần lactose tan, phần cellulose không tan)\n• pH: 4,0 – 7,0\n• Góc nghỉ: 32 – 35°\n• Tỷ trọng khối 0,38 g/cm³; tỷ trọng gõ 0,5 g/cm³; tỷ số Hausner 1,24\n• Hàm ẩm: 4 – 7%; mất khối lượng do làm khô ≤ 3,5%\n• Phân bố cỡ hạt: ≤ 20% < 32 µm; 35 – 65% < 160 µm; ≥ 80% < 250 µm\n• HPE không nêu điểm chảy cho chuyên luận đồng xử lý này",
+              "Phân loại chức năng (HPE mục 6): tá dược pha loãng cho viên nén và viên nang.\nỨng dụng (HPE mục 7): dùng trong viên nén dập thẳng để cải thiện khả năng chịu nén và cảm giác khi uống.\nGhi chú (HPE mục 18): Cellactose 80 được thiết kế riêng cho dập thẳng và đã được chứng minh vượt trội so với hỗn hợp vật lý đơn thuần của các thành phần về khả năng pha loãng, khả năng chịu nén, độ bền kéo, độ nhạy với tá dược trơn và các tính chất viên thu được trên nhiều dược chất.",
+              "Thành phần độn chính, 63,00 mg/viên (63% kl/kl), giữ cố định ở cả ba công thức. Tỷ số Hausner 1,24 và góc nghỉ 32 – 35° cho thấy độ chảy khá, phù hợp quy mô lô 1.000 viên. Vì HPE ghi nhận Cellactose 80 ít nhạy với tá dược trơn hơn hỗn hợp vật lý tương ứng, nền công thức này có khả năng dung nạp mức magnesi stearat 3% tốt hơn nền lactose đơn thuần — tuy vậy vẫn cần dữ liệu thực nghiệm xác nhận (xem STT 6)."
             ],
             [
               "3",
-              "Croscarmellose sodium (Primellose)",
-              "• Cảm quan: bột trắng đến trắng ngà, không mùi, cấu trúc dạng sợi\n• Độ tan: không tan trong nước nhưng trương nở nhanh 4 – 8 lần thể tích ban đầu; không tan trong ethanol, ether\n• Điểm chảy: không chảy rõ rệt; than hóa ở khoảng 252 °C\n• pH (phân tán 1% kl/tt): 5,0 – 7,0\n• Hút ẩm: có hút ẩm nhưng không làm mất hiệu lực rã",
-              "Tá dược siêu rã (superdisintegrant) cho viên nén và viên nang. Tỷ lệ 0,5 – 5,0% kl/kl trong viên nén — thông dụng 2% cho dập thẳng và 3% cho xát hạt ướt; tới 5% khi yêu cầu rã nhanh. Vượt khoảng này hiệu quả rã không tăng tương ứng.",
-              "BIẾN SỐ KHẢO SÁT CHÍNH của Thử nghiệm 1: 1,00 / 3,00 / 5,00 mg/viên tương ứng 1% / 3% / 5% kl/kl — quét trọn khoảng khuyến cáo, từ dưới mức thông dụng (1%) đến giới hạn trên (5%). Cơ chế rã kép: trương nở nhanh kết hợp dẫn nước theo mao dẫn nhờ cấu trúc sợi. Đây là tá dược quyết định CQA thời gian rã và tốc độ hòa tan."
+              "Croscarmellose sodium (Primellose)\n(HPE tr. 206 – 208)",
+              "• Cảm quan: bột màu trắng hoặc trắng xám, không mùi\n• Độ tan: không tan trong nước, nhưng trương nở nhanh 4 – 8 lần thể tích ban đầu khi tiếp xúc nước; thực tế không tan trong aceton, ethanol và toluen\n• pH: 5,0 – 7,0 (phân tán trong nước)\n• Tỷ trọng khối 0,529 g/cm³; tỷ trọng gõ 0,819 g/cm³; tỷ trọng thật 1,543 g/cm³ (Ac-Di-Sol)\n• Diện tích bề mặt riêng: 0,81 – 0,83 m²/g\n• HPE không nêu điểm chảy cho chuyên luận này",
+              "Phân loại chức năng (HPE mục 6): tá dược rã cho viên nén và viên nang.\nỨng dụng (HPE mục 7): dùng làm tá dược rã cho viên nang, viên nén và hạt. Trong viên nén có thể dùng cho cả dập thẳng lẫn xát hạt ướt; khi xát hạt ướt nên thêm ở cả giai đoạn ướt và giai đoạn khô (trong hạt và ngoài hạt) để tận dụng tốt nhất khả năng dẫn nước và trương nở.\nTỷ lệ (HPE Bảng I): tá dược rã trong viên nén 0,5 – 5,0%; trong viên nang 10 – 25%. HPE nêu rõ: có thể dùng tới 5% kl/kl, nhưng thông thường 2% cho dập thẳng và 3% cho xát hạt ướt.",
+              "BIẾN SỐ KHẢO SÁT CHÍNH của Thử nghiệm 1: 1,00 / 3,00 / 5,00 mg/viên tương ứng 1% / 3% / 5% kl/kl. Thiết kế này quét trọn khoảng 0,5 – 5,0% của HPE: CT02 (3%) trùng đúng mức HPE khuyến cáo cho xát hạt ướt, CT01 (1%) nằm dưới và CT03 (5%) chạm giới hạn trên. Cơ chế rã kép — trương nở 4 – 8 lần kết hợp dẫn nước theo mao dẫn. Đây là tá dược quyết định CQA thời gian rã và tốc độ hòa tan."
             ],
             [
               "4",
-              "Magnesi oxyd (MgO XP 103)",
-              "• Cảm quan: bột rất mịn, màu trắng, không mùi (có grade nhẹ và grade nặng khác nhau về tỷ trọng khối)\n• Độ tan: thực tế không tan trong nước (khoảng 0,0006 g/100 mL) và ethanol; tan trong acid loãng\n• Điểm chảy: khoảng 2.800 °C — bền nhiệt trong mọi điều kiện bào chế\n• pH: huyền phù nước bão hòa có tính kiềm, pH khoảng 10,3\n• Hoạt tính: hấp thụ CO₂ và hơi ẩm từ không khí, cần bảo quản kín",
-              "Tác nhân kiềm hóa (alkalizing agent), chất hấp phụ, tá dược độn cho viên nén/viên nang, và là dược chất kháng acid. Trong bào chế thường dùng để kiềm hóa vi môi trường viên nhằm ổn định dược chất nhạy cảm với môi trường acid; tỷ lệ tùy mục đích, thường vài phần trăm khi đóng vai trò ổn định.",
-              "3,30 mg/viên (3,3% kl/kl), giữ cố định ở cả ba công thức. Suy luận chức năng: kiềm hóa vi môi trường để ổn định bisoprolol fumarat — fumarat là muối của acid hữu cơ, môi trường acid tại chỗ có thể thúc đẩy phân hủy. Thử nghiệm 1 KHÔNG nêu mục đích sử dụng của MgO; cần FD xác nhận vai trò thiết kế và dữ liệu độ ổn định chứng minh."
+              "Magnesi oxyd (MgO XP 103)\n(HPE tr. 400 – 401)",
+              "• Cảm quan: bột mịn, màu trắng, không mùi; tồn tại hai dạng — dạng nhẹ (xốp) và dạng nặng (đặc), khác nhau về thể tích biểu kiến\n• Độ tan: tan trong acid loãng và dung dịch muối amoni; rất ít tan trong nước tinh khiết (0,0086 g/100 mL ở 30 °C, tăng khi có CO₂); thực tế không tan trong ethanol 95%\n• pH: 10,3 (dung dịch nước bão hòa)\n• Điểm chảy: 2.800 °C; điểm sôi 3.600 °C\n• Tỷ trọng: 3,58 g/cm³ ở 25 °C (dạng nặng)\n• Độ ổn định (HPE mục 11): hút ẩm, hấp thụ nhanh nước và CO₂ khi tiếp xúc không khí — dạng nhẹ nhanh hơn dạng nặng",
+              "Phân loại chức năng (HPE mục 6): chất chống vón; chất nhũ hóa; chất điều hòa chảy; tá dược pha loãng cho viên nén và viên nang.\nỨng dụng (HPE mục 7): dùng làm TÁ DƯỢC PHA LOÃNG CÓ TÍNH KIỀM trong dạng thuốc rắn ĐỂ ĐIỀU CHỈNH pH CỦA VIÊN NÉN. Có thể thêm vào dạng thuốc rắn để giữ nước dư và duy trì khối hạt khô ráo. Kết hợp với silica có thể dùng làm chất điều hòa chảy phụ trợ. Ngoài ra dùng làm phụ gia thực phẩm, thuốc kháng acid, thuốc nhuận tràng thẩm thấu và chế phẩm bổ sung magnesi.",
+              "3,30 mg/viên (3,3% kl/kl), giữ cố định ở cả ba công thức. HPE xác nhận vai trò tá dược pha loãng có tính kiềm dùng để điều chỉnh pH viên nén, phù hợp với mục đích ổn định bisoprolol fumarat — fumarat là muối của acid hữu cơ nên vi môi trường acid tại chỗ có thể thúc đẩy phân hủy. Đặc tính hút ẩm mạnh của MgO cũng hỗ trợ giữ khối hạt khô ráo. Lưu ý: Thử nghiệm 1 không ghi mục đích sử dụng MgO, nên vai trò thiết kế cụ thể vẫn cần FD xác nhận kèm dữ liệu độ ổn định."
             ],
             [
               "5",
-              "Povidon K30",
-              "• Cảm quan: bột mịn trắng đến trắng kem, không mùi hoặc mùi rất nhẹ\n• Độ tan: tan tự do trong nước, ethanol, methanol, cloroform; không tan trong ether và hydrocarbon\n• Điểm chảy: hóa mềm ở khoảng 150 °C, không có điểm chảy sắc nét\n• pH (dung dịch 5% kl/tt): 3,0 – 7,0\n• Hút ẩm: rất hút ẩm, phải bảo quản trong bao bì kín\n• Trị số K 30 tương ứng khối lượng phân tử trung bình khoảng 50.000",
-              "Tá dược dính cho xát hạt ướt ở 0,5 – 5,0% kl/kl, dùng dưới dạng dung dịch nước hoặc dung dịch cồn. Ngoài ra dùng làm chất tăng độ tan, chất ổn định hỗn dịch và tá dược tạo màng bao.",
-              "Tá dược dính, 2,00 mg/viên (2% kl/kl) — nằm giữa khoảng khuyến cáo, giữ cố định ở cả ba công thức. Tạo cầu nối kết dính giữa các tiểu phân khi xát hạt, cho hạt đủ bền cơ học để dập viên. Do povidon tan tốt trong nước, ở tỷ lệ này nó không cản trở nước thấm vào viên nên không đối kháng cơ chế rã của croscarmellose sodium."
+              "Povidon K30\n(HPE tr. 581 – 585)",
+              "• Cảm quan: bột mịn màu trắng đến trắng kem, không mùi hoặc gần như không mùi, hút ẩm; povidon có trị số K ≤ 30 được sản xuất bằng phun sấy nên có dạng hình cầu\n• Độ tan: tan tự do trong acid, cloroform, ethanol 95%, ceton, methanol và nước; thực tế không tan trong ether, hydrocarbon và dầu khoáng\n• pH: 3,0 – 7,0 (dung dịch nước 5% kl/tt)\n• Điểm chảy: hóa mềm ở 150 °C\n• Tỷ trọng khối 0,29 – 0,39 g/cm³; tỷ trọng gõ 0,39 – 0,54 g/cm³ (Plasdone)\n• Hàm ẩm: rất hút ẩm, hấp thụ lượng ẩm đáng kể ngay ở độ ẩm tương đối thấp",
+              "Phân loại chức năng (HPE mục 6): tá dược rã; chất tăng hòa tan; chất gây treo; tá dược dính cho viên nén.\nỨng dụng (HPE mục 7): chủ yếu dùng cho dạng thuốc rắn. Trong dập viên, dung dịch povidon được dùng làm TÁ DƯỢC DÍNH TRONG XÁT HẠT ƯỚT; povidon cũng có thể thêm ở dạng bột khô rồi xát hạt tại chỗ bằng nước, cồn hoặc dung dịch thủy-cồn. Ngoài ra dùng làm chất tăng hòa tan và đã được chứng minh cải thiện độ hòa tan của dược chất ít tan từ dạng thuốc rắn.\nTỷ lệ (HPE Bảng II): tá dược dính, tá dược pha loãng hoặc tá dược bao cho viên nén 0,5 – 5%.",
+              "Tá dược dính, 2,00 mg/viên (2% kl/kl) — nằm giữa khoảng 0,5 – 5% của HPE, giữ cố định ở cả ba công thức. Tạo cầu nối kết dính giữa các tiểu phân khi xát hạt ướt, cho hạt đủ bền cơ học để dập viên. Vì povidon tan tự do trong nước, ở tỷ lệ này nó không cản trở nước thấm vào viên nên không đối kháng cơ chế rã của croscarmellose sodium; HPE còn ghi nhận povidon có thể làm tăng độ hòa tan của dược chất ít tan."
             ],
             [
               "6",
-              "Magnesi stearat",
-              "• Cảm quan: bột rất mịn, trắng sáng, sờ có cảm giác nhờn, mùi nhẹ đặc trưng của acid stearic\n• Độ tan: thực tế không tan trong nước, ethanol và ether; ít tan trong benzen nóng và ethanol 95% nóng\n• Điểm chảy: 117 – 150 °C tùy nguồn và grade thương mại\n• pH: không áp dụng (không tan trong nước)\n• Đặc tính: kỵ nước, cấu trúc phiến mỏng nên dễ trải thành màng trên bề mặt tiểu phân",
-              "Tá dược trơn (lubricant) cho viên nén và viên nang ở 0,25 – 5,0% kl/kl, thông dụng nhất là 0,5 – 2,0%. Do bản chất kỵ nước, nồng độ cao và/hoặc thời gian trộn trơn kéo dài làm chậm rã và giảm tốc độ hòa tan.",
-              "Tá dược trơn, 3,00 mg/viên (3% kl/kl), giữ cố định ở cả ba công thức; giảm ma sát chày – cối và chống dính khi dập. LƯU Ý KỸ THUẬT: 3% nằm ở nửa trên khoảng khuyến cáo và cao hơn mức thông dụng 0,5 – 2%; kết hợp bản chất kỵ nước, đây là yếu tố có thể làm chậm rã/hòa tan và là biến nhiễu tiềm tàng khi diễn giải kết quả Thử nghiệm 1. Cần FD xác nhận thời gian trộn trơn và đánh giá lại tỷ lệ này ở bước tối ưu công thức."
+              "Magnesi stearat\n(HPE tr. 405 – 407)",
+              "• Cảm quan: bột rất mịn, màu trắng sáng, kết tủa hoặc nghiền, tỷ trọng khối thấp, có mùi nhẹ của acid stearic và vị đặc trưng; sờ nhờn và dễ bám vào da\n• Độ tan: thực tế không tan trong ethanol, ethanol 95%, ether và nước; ít tan trong benzen nóng và ethanol 95% nóng\n• Điểm chảy: 117 – 150 °C (mẫu thương mại); 126 – 130 °C (magnesi stearat độ tinh khiết cao)\n• Độ chảy: bột dính, chảy kém\n• Tỷ trọng khối 0,159 g/cm³; tỷ trọng gõ 0,286 g/cm³; tỷ trọng thật 1,092 g/cm³\n• Diện tích bề mặt riêng: 1,6 – 14,8 m²/g\n• HPE không nêu chỉ tiêu pH (không tan trong nước)",
+              "Phân loại chức năng (HPE mục 6): tá dược trơn cho viên nén và viên nang.\nỨng dụng (HPE mục 7): dùng rộng rãi trong mỹ phẩm, thực phẩm và chế phẩm dược. Chủ yếu dùng LÀM TÁ DƯỢC TRƠN trong sản xuất viên nang và viên nén ở nồng độ 0,25 – 5,0% kl/kl.",
+              "Tá dược trơn, 3,00 mg/viên (3% kl/kl), giữ cố định ở cả ba công thức; giảm ma sát chày – cối và chống dính khi dập. LƯU Ý KỸ THUẬT: 3% nằm ở nửa trên khoảng 0,25 – 5,0% của HPE. Kết hợp với đặc tính thực tế không tan trong nước và diện tích bề mặt riêng có thể lên tới 14,8 m²/g (trải màng kỵ nước trên bề mặt tiểu phân), đây là yếu tố có khả năng làm chậm rã và giảm tốc độ hòa tan, tức là biến nhiễu tiềm tàng khi diễn giải kết quả Thử nghiệm 1. Cần FD xác nhận thời gian trộn trơn và đánh giá lại tỷ lệ này ở bước tối ưu công thức."
             ]
           ]
         },
         {
           "type": "paragraph",
-          "text": "Nguồn dữ liệu và mức độ tin cậy: các giá trị lý hóa và khoảng tỷ lệ sử dụng nêu trên là dữ liệu tham chiếu chung theo Handbook of Pharmaceutical Excipients, KHÔNG lấy từ Thử nghiệm 1 và CHƯA được đối chiếu với bản in HPE cụ thể. Trước khi đưa vào hồ sơ, cần: (i) xác minh từng giá trị theo đúng ấn bản HPE đang lưu hành tại đơn vị và ghi rõ số ấn bản/số trang; (ii) đối chiếu chuyên luận dược điển tương ứng (USP-NF/Ph.Eur./DĐVN) cho các chỉ tiêu có trong tiêu chuẩn; (iii) kiểm tra giới hạn dùng theo FDA IID cho đường dùng uống.",
+          "text": "Nguồn: Rowe RC, Sheskey PJ, Quinn ME (chủ biên). Handbook of Pharmaceutical Excipients, 6th Edition. London: Pharmaceutical Press; 2009. Các chuyên luận sử dụng: Lactose, Monohydrate (tr. 364 – 369); Lactose, Monohydrate and Powdered Cellulose (tr. 374 – 375, synonym: Cellactose 80); Croscarmellose Sodium (tr. 206 – 208); Magnesium Oxide (tr. 400 – 401); Povidone (tr. 581 – 585); Magnesium Stearate (tr. 405 – 407). Chỉ tiêu nào HPE không nêu trong chuyên luận tương ứng đều được ghi rõ là \"HPE không nêu\" thay vì lấy từ nguồn khác.",
           "italic": true
         },
         {
           "type": "paragraph",
-          "text": "Cột \"Chức năng\" là thuyết minh kỹ thuật, chưa được FD phê duyệt. Riêng vai trò của magnesi oxyd và mức 3% magnesi stearat là hai điểm cần FD xác nhận và bổ sung dữ liệu chứng minh trước khi chốt công thức.",
+          "text": "Việc cần làm trước khi đưa vào hồ sơ đăng ký: (i) đối chiếu chuyên luận dược điển tương ứng (USP-NF / Ph.Eur. / DĐVN) cho các chỉ tiêu nằm trong tiêu chuẩn nguyên liệu; (ii) kiểm tra giới hạn dùng theo FDA IID cho đường dùng uống; (iii) FD phê duyệt nội dung cột \"Chức năng\" — riêng vai trò thiết kế của magnesi oxyd và mức 3% magnesi stearat là hai điểm cần dữ liệu thực nghiệm chứng minh.",
           "italic": true
         },
         {
