@@ -216,6 +216,26 @@
         {
           "type": "paragraph",
           "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] QTPP đầy đủ (dạng bào chế, đường dùng, PK/BE với RMP, độ ổn định ICH Q1A...) và bảng CQA có biện luận \"có phải CQA hay không\" — cần FD xây dựng và phê duyệt."
+        },
+        {
+          "type": "heading3",
+          "text": "Xác định yếu tố trọng yếu và biện luận kiểm soát"
+        },
+        {
+          "type": "paragraph",
+          "text": "ICH Q8(R2) Part I (trang 6) đặt đây là yêu cầu nền: \"At a minimum, those aspects of drug substances, excipients, container closure systems, and manufacturing processes that are critical to product quality should be determined and control strategies justified\", và mô tả cách xác định: \"Critical formulation attributes and process parameters are generally identified through an assessment of the extent to which their variation can have impact on the quality of the drug product.\" Mục này chỉ kết luận cho yếu tố mà Thử nghiệm 1 đã thực sự khảo sát biến thiên; các yếu tố còn lại được ghi rõ là chưa đánh giá, không suy đoán."
+        },
+        {
+          "type": "paragraph",
+          "text": "Tỷ lệ croscarmellose sodium là thuộc tính công thức trọng yếu, đã chứng minh bằng thực nghiệm. Đây là biến số độc lập duy nhất giữa CT01 – CT03 (1% / 3% / 5% kl/kl, bù trừ bằng lactose monohydrate để giữ khối lượng viên 100 mg). Biến thiên của nó làm độ hòa tan 30 phút đổi từ 73,89% → 81,40% → 98,64% (tiêu chuẩn ≥ 80% Q) và độ rã tối đa từ 13'28\" → 8'57\" → 4'18\". Mức 1% không đạt độ hòa tan; mức 3% đạt trung bình nhưng giá trị Min 79,12% nằm dưới ngưỡng. Vậy độ hòa tan là chỉ tiêu chất lượng chịu ảnh hưởng trực tiếp của yếu tố này. Số liệu dẫn ở đây lấy từ bảng kết quả mục P.2.2.1.3, không phải số liệu mới."
+        },
+        {
+          "type": "paragraph",
+          "text": "Biện luận kiểm soát tương ứng: cố định croscarmellose sodium ở 5% kl/kl mang sang Thử nghiệm 2, và giữ độ hòa tan 30 phút (≥ 80% Q) cùng độ rã (≤ 15 phút) trong bộ chỉ tiêu kiểm tra viên thành phẩm nêu ở bảng trên. Ở mức 5%, giá trị Min đạt 96,15% và RSD giảm từ 7,57% (mức 1%) xuống 2,70%, tức cả biên an toàn lẫn độ lặp lại đều cải thiện. Lưu ý mức 5% chạm trần khoảng 0,5 – 5,0% mà Handbook of Pharmaceutical Excipients khuyến cáo cho viên nén, nên không còn dư địa nâng thêm; nếu Thử nghiệm 2 cần thêm biên an toàn thì phải điều chỉnh yếu tố khác."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa đánh giá tính trọng yếu của: thuộc tính dược chất (phân bố cỡ hạt, đa hình), các thông số quy trình (thời gian trộn, lực dập, điều kiện xát hạt và bao phim), hệ màng bao, và hệ thống bao bì. Thử nghiệm 1 giữ cố định hoặc không khảo sát các yếu tố này nên không có cơ sở kết luận theo cách ICH Q8(R2) trang 6 mô tả. Riêng magnesium stearate 3% kl/kl là biến nhiễu tiềm tàng đối với độ hòa tan, cần tách bạch trong thử nghiệm tiếp theo trước khi kết luận về tá dược rã là đầy đủ."
         }
       ]
     },
@@ -530,6 +550,14 @@
         {
           "type": "paragraph",
           "text": "Công thức tạm thời sau Thử nghiệm 1: CT03 (Primellose 5%) là điểm khởi đầu cho Thử nghiệm 2, chưa phải công thức thương mại/biobatch cuối cùng — cần các thử nghiệm tiếp theo để hoàn thiện."
+        },
+        {
+          "type": "heading3",
+          "text": "Đặc điểm thiết kế riêng của viên"
+        },
+        {
+          "type": "paragraph",
+          "text": "Viên được khắc số \"10\" trên một mặt. ICH Q8(R2) mục 2.2.1 (trang 8) yêu cầu: \"Any special design features of the drug product (e.g., tablet score line, overfill, anti-counterfeiting measure as it affects the drug product) should be identified and a rationale provided for their use.\" Ký hiệu này là dấu nhận dạng hàm lượng 10 mg, không phải vạch bẻ nên không nhằm mục đích chia liều và không đặt ra nghĩa vụ chứng minh đồng đều hàm lượng của nửa viên. Kết quả đồng đều khối lượng (100,1 mg trung bình, dao động −2,10% đến +1,90% ở CT03) và độ đồng đều hàm lượng (AV 3,04 ở CT03) không cho thấy tác động bất lợi của việc khắc. Đây là suy luận từ mô tả cảm quan trong Thử nghiệm 1; cần FD xác nhận chính thức mục đích của ký hiệu."
         }
       ]
     },
@@ -561,7 +589,11 @@
         },
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Điều kiện phương pháp hòa tan cụ thể (thiết bị, tốc độ khuấy, môi trường, thể tích) và khả năng phân biệt của phương pháp (discriminatory power) — không có trong Thử nghiệm 1."
+          "text": "Khả năng phân biệt (discriminatory power) — biện luận hồi cứu từ Thử nghiệm 1: cùng một phương pháp hòa tan đã cho ba kết quả tách bạch 73,89% / 81,40% / 98,64% trên ba công thức chỉ khác nhau ở tỷ lệ tá dược rã, xếp đúng thứ tự với độ rã (13'28\" / 8'57\" / 4'18\"), và phân loại đạt/không đạt đúng ở ngưỡng 80% Q. Phương pháp do đó phân biệt được thay đổi có ý nghĩa về công thức. ICH Q8(R2) mục 2.2.3 (trang 8) diễn đạt phần này bằng \"could be provided\" nên đây không phải yêu cầu bắt buộc của guideline; mục riêng là theo tài liệu mẫu của phòng."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Điều kiện phương pháp hòa tan cụ thể (thiết bị, tốc độ khuấy, môi trường, thể tích, thời điểm lấy mẫu) — không có trong Thử nghiệm 1; cần trích từ hồ sơ phương pháp phân tích 3.2.P.5.2. Biện luận khả năng phân biệt ở trên không thay thế cho việc khai điều kiện phương pháp."
         },
         {
           "type": "heading3",

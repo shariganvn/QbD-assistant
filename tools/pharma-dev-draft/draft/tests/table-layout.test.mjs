@@ -123,3 +123,25 @@ test("P.2.1.2 keeps one excipient table under the two numbered sub-headings", ()
   ]);
   assert.equal(section.blocks.filter((b) => b.type === "heading2").length, 0);
 });
+
+test("the criticality discussion does not upgrade P.2.2.1.2 into an approved QTPP/CQA table", () => {
+  const section = loadExample().sections.find((s) => s.id === "P.2.2.1.2");
+  const headings = section.blocks.filter((b) => b.type === "heading3").map((b) => b.text);
+  assert.ok(
+    headings.includes("Xác định yếu tố trọng yếu và biện luận kiểm soát"),
+    "the section must carry the criticality and control-strategy discussion",
+  );
+  // The section reasons about which attributes are critical, which is a different claim from
+  // presenting an approved QTPP/CQA table. The opening disclaimer is what keeps the two apart, so
+  // it has to survive every later pass that adds reasoning here.
+  assert.ok(
+    section.blocks.some((b) => b.type === "paragraph" && b.text.includes("KHÔNG phải bảng QTPP/CQA chính thức")),
+    "the section must keep stating that it is not an approved QTPP/CQA table",
+  );
+  // Only the disintegrant level was actually varied, so everything else stays an open question
+  // rather than an unsupported criticality claim.
+  assert.ok(
+    section.blocks.some((b) => b.type === "paragraph" && b.text.startsWith("[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa đánh giá tính trọng yếu")),
+    "the section must name the attributes whose criticality is still unassessed",
+  );
+});
