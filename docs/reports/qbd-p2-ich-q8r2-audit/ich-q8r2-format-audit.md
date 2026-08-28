@@ -68,12 +68,12 @@ critical to product quality và biện luận cách kiểm soát, dù chỉ bằ
 | 2.1.1 Drug substance (tr. 6) — properties ảnh hưởng performance/manufacturability: solubility, water content, particle size, crystal properties, biological activity, permeability | P.2.1.1 | Bảng 7 dòng, draft tự khai là kiến thức tham khảo chưa đối chiếu CoA/dược điển. Cỡ hạt, đa hình, BCS thực nghiệm, độ tan theo pH, ổn định — đều là marker trống | Chưa đạt — **thiếu dữ liệu**. Đúng các thuộc tính guideline nêu tên lại là phần trống |
 | 2.1.1 (tr. 7) — *"The compatibility of the drug substance with excipients listed in 3.2.P.1 should be evaluated"* | P.2.1.1 (draft đặt ở P.2.1.2) | Marker trống, nay đã có mục riêng `3.2.P.2.1.2.2` | Chưa đạt — **thiếu dữ liệu**. Đây là một trong số ít yêu cầu Part I dùng "should be evaluated" tuyệt đối, không kèm "where appropriate" |
 | 2.1.2 Excipients (tr. 7) — *"This should include all substances used in the manufacture of the drug product, whether they appear in the finished product or not (e.g., processing aids)"* | P.2.1.2 | Bảng 6 tá dược lõi viên, tổng 100,00 mg. **Không có hệ màng bao, không có dung môi tá hạt** dù sản phẩm khai là viên nén bao phim | Chưa đạt — **thiếu cấu trúc**. Đã bổ sung marker ghi nhận trong lần cập nhật này |
-| 2.2.1 Formulation development (tr. 7–8) — evolution từ concept tới final design; identification of critical attributes; tóm tắt công thức lâm sàng/BE; IVIVC; biện luận special design features | P.2.2.1.1/.2/.3 | 1 vòng thử nghiệm, 1 biến (croscarmellose 1/3/5%), 3 bảng kết quả đầy đủ, chọn CT03. RMP `gap`. Không có IVIVC, không có công thức lâm sàng, không có evolution | Chưa đạt — **thiếu dữ liệu**. Phần thực nghiệm đã có thì chắc và truy vết được |
+| 2.2.1 Formulation development (tr. 7–8) — evolution từ concept tới final design; identification of critical attributes; tóm tắt công thức lâm sàng/BE; IVIVC; biện luận special design features | P.2.2.1.1/.2/.3 | 1 vòng thử nghiệm, 1 biến (croscarmellose 1/3/5%), 3 bảng kết quả đầy đủ, chọn CT03. RMP `gap`. Không có IVIVC, không có công thức lâm sàng, không có evolution | Chưa đạt — **thiếu dữ liệu**. Phần thực nghiệm đã có thì chắc và truy vết được. Đợt 2 đã bổ sung biện luận criticality cho yếu tố duy nhất được khảo sát biến thiên, và biện luận special design feature |
 | 2.2.2 Overages (tr. 8) — overage bị *"discouraged"*, nếu có phải biện luận | P.2.2.2 | Ghi nhận không thấy overage, nêu rõ đây là quan sát chưa phải xác nhận chính thức | **Đạt điều kiện.** Không có overage thì nghĩa vụ biện luận không phát sinh |
-| 2.2.3 Physicochemical and biological properties (tr. 8) | P.2.2.3 | Chỉ có spec ≥ 80% (Q)/30 phút; điều kiện phương pháp hòa tan và discriminatory power là marker trống | Chưa đạt một phần. Lưu ý sắc thái: phần method development dùng **"could be provided"**, không phải "should" — kỳ vọng mềm theo Q8(R2), nhưng file mẫu phòng lại đòi kỹ |
+| 2.2.3 Physicochemical and biological properties (tr. 8) | P.2.2.3 | Đợt 2 đã bổ sung biện luận discriminatory power từ dữ liệu ba công thức; điều kiện phương pháp hòa tan vẫn là marker trống | Chưa đạt một phần. Lưu ý sắc thái: phần method development dùng **"could be provided"**, không phải "should" — kỳ vọng mềm theo Q8(R2), nhưng file mẫu phòng lại đòi kỹ |
 | 2.3 Manufacturing process development (tr. 8–9) | P.2.3 | `gap` toàn mục | Chưa đạt — **thiếu dữ liệu**. Cần hồ sơ quy trình/hồ sơ lô, không đóng được bằng viết lại |
 | 2.4 Container closure system (tr. 9–10) | P.2.4 | `gap` toàn mục | Chưa đạt — **thiếu dữ liệu** |
-| 2.5 Microbiological attributes (tr. 10) — *"Where appropriate"*, gồm cả *"rationale for performing or not performing microbial limits testing"* | P.2.5 | `gap` | Chưa đạt, **nhưng gánh nặng thấp nhất**: guideline chấp nhận biện luận lý do KHÔNG thử. Có thể đóng bằng một đoạn theo ICH Q6A Decision Tree #8, không cần thực nghiệm mới |
+| 2.5 Microbiological attributes (tr. 10) — *"Where appropriate"*, gồm cả *"rationale for performing or not performing microbial limits testing"* | P.2.5 | `gap` | Chưa đạt, **nhưng gánh nặng thấp nhất**: guideline chấp nhận biện luận lý do KHÔNG thử. Có thể đóng bằng một đoạn biện luận theo ICH Q6A, không cần thực nghiệm mới. **Số hiệu decision tree: chưa xác minh** — xem đính chính bên dưới |
 | 2.6 Compatibility (tr. 10) — giới hạn ở dung môi hoàn nguyên và pha loãng trước khi dùng | P.2.6 | "Không áp dụng" kèm lý do dạng bào chế + chờ FD xác nhận | **Đạt trọn vẹn.** Mục duy nhất đạt hoàn toàn |
 
 ## Findings
@@ -84,6 +84,9 @@ critical to product quality và biện luận cách kiểm soát, dù chỉ bằ
 bất kỳ mục nào.** Vi phạm Part I tr. 6 (trích ở phần đính chính trên). Không phải chuyện Annex.
 Chi phí đóng thấp: có thể viết dạng văn xuôi có biện luận, không bắt buộc làm QbD đầy đủ.
 Loại: thiếu dữ liệu + thiếu cấu trúc.
+
+*Trạng thái sau đợt 2:* đã đóng phần khảo sát được — xem mục "Đã sửa — đợt 2". Phần còn
+lại (thuộc tính API, thông số quy trình, màng bao, bao bì) vẫn là thiếu dữ liệu.
 
 **C-2 — Danh mục tá dược bỏ sót toàn bộ hệ màng bao và mọi processing aid.** Vi phạm 2.1.2 tr. 7.
 Sản phẩm khai là viên nén bao phim, P.2.2.1.2 mô tả "viên nén tròn, bao phim trắng", nhưng bảng
@@ -141,6 +144,9 @@ công thức khác nhau về tỷ lệ rã cho 73,89 / 81,40 / 98,64% — **đó
 phân biệt được**. Có thể đóng phần lớn mục này mà không cần thực nghiệm mới, chỉ cần bổ sung điều
 kiện phương pháp (thiết bị, tốc độ, môi trường, thể tích).
 
+*Trạng thái sau đợt 2:* nửa discriminatory power đã đóng. Điều kiện phương pháp vẫn thiếu — phải
+trích từ hồ sơ 3.2.P.5.2, không suy ra được từ Thử nghiệm 1.
+
 ### INFO
 
 **I-1 — Vắng mặt design space, RTRT, PAT, DoE đa biến là lựa chọn hợp lệ, đã xác minh.**
@@ -169,7 +175,9 @@ features of the drug product (e.g., tablet score line, overfill, anti-counterfei
 affects the drug product) should be identified and a rationale provided for their use."* Khắc chữ
 nhận dạng nhẹ hơn score line, một câu biện luận là đủ đóng.
 
-## Đã sửa trong lần cập nhật này
+*Trạng thái sau đợt 2:* đã đóng, kèm câu chờ FD xác nhận mục đích của ký hiệu.
+
+## Đã sửa — đợt 1 (tách mục tá dược)
 
 - `P.2.1.2` tách thành hai mục có đánh số theo file mẫu của phòng:
   `3.2.P.2.1.2.1. Đặc tính lý hóa` và `3.2.P.2.1.2.2. Nghiên cứu tương hợp dược chất – tá dược`.
@@ -179,14 +187,48 @@ nhận dạng nhẹ hơn score line, một câu biện luận là đủ đóng.
 - Bổ sung marker ghi nhận thiếu hệ màng bao và processing aid (C-2), kèm dẫn chiếu 2.1.2 tr. 7.
 - `meta.referenceSources` thêm Q8(R2) để trang bìa khai đủ nguồn tài liệu đã viện dẫn.
 
+## Đã sửa — đợt 2 (C-1, nửa W-7, I-5)
+
+Nguyên tắc của đợt này: **chỉ viết lập luận từ số liệu đã có trong draft**, không thêm bất kỳ giá
+trị đo nào. Mọi con số trong văn bản mới đều truy về bảng kết quả ở `P.2.2.1.3`.
+
+- **C-1 → `P.2.2.1.2`**, mục "Xác định yếu tố trọng yếu và biện luận kiểm soát". Kết luận tỷ lệ
+  croscarmellose sodium là thuộc tính công thức trọng yếu, dựa trên đúng cơ chế mà Q8(R2) tr. 6 mô
+  tả (*"identified through an assessment of the extent to which their variation can have impact on
+  the quality of the drug product"*): biến độc lập duy nhất, tác động đo được lên độ hòa tan và độ
+  rã. Biện luận kiểm soát: cố định 5% kl/kl, giữ độ hòa tan và độ rã trong bộ chỉ tiêu thành phẩm,
+  kèm cảnh báo 5% chạm trần khoảng HPE. Một marker riêng liệt kê những yếu tố **chưa** đánh giá
+  được tính trọng yếu, để không tạo ấn tượng đã làm risk assessment đầy đủ.
+- **W-7 (một nửa) → `P.2.2.3`**: biện luận discriminatory power hồi cứu từ ba kết quả
+  73,89 / 81,40 / 98,64% trên ba công thức chỉ khác tỷ lệ tá dược rã. Marker cũ được thu hẹp lại
+  còn đúng phần thiếu thật — điều kiện phương pháp — kèm câu nói rõ biện luận này không thay thế
+  cho việc khai điều kiện.
+- **I-5 → `P.2.2.1.3`**, mục "Đặc điểm thiết kế riêng của viên": biện luận ký hiệu khắc theo
+  2.2.1 tr. 8, phân biệt với vạch bẻ, dẫn AV và đồng đều khối lượng làm bằng chứng không có tác
+  động bất lợi, đóng bằng câu chờ FD xác nhận.
+
+**Câu hỏi đánh số để FD quyết:** heading criticality để **không đánh số** vì file mẫu của phòng đã
+dùng `3.2.P.2.2.1.2.1 QTPP` và `.2 CQAs`. Nếu phòng muốn mục này có số riêng thì phải quyết vị trí
+của nó trong cây đánh số trước.
+
+**Đính chính một trích dẫn của đợt 1:** báo cáo đợt 1 ghi có thể đóng P.2.5 bằng "ICH Q6A Decision
+Tree #8". Repo không có file Q6A trong `docs/raw/` nên **số hiệu decision tree là chưa xác minh**.
+Chỗ Q8(R2) tr. 8 thực sự cross-reference là Q6A Decision Tree #4 (Part 3) và #7 (Part 1), và cả
+hai thuộc phần hòa tan/drug release chứ không phải vi sinh. Cần đẩy file Q6A vào `docs/raw/` trước
+khi viết biện luận cho P.2.5. Ràng buộc kỹ thuật đi kèm: validator chặn `E_GAP_HAS_BLOCKS` —
+section `status: "gap"` không được mang block, nên muốn viết biện luận vào P.2.5 thì phải lật sang
+`covered`, mà lật khi chưa có kết quả vi sinh nào là khai sai. P.2.5 giữ nguyên `gap`.
+
 ## Còn lại, phân theo loại
 
 **Thiếu dữ liệu** (cần nguồn, không sửa được bằng viết lại): C-3 tương hợp, C-4 quy trình sản
-xuất, C-5 bao bì, P.2.2.1.1 RMP, thuộc tính API ở W-5, thành phần màng bao thật ở C-2.
+xuất, C-5 bao bì, P.2.2.1.1 RMP, thuộc tính API ở W-5, thành phần màng bao thật ở C-2, điều kiện
+phương pháp hòa tan ở W-7, và phần criticality của mọi yếu tố ngoài tá dược rã ở C-1.
 
-**Thiếu cấu trúc** (sửa được ngay, không cần dữ liệu mới): C-1 xác định criticality + biện luận
-control strategy, W-1 ba heading cha, W-2 phân cấp heading, W-7 điều kiện phương pháp hòa tan,
-I-5 biện luận khắc chữ, P.2.5 biện luận Q6A Decision Tree #8.
+**Thiếu cấu trúc** (sửa được ngay, không cần dữ liệu mới): W-1 ba heading cha, W-2 phân cấp
+heading. C-1, nửa W-7 và I-5 đã đóng ở đợt 2.
+
+**Chờ nguồn guideline:** P.2.5 biện luận vi sinh — cần file ICH Q6A trong `docs/raw/`.
 
 **Lệch chuẩn phòng** (Q8(R2) không đòi, file mẫu có): W-3 nhóm risk assessment và QTPP/CQA theo
 định dạng Annex.
