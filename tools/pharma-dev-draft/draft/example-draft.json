@@ -8,7 +8,8 @@
     "preparer": "Claude (phiên làm việc 2026-08-20, tổng hợp từ Thử nghiệm 1)",
     "extractionMethod": "xml-walk",
     "referenceSources": [
-      "Rowe RC, Sheskey PJ, Quinn ME (chủ biên). Handbook of Pharmaceutical Excipients, 6th Edition. London: Pharmaceutical Press; 2009"
+      "Rowe RC, Sheskey PJ, Quinn ME (chủ biên). Handbook of Pharmaceutical Excipients, 6th Edition. London: Pharmaceutical Press; 2009",
+      "ICH guideline Q8 (R2) on pharmaceutical development, Step 5. EMA/CHMP/ICH/167068/2004; 22/06/2017"
     ]
   },
   "sections": [
@@ -67,6 +68,10 @@
       "id": "P.2.1.2",
       "status": "covered",
       "blocks": [
+        {
+          "type": "heading3",
+          "text": "3.2.P.2.1.2.1. Đặc tính lý hóa (Physicochemical properties)"
+        },
         {
           "type": "paragraph",
           "text": "Danh mục tá dược sử dụng trong công thức, kèm đặc tính lý hóa, ứng dụng trong công thức dược phẩm và chức năng tương ứng. Thành phần định lượng theo từng công thức thử nghiệm được trình bày tại mục 3.2.P.2.2.1.3."
@@ -143,6 +148,14 @@
           "type": "paragraph",
           "italic": true,
           "text": "Nguồn dữ liệu cột \"Đặc tính lý hóa\" và \"Ứng dụng\": Handbook of Pharmaceutical Excipients, 6th Edition — Lactose, Monohydrate (tr. 364 – 369); Lactose, Monohydrate and Powdered Cellulose (tr. 374 – 375, synonym: Cellactose 80); Croscarmellose Sodium (tr. 206 – 208); Magnesium Oxide (tr. 400 – 401); Povidone (tr. 581 – 585); Magnesium Stearate (tr. 405 – 407). Trích dẫn đầy đủ ghi ở trang bìa. Chỉ tiêu nào tài liệu không nêu trong chuyên luận tương ứng thì không đưa vào bảng thay vì lấy từ nguồn khác."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Bảng trên chỉ gồm tá dược của lõi viên (tổng 100,00 mg). Sản phẩm là viên nén bao phim nên còn thành phần hệ màng bao, và các chất chỉ dùng trong quá trình sản xuất mà không còn trong thành phẩm (dung môi tá hạt, dung môi pha dịch bao) — không có trong Thử nghiệm 1. ICH Q8(R2) mục 2.1.2 (trang 7) yêu cầu phần này bao gồm mọi chất dùng trong sản xuất thuốc, dù có xuất hiện trong thành phẩm hay không."
+        },
+        {
+          "type": "heading3",
+          "text": "3.2.P.2.1.2.2. Nghiên cứu tương hợp dược chất – tá dược (Excipient compatibility)"
         },
         {
           "type": "paragraph",

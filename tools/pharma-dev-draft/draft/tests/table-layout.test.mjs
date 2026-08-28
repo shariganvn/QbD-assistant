@@ -106,11 +106,20 @@ test("justify is an accepted column alignment", () => {
   assert.doesNotThrow(() => validateDraft(draft));
 });
 
-test("P.2.1.2 stays a single table with no sub-part headings", () => {
+test("P.2.1.2 keeps one excipient table under the two numbered sub-headings", () => {
   const section = loadExample().sections.find((s) => s.id === "P.2.1.2");
   const tables = section.blocks.filter((b) => b.type === "table");
-  const headings = section.blocks.filter((b) => b.type === "heading2" || b.type === "heading3");
+  const subHeadings = section.blocks.filter((b) => b.type === "heading3");
+  // One table only: the excipient information belongs in a single table, not split back into the
+  // quantitative-composition plus information-table pair the section used to carry.
   assert.equal(tables.length, 1, "the excipient section should hold exactly one table");
-  assert.equal(headings.length, 0, "the excipient section should not be split into sub-parts");
   assert.deepEqual(tables[0].headers, ["STT", "Tên tá dược", "Đặc tính lý hóa", "Ứng dụng", "Chức năng"]);
+  // Properties and drug-substance compatibility are separate numbered items in the department's
+  // reference document, and Q8(R2) states the compatibility requirement in its own clause, so the
+  // section carries exactly those two sub-headings and no heading2 that would outrank them.
+  assert.deepEqual(subHeadings.map((b) => b.text), [
+    "3.2.P.2.1.2.1. Đặc tính lý hóa (Physicochemical properties)",
+    "3.2.P.2.1.2.2. Nghiên cứu tương hợp dược chất – tá dược (Excipient compatibility)",
+  ]);
+  assert.equal(section.blocks.filter((b) => b.type === "heading2").length, 0);
 });
