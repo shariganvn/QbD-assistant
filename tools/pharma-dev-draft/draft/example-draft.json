@@ -10,7 +10,8 @@
     "referenceSources": [
       "Rowe RC, Sheskey PJ, Quinn ME (chủ biên). Handbook of Pharmaceutical Excipients, 6th Edition. London: Pharmaceutical Press; 2009",
       "ICH guideline Q8 (R2) on pharmaceutical development, Step 5. EMA/CHMP/ICH/167068/2004; 22/06/2017",
-      "ICH Harmonised Tripartite Guideline Q6A. Specifications: Test Procedures and Acceptance Criteria for New Drug Substances and New Drug Products: Chemical Substances, Step 4; 06/10/1999"
+      "ICH Harmonised Tripartite Guideline Q6A. Specifications: Test Procedures and Acceptance Criteria for New Drug Substances and New Drug Products: Chemical Substances, Step 4; 06/10/1999",
+      "Viện Kiểm nghiệm thuốc Trung ương. Chứng chỉ phân tích chuẩn đối chiếu thứ cấp Bisoprolol fumarat, SKS C0223252; ban hành 15/12/2020, adoption 18/05/2023"
     ]
   },
   "sections": [
@@ -39,7 +40,7 @@
             ],
             [
               "Công thức phân tử",
-              "(C18H31NO4)2·C4H4O4"
+              "(C18H31NO4)2·C4H4O4, tương đương C40H66N2O12 — đã đối chiếu (xem ghi chú dưới bảng)"
             ],
             [
               "Khối lượng phân tử",
@@ -62,6 +63,10 @@
         {
           "type": "paragraph",
           "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phân bố cỡ hạt API, tính chất chảy, đa hình tinh thể, độ thấm/BCS thực nghiệm, độ tan theo pH, dữ liệu ổn định/phân hủy của dược chất, và tính chất sinh học/dược lý lâm sàng — không có trong Thử nghiệm 1."
+        },
+        {
+          "type": "paragraph",
+          "text": "Ghi chú đối chiếu: công thức phân tử đã được đối chiếu với Chứng chỉ phân tích chuẩn đối chiếu thứ cấp Bisoprolol fumarat, SKS C0223252 của Viện Kiểm nghiệm thuốc Trung ương (ban hành 15/12/2020, adoption 18/05/2023), trên đó ghi C40H66N2O12 — khớp với dạng cấu trúc (C18H31NO4)2·C4H4O4 nêu trong bảng. Cần lưu ý phạm vi của chứng chỉ này: nó đặc trưng cho chất chuẩn dùng trong phép thử định tính và định lượng, KHÔNG phải cho lô nguyên liệu dùng sản xuất, nên không thay thế CoA/tiêu chuẩn nhà cung cấp API cho các thuộc tính còn lại của bảng và cho các mục còn thiếu bên dưới."
         }
       ]
     },
@@ -606,7 +611,7 @@
         },
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phương pháp phân tích tạp chất cụ thể (tham chiếu 3.2.P.5.2) chưa được nêu trong Thử nghiệm 1."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phương pháp phân tích tạp chất cụ thể (tham chiếu 3.2.P.5.2) chưa được nêu trong Thử nghiệm 1. Ngoài ra, phép thử tạp liên quan của bisoprolol fumarat theo chuyên luận được thực hiện dưới dạng định danh từng tạp — tạp G, tạp A, tạp E, tạp khác và tổng tạp, như thể hiện trên chứng chỉ chuẩn đối chiếu SKS C0223252 — trong khi tiêu chuẩn viên thành phẩm đang áp dụng ở mục P.2.2.1.2 chỉ ghi \"tạp đơn bất kỳ\" và tổng tạp, không nêu tên tạp nào. Cần FD xác nhận chuyên luận áp dụng và khai lại tiêu chuẩn theo đúng danh mục tạp của chuyên luận đó."
         }
       ]
     },

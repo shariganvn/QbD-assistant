@@ -140,6 +140,10 @@ nhưng đây là câu hỏi thẩm định gần như chắc chắn.
 được xếp"). 2.1.1 tr. 6 đòi properties *"identified and discussed"*; giá trị chưa đối chiếu chuyên
 luận/CoA không đáp ứng. Draft đã cảnh báo minh bạch, nhưng phải thay bằng số có nguồn trước khi nộp.
 
+*Trạng thái sau đợt 4:* vẫn mở. Chỉ ô công thức phân tử được đối chiếu. Tài liệu đóng được mục này
+là **CoA hoặc tiêu chuẩn của lô nguyên liệu từ nhà cung cấp API** — chứng chỉ chuẩn đối chiếu không
+thay thế được.
+
 **W-6 — `meta.preparer` ghi AI là người soạn thảo.** Không liên quan Q8(R2); là vấn đề data
 integrity — người soạn phải là cá nhân định danh được. Bảng ký cuối tài liệu đã có dòng "Rà soát
 FD"/"Phê duyệt QA-PO" bỏ trống nên rủi ro có kiểm soát, nhưng trường này nên đổi.
@@ -152,6 +156,17 @@ kiện phương pháp (thiết bị, tốc độ, môi trường, thể tích).
 
 *Trạng thái sau đợt 2:* nửa discriminatory power đã đóng. Điều kiện phương pháp vẫn thiếu — phải
 trích từ hồ sơ 3.2.P.5.2, không suy ra được từ Thử nghiệm 1.
+
+**W-8 — Tiêu chuẩn tạp chất viên thành phẩm không định danh tạp, và ngưỡng tổng tạp rất rộng.**
+`P.2.2.1.2` ghi "Tạp đơn bất kỳ ≤ 0,2%; tổng tạp ≤ 3,0%" — không nêu tên tạp nào. Phép thử tạp
+liên quan của bisoprolol fumarat theo chuyên luận lại được thực hiện dưới dạng **định danh từng
+tạp**: tạp G, tạp A, tạp E, tạp khác, tổng tạp — thấy rõ trên chứng chỉ chuẩn đối chiếu SKS
+C0223252. Hai điểm để đối chiếu độ rộng của ngưỡng: kết quả thực đo trên viên ở cả ba công thức là
+0,1839 – 0,1918% tổng tạp, tức cách ngưỡng 3,0% hơn một bậc; và bản thân chất chuẩn đo được tổng
+tạp 0,07%. Ngưỡng 3,0% cho một viên nén phóng thích ngay của hoạt chất ổn định là bất thường và
+gần như chắc chắn bị hỏi khi thẩm định. Cần FD xác nhận chuyên luận áp dụng (USP/BP/Ph.Eur.) và
+khai lại tiêu chuẩn theo đúng danh mục tạp của chuyên luận đó. Loại: lệch chuẩn + thiếu cấu trúc;
+sửa được bằng viết lại, không cần thực nghiệm mới.
 
 ### INFO
 
@@ -255,6 +270,36 @@ thể**, không còn mơ hồ.
 **Đã sửa:** `P.2.5` giữ `status: "gap"`, viết lại `gapReason` nêu hai lối Q6A cho phép và ba loại
 bằng chứng còn thiếu; `meta.referenceSources` thêm Q6A (trường này khai nguồn cho trang bìa, và
 `gapReason` có được render — cả trong bảng tổng hợp khoảng trống lẫn thân mục).
+
+## Đợt 4 — Chứng chỉ chuẩn đối chiếu thứ cấp
+
+**Tài liệu nhận được không phải CoA lô API.** Đây là Chứng chỉ phân tích **Chuẩn đối chiếu thứ
+cấp** (Secondary Reference Substance) Bisoprolol fumarat, Viện Kiểm nghiệm thuốc Trung ương, SKS
+**C0223252**, ban hành 15/12/2020, date of adoption 18/05/2023, re-test 2026. Mục đích ghi trên
+chính tài liệu: *"intended to be used in physicochemical analysis for assay and identification"*.
+Nội dung: mô tả bột màu trắng; nước (KF) 0,14%; tro sulfat 0,02%; tạp liên quan HPLC (tạp G 0,07%,
+tạp A < 0,05%, tạp E và tạp khác không phát hiện, tổng 0,07%); định lượng 99,6% as-is, U = ±0,2%
+(k = 2, 95%), đối chiếu USPRS lô R093J0. Bản gốc là scan không có text layer — phải render trang
+thành ảnh mới đọc được.
+
+**Ranh giới CTD.** Chất chuẩn đối chiếu là vật liệu hiệu chuẩn cho phép thử, thuộc `3.2.S.5
+Reference Standards` và `3.2.P.5.2/5.3`. Nó **không** mang các thuộc tính mà `3.2.P.2` đang chờ:
+pKa, LogP, độ tan theo pH, BCS thực nghiệm (W-5); phân bố cỡ hạt, đa hình, tính chảy (C-1, W-5);
+dữ liệu ổn định/phân hủy dược chất; kiểm vi sinh nguyên liệu trước sản xuất (một trong ba điều
+kiện Q6A cho P.2.5); tương hợp dược chất – tá dược (C-3). Gán thuộc tính của chất chuẩn thành
+thuộc tính của API sản xuất là lỗi nghiêm trọng trong hồ sơ đăng ký, nên các mục trên **giữ nguyên
+trạng thái thiếu**.
+
+**Hai điểm đã đóng được:**
+
+- `P.2.1.1` — công thức phân tử. Draft ghi `(C18H31NO4)2·C4H4O4`, chứng chỉ ghi `C40H66N2O12`;
+  khai triển khớp chính xác (C 40, H 66, N 2, O 12). Đây là đối chiếu, không phải dữ liệu mới. Kèm
+  ghi chú giới hạn phạm vi chứng chỉ để người đọc không hiểu nhầm là đã có CoA nguyên liệu.
+- `meta.referenceSources` — thêm chứng chỉ, để trang bìa khai đủ nguồn.
+
+**Bản scan không được commit** theo quyết định của user (tài liệu mang chữ ký và dấu của Viện
+trưởng). Thông tin định danh ghi ở trên và trong `meta.referenceSources` là dấu vết truy nguyên
+thay cho file.
 
 ## Còn lại, phân theo loại
 
