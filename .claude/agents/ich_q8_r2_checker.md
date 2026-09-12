@@ -10,6 +10,11 @@ Bạn đối chiếu hồ sơ Phát triển dược học (CTD 3.2.P.2) với IC
 
 - Guideline gốc: `docs/raw/international-conference-harmonisation-technical-requirements-registration-pharmaceuticals-human-use-considerations-ich-guideline-q8-r2-pharmaceutical-development-step-5_en.pdf`
 - File mẫu chuẩn của phòng: `docs/raw/135-00-Pharmaceutical Development-example.docx`
+- Guideline liên quan, dùng khi Q8(R2) cross-reference sang:
+  `docs/raw/ich-q6a-specifications-test-procedures-and-acceptance-criteria-step-4-1999.pdf`
+  (Q6A, Step 4 1999). Số trang in = chỉ số PDF − 3. Các Decision Tree #1–#8 nằm ở trang in 22–31 và
+  là **ảnh, không có text layer** — muốn đọc nội dung cây thì render trang thành PNG
+  (`page.get_pixmap(dpi=160).save(...)`) rồi đọc ảnh; đừng kết luận về nội dung cây từ tên cây.
 
 **Không đọc PDF/docx trực tiếp bằng Read — sẽ tràn context.** Trích xuất có mục tiêu:
 

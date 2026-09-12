@@ -9,7 +9,8 @@
     "extractionMethod": "xml-walk",
     "referenceSources": [
       "Rowe RC, Sheskey PJ, Quinn ME (chủ biên). Handbook of Pharmaceutical Excipients, 6th Edition. London: Pharmaceutical Press; 2009",
-      "ICH guideline Q8 (R2) on pharmaceutical development, Step 5. EMA/CHMP/ICH/167068/2004; 22/06/2017"
+      "ICH guideline Q8 (R2) on pharmaceutical development, Step 5. EMA/CHMP/ICH/167068/2004; 22/06/2017",
+      "ICH Harmonised Tripartite Guideline Q6A. Specifications: Test Procedures and Acceptance Criteria for New Drug Substances and New Drug Products: Chemical Substances, Step 4; 06/10/1999"
     ]
   },
   "sections": [
@@ -622,7 +623,7 @@
     {
       "id": "P.2.5",
       "status": "gap",
-      "gapReason": "Không có kết quả thử nghiệm vi sinh cho các công thức trong Thử nghiệm 1 — cần bổ sung. (Dự kiến áp dụng khung ICH Q6A / Ph.Eur. 5.1.4 cho dạng bào chế không vô khuẩn, nhưng đây là suy luận chung, không phải dữ liệu từ nguồn.)"
+      "gapReason": "Không có kết quả thử vi sinh cho các công thức trong Thử nghiệm 1. ICH Q6A trang 12 cho phép \"propose no microbial limit testing for solid oral dosage forms\" nhưng chỉ khi có \"acceptable scientific justification\". Decision Tree #8 (trang 31) chỉ rõ lối đi cho viên nén không chứa chất bảo quản: nếu có bằng chứng khoa học chứng minh sản phẩm có tính ức chế phát triển vi sinh thì tiêu chuẩn và phép thử giới hạn vi sinh có thể không cần thiết; nếu không, phải lập tiêu chuẩn theo chuyên luận dược điển hài hòa và thử từng lô trước khi xin chuyển sang skip-lot. Hồ sơ chưa có bằng chứng nào trong ba loại Q6A đòi: kiểm vi sinh nguyên liệu trước sản xuất, thẩm định quy trình chứng minh không mang rủi ro nhiễm hoặc tăng sinh đáng kể (trang 12), và dữ liệu phát triển chứng minh tính ức chế phát triển (ví dụ hoạt độ nước). Cần FD chọn một trong hai lối và bổ sung dữ liệu."
     },
     {
       "id": "P.2.6",

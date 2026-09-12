@@ -19,6 +19,12 @@ authorised provided the source is acknowledged."* — việc lưu bản này tro
 dẫn nguồn. Điều này **không** áp dụng cho Handbook of Pharmaceutical Excipients (sách thương mại
 của Pharmaceutical Press) đang nằm cùng thư mục; câu hỏi bản quyền cho HPE vẫn còn treo.
 
+ICH Q6A (Step 4, 06/10/1999, 35 trang) đã được bổ sung vào `docs/raw/` ở đợt 3. Số trang in =
+chỉ số PDF − 3. Các decision tree (tr. 22–31) là **ảnh, không có text layer** — phải render trang
+thành PNG mới đọc được nội dung. PDF này **không mang tuyên bố cho phép sao chép** nào; Q6A là
+guideline công khai của ICH nên rủi ro thấp, nhưng không có câu cho phép tường minh như bản EMA của
+Q8(R2) — ghi nhận để phòng quyết, không tự kết luận.
+
 ## Kết luận
 
 Hồ sơ **chưa đạt kỳ vọng nền của Q8(R2) Part I**. Bốn mục chưa có nội dung (2.3 quy trình sản
@@ -73,7 +79,7 @@ critical to product quality và biện luận cách kiểm soát, dù chỉ bằ
 | 2.2.3 Physicochemical and biological properties (tr. 8) | P.2.2.3 | Đợt 2 đã bổ sung biện luận discriminatory power từ dữ liệu ba công thức; điều kiện phương pháp hòa tan vẫn là marker trống | Chưa đạt một phần. Lưu ý sắc thái: phần method development dùng **"could be provided"**, không phải "should" — kỳ vọng mềm theo Q8(R2), nhưng file mẫu phòng lại đòi kỹ |
 | 2.3 Manufacturing process development (tr. 8–9) | P.2.3 | `gap` toàn mục | Chưa đạt — **thiếu dữ liệu**. Cần hồ sơ quy trình/hồ sơ lô, không đóng được bằng viết lại |
 | 2.4 Container closure system (tr. 9–10) | P.2.4 | `gap` toàn mục | Chưa đạt — **thiếu dữ liệu** |
-| 2.5 Microbiological attributes (tr. 10) — *"Where appropriate"*, gồm cả *"rationale for performing or not performing microbial limits testing"* | P.2.5 | `gap` | Chưa đạt, **nhưng gánh nặng thấp nhất**: guideline chấp nhận biện luận lý do KHÔNG thử. Có thể đóng bằng một đoạn biện luận theo ICH Q6A, không cần thực nghiệm mới. **Số hiệu decision tree: chưa xác minh** — xem đính chính bên dưới |
+| 2.5 Microbiological attributes (tr. 10) — *"Where appropriate"*, gồm cả *"rationale for performing or not performing microbial limits testing"* | P.2.5 | `gap` | Chưa đạt, **nhưng gánh nặng thấp nhất**: guideline chấp nhận biện luận lý do KHÔNG thử. Đã xác minh bằng Q6A: có lối đóng không cần thực nghiệm vi sinh, **nhưng cần dữ liệu chứng minh tính ức chế phát triển** mà hồ sơ chưa có. Xem đính chính đợt 3 |
 | 2.6 Compatibility (tr. 10) — giới hạn ở dung môi hoàn nguyên và pha loãng trước khi dùng | P.2.6 | "Không áp dụng" kèm lý do dạng bào chế + chờ FD xác nhận | **Đạt trọn vẹn.** Mục duy nhất đạt hoàn toàn |
 
 ## Findings
@@ -212,12 +218,43 @@ dùng `3.2.P.2.2.1.2.1 QTPP` và `.2 CQAs`. Nếu phòng muốn mục này có s
 của nó trong cây đánh số trước.
 
 **Đính chính một trích dẫn của đợt 1:** báo cáo đợt 1 ghi có thể đóng P.2.5 bằng "ICH Q6A Decision
-Tree #8". Repo không có file Q6A trong `docs/raw/` nên **số hiệu decision tree là chưa xác minh**.
-Chỗ Q8(R2) tr. 8 thực sự cross-reference là Q6A Decision Tree #4 (Part 3) và #7 (Part 1), và cả
-hai thuộc phần hòa tan/drug release chứ không phải vi sinh. Cần đẩy file Q6A vào `docs/raw/` trước
-khi viết biện luận cho P.2.5. Ràng buộc kỹ thuật đi kèm: validator chặn `E_GAP_HAS_BLOCKS` —
-section `status: "gap"` không được mang block, nên muốn viết biện luận vào P.2.5 thì phải lật sang
-`covered`, mà lật khi chưa có kết quả vi sinh nào là khai sai. P.2.5 giữ nguyên `gap`.
+Tree #8". Repo khi đó không có file Q6A nên số hiệu này được hạ xuống **chưa xác minh**. *Xem đính
+chính đợt 3 bên dưới — có nguồn rồi thì #8 là đúng.* Phần vẫn đúng của ghi chú này: chỗ Q8(R2)
+tr. 8 cross-reference là Q6A Decision Tree #4 (Part 3) và #7 (Part 1), thuộc phần hòa tan/drug
+release — đó là việc khác, không mâu thuẫn với #8. Ràng buộc kỹ thuật đi kèm: validator chặn
+`E_GAP_HAS_BLOCKS` — section `status: "gap"` không được mang block, nên muốn viết biện luận vào
+P.2.5 thì phải lật sang `covered`, mà lật khi chưa có kết quả vi sinh nào là khai sai. P.2.5 giữ
+nguyên `gap`.
+
+## Đợt 3 — Q6A vào repo, đính chính ngược, làm rõ P.2.5
+
+**Đính chính đợt 2 (sai chiều ngược lại).** Đợt 2 hạ "Decision Tree #8" xuống `chưa xác minh` vì
+repo không có nguồn. Đúng quy trình vào lúc đó, nhưng nay đã đọc được Q6A và **#8 chính là cây vi
+sinh**: tr. 31, *"DECISION TREE #8: MICROBIOLOGICAL ATTRIBUTES OF NON-STERILE DRUG PRODUCTS"*. Số
+hiệu đợt 1 đưa ra là chính xác.
+
+**Điều Q6A thực sự đòi, đọc từ cả thân bài lẫn cây.** Thân bài tr. 12 (§3.3.2 Solid Oral Drug
+Products, mục f) nói *"With acceptable scientific justification, it should be possible to propose
+no microbial limit testing for solid oral dosage forms"* — nhưng vế *"acceptable scientific
+justification"* mới là phần nặng. Cây #8 (tr. 31) nói rõ nội dung vế đó cho viên nén:
+
+1. Sản phẩm có chất bảo quản hoặc tự có hoạt tính kháng khuẩn? → **Không** (viên nén bisoprolol).
+2. Có phải dạng bào chế khô (viên nén, bột)? → **Có**.
+3. *"Does scientific evidence demonstrate growth inhibitory properties of the drug product?"*
+   - **Có** → *"Microbial limits acceptance criteria and testing may not be necessary."*
+   - **Không** → lập tiêu chuẩn theo chuyên luận dược điển hài hòa, thử **từng lô**, và chỉ sau khi
+     các lô sản xuất đạt ổn định mới được *"perform skip-lot testing, or provide scientific
+     justification for no routine microbial limits testing"*.
+
+Nút 3 là nút quyết định, và hồ sơ **không có** bằng chứng cho nó. Cộng thêm hai điều kiện ở tr. 12
+(nguyên liệu kiểm trước sản xuất; quy trình đã thẩm định không mang rủi ro nhiễm/tăng sinh đáng
+kể), đây là ba loại dữ liệu còn thiếu. Vì vậy **có nguồn vẫn chưa đóng được P.2.5** — mục này
+chuyển từ "chờ nguồn guideline" sang "thiếu dữ liệu", nhưng nay là thiếu dữ liệu **có tên cụ
+thể**, không còn mơ hồ.
+
+**Đã sửa:** `P.2.5` giữ `status: "gap"`, viết lại `gapReason` nêu hai lối Q6A cho phép và ba loại
+bằng chứng còn thiếu; `meta.referenceSources` thêm Q6A (trường này khai nguồn cho trang bìa, và
+`gapReason` có được render — cả trong bảng tổng hợp khoảng trống lẫn thân mục).
 
 ## Còn lại, phân theo loại
 
@@ -228,7 +265,9 @@ phương pháp hòa tan ở W-7, và phần criticality của mọi yếu tố n
 **Thiếu cấu trúc** (sửa được ngay, không cần dữ liệu mới): W-1 ba heading cha, W-2 phân cấp
 heading. C-1, nửa W-7 và I-5 đã đóng ở đợt 2.
 
-**Chờ nguồn guideline:** P.2.5 biện luận vi sinh — cần file ICH Q6A trong `docs/raw/`.
+P.2.5 vi sinh chuyển sang nhóm thiếu dữ liệu: cần bằng chứng tính ức chế phát triển (ví dụ hoạt
+độ nước), kết quả kiểm vi sinh nguyên liệu, và thẩm định quy trình — hoặc chấp nhận lối thử từng
+lô theo cây #8.
 
 **Lệch chuẩn phòng** (Q8(R2) không đòi, file mẫu có): W-3 nhóm risk assessment và QTPP/CQA theo
 định dạng Annex.
