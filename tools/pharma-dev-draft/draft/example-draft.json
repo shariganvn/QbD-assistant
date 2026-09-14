@@ -11,7 +11,8 @@
       "Rowe RC, Sheskey PJ, Quinn ME (chủ biên). Handbook of Pharmaceutical Excipients, 6th Edition. London: Pharmaceutical Press; 2009",
       "ICH guideline Q8 (R2) on pharmaceutical development, Step 5. EMA/CHMP/ICH/167068/2004; 22/06/2017",
       "ICH Harmonised Tripartite Guideline Q6A. Specifications: Test Procedures and Acceptance Criteria for New Drug Substances and New Drug Products: Chemical Substances, Step 4; 06/10/1999",
-      "Viện Kiểm nghiệm thuốc Trung ương. Chứng chỉ phân tích chuẩn đối chiếu thứ cấp Bisoprolol fumarat, SKS C0223252; ban hành 15/12/2020, adoption 18/05/2023"
+      "Viện Kiểm nghiệm thuốc Trung ương. Chứng chỉ phân tích chuẩn đối chiếu thứ cấp Bisoprolol fumarat, SKS C0223252; ban hành 15/12/2020, adoption 18/05/2023",
+      "Certificate of Analysis — Bisoprolol fumarate Ph.Eur. 12, code 71460, lô 488, sản xuất 23/04/2026, re-test 23/04/2031; nhà sản xuất Johnson Canady"
     ]
   },
   "sections": [
@@ -52,7 +53,7 @@
             ],
             [
               "Độ tan",
-              "Dễ tan trong nước và ethanol; thường được xếp BCS Class I"
+              "Xem bảng CoA bên dưới cho độ tan có nguồn; phân loại BCS Class I là suy đoán phổ biến, chưa có dữ liệu thấm thực nghiệm"
             ],
             [
               "pKa",
@@ -62,11 +63,92 @@
         },
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phân bố cỡ hạt API, tính chất chảy, đa hình tinh thể, độ thấm/BCS thực nghiệm, độ tan theo pH, dữ liệu ổn định/phân hủy của dược chất, và tính chất sinh học/dược lý lâm sàng — không có trong Thử nghiệm 1."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đa hình tinh thể, tính chất chảy của bột, độ thấm/BCS thực nghiệm, độ tan theo pH, dữ liệu ổn định/phân hủy của dược chất, và tính chất sinh học/dược lý lâm sàng — không có trong Thử nghiệm 1 cũng như trong CoA nguyên liệu. Ngoài ra cần đối chiếu số lô API ghi trong hồ sơ Thử nghiệm 1 với lô nêu ở bảng dưới."
         },
         {
           "type": "paragraph",
           "text": "Ghi chú đối chiếu: công thức phân tử đã được đối chiếu với Chứng chỉ phân tích chuẩn đối chiếu thứ cấp Bisoprolol fumarat, SKS C0223252 của Viện Kiểm nghiệm thuốc Trung ương (ban hành 15/12/2020, adoption 18/05/2023), trên đó ghi C40H66N2O12 — khớp với dạng cấu trúc (C18H31NO4)2·C4H4O4 nêu trong bảng. Cần lưu ý phạm vi của chứng chỉ này: nó đặc trưng cho chất chuẩn dùng trong phép thử định tính và định lượng, KHÔNG phải cho lô nguyên liệu dùng sản xuất, nên không thay thế CoA/tiêu chuẩn nhà cung cấp API cho các thuộc tính còn lại của bảng và cho các mục còn thiếu bên dưới."
+        },
+        {
+          "type": "heading3",
+          "text": "Thuộc tính theo CoA lô nguyên liệu"
+        },
+        {
+          "type": "paragraph",
+          "text": "Nguồn: Certificate of Analysis của nhà sản xuất Johnson Canady cho Bisoprolol fumarate Ph.Eur. 12, mã sản phẩm 71460, lô 488, ngày sản xuất 23/04/2026, hạn kiểm tra lại 23/04/2031, lượng giao 400,00 kg trong 16 kiện, ký bởi QC Manager. Lưu ý phạm vi: hồ sơ Thử nghiệm 1 không ghi số lô dược chất đã dùng, nên chưa có cơ sở khẳng định đây đúng là lô dùng để bào chế CT01 – CT03. Ngày sản xuất lô (23/04/2026) sớm hơn ngày lập bản thảo này nên về mặt thời gian là khả dĩ, nhưng cần đối chiếu hồ sơ lô để xác nhận."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Phép thử",
+            "Giới hạn / Kết quả"
+          ],
+          "rows": [
+            [
+              "Cảm quan (Appearance)",
+              "Trắng hoặc gần như trắng — Đạt"
+            ],
+            [
+              "Độ tan trong nước",
+              "Rất dễ tan (very soluble) — Đạt"
+            ],
+            [
+              "Độ tan trong methanol",
+              "Dễ tan (freely soluble) — Đạt"
+            ],
+            [
+              "Định tính — phổ hồng ngoại (IR)",
+              "Đạt (nguyên văn CoA: \"Conforms to 5th\")"
+            ],
+            [
+              "Phân bố cỡ hạt",
+              "Tối thiểu 75% nhỏ hơn 200 pm (nguyên văn CoA)"
+            ],
+            [
+              "Hàm lượng acid fumaric",
+              "14,8 – 15,4%"
+            ],
+            [
+              "Dung môi tồn dư",
+              "Tối đa 500 ppm"
+            ],
+            [
+              "Tổng vi sinh vật hiếu khí (TAMC)",
+              "Tối đa 1.000 CFU/g"
+            ],
+            [
+              "Tổng nấm men và nấm mốc (TYMC)",
+              "Tối đa 100 CFU/g"
+            ],
+            [
+              "Escherichia coli",
+              "Không có/g"
+            ],
+            [
+              "Salmonella",
+              "Không có/g"
+            ],
+            [
+              "Tạp A (benzyl alcohol) — HPLC",
+              "Tối đa 0,1%"
+            ],
+            [
+              "Tạp E — HPLC",
+              "Tối đa 0,1%"
+            ],
+            [
+              "Tạp G — HPLC",
+              "Tối đa 0,1%"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Ghi chú kỹ thuật về bảng trên. Thứ nhất, hàm lượng acid fumaric lý thuyết của muối hemifumarat là 116,07 / 766,97 = 15,13%, nằm trong khoảng 14,8 – 15,4% của CoA — nhất quán với dạng muối khai ở bảng tham khảo. Thứ hai, đơn vị cỡ hạt ghi trên CoA là \"pm\"; 200 picomet nhỏ hơn kích thước một nguyên tử nên đây gần như chắc chắn là lỗi đánh máy của µm, cần nhà cung cấp xác nhận trước khi trích vào hồ sơ nộp — bản thảo giữ nguyên văn thay vì tự sửa. Thứ ba, ô định tính ghi \"Conforms to 5th\" trong khi sản phẩm khai theo Ph.Eur. 12; cần làm rõ \"5th\" chỉ đến tài liệu nào. Thứ tư, hạn kiểm tra lại 5 năm cho thấy nhà cung cấp có dữ liệu độ ổn định của dược chất, nhưng bản thân dữ liệu đó chưa có trong hồ sơ này."
+        },
+        {
+          "type": "paragraph",
+          "text": "CoA khai tuân thủ ICH Q7, EU GMP Part II, 21 CFR Parts 210 & 211 và ICH Q3D (tạp nguyên tố) — Complies."
         }
       ]
     },
@@ -611,7 +693,7 @@
         },
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phương pháp phân tích tạp chất cụ thể (tham chiếu 3.2.P.5.2) chưa được nêu trong Thử nghiệm 1. Ngoài ra, phép thử tạp liên quan của bisoprolol fumarat theo chuyên luận được thực hiện dưới dạng định danh từng tạp — tạp G, tạp A, tạp E, tạp khác và tổng tạp, như thể hiện trên chứng chỉ chuẩn đối chiếu SKS C0223252 — trong khi tiêu chuẩn viên thành phẩm đang áp dụng ở mục P.2.2.1.2 chỉ ghi \"tạp đơn bất kỳ\" và tổng tạp, không nêu tên tạp nào. Cần FD xác nhận chuyên luận áp dụng và khai lại tiêu chuẩn theo đúng danh mục tạp của chuyên luận đó."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phương pháp phân tích tạp chất cụ thể (tham chiếu 3.2.P.5.2) chưa được nêu trong Thử nghiệm 1. Về danh mục tạp: CoA nguyên liệu khai theo chuyên luận Ph.Eur. 12 và kiểm riêng từng tạp — tạp A (benzyl alcohol), tạp E, tạp G, mỗi tạp tối đa 0,1%. Tiêu chuẩn viên thành phẩm đang áp dụng ở mục P.2.2.1.2 lại chỉ ghi \"tạp đơn bất kỳ\" tối đa 0,2% và tổng tạp tối đa 3,0%, không nêu tên tạp nào. Đây là điểm không nhất quán cần giải quyết: nguyên liệu đầu vào đang bị kiểm chặt hơn thành phẩm, trong khi quá trình bào chế chỉ có thể làm tạp tăng thêm chứ không giảm đi. Cần FD xác nhận chuyên luận áp dụng cho thành phẩm và khai lại tiêu chuẩn theo đúng danh mục tạp của chuyên luận đó."
         }
       ]
     },
@@ -628,7 +710,7 @@
     {
       "id": "P.2.5",
       "status": "gap",
-      "gapReason": "Không có kết quả thử vi sinh cho các công thức trong Thử nghiệm 1. ICH Q6A trang 12 cho phép \"propose no microbial limit testing for solid oral dosage forms\" nhưng chỉ khi có \"acceptable scientific justification\". Decision Tree #8 (trang 31) chỉ rõ lối đi cho viên nén không chứa chất bảo quản: nếu có bằng chứng khoa học chứng minh sản phẩm có tính ức chế phát triển vi sinh thì tiêu chuẩn và phép thử giới hạn vi sinh có thể không cần thiết; nếu không, phải lập tiêu chuẩn theo chuyên luận dược điển hài hòa và thử từng lô trước khi xin chuyển sang skip-lot. Hồ sơ chưa có bằng chứng nào trong ba loại Q6A đòi: kiểm vi sinh nguyên liệu trước sản xuất, thẩm định quy trình chứng minh không mang rủi ro nhiễm hoặc tăng sinh đáng kể (trang 12), và dữ liệu phát triển chứng minh tính ức chế phát triển (ví dụ hoạt độ nước). Cần FD chọn một trong hai lối và bổ sung dữ liệu."
+      "gapReason": "Không có kết quả thử vi sinh cho các công thức trong Thử nghiệm 1. ICH Q6A trang 12 cho phép \"propose no microbial limit testing for solid oral dosage forms\" nhưng chỉ khi có \"acceptable scientific justification\"; Decision Tree #8 (trang 31) chỉ rõ lối đi cho viên nén không chứa chất bảo quản: có bằng chứng khoa học về tính ức chế phát triển vi sinh thì tiêu chuẩn và phép thử có thể không cần thiết, nếu không thì phải lập tiêu chuẩn theo chuyên luận dược điển hài hòa và thử từng lô trước khi xin skip-lot. Trong ba loại bằng chứng Q6A đòi, nay đã có một: nguyên liệu được kiểm vi sinh trước khi sản xuất — CoA lô 488 nêu ở mục P.2.1.1 giới hạn TAMC 1.000 CFU/g, TYMC 100 CFU/g, không có E. coli và Salmonella. Còn thiếu hai loại: thẩm định quy trình chứng minh không mang rủi ro nhiễm hoặc tăng sinh đáng kể (trang 12), và dữ liệu phát triển chứng minh tính ức chế phát triển của viên (ví dụ hoạt độ nước). Cần FD chọn một trong hai lối và bổ sung dữ liệu tương ứng."
     },
     {
       "id": "P.2.6",

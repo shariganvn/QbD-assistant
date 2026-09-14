@@ -140,9 +140,10 @@ nhưng đây là câu hỏi thẩm định gần như chắc chắn.
 được xếp"). 2.1.1 tr. 6 đòi properties *"identified and discussed"*; giá trị chưa đối chiếu chuyên
 luận/CoA không đáp ứng. Draft đã cảnh báo minh bạch, nhưng phải thay bằng số có nguồn trước khi nộp.
 
-*Trạng thái sau đợt 4:* vẫn mở. Chỉ ô công thức phân tử được đối chiếu. Tài liệu đóng được mục này
-là **CoA hoặc tiêu chuẩn của lô nguyên liệu từ nhà cung cấp API** — chứng chỉ chuẩn đối chiếu không
-thay thế được.
+*Trạng thái sau đợt 5:* **đóng một phần.** CoA lô 488 cấp nguồn cho cảm quan, độ tan (nước,
+methanol), phân bố cỡ hạt, hàm lượng acid fumaric, dung môi tồn dư và giới hạn vi sinh. Vẫn mở:
+pKa, LogP, BCS thực nghiệm, đa hình tinh thể, tính chất chảy, độ tan theo pH, dữ liệu ổn định/phân
+hủy — CoA không chứa các mục này.
 
 **W-6 — `meta.preparer` ghi AI là người soạn thảo.** Không liên quan Q8(R2); là vấn đề data
 integrity — người soạn phải là cá nhân định danh được. Bảng ký cuối tài liệu đã có dòng "Rà soát
@@ -161,12 +162,26 @@ trích từ hồ sơ 3.2.P.5.2, không suy ra được từ Thử nghiệm 1.
 `P.2.2.1.2` ghi "Tạp đơn bất kỳ ≤ 0,2%; tổng tạp ≤ 3,0%" — không nêu tên tạp nào. Phép thử tạp
 liên quan của bisoprolol fumarat theo chuyên luận lại được thực hiện dưới dạng **định danh từng
 tạp**: tạp G, tạp A, tạp E, tạp khác, tổng tạp — thấy rõ trên chứng chỉ chuẩn đối chiếu SKS
-C0223252. Hai điểm để đối chiếu độ rộng của ngưỡng: kết quả thực đo trên viên ở cả ba công thức là
+C0223252, và CoA nguyên liệu khai theo chuyên luận **Ph.Eur. 12** với giới hạn **0,1% cho từng
+tạp**. Hai điểm để đối chiếu độ rộng của ngưỡng: kết quả thực đo trên viên ở cả ba công thức là
 0,1839 – 0,1918% tổng tạp, tức cách ngưỡng 3,0% hơn một bậc; và bản thân chất chuẩn đo được tổng
 tạp 0,07%. Ngưỡng 3,0% cho một viên nén phóng thích ngay của hoạt chất ổn định là bất thường và
 gần như chắc chắn bị hỏi khi thẩm định. Cần FD xác nhận chuyên luận áp dụng (USP/BP/Ph.Eur.) và
 khai lại tiêu chuẩn theo đúng danh mục tạp của chuyên luận đó. Loại: lệch chuẩn + thiếu cấu trúc;
 sửa được bằng viết lại, không cần thực nghiệm mới.
+
+**W-9 — Bản thảo đã ghi sai dung môi suốt bốn đợt.** Bảng thuộc tính tham khảo ghi "dễ tan trong
+nước và **ethanol**"; CoA ghi **methanol** (*freely soluble*), còn nước là *very soluble* chứ không
+phải "dễ tan". Sai cả dung môi lẫn mức độ tan. Đây chính là rủi ro mà câu caveat ngay đầu mục đó
+cảnh báo — dùng kiến thức tham khảo thay cho nguồn. Đã sửa ở đợt 5. Đáng ghi lại như bằng chứng cho
+nguyên tắc: một giá trị "ai cũng biết" vẫn phải chờ nguồn, và caveat không làm cho giá trị sai trở
+nên vô hại.
+
+**W-10 — Hai chỗ trên CoA cần nhà cung cấp xác nhận.** (a) Cỡ hạt ghi "less than 200 **pm**"; 200
+picomet nhỏ hơn kích thước một nguyên tử, gần như chắc chắn là lỗi đánh máy của µm. Bản thảo giữ
+nguyên văn và đánh dấu thay vì tự sửa — không sửa số của nhà cung cấp trong tài liệu đăng ký.
+(b) Ô định tính ghi "Conforms to **5th**" trong khi sản phẩm khai theo Ph.Eur. 12; chưa rõ "5th"
+chỉ đến tài liệu nào. Cả hai nên đưa vào văn bản hỏi nhà cung cấp cùng một lượt.
 
 ### INFO
 
@@ -301,18 +316,57 @@ trạng thái thiếu**.
 trưởng). Thông tin định danh ghi ở trên và trong `meta.referenceSources` là dấu vết truy nguyên
 thay cho file.
 
+## Đợt 5 — CoA lô nguyên liệu API
+
+**Nguồn.** Certificate of Analysis của nhà sản xuất Johnson Canady cho Bisoprolol fumarate
+**Ph.Eur. 12**, mã sản phẩm 71460, **lô 488**, sản xuất 23/04/2026, re-test 23/04/2031, 400,00 kg
+trong 16 kiện, ký bởi QC Manager. Tên cá nhân người ký không đưa vào hồ sơ hay repo — mã sản phẩm
+cộng số lô cộng ngày đã đủ định danh tài liệu.
+
+**Cách đọc bảng, cần lưu ý cho các đợt sau.** Trên CoA, cột nhãn "Specification" chứa **tên phép
+thử** (TAMC, TYMC, E. coli, Impurity A…) còn cột "Result" chứa **giới hạn chấp nhận** (Maximum 1000
+CFU/g, Absence/g, Maximum 0,1%). Bốn dòng đầu mang "Conforms" — đó mới là kết quả thử của lô. Đọc
+theo nhãn cột sẽ hiểu ngược.
+
+**Ràng buộc chưa gỡ được: chưa xác nhận đúng lô.** Hồ sơ Thử nghiệm 1 không ghi số lô dược chất đã
+dùng, nên không có cơ sở khẳng định lô 488 là lô bào chế CT01 – CT03. Ngày sản xuất lô sớm hơn ngày
+lập bản thảo nên về thời gian là khả dĩ — nhưng khả dĩ không phải xác nhận. Bản thảo ghi rõ điều
+này và yêu cầu đối chiếu hồ sơ lô. Đây là rào cản truy nguyên duy nhất còn lại của nguồn này.
+
+**Đã đóng:**
+
+- `P.2.1.1` — thêm mục "Thuộc tính theo CoA lô nguyên liệu" với bảng 14 phép thử, ghi rõ ô nào là
+  kết quả và ô nào là giới hạn, kèm định danh tài liệu và bốn ghi chú kỹ thuật.
+- `P.2.5` — 1/3 điều kiện Q6A nay có nguồn (xem dưới).
+- `P.2.2.3` — danh mục tạp nay có chuyên luận và giới hạn cụ thể.
+- `meta.referenceSources` — thêm CoA.
+
+**C-1, phân biệt cần giữ cho rõ.** Cỡ hạt API nay có **giới hạn tiêu chuẩn** (tối thiểu 75% dưới
+200 µm). Điều đó **không** đồng nghĩa đã đánh giá tính trọng yếu của cỡ hạt. Q8(R2) tr. 6 đòi xác
+định criticality qua *"an assessment of the extent to which their variation can have impact on the
+quality"* — tức phải có thực nghiệm thay đổi cỡ hạt và đo tác động. Thử nghiệm 1 giữ cố định nguồn
+API nên không có dữ liệu đó. Có giới hạn là có kiểm soát; chưa có biện luận vì sao mức kiểm soát đó
+là đủ.
+
+**P.2.5 — 1/3 điều kiện Q6A.** CoA cho thấy nguyên liệu **được kiểm vi sinh trước khi sản xuất**
+(TAMC ≤ 1.000 CFU/g, TYMC ≤ 100 CFU/g, không có E. coli và Salmonella), đúng vế đầu của điều kiện
+Q6A tr. 12. Hai vế còn thiếu: thẩm định quy trình chứng minh không mang rủi ro nhiễm/tăng sinh đáng
+kể, và bằng chứng tính ức chế phát triển của viên. Mục vẫn giữ `gap`. Lưu ý vị trí CTD: số liệu vi
+sinh **nguyên liệu** đặt ở `P.2.1.1`, `P.2.5` chỉ dẫn chiếu sang — `P.2.5` nói về thành phẩm.
+
 ## Còn lại, phân theo loại
 
 **Thiếu dữ liệu** (cần nguồn, không sửa được bằng viết lại): C-3 tương hợp, C-4 quy trình sản
-xuất, C-5 bao bì, P.2.2.1.1 RMP, thuộc tính API ở W-5, thành phần màng bao thật ở C-2, điều kiện
-phương pháp hòa tan ở W-7, và phần criticality của mọi yếu tố ngoài tá dược rã ở C-1.
+xuất, C-5 bao bì, P.2.2.1.1 RMP, phần còn lại của thuộc tính API ở W-5 (pKa, BCS, đa hình, tính
+chảy, ổn định), thành phần màng bao thật ở C-2, điều kiện phương pháp hòa tan ở W-7, và phần
+criticality của mọi yếu tố ngoài tá dược rã ở C-1.
 
 **Thiếu cấu trúc** (sửa được ngay, không cần dữ liệu mới): W-1 ba heading cha, W-2 phân cấp
 heading. C-1, nửa W-7 và I-5 đã đóng ở đợt 2.
 
-P.2.5 vi sinh chuyển sang nhóm thiếu dữ liệu: cần bằng chứng tính ức chế phát triển (ví dụ hoạt
-độ nước), kết quả kiểm vi sinh nguyên liệu, và thẩm định quy trình — hoặc chấp nhận lối thử từng
-lô theo cây #8.
+P.2.5 vi sinh, sau đợt 5 còn thiếu 2/3 điều kiện Q6A: bằng chứng tính ức chế phát triển (ví dụ
+hoạt độ nước) và thẩm định quy trình — hoặc chấp nhận lối thử từng lô theo cây #8. Kết quả kiểm vi
+sinh nguyên liệu đã có trên CoA lô 488.
 
 **Lệch chuẩn phòng** (Q8(R2) không đòi, file mẫu có): W-3 nhóm risk assessment và QTPP/CQA theo
 định dạng Annex.
