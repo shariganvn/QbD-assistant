@@ -163,6 +163,8 @@ test("P.2.1.1 stays one headerless properties form, whatever new drug substance 
     "Công thức phân tử",
     "Khối lượng phân tử",
     "Cảm quan",
+    "Độ tan",
+    "Phân bố cỡ hạt",
     "Điểm chảy",
     "pKa",
     "Log P",

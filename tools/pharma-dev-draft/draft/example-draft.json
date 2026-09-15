@@ -61,6 +61,14 @@
               "Bột màu trắng hoặc gần như trắng — kết quả lô 488: Đạt [3]"
             ],
             [
+              "Độ tan",
+              "Trong nước: rất dễ tan (very soluble) — Đạt. Trong methanol: dễ tan (freely soluble) — Đạt [3]"
+            ],
+            [
+              "Phân bố cỡ hạt",
+              "Tối thiểu 75% nhỏ hơn \"200 pm\" (nguyên văn CoA; xem [3] về đơn vị) [3]"
+            ],
+            [
               "Điểm chảy",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
             ],
@@ -116,7 +124,7 @@
         },
         {
           "type": "paragraph",
-          "text": "Nguồn [3] còn nêu các chỉ tiêu không có dòng tương ứng trong biểu mẫu trên, ghi lại đây để tra cứu — các chỉ tiêu này thuộc phạm vi 3.2.S.4 Kiểm soát dược chất: độ tan trong nước rất dễ tan (very soluble) và trong methanol dễ tan (freely soluble), cả hai đạt; phân bố cỡ hạt tối thiểu 75% nhỏ hơn \"200 pm\" (nguyên văn CoA — 200 picomet nhỏ hơn kích thước một nguyên tử nên gần như chắc chắn là lỗi đánh máy của µm, chờ nhà cung cấp xác nhận); hàm lượng acid fumaric 14,8 – 15,4% (giá trị lý thuyết của muối hemifumarat là 116,07 / 766,97 = 15,13%, nằm trong khoảng này); dung môi tồn dư tối đa 500 ppm; tổng vi sinh vật hiếu khí tối đa 1.000 CFU/g; tổng nấm men và nấm mốc tối đa 100 CFU/g; không có Escherichia coli và Salmonella; tạp A (benzyl alcohol), tạp E và tạp G mỗi tạp tối đa 0,1% theo HPLC; định tính bằng phổ hồng ngoại đạt, nguyên văn ghi \"Conforms to 5th\" trong khi sản phẩm khai theo Ph.Eur. 12 nên cần làm rõ; tuân thủ ICH Q7, EU GMP Part II, 21 CFR Parts 210 & 211 và ICH Q3D."
+          "text": "Nguồn [3] còn nêu các chỉ tiêu không có dòng tương ứng trong biểu mẫu trên, ghi lại đây để tra cứu — các chỉ tiêu này thuộc phạm vi 3.2.S.4 Kiểm soát dược chất: hàm lượng acid fumaric 14,8 – 15,4% (giá trị lý thuyết của muối hemifumarat là 116,07 / 766,97 = 15,13%, nằm trong khoảng này); dung môi tồn dư tối đa 500 ppm; tổng vi sinh vật hiếu khí tối đa 1.000 CFU/g; tổng nấm men và nấm mốc tối đa 100 CFU/g; không có Escherichia coli và Salmonella; tạp A (benzyl alcohol), tạp E và tạp G mỗi tạp tối đa 0,1% theo HPLC; định tính bằng phổ hồng ngoại đạt, nguyên văn ghi \"Conforms to 5th\" trong khi sản phẩm khai theo Ph.Eur. 12 nên cần làm rõ; tuân thủ ICH Q7, EU GMP Part II, 21 CFR Parts 210 & 211 và ICH Q3D. Về đơn vị cỡ hạt nêu trong bảng: CoA ghi \"200 pm\"; 200 picomet nhỏ hơn kích thước một nguyên tử nên gần như chắc chắn là lỗi đánh máy của µm. Bản thảo giữ nguyên văn thay vì tự sửa số của nhà cung cấp; cần nhà cung cấp xác nhận trước khi nộp hồ sơ."
         }
       ]
     },

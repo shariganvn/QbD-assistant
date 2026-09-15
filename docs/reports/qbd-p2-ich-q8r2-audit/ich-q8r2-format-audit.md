@@ -192,9 +192,12 @@ hạt.** Q8(R2) mục 2.1.1 (tr. 6) yêu cầu nêu các thuộc tính *"that ca
 the drug product"*. Với viên nén phóng thích ngay của một hoạt chất dễ tan, độ tan và phân bố cỡ
 hạt là hai thuộc tính nặng ký nhất — độ tan là nền của mọi lập luận BCS, cỡ hạt là biến số then
 chốt của đồng đều hàm lượng và tốc độ hòa tan. Cả hai đều đã có nguồn từ CoA lô 488, nhưng vì biểu
-mẫu không có dòng nên hiện chỉ nằm ở khối trích dẫn, tức đọc lướt bảng sẽ không thấy. Đề xuất FD
-cân nhắc thêm hai dòng vào biểu mẫu. Đây là nhận xét về **biểu mẫu của phòng**, không phải về
-Q8(R2) — quyết định thuộc về phòng, và bản thảo hiện theo đúng biểu mẫu như đã được chỉ đạo.
+mẫu không có dòng nên chỉ nằm ở khối trích dẫn, tức đọc lướt bảng sẽ không thấy. Đây là nhận xét
+về **biểu mẫu của phòng**, không phải về Q8(R2).
+
+*Đã xử lý ở đợt 7:* phòng quyết định nới biểu mẫu. Hai dòng "Độ tan" và "Phân bố cỡ hạt" đã được
+thêm ngay sau "Cảm quan"; biểu mẫu đi từ 16 lên 18 dòng. Giá trị lấy từ CoA lô 488, gỡ khỏi khối
+trích dẫn để không trùng hai chỗ.
 
 ### INFO
 
@@ -378,7 +381,8 @@ thêm bảng hay heading.
 Ràng buộc này đã ghi vào `description` của `P.2.1.1` trong `schemas/p2-outline.json` và khóa bằng
 test, để các đợt sau không phải hỏi lại và không tái diễn việc phình mục.
 
-**Kết quả đối chiếu biểu mẫu: 6/16 dòng có giá trị, 10/16 trống.**
+**Kết quả đối chiếu biểu mẫu: 6/16 dòng có giá trị, 10/16 trống.** (Sau đợt 7 biểu mẫu thành 18
+dòng, tỉ lệ là 8/18 có giá trị.)
 
 | Có nguồn | Trống |
 |---|---|
@@ -386,7 +390,7 @@ test, để các đợt sau không phải hỏi lại và không tái diễn vi�
 | Công thức phân tử — đối chiếu chứng chỉ chuẩn `[2]` | Công thức cấu tạo (cần hình) |
 | Cảm quan — kết quả lô 488 `[3]` | Độ ổn định hóa học + 5 dòng phân hủy cưỡng bức |
 
-Bảng trống 10/16 là kết quả trung thực và dùng được: nó thành danh mục việc cần lấy cho FD, thay vì
+Bảng trống 10/18 là kết quả trung thực và dùng được: nó thành danh mục việc cần lấy cho FD, thay vì
 trông như đã đủ. Đáng chú ý nhất là **toàn bộ khối phân hủy cưỡng bức trống** — chưa có nghiên cứu
 nhiệt, ẩm, peroxid, acid/base, ánh sáng nào cho dược chất.
 
@@ -403,6 +407,29 @@ table: `headers` vẫn bắt buộc vì chúng định nghĩa số cột và là
 
 **Hạn chế công cụ cần xử lý thủ công:** ô "Công thức cấu tạo" cần hình, renderer chưa chèn được
 hình. Phải bổ sung thủ công vào bản Word cuối; bản thảo đánh dấu rõ ở ô đó.
+
+## Đợt 7 — Nới biểu mẫu theo quyết định của phòng
+
+Phòng chốt xử lý W-11: thêm **hai dòng** vào biểu mẫu General properties, đặt ngay sau "Cảm quan"
+để nhóm ba thuộc tính vật lý cạnh nhau và để hai thuộc tính quan trọng nhất nằm ở phần đầu bảng —
+đúng lý do W-11 nêu ra. Biểu mẫu 16 → **18 dòng**, số dòng có giá trị 6 → **8**.
+
+| Dòng mới | Giá trị, nguồn [3] |
+|---|---|
+| Độ tan | Trong nước rất dễ tan (*very soluble*) — Đạt; trong methanol dễ tan (*freely soluble*) — Đạt |
+| Phân bố cỡ hạt | Tối thiểu 75% nhỏ hơn "200 pm" (nguyên văn CoA) |
+
+**Ô cỡ hạt giữ nguyên văn "200 pm"** và trỏ sang ghi chú [3] cho cảnh báo đơn vị, giữ đúng nguyên
+tắc của đợt 5: không sửa số của nhà cung cấp trong tài liệu đăng ký. Cảnh báo này vẫn nằm ở [3] nên
+ô bảng có chỗ để dẫn tới; W-10 chưa đóng cho tới khi nhà cung cấp xác nhận.
+
+**Chống trùng lặp.** Hai chỉ tiêu này trước đó nằm trong danh sách "các chỉ tiêu không có dòng
+tương ứng trong biểu mẫu" ở ghi chú [3]. Nay chúng có dòng nên đã được gỡ khỏi danh sách đó — nếu
+để lại thì câu dẫn của ghi chú thành sai và nội dung hiện hai chỗ. Đã xác minh trên bản render:
+`very soluble` và `freely soluble` mỗi chuỗi xuất hiện đúng một lần.
+
+Bốn chỗ ràng buộc lẫn nhau đều đã đồng bộ: bảng, ghi chú [3], test khóa nhãn dòng, và `description`
+của `P.2.1.1` trong `schemas/p2-outline.json`.
 
 ## Còn lại, phân theo loại
 

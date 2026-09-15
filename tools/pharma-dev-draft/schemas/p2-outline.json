@@ -6,7 +6,7 @@
       "id": "P.2.1.1",
       "ctdReference": "3.2.P.2.1.1",
       "headingVi": "Dược chất (Drug Substance)",
-      "description": "Tính chất lý hóa và sinh học của API. Mục này cố định một hình dạng: ĐÚNG MỘT bảng \"General properties\" 16 dòng theo biểu mẫu của phòng (INN, IUPAC, CAS, công thức cấu tạo, công thức phân tử, khối lượng phân tử, cảm quan, điểm chảy, pKa, Log P, độ ổn định hóa học và 5 dòng con: nhiệt, ẩm, peroxid, acid/base, ánh sáng), bảng khai headerless, phía dưới là khối trích dẫn đánh số. Mọi nguồn API bổ sung về sau đổ vào đúng bảng đó; chỉ tiêu không có dòng tương ứng thì ghi vào khối trích dẫn, không thêm bảng hay heading mới."
+      "description": "Tính chất lý hóa và sinh học của API. Mục này cố định một hình dạng: ĐÚNG MỘT bảng \"General properties\" 18 dòng theo biểu mẫu của phòng (INN, IUPAC, CAS, công thức cấu tạo, công thức phân tử, khối lượng phân tử, cảm quan, độ tan, phân bố cỡ hạt, điểm chảy, pKa, Log P, độ ổn định hóa học và 5 dòng con: nhiệt, ẩm, peroxid, acid/base, ánh sáng), bảng khai headerless, phía dưới là khối trích dẫn đánh số. Mọi nguồn API bổ sung về sau đổ vào đúng bảng đó; chỉ tiêu không có dòng tương ứng thì ghi vào khối trích dẫn, không thêm bảng hay heading mới."
     },
     {
       "id": "P.2.1.2",
