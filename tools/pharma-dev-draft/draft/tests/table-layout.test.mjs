@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 
 import { validateDraft } from "../validate-draft.mjs";
 import { TABLE_WIDTH_DXA } from "../../schemas/layout.mjs";
-import { widthsFor, FIXED_TABLE_WIDTHS } from "../../render/builder.mjs";
+import { widthsFor, FIXED_TABLE_WIDTHS, dataStatusLabel } from "../../render/builder.mjs";
 
 const draftDir = dirname(fileURLToPath(import.meta.url));
 const examplePath = join(draftDir, "..", "example-draft.json");
@@ -189,4 +189,48 @@ test("headerless drops the printed header row but not the column contract", () =
   // row carry the wrong number of cells.
   form.rows.push(["chỉ một ô"]);
   expectFailure(valid, "E_TABLE_ROW_WIDTH");
+});
+
+test("P.2.2.1.1 carries the reference-product form with every value still awaiting data", () => {
+  const section = loadExample().sections.find((s) => s.id === "P.2.2.1.1");
+  const tables = section.blocks.filter((b) => b.type === "table");
+  assert.equal(tables.length, 2, "the house form for this section is two tables");
+  assert.deepEqual(tables[1].rows.map((r) => r[0]), [
+    "Nhà sản xuất",
+    "Số đăng ký",
+    "Hạn dùng",
+    "Điều kiện bảo quản",
+    "Quy cách đóng gói",
+    "Cảm quan",
+    "Khối lượng trung bình",
+    "Kích thước viên",
+    "Độ cứng",
+    "Thời gian rã",
+    "Định lượng",
+    "Tạp chất liên quan",
+    "Đồng đều hàm lượng",
+    "Hàm lượng chất bảo quản",
+    "Tương đương độ hòa tan — điều kiện thử",
+    "Tương đương độ hòa tan — hồ sơ theo thời gian",
+  ]);
+  // No reference product has been characterised yet, so any value cell holding a figure would be
+  // invented rather than measured.
+  for (const table of tables) {
+    for (const row of table.rows) {
+      assert.ok(row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} must still be marked as awaiting data`);
+    }
+  }
+});
+
+test("the gap register separates a built-out form from one that holds data", () => {
+  const draft = loadExample();
+  const referenceProduct = draft.sections.find((s) => s.id === "P.2.2.1.1");
+  assert.equal(dataStatusLabel(referenceProduct), "Đã dựng khung, chưa có dữ liệu");
+  assert.equal(dataStatusLabel(draft.sections.find((s) => s.id === "P.2.1.1")), "Có dữ liệu (một phần hoặc đầy đủ)");
+  assert.equal(dataStatusLabel(draft.sections.find((s) => s.id === "P.2.5")), "Không có dữ liệu");
+
+  // Filling in one real value has to flip the label on its own; a section cannot keep claiming to
+  // be an empty form once it is not one.
+  referenceProduct.blocks.find((b) => b.type === "table").rows[1][1] = "Viên nén bao phim";
+  assert.equal(dataStatusLabel(referenceProduct), "Có dữ liệu (một phần hoặc đầy đủ)");
 });

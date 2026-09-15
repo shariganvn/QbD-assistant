@@ -229,8 +229,125 @@
     },
     {
       "id": "P.2.2.1.1",
-      "status": "gap",
-      "gapReason": "Không có dữ liệu đặc tính sản phẩm đối chiếu (RMP) trong Thử nghiệm 1 — cần bổ sung thành phần định tính/định lượng và kết quả so sánh với sản phẩm đối chiếu."
+      "status": "covered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Thuốc đối chiếu được chọn cho sản phẩm này là Concor® 10 mg (viên nén bao phim chứa bisoprolol fumarat 10 mg), do FD xác nhận. Khảo sát đặc tính thuốc đối chiếu cung cấp thông tin giúp rút ngắn thời gian nghiên cứu mà vẫn đạt chất lượng tương đương; theo biểu mẫu của phòng, khảo sát được tiến hành theo ba hướng: thu thập dữ liệu công bố, thực nghiệm trên mẫu mua về, và kỹ thuật đảo ngược (reverse engineering). Tính đến bản thảo này, CHƯA có bất kỳ số liệu khảo sát nào được thực hiện — hai bảng dưới đây là khung theo biểu mẫu, mọi ô đều đang chờ dữ liệu."
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Tỷ lệ và thành phần tá dược thuốc đối chiếu"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Thành phần",
+            "Concor® 10 mg"
+          ],
+          "rows": [
+            [
+              "Thành phần tá dược",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Liệt kê từng tá dược kèm tỷ lệ. Nguồn định tính lấy từ SmPC hoặc tờ hướng dẫn sử dụng; tỷ lệ định lượng cần kỹ thuật đảo ngược vì nhà sản xuất không công bố."
+            ],
+            [
+              "Dạng bào chế",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác nhận từ nhãn hoặc SmPC."
+            ],
+            [
+              "Tài liệu tham khảo (TLTK)",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Ghi rõ nguồn của từng dòng trên: SmPC nước nào, phiên bản nào, ngày truy cập; hoặc số hiệu báo cáo thực nghiệm nội bộ."
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Đặc tính lý hóa của thuốc đối chiếu"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Thông tin",
+            "Concor® 10 mg (Lô …)"
+          ],
+          "rows": [
+            [
+              "Nhà sản xuất",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn hoặc tờ hướng dẫn sử dụng của lô mua về."
+            ],
+            [
+              "Số đăng ký",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn; ghi rõ số đăng ký tại thị trường mua mẫu."
+            ],
+            [
+              "Hạn dùng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn của lô mua về."
+            ],
+            [
+              "Điều kiện bảo quản",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn hoặc SmPC."
+            ],
+            [
+              "Quy cách đóng gói",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn; nêu loại vỉ, số viên mỗi vỉ và mỗi hộp."
+            ],
+            [
+              "Cảm quan",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Mô tả viên đối chiếu: hình dạng, màu sắc, ký hiệu dập hoặc khắc nếu có."
+            ],
+            [
+              "Khối lượng trung bình",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Cân theo phương pháp dược điển; ghi giá trị trung bình, lớn nhất, nhỏ nhất."
+            ],
+            [
+              "Kích thước viên",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đo đường kính và độ dày."
+            ],
+            [
+              "Độ cứng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đo trên cùng thiết bị dùng cho CT01 – CT03 để so sánh được."
+            ],
+            [
+              "Thời gian rã",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thử theo cùng điều kiện đã dùng ở Thử nghiệm 1."
+            ],
+            [
+              "Định lượng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thử theo phương pháp sẽ khai ở 3.2.P.5.2."
+            ],
+            [
+              "Tạp chất liên quan",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Định danh từng tạp theo chuyên luận Ph.Eur. 12 (tạp A, E, G) như đã nêu ở mục P.2.2.3."
+            ],
+            [
+              "Đồng đều hàm lượng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thử theo Ph.Eur. 2.9.40; ghi giá trị AV."
+            ],
+            [
+              "Hàm lượng chất bảo quản",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Không áp dụng nếu công thức đối chiếu không dùng chất bảo quản — cần xác nhận rồi ghi \"không áp dụng\" kèm lý do."
+            ],
+            [
+              "Tương đương độ hòa tan — điều kiện thử",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Ghi thiết bị, tốc độ khuấy, môi trường, thể tích. Phải trùng điều kiện dùng cho công thức của ta thì so sánh mới có nghĩa."
+            ],
+            [
+              "Tương đương độ hòa tan — hồ sơ theo thời gian",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Lấy nhiều thời điểm, không chỉ một giá trị 30 phút, để tính được hệ số tương đồng f2."
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Mục đích cuối của mục này là so sánh hồ sơ hòa tan của thuốc đối chiếu với công thức của ta — CT03 đạt trung bình 98,64% tại 30 phút (mục P.2.2.1.3). Vì vậy hồ sơ hòa tan của thuốc đối chiếu phải được lấy tại nhiều thời điểm và trong cùng điều kiện thử, nếu không sẽ không tính được hệ số tương đồng f2. Biểu mẫu của phòng còn có một biểu đồ hòa tan; bản render tự động chưa hỗ trợ hình nên biểu đồ phải bổ sung thủ công vào bản Word cuối."
+        },
+        {
+          "type": "paragraph",
+          "text": "Nguồn của mục này: cấu trúc hai bảng và danh mục chỉ tiêu lấy từ biểu mẫu P.2 của phòng và tài liệu mẫu 135-00 trong docs/raw. Không viện dẫn số liệu nào vì chưa có khảo sát."
+        }
+      ]
     },
     {
       "id": "P.2.2.1.2",

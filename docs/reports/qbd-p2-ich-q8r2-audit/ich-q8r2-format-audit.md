@@ -74,7 +74,7 @@ critical to product quality và biện luận cách kiểm soát, dù chỉ bằ
 | 2.1.1 Drug substance (tr. 6) — properties ảnh hưởng performance/manufacturability: solubility, water content, particle size, crystal properties, biological activity, permeability | P.2.1.1 | Bảng 7 dòng, draft tự khai là kiến thức tham khảo chưa đối chiếu CoA/dược điển. Cỡ hạt, đa hình, BCS thực nghiệm, độ tan theo pH, ổn định — đều là marker trống | Chưa đạt — **thiếu dữ liệu**. Đúng các thuộc tính guideline nêu tên lại là phần trống |
 | 2.1.1 (tr. 7) — *"The compatibility of the drug substance with excipients listed in 3.2.P.1 should be evaluated"* | P.2.1.1 (draft đặt ở P.2.1.2) | Marker trống, nay đã có mục riêng `3.2.P.2.1.2.2` | Chưa đạt — **thiếu dữ liệu**. Đây là một trong số ít yêu cầu Part I dùng "should be evaluated" tuyệt đối, không kèm "where appropriate" |
 | 2.1.2 Excipients (tr. 7) — *"This should include all substances used in the manufacture of the drug product, whether they appear in the finished product or not (e.g., processing aids)"* | P.2.1.2 | Bảng 6 tá dược lõi viên, tổng 100,00 mg. **Không có hệ màng bao, không có dung môi tá hạt** dù sản phẩm khai là viên nén bao phim | Chưa đạt — **thiếu cấu trúc**. Đã bổ sung marker ghi nhận trong lần cập nhật này |
-| 2.2.1 Formulation development (tr. 7–8) — evolution từ concept tới final design; identification of critical attributes; tóm tắt công thức lâm sàng/BE; IVIVC; biện luận special design features | P.2.2.1.1/.2/.3 | 1 vòng thử nghiệm, 1 biến (croscarmellose 1/3/5%), 3 bảng kết quả đầy đủ, chọn CT03. RMP `gap`. Không có IVIVC, không có công thức lâm sàng, không có evolution | Chưa đạt — **thiếu dữ liệu**. Phần thực nghiệm đã có thì chắc và truy vết được. Đợt 2 đã bổ sung biện luận criticality cho yếu tố duy nhất được khảo sát biến thiên, và biện luận special design feature |
+| 2.2.1 Formulation development (tr. 7–8) — evolution từ concept tới final design; identification of critical attributes; tóm tắt công thức lâm sàng/BE; IVIVC; biện luận special design features | P.2.2.1.1/.2/.3 | 1 vòng thử nghiệm, 1 biến (croscarmellose 1/3/5%), 3 bảng kết quả đầy đủ, chọn CT03. RMP: đợt 8 đã dựng khung hai bảng theo biểu mẫu, chưa có số liệu. Không có IVIVC, không có công thức lâm sàng, không có evolution | Chưa đạt — **thiếu dữ liệu**. Phần thực nghiệm đã có thì chắc và truy vết được. Đợt 2 đã bổ sung biện luận criticality cho yếu tố duy nhất được khảo sát biến thiên, và biện luận special design feature |
 | 2.2.2 Overages (tr. 8) — overage bị *"discouraged"*, nếu có phải biện luận | P.2.2.2 | Ghi nhận không thấy overage, nêu rõ đây là quan sát chưa phải xác nhận chính thức | **Đạt điều kiện.** Không có overage thì nghĩa vụ biện luận không phát sinh |
 | 2.2.3 Physicochemical and biological properties (tr. 8) | P.2.2.3 | Đợt 2 đã bổ sung biện luận discriminatory power từ dữ liệu ba công thức; điều kiện phương pháp hòa tan vẫn là marker trống | Chưa đạt một phần. Lưu ý sắc thái: phần method development dùng **"could be provided"**, không phải "should" — kỳ vọng mềm theo Q8(R2), nhưng file mẫu phòng lại đòi kỹ |
 | 2.3 Manufacturing process development (tr. 8–9) | P.2.3 | `gap` toàn mục | Chưa đạt — **thiếu dữ liệu**. Cần hồ sơ quy trình/hồ sơ lô, không đóng được bằng viết lại |
@@ -431,10 +431,51 @@ tương ứng trong biểu mẫu" ở ghi chú [3]. Nay chúng có dòng nên đ
 Bốn chỗ ràng buộc lẫn nhau đều đã đồng bộ: bảng, ghi chú [3], test khóa nhãn dòng, và `description`
 của `P.2.1.1` trong `schemas/p2-outline.json`.
 
+## Đợt 8 — Dựng khung P.2.2.1.1 và cho bảng tổng hợp một trạng thái thứ ba
+
+**Cấu trúc lấy từ biểu mẫu của phòng, không tự nghĩ.** Hai file trong `docs/raw/` thống nhất về mục
+này, tên trong biểu mẫu là "Đặc tính thuốc biệt dược gốc": `P 2_form_Edit 29-09-2025-example.docx`
+dòng 164–222 và `135-00-Pharmaceutical Development-example.docx` dòng 303–319. Cấu trúc gồm đoạn mở
+đầu (ba hướng khảo sát: thu thập dữ liệu, thực nghiệm, kỹ thuật đảo ngược), bảng thành phần tá dược
+thuốc đối chiếu, và bảng đặc tính lý hóa 14 chỉ tiêu cộng khối hòa tan.
+
+**RMP: Concor® 10 mg**, FD xác nhận. Khớp với file mẫu 135-00 vốn nêu thẳng `Concor® 5 mg` và
+`Concor® 10 mg` cho bisoprolol. Lưu ý cả hai file đều là template còn chỗ giữ chỗ `<<API name>>` và
+một câu lẫn galantamine với Concor, nên tên thuốc đối chiếu đến từ xác nhận của FD chứ không phải
+từ suy diễn trên file mẫu.
+
+**Khung đã dựng, 19 ô chờ số liệu.** Bảng 1 ba dòng, bảng 2 mười sáu dòng. Mỗi ô không chỉ mang
+marker mà còn ghi **lấy dữ liệu ở đâu** — nhãn/SmPC, thực nghiệm trên mẫu mua về, hay kỹ thuật đảo
+ngược — nên khung rỗng dùng được như danh mục việc, giống cách 10 dòng trống của `P.2.1.1` đang
+dùng. Hai dòng hòa tan tách riêng điều kiện thử và hồ sơ theo thời gian, kèm ghi chú nêu lý do:
+mục đích cuối là so với CT03 (98,64% tại 30 phút, mục `P.2.2.1.3`), muốn tính f2 thì phải có nhiều
+thời điểm và cùng điều kiện thử.
+
+**Bảng tổng hợp khoảng trống nay có ba trạng thái.** Đây là thay đổi chống khai sai, không phải mỹ
+thuật. Validator cấm section `gap` mang block, nên dựng khung buộc phải lật `covered`; mà bảng tổng
+hợp trước đây chỉ đọc `status` nên sẽ khai mục toàn marker là "Có dữ liệu" — sai trong một tài liệu
+định dạng hồ sơ đăng ký.
+
+| Trạng thái | Điều kiện |
+|---|---|
+| Không có dữ liệu | `status: gap` |
+| Đã dựng khung, chưa có dữ liệu | `covered`, mọi ô giá trị của mọi bảng đều mang marker |
+| Có dữ liệu (một phần hoặc đầy đủ) | `covered`, có ít nhất một ô giá trị thật |
+
+Trạng thái được **suy từ nội dung**, không khai thêm trường. Một trường khai tay sẽ thành nguồn sự
+thật thứ hai và chắc chắn lệch khi có người điền số rồi quên đổi trạng thái; suy từ ô thì điền một
+giá trị thật là bảng tự đổi. Đã có test khóa đúng hành vi đó.
+
+Kiểm không hồi quy trên bản render: `P.2.2.1.1` hiện "Đã dựng khung"; `P.2.3`, `P.2.4`, `P.2.5` vẫn
+"Không có dữ liệu"; bảy mục còn lại vẫn "Có dữ liệu".
+
+**Hạn chế công cụ:** biểu đồ hòa tan của biểu mẫu phải vẽ thủ công — cùng loại với công thức cấu tạo
+ở `P.2.1.1`. Renderer không hỗ trợ hình.
+
 ## Còn lại, phân theo loại
 
 **Thiếu dữ liệu** (cần nguồn, không sửa được bằng viết lại): C-3 tương hợp, C-4 quy trình sản
-xuất, C-5 bao bì, P.2.2.1.1 RMP, phần còn lại của thuộc tính API ở W-5 (pKa, BCS, đa hình, tính
+xuất, C-5 bao bì, P.2.2.1.1 RMP (19 ô chờ số liệu, khung đã dựng), phần còn lại của thuộc tính API ở W-5 (pKa, BCS, đa hình, tính
 chảy, ổn định), thành phần màng bao thật ở C-2, điều kiện phương pháp hòa tan ở W-7, và phần
 criticality của mọi yếu tố ngoài tá dược rã ở C-1.
 

@@ -198,10 +198,30 @@ function renderBlock(block) {
   }
 }
 
+// The prefix every draft uses to mark a value it has no source for. A section whose tables are
+// built out but hold nothing else is a form waiting to be filled, and the register has to say so:
+// reporting it as holding data would be a false statement in a document shaped like a submission.
+const GAP_MARKER = "[CHƯA CÓ DỮ LIỆU";
+
+// Derived from the cells rather than declared on the section, so it cannot go stale: the moment a
+// real value replaces a marker, the register stops calling the section a skeleton. Only the value
+// columns count — the first column holds row labels, which a skeleton has filled in by definition.
+function holdsOnlyPlaceholders(section) {
+  const valueCells = (section.blocks ?? [])
+    .filter((block) => block.type === "table")
+    .flatMap((block) => block.rows.flatMap((row) => row.slice(1)));
+  return valueCells.length > 0 && valueCells.every((cell) => cell.includes(GAP_MARKER));
+}
+
+export function dataStatusLabel(section) {
+  if (section?.status !== "covered") return "Không có dữ liệu";
+  return holdsOnlyPlaceholders(section) ? "Đã dựng khung, chưa có dữ liệu" : "Có dữ liệu (một phần hoặc đầy đủ)";
+}
+
 function gapRegisterTable(outline, draftSectionsById) {
   const rows = outline.sections.map((section) => {
     const draftSection = draftSectionsById.get(section.id);
-    const status = draftSection?.status === "covered" ? "Có dữ liệu (một phần hoặc đầy đủ)" : "Không có dữ liệu";
+    const status = dataStatusLabel(draftSection);
     const note = draftSection?.status === "gap" ? draftSection.gapReason : "—";
     return [`${section.ctdReference} ${section.headingVi}`, status, note];
   });

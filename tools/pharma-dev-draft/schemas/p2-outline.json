@@ -18,7 +18,7 @@
       "id": "P.2.2.1.1",
       "ctdReference": "3.2.P.2.2.1.1",
       "headingVi": "Đặc tính sản phẩm đối chiếu (Characterization of Reference Product)",
-      "description": "Thành phần định tính/định lượng và kết quả thử nghiệm của sản phẩm đối chiếu (RMP) dùng để so sánh."
+      "description": "Thành phần định tính/định lượng và kết quả thử nghiệm của sản phẩm đối chiếu (RMP) dùng để so sánh. Mục này cố định hai bảng theo biểu mẫu của phòng: (1) Tỷ lệ và thành phần tá dược thuốc đối chiếu — thành phần tá dược, dạng bào chế, TLTK; (2) Đặc tính lý hóa — nhà sản xuất, số đăng ký, hạn dùng, điều kiện bảo quản, quy cách đóng gói, cảm quan, khối lượng trung bình, kích thước viên, độ cứng, thời gian rã, định lượng, tạp chất liên quan, đồng đều hàm lượng, hàm lượng chất bảo quản, tương đương độ hòa tan (điều kiện thử; hồ sơ theo thời gian). Biểu đồ hòa tan của biểu mẫu phải bổ sung thủ công vì renderer không hỗ trợ hình."
     },
     {
       "id": "P.2.2.1.2",
