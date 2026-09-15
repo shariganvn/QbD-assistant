@@ -104,7 +104,10 @@ const ALIGNMENTS = {
 
 // `align` is an optional per-column array of "left"/"center"/"justify". Without it, the first
 // column is left-aligned and the rest centred — right for short numeric tables, wrong for prose.
-function makeTable(headers, rows, widths, align) {
+// `headerless` suppresses the header row for label/value forms, where the left column already
+// names each row and a "Property | Value" strip would only add noise. The headers still define the
+// columns; they just are not printed.
+function makeTable(headers, rows, widths, align, headerless) {
   const alignFor = (i) => (align ? ALIGNMENTS[align[i]] : (i === 0 ? AlignmentType.LEFT : AlignmentType.CENTER));
   const headerRow = new TableRow({
     tableHeader: true,
@@ -113,7 +116,11 @@ function makeTable(headers, rows, widths, align) {
   const bodyRows = rows.map((r) => new TableRow({
     children: r.map((c, i) => cellText(c, { width: widths[i], align: alignFor(i) })),
   }));
-  return new Table({ width: { size: TABLE_WIDTH, type: WidthType.DXA }, columnWidths: widths, rows: [headerRow, ...bodyRows] });
+  return new Table({
+    width: { size: TABLE_WIDTH, type: WidthType.DXA },
+    columnWidths: widths,
+    rows: headerless ? bodyRows : [headerRow, ...bodyRows],
+  });
 }
 
 // Default when a table block declares no columnWidths: widths sum to TABLE_WIDTH; first column
@@ -185,6 +192,7 @@ function renderBlock(block) {
       block.rows,
       block.columnWidths ?? widthsFor(block.headers.length),
       block.columnAlign,
+      block.headerless,
     )];
     default: throw new Error(`unknown block type: ${block.type}`);
   }

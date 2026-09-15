@@ -145,3 +145,46 @@ test("the criticality discussion does not upgrade P.2.2.1.2 into an approved QTP
     "the section must name the attributes whose criticality is still unassessed",
   );
 });
+
+test("P.2.1.1 stays one headerless properties form, whatever new drug substance sources arrive", () => {
+  const section = loadExample().sections.find((s) => s.id === "P.2.1.1");
+  const tables = section.blocks.filter((b) => b.type === "table");
+  // Five passes each added their own table or heading here until the section held nine blocks. The
+  // department's form is one table; everything a source says that has no row belongs in the
+  // citation paragraphs below it, not in another block.
+  assert.equal(tables.length, 1, "the drug substance section should hold exactly one table");
+  assert.equal(section.blocks.filter((b) => b.type.startsWith("heading")).length, 0);
+  assert.equal(tables[0].headerless, true, "the form is a label/value table with no header strip");
+  assert.deepEqual(tables[0].rows.map((r) => r[0]), [
+    "Tên chung quốc tế (INN)",
+    "Tên IUPAC",
+    "Số đăng ký CAS",
+    "Công thức cấu tạo",
+    "Công thức phân tử",
+    "Khối lượng phân tử",
+    "Cảm quan",
+    "Điểm chảy",
+    "pKa",
+    "Log P",
+    "Độ ổn định hóa học",
+    "– Phân hủy do nhiệt",
+    "– Phân hủy do ẩm",
+    "– Phân hủy do peroxid",
+    "– Phân hủy do acid/base",
+    "– Phân hủy do ánh sáng",
+  ]);
+});
+
+test("headerless drops the printed header row but not the column contract", () => {
+  const draft = loadExample();
+  const table = excipientTable(draft);
+  table.headerless = "yes";
+  expectFailure(draft, "E_TABLE_HEADERLESS");
+
+  const valid = loadExample();
+  const form = valid.sections.find((s) => s.id === "P.2.1.1").blocks.find((b) => b.type === "table");
+  // Headers are what every row is measured against, so suppressing the printed row must not let a
+  // row carry the wrong number of cells.
+  form.rows.push(["chỉ một ô"]);
+  expectFailure(valid, "E_TABLE_ROW_WIDTH");
+});

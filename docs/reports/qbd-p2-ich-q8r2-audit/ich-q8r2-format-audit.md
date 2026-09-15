@@ -145,6 +145,10 @@ methanol), phân bố cỡ hạt, hàm lượng acid fumaric, dung môi tồn d�
 pKa, LogP, BCS thực nghiệm, đa hình tinh thể, tính chất chảy, độ tan theo pH, dữ liệu ổn định/phân
 hủy — CoA không chứa các mục này.
 
+*Sau đợt 6:* phần còn thiếu nay hiển thị thành các dòng trống cụ thể trong biểu mẫu thay vì một câu
+marker gộp — riêng độ ổn định hóa học tách thành 5 dòng phân hủy cưỡng bức, nên đọc bảng là biết
+chính xác phải đi lấy thí nghiệm nào.
+
 **W-6 — `meta.preparer` ghi AI là người soạn thảo.** Không liên quan Q8(R2); là vấn đề data
 integrity — người soạn phải là cá nhân định danh được. Bảng ký cuối tài liệu đã có dòng "Rà soát
 FD"/"Phê duyệt QA-PO" bỏ trống nên rủi ro có kiểm soát, nhưng trường này nên đổi.
@@ -182,6 +186,15 @@ picomet nhỏ hơn kích thước một nguyên tử, gần như chắc chắn l
 nguyên văn và đánh dấu thay vì tự sửa — không sửa số của nhà cung cấp trong tài liệu đăng ký.
 (b) Ô định tính ghi "Conforms to **5th**" trong khi sản phẩm khai theo Ph.Eur. 12; chưa rõ "5th"
 chỉ đến tài liệu nào. Cả hai nên đưa vào văn bản hỏi nhà cung cấp cùng một lượt.
+
+**W-11 — Biểu mẫu "General properties" của phòng không có dòng độ tan và không có dòng phân bố cỡ
+hạt.** Q8(R2) mục 2.1.1 (tr. 6) yêu cầu nêu các thuộc tính *"that can influence the performance of
+the drug product"*. Với viên nén phóng thích ngay của một hoạt chất dễ tan, độ tan và phân bố cỡ
+hạt là hai thuộc tính nặng ký nhất — độ tan là nền của mọi lập luận BCS, cỡ hạt là biến số then
+chốt của đồng đều hàm lượng và tốc độ hòa tan. Cả hai đều đã có nguồn từ CoA lô 488, nhưng vì biểu
+mẫu không có dòng nên hiện chỉ nằm ở khối trích dẫn, tức đọc lướt bảng sẽ không thấy. Đề xuất FD
+cân nhắc thêm hai dòng vào biểu mẫu. Đây là nhận xét về **biểu mẫu của phòng**, không phải về
+Q8(R2) — quyết định thuộc về phòng, và bản thảo hiện theo đúng biểu mẫu như đã được chỉ đạo.
 
 ### INFO
 
@@ -353,6 +366,43 @@ là đủ.
 Q6A tr. 12. Hai vế còn thiếu: thẩm định quy trình chứng minh không mang rủi ro nhiễm/tăng sinh đáng
 kể, và bằng chứng tính ức chế phát triển của viên. Mục vẫn giữ `gap`. Lưu ý vị trí CTD: số liệu vi
 sinh **nguyên liệu** đặt ở `P.2.1.1`, `P.2.5` chỉ dẫn chiếu sang — `P.2.5` nói về thành phẩm.
+
+## Đợt 6 — P.2.1.1 gom về đúng một biểu mẫu
+
+**Ràng buộc hình thức mới, áp dụng lâu dài.** Qua năm đợt, `P.2.1.1` phình thành 9 block: 2 bảng,
+1 heading và 5 đoạn — mỗi nguồn mới lại đẻ thêm một cụm. Phòng chốt: dù đưa bao nhiêu tài liệu về
+API, mục này chỉ được **một bảng "General properties" 16 dòng** theo biểu mẫu của phòng, phía dưới
+là khối trích dẫn đánh số. Chỉ tiêu nào biểu mẫu không có dòng thì ghi vào khối trích dẫn, không
+thêm bảng hay heading.
+
+Ràng buộc này đã ghi vào `description` của `P.2.1.1` trong `schemas/p2-outline.json` và khóa bằng
+test, để các đợt sau không phải hỏi lại và không tái diễn việc phình mục.
+
+**Kết quả đối chiếu biểu mẫu: 6/16 dòng có giá trị, 10/16 trống.**
+
+| Có nguồn | Trống |
+|---|---|
+| INN, CAS, khối lượng phân tử, pKa — nhưng chỉ ở mức tham khảo `[1]`, chưa đối chiếu chuyên luận | IUPAC, điểm chảy, Log P |
+| Công thức phân tử — đối chiếu chứng chỉ chuẩn `[2]` | Công thức cấu tạo (cần hình) |
+| Cảm quan — kết quả lô 488 `[3]` | Độ ổn định hóa học + 5 dòng phân hủy cưỡng bức |
+
+Bảng trống 10/16 là kết quả trung thực và dùng được: nó thành danh mục việc cần lấy cho FD, thay vì
+trông như đã đủ. Đáng chú ý nhất là **toàn bộ khối phân hủy cưỡng bức trống** — chưa có nghiên cứu
+nhiệt, ẩm, peroxid, acid/base, ánh sáng nào cho dược chất.
+
+**Cơ chế truy nguyên.** Mỗi giá trị mang một nhãn `[1]` `[2]` `[3]` trỏ tới đúng một nguồn ở khối
+dưới bảng; `[1]` mang cảnh báo chưa đối chiếu chuyên luận, `[2]` nói rõ chứng chỉ đặc trưng cho
+chất chuẩn chứ không phải lô sản xuất, `[3]` nói rõ chưa đối chiếu số lô với hồ sơ Thử nghiệm 1.
+Không giá trị nào của CoA bị mất khi gom bảng: các chỉ tiêu không có dòng trong biểu mẫu nằm đủ ở
+ghi chú cuối `[3]`, kèm ghi rõ chúng thuộc phạm vi `3.2.S.4` chứ không phải `3.2.P.2.1.1`.
+
+**Thay đổi công cụ đi kèm.** Biểu mẫu là bảng nhãn–giá trị nên không có hàng tiêu đề, trong khi
+renderer luôn phát một hàng tiêu đề in đậm nền xám. Đã thêm cờ tuỳ chọn `headerless` cho block
+table: `headers` vẫn bắt buộc vì chúng định nghĩa số cột và là mốc kiểm số ô mỗi hàng, cờ chỉ quyết
+định có in hàng đó ra hay không. Mọi bảng khác giữ nguyên tiêu đề — đã xác minh trên bản render.
+
+**Hạn chế công cụ cần xử lý thủ công:** ô "Công thức cấu tạo" cần hình, renderer chưa chèn được
+hình. Phải bổ sung thủ công vào bản Word cuối; bản thảo đánh dấu rõ ở ô đó.
 
 ## Còn lại, phân theo loại
 

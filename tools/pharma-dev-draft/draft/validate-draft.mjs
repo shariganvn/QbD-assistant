@@ -28,7 +28,7 @@ const ALLOWED_BLOCK_KEYS = {
   heading2: new Set(["type", "text"]),
   heading3: new Set(["type", "text"]),
   paragraph: new Set(["type", "text", "italic", "bold"]),
-  table: new Set(["type", "headers", "rows", "columnWidths", "columnAlign"]),
+  table: new Set(["type", "headers", "rows", "columnWidths", "columnAlign", "headerless"]),
 };
 const REQUIRED_META_FIELDS = ["productName", "apiName", "sourceFile", "draftDate", "preparer", "extractionMethod"];
 
@@ -94,6 +94,12 @@ function validateBlock(block, sectionId, index) {
       if (total !== TABLE_WIDTH_DXA) {
         fail("E_TABLE_COLUMN_WIDTHS", `${where}.columnWidths must sum to ${TABLE_WIDTH_DXA}, got ${total}`);
       }
+    }
+    // A label/value form has no header row to print, but it still has columns: headers stay
+    // required because they fix the column count that widths and every row are checked against.
+    // The flag only decides whether that row is rendered.
+    if (block.headerless !== undefined && typeof block.headerless !== "boolean") {
+      fail("E_TABLE_HEADERLESS", `${where}.headerless must be a boolean`);
     }
     if (block.columnAlign !== undefined) {
       const align = block.columnAlign;
