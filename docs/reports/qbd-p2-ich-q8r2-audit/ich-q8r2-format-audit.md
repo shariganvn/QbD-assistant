@@ -528,6 +528,70 @@ hiện "Có dữ liệu (một phần)" chứ không phải "Đã dựng khung" 
   quy trình là dập thẳng nên không có công đoạn xát hạt. Đã bỏ vế đó, giữ thời gian trộn, lực dập,
   điều kiện bao phim.
 
+## Đợt 10 — Rà soát logic build: format P.2 nay được cưỡng chế cho mọi sản phẩm
+
+**Yêu cầu.** Mỗi sản phẩm viên nén bao phim có hoạt chất khác, tá dược khác, kéo theo mọi yếu tố
+khác đều đổi; không được hard-code những thay đổi đó, nhưng phải giữ đúng format tài liệu P.2.
+
+**Kết quả rà soát: logic build đang sai, nhưng sai ngược chiều với dự đoán ban đầu.** Extractor
+(`extract/*.mjs`) và renderer (`render/builder.mjs`) **sạch** — grep toàn bộ code và schema cho
+bisoprolol, croscarmellose, Cellactose, Primellose, povidone, Concor, CT01… chỉ trả ba chỗ vô hại:
+một ví dụ minh hoạ trong `p2-draft-contract.md`, một liệt kê **phương pháp pha chế** trong outline,
+và một câu mô tả worked example trong `README.md`.
+
+Vấn đề nằm ở chiều ngược lại: **format P.2 không được mã hoá ở đâu cưỡng chế được.**
+
+| Nơi | Chứa gì | Cưỡng chế? |
+|---|---|---|
+| `draft/example-draft.json` | Dữ liệu một sản phẩm | — |
+| `schemas/p2-outline.json` → `description` | Mô tả form bằng văn xuôi, 547–738 ký tự mỗi mục | Không — máy không đọc được |
+| `draft/tests/table-layout.test.mjs` | 7 mảng nhãn dòng hard-code | Không — chỉ kiểm đúng file ví dụ |
+| `draft/validate-draft.mjs` | Đọc outline **chỉ để lấy danh sách id mục** | Không kiểm hình dạng form |
+
+Hệ quả cụ thể: một draft cho sản phẩm khác **vẫn validate PASS** kể cả khi dựng `P.2.1.1` thành ba
+bảng, bỏ hết dòng của biểu mẫu, hay thêm heading tuỳ ý. Format tồn tại ở **ba bản sao** và không bản
+nào ràng buộc được sản phẩm mới — đúng nghĩa hard-code sai chỗ: format thì lỏng, còn thứ bị ghim
+cứng lại là dữ liệu của một sản phẩm.
+
+**Khắc phục: khoá `form` máy đọc được trong `schemas/p2-outline.json`, cưỡng chế bởi validator.**
+Ký hiệu đầy đủ ghi ở `_formSpec` của outline và ở `p2-draft-contract.md`. Cốt lõi:
+
+- `headings` — danh sách heading3 bắt buộc theo thứ tự; `[]` = không được có heading.
+- `tables` — đúng số bảng, đúng thứ tự. Mỗi bảng khai `columns` (nhãn chính xác; `"*"` = bất kỳ,
+  dùng cho nhãn mang **tên sản phẩm**; `"..."` cuối = các cột còn lại tự do về số lượng và tên),
+  cộng một trong `rows` (nhãn chính xác) / `rows: "variable"` (sản phẩm quyết định) /
+  `rowsFrom: "<id mục>"` (phải trùng nhãn dòng bảng đầu của mục đó).
+
+Tám mục được ràng buộc. Ba chỗ **cố tình để mở** vì chúng đổi theo sản phẩm: nhãn cột mang tên thuốc
+đối chiếu ở `P.2.2.1.1`, nhãn cột mang tên thử nghiệm ở `P.2.2.1.2`, và toàn bộ cột công đoạn của ma
+trận rủi ro `P.2.3` — đổi theo phương pháp pha chế.
+
+`rowsFrom` là cách diễn đạt máy-kiểm-được cho quy tắc quan trọng nhất: **ma trận rủi ro phải chấm
+đúng bộ CQA mà sản phẩm tự khai**. Đổi một CQA ở `P.2.2.1.2` mà quên rescore `P.2.3` sẽ bị chặn.
+
+**Bằng chứng spec hoạt động.** Sáu kiểu phá format bị chặn đúng mã lỗi: bỏ một dòng biểu mẫu
+(`E_FORM_ROWS`), thêm bảng (`E_FORM_TABLE_COUNT`), bỏ `headerless` (`E_FORM_HEADERLESS`), thêm
+heading (`E_FORM_HEADINGS`), đổi nhãn cột cố định (`E_FORM_COLUMNS`), lệch CQA giữa `P.2.2.1.2` và
+`P.2.3` (`E_FORM_ROWS`). Hai biến thiên hợp lệ được cho qua: đổi tên thuốc đối chiếu ở nhãn cột, và
+đổi ma trận từ năm công đoạn dập thẳng sang ba công đoạn xát hạt ướt.
+
+**Phép thử quyết định: `example-draft.json` không bị sửa một ký tự nào** và vẫn validate PASS. Nếu
+phải sửa dữ liệu cho khớp spec thì spec đã viết sai. `git diff` trên file đó trống, và `document.xml`
+của bản render có SHA-256 **không đổi** so với đợt 9 — spec chỉ kiểm, không sinh.
+
+Bảy mảng nhãn hard-code trong test đã được gỡ; thay bằng các test âm chứng minh spec chặn thật, hai
+test chứng minh spec không dính vào sản phẩm/phương pháp, và **một test dựng draft cho sản phẩm
+khác hẳn** (metformin, tá dược khác, CQA khác, thuốc đối chiếu khác) — phải validate PASS trên đúng
+form đó. 25/25 test xanh.
+
+**Dọn branch remote.** `claude/codebase-architecture-summary-po0utr` đã bị xoá sẵn trên remote
+(`git fetch --prune` xác nhận). `master` **chưa xoá được**: `git push origin --delete master` trả
+HTTP 403 trong khi push commit thường vẫn hoạt động, và proxy không ghi nhận lỗi relay nào — dấu
+hiệu `master` đang là default branch của repo, thứ GitHub không cho xoá. Cần đổi default sang
+`tienpharmacist` ở Settings → Branches rồi xoá lại. Nội dung không mất gì: `master` chỉ hơn
+`tienpharmacist` đúng một commit merge không mang thay đổi riêng, SHA
+`f2bc632ca88a31bf32c5f4556bcc4aad0e674149`.
+
 ## Còn lại, phân theo loại
 
 **Thiếu dữ liệu** (cần nguồn, không sửa được bằng viết lại): C-3 tương hợp, C-4 quy trình sản

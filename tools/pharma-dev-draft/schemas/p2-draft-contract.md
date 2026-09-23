@@ -103,3 +103,29 @@ header when present:
 `render/builder.mjs` unconditionally prepends a scope-notice box and appends a sign-off table —
 these are fixed constants in the renderer, not settable through the draft JSON. See
 `tools/pharma-dev-draft/README.md` for why this is non-negotiable.
+
+## The P.2 form: `form` in `schemas/p2-outline.json`
+
+Every product brings a different active substance, different excipients, different quality
+attributes and, depending on the manufacturing method, a different set of unit operations. None of
+that may be fixed anywhere. What must not vary is the shape of the department's P.2 document, so
+each outline section may carry a `form` key that the validator enforces against **any** draft:
+
+- `headings` — the `heading3` texts the section must have, in order. `[]` means the section takes
+  no headings at all.
+- `tables` — one entry per table the section must have, in order. Each entry may declare:
+  - `columns` — exact header labels. `"*"` accepts any non-empty label, for a column whose title
+    carries a product name (the reference product, the trial the criteria came from). `"..."` as
+    the last entry accepts any number of further columns with any names — that is how the process
+    risk matrix takes whichever unit operations the chosen method has.
+  - `rows` — exact row labels, or `"variable"` when the product decides them (the excipient list,
+    the quality attributes, the process steps).
+  - `rowsFrom` — the id of another section whose first table supplies the row labels. The risk
+    matrix uses this so it always scores exactly the attributes the product declared, rather than a
+    list frozen into the schema.
+  - `headerless` — whether the printed header strip is suppressed, for label/value forms.
+
+Omit `headings` or `tables` to leave that aspect unconstrained; omit `form` entirely for a section
+with no fixed shape. Violations report as `E_FORM_HEADINGS`, `E_FORM_TABLE_COUNT`,
+`E_FORM_COLUMNS`, `E_FORM_ROWS` and `E_FORM_HEADERLESS`, each naming the section, the table and the
+label that differs.

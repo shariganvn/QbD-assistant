@@ -106,31 +106,104 @@ test("justify is an accepted column alignment", () => {
   assert.doesNotThrow(() => validateDraft(draft));
 });
 
-test("P.2.1.2 keeps one excipient table under the two numbered sub-headings", () => {
-  const section = loadExample().sections.find((s) => s.id === "P.2.1.2");
-  const tables = section.blocks.filter((b) => b.type === "table");
-  const subHeadings = section.blocks.filter((b) => b.type === "heading3");
-  // One table only: the excipient information belongs in a single table, not split back into the
-  // quantitative-composition plus information-table pair the section used to carry.
-  assert.equal(tables.length, 1, "the excipient section should hold exactly one table");
-  assert.deepEqual(tables[0].headers, ["STT", "Tên tá dược", "Đặc tính lý hóa", "Ứng dụng", "Chức năng"]);
-  // Properties and drug-substance compatibility are separate numbered items in the department's
-  // reference document, and Q8(R2) states the compatibility requirement in its own clause, so the
-  // section carries exactly those two sub-headings and no heading2 that would outrank them.
-  assert.deepEqual(subHeadings.map((b) => b.text), [
-    "3.2.P.2.1.2.1. Đặc tính lý hóa (Physicochemical properties)",
-    "3.2.P.2.1.2.2. Nghiên cứu tương hợp dược chất – tá dược (Excipient compatibility)",
-  ]);
-  assert.equal(section.blocks.filter((b) => b.type === "heading2").length, 0);
+// --- the P.2 form, as enforced for any product -----------------------------
+//
+// Row labels, table counts and headings are no longer repeated here. They live in
+// schemas/p2-outline.json under `form`, and validateDraft enforces them for whatever draft it is
+// given. Copying them into the tests as well would make a third copy that only ever checks this one
+// example, and would go stale the moment a different product is drafted. What the tests do instead
+// is prove the spec actually bites, and that it bites on shape rather than on this product.
+
+function formTable(draft, sectionId, index = 0) {
+  return draft.sections.find((s) => s.id === sectionId).blocks.filter((b) => b.type === "table")[index];
+}
+
+test("dropping a row from a form table is rejected", () => {
+  const draft = loadExample();
+  formTable(draft, "P.2.1.1").rows.splice(3, 1);
+  expectFailure(draft, "E_FORM_ROWS");
 });
+
+test("adding a table the form does not have is rejected", () => {
+  const draft = loadExample();
+  draft.sections.find((s) => s.id === "P.2.1.1").blocks.push({ type: "table", headers: ["a", "b"], rows: [["x", "y"]] });
+  expectFailure(draft, "E_FORM_TABLE_COUNT");
+});
+
+test("adding a heading the form does not have is rejected", () => {
+  const draft = loadExample();
+  draft.sections.find((s) => s.id === "P.2.1.1").blocks.push({ type: "heading3", text: "Mục thêm" });
+  expectFailure(draft, "E_FORM_HEADINGS");
+});
+
+test("a label/value form must keep its header row suppressed", () => {
+  const draft = loadExample();
+  delete formTable(draft, "P.2.1.1").headerless;
+  expectFailure(draft, "E_FORM_HEADERLESS");
+});
+
+test("renaming a fixed column label is rejected", () => {
+  const draft = loadExample();
+  formTable(draft, "P.2.4").headers[1] = "Bao bì khác";
+  expectFailure(draft, "E_FORM_COLUMNS");
+});
+
+test("the risk matrix has to follow the quality attributes the product declares", () => {
+  const draft = loadExample();
+  // Changing a quality attribute without rescoring the process risk for it is the mistake this
+  // rule exists to catch; the matrix takes its rows from P.2.2.1.2 rather than from a fixed list.
+  formTable(draft, "P.2.2.1.2").rows[0][0] = "Chỉ tiêu mới";
+  expectFailure(draft, "E_FORM_ROWS");
+});
+
+test("the form fixes the shape, not the product: labels carrying a product name may change", () => {
+  const draft = loadExample();
+  formTable(draft, "P.2.2.1.1").headers[1] = "Thuốc gốc XYZ 20 mg";
+  assert.doesNotThrow(() => validateDraft(draft));
+});
+
+test("the form fixes the shape, not the method: process steps may change with the method", () => {
+  const draft = loadExample();
+  // Direct compression is this product's method. Wet granulation, fluid-bed granulation, roller
+  // compaction, slugging and hot-melt extrusion each bring a different set of unit operations, and
+  // the risk matrix has to accept whichever set applies.
+  const matrix = formTable(draft, "P.2.3");
+  matrix.headers = ["CQA sản phẩm", "Xát hạt ướt", "Sấy", "Dập viên"];
+  matrix.rows = matrix.rows.map((row) => [row[0], "[CHƯA CÓ DỮ LIỆU]", "[CHƯA CÓ DỮ LIỆU]", "[CHƯA CÓ DỮ LIỆU]"]);
+  formTable(draft, "P.2.3", 1).rows = [
+    ["Xát hạt ướt", "[CHƯA CÓ DỮ LIỆU]", "[CHƯA CÓ DỮ LIỆU]"],
+    ["Sấy", "[CHƯA CÓ DỮ LIỆU]", "[CHƯA CÓ DỮ LIỆU]"],
+    ["Dập viên", "[CHƯA CÓ DỮ LIỆU]", "[CHƯA CÓ DỮ LIỆU]"],
+  ];
+  assert.doesNotThrow(() => validateDraft(draft));
+});
+
+test("a draft for an entirely different product validates on the same form", () => {
+  const draft = loadExample();
+  // Nothing about this product survives: another active substance, other excipients, other quality
+  // attributes, another reference product. Only the P.2 form stays, which is the point.
+  draft.meta.productName = "Metformin hydrochloride 500 mg viên nén bao phim";
+  draft.meta.apiName = "Metformin hydrochloride";
+  const excipients = formTable(draft, "P.2.1.2");
+  excipients.rows = [["1.", "Hypromellose", "—", "—", "Tá dược dính"]];
+  const attributes = formTable(draft, "P.2.2.1.2");
+  attributes.rows = [["Độ hòa tan (45 phút)", "≥ 75% (Q)"], ["Định lượng", "95–105%"]];
+  const matrix = formTable(draft, "P.2.3");
+  matrix.headers = ["CQA sản phẩm", "Xát hạt ướt", "Dập viên"];
+  matrix.rows = attributes.rows.map((row) => [row[0], "Thấp", "Cao"]);
+  formTable(draft, "P.2.3", 1).rows = [
+    ["Xát hạt ướt", "Lượng dung môi", "Kinh nghiệm sản xuất"],
+    ["Dập viên", "Lực dập", "Kinh nghiệm sản xuất"],
+  ];
+  formTable(draft, "P.2.2.1.1").headers[1] = "Glucophage® 500 mg";
+  formTable(draft, "P.2.2.1.1", 1).headers[1] = "Glucophage® 500 mg (Lô …)";
+  assert.doesNotThrow(() => validateDraft(draft));
+});
+
+// --- content intent the form spec cannot express ---------------------------
 
 test("the criticality discussion does not upgrade P.2.2.1.2 into an approved QTPP/CQA table", () => {
   const section = loadExample().sections.find((s) => s.id === "P.2.2.1.2");
-  const headings = section.blocks.filter((b) => b.type === "heading3").map((b) => b.text);
-  assert.ok(
-    headings.includes("Xác định yếu tố trọng yếu và biện luận kiểm soát"),
-    "the section must carry the criticality and control-strategy discussion",
-  );
   // The section reasons about which attributes are critical, which is a different claim from
   // presenting an approved QTPP/CQA table. The opening disclaimer is what keeps the two apart, so
   // it has to survive every later pass that adds reasoning here.
@@ -138,43 +211,43 @@ test("the criticality discussion does not upgrade P.2.2.1.2 into an approved QTP
     section.blocks.some((b) => b.type === "paragraph" && b.text.includes("KHÔNG phải bảng QTPP/CQA chính thức")),
     "the section must keep stating that it is not an approved QTPP/CQA table",
   );
-  // Only the disintegrant level was actually varied, so everything else stays an open question
-  // rather than an unsupported criticality claim.
   assert.ok(
     section.blocks.some((b) => b.type === "paragraph" && b.text.startsWith("[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa đánh giá tính trọng yếu")),
     "the section must name the attributes whose criticality is still unassessed",
   );
 });
 
-test("P.2.1.1 stays one headerless properties form, whatever new drug substance sources arrive", () => {
-  const section = loadExample().sections.find((s) => s.id === "P.2.1.1");
-  const tables = section.blocks.filter((b) => b.type === "table");
-  // Five passes each added their own table or heading here until the section held nine blocks. The
-  // department's form is one table; everything a source says that has no row belongs in the
-  // citation paragraphs below it, not in another block.
-  assert.equal(tables.length, 1, "the drug substance section should hold exactly one table");
-  assert.equal(section.blocks.filter((b) => b.type.startsWith("heading")).length, 0);
-  assert.equal(tables[0].headerless, true, "the form is a label/value table with no header strip");
-  assert.deepEqual(tables[0].rows.map((r) => r[0]), [
-    "Tên chung quốc tế (INN)",
-    "Tên IUPAC",
-    "Số đăng ký CAS",
-    "Công thức cấu tạo",
-    "Công thức phân tử",
-    "Khối lượng phân tử",
-    "Cảm quan",
-    "Độ tan",
-    "Phân bố cỡ hạt",
-    "Điểm chảy",
-    "pKa",
-    "Log P",
-    "Độ ổn định hóa học",
-    "– Phân hủy do nhiệt",
-    "– Phân hủy do ẩm",
-    "– Phân hủy do peroxid",
-    "– Phân hủy do acid/base",
-    "– Phân hủy do ánh sáng",
-  ]);
+test("no value is invented where no reference product has been characterised", () => {
+  const draft = loadExample();
+  for (const index of [0, 1]) {
+    for (const row of formTable(draft, "P.2.2.1.1", index).rows) {
+      assert.ok(row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} must still be marked as awaiting data`);
+    }
+  }
+  for (const index of [0, 1]) {
+    for (const row of formTable(draft, "P.2.4", index).rows) {
+      assert.ok(row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} must still be awaiting a decision`);
+    }
+  }
+  for (const row of formTable(draft, "P.2.3").rows) {
+    for (const cell of row.slice(1)) {
+      assert.ok(cell.includes("[CHƯA CÓ DỮ LIỆU"), "no risk level has been assessed yet");
+    }
+  }
+});
+
+test("P.2.5 states the limits it applies and marks only the results as missing", () => {
+  const draft = loadExample();
+  // The department's form commits to routine testing, so the limits and the schedule are real
+  // content taken from it. Only the measurements are outstanding — marking the limits as missing
+  // too would hide the fact that a route has already been chosen.
+  for (const row of formTable(draft, "P.2.5").rows) {
+    assert.ok(!row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} limit comes from the form`);
+    assert.ok(row[2].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} result is not measured yet`);
+  }
+  for (const row of formTable(draft, "P.2.5", 1).rows) {
+    assert.ok(!row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} schedule comes from the form`);
+  }
 });
 
 test("headerless drops the printed header row but not the column contract", () => {
@@ -184,42 +257,10 @@ test("headerless drops the printed header row but not the column contract", () =
   expectFailure(draft, "E_TABLE_HEADERLESS");
 
   const valid = loadExample();
-  const form = valid.sections.find((s) => s.id === "P.2.1.1").blocks.find((b) => b.type === "table");
   // Headers are what every row is measured against, so suppressing the printed row must not let a
   // row carry the wrong number of cells.
-  form.rows.push(["chỉ một ô"]);
+  formTable(valid, "P.2.1.1").rows.push(["chỉ một ô"]);
   expectFailure(valid, "E_TABLE_ROW_WIDTH");
-});
-
-test("P.2.2.1.1 carries the reference-product form with every value still awaiting data", () => {
-  const section = loadExample().sections.find((s) => s.id === "P.2.2.1.1");
-  const tables = section.blocks.filter((b) => b.type === "table");
-  assert.equal(tables.length, 2, "the house form for this section is two tables");
-  assert.deepEqual(tables[1].rows.map((r) => r[0]), [
-    "Nhà sản xuất",
-    "Số đăng ký",
-    "Hạn dùng",
-    "Điều kiện bảo quản",
-    "Quy cách đóng gói",
-    "Cảm quan",
-    "Khối lượng trung bình",
-    "Kích thước viên",
-    "Độ cứng",
-    "Thời gian rã",
-    "Định lượng",
-    "Tạp chất liên quan",
-    "Đồng đều hàm lượng",
-    "Hàm lượng chất bảo quản",
-    "Tương đương độ hòa tan — điều kiện thử",
-    "Tương đương độ hòa tan — hồ sơ theo thời gian",
-  ]);
-  // No reference product has been characterised yet, so any value cell holding a figure would be
-  // invented rather than measured.
-  for (const table of tables) {
-    for (const row of table.rows) {
-      assert.ok(row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} must still be marked as awaiting data`);
-    }
-  }
 });
 
 test("the gap register separates a built-out form from one that holds data", () => {
@@ -236,58 +277,4 @@ test("the gap register separates a built-out form from one that holds data", () 
   // be an empty form once it is not one.
   referenceProduct.blocks.find((b) => b.type === "table").rows[1][1] = "Viên nén bao phim";
   assert.equal(dataStatusLabel(referenceProduct), "Có dữ liệu (một phần hoặc đầy đủ)");
-});
-
-test("the P.2.3 risk matrix assesses exactly the product's own quality attributes", () => {
-  const draft = loadExample();
-  const section = draft.sections.find((s) => s.id === "P.2.3");
-  const tables = section.blocks.filter((b) => b.type === "table");
-  assert.equal(tables.length, 2, "the house form is a risk matrix plus a justification table");
-
-  const [matrix, justification] = tables;
-  // Process steps depend on the manufacturing method — direct compression, wet granulation, roller
-  // compaction and the rest each have their own — so the step names are product data and are
-  // deliberately not pinned here. What must hold for any method is that the matrix scores every
-  // quality attribute the product itself declares, and no others.
-  const declaredCqas = draft.sections.find((s) => s.id === "P.2.2.1.2")
-    .blocks.find((b) => b.type === "table").rows.map((r) => r[0]);
-  assert.deepEqual(matrix.rows.map((r) => r[0]), declaredCqas);
-  assert.ok(matrix.headers.length >= 2, "the matrix needs at least one process step column");
-  assert.equal(justification.rows.length, matrix.headers.length - 1, "one justification row per step");
-
-  for (const row of matrix.rows) {
-    for (const cell of row.slice(1)) {
-      assert.ok(cell.includes("[CHƯA CÓ DỮ LIỆU"), "no risk level has been assessed yet");
-    }
-  }
-});
-
-test("P.2.4 carries the packaging form with nothing chosen yet", () => {
-  const section = loadExample().sections.find((s) => s.id === "P.2.4");
-  const tables = section.blocks.filter((b) => b.type === "table");
-  assert.equal(tables.length, 2, "primary and secondary packaging are separate tables");
-  assert.deepEqual(tables[0].rows.map((r) => r[0]), [
-    "Vật liệu", "Mô tả", "Khả năng bảo vệ", "Tính tương hợp", "Kiểm soát chất lượng", "Dữ liệu độ ổn định",
-  ]);
-  assert.deepEqual(tables[1].rows.map((r) => r[0]), ["Mô tả", "Chức năng"]);
-  for (const table of tables) {
-    for (const row of table.rows) {
-      assert.ok(row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} must still be awaiting a decision`);
-    }
-  }
-});
-
-test("P.2.5 states the limits it applies and marks only the results as missing", () => {
-  const section = loadExample().sections.find((s) => s.id === "P.2.5");
-  const [limits, frequency] = section.blocks.filter((b) => b.type === "table");
-  // The department's form commits to routine testing, so the limits and the schedule are real
-  // content taken from it. Only the measurements are outstanding — marking the limits as missing
-  // too would hide the fact that a route has already been chosen.
-  for (const row of limits.rows) {
-    assert.ok(!row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} limit comes from the form`);
-    assert.ok(row[2].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} result is not measured yet`);
-  }
-  for (const row of frequency.rows) {
-    assert.ok(!row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} schedule comes from the form`);
-  }
 });

@@ -113,6 +113,80 @@ function validateBlock(block, sectionId, index) {
   }
 }
 
+// The P.2 form is the one thing that must not vary between products: a different active substance
+// brings different excipients, different quality attributes and different process steps, but the
+// department's document keeps the same sections, tables and row labels. Those rules live in
+// schemas/p2-outline.json under `form` so they apply to any draft, rather than only to whichever
+// example the tests happen to load. See `_formSpec` there for the notation.
+const COLUMN_ANY = "*";
+const COLUMN_REST = "...";
+
+function firstTableRowLabels(draft, sectionId) {
+  const section = draft.sections.find((entry) => entry.id === sectionId);
+  const table = section?.blocks?.find((block) => block.type === "table");
+  return table ? table.rows.map((row) => row[0]) : undefined;
+}
+
+function validateColumns(actual, expected, where) {
+  const openEnded = expected[expected.length - 1] === COLUMN_REST;
+  const fixed = openEnded ? expected.slice(0, -1) : expected;
+  if (openEnded ? actual.length < fixed.length : actual.length !== fixed.length) {
+    fail("E_FORM_COLUMNS", `${where} must have ${openEnded ? "at least " : ""}${fixed.length} columns, got ${actual.length}`);
+  }
+  fixed.forEach((want, index) => {
+    const got = actual[index];
+    if (want === COLUMN_ANY) {
+      // The label carries a product name (the reference product, the trial it belongs to), so the
+      // form fixes the position and leaves the wording to the draft.
+      if (typeof got !== "string" || got.trim() === "") {
+        fail("E_FORM_COLUMNS", `${where} column ${index + 1} must be a non-empty label`);
+      }
+      return;
+    }
+    if (got !== want) fail("E_FORM_COLUMNS", `${where} column ${index + 1} must be "${want}", got "${got}"`);
+  });
+}
+
+function validateRows(table, tableSpec, draft, where) {
+  if (tableSpec.rows === "variable") return;
+  let expected = tableSpec.rows;
+  if (tableSpec.rowsFrom) {
+    expected = firstTableRowLabels(draft, tableSpec.rowsFrom);
+    if (!expected) {
+      fail("E_FORM_ROWS", `${where} takes its row labels from section "${tableSpec.rowsFrom}", which has no table`);
+    }
+  }
+  if (!expected) return;
+  const actual = table.rows.map((row) => row[0]);
+  if (actual.length !== expected.length || actual.some((label, index) => label !== expected[index])) {
+    const source = tableSpec.rowsFrom ? ` (must match section "${tableSpec.rowsFrom}")` : "";
+    fail("E_FORM_ROWS", `${where} row labels do not match the P.2 form${source}. Expected: ${expected.join(" | ")}. Got: ${actual.join(" | ")}`);
+  }
+}
+
+function validateSectionForm(section, spec, draft) {
+  if (Array.isArray(spec.headings)) {
+    const actual = section.blocks.filter((block) => block.type.startsWith("heading")).map((block) => block.text);
+    if (actual.length !== spec.headings.length || actual.some((text, index) => text !== spec.headings[index])) {
+      fail("E_FORM_HEADINGS", `section "${section.id}" headings do not match the P.2 form. Expected: ${spec.headings.join(" | ") || "(none)"}. Got: ${actual.join(" | ") || "(none)"}`);
+    }
+  }
+  if (!Array.isArray(spec.tables)) return;
+  const tables = section.blocks.filter((block) => block.type === "table");
+  if (tables.length !== spec.tables.length) {
+    fail("E_FORM_TABLE_COUNT", `section "${section.id}" must have ${spec.tables.length} table(s) per the P.2 form, got ${tables.length}`);
+  }
+  spec.tables.forEach((tableSpec, index) => {
+    const table = tables[index];
+    const where = `section "${section.id}" table ${index + 1}`;
+    if (Array.isArray(tableSpec.columns)) validateColumns(table.headers, tableSpec.columns, where);
+    if (Boolean(table.headerless) !== Boolean(tableSpec.headerless)) {
+      fail("E_FORM_HEADERLESS", `${where} must ${tableSpec.headerless ? "be" : "not be"} headerless`);
+    }
+    validateRows(table, tableSpec, draft, where);
+  });
+}
+
 export function validateDraft(draft) {
   if (typeof draft !== "object" || draft === null) fail("E_DRAFT_SHAPE", "draft must be an object");
   if (draft.schemaVersion !== "1.0") fail("E_SCHEMA_VERSION", `unsupported schemaVersion: ${draft.schemaVersion}`);
@@ -166,6 +240,8 @@ export function validateDraft(draft) {
         fail("E_COVERED_NO_BLOCKS", `section "${section.id}" has status "covered" but no blocks`);
       }
       section.blocks.forEach((block, index) => validateBlock(block, section.id, index));
+      const spec = outline.sections.find((entry) => entry.id === section.id)?.form;
+      if (spec) validateSectionForm(section, spec, draft);
     } else {
       fail("E_SECTION_STATUS", `section "${section.id}".status must be "covered" or "gap", got: ${section.status}`);
     }
