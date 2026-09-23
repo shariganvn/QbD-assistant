@@ -227,10 +227,67 @@ test("the gap register separates a built-out form from one that holds data", () 
   const referenceProduct = draft.sections.find((s) => s.id === "P.2.2.1.1");
   assert.equal(dataStatusLabel(referenceProduct), "Đã dựng khung, chưa có dữ liệu");
   assert.equal(dataStatusLabel(draft.sections.find((s) => s.id === "P.2.1.1")), "Có dữ liệu (một phần hoặc đầy đủ)");
-  assert.equal(dataStatusLabel(draft.sections.find((s) => s.id === "P.2.5")), "Không có dữ liệu");
+  // Checked against a bare section rather than a real one: every section in the example now has at
+  // least a form built out, so pinning this to whichever section happened to be empty would break
+  // again the next time one is filled in.
+  assert.equal(dataStatusLabel({ id: "X", status: "gap", gapReason: "chưa có nguồn" }), "Không có dữ liệu");
 
   // Filling in one real value has to flip the label on its own; a section cannot keep claiming to
   // be an empty form once it is not one.
   referenceProduct.blocks.find((b) => b.type === "table").rows[1][1] = "Viên nén bao phim";
   assert.equal(dataStatusLabel(referenceProduct), "Có dữ liệu (một phần hoặc đầy đủ)");
+});
+
+test("the P.2.3 risk matrix assesses exactly the product's own quality attributes", () => {
+  const draft = loadExample();
+  const section = draft.sections.find((s) => s.id === "P.2.3");
+  const tables = section.blocks.filter((b) => b.type === "table");
+  assert.equal(tables.length, 2, "the house form is a risk matrix plus a justification table");
+
+  const [matrix, justification] = tables;
+  // Process steps depend on the manufacturing method — direct compression, wet granulation, roller
+  // compaction and the rest each have their own — so the step names are product data and are
+  // deliberately not pinned here. What must hold for any method is that the matrix scores every
+  // quality attribute the product itself declares, and no others.
+  const declaredCqas = draft.sections.find((s) => s.id === "P.2.2.1.2")
+    .blocks.find((b) => b.type === "table").rows.map((r) => r[0]);
+  assert.deepEqual(matrix.rows.map((r) => r[0]), declaredCqas);
+  assert.ok(matrix.headers.length >= 2, "the matrix needs at least one process step column");
+  assert.equal(justification.rows.length, matrix.headers.length - 1, "one justification row per step");
+
+  for (const row of matrix.rows) {
+    for (const cell of row.slice(1)) {
+      assert.ok(cell.includes("[CHƯA CÓ DỮ LIỆU"), "no risk level has been assessed yet");
+    }
+  }
+});
+
+test("P.2.4 carries the packaging form with nothing chosen yet", () => {
+  const section = loadExample().sections.find((s) => s.id === "P.2.4");
+  const tables = section.blocks.filter((b) => b.type === "table");
+  assert.equal(tables.length, 2, "primary and secondary packaging are separate tables");
+  assert.deepEqual(tables[0].rows.map((r) => r[0]), [
+    "Vật liệu", "Mô tả", "Khả năng bảo vệ", "Tính tương hợp", "Kiểm soát chất lượng", "Dữ liệu độ ổn định",
+  ]);
+  assert.deepEqual(tables[1].rows.map((r) => r[0]), ["Mô tả", "Chức năng"]);
+  for (const table of tables) {
+    for (const row of table.rows) {
+      assert.ok(row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} must still be awaiting a decision`);
+    }
+  }
+});
+
+test("P.2.5 states the limits it applies and marks only the results as missing", () => {
+  const section = loadExample().sections.find((s) => s.id === "P.2.5");
+  const [limits, frequency] = section.blocks.filter((b) => b.type === "table");
+  // The department's form commits to routine testing, so the limits and the schedule are real
+  // content taken from it. Only the measurements are outstanding — marking the limits as missing
+  // too would hide the fact that a route has already been chosen.
+  for (const row of limits.rows) {
+    assert.ok(!row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} limit comes from the form`);
+    assert.ok(row[2].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} result is not measured yet`);
+  }
+  for (const row of frequency.rows) {
+    assert.ok(!row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} schedule comes from the form`);
+  }
 });

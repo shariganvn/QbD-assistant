@@ -215,7 +215,7 @@
         },
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Bảng trên chỉ gồm tá dược của lõi viên (tổng 100,00 mg). Sản phẩm là viên nén bao phim nên còn thành phần hệ màng bao, và các chất chỉ dùng trong quá trình sản xuất mà không còn trong thành phẩm (dung môi tá hạt, dung môi pha dịch bao) — không có trong Thử nghiệm 1. ICH Q8(R2) mục 2.1.2 (trang 7) yêu cầu phần này bao gồm mọi chất dùng trong sản xuất thuốc, dù có xuất hiện trong thành phẩm hay không."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Bảng trên chỉ gồm tá dược của lõi viên (tổng 100,00 mg). Sản phẩm là viên nén bao phim nên còn thành phần hệ màng bao, và các chất chỉ dùng trong quá trình sản xuất mà không còn trong thành phẩm (dung môi xát hạt, dung môi pha dịch bao) — không có trong Thử nghiệm 1. ICH Q8(R2) mục 2.1.2 (trang 7) yêu cầu phần này bao gồm mọi chất dùng trong sản xuất thuốc, dù có xuất hiện trong thành phẩm hay không."
         },
         {
           "type": "heading3",
@@ -416,7 +416,7 @@
         },
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa đánh giá tính trọng yếu của: thuộc tính dược chất (phân bố cỡ hạt, đa hình), các thông số quy trình (thời gian trộn, lực dập, điều kiện xát hạt và bao phim), hệ màng bao, và hệ thống bao bì. Thử nghiệm 1 giữ cố định hoặc không khảo sát các yếu tố này nên không có cơ sở kết luận theo cách ICH Q8(R2) trang 6 mô tả. Riêng magnesium stearate 3% kl/kl là biến nhiễu tiềm tàng đối với độ hòa tan, cần tách bạch trong thử nghiệm tiếp theo trước khi kết luận về tá dược rã là đầy đủ."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa đánh giá tính trọng yếu của: thuộc tính dược chất (phân bố cỡ hạt, đa hình), các thông số quy trình (thời gian trộn, lực dập, điều kiện bao phim), hệ màng bao, và hệ thống bao bì. Thử nghiệm 1 giữ cố định hoặc không khảo sát các yếu tố này nên không có cơ sở kết luận theo cách ICH Q8(R2) trang 6 mô tả. Riêng magnesium stearate 3% kl/kl là biến nhiễu tiềm tàng đối với độ hòa tan, cần tách bạch trong thử nghiệm tiếp theo trước khi kết luận về tá dược rã là đầy đủ."
         }
       ]
     },
@@ -509,7 +509,7 @@
         },
         {
           "type": "paragraph",
-          "text": "Cả ba mức croscarmellose sodium đều nằm trong khoảng 0,5 – 5,0% mà Handbook of Pharmaceutical Excipients khuyến cáo cho viên nén: CT02 (3%) trùng mức khuyến cáo cho xát hạt ướt, CT01 (1%) thấp hơn mức đó, CT03 (5%) chạm giới hạn trên. Khoảng 0,5 – 1% chưa được khảo sát nên chưa kết luận được về vùng dưới của khoảng khuyến cáo."
+          "text": "Cả ba mức croscarmellose sodium đều nằm trong khoảng 0,5 – 5,0% mà Handbook of Pharmaceutical Excipients khuyến cáo cho viên nén: CT02 (3%) trùng mức khuyến cáo cho xát hạt ướt, CT01 (1%) thấp hơn mức đó, CT03 (5%) chạm giới hạn trên. Khoảng 0,5 – 1% chưa được khảo sát nên chưa kết luận được về vùng dưới của khoảng khuyến cáo. Lưu ý sau khi FD xác nhận quy trình là trộn dập thẳng: chuyên luận croscarmellose sodium trích ở mục P.2.1.2 nêu mức thông thường 2% cho dập thẳng và 3% cho xát hạt ướt, nên mốc đối chiếu đúng cho sản phẩm này là 2%, không phải 3%. Cả ba công thức đều nằm xa mốc đó, riêng CT03 ở 5% gấp 2,5 lần mức thông thường của dập thẳng — cần biện luận khi nộp hồ sơ."
         },
         {
           "type": "paragraph",
@@ -792,18 +792,275 @@
     },
     {
       "id": "P.2.3",
-      "status": "gap",
-      "gapReason": "Thử nghiệm 1 không mô tả quy trình sản xuất/pha chế (trộn, xát hạt, sấy, dập viên, bao phim). Toàn bộ mục cần dữ liệu bổ sung từ hồ sơ quy trình sản xuất/hồ sơ lô."
+      "status": "covered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Quy trình sản xuất được chọn cho sản phẩm này là trộn dập thẳng, do FD xác nhận — hồ sơ Thử nghiệm 1 không mô tả quy trình nên dữ kiện này không đến từ nguồn thử nghiệm. Trộn dập thẳng rút ngắn quá trình sản xuất và hạn chế phát sinh tạp so với xát hạt, nhưng đặt ra ba vấn đề phải giải quyết trong phát triển: độ đồng đều hàm lượng, tính chảy của hỗn hợp bột, và khả năng chịu nén. Biểu mẫu của phòng còn yêu cầu một sơ đồ quy trình; bản render tự động chưa hỗ trợ hình nên sơ đồ phải bổ sung thủ công vào bản Word cuối."
+        },
+        {
+          "type": "paragraph",
+          "text": "Phạm vi áp dụng của hai bảng dưới đây: bộ công đoạn và bộ thông số trọng yếu gắn với phương pháp trộn dập thẳng. Nếu FD đổi sang phương pháp khác — xát hạt ướt, phun sấy tầng sôi tạo hạt, cán ép, đóng tán (slugging), ép đùn nóng chảy — thì bộ công đoạn và các thông số trọng yếu đi kèm đều khác, và cả hai bảng phải được dựng lại theo phương pháp mới chứ không sửa từng ô."
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Đánh giá rủi ro ban đầu của quy trình sản xuất"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "CQA sản phẩm",
+            "Trộn sơ bộ",
+            "Trộn hoàn tất",
+            "Dập viên",
+            "Bao phim",
+            "Đóng gói"
+          ],
+          "rows": [
+            [
+              "Cảm quan",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Đồng đều khối lượng",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Độ rã",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Định lượng (Assay)",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Độ hòa tan (30 phút)",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Tạp chất liên quan",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Độ đồng đều hàm lượng",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Biện luận mức rủi ro theo công đoạn"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Công đoạn",
+            "Thông số trọng yếu dự kiến",
+            "Biện luận mức rủi ro"
+          ],
+          "rows": [
+            [
+              "Trộn sơ bộ",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác định và khai thời gian trộn, tốc độ, mức nạp thùng trộn.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu căn cứ cho mức rủi ro: kinh nghiệm sản xuất sản phẩm tương tự, hoặc dữ liệu thực nghiệm của công đoạn này."
+            ],
+            [
+              "Trộn hoàn tất",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác định và khai thời gian trộn tá dược trơn — trộn quá lâu làm chậm hòa tan.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu căn cứ cho mức rủi ro: kinh nghiệm sản xuất sản phẩm tương tự, hoặc dữ liệu thực nghiệm của công đoạn này."
+            ],
+            [
+              "Dập viên",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác định và khai lực dập, tốc độ dập, độ cứng mục tiêu.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu căn cứ cho mức rủi ro: kinh nghiệm sản xuất sản phẩm tương tự, hoặc dữ liệu thực nghiệm của công đoạn này."
+            ],
+            [
+              "Bao phim",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác định và khai nhiệt độ khí vào, tốc độ phun, mức tăng khối lượng màng bao.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu căn cứ cho mức rủi ro: kinh nghiệm sản xuất sản phẩm tương tự, hoặc dữ liệu thực nghiệm của công đoạn này."
+            ],
+            [
+              "Đóng gói",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác định và khai điều kiện môi trường đóng gói, độ kín vỉ.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu căn cứ cho mức rủi ro: kinh nghiệm sản xuất sản phẩm tương tự, hoặc dữ liệu thực nghiệm của công đoạn này."
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nâng cỡ lô: Thử nghiệm 1 thực hiện ở cỡ lô 1.000 viên mỗi công thức (mục P.2.2.1.3), tức quy mô phòng thí nghiệm. Cần thử nghiệm nâng cỡ lô lên quy mô pilot rồi thương mại để đánh giá tính lặp lại của thông số quy trình, sau đó mới lập được bảng đánh giá rủi ro cập nhật theo yêu cầu của biểu mẫu."
+        }
+      ]
     },
     {
       "id": "P.2.4",
-      "status": "gap",
-      "gapReason": "Không có thông tin bao bì sơ cấp/thứ cấp trong Thử nghiệm 1 — cần bổ sung."
+      "status": "covered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Bao bì được lựa chọn dựa trên đặc tính lý hóa của dược chất, dạng bào chế của sản phẩm, và khảo sát bao bì của thuốc đối chiếu (mục P.2.2.1.1). Chưa có quyết định bao bì nào cho sản phẩm này; hai bảng dưới đây là khung theo biểu mẫu của phòng."
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Bao bì sơ cấp"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Nội dung",
+            "Bao bì sơ cấp"
+          ],
+          "rows": [
+            [
+              "Vật liệu",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu vật liệu và đối chiếu với bao bì của thuốc đối chiếu."
+            ],
+            [
+              "Mô tả",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Quy cách và độ dày từng lớp màng, định lượng lớp nhôm."
+            ],
+            [
+              "Khả năng bảo vệ",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Biện luận khả năng chắn ẩm và chắn sáng, dựa trên độ ổn định của dược chất."
+            ],
+            [
+              "Tính tương hợp",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chứng minh không tương kỵ với dược chất và tá dược; dẫn chiếu dữ liệu độ ổn định."
+            ],
+            [
+              "Kiểm soát chất lượng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Tiêu chuẩn vật liệu bao bì — thuộc mục 3.2.P.7, dẫn chiếu sang khi có."
+            ],
+            [
+              "Dữ liệu độ ổn định",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Dẫn chiếu mục 3.2.P.8 khi có số liệu."
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Bao bì thứ cấp"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Nội dung",
+            "Bao bì thứ cấp"
+          ],
+          "rows": [
+            [
+              "Mô tả",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu loại hộp/túi và thông tin ghi nhãn kèm theo."
+            ],
+            [
+              "Chức năng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu vai trò bảo vệ bổ sung và vai trò mang thông tin nhãn."
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Lưu ý trình tự: tính tương hợp giữa thành phẩm và bao bì sơ cấp chỉ chứng minh được bằng số liệu độ ổn định của thành phẩm trong chính bao bì đó. Vì vậy mục này không thể đóng trước khi có dữ liệu ở 3.2.P.8, kể cả khi vật liệu bao bì đã được chọn."
+        }
+      ]
     },
     {
       "id": "P.2.5",
-      "status": "gap",
-      "gapReason": "Không có kết quả thử vi sinh cho các công thức trong Thử nghiệm 1. ICH Q6A trang 12 cho phép \"propose no microbial limit testing for solid oral dosage forms\" nhưng chỉ khi có \"acceptable scientific justification\"; Decision Tree #8 (trang 31) chỉ rõ lối đi cho viên nén không chứa chất bảo quản: có bằng chứng khoa học về tính ức chế phát triển vi sinh thì tiêu chuẩn và phép thử có thể không cần thiết, nếu không thì phải lập tiêu chuẩn theo chuyên luận dược điển hài hòa và thử từng lô trước khi xin skip-lot. Trong ba loại bằng chứng Q6A đòi, nay đã có một: nguyên liệu được kiểm vi sinh trước khi sản xuất — ghi chú nguồn [3] của mục P.2.1.1 nêu giới hạn TAMC 1.000 CFU/g, TYMC 100 CFU/g, không có E. coli và Salmonella. Còn thiếu hai loại: thẩm định quy trình chứng minh không mang rủi ro nhiễm hoặc tăng sinh đáng kể (trang 12), và dữ liệu phát triển chứng minh tính ức chế phát triển của viên (ví dụ hoạt độ nước). Cần FD chọn một trong hai lối và bổ sung dữ liệu tương ứng."
+      "status": "covered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Sản phẩm là dạng bào chế rắn dùng đường uống, không vô khuẩn. ICH Q6A trang 12 cho phép đề xuất không thử giới hạn vi sinh với dạng này nếu có biện luận khoa học chấp nhận được, và Decision Tree #8 (trang 31) nêu hai nhánh: có bằng chứng sản phẩm ức chế phát triển vi sinh thì tiêu chuẩn và phép thử có thể không cần thiết; không có bằng chứng đó thì lập tiêu chuẩn theo chuyên luận dược điển hài hòa và thử từng lô, sau khi các lô đạt ổn định mới xin chuyển sang skip-lot. Biểu mẫu của phòng đi theo nhánh thứ hai — thử định kỳ. Giới hạn và tần suất dưới đây lấy từ biểu mẫu; cần FD xác nhận áp dụng cho sản phẩm này."
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Giới hạn vi sinh áp dụng"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Chỉ tiêu",
+            "Giới hạn theo biểu mẫu",
+            "Kết quả"
+          ],
+          "rows": [
+            [
+              "Tổng số vi sinh vật hiếu khí (TAMC)",
+              "≤ 10³ CFU/g",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa có kết quả thử cho công thức nào của Thử nghiệm 1."
+            ],
+            [
+              "Tổng số nấm men và nấm mốc (TYMC)",
+              "≤ 10² CFU/g",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa có kết quả thử."
+            ],
+            [
+              "Escherichia coli",
+              "Không được có/g",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa có kết quả thử."
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Tần suất kiểm tra"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Đối tượng",
+            "Tần suất kiểm tra"
+          ],
+          "rows": [
+            [
+              "Ba lô thẩm định quy trình sản xuất",
+              "Một lần/năm đến hết hạn dùng, cộng thêm một năm sau đó"
+            ],
+            [
+              "Lô sản xuất thường niên",
+              "Mỗi năm một lô, hoặc mỗi mười lô"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Hai điểm cần làm rõ trước khi nộp. Thứ nhất, biểu mẫu của phòng dẫn chiếu Dược điển châu Âu EP 11.0 phụ lục 5.1.4, trong khi CoA nguyên liệu khai theo Ph.Eur. 12; cần thống nhất phiên bản dược điển áp dụng cho cả hồ sơ. Thứ hai, nguyên liệu đã được kiểm vi sinh trước khi sản xuất — xem ghi chú nguồn [3] ở mục P.2.1.1 — đó là một trong ba điều kiện mà ICH Q6A trang 12 nêu; hai điều kiện còn lại là thẩm định quy trình chứng minh không mang rủi ro nhiễm hoặc tăng sinh đáng kể, và bằng chứng về tính ức chế phát triển của viên."
+        }
+      ]
     },
     {
       "id": "P.2.6",

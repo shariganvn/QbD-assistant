@@ -77,8 +77,8 @@ critical to product quality và biện luận cách kiểm soát, dù chỉ bằ
 | 2.2.1 Formulation development (tr. 7–8) — evolution từ concept tới final design; identification of critical attributes; tóm tắt công thức lâm sàng/BE; IVIVC; biện luận special design features | P.2.2.1.1/.2/.3 | 1 vòng thử nghiệm, 1 biến (croscarmellose 1/3/5%), 3 bảng kết quả đầy đủ, chọn CT03. RMP: đợt 8 đã dựng khung hai bảng theo biểu mẫu, chưa có số liệu. Không có IVIVC, không có công thức lâm sàng, không có evolution | Chưa đạt — **thiếu dữ liệu**. Phần thực nghiệm đã có thì chắc và truy vết được. Đợt 2 đã bổ sung biện luận criticality cho yếu tố duy nhất được khảo sát biến thiên, và biện luận special design feature |
 | 2.2.2 Overages (tr. 8) — overage bị *"discouraged"*, nếu có phải biện luận | P.2.2.2 | Ghi nhận không thấy overage, nêu rõ đây là quan sát chưa phải xác nhận chính thức | **Đạt điều kiện.** Không có overage thì nghĩa vụ biện luận không phát sinh |
 | 2.2.3 Physicochemical and biological properties (tr. 8) | P.2.2.3 | Đợt 2 đã bổ sung biện luận discriminatory power từ dữ liệu ba công thức; điều kiện phương pháp hòa tan vẫn là marker trống | Chưa đạt một phần. Lưu ý sắc thái: phần method development dùng **"could be provided"**, không phải "should" — kỳ vọng mềm theo Q8(R2), nhưng file mẫu phòng lại đòi kỹ |
-| 2.3 Manufacturing process development (tr. 8–9) | P.2.3 | `gap` toàn mục | Chưa đạt — **thiếu dữ liệu**. Cần hồ sơ quy trình/hồ sơ lô, không đóng được bằng viết lại |
-| 2.4 Container closure system (tr. 9–10) | P.2.4 | `gap` toàn mục | Chưa đạt — **thiếu dữ liệu** |
+| 2.3 Manufacturing process development (tr. 8–9) | P.2.3 | Đợt 9 đã dựng khung: ma trận rủi ro CQA × công đoạn và bảng biện luận theo công đoạn, quy trình trộn dập thẳng do FD chốt | Chưa đạt — **thiếu dữ liệu**. Cần hồ sơ quy trình/hồ sơ lô, không đóng được bằng viết lại |
+| 2.4 Container closure system (tr. 9–10) | P.2.4 | Đợt 9 đã dựng khung hai bảng bao bì sơ cấp/thứ cấp | Chưa đạt — **thiếu dữ liệu** |
 | 2.5 Microbiological attributes (tr. 10) — *"Where appropriate"*, gồm cả *"rationale for performing or not performing microbial limits testing"* | P.2.5 | `gap` | Chưa đạt, **nhưng gánh nặng thấp nhất**: guideline chấp nhận biện luận lý do KHÔNG thử. Đã xác minh bằng Q6A: có lối đóng không cần thực nghiệm vi sinh, **nhưng cần dữ liệu chứng minh tính ức chế phát triển** mà hồ sơ chưa có. Xem đính chính đợt 3 |
 | 2.6 Compatibility (tr. 10) — giới hạn ở dung môi hoàn nguyên và pha loãng trước khi dùng | P.2.6 | "Không áp dụng" kèm lý do dạng bào chế + chờ FD xác nhận | **Đạt trọn vẹn.** Mục duy nhất đạt hoàn toàn |
 
@@ -198,6 +198,20 @@ về **biểu mẫu của phòng**, không phải về Q8(R2).
 *Đã xử lý ở đợt 7:* phòng quyết định nới biểu mẫu. Hai dòng "Độ tan" và "Phân bố cỡ hạt" đã được
 thêm ngay sau "Cảm quan"; biểu mẫu đi từ 16 lên 18 dòng. Giá trị lấy từ CoA lô 488, gỡ khỏi khối
 trích dẫn để không trùng hai chỗ.
+
+**W-12 — Mốc khuyến cáo croscarmellose đang đối chiếu nhầm phương pháp.** `P.2.2.1.3` viết CT02
+(3%) "trùng mức khuyến cáo cho xát hạt ướt". Nhưng bảng tá dược ở `P.2.1.2` đã trích sẵn chuyên
+luận: *"Thông thường 2% cho dập thẳng và 3% cho xát hạt ướt"*. Quy trình của sản phẩm là **trộn dập
+thẳng**, nên mốc đối chiếu đúng là **2%**, không phải 3%. Hệ quả: cả ba công thức đều nằm xa mốc
+đó, và CT03 ở 5% — công thức được chọn mang sang Thử nghiệm 2 — gấp **2,5 lần** mức thông thường
+của dập thẳng. Đây là câu hỏi thẩm định gần như chắc chắn, và nó cộng dồn với W-4 (5% đã chạm trần
+khoảng 0,5 – 5,0%). Đã thêm câu nêu rõ vào `P.2.2.1.3`; không sửa số liệu thực nghiệm. Nguồn nằm
+ngay trong tài liệu nên không cần tra lại HPE.
+
+**W-13 — Lệch phiên bản dược điển giữa hai mục.** Biểu mẫu của phòng dẫn EP 11.0 phụ lục 5.1.4 cho
+giới hạn vi sinh, trong khi CoA nguyên liệu khai theo **Ph.Eur. 12** và `P.2.2.3` đã ghi chuyên
+luận tạp chất theo Ph.Eur. 12. Hồ sơ đang viện dẫn hai phiên bản dược điển khác nhau. Cần FD thống
+nhất một phiên bản áp dụng cho toàn hồ sơ. Đã ghi vào `P.2.5`.
 
 ### INFO
 
@@ -472,10 +486,52 @@ Kiểm không hồi quy trên bản render: `P.2.2.1.1` hiện "Đã dựng khun
 **Hạn chế công cụ:** biểu đồ hòa tan của biểu mẫu phải vẽ thủ công — cùng loại với công thức cấu tạo
 ở `P.2.1.1`. Renderer không hỗ trợ hình.
 
+## Đợt 9 — Dựng khung ba mục cuối, và giữ hệ thống trung lập với phương pháp pha chế
+
+Sau đợt này **không còn mục nào ở trạng thái "Không có dữ liệu"**: mọi mục CTD trong tài liệu đều
+ít nhất đã có khung theo biểu mẫu của phòng.
+
+**Nguyên tắc chi phối: tên công đoạn là dữ liệu, không phải hình dạng hệ thống.** Phòng nêu rõ
+bisoprolol trộn dập thẳng chỉ là ví dụ để dựng hệ thống; thực tế còn xát hạt ướt, phun sấy tầng sôi
+tạo hạt, cán ép, đóng tán, ép đùn nóng chảy, và mỗi phương pháp có bộ công đoạn cùng bộ CQA/CPP
+riêng. Vì vậy:
+
+- `schemas/p2-outline.json` mô tả **hình dạng** của `P.2.3` (một ma trận rủi ro có cột đầu là CQA và
+  các cột sau là công đoạn, cộng một bảng biện luận) và nói rõ bộ công đoạn phụ thuộc phương pháp;
+  contract **không chứa tên công đoạn nào** — đã kiểm bằng assert khi ghi file.
+- Bản thảo có một đoạn riêng nêu: đổi phương pháp thì **dựng lại cả hai bảng**, không sửa từng ô.
+- Test **không pin tên công đoạn**. Thay vào đó kiểm tính nhất quán: các dòng CQA của ma trận
+  `P.2.3` phải trùng đúng danh mục chỉ tiêu đang khai ở `P.2.2.1.2`, và số dòng bảng biện luận phải
+  bằng số cột công đoạn. Đúng với mọi sản phẩm và mọi phương pháp, đồng thời bắt được lỗi thật —
+  ma trận bỏ sót một CQA của chính sản phẩm.
+
+**`P.2.3`** — ma trận 7 CQA × 5 công đoạn (mọi ô mức rủi ro là marker) và bảng biện luận 5 dòng nêu
+thông số trọng yếu dự kiến của từng công đoạn. Kèm ghi chú nâng cỡ lô: Thử nghiệm 1 ở 1.000 viên,
+cần lên pilot rồi thương mại trước khi lập được bảng rủi ro cập nhật. Sơ đồ quy trình phải vẽ thủ
+công.
+
+**`P.2.4`** — hai bảng theo `135-00` dòng 1931–1948. Kèm lưu ý trình tự: tính tương hợp chỉ chứng
+minh được bằng dữ liệu độ ổn định trong chính bao bì đó, nên mục không đóng được trước `3.2.P.8`
+ngay cả khi đã chọn xong vật liệu.
+
+**`P.2.5`** — dựng theo nhánh **thử định kỳ** mà biểu mẫu của phòng đã chọn, tức nhánh thứ hai của
+Q6A Decision Tree #8 (tr. 31). Giới hạn (TAMC ≤ 10³ CFU/g, TYMC ≤ 10² CFU/g, E. coli không được
+có/g) và tần suất là **nội dung thật lấy từ biểu mẫu**; chỉ cột kết quả là marker. Do đó mục này
+hiện "Có dữ liệu (một phần)" chứ không phải "Đã dựng khung" — đúng, và test khóa đúng sự phân biệt
+đó: cột giới hạn không được mang marker, cột kết quả bắt buộc phải mang.
+
+**Hai sửa ở mục đã có, do phương pháp pha chế làm lộ ra:**
+
+- `P.2.1.2` — "dung môi tá hạt" là lỗi đánh máy của "dung môi **xát** hạt"; đã sửa chính tả, giữ
+  nguyên nội dung vì đây là ví dụ về loại chất chỉ dùng khi sản xuất.
+- `P.2.2.1.2` — marker criticality liệt kê "điều kiện xát hạt" trong các thông số chưa đánh giá;
+  quy trình là dập thẳng nên không có công đoạn xát hạt. Đã bỏ vế đó, giữ thời gian trộn, lực dập,
+  điều kiện bao phim.
+
 ## Còn lại, phân theo loại
 
 **Thiếu dữ liệu** (cần nguồn, không sửa được bằng viết lại): C-3 tương hợp, C-4 quy trình sản
-xuất, C-5 bao bì, P.2.2.1.1 RMP (19 ô chờ số liệu, khung đã dựng), phần còn lại của thuộc tính API ở W-5 (pKa, BCS, đa hình, tính
+xuất (khung đã dựng, chờ mức rủi ro và thông số quy trình), C-5 bao bì (khung đã dựng, chờ 3.2.P.8), P.2.2.1.1 RMP (19 ô chờ số liệu, khung đã dựng), kết quả thử vi sinh ở P.2.5, phần còn lại của thuộc tính API ở W-5 (pKa, BCS, đa hình, tính
 chảy, ổn định), thành phần màng bao thật ở C-2, điều kiện phương pháp hòa tan ở W-7, và phần
 criticality của mọi yếu tố ngoài tá dược rã ở C-1.
 

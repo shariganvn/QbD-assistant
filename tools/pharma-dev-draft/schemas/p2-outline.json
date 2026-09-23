@@ -48,19 +48,19 @@
       "id": "P.2.3",
       "ctdReference": "3.2.P.2.3",
       "headingVi": "Phát triển quy trình sản xuất (Manufacturing Process Development)",
-      "description": "Đánh giá rủi ro quy trình, nghiên cứu phát triển từng công đoạn (trộn, xát hạt, dập viên, bao phim...), scale-up từ lab lên pilot/thương mại."
+      "description": "Phát triển quy trình sản xuất: đánh giá rủi ro, nghiên cứu từng công đoạn, scale-up. Mục này cố định hai bảng: (1) ma trận đánh giá rủi ro ban đầu, cột đầu là CQA sản phẩm và các cột sau là công đoạn sản xuất; (2) bảng biện luận theo công đoạn gồm thông số trọng yếu dự kiến và căn cứ của mức rủi ro. QUAN TRỌNG: bộ công đoạn KHÔNG cố định — nó phụ thuộc phương pháp pha chế đã chọn (trộn dập thẳng, xát hạt ướt, phun sấy tầng sôi tạo hạt, cán ép, đóng tán, ép đùn nóng chảy…), và mỗi phương pháp có bộ thông số trọng yếu riêng. Đổi phương pháp thì dựng lại cả hai bảng theo bộ công đoạn mới. Các dòng CQA của ma trận phải trùng danh mục chỉ tiêu đang khai ở P.2.2.1.2. Sơ đồ quy trình phải bổ sung thủ công vì renderer không hỗ trợ hình."
     },
     {
       "id": "P.2.4",
       "ctdReference": "3.2.P.2.4",
       "headingVi": "Hệ thống bao bì (Container Closure System)",
-      "description": "Bao bì sơ cấp/thứ cấp, vật liệu, độ dày/khối lượng, khả năng bảo vệ/tương thích."
+      "description": "Hệ thống bao bì. Mục này cố định hai bảng nhãn–giá trị theo biểu mẫu của phòng: (1) bao bì sơ cấp — vật liệu, mô tả, khả năng bảo vệ, tính tương hợp, kiểm soát chất lượng (dẫn 3.2.P.7), dữ liệu độ ổn định (dẫn 3.2.P.8); (2) bao bì thứ cấp — mô tả, chức năng. Mục chỉ đóng được sau khi có dữ liệu độ ổn định ở 3.2.P.8, vì tính tương hợp chứng minh bằng chính dữ liệu đó."
     },
     {
       "id": "P.2.5",
       "ctdReference": "3.2.P.2.5",
       "headingVi": "Đặc tính vi sinh (Microbiological Attributes)",
-      "description": "Giới hạn vi sinh áp dụng (ICH Q6A, Ph.Eur. 5.1.4...) và kết quả thử nghiệm thực tế."
+      "description": "Đặc tính vi sinh. Mục này cố định hai bảng: (1) giới hạn vi sinh áp dụng — chỉ tiêu, giới hạn, kết quả; (2) tần suất kiểm tra theo đối tượng lô. Biểu mẫu của phòng đi theo nhánh thử định kỳ của ICH Q6A Decision Tree #8 chứ không phải nhánh đề xuất không thử; cột giới hạn và bảng tần suất là nội dung thật từ biểu mẫu, chỉ cột kết quả chờ dữ liệu."
     },
     {
       "id": "P.2.6",
