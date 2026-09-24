@@ -1,0 +1,277 @@
+# Executable acceptance gates for qbd-p2-bisoprolol-5-10mg.
+# This file owns gate bodies. Step files describe implementation; they must not restate a full
+# gate. Status stays unverified until machine evidence exists under evidence_root.
+
+version: 2
+workstream: qbd-p2-bisoprolol-5-10mg
+evidence_root: docs/reports/qbd-p2-bisoprolol-5-10mg
+
+form_authority:
+  file: docs/raw/135-00-Pharmaceutical Development-example.docx
+  role: >
+    Source of the CTD taxonomy, heading nesting and the per-strength table shapes. A working
+    structure, NOT FD/regulatory-affairs confirmed authority — same caveat as
+    tools/pharma-dev-draft/schemas/p2-outline.json already carries.
+  observed_shape:
+    containers: 12
+    leaves: 26
+    per_strength_one_column: "Ingredients | Concor | API 5 mg | API 10 mg"
+    per_strength_two_columns: "No. | Name | Function | <s1> mg | <s1> % | <s2> mg | <s2> %"
+  known_defects:
+    - "3.2.P.2.2.3.1.2 is used twice (dissolution method and discriminatory power)."
+    - "3.2.P.2.2.3.1.1.3 is a depth-6 number inside a depth-5 group."
+
+baseline:
+  # Pre-change state, so G-04 has something to diff against and a regression is visible.
+  draft: tools/pharma-dev-draft/draft/example-draft.json
+  outline_leaves: 11
+  gap_markers: 93
+  tests_passing: 25
+
+gates:
+  - id: G-00
+    title: No product, strength or method literal in code, schema or test
+    invariant: >
+      The build logic is neutral with respect to which product, which strengths and which
+      manufacturing method a draft describes. Product names, active substance names, excipient brand
+      names, reference product names, formula codes, strength strings and unit-operation names appear
+      only in draft JSON — never in a .mjs file, never in schemas/p2-outline.json, never in a test.
+      A test may construct such a literal inline as fixture data, but must not assert against one as
+      if it were part of the form.
+    boundary_owner: >
+      tools/pharma-dev-draft/{schemas,draft,render,verify} — the whole tool surface
+    fixture: >
+      the tool's own source tree; no external fixture needed
+    command: >
+      grep -rniE 'bisoprolol|croscarmellose|primellose|cellactose|povidone|concor|metformin|CT0[0-9]|d[aậ]p th[aẳ]ng|x[aá]t h[aạ]t'
+      tools/pharma-dev-draft --include='*.mjs' --include='p2-outline.json'
+    expected: >
+      exit 1 from grep (no match) for every schema and non-test module. Matches are permitted only
+      inside a fixture literal in draft/tests/*.mjs and inside draft/example-draft.json; each such
+      match must be listed with a one-line reason in the evidence file, and a match anywhere else
+      fails the gate.
+    negative_cases:
+      - A strength string is added to p2-outline.json to fix a validator failure -> fail.
+      - A test re-pins an excipient row-label array the way the pre-audit tests did -> fail.
+      - The renderer gains a product-specific branch -> fail.
+      - An error message embeds an example product name -> fail.
+    evidence: >
+      g00-literal-scan.txt (raw grep output) + g00-permitted-matches.md (each allowed fixture match
+      with its reason)
+    blocks: [G-01, G-02, G-03, G-05]
+    status: unverified
+
+  - id: G-01
+    title: Per-strength tables carry one derived column group per declared strength
+    invariant: >
+      meta.strengths is required, is a non-empty array of distinct non-empty strings, and has no
+      upper bound. For a table declaring form.perStrength, the validator derives the column-group
+      size as (column count - fixed column count) / strengths.length, requires that division to be
+      exact, and requires the first column of each group to contain the corresponding strength string
+      verbatim. The group size is never declared in the schema, so it cannot drift from the table.
+    boundary_owner: >
+      schemas/p2-outline.json (form.perStrength) + draft/validate-draft.mjs
+    fixture: >
+      three synthetic drafts built from the outline at test time: one declaring two strengths with a
+      correct two-column-per-strength table, one declaring two strengths with a single group, and one
+      declaring THREE strengths with a correct three-group table
+    command: >
+      node --test tools/pharma-dev-draft/draft/tests/*.test.mjs
+    expected: >
+      exit 0. The correct two-strength draft validates. The single-group draft fails with
+      E_FORM_STRENGTH_COLUMNS naming the section, the table and the expected group count. The
+      three-strength draft validates unchanged, proving no code path assumes exactly two.
+    negative_cases:
+      - Remaining column count not divisible by strengths.length -> E_FORM_STRENGTH_COLUMNS.
+      - A group's first column omits its strength string -> E_FORM_STRENGTH_COLUMNS.
+      - Two groups carry the same strength string -> E_FORM_STRENGTH_COLUMNS.
+      - meta.strengths absent, empty, or holding a duplicate -> E_META_STRENGTHS.
+      - meta.derivedStrengths naming a strength absent from meta.strengths -> E_META_STRENGTHS.
+    evidence: >
+      g01-strength-columns.txt (test output) + g01-three-strength-draft.json (the fixture that proves
+      strength count is unbounded)
+    blocks: [G-02, G-07]
+    status: unverified
+
+  - id: G-02
+    title: A strength with no experimental source cannot carry a measured result
+    invariant: >
+      A strength listed in meta.derivedStrengths has no experimental source, so it can carry
+      calculated masses and nothing else. In every table the outline marks form.measuredOnly, every
+      cell in a derived strength's column group must carry the gap marker. The rule reads
+      meta.derivedStrengths and knows nothing about any particular strength value, so it holds for
+      any product. Enforcement is in the validator, upstream of the renderer: a document containing a
+      fabricated measurement must be impossible to render, not merely discouraged.
+    boundary_owner: >
+      schemas/p2-outline.json (form.measuredOnly) + draft/validate-draft.mjs +
+      schemas/markers.mjs (single marker producer, from step 00)
+    fixture: >
+      a synthetic draft declaring a derived strength, with one dissolution result cell filled with a
+      plausible comma-decimal value in that strength's column
+    command: >
+      node --test tools/pharma-dev-draft/draft/tests/*.test.mjs
+    expected: >
+      exit 0. The filled-result draft fails with E_DERIVED_STRENGTH_HAS_RESULT naming the section,
+      the table, the row label and the offending strength. The same draft with that cell marked
+      validates. The permitted exception — calculated mass in the final-formulation table — validates
+      and carries its stated-as-calculated paragraph.
+    negative_cases:
+      - Any measuredOnly cell for a derived strength holds a non-marker value -> reject.
+      - A derived strength's result cell is blank rather than marked -> reject; silence is not a gap.
+      - measuredOnly is moved from the outline into the validator as a hardcoded id list -> fails G-00.
+      - The final-formulation table loses the paragraph stating the masses are calculated -> reject.
+      - The marker string is re-literalised instead of imported from schemas/markers.mjs -> reject.
+    evidence: >
+      g02-derived-strength.txt (test output) + g02-rejected-draft.json (the fabricated-measurement
+      fixture and the exact error it produces)
+    blocks: [G-07]
+    status: unverified
+
+  - id: G-03
+    title: The heading tree nests by CTD depth and skips no level
+    invariant: >
+      An outline entry may be a container that carries only a heading. A draft must not hold an entry
+      for a container id, and the missing-section check covers leaves only. The rendered heading level
+      is derived from the depth of ctdReference; a heading inside a section renders one level below
+      that section. No id-to-level map exists anywhere. In the rendered document.xml, consecutive
+      heading outline levels never increase by more than one.
+    boundary_owner: >
+      schemas/p2-outline.json (container) + draft/validate-draft.mjs + render/builder.mjs +
+      verify/verify.mjs
+    fixture: >
+      the migrated example draft on the full outline
+    command: >
+      node tools/pharma-dev-draft/render/render.mjs tools/pharma-dev-draft/draft/example-draft.json
+      --output-root "$(pwd)/tools/pharma-dev-draft/output"
+      && node tools/pharma-dev-draft/verify/verify.mjs <rendered>.docx
+      --draft tools/pharma-dev-draft/draft/example-draft.json
+    expected: >
+      exit 0. XSD validation passes. Heading levels form a tree with no skipped level. The twelve
+      container headings each appear exactly once and carry no body content. The gap register lists
+      the 26 leaves and no container.
+    negative_cases:
+      - A draft supplies blocks for a container id -> E_SECTION_CONTAINER_HAS_ENTRY.
+      - A leaf id is missing from the draft -> E_SECTIONS_MISSING.
+      - A container appears in the gap register -> reject.
+      - Consecutive outline levels jump by two -> reject.
+      - Heading level comes from a literal map rather than ctdReference depth -> fails G-00.
+    evidence: >
+      g03-heading-tree.txt (level sequence extracted from document.xml) + g03-verify.txt
+    blocks: [G-04]
+    status: unverified
+
+  - id: G-04
+    title: Restructuring loses no value and duplicates none
+    invariant: >
+      Every value the pre-change draft states — every table cell, every paragraph — appears exactly
+      once in the restructured draft. Moving content between sections must not drop a value, and must
+      not leave a copy behind in the section it moved out of. The 93 gap markers of the baseline are
+      accounted for: each is still present, or has been replaced by a real value, and none has
+      silently vanished.
+    boundary_owner: draft/example-draft.json — content migration only, no schema change
+    fixture: >
+      git show of the pre-change example-draft.json versus the working tree copy
+    command: >
+      node tools/pharma-dev-draft/draft/tests/value-inventory.mjs
+      --before <baseline example-draft.json> --after tools/pharma-dev-draft/draft/example-draft.json
+    expected: >
+      exit 0. Every baseline value maps to exactly one destination section in the new draft. Added
+      values are listed separately and every one of them is either a marker or a heading the new
+      outline requires — a real measurement appearing in this list is a failure, since this step adds
+      no data.
+    negative_cases:
+      - A baseline value has no destination -> reject (content lost).
+      - A baseline value appears in two sections -> reject (duplicated during the move).
+      - The added-values list holds a measurement -> reject; step 04 adds no data.
+      - The inventory is produced by hand instead of derived from the two files -> reject.
+    evidence: >
+      g04-value-inventory.json (before/after mapping) + g04-added-values.md
+    blocks: [G-07]
+    status: unverified
+
+  - id: G-05
+    title: The form stays neutral to product and manufacturing method
+    invariant: >
+      The regression the tenth audit pass established still holds on the expanded form: a draft for a
+      different active substance with different excipients, different quality attributes and a
+      different reference product validates; and a draft whose process risk matrix uses a different
+      set of unit operations validates. The risk matrix still scores exactly the quality attributes
+      the product declares, taken from the declaring section by reference rather than by a copy.
+    boundary_owner: draft/validate-draft.mjs + schemas/p2-outline.json
+    fixture: >
+      the different-product draft and the different-method draft already in
+      draft/tests/table-layout.test.mjs, updated to the new outline
+    command: >
+      node --test tools/pharma-dev-draft/draft/tests/*.test.mjs
+    expected: >
+      exit 0. Both drafts validate on the expanded form. A draft whose risk matrix omits one of its
+      own declared quality attributes fails with E_FORM_ROWS naming the declaring section.
+    negative_cases:
+      - Risk matrix rows diverge from the declaring section's attributes -> E_FORM_ROWS.
+      - The rowsFrom reference is replaced by a copied label array -> fails G-00.
+      - A different-method draft needs a schema edit to validate -> reject.
+    evidence: g05-neutrality.txt (test output)
+    blocks: []
+    status: unverified
+
+  - id: G-06
+    title: No pharmacopoeia version number is written before a verifiable source names it
+    invariant: >
+      The repository cites two EP versions: the house microbiological form cites EP 11.0, the API
+      certificate of analysis for batch 488 states Ph.Eur. 12. The certificate is a supplier statement
+      about the drug substance, kept verbatim, and is not authority for the finished-product
+      specification. Until the effective EP version and supplement are named by a verifiable source,
+      no finished-product EP citation in the draft carries a version number; each renders as the
+      pending form and appears as one row in the data-request annex.
+    boundary_owner: draft/example-draft.json — content only; no code enforces this yet
+    fixture: the draft itself
+    command: >
+      grep -nE 'EP 1[0-9]|Ph\.? ?Eur\.? ?1[0-9]' tools/pharma-dev-draft/draft/example-draft.json
+    expected: >
+      every match is inside a verbatim quotation of a named source document (the batch 488
+      certificate, or the house form) and is labelled as that source's statement. No match sits in a
+      finished-product specification sentence written by the draft itself. This is a discovery gate:
+      it becomes pass only when FD or a verifiable source names the effective version, at which point
+      the pending wording is replaced in one pass.
+    negative_cases:
+      - A finished-product specification states a bare EP version -> reject.
+      - The supplier's Ph.Eur. 12 statement is silently promoted to the finished-product spec -> reject.
+      - The pending wording is removed without a source being named -> reject.
+      - The two conflicting citations are unified by picking one without evidence -> reject.
+    evidence: >
+      g06-ep-citations.txt (every match with its surrounding sentence and its source attribution)
+    blocks: []
+    status: deferred
+
+  - id: G-07
+    title: The data-request annex is complete and derived, never hand-kept
+    invariant: >
+      Every gap marker in the draft produces exactly one row in the data-request annex, and every row
+      traces back to a marker. The place the data comes from is written in the marker cell itself, the
+      way the reference-product section already does it; the annex reads it out. No table mapping a
+      CTD section to a data location exists in the code, because such a table would be a second
+      source of truth and would go stale the moment a marker moved. Filling one real value removes its
+      row with no other edit.
+    boundary_owner: render/builder.mjs (annex) + schemas/markers.mjs
+    fixture: the migrated two-strength example draft
+    command: >
+      node tools/pharma-dev-draft/render/render.mjs tools/pharma-dev-draft/draft/example-draft.json
+      --output-root "$(pwd)/tools/pharma-dev-draft/output"
+      && node tools/pharma-dev-draft/verify/verify.mjs <rendered>.docx
+      --draft tools/pharma-dev-draft/draft/example-draft.json
+    expected: >
+      exit 0. Annex row count equals the draft's marker count. Every row names the CTD section, the
+      item, the strength it applies to, where the data comes from, and an owner. Replacing one marker
+      with a real value in a scratch copy reduces the row count by exactly one and changes nothing
+      else.
+    negative_cases:
+      - Row count differs from marker count -> reject.
+      - A row lacks a data location or an owner -> reject.
+      - A row is added by hand rather than derived from a marker -> reject.
+      - A section-to-location lookup table appears in the code -> fails G-00 and this gate.
+      - Filling a value leaves its row in place -> reject; the annex is stale by construction.
+    evidence: >
+      g07-annex-vs-markers.txt (counts and the row-by-row join) + g07-fill-one-value.txt (the
+      remove-one-row demonstration)
+    blocks: []
+    status: unverified

@@ -95,8 +95,10 @@ reproducible failures; it must not choose thresholds, change classifications, or
 | PO pilot readiness | GO with boundaries | Safe to receive public/synthetic mocks and run an isolated trial; not ready for production or direct PO installation. |
 
 Implementation routing has no alternate machine-readable route: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md)
-is authoritative and currently records no active plan. Reports and reviews are evidence, not pickup
-authority. The cooperative-writer boundary remains limited; hostile same-host TOCTOU is not resolved.
+is authoritative and currently points at the active
+[two-strength P.2 plan](docs/plans/qbd-p2-bisoprolol-5-10mg/plan.md), which covers
+`tools/pharma-dev-draft` only and does not change any boundary described above. Reports and reviews
+are evidence, not pickup authority. The cooperative-writer boundary remains limited; hostile same-host TOCTOU is not resolved.
 See [D20260722](docs/decisions/D20260722-qbd-p2-ingest-toctou-tech-debt.md) for that boundary.
 
 ## Next steps for the bounded pilot

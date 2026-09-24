@@ -1,11 +1,14 @@
 # Implementation Plan
 
 The active implementation plan is
-`plans/260809-2001-rationale-explanation/plan.md`. This file remains the
-single authoritative router; follow that plan for the current change.
+[docs/plans/qbd-p2-bisoprolol-5-10mg/plan.md](docs/plans/qbd-p2-bisoprolol-5-10mg/plan.md).
+This file remains the single authoritative router; follow that plan for the
+current change. Executable acceptance for it lives in
+`docs/plans/qbd-p2-bisoprolol-5-10mg/gates.yaml`.
 
 ## Latest completed
 
+- `plans/260809-2001-rationale-explanation/plan.md` — `completed` and read-only.
 - [P.2.2.1 formulation-selection plan](docs/plans/qbd-p221-formulation-selection/plan.md) — completed
   and read-only.
 
