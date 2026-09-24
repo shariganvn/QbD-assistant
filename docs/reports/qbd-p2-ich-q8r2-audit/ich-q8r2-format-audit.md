@@ -585,12 +585,20 @@ khác hẳn** (metformin, tá dược khác, CQA khác, thuốc đối chiếu k
 form đó. 25/25 test xanh.
 
 **Dọn branch remote.** `claude/codebase-architecture-summary-po0utr` đã bị xoá sẵn trên remote
-(`git fetch --prune` xác nhận). `master` **chưa xoá được**: `git push origin --delete master` trả
-HTTP 403 trong khi push commit thường vẫn hoạt động, và proxy không ghi nhận lỗi relay nào — dấu
-hiệu `master` đang là default branch của repo, thứ GitHub không cho xoá. Cần đổi default sang
-`tienpharmacist` ở Settings → Branches rồi xoá lại. Nội dung không mất gì: `master` chỉ hơn
-`tienpharmacist` đúng một commit merge không mang thay đổi riêng, SHA
-`f2bc632ca88a31bf32c5f4556bcc4aad0e674149`.
+(`git fetch --prune` xác nhận).
+
+`master` không xoá được bằng `git push origin --delete master` (HTTP 403 trong khi push commit
+thường vẫn hoạt động, proxy không ghi nhận lỗi relay nào) — dấu hiệu nó đang là default branch,
+thứ GitHub không cho xoá. Push trực tiếp vào `master` cũng bị chặn vì branch này không nằm trong
+danh sách session được phép push.
+
+Thay vào đó, hai branch đã được đồng bộ theo hai bước. Một: merge `master` vào
+`tienpharmacist` (commit `93f37d4`), khiến `master` thành tổ tiên thuần tuý — 0 commit riêng. Hai:
+merge PR #4 trên GitHub (commit `f280563`), đưa đủ 24 commit vào default branch.
+
+Kết quả: `git diff origin/master origin/tienpharmacist` **trống**, hai branch cùng nội dung cây file.
+Xoá `master` từ đây không mất gì, nhưng vẫn cần đổi default sang `tienpharmacist` ở Settings →
+Branches trước. SHA của `master` trước khi đồng bộ: `f2bc632ca88a31bf32c5f4556bcc4aad0e674149`.
 
 ## Còn lại, phân theo loại
 
