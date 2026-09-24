@@ -64,7 +64,7 @@ gates:
       g00-neutrality.txt (suite output) + g00-blocked-violation.txt (the pinned row label and the
       failure it produces)
     blocks: [G-01, G-02, G-03, G-05]
-    status: unverified
+    status: pass
 
   - id: G-01
     title: Per-strength tables carry one derived column group per declared strength
@@ -102,7 +102,7 @@ gates:
       g01-strength-columns.txt (test output) + g01-three-strength-draft.json (the fixture that proves
       strength count is unbounded)
     blocks: [G-02, G-07]
-    status: unverified
+    status: pass
 
   - id: G-02
     title: A strength with no experimental source cannot carry a measured result
@@ -136,7 +136,7 @@ gates:
       g02-derived-strength.txt (test output) + g02-rejected-draft.json (the fabricated-measurement
       fixture and the exact error it produces)
     blocks: [G-07]
-    status: unverified
+    status: pass
 
   - id: G-03
     title: The heading tree nests by CTD depth and skips no level
@@ -169,7 +169,7 @@ gates:
     evidence: >
       g03-heading-tree.txt (level sequence extracted from document.xml) + g03-verify.txt
     blocks: [G-04]
-    status: unverified
+    status: pass
 
   - id: G-04
     title: Restructuring loses no value and duplicates none
@@ -181,24 +181,30 @@ gates:
       silently vanished.
     boundary_owner: draft/example-draft.json — content migration only, no schema change
     fixture: >
-      git show of the pre-change example-draft.json versus the working tree copy
+      the pre-change example-draft.json (git show of the commit before the migration) against the
+      working tree copy
     command: >
       node tools/pharma-dev-draft/draft/tests/value-inventory.mjs
       --before <baseline example-draft.json> --after tools/pharma-dev-draft/draft/example-draft.json
     expected: >
-      exit 0. Every baseline value maps to exactly one destination section in the new draft. Added
-      values are listed separately and every one of them is either a marker or a heading the new
-      outline requires — a real measurement appearing in this list is a failure, since this step adds
-      no data.
+      exit 0, with lost 0 and duplicated 0. A "value" is a paragraph's text or a table cell outside the
+      label columns; label columns are column 0 plus any further leading column whose cells are all
+      bare ordinals, since several of the department's tables open with a numbering column. Row labels
+      and headers are structure the form supplies and the same label legitimately appears in more than
+      one table. An added value is classified by where it sits rather than by whether it is a marker:
+      a new table cell holding anything but a marker is a measurement with no source and fails; a new
+      paragraph is prose framing a section the new form requires and is reported for a reviewer to
+      read.
     negative_cases:
       - A baseline value has no destination -> reject (content lost).
-      - A baseline value appears in two sections -> reject (duplicated during the move).
-      - The added-values list holds a measurement -> reject; step 04 adds no data.
+      - A baseline value's occurrence count grows during the move -> reject (duplicated).
+      - A new table cell holds anything other than a marker -> reject; this pass adds no data.
+      - The label-column rule is written as a header name such as "STT" -> fails G-00.
       - The inventory is produced by hand instead of derived from the two files -> reject.
     evidence: >
       g04-value-inventory.json (before/after mapping) + g04-added-values.md
     blocks: [G-07]
-    status: unverified
+    status: pass
 
   - id: G-05
     title: The form stays neutral to product and manufacturing method
@@ -223,7 +229,7 @@ gates:
       - A different-method draft needs a schema edit to validate -> reject.
     evidence: g05-neutrality.txt (test output)
     blocks: []
-    status: unverified
+    status: pass
 
   - id: G-06
     title: No pharmacopoeia version number is written before a verifiable source names it

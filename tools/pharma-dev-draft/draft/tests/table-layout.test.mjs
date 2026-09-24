@@ -22,7 +22,7 @@ function loadExample() {
 
 // Returns the P.2.1.2 excipient table — the one block in the example that declares explicit layout.
 function excipientTable(draft) {
-  const section = draft.sections.find((s) => s.id === "P.2.1.2");
+  const section = draft.sections.find((s) => s.id === "P.2.1.2.1");
   return section.blocks.find((b) => b.type === "table" && b.columnWidths);
 }
 
@@ -74,7 +74,7 @@ test("a non-string cell is rejected so comma-decimals cannot be lost", () => {
 
 test("a newline outside a table cell is rejected", () => {
   const draft = loadExample();
-  const section = draft.sections.find((s) => s.id === "P.2.1.2");
+  const section = draft.sections.find((s) => s.id === "P.2.1.2.1");
   section.blocks.find((b) => b.type === "paragraph").text = "dòng một\ndòng hai";
   expectFailure(draft, "E_BLOCK_TEXT");
 });
@@ -121,31 +121,31 @@ function formTable(draft, sectionId, index = 0) {
 
 test("dropping a row from a form table is rejected", () => {
   const draft = loadExample();
-  formTable(draft, "P.2.1.1").rows.splice(3, 1);
+  formTable(draft, "P.2.1.1.1").rows.splice(3, 1);
   expectFailure(draft, "E_FORM_ROWS");
 });
 
 test("adding a table the form does not have is rejected", () => {
   const draft = loadExample();
-  draft.sections.find((s) => s.id === "P.2.1.1").blocks.push({ type: "table", headers: ["a", "b"], rows: [["x", "y"]] });
+  draft.sections.find((s) => s.id === "P.2.1.1.1").blocks.push({ type: "table", headers: ["a", "b"], rows: [["x", "y"]] });
   expectFailure(draft, "E_FORM_TABLE_COUNT");
 });
 
 test("adding a heading the form does not have is rejected", () => {
   const draft = loadExample();
-  draft.sections.find((s) => s.id === "P.2.1.1").blocks.push({ type: "heading3", text: "Mục thêm" });
+  draft.sections.find((s) => s.id === "P.2.1.1.1").blocks.push({ type: "heading3", text: "Mục thêm" });
   expectFailure(draft, "E_FORM_HEADINGS");
 });
 
 test("a label/value form must keep its header row suppressed", () => {
   const draft = loadExample();
-  delete formTable(draft, "P.2.1.1").headerless;
+  delete formTable(draft, "P.2.1.1.1").headerless;
   expectFailure(draft, "E_FORM_HEADERLESS");
 });
 
 test("renaming a fixed column label is rejected", () => {
   const draft = loadExample();
-  formTable(draft, "P.2.4").headers[1] = "Bao bì khác";
+  formTable(draft, "P.2.4.1").headers[1] = "Bao bì khác";
   expectFailure(draft, "E_FORM_COLUMNS");
 });
 
@@ -153,7 +153,7 @@ test("the risk matrix has to follow the quality attributes the product declares"
   const draft = loadExample();
   // Changing a quality attribute without rescoring the process risk for it is the mistake this
   // rule exists to catch; the matrix takes its rows from P.2.2.1.2 rather than from a fixed list.
-  formTable(draft, "P.2.2.1.2").rows[0][0] = "Chỉ tiêu mới";
+  formTable(draft, "P.2.2.1.2.1").rows[0][0] = "Chỉ tiêu mới";
   expectFailure(draft, "E_FORM_ROWS");
 });
 
@@ -168,10 +168,10 @@ test("the form fixes the shape, not the method: process steps may change with th
   // Direct compression is this product's method. Wet granulation, fluid-bed granulation, roller
   // compaction, slugging and hot-melt extrusion each bring a different set of unit operations, and
   // the risk matrix has to accept whichever set applies.
-  const matrix = formTable(draft, "P.2.3");
+  const matrix = formTable(draft, "P.2.3.1");
   matrix.headers = ["CQA sản phẩm", "Xát hạt ướt", "Sấy", "Dập viên"];
   matrix.rows = matrix.rows.map((row) => [row[0], GAP_PREFIX, GAP_PREFIX, GAP_PREFIX]);
-  formTable(draft, "P.2.3", 1).rows = [
+  formTable(draft, "P.2.3.2.1").rows = [
     ["Xát hạt ướt", GAP_PREFIX, GAP_PREFIX],
     ["Sấy", GAP_PREFIX, GAP_PREFIX],
     ["Dập viên", GAP_PREFIX, GAP_PREFIX],
@@ -185,14 +185,14 @@ test("a draft for an entirely different product validates on the same form", () 
   // attributes, another reference product. Only the P.2 form stays, which is the point.
   draft.meta.productName = "Metformin hydrochloride 500 mg viên nén bao phim";
   draft.meta.apiName = "Metformin hydrochloride";
-  const excipients = formTable(draft, "P.2.1.2");
+  const excipients = formTable(draft, "P.2.1.2.1");
   excipients.rows = [["1.", "Hypromellose", "—", "—", "Tá dược dính"]];
-  const attributes = formTable(draft, "P.2.2.1.2");
+  const attributes = formTable(draft, "P.2.2.1.2.1");
   attributes.rows = [["Độ hòa tan (45 phút)", "≥ 75% (Q)"], ["Định lượng", "95–105%"]];
-  const matrix = formTable(draft, "P.2.3");
+  const matrix = formTable(draft, "P.2.3.1");
   matrix.headers = ["CQA sản phẩm", "Xát hạt ướt", "Dập viên"];
   matrix.rows = attributes.rows.map((row) => [row[0], "Thấp", "Cao"]);
-  formTable(draft, "P.2.3", 1).rows = [
+  formTable(draft, "P.2.3.2.1").rows = [
     ["Xát hạt ướt", "Lượng dung môi", "Kinh nghiệm sản xuất"],
     ["Dập viên", "Lực dập", "Kinh nghiệm sản xuất"],
   ];
@@ -203,18 +203,21 @@ test("a draft for an entirely different product validates on the same form", () 
 
 // --- content intent the form spec cannot express ---------------------------
 
-test("the criticality discussion does not upgrade P.2.2.1.2 into an approved QTPP/CQA table", () => {
-  const section = loadExample().sections.find((s) => s.id === "P.2.2.1.2");
-  // The section reasons about which attributes are critical, which is a different claim from
-  // presenting an approved QTPP/CQA table. The opening disclaimer is what keeps the two apart, so
-  // it has to survive every later pass that adds reasoning here.
+test("the criticality discussion does not upgrade the quality-attribute table into an approved QTPP/CQA", () => {
+  // Reasoning about which attributes are critical is a different claim from presenting an approved
+  // QTPP/CQA table. Two statements keep them apart: a disclaimer on the table, and a marker naming the
+  // attributes whose criticality is still unassessed. They live in the two sections the form splits
+  // this into, and both have to survive every later pass that adds reasoning here.
+  const draft = loadExample();
+  const paragraphsOf = (id) => draft.sections.find((s) => s.id === id).blocks
+    .filter((b) => b.type === "paragraph").map((b) => b.text);
   assert.ok(
-    section.blocks.some((b) => b.type === "paragraph" && b.text.includes("KHÔNG phải bảng QTPP/CQA chính thức")),
-    "the section must keep stating that it is not an approved QTPP/CQA table",
+    paragraphsOf("P.2.2.1.2.1").some((text) => text.includes("KHÔNG phải bảng QTPP/CQA chính thức")),
+    "the table must keep stating that it is not an approved QTPP/CQA table",
   );
   assert.ok(
-    section.blocks.some((b) => b.type === "paragraph" && b.text.startsWith(`${GAP_LABEL} Chưa đánh giá tính trọng yếu`)),
-    "the section must name the attributes whose criticality is still unassessed",
+    paragraphsOf("P.2.2.1.2.2").some((text) => text.startsWith(`${GAP_LABEL} Chưa đánh giá tính trọng yếu`)),
+    "the reasoning must name the attributes whose criticality is still unassessed",
   );
 });
 
@@ -225,12 +228,12 @@ test("no value is invented where no reference product has been characterised", (
       assert.ok(isGapText(row[1]), `${row[0]} must still be marked as awaiting data`);
     }
   }
-  for (const index of [0, 1]) {
-    for (const row of formTable(draft, "P.2.4", index).rows) {
+  for (const sectionId of ["P.2.4.1", "P.2.4.2"]) {
+    for (const row of formTable(draft, sectionId).rows) {
       assert.ok(isGapText(row[1]), `${row[0]} must still be awaiting a decision`);
     }
   }
-  for (const row of formTable(draft, "P.2.3").rows) {
+  for (const row of formTable(draft, "P.2.3.1").rows) {
     for (const cell of row.slice(1)) {
       assert.ok(isGapText(cell), "no risk level has been assessed yet");
     }
@@ -260,7 +263,7 @@ test("headerless drops the printed header row but not the column contract", () =
   const valid = loadExample();
   // Headers are what every row is measured against, so suppressing the printed row must not let a
   // row carry the wrong number of cells.
-  formTable(valid, "P.2.1.1").rows.push(["chỉ một ô"]);
+  formTable(valid, "P.2.1.1.1").rows.push(["chỉ một ô"]);
   expectFailure(valid, "E_TABLE_ROW_WIDTH");
 });
 
@@ -268,7 +271,7 @@ test("the gap register separates a built-out form from one that holds data", () 
   const draft = loadExample();
   const referenceProduct = draft.sections.find((s) => s.id === "P.2.2.1.1");
   assert.equal(dataStatusLabel(referenceProduct), "Đã dựng khung, chưa có dữ liệu");
-  assert.equal(dataStatusLabel(draft.sections.find((s) => s.id === "P.2.1.1")), "Có dữ liệu (một phần hoặc đầy đủ)");
+  assert.equal(dataStatusLabel(draft.sections.find((s) => s.id === "P.2.1.1.1")), "Có dữ liệu (một phần hoặc đầy đủ)");
   // Checked against a bare section rather than a real one: every section in the example now has at
   // least a form built out, so pinning this to whichever section happened to be empty would break
   // again the next time one is filled in.

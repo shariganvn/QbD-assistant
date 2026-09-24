@@ -1,6 +1,6 @@
 # Step 01 — The strength dimension
 
-Status: unverified · Gate: G-01 · Blocks: step 02, step 05
+Status: pass · Gate: G-01 · Blocks: step 02, step 05
 
 ## Requirement
 

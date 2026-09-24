@@ -1,6 +1,6 @@
 # Step 00 — One producer for the gap marker
 
-Status: unverified · Gate: G-00 · Blocks: step 02
+Status: pass · Gate: G-00 · Blocks: step 02
 
 ## Why this comes first
 

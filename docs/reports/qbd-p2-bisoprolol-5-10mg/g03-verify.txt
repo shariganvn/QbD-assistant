@@ -1,58 +1,100 @@
 TAP version 13
-# Subtest: heading level follows the depth of the CTD number
-ok 1 - heading level follows the depth of the CTD number
+# Subtest: a gap section reports no data
+ok 1 - a gap section reports no data
   ---
-  duration_ms: 1.031176
+  duration_ms: 1.1694
+  type: 'test'
+  ...
+# Subtest: a built-out form holding only markers reports as a skeleton, not as data
+ok 2 - a built-out form holding only markers reports as a skeleton, not as data
+  ---
+  duration_ms: 0.539537
+  type: 'test'
+  ...
+# Subtest: one real value moves the row off skeleton with no other edit
+ok 3 - one real value moves the row off skeleton with no other edit
+  ---
+  duration_ms: 0.33245
+  type: 'test'
+  ...
+# Subtest: a leading ordinal column does not count as data
+ok 4 - a leading ordinal column does not count as data
+  ---
+  duration_ms: 0.262245
+  type: 'test'
+  ...
+# Subtest: a section stating only that data is missing reports no data
+ok 5 - a section stating only that data is missing reports no data
+  ---
+  duration_ms: 0.218462
+  type: 'test'
+  ...
+# Subtest: a section with real prose and a marker still reports data
+ok 6 - a section with real prose and a marker still reports data
+  ---
+  duration_ms: 0.278703
+  type: 'test'
+  ...
+# Subtest: a built-out form outranks a marker-only lead-in
+ok 7 - a built-out form outranks a marker-only lead-in
+  ---
+  duration_ms: 0.179375
+  type: 'test'
+  ...
+# Subtest: heading level follows the depth of the CTD number
+ok 8 - heading level follows the depth of the CTD number
+  ---
+  duration_ms: 0.943134
   type: 'test'
   ...
 # Subtest: a numbering deeper than Word's heading styles is clamped, not dropped
-ok 2 - a numbering deeper than Word's heading styles is clamped, not dropped
+ok 9 - a numbering deeper than Word's heading styles is clamped, not dropped
   ---
-  duration_ms: 0.130501
+  duration_ms: 0.154073
   type: 'test'
   ...
 # Subtest: every outline section's level is at most one deeper than the section before it
-ok 3 - every outline section's level is at most one deeper than the section before it
+ok 10 - every outline section's level is at most one deeper than the section before it
   ---
-  duration_ms: 0.5452
+  duration_ms: 0.583392
   type: 'test'
   ...
 # Subtest: a container carries no form and no content of its own
-ok 4 - a container carries no form and no content of its own
+ok 11 - a container carries no form and no content of its own
   ---
-  duration_ms: 0.361762
+  duration_ms: 0.470758
   type: 'test'
   ...
 # Subtest: every container has at least one child section
-ok 5 - every container has at least one child section
+ok 12 - every container has at least one child section
   ---
-  duration_ms: 0.39058
+  duration_ms: 1.994443
   type: 'test'
   ...
 # Subtest: a draft entry for a container is rejected
-ok 6 - a draft entry for a container is rejected
+ok 13 - a draft entry for a container is rejected
   ---
-  duration_ms: 3.263111
+  duration_ms: 2.895916
   type: 'test'
   ...
 # Subtest: a missing leaf is still reported, and a missing container is not
-ok 7 - a missing leaf is still reported, and a missing container is not
+ok 14 - a missing leaf is still reported, and a missing container is not
   ---
-  duration_ms: 1.454317
+  duration_ms: 1.452033
   type: 'test'
   ...
 # Subtest: a heading3 block without a heading2 above it is rejected
-ok 8 - a heading3 block without a heading2 above it is rejected
+ok 15 - a heading3 block without a heading2 above it is rejected
   ---
-  duration_ms: 1.065416
+  duration_ms: 1.395649
   type: 'test'
   ...
-1..8
-# tests 8
+1..15
+# tests 15
 # suites 0
-# pass 8
+# pass 15
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 156.319065
+# duration_ms 156.754103

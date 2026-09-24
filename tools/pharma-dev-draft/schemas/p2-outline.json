@@ -13,7 +13,14 @@
       "id": "P.2.1.1",
       "ctdReference": "3.2.P.2.1.1",
       "headingVi": "Dược chất (Drug Substance)",
-      "description": "Tính chất lý hóa và sinh học của dược chất, trình bày theo biểu mẫu General properties của phòng. Khối trích dẫn đánh số đặt dưới bảng; ô công thức cấu tạo cần hình, phải bổ sung thủ công vì renderer không hỗ trợ hình.",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Tính chất lý hóa tách khỏi tính chất sinh học theo biểu mẫu của phòng."
+    },
+    {
+      "id": "P.2.1.1.1",
+      "ctdReference": "3.2.P.2.1.1.1",
+      "headingVi": "Tính chất lý hóa (Physicochemical properties)",
+      "description": "Trình bày theo biểu mẫu General properties của phòng: ĐÚNG MỘT bảng nhãn–giá trị, phía dưới là khối trích dẫn đánh số. Đưa thêm bao nhiêu tài liệu về dược chất cũng không được thêm bảng hay heading; chỉ tiêu nào biểu mẫu không có dòng thì ghi vào khối trích dẫn. Ô công thức cấu tạo cần hình, phải bổ sung thủ công vì renderer không hỗ trợ hình.",
       "form": {
         "headings": [],
         "tables": [
@@ -48,15 +55,25 @@
       }
     },
     {
+      "id": "P.2.1.1.2",
+      "ctdReference": "3.2.P.2.1.1.2",
+      "headingVi": "Tính chất sinh học (Biological properties)",
+      "description": "Phân loại BCS, tính thấm, sinh khả dụng, dữ liệu dược động học liên quan tới thiết kế dạng bào chế. Không có dòng biểu mẫu cố định; giá trị nào chưa đối chiếu được nguồn thì đánh dấu, không suy từ kiến thức tham khảo."
+    },
+    {
       "id": "P.2.1.2",
       "ctdReference": "3.2.P.2.1.2",
       "headingVi": "Tá dược (Excipients)",
-      "description": "Danh mục tá dược, chức năng, lý do lựa chọn, khoảng hàm lượng khuyến cáo, và nghiên cứu tương hợp tá dược – dược chất. Số dòng và tên tá dược thay đổi theo từng công thức.",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Nội dung nằm ở hai mục con theo biểu mẫu của phòng."
+    },
+    {
+      "id": "P.2.1.2.1",
+      "ctdReference": "3.2.P.2.1.2.1",
+      "headingVi": "Đặc tính lý hóa (Physicochemical properties)",
+      "description": "Danh mục tá dược, chức năng, lý do lựa chọn và khoảng hàm lượng khuyến cáo. Số dòng và tên tá dược thay đổi theo từng công thức. Phải gồm mọi chất dùng trong sản xuất, kể cả chất không còn trong thành phẩm (hệ màng bao, dung môi xát hạt, processing aid).",
       "form": {
-        "headings": [
-          "3.2.P.2.1.2.1. Đặc tính lý hóa (Physicochemical properties)",
-          "3.2.P.2.1.2.2. Nghiên cứu tương hợp dược chất – tá dược (Excipient compatibility)"
-        ],
+        "headings": [],
         "tables": [
           {
             "columns": [
@@ -72,6 +89,12 @@
       }
     },
     {
+      "id": "P.2.1.2.2",
+      "ctdReference": "3.2.P.2.1.2.2",
+      "headingVi": "Nghiên cứu tương hợp dược chất – tá dược (Excipient compatibility)",
+      "description": "Thiết kế nghiên cứu, điều kiện bảo quản, chỉ tiêu theo dõi và kết luận tương hợp. Ghi chú vị trí: ICH Q8(R2) đặt yêu cầu tương hợp dược chất–tá dược ở mục 2.1.1, biểu mẫu của phòng đặt ở đây; bản này theo biểu mẫu của phòng."
+    },
+    {
       "id": "P.2.2",
       "ctdReference": "3.2.P.2.2",
       "headingVi": "Thành phẩm (Drug Product)",
@@ -83,7 +106,7 @@
       "ctdReference": "3.2.P.2.2.1",
       "headingVi": "Phát triển công thức (Formulation Development)",
       "container": true,
-      "description": "Mục cha, chỉ mang heading. Nội dung nằm ở các mục con: đặc tính sản phẩm đối chiếu, QTPP/CQA, nghiên cứu phát triển công thức."
+      "description": "Mục cha, chỉ mang heading."
     },
     {
       "id": "P.2.2.1.1",
@@ -135,11 +158,16 @@
       "id": "P.2.2.1.2",
       "ctdReference": "3.2.P.2.2.1.2",
       "headingVi": "Hồ sơ chất lượng mục tiêu và CQA (QTPP / CQA)",
-      "description": "Bảng chỉ tiêu chất lượng và biện luận CQA. Danh mục chỉ tiêu đổi theo sản phẩm; mục P.2.3 phải chấm rủi ro đúng danh mục này.",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Bảng chỉ tiêu và phần biện luận tính trọng yếu tách thành hai mục con theo biểu mẫu của phòng."
+    },
+    {
+      "id": "P.2.2.1.2.1",
+      "ctdReference": "3.2.P.2.2.1.2.1",
+      "headingVi": "Hồ sơ chất lượng mục tiêu (QTPP)",
+      "description": "Bảng chỉ tiêu chất lượng mục tiêu. Danh mục chỉ tiêu đổi theo sản phẩm; ma trận rủi ro ở P.2.3.1 phải chấm đúng danh mục này.",
       "form": {
-        "headings": [
-          "Xác định yếu tố trọng yếu và biện luận kiểm soát"
-        ],
+        "headings": [],
         "tables": [
           {
             "columns": [
@@ -152,10 +180,61 @@
       }
     },
     {
+      "id": "P.2.2.1.2.2",
+      "ctdReference": "3.2.P.2.2.1.2.2",
+      "headingVi": "Thuộc tính chất lượng trọng yếu (CQAs)",
+      "description": "Biện luận yếu tố nào là trọng yếu với chất lượng thành phẩm và kiểm soát bằng cách nào. ICH Q8(R2) Part I trang 6 đòi xác định các yếu tố critical to product quality và biện luận control strategy, không bắt buộc theo đúng thuật ngữ Annex."
+    },
+    {
       "id": "P.2.2.1.3",
       "ctdReference": "3.2.P.2.2.1.3",
       "headingVi": "Nghiên cứu phát triển công thức (Formulation Development Study)",
-      "description": "Các thử nghiệm sàng lọc/khảo sát công thức: thông số cố định, bảng thành phần từng công thức, kết quả IPC/QC, đánh giá rủi ro trước/sau, kết luận và công thức được chọn mang sang giai đoạn tiếp theo."
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Các mục con đi theo trình tự của biểu mẫu: thử nghiệm thăm dò, đánh giá rủi ro ban đầu, nghiên cứu chính, đánh giá rủi ro cập nhật, công thức cuối."
+    },
+    {
+      "id": "P.2.2.1.3.1",
+      "ctdReference": "3.2.P.2.2.1.3.1",
+      "headingVi": "Thử nghiệm thăm dò (Preliminary experiments)",
+      "description": "Thử nghiệm sàng lọc sơ bộ để chọn loại tá dược và khoảng khảo sát trước khi vào nghiên cứu chính."
+    },
+    {
+      "id": "P.2.2.1.3.2",
+      "ctdReference": "3.2.P.2.2.1.3.2",
+      "headingVi": "Đánh giá rủi ro ban đầu của biến công thức (Initial risk assessment of formulation variables)",
+      "description": "Mức rủi ro của từng biến công thức TRƯỚC khi có dữ liệu thực nghiệm, kèm lý do."
+    },
+    {
+      "id": "P.2.2.1.3.3",
+      "ctdReference": "3.2.P.2.2.1.3.3",
+      "headingVi": "Nghiên cứu phát triển công thức (Formulation development study)",
+      "description": "Thông số cố định, bảng thành phần từng công thức, kết quả IPC/QC, nhận xét và công thức được chọn mang sang giai đoạn tiếp theo."
+    },
+    {
+      "id": "P.2.2.1.3.4",
+      "ctdReference": "3.2.P.2.2.1.3.4",
+      "headingVi": "Đánh giá rủi ro cập nhật (Updated risk assessment)",
+      "description": "Mức rủi ro của từng biến công thức SAU khi có dữ liệu, kèm lý do thay đổi so với đánh giá ban đầu."
+    },
+    {
+      "id": "P.2.2.1.3.5",
+      "ctdReference": "3.2.P.2.2.1.3.5",
+      "headingVi": "Công thức cuối (Final formulation)",
+      "description": "Công thức chốt, khai theo từng hàm lượng. Bảng thành phần KHÔNG phải bảng kết quả đo: thành phần là lượng khai báo nên tỷ lệ cấp được, và đây là chỗ duy nhất một hàm lượng suy theo tỷ lệ được mang số. Mục phải nói rõ hàm lượng nào là khối lượng tính chứ chưa phải công thức đã bào chế.",
+      "form": {
+        "headings": [],
+        "tables": [
+          {
+            "columns": [
+              "STT",
+              "Tên thành phần",
+              "Chức năng"
+            ],
+            "perStrength": true,
+            "rows": "variable"
+          }
+        ]
+      }
     },
     {
       "id": "P.2.2.2",
@@ -167,19 +246,58 @@
       "id": "P.2.2.3",
       "ctdReference": "3.2.P.2.2.3",
       "headingVi": "Tính chất lý hóa và sinh học (Physicochemical and Biological Properties)",
-      "description": "Phát triển phương pháp hòa tan và hồ sơ tạp chất của thành phẩm.",
-      "form": {
-        "headings": [
-          "Phương pháp hòa tan",
-          "Hồ sơ tạp chất"
-        ]
-      }
+      "container": true,
+      "description": "Mục cha, chỉ mang heading."
+    },
+    {
+      "id": "P.2.2.3.1",
+      "ctdReference": "3.2.P.2.2.3.1",
+      "headingVi": "Phát triển phương pháp hòa tan (Development of a dissolution method)",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Đánh số các mục con đã được chỉnh so với file mẫu: file mẫu dùng 3.2.P.2.2.3.1.2 cho HAI mục khác nhau và có một mục 3.2.P.2.2.3.1.1.3 sâu hơn nhóm chứa nó. Bản này đánh lại .1 điều kiện sink, .2 phương pháp, .3 khả năng phân biệt, .4 hòa tan so sánh — chờ FD ký deviation."
+    },
+    {
+      "id": "P.2.2.3.1.1",
+      "ctdReference": "3.2.P.2.2.3.1.1",
+      "headingVi": "Điều kiện sink (Sink condition)",
+      "description": "Độ tan của dược chất trong môi trường thử và thể tích cần để đạt điều kiện sink."
+    },
+    {
+      "id": "P.2.2.3.1.2",
+      "ctdReference": "3.2.P.2.2.3.1.2",
+      "headingVi": "Phương pháp hòa tan (Dissolution method)",
+      "description": "Thiết bị, tốc độ, môi trường, thể tích, thời điểm lấy mẫu và cách định lượng. Trích từ hồ sơ 3.2.P.5.2; không suy ra được từ báo cáo thử nghiệm công thức."
+    },
+    {
+      "id": "P.2.2.3.1.3",
+      "ctdReference": "3.2.P.2.2.3.1.3",
+      "headingVi": "Khả năng phân biệt của phương pháp (Discriminatory power)",
+      "description": "Bằng chứng phương pháp phân biệt được các công thức khác nhau. ICH Q8(R2) trang 8 dùng \"could be provided\" nên đây là kỳ vọng mềm của guideline, nhưng biểu mẫu của phòng đòi một mục riêng."
+    },
+    {
+      "id": "P.2.2.3.1.4",
+      "ctdReference": "3.2.P.2.2.3.1.4",
+      "headingVi": "Hồ sơ hòa tan so sánh (Comparative dissolution profile)",
+      "description": "So sánh hòa tan giữa thành phẩm và sản phẩm đối chiếu, và giữa các hàm lượng với nhau khi hồ sơ xin miễn thử tương đương sinh học cho hàm lượng thấp. Cần nhiều thời điểm lấy mẫu và cùng điều kiện thử mới tính được f2. Biểu đồ phải bổ sung thủ công."
+    },
+    {
+      "id": "P.2.2.3.2",
+      "ctdReference": "3.2.P.2.2.3.2",
+      "headingVi": "Hồ sơ tạp chất của viên (Impurity profile of tablets)",
+      "description": "Danh mục tạp theo chuyên luận áp dụng, giới hạn và kết quả thực đo trên thành phẩm."
     },
     {
       "id": "P.2.3",
       "ctdReference": "3.2.P.2.3",
       "headingVi": "Phát triển quy trình sản xuất (Manufacturing Process Development)",
-      "description": "Phát triển quy trình sản xuất: đánh giá rủi ro, nghiên cứu từng công đoạn, nâng cỡ lô. Bộ công đoạn KHÔNG cố định — nó phụ thuộc phương pháp pha chế đã chọn (trộn dập thẳng, xát hạt ướt, phun sấy tầng sôi tạo hạt, cán ép, đóng tán, ép đùn nóng chảy…), và mỗi phương pháp có bộ thông số trọng yếu riêng; đổi phương pháp thì dựng lại cả hai bảng. Sơ đồ quy trình phải bổ sung thủ công.",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Bộ công đoạn KHÔNG cố định — nó phụ thuộc phương pháp pha chế đã chọn (trộn dập thẳng, xát hạt ướt, phun sấy tầng sôi tạo hạt, cán ép, đóng tán, ép đùn nóng chảy…), và mỗi phương pháp có bộ thông số trọng yếu riêng; đổi phương pháp thì dựng lại các bảng. Sơ đồ quy trình phải bổ sung thủ công."
+    },
+    {
+      "id": "P.2.3.1",
+      "ctdReference": "3.2.P.2.3.1",
+      "headingVi": "Đánh giá rủi ro ban đầu của quy trình (Initial risk assessment of the manufacturing process)",
+      "description": "Ma trận rủi ro CQA × công đoạn. Dòng phải trùng đúng danh mục chỉ tiêu khai ở P.2.2.1.2.1; cột là các công đoạn của phương pháp đã chọn.",
       "form": {
         "headings": [],
         "tables": [
@@ -188,8 +306,26 @@
               "CQA sản phẩm",
               "..."
             ],
-            "rowsFrom": "P.2.2.1.2"
-          },
+            "rowsFrom": "P.2.2.1.2.1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P.2.3.2",
+      "ctdReference": "3.2.P.2.3.2",
+      "headingVi": "Nghiên cứu phát triển (Studies development)",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading."
+    },
+    {
+      "id": "P.2.3.2.1",
+      "ctdReference": "3.2.P.2.3.2.1",
+      "headingVi": "Phát triển quy trình (Process development)",
+      "description": "Thông số trọng yếu dự kiến của từng công đoạn và biện luận mức rủi ro. Số dòng bằng số công đoạn trong ma trận ở P.2.3.1.",
+      "form": {
+        "headings": [],
+        "tables": [
           {
             "columns": [
               "Công đoạn",
@@ -202,10 +338,29 @@
       }
     },
     {
+      "id": "P.2.3.2.2",
+      "ctdReference": "3.2.P.2.3.2.2",
+      "headingVi": "Đánh giá rủi ro cập nhật (Updated risk assessment)",
+      "description": "Mức rủi ro của từng công đoạn SAU khi có dữ liệu chạy quy trình."
+    },
+    {
+      "id": "P.2.3.2.3",
+      "ctdReference": "3.2.P.2.3.2.3",
+      "headingVi": "Nâng cỡ lô (Scale up)",
+      "description": "Từ cỡ lô phòng thí nghiệm lên pilot rồi thương mại: cỡ lô, thiết bị, thông số và dữ liệu so sánh giữa các cỡ."
+    },
+    {
       "id": "P.2.4",
       "ctdReference": "3.2.P.2.4",
       "headingVi": "Hệ thống bao bì (Container Closure System)",
-      "description": "Bao bì sơ cấp và thứ cấp: vật liệu, khả năng bảo vệ, tính tương hợp. Mục chỉ đóng được sau khi có dữ liệu độ ổn định ở 3.2.P.8, vì tính tương hợp chứng minh bằng chính dữ liệu đó.",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Mục chỉ đóng được sau khi có dữ liệu độ ổn định ở 3.2.P.8, vì tính tương hợp chứng minh bằng chính dữ liệu đó."
+    },
+    {
+      "id": "P.2.4.1",
+      "ctdReference": "3.2.P.2.4.1",
+      "headingVi": "Bao bì sơ cấp (Primary packaging material)",
+      "description": "Vật liệu, mô tả, khả năng bảo vệ, tính tương hợp, kiểm soát chất lượng và dữ liệu độ ổn định của bao bì tiếp xúc trực tiếp.",
       "form": {
         "headings": [],
         "tables": [
@@ -222,7 +377,18 @@
               "Kiểm soát chất lượng",
               "Dữ liệu độ ổn định"
             ]
-          },
+          }
+        ]
+      }
+    },
+    {
+      "id": "P.2.4.2",
+      "ctdReference": "3.2.P.2.4.2",
+      "headingVi": "Bao bì thứ cấp (Secondary packaging material)",
+      "description": "Mô tả và chức năng của bao bì ngoài.",
+      "form": {
+        "headings": [],
+        "tables": [
           {
             "columns": [
               "Nội dung",

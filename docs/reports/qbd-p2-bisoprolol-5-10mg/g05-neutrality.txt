@@ -1,0 +1,172 @@
+TAP version 13
+# Subtest: no product name reaches a module
+ok 1 - no product name reaches a module
+  ---
+  duration_ms: 8.540335
+  type: 'test'
+  ...
+# Subtest: no product name reaches the enforced part of the outline
+ok 2 - no product name reaches the enforced part of the outline
+  ---
+  duration_ms: 1.369117
+  type: 'test'
+  ...
+# Subtest: the committed example draft validates
+ok 3 - the committed example draft validates
+  ---
+  duration_ms: 4.424294
+  type: 'test'
+  ...
+# Subtest: columnWidths must sum to the renderer's table width
+ok 4 - columnWidths must sum to the renderer's table width
+  ---
+  duration_ms: 1.575106
+  type: 'test'
+  ...
+# Subtest: columnWidths must have one entry per header
+ok 5 - columnWidths must have one entry per header
+  ---
+  duration_ms: 1.309613
+  type: 'test'
+  ...
+# Subtest: columnAlign rejects an alignment the renderer cannot map
+ok 6 - columnAlign rejects an alignment the renderer cannot map
+  ---
+  duration_ms: 1.183552
+  type: 'test'
+  ...
+# Subtest: a misspelled layout field is rejected, not silently ignored
+ok 7 - a misspelled layout field is rejected, not silently ignored
+  ---
+  duration_ms: 1.641803
+  type: 'test'
+  ...
+# Subtest: a non-string cell is rejected so comma-decimals cannot be lost
+ok 8 - a non-string cell is rejected so comma-decimals cannot be lost
+  ---
+  duration_ms: 1.0215
+  type: 'test'
+  ...
+# Subtest: a newline outside a table cell is rejected
+ok 9 - a newline outside a table cell is rejected
+  ---
+  duration_ms: 1.143781
+  type: 'test'
+  ...
+# Subtest: referenceSources entries must be non-empty strings
+ok 10 - referenceSources entries must be non-empty strings
+  ---
+  duration_ms: 0.955325
+  type: 'test'
+  ...
+# Subtest: default column widths fill the table exactly for any column count
+ok 11 - default column widths fill the table exactly for any column count
+  ---
+  duration_ms: 0.574818
+  type: 'test'
+  ...
+# Subtest: the renderer's own hardcoded table widths fill the table exactly
+ok 12 - the renderer's own hardcoded table widths fill the table exactly
+  ---
+  duration_ms: 0.427868
+  type: 'test'
+  ...
+# Subtest: justify is an accepted column alignment
+ok 13 - justify is an accepted column alignment
+  ---
+  duration_ms: 1.470804
+  type: 'test'
+  ...
+# Subtest: dropping a row from a form table is rejected
+ok 14 - dropping a row from a form table is rejected
+  ---
+  duration_ms: 1.392216
+  type: 'test'
+  ...
+# Subtest: adding a table the form does not have is rejected
+ok 15 - adding a table the form does not have is rejected
+  ---
+  duration_ms: 1.576246
+  type: 'test'
+  ...
+# Subtest: adding a heading the form does not have is rejected
+ok 16 - adding a heading the form does not have is rejected
+  ---
+  duration_ms: 1.037581
+  type: 'test'
+  ...
+# Subtest: a label/value form must keep its header row suppressed
+ok 17 - a label/value form must keep its header row suppressed
+  ---
+  duration_ms: 0.980032
+  type: 'test'
+  ...
+# Subtest: renaming a fixed column label is rejected
+ok 18 - renaming a fixed column label is rejected
+  ---
+  duration_ms: 1.290511
+  type: 'test'
+  ...
+# Subtest: the risk matrix has to follow the quality attributes the product declares
+ok 19 - the risk matrix has to follow the quality attributes the product declares
+  ---
+  duration_ms: 1.153475
+  type: 'test'
+  ...
+# Subtest: the form fixes the shape, not the product: labels carrying a product name may change
+ok 20 - the form fixes the shape, not the product: labels carrying a product name may change
+  ---
+  duration_ms: 1.089938
+  type: 'test'
+  ...
+# Subtest: the form fixes the shape, not the method: process steps may change with the method
+ok 21 - the form fixes the shape, not the method: process steps may change with the method
+  ---
+  duration_ms: 1.57685
+  type: 'test'
+  ...
+# Subtest: a draft for an entirely different product validates on the same form
+ok 22 - a draft for an entirely different product validates on the same form
+  ---
+  duration_ms: 1.276167
+  type: 'test'
+  ...
+# Subtest: the criticality discussion does not upgrade the quality-attribute table into an approved QTPP/CQA
+ok 23 - the criticality discussion does not upgrade the quality-attribute table into an approved QTPP/CQA
+  ---
+  duration_ms: 0.743394
+  type: 'test'
+  ...
+# Subtest: no value is invented where no reference product has been characterised
+ok 24 - no value is invented where no reference product has been characterised
+  ---
+  duration_ms: 0.805254
+  type: 'test'
+  ...
+# Subtest: P.2.5 states the limits it applies and marks only the results as missing
+ok 25 - P.2.5 states the limits it applies and marks only the results as missing
+  ---
+  duration_ms: 0.605402
+  type: 'test'
+  ...
+# Subtest: headerless drops the printed header row but not the column contract
+ok 26 - headerless drops the printed header row but not the column contract
+  ---
+  duration_ms: 1.73064
+  type: 'test'
+  ...
+# Subtest: the gap register separates a built-out form from one that holds data
+ok 27 - the gap register separates a built-out form from one that holds data
+  ---
+  duration_ms: 1.457568
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 172.957716

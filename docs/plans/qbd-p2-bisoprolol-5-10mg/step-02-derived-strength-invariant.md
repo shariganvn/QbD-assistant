@@ -1,6 +1,6 @@
 # Step 02 — A calculated strength cannot carry a measured result
 
-Status: unverified · Gate: G-02 · Depends on: step 00, step 01
+Status: pass · Gate: G-02 · Depends on: step 00, step 01
 
 ## Requirement
 

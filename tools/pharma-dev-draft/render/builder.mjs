@@ -12,6 +12,7 @@ import {
 
 import { TABLE_WIDTH_DXA as TABLE_WIDTH } from "../schemas/layout.mjs";
 import { GAP_LABEL, isGapText } from "../schemas/markers.mjs";
+import { tableValueCells } from "../schemas/table-shape.mjs";
 
 const HEADER_FILL = "D9D9D9";
 const NOTICE_FILL = "FFF2CC";
@@ -232,19 +233,30 @@ function renderBlock(block, sectionLevel = 1) {
 // the register has to say so: reporting it as holding data would be a false statement in a document
 // shaped like a submission. What counts as marked comes from schemas/markers.mjs.
 
-// Derived from the cells rather than declared on the section, so it cannot go stale: the moment a
-// real value replaces a marker, the register stops calling the section a skeleton. Only the value
-// columns count — the first column holds row labels, which a skeleton has filled in by definition.
-function holdsOnlyPlaceholders(section) {
-  const valueCells = (section.blocks ?? [])
-    .filter((block) => block.type === "table")
-    .flatMap((block) => block.rows.flatMap((row) => row.slice(1)));
-  return valueCells.length > 0 && valueCells.every((cell) => isGapText(cell));
+// Derived from the content rather than declared on the section, so it cannot go stale: the moment a real
+// value replaces a marker, the register stops calling the section empty. Label columns do not count —
+// a skeleton has its row labels filled in by definition, so counting them would report a form that
+// holds nothing at all as holding data.
+function tableCellsOf(section) {
+  return (section.blocks ?? []).filter((block) => block.type === "table").flatMap(tableValueCells);
+}
+
+function paragraphsOf(section) {
+  return (section.blocks ?? []).filter((block) => block.type === "paragraph").map((block) => block.text);
 }
 
 export function dataStatusLabel(section) {
   if (section?.status !== "covered") return "Không có dữ liệu";
-  return holdsOnlyPlaceholders(section) ? "Đã dựng khung, chưa có dữ liệu" : "Có dữ liệu (một phần hoặc đầy đủ)";
+  const cells = tableCellsOf(section);
+  // A built-out form waiting to be filled is worth saying so, and it is the more useful of the two
+  // empty states, so it is checked first.
+  if (cells.length > 0 && cells.every((cell) => isGapText(cell))) return "Đã dựng khung, chưa có dữ liệu";
+  // Otherwise a section whose every statement is a marker holds nothing. Paragraphs have to count here:
+  // a section that says only "this data is missing" would otherwise be reported as holding data, which
+  // is a false claim in a document shaped like a submission.
+  const everything = [...cells, ...paragraphsOf(section)];
+  if (everything.length > 0 && everything.every((text) => isGapText(text))) return "Không có dữ liệu";
+  return "Có dữ liệu (một phần hoặc đầy đủ)";
 }
 
 function gapRegisterTable(outline, draftSectionsById) {

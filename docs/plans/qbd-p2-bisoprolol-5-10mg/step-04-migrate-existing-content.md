@@ -1,6 +1,6 @@
 # Step 04 — Move the existing content onto the new outline, adding no data
 
-Status: unverified · Gate: G-04 · Depends on: step 03
+Status: pass · Gate: G-04 · Depends on: step 03
 
 ## Requirement
 

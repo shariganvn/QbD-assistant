@@ -20,7 +20,7 @@
   },
   "sections": [
     {
-      "id": "P.2.1.1",
+      "id": "P.2.1.1.1",
       "status": "covered",
       "blocks": [
         {
@@ -132,13 +132,19 @@
       ]
     },
     {
-      "id": "P.2.1.2",
+      "id": "P.2.1.1.2",
       "status": "covered",
       "blocks": [
         {
-          "type": "heading2",
-          "text": "3.2.P.2.1.2.1. Đặc tính lý hóa (Physicochemical properties)"
-        },
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phân loại BCS thực nghiệm, hệ số thấm, sinh khả dụng tuyệt đối và dữ liệu dược động học của bisoprolol fumarate — nhóm thuộc tính mà ICH Q8(R2) mục 2.1.1 (trang 6) đòi nêu và bàn luận vì chúng quyết định thiết kế dạng bào chế phóng thích ngay và khả năng xin miễn thử tương đương sinh học. Nguồn cần lấy: chuyên luận dược điển áp dụng, hồ sơ 3.2.S, hoặc public assessment report của thuốc đối chiếu. Ghi chú [1] ở mục 3.2.P.2.1.1.1 có nhắc BCS nhưng tự khai là kiến thức tham khảo chưa đối chiếu, nên không dùng làm nguồn cho mục này."
+        }
+      ]
+    },
+    {
+      "id": "P.2.1.2.1",
+      "status": "covered",
+      "blocks": [
         {
           "type": "paragraph",
           "text": "Danh mục tá dược sử dụng trong công thức, kèm đặc tính lý hóa, ứng dụng trong công thức dược phẩm và chức năng tương ứng. Thành phần định lượng theo từng công thức thử nghiệm được trình bày tại mục 3.2.P.2.2.1.3."
@@ -219,11 +225,13 @@
         {
           "type": "paragraph",
           "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Bảng trên chỉ gồm tá dược của lõi viên (tổng 100,00 mg). Sản phẩm là viên nén bao phim nên còn thành phần hệ màng bao, và các chất chỉ dùng trong quá trình sản xuất mà không còn trong thành phẩm (dung môi xát hạt, dung môi pha dịch bao) — không có trong Thử nghiệm 1. ICH Q8(R2) mục 2.1.2 (trang 7) yêu cầu phần này bao gồm mọi chất dùng trong sản xuất thuốc, dù có xuất hiện trong thành phẩm hay không."
-        },
-        {
-          "type": "heading2",
-          "text": "3.2.P.2.1.2.2. Nghiên cứu tương hợp dược chất – tá dược (Excipient compatibility)"
-        },
+        }
+      ]
+    },
+    {
+      "id": "P.2.1.2.2",
+      "status": "covered",
+      "blocks": [
         {
           "type": "paragraph",
           "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nghiên cứu tương hợp tá dược – dược chất (ví dụ DSC hỗn hợp nhị phân 1:1, hoặc theo dõi hỗn hợp ở điều kiện lão hóa cấp tốc) — không có trong Thử nghiệm 1."
@@ -353,7 +361,7 @@
       ]
     },
     {
-      "id": "P.2.2.1.2",
+      "id": "P.2.2.1.2.1",
       "status": "covered",
       "blocks": [
         {
@@ -400,11 +408,13 @@
         {
           "type": "paragraph",
           "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] QTPP đầy đủ (dạng bào chế, đường dùng, PK/BE với RMP, độ ổn định ICH Q1A...) và bảng CQA có biện luận \"có phải CQA hay không\" — cần FD xây dựng và phê duyệt."
-        },
-        {
-          "type": "heading2",
-          "text": "Xác định yếu tố trọng yếu và biện luận kiểm soát"
-        },
+        }
+      ]
+    },
+    {
+      "id": "P.2.2.1.2.2",
+      "status": "covered",
+      "blocks": [
         {
           "type": "paragraph",
           "text": "ICH Q8(R2) Part I (trang 6) đặt đây là yêu cầu nền: \"At a minimum, those aspects of drug substances, excipients, container closure systems, and manufacturing processes that are critical to product quality should be determined and control strategies justified\", và mô tả cách xác định: \"Critical formulation attributes and process parameters are generally identified through an assessment of the extent to which their variation can have impact on the quality of the drug product.\" Mục này chỉ kết luận cho yếu tố mà Thử nghiệm 1 đã thực sự khảo sát biến thiên; các yếu tố còn lại được ghi rõ là chưa đánh giá, không suy đoán."
@@ -424,7 +434,27 @@
       ]
     },
     {
-      "id": "P.2.2.1.3",
+      "id": "P.2.2.1.3.1",
+      "status": "covered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thử nghiệm thăm dò chọn loại tá dược và khoảng khảo sát trước Thử nghiệm 1. Nguồn cần lấy: hồ sơ nghiên cứu của FD trước giai đoạn khảo sát tỷ lệ tá dược rã; nếu không có thử nghiệm thăm dò nào thì ghi rõ là không thực hiện, kèm lý do."
+        }
+      ]
+    },
+    {
+      "id": "P.2.2.1.3.2",
+      "status": "covered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đánh giá rủi ro của từng biến công thức TRƯỚC khi có dữ liệu Thử nghiệm 1, theo biểu mẫu của phòng. Nguồn cần lấy: biên bản đánh giá rủi ro của FD lập trước khi bào chế. Bản thảo này không dựng ngược đánh giá đó từ kết quả đã biết — làm vậy là biến kết quả thành tiên đoán."
+        }
+      ]
+    },
+    {
+      "id": "P.2.2.1.3.3",
       "status": "covered",
       "blocks": [
         {
@@ -746,6 +776,91 @@
       ]
     },
     {
+      "id": "P.2.2.1.3.4",
+      "status": "covered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đánh giá rủi ro cập nhật sau Thử nghiệm 1, kèm lý do thay đổi mức so với đánh giá ban đầu. Nguồn cần lấy: biên bản đánh giá rủi ro cập nhật của FD. Phần biện luận tính trọng yếu của tỷ lệ tá dược rã đã có ở mục 3.2.P.2.2.1.2.2 nhưng đó là biện luận CQA, không thay cho bảng rủi ro theo biến công thức."
+        }
+      ]
+    },
+    {
+      "id": "P.2.2.1.3.5",
+      "status": "covered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Công thức cuối phải là công thức đã được FD chốt, khai theo từng hàm lượng đăng ký. Thử nghiệm 1 kết luận CT03 là điểm khởi đầu cho Thử nghiệm 2 chứ không phải công thức chốt (nguyên văn ở mục 3.2.P.2.2.1.3.3), nên không có công thức nào được mang sang đây. Nguồn cần lấy: quyết định chốt công thức của FD sau khi hoàn tất chuỗi thử nghiệm. Bảng dưới đây là khung theo biểu mẫu; chưa ô nào được điền."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "STT",
+            "Tên thành phần",
+            "Chức năng",
+            "10 mg"
+          ],
+          "rows": [
+            [
+              "1",
+              "Bisoprolol fumarate",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
+            ],
+            [
+              "2",
+              "Lactose monohydrate",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
+            ],
+            [
+              "3",
+              "Lactose monohydrate & cellulose powder 75:25 (Cellactose 80)",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
+            ],
+            [
+              "4",
+              "Croscarmellose sodium (Primellose)",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
+            ],
+            [
+              "5",
+              "Magnesium oxide (MgO XP 103)",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
+            ],
+            [
+              "6",
+              "Povidone K30",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
+            ],
+            [
+              "7",
+              "Magnesium stearate",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
+            ],
+            [
+              "8",
+              "Tổng cộng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
+            ]
+          ],
+          "columnAlign": [
+            "center",
+            "left",
+            "left",
+            "center"
+          ]
+        }
+      ]
+    },
+    {
       "id": "P.2.2.2",
       "status": "covered",
       "blocks": [
@@ -760,29 +875,53 @@
       ]
     },
     {
-      "id": "P.2.2.3",
+      "id": "P.2.2.3.1.1",
       "status": "covered",
       "blocks": [
         {
-          "type": "heading2",
-          "text": "Phương pháp hòa tan"
-        },
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Điều kiện sink: độ tan của bisoprolol fumarate trong môi trường thử và thể tích môi trường cần để đạt điều kiện sink. Nguồn cần lấy: hồ sơ phát triển phương pháp ở 3.2.P.5.2. Độ tan trong nước và methanol đã có ở mục 3.2.P.2.1.1.1 nhưng lấy từ CoA nguyên liệu, không phải độ tan theo môi trường thử hòa tan."
+        }
+      ]
+    },
+    {
+      "id": "P.2.2.3.1.2",
+      "status": "covered",
+      "blocks": [
         {
           "type": "paragraph",
           "text": "Tiêu chuẩn đã áp dụng: ≥ 80% (Q) bisoprolol fumarate hòa tan trong 30 phút."
         },
         {
           "type": "paragraph",
-          "text": "Khả năng phân biệt (discriminatory power) — biện luận hồi cứu từ Thử nghiệm 1: cùng một phương pháp hòa tan đã cho ba kết quả tách bạch 73,89% / 81,40% / 98,64% trên ba công thức chỉ khác nhau ở tỷ lệ tá dược rã, xếp đúng thứ tự với độ rã (13'28\" / 8'57\" / 4'18\"), và phân loại đạt/không đạt đúng ở ngưỡng 80% Q. Phương pháp do đó phân biệt được thay đổi có ý nghĩa về công thức. ICH Q8(R2) mục 2.2.3 (trang 8) diễn đạt phần này bằng \"could be provided\" nên đây không phải yêu cầu bắt buộc của guideline; mục riêng là theo tài liệu mẫu của phòng."
-        },
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Điều kiện phương pháp hòa tan cụ thể (thiết bị, tốc độ khuấy, môi trường, thể tích, thời điểm lấy mẫu) — không có trong Thử nghiệm 1; cần trích từ hồ sơ phương pháp phân tích 3.2.P.5.2. Biện luận khả năng phân biệt ở trên không thay thế cho việc khai điều kiện phương pháp."
+        }
+      ]
+    },
+    {
+      "id": "P.2.2.3.1.3",
+      "status": "covered",
+      "blocks": [
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Điều kiện phương pháp hòa tan cụ thể (thiết bị, tốc độ khuấy, môi trường, thể tích, thời điểm lấy mẫu) — không có trong Thử nghiệm 1; cần trích từ hồ sơ phương pháp phân tích 3.2.P.5.2. Biện luận khả năng phân biệt ở trên không thay thế cho việc khai điều kiện phương pháp."
-        },
+          "text": "Khả năng phân biệt (discriminatory power) — biện luận hồi cứu từ Thử nghiệm 1: cùng một phương pháp hòa tan đã cho ba kết quả tách bạch 73,89% / 81,40% / 98,64% trên ba công thức chỉ khác nhau ở tỷ lệ tá dược rã, xếp đúng thứ tự với độ rã (13'28\" / 8'57\" / 4'18\"), và phân loại đạt/không đạt đúng ở ngưỡng 80% Q. Phương pháp do đó phân biệt được thay đổi có ý nghĩa về công thức. ICH Q8(R2) mục 2.2.3 (trang 8) diễn đạt phần này bằng \"could be provided\" nên đây không phải yêu cầu bắt buộc của guideline; mục riêng là theo tài liệu mẫu của phòng."
+        }
+      ]
+    },
+    {
+      "id": "P.2.2.3.1.4",
+      "status": "covered",
+      "blocks": [
         {
-          "type": "heading2",
-          "text": "Hồ sơ tạp chất"
-        },
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ hòa tan so sánh giữa thành phẩm và thuốc đối chiếu, và giữa các hàm lượng với nhau. Nguồn cần lấy: thực nghiệm hòa tan nhiều thời điểm trên cùng điều kiện thử. Mục 3.2.P.2.2.1.1 đang chờ chính bộ số liệu này cho thuốc đối chiếu; chưa có thì không tính được f2 và không có cơ sở xin miễn thử tương đương sinh học cho hàm lượng thấp."
+        }
+      ]
+    },
+    {
+      "id": "P.2.2.3.2",
+      "status": "covered",
+      "blocks": [
         {
           "type": "paragraph",
           "text": "Kết quả tạp chất (tạp đơn, tổng tạp) đã có trong bảng kết quả viên thành phẩm ở mục P.2.2.1.3."
@@ -794,7 +933,7 @@
       ]
     },
     {
-      "id": "P.2.3",
+      "id": "P.2.3.1",
       "status": "covered",
       "blocks": [
         {
@@ -878,7 +1017,13 @@
               "[CHƯA CÓ DỮ LIỆU]"
             ]
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "P.2.3.2.1",
+      "status": "covered",
+      "blocks": [
         {
           "type": "paragraph",
           "italic": true,
@@ -918,7 +1063,23 @@
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu căn cứ cho mức rủi ro: kinh nghiệm sản xuất sản phẩm tương tự, hoặc dữ liệu thực nghiệm của công đoạn này."
             ]
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "P.2.3.2.2",
+      "status": "covered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đánh giá rủi ro cập nhật của quy trình sau khi có dữ liệu chạy thật. Nguồn cần lấy: hồ sơ lô và biên bản đánh giá rủi ro cập nhật của FD."
+        }
+      ]
+    },
+    {
+      "id": "P.2.3.2.3",
+      "status": "covered",
+      "blocks": [
         {
           "type": "paragraph",
           "text": "Nâng cỡ lô: Thử nghiệm 1 thực hiện ở cỡ lô 1.000 viên mỗi công thức (mục P.2.2.1.3), tức quy mô phòng thí nghiệm. Cần thử nghiệm nâng cỡ lô lên quy mô pilot rồi thương mại để đánh giá tính lặp lại của thông số quy trình, sau đó mới lập được bảng đánh giá rủi ro cập nhật theo yêu cầu của biểu mẫu."
@@ -926,7 +1087,7 @@
       ]
     },
     {
-      "id": "P.2.4",
+      "id": "P.2.4.1",
       "status": "covered",
       "blocks": [
         {
@@ -973,6 +1134,16 @@
         },
         {
           "type": "paragraph",
+          "text": "Lưu ý trình tự: tính tương hợp giữa thành phẩm và bao bì sơ cấp chỉ chứng minh được bằng số liệu độ ổn định của thành phẩm trong chính bao bì đó. Vì vậy mục này không thể đóng trước khi có dữ liệu ở 3.2.P.8, kể cả khi vật liệu bao bì đã được chọn."
+        }
+      ]
+    },
+    {
+      "id": "P.2.4.2",
+      "status": "covered",
+      "blocks": [
+        {
+          "type": "paragraph",
           "italic": true,
           "text": "Bảng: Bao bì thứ cấp"
         },
@@ -992,10 +1163,6 @@
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu vai trò bảo vệ bổ sung và vai trò mang thông tin nhãn."
             ]
           ]
-        },
-        {
-          "type": "paragraph",
-          "text": "Lưu ý trình tự: tính tương hợp giữa thành phẩm và bao bì sơ cấp chỉ chứng minh được bằng số liệu độ ổn định của thành phẩm trong chính bao bì đó. Vì vậy mục này không thể đóng trước khi có dữ liệu ở 3.2.P.8, kể cả khi vật liệu bao bì đã được chọn."
         }
       ]
     },

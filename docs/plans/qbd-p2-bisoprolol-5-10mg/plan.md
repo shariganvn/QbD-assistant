@@ -66,15 +66,15 @@ manual additions), and filling any gap that needs a source the repository does n
 
 ## Ordered steps
 
-- [ ] `step-00-shared-marker-constant.md` — one producer for the gap marker before any new logic
+- [x] `step-00-shared-marker-constant.md` — one producer for the gap marker before any new logic
       reads it. Must precede step 02.
-- [ ] `step-01-multi-strength-contract.md` — `meta.strengths`, `meta.derivedStrengths`,
+- [x] `step-01-multi-strength-contract.md` — `meta.strengths`, `meta.derivedStrengths`,
       `form.perStrength`, with the per-strength column-group size derived, not declared.
-- [ ] `step-02-derived-strength-invariant.md` — `form.measuredOnly` plus
+- [x] `step-02-derived-strength-invariant.md` — `form.measuredOnly` plus
       `E_DERIVED_STRENGTH_HAS_RESULT`. Depends on step 00 and step 01.
-- [ ] `step-03-full-outline-and-heading-depth.md` — container sections, heading level derived from
+- [x] `step-03-full-outline-and-heading-depth.md` — container sections, heading level derived from
       CTD depth, the full 12-container/26-leaf outline. Closes W-1, W-2, W-3.
-- [ ] `step-04-migrate-existing-content.md` — move every existing value into the new sections,
+- [x] `step-04-migrate-existing-content.md` — move every existing value into the new sections,
       adding no data. Depends on step 03.
 - [ ] `step-05-five-mg-skeleton-and-data-request.md` — build out the 5 mg columns as located
       markers and derive the data-request annex from them. Depends on steps 01, 02, 04.

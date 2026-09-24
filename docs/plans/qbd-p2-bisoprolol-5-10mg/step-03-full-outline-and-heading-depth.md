@@ -1,6 +1,6 @@
 # Step 03 — The full house outline and real heading nesting
 
-Status: unverified · Gate: G-03 · Blocks: step 04 · Closes: W-1, W-2, W-3
+Status: pass · Gate: G-03 · Blocks: step 04 · Closes: W-1, W-2, W-3
 
 ## Requirement
 
