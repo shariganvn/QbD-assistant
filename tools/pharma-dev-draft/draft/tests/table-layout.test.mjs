@@ -10,6 +10,7 @@ import { fileURLToPath } from "node:url";
 
 import { validateDraft } from "../validate-draft.mjs";
 import { TABLE_WIDTH_DXA } from "../../schemas/layout.mjs";
+import { GAP_LABEL, GAP_PREFIX, isGapText } from "../../schemas/markers.mjs";
 import { widthsFor, FIXED_TABLE_WIDTHS, dataStatusLabel } from "../../render/builder.mjs";
 
 const draftDir = dirname(fileURLToPath(import.meta.url));
@@ -169,11 +170,11 @@ test("the form fixes the shape, not the method: process steps may change with th
   // the risk matrix has to accept whichever set applies.
   const matrix = formTable(draft, "P.2.3");
   matrix.headers = ["CQA sản phẩm", "Xát hạt ướt", "Sấy", "Dập viên"];
-  matrix.rows = matrix.rows.map((row) => [row[0], "[CHƯA CÓ DỮ LIỆU]", "[CHƯA CÓ DỮ LIỆU]", "[CHƯA CÓ DỮ LIỆU]"]);
+  matrix.rows = matrix.rows.map((row) => [row[0], GAP_PREFIX, GAP_PREFIX, GAP_PREFIX]);
   formTable(draft, "P.2.3", 1).rows = [
-    ["Xát hạt ướt", "[CHƯA CÓ DỮ LIỆU]", "[CHƯA CÓ DỮ LIỆU]"],
-    ["Sấy", "[CHƯA CÓ DỮ LIỆU]", "[CHƯA CÓ DỮ LIỆU]"],
-    ["Dập viên", "[CHƯA CÓ DỮ LIỆU]", "[CHƯA CÓ DỮ LIỆU]"],
+    ["Xát hạt ướt", GAP_PREFIX, GAP_PREFIX],
+    ["Sấy", GAP_PREFIX, GAP_PREFIX],
+    ["Dập viên", GAP_PREFIX, GAP_PREFIX],
   ];
   assert.doesNotThrow(() => validateDraft(draft));
 });
@@ -212,7 +213,7 @@ test("the criticality discussion does not upgrade P.2.2.1.2 into an approved QTP
     "the section must keep stating that it is not an approved QTPP/CQA table",
   );
   assert.ok(
-    section.blocks.some((b) => b.type === "paragraph" && b.text.startsWith("[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa đánh giá tính trọng yếu")),
+    section.blocks.some((b) => b.type === "paragraph" && b.text.startsWith(`${GAP_LABEL} Chưa đánh giá tính trọng yếu`)),
     "the section must name the attributes whose criticality is still unassessed",
   );
 });
@@ -221,17 +222,17 @@ test("no value is invented where no reference product has been characterised", (
   const draft = loadExample();
   for (const index of [0, 1]) {
     for (const row of formTable(draft, "P.2.2.1.1", index).rows) {
-      assert.ok(row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} must still be marked as awaiting data`);
+      assert.ok(isGapText(row[1]), `${row[0]} must still be marked as awaiting data`);
     }
   }
   for (const index of [0, 1]) {
     for (const row of formTable(draft, "P.2.4", index).rows) {
-      assert.ok(row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} must still be awaiting a decision`);
+      assert.ok(isGapText(row[1]), `${row[0]} must still be awaiting a decision`);
     }
   }
   for (const row of formTable(draft, "P.2.3").rows) {
     for (const cell of row.slice(1)) {
-      assert.ok(cell.includes("[CHƯA CÓ DỮ LIỆU"), "no risk level has been assessed yet");
+      assert.ok(isGapText(cell), "no risk level has been assessed yet");
     }
   }
 });
@@ -242,11 +243,11 @@ test("P.2.5 states the limits it applies and marks only the results as missing",
   // content taken from it. Only the measurements are outstanding — marking the limits as missing
   // too would hide the fact that a route has already been chosen.
   for (const row of formTable(draft, "P.2.5").rows) {
-    assert.ok(!row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} limit comes from the form`);
-    assert.ok(row[2].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} result is not measured yet`);
+    assert.ok(!isGapText(row[1]), `${row[0]} limit comes from the form`);
+    assert.ok(isGapText(row[2]), `${row[0]} result is not measured yet`);
   }
   for (const row of formTable(draft, "P.2.5", 1).rows) {
-    assert.ok(!row[1].includes("[CHƯA CÓ DỮ LIỆU"), `${row[0]} schedule comes from the form`);
+    assert.ok(!isGapText(row[1]), `${row[0]} schedule comes from the form`);
   }
 });
 

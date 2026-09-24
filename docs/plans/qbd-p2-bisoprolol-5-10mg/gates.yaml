@@ -35,29 +35,34 @@ gates:
       The build logic is neutral with respect to which product, which strengths and which
       manufacturing method a draft describes. Product names, active substance names, excipient brand
       names, reference product names, formula codes, strength strings and unit-operation names appear
-      only in draft JSON — never in a .mjs file, never in schemas/p2-outline.json, never in a test.
-      A test may construct such a literal inline as fixture data, but must not assert against one as
-      if it were part of the form.
+      only in draft JSON — never in a module, and never in the enforced part of the outline (ids, CTD
+      numbers, headings, `form`). A section's `description` is prose addressed to the draft's author
+      and may name a product or method as an example, because prose constrains no draft; the enforced
+      surface does. A test file may build a draft for another product as fixture data — that is how
+      the form's neutrality is demonstrated.
     boundary_owner: >
       tools/pharma-dev-draft/{schemas,draft,render,verify} — the whole tool surface
     fixture: >
-      the tool's own source tree; no external fixture needed
+      the tool's own source tree, plus the terms derived from draft/example-draft.json's meta so the
+      scan follows the worked example instead of being maintained beside it
     command: >
-      grep -rniE 'bisoprolol|croscarmellose|primellose|cellactose|povidone|concor|metformin|CT0[0-9]|d[aậ]p th[aẳ]ng|x[aá]t h[aạ]t'
-      tools/pharma-dev-draft --include='*.mjs' --include='p2-outline.json'
+      node --test tools/pharma-dev-draft/draft/tests/product-neutrality.test.mjs
     expected: >
-      exit 1 from grep (no match) for every schema and non-test module. Matches are permitted only
-      inside a fixture literal in draft/tests/*.mjs and inside draft/example-draft.json; each such
-      match must be listed with a one-line reason in the evidence file, and a match anywhere else
-      fails the gate.
+      exit 0. No term reaches a non-test module, and none reaches the enforced outline surface.
+      Implemented as a test, not a grep: grep compares bytes, so in a byte-oriented locale a bracket
+      expression holding a Vietnamese letter is split into its UTF-8 bytes and silently stops
+      matching — a scan written that way reports clean while the term sits in the file. Verified by
+      pinning a unit-operation name as a form row label and seeing the gate fail.
     negative_cases:
       - A strength string is added to p2-outline.json to fix a validator failure -> fail.
+      - A unit-operation name is pinned as a form row label -> fail (demonstrated).
       - A test re-pins an excipient row-label array the way the pre-audit tests did -> fail.
       - The renderer gains a product-specific branch -> fail.
       - An error message embeds an example product name -> fail.
+      - The scan is rewritten as a shell grep over Vietnamese terms -> reject; it cannot match them.
     evidence: >
-      g00-literal-scan.txt (raw grep output) + g00-permitted-matches.md (each allowed fixture match
-      with its reason)
+      g00-neutrality.txt (suite output) + g00-blocked-violation.txt (the pinned row label and the
+      failure it produces)
     blocks: [G-01, G-02, G-03, G-05]
     status: unverified
 

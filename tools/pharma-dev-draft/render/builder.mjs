@@ -11,6 +11,7 @@ import {
 } from "docx";
 
 import { TABLE_WIDTH_DXA as TABLE_WIDTH } from "../schemas/layout.mjs";
+import { GAP_LABEL, isGapText } from "../schemas/markers.mjs";
 
 const HEADER_FILL = "D9D9D9";
 const NOTICE_FILL = "FFF2CC";
@@ -31,7 +32,7 @@ const SCOPE_NOTICE_TITLE = "Lưu ý phạm vi tài liệu";
 const SCOPE_NOTICE_BODY_1 =
   "Tài liệu này là bản tổng hợp nội bộ, được soạn theo khung mục CTD 3.2.P.2 dựa trên nguồn dữ " +
   "liệu do người dùng cung cấp. Các mục không có dữ liệu nguồn được đánh dấu rõ " +
-  "\"[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]\" thay vì suy diễn hoặc điền số liệu giả định.";
+  `"${GAP_LABEL}" thay vì suy diễn hoặc điền số liệu giả định.`;
 const SCOPE_NOTICE_BODY_2 =
   "Tài liệu KHÔNG phải hồ sơ P.2.2/P.2.3 đã phê duyệt, không thay thế thẩm định của bộ phận Phát " +
   "triển sản phẩm (FD)/QA, và không được dùng để nộp hồ sơ đăng ký cho đến khi được rà soát, bổ " +
@@ -156,7 +157,7 @@ function bodyParagraph(text, opts = {}) {
 function gapParagraph(text) {
   return new Paragraph({
     spacing: { after: 160 },
-    children: [new TextRun({ text: `[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] ${text}`, bold: true, italics: true, color: GAP_COLOR, size: 20 })],
+    children: [new TextRun({ text: `${GAP_LABEL} ${text}`, bold: true, italics: true, color: GAP_COLOR, size: 20 })],
   });
 }
 function spacer() {
@@ -198,10 +199,9 @@ function renderBlock(block) {
   }
 }
 
-// The prefix every draft uses to mark a value it has no source for. A section whose tables are
-// built out but hold nothing else is a form waiting to be filled, and the register has to say so:
-// reporting it as holding data would be a false statement in a document shaped like a submission.
-const GAP_MARKER = "[CHƯA CÓ DỮ LIỆU";
+// A section whose tables are built out but hold nothing else is a form waiting to be filled, and
+// the register has to say so: reporting it as holding data would be a false statement in a document
+// shaped like a submission. What counts as marked comes from schemas/markers.mjs.
 
 // Derived from the cells rather than declared on the section, so it cannot go stale: the moment a
 // real value replaces a marker, the register stops calling the section a skeleton. Only the value
@@ -210,7 +210,7 @@ function holdsOnlyPlaceholders(section) {
   const valueCells = (section.blocks ?? [])
     .filter((block) => block.type === "table")
     .flatMap((block) => block.rows.flatMap((row) => row.slice(1)));
-  return valueCells.length > 0 && valueCells.every((cell) => cell.includes(GAP_MARKER));
+  return valueCells.length > 0 && valueCells.every((cell) => isGapText(cell));
 }
 
 export function dataStatusLabel(section) {
