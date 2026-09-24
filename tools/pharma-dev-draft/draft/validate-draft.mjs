@@ -8,6 +8,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { TABLE_WIDTH_DXA } from "../schemas/layout.mjs";
+import { isGapText } from "../schemas/markers.mjs";
 
 const draftDir = dirname(fileURLToPath(import.meta.url));
 const toolRoot = join(draftDir, "..");
@@ -177,6 +178,30 @@ function validateStrengthColumns(table, tableSpec, draft, where) {
   return groupSize;
 }
 
+// A strength with no experimental source of its own can carry a calculated quantity and nothing more.
+// Proportion gives a mass; it does not give a dissolution percentage, a hardness, a disintegration
+// time or a content-uniformity result. Any table the form marks `measuredOnly` therefore has to show
+// a gap in that strength's columns, because nobody reading the finished document can tell a
+// calculated number from a measured one, and a blank cell reads as "not applicable" rather than as
+// "not known". Enforced here, upstream of the renderer, so such a document cannot be produced at all.
+function validateMeasuredOnly(table, groupSpan, draft, where) {
+  const derived = draft.meta.derivedStrengths ?? [];
+  if (derived.length === 0) return;
+  const rowLabel = (row) => row[0] ?? "";
+  for (const strength of derived) {
+    const span = groupSpan(strength);
+    if (!span) continue;
+    for (const row of table.rows) {
+      for (let column = span.start; column < span.start + span.size; column++) {
+        const cell = row[column];
+        if (!isGapText(cell)) {
+          fail("E_DERIVED_STRENGTH_HAS_RESULT", `${where} row "${rowLabel(row)}" column ${column + 1} reports a measured value for strength "${strength}", which has no experimental source — it must be marked as awaiting data, not left blank and not filled in`);
+        }
+      }
+    }
+  }
+}
+
 function validateRows(table, tableSpec, draft, where) {
   if (tableSpec.rows === "variable") return;
   let expected = tableSpec.rows;
@@ -218,7 +243,15 @@ function validateSectionForm(section, spec, draft) {
       if (Array.isArray(tableSpec.columns)) {
         validateColumns(table.headers.slice(0, tableSpec.columns.length), tableSpec.columns, where);
       }
-      validateStrengthColumns(table, tableSpec, draft, where);
+      const groupSize = validateStrengthColumns(table, tableSpec, draft, where);
+      if (tableSpec.measuredOnly) {
+        const fixedCount = Array.isArray(tableSpec.columns) ? tableSpec.columns.length : 0;
+        const spanFor = (strength) => {
+          const index = draft.meta.strengths.indexOf(strength);
+          return index < 0 ? undefined : { start: fixedCount + index * groupSize, size: groupSize };
+        };
+        validateMeasuredOnly(table, spanFor, draft, where);
+      }
     } else if (Array.isArray(tableSpec.columns)) {
       validateColumns(table.headers, tableSpec.columns, where);
     }

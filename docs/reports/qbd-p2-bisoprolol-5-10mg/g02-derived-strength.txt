@@ -1,0 +1,76 @@
+TAP version 13
+# Subtest: a derived strength's results table is accepted when every cell is marked
+ok 1 - a derived strength's results table is accepted when every cell is marked
+  ---
+  duration_ms: 2.191235
+  type: 'test'
+  ...
+# Subtest: a measured value filled in for a derived strength is rejected
+ok 2 - a measured value filled in for a derived strength is rejected
+  ---
+  duration_ms: 0.726706
+  type: 'test'
+  ...
+# Subtest: the rejection names the row, the column and the strength
+ok 3 - the rejection names the row, the column and the strength
+  ---
+  duration_ms: 0.524738
+  type: 'test'
+  ...
+# Subtest: a blank cell for a derived strength is rejected too
+ok 4 - a blank cell for a derived strength is rejected too
+  ---
+  duration_ms: 0.282409
+  type: 'test'
+  ...
+# Subtest: whitespace does not pass as a marker
+ok 5 - whitespace does not pass as a marker
+  ---
+  duration_ms: 0.286881
+  type: 'test'
+  ...
+# Subtest: the studied strength's results are untouched by the rule
+ok 6 - the studied strength's results are untouched by the rule
+  ---
+  duration_ms: 0.407568
+  type: 'test'
+  ...
+# Subtest: marking the studied strength's results is still allowed
+ok 7 - marking the studied strength's results is still allowed
+  ---
+  duration_ms: 0.243283
+  type: 'test'
+  ...
+# Subtest: a composition table may carry calculated quantities for a derived strength
+ok 8 - a composition table may carry calculated quantities for a derived strength
+  ---
+  duration_ms: 0.246065
+  type: 'test'
+  ...
+# Subtest: with no derived strength declared, a results table may be filled throughout
+ok 9 - with no derived strength declared, a results table may be filled throughout
+  ---
+  duration_ms: 1.507822
+  type: 'test'
+  ...
+# Subtest: every strength may be derived, and then no result may be stated at all
+ok 10 - every strength may be derived, and then no result may be stated at all
+  ---
+  duration_ms: 0.546019
+  type: 'test'
+  ...
+# Subtest: the rule follows the strength count: a third derived strength is checked as well
+ok 11 - the rule follows the strength count: a third derived strength is checked as well
+  ---
+  duration_ms: 0.298907
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 98.189143

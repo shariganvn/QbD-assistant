@@ -77,8 +77,9 @@ test("meta.derivedStrengths must name a declared strength", () => {
 });
 
 test("meta.derivedStrengths accepts a subset of the declared strengths", () => {
-  const draft = draftFor(["5 mg", "10 mg"]);
-  draft.meta.derivedStrengths = ["5 mg"];
+  // Built with the option, so the results table marks the derived strength's cells. Declaring a
+  // strength derived while its result cells still hold numbers is the case the next file covers.
+  const draft = draftFor(["5 mg", "10 mg"], { derivedStrengths: ["5 mg"] });
   assert.doesNotThrow(() => validateDraft(draft, OUTLINE));
 });
 

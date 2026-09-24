@@ -135,6 +135,15 @@ each outline section may carry a `form` key that the validator enforces against 
     strength, resolved by longest match so a 5 mg / 15 mg pair cannot be read in the wrong order.
     `perStrength` cannot be combined with `"..."` — they make opposite claims about the trailing
     columns.
+  - `measuredOnly` — the table holds **measured results** (in-process and quality-control results,
+    dissolution, hardness, disintegration, content uniformity, reference-product survey, stability).
+    In such a table every cell in the column group of a strength listed in `meta.derivedStrengths`
+    must carry the gap marker: proportion yields a mass, never a measurement, and a blank cell reads
+    as "not applicable" rather than "not known". Violations report as
+    `E_DERIVED_STRENGTH_HAS_RESULT`, naming the row, the column and the strength. A composition table
+    is **not** `measuredOnly`, because a composition is a declared quantity that proportion can
+    supply — that is the one place a derived strength may hold a number, and the section carrying it
+    has to say the masses are calculated.
 
 Omit `headings` or `tables` to leave that aspect unconstrained; omit `form` entirely for a section
 with no fixed shape. Violations report as `E_FORM_HEADINGS`, `E_FORM_TABLE_COUNT`,
