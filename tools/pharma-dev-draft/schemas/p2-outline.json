@@ -6,25 +6,129 @@
       "id": "P.2.1.1",
       "ctdReference": "3.2.P.2.1.1",
       "headingVi": "Dược chất (Drug Substance)",
-      "description": "Tính chất lý hóa và sinh học của API: INN/CAS/công thức/KLPT, độ tan, pKa, LogP, đa hình, phân bố cỡ hạt, BCS, độ ổn định/phân hủy."
+      "description": "Tính chất lý hóa và sinh học của dược chất, trình bày theo biểu mẫu General properties của phòng. Khối trích dẫn đánh số đặt dưới bảng; ô công thức cấu tạo cần hình, phải bổ sung thủ công vì renderer không hỗ trợ hình.",
+      "form": {
+        "headings": [],
+        "tables": [
+          {
+            "columns": [
+              "Thuộc tính",
+              "Giá trị"
+            ],
+            "headerless": true,
+            "rows": [
+              "Tên chung quốc tế (INN)",
+              "Tên IUPAC",
+              "Số đăng ký CAS",
+              "Công thức cấu tạo",
+              "Công thức phân tử",
+              "Khối lượng phân tử",
+              "Cảm quan",
+              "Độ tan",
+              "Phân bố cỡ hạt",
+              "Điểm chảy",
+              "pKa",
+              "Log P",
+              "Độ ổn định hóa học",
+              "– Phân hủy do nhiệt",
+              "– Phân hủy do ẩm",
+              "– Phân hủy do peroxid",
+              "– Phân hủy do acid/base",
+              "– Phân hủy do ánh sáng"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "P.2.1.2",
       "ctdReference": "3.2.P.2.1.2",
       "headingVi": "Tá dược (Excipients)",
-      "description": "Danh mục tá dược, chức năng, lý do lựa chọn, khoảng hàm lượng khuyến cáo, và nghiên cứu tương hợp tá dược – dược chất."
+      "description": "Danh mục tá dược, chức năng, lý do lựa chọn, khoảng hàm lượng khuyến cáo, và nghiên cứu tương hợp tá dược – dược chất. Số dòng và tên tá dược thay đổi theo từng công thức.",
+      "form": {
+        "headings": [
+          "3.2.P.2.1.2.1. Đặc tính lý hóa (Physicochemical properties)",
+          "3.2.P.2.1.2.2. Nghiên cứu tương hợp dược chất – tá dược (Excipient compatibility)"
+        ],
+        "tables": [
+          {
+            "columns": [
+              "STT",
+              "Tên tá dược",
+              "Đặc tính lý hóa",
+              "Ứng dụng",
+              "Chức năng"
+            ],
+            "rows": "variable"
+          }
+        ]
+      }
     },
     {
       "id": "P.2.2.1.1",
       "ctdReference": "3.2.P.2.2.1.1",
       "headingVi": "Đặc tính sản phẩm đối chiếu (Characterization of Reference Product)",
-      "description": "Thành phần định tính/định lượng và kết quả thử nghiệm của sản phẩm đối chiếu (RMP) dùng để so sánh."
+      "description": "Thành phần định tính/định lượng và kết quả thử nghiệm của sản phẩm đối chiếu (RMP) dùng để so sánh. Tên và hàm lượng RMP đổi theo sản phẩm nên nằm ở nhãn cột, không cố định. Biểu đồ hòa tan phải bổ sung thủ công.",
+      "form": {
+        "headings": [],
+        "tables": [
+          {
+            "columns": [
+              "Thành phần",
+              "*"
+            ],
+            "rows": [
+              "Thành phần tá dược",
+              "Dạng bào chế",
+              "Tài liệu tham khảo (TLTK)"
+            ]
+          },
+          {
+            "columns": [
+              "Thông tin",
+              "*"
+            ],
+            "rows": [
+              "Nhà sản xuất",
+              "Số đăng ký",
+              "Hạn dùng",
+              "Điều kiện bảo quản",
+              "Quy cách đóng gói",
+              "Cảm quan",
+              "Khối lượng trung bình",
+              "Kích thước viên",
+              "Độ cứng",
+              "Thời gian rã",
+              "Định lượng",
+              "Tạp chất liên quan",
+              "Đồng đều hàm lượng",
+              "Hàm lượng chất bảo quản",
+              "Tương đương độ hòa tan — điều kiện thử",
+              "Tương đương độ hòa tan — hồ sơ theo thời gian"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "P.2.2.1.2",
       "ctdReference": "3.2.P.2.2.1.2",
       "headingVi": "Hồ sơ chất lượng mục tiêu và CQA (QTPP / CQA)",
-      "description": "Bảng QTPP (dạng bào chế, đường dùng, PK/BE, độ ổn định, bao bì...) và bảng CQA với biện luận \"có phải CQA hay không\", đã được FD phê duyệt."
+      "description": "Bảng chỉ tiêu chất lượng và biện luận CQA. Danh mục chỉ tiêu đổi theo sản phẩm; mục P.2.3 phải chấm rủi ro đúng danh mục này.",
+      "form": {
+        "headings": [
+          "Xác định yếu tố trọng yếu và biện luận kiểm soát"
+        ],
+        "tables": [
+          {
+            "columns": [
+              "Chỉ tiêu",
+              "*"
+            ],
+            "rows": "variable"
+          }
+        ]
+      }
     },
     {
       "id": "P.2.2.1.3",
@@ -42,25 +146,104 @@
       "id": "P.2.2.3",
       "ctdReference": "3.2.P.2.2.3",
       "headingVi": "Tính chất lý hóa và sinh học (Physicochemical and Biological Properties)",
-      "description": "Phát triển phương pháp hòa tan (sink condition, điều kiện thiết bị, khả năng phân biệt) và hồ sơ tạp chất viên."
+      "description": "Phát triển phương pháp hòa tan và hồ sơ tạp chất của thành phẩm.",
+      "form": {
+        "headings": [
+          "Phương pháp hòa tan",
+          "Hồ sơ tạp chất"
+        ]
+      }
     },
     {
       "id": "P.2.3",
       "ctdReference": "3.2.P.2.3",
       "headingVi": "Phát triển quy trình sản xuất (Manufacturing Process Development)",
-      "description": "Đánh giá rủi ro quy trình, nghiên cứu phát triển từng công đoạn (trộn, xát hạt, dập viên, bao phim...), scale-up từ lab lên pilot/thương mại."
+      "description": "Phát triển quy trình sản xuất: đánh giá rủi ro, nghiên cứu từng công đoạn, nâng cỡ lô. Bộ công đoạn KHÔNG cố định — nó phụ thuộc phương pháp pha chế đã chọn (trộn dập thẳng, xát hạt ướt, phun sấy tầng sôi tạo hạt, cán ép, đóng tán, ép đùn nóng chảy…), và mỗi phương pháp có bộ thông số trọng yếu riêng; đổi phương pháp thì dựng lại cả hai bảng. Sơ đồ quy trình phải bổ sung thủ công.",
+      "form": {
+        "headings": [],
+        "tables": [
+          {
+            "columns": [
+              "CQA sản phẩm",
+              "..."
+            ],
+            "rowsFrom": "P.2.2.1.2"
+          },
+          {
+            "columns": [
+              "Công đoạn",
+              "Thông số trọng yếu dự kiến",
+              "Biện luận mức rủi ro"
+            ],
+            "rows": "variable"
+          }
+        ]
+      }
     },
     {
       "id": "P.2.4",
       "ctdReference": "3.2.P.2.4",
       "headingVi": "Hệ thống bao bì (Container Closure System)",
-      "description": "Bao bì sơ cấp/thứ cấp, vật liệu, độ dày/khối lượng, khả năng bảo vệ/tương thích."
+      "description": "Bao bì sơ cấp và thứ cấp: vật liệu, khả năng bảo vệ, tính tương hợp. Mục chỉ đóng được sau khi có dữ liệu độ ổn định ở 3.2.P.8, vì tính tương hợp chứng minh bằng chính dữ liệu đó.",
+      "form": {
+        "headings": [],
+        "tables": [
+          {
+            "columns": [
+              "Nội dung",
+              "Bao bì sơ cấp"
+            ],
+            "rows": [
+              "Vật liệu",
+              "Mô tả",
+              "Khả năng bảo vệ",
+              "Tính tương hợp",
+              "Kiểm soát chất lượng",
+              "Dữ liệu độ ổn định"
+            ]
+          },
+          {
+            "columns": [
+              "Nội dung",
+              "Bao bì thứ cấp"
+            ],
+            "rows": [
+              "Mô tả",
+              "Chức năng"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "P.2.5",
       "ctdReference": "3.2.P.2.5",
       "headingVi": "Đặc tính vi sinh (Microbiological Attributes)",
-      "description": "Giới hạn vi sinh áp dụng (ICH Q6A, Ph.Eur. 5.1.4...) và kết quả thử nghiệm thực tế."
+      "description": "Giới hạn vi sinh áp dụng và tần suất kiểm tra. Biểu mẫu của phòng đi theo nhánh thử định kỳ của ICH Q6A Decision Tree #8; bộ ba chỉ tiêu là chuẩn cho dạng rắn uống không vô khuẩn, thêm chỉ tiêu khác (ví dụ hàm lượng chất bảo quản) thì phải cập nhật spec.",
+      "form": {
+        "headings": [],
+        "tables": [
+          {
+            "columns": [
+              "Chỉ tiêu",
+              "Giới hạn theo biểu mẫu",
+              "Kết quả"
+            ],
+            "rows": [
+              "Tổng số vi sinh vật hiếu khí (TAMC)",
+              "Tổng số nấm men và nấm mốc (TYMC)",
+              "Escherichia coli"
+            ]
+          },
+          {
+            "columns": [
+              "Đối tượng",
+              "Tần suất kiểm tra"
+            ],
+            "rows": "variable"
+          }
+        ]
+      }
     },
     {
       "id": "P.2.6",
@@ -68,5 +251,6 @@
       "headingVi": "Khả năng tương thích (Compatibility)",
       "description": "Tương thích với dung môi/thiết bị hoàn nguyên/pha loãng nếu sản phẩm cần pha trước khi dùng; ghi \"không áp dụng\" kèm lý do nếu sản phẩm dùng trực tiếp."
     }
-  ]
+  ],
+  "_formSpec": "Khoá `form` mô tả HÌNH DẠNG bắt buộc của mục, không mô tả nội dung — để một draft của sản phẩm bất kỳ vẫn bị giữ đúng format P.2. `headings`: danh sách heading3 bắt buộc theo thứ tự ([] = không được có heading). `tables`: đúng số bảng, đúng thứ tự; mỗi bảng khai `columns` (nhãn cột chính xác; \"*\" = bất kỳ chuỗi không rỗng, dùng cho nhãn mang tên sản phẩm; \"...\" ở cuối = các cột còn lại tự do về số lượng và tên), và một trong `rows` (nhãn dòng chính xác) / `rows: \"variable\"` (do sản phẩm quyết định) / `rowsFrom: \"<id mục>\"` (phải trùng nhãn dòng bảng đầu của mục đó). Bỏ `headings` hoặc `tables` nghĩa là không ràng buộc phần đó. Mục không khai `form` thì tự do."
 }

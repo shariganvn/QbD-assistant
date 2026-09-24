@@ -20,7 +20,8 @@
     "pharma-dev:extract": "node tools/pharma-dev-draft/extract/extract.mjs",
     "pharma-dev:validate": "node tools/pharma-dev-draft/draft/validate-draft.mjs",
     "pharma-dev:render": "node tools/pharma-dev-draft/render/render.mjs",
-    "pharma-dev:verify": "node tools/pharma-dev-draft/verify/verify.mjs"
+    "pharma-dev:verify": "node tools/pharma-dev-draft/verify/verify.mjs",
+    "test:pharma-dev": "node --test tools/pharma-dev-draft/draft/tests/*.test.mjs"
   },
   "keywords": [],
   "author": "",
