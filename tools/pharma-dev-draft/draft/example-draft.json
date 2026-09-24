@@ -6,186 +6,1070 @@
     "sourceFile": "Thử nghiệm 1.docx (Khảo sát tỷ lệ tá dược rã)",
     "draftDate": "2026-08-20",
     "preparer": "Claude (phiên làm việc 2026-08-20, tổng hợp từ Thử nghiệm 1)",
-    "extractionMethod": "xml-walk"
+    "extractionMethod": "xml-walk",
+    "referenceSources": [
+      "Rowe RC, Sheskey PJ, Quinn ME (chủ biên). Handbook of Pharmaceutical Excipients, 6th Edition. London: Pharmaceutical Press; 2009",
+      "ICH guideline Q8 (R2) on pharmaceutical development, Step 5. EMA/CHMP/ICH/167068/2004; 22/06/2017",
+      "ICH Harmonised Tripartite Guideline Q6A. Specifications: Test Procedures and Acceptance Criteria for New Drug Substances and New Drug Products: Chemical Substances, Step 4; 06/10/1999",
+      "Viện Kiểm nghiệm thuốc Trung ương. Chứng chỉ phân tích chuẩn đối chiếu thứ cấp Bisoprolol fumarat, SKS C0223252; ban hành 15/12/2020, adoption 18/05/2023",
+      "Certificate of Analysis — Bisoprolol fumarate Ph.Eur. 12, code 71460, lô 488, sản xuất 23/04/2026, re-test 23/04/2031; nhà sản xuất Johnson Canady"
+    ]
   },
   "sections": [
     {
       "id": "P.2.1.1",
       "status": "covered",
       "blocks": [
-        { "type": "paragraph", "text": "Tính chất lý hóa dưới đây là kiến thức tham khảo phổ biến/dược điển, KHÔNG có trong Thử nghiệm 1 — CẦN đối chiếu trực tiếp với chuyên luận USP/BP/Ph.Eur. hiện hành và CoA của nhà cung cấp API trước khi đưa vào hồ sơ chính thức." },
         {
           "type": "table",
-          "headers": ["Thuộc tính", "Giá trị tham khảo (cần đối chiếu)"],
+          "headers": [
+            "Thuộc tính",
+            "Giá trị"
+          ],
+          "headerless": true,
+          "columnAlign": [
+            "left",
+            "left"
+          ],
           "rows": [
-            ["Tên INN", "Bisoprolol fumarate"],
-            ["Số CAS", "104344-23-2 (dạng hemifumarat)"],
-            ["Công thức phân tử", "(C18H31NO4)2·C4H4O4"],
-            ["Khối lượng phân tử", "≈ 766,96 g/mol"],
-            ["Cảm quan", "Bột kết tinh màu trắng hoặc gần như trắng"],
-            ["Độ tan", "Dễ tan trong nước và ethanol; thường được xếp BCS Class I"],
-            ["pKa", "≈ 9,5 (tham khảo, cần xác nhận)"]
+            [
+              "Tên chung quốc tế (INN)",
+              "Bisoprolol fumarate [1]"
+            ],
+            [
+              "Tên IUPAC",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+            ],
+            [
+              "Số đăng ký CAS",
+              "104344-23-2 (dạng hemifumarat) [1]"
+            ],
+            [
+              "Công thức cấu tạo",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Cần chèn hình công thức cấu tạo; bản render tự động chưa hỗ trợ hình, phải bổ sung thủ công vào bản Word cuối."
+            ],
+            [
+              "Công thức phân tử",
+              "(C18H31NO4)2·C4H4O4, tương đương C40H66N2O12 [2]"
+            ],
+            [
+              "Khối lượng phân tử",
+              "≈ 766,96 g/mol [1]"
+            ],
+            [
+              "Cảm quan",
+              "Bột màu trắng hoặc gần như trắng — kết quả lô 488: Đạt [3]"
+            ],
+            [
+              "Độ tan",
+              "Trong nước: rất dễ tan (very soluble) — Đạt. Trong methanol: dễ tan (freely soluble) — Đạt [3]"
+            ],
+            [
+              "Phân bố cỡ hạt",
+              "Tối thiểu 75% nhỏ hơn \"200 pm\" (nguyên văn CoA; xem [3] về đơn vị) [3]"
+            ],
+            [
+              "Điểm chảy",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+            ],
+            [
+              "pKa",
+              "≈ 9,5 [1]"
+            ],
+            [
+              "Log P",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+            ],
+            [
+              "Độ ổn định hóa học",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa có nghiên cứu phân hủy cưỡng bức cho dược chất."
+            ],
+            [
+              "– Phân hủy do nhiệt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+            ],
+            [
+              "– Phân hủy do ẩm",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+            ],
+            [
+              "– Phân hủy do peroxid",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+            ],
+            [
+              "– Phân hủy do acid/base",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+            ],
+            [
+              "– Phân hủy do ánh sáng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+            ]
           ]
         },
-        { "type": "paragraph", "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phân bố cỡ hạt API, tính chất chảy, đa hình tinh thể, độ thấm/BCS thực nghiệm, độ tan theo pH, dữ liệu ổn định/phân hủy của dược chất, và tính chất sinh học/dược lý lâm sàng — không có trong Thử nghiệm 1." }
+        {
+          "type": "paragraph",
+          "text": "Nguồn trích dẫn cho bảng trên. Ô đánh dấu [CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] là chưa có nguồn nào cung cấp giá trị, không phải chưa điền."
+        },
+        {
+          "type": "paragraph",
+          "text": "[1] Kiến thức dược điển và tài liệu tham khảo phổ biến — CHƯA đối chiếu trực tiếp với chuyên luận USP, BP hoặc Ph.Eur. hiện hành. Các giá trị mang nhãn này phải được thay bằng giá trị trích từ chuyên luận, kèm tên và ấn bản chuyên luận, trước khi nộp hồ sơ."
+        },
+        {
+          "type": "paragraph",
+          "text": "[2] Chứng chỉ phân tích chuẩn đối chiếu thứ cấp Bisoprolol fumarat, SKS C0223252, Viện Kiểm nghiệm thuốc Trung ương, ban hành 15/12/2020, date of adoption 18/05/2023. Chứng chỉ ghi công thức C40H66N2O12, khai triển khớp với dạng cấu trúc nêu trong bảng. Lưu ý phạm vi: chứng chỉ đặc trưng cho chất chuẩn dùng trong phép thử định tính và định lượng, không phải cho lô nguyên liệu dùng sản xuất."
+        },
+        {
+          "type": "paragraph",
+          "text": "[3] Certificate of Analysis của nhà sản xuất Johnson Canady cho Bisoprolol fumarate Ph.Eur. 12, mã sản phẩm 71460, lô 488, ngày sản xuất 23/04/2026, hạn kiểm tra lại 23/04/2031, lượng giao 400,00 kg trong 16 kiện, ký bởi QC Manager. Hồ sơ Thử nghiệm 1 không ghi số lô dược chất đã dùng nên chưa có cơ sở khẳng định đây đúng là lô bào chế CT01 – CT03; cần đối chiếu hồ sơ lô."
+        },
+        {
+          "type": "paragraph",
+          "text": "Nguồn [3] còn nêu các chỉ tiêu không có dòng tương ứng trong biểu mẫu trên, ghi lại đây để tra cứu — các chỉ tiêu này thuộc phạm vi 3.2.S.4 Kiểm soát dược chất: hàm lượng acid fumaric 14,8 – 15,4% (giá trị lý thuyết của muối hemifumarat là 116,07 / 766,97 = 15,13%, nằm trong khoảng này); dung môi tồn dư tối đa 500 ppm; tổng vi sinh vật hiếu khí tối đa 1.000 CFU/g; tổng nấm men và nấm mốc tối đa 100 CFU/g; không có Escherichia coli và Salmonella; tạp A (benzyl alcohol), tạp E và tạp G mỗi tạp tối đa 0,1% theo HPLC; định tính bằng phổ hồng ngoại đạt, nguyên văn ghi \"Conforms to 5th\" trong khi sản phẩm khai theo Ph.Eur. 12 nên cần làm rõ; tuân thủ ICH Q7, EU GMP Part II, 21 CFR Parts 210 & 211 và ICH Q3D. Về đơn vị cỡ hạt nêu trong bảng: CoA ghi \"200 pm\"; 200 picomet nhỏ hơn kích thước một nguyên tử nên gần như chắc chắn là lỗi đánh máy của µm. Bản thảo giữ nguyên văn thay vì tự sửa số của nhà cung cấp; cần nhà cung cấp xác nhận trước khi nộp hồ sơ."
+        }
       ]
     },
     {
       "id": "P.2.1.2",
       "status": "covered",
       "blocks": [
-        { "type": "paragraph", "text": "Danh mục tá dược sử dụng trong Thử nghiệm 1 (3 công thức), theo mg/viên (cỡ lô 1.000 viên, khối lượng viên 100 mg — do đó mg/viên trùng số với % kl/kl)." },
+        {
+          "type": "heading3",
+          "text": "3.2.P.2.1.2.1. Đặc tính lý hóa (Physicochemical properties)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Danh mục tá dược sử dụng trong công thức, kèm đặc tính lý hóa, ứng dụng trong công thức dược phẩm và chức năng tương ứng. Thành phần định lượng theo từng công thức thử nghiệm được trình bày tại mục 3.2.P.2.2.1.3."
+        },
         {
           "type": "table",
-          "headers": ["Tá dược", "CT01 (mg)", "CT02 (mg)", "CT03 (mg)", "Chức năng (suy luận)"],
+          "headers": [
+            "STT",
+            "Tên tá dược",
+            "Đặc tính lý hóa",
+            "Ứng dụng",
+            "Chức năng"
+          ],
+          "columnWidths": [
+            588,
+            2207,
+            3088,
+            2644,
+            1473
+          ],
+          "columnAlign": [
+            "center",
+            "left",
+            "justify",
+            "justify",
+            "left"
+          ],
           "rows": [
-            ["Lactose monohydrate", "17,70", "15,70", "13,70", "Tá dược độn (điều chỉnh bù trừ)"],
-            ["Lactose monohydrate & cellulose powder 75:25 (Cellactose 80)", "63,00", "63,00", "63,00", "Tá dược độn đồng xử lý"],
-            ["Croscarmellose sodium (Primellose)", "1,00", "3,00", "5,00", "Tá dược rã — biến số khảo sát chính"],
-            ["Magnesium oxide (MgO XP 103)", "3,30", "3,30", "3,30", "Ổn định/kiềm hóa (suy luận)"],
-            ["Povidone K30", "2,00", "2,00", "2,00", "Tá dược dính"],
-            ["Magnesium stearate", "3,00", "3,00", "3,00", "Tá dược trơn"]
+            [
+              "1.",
+              "Lactose monohydrate",
+              "- Cảm quan: dạng bột hay tiểu phân kết tinh màu trắng đến trắng ngà, không mùi, vị hơi ngọt.\n- Độ tan ở 20 °C: tan trong 5,24 phần nước; thực tế không tan trong cloroform, ethanol, ether.\n- Điểm chảy: 201 – 202 °C (dạng α-lactose monohydrate đã khử nước).",
+              "Được ứng dụng rộng rãi làm tá dược độn và pha loãng trong viên nén và viên nang. Grade mịn thường dùng cho xát hạt ướt vì cỡ hạt nhỏ giúp trộn đều hơn và sử dụng tá dược dính hiệu quả hơn.",
+              "Tá dược độn"
+            ],
+            [
+              "2.",
+              "Lactose monohydrate & cellulose powder 75:25 (Cellactose 80)",
+              "- Cảm quan: bột màu trắng hoặc gần như trắng, không mùi; chứa 73 – 77% lactose monohydrate và 23 – 27% cellulose bột.\n- Độ tan: tan một phần trong nước.\n- pH: 4,0 – 7,0.\n- Góc nghỉ: 32 – 35°; hàm ẩm 4 – 7%.",
+              "Dùng trong viên nén dập thẳng để cải thiện khả năng chịu nén. Vượt trội so với hỗn hợp vật lý của các thành phần về khả năng pha loãng, độ bền kéo và độ nhạy với tá dược trơn.",
+              "Tá dược độn, dính"
+            ],
+            [
+              "3.",
+              "Croscarmellose sodium (Primellose)",
+              "- Cảm quan: bột màu trắng hoặc trắng xám, không mùi.\n- Độ tan: không tan trong nước nhưng trương nở nhanh 4 – 8 lần thể tích ban đầu; thực tế không tan trong aceton, ethanol và toluen.\n- pH: 5,0 – 7,0 (phân tán trong nước).",
+              "Làm tá dược rã cho viên nén, viên nang và hạt; dùng được cho cả dập thẳng lẫn xát hạt ướt. Thông thường 2% cho dập thẳng và 3% cho xát hạt ướt.\nGiới hạn sử dụng:\n- Tá dược rã (viên nén): 0,5 – 5,0%\n- Tá dược rã (viên nang): 10 – 25%",
+              "Tá dược rã"
+            ],
+            [
+              "4.",
+              "Magnesium oxide (MgO XP 103)",
+              "- Cảm quan: bột mịn màu trắng, không mùi; có dạng nhẹ và dạng nặng khác nhau về thể tích biểu kiến.\n- Độ tan: tan trong acid loãng và dung dịch muối amoni; rất ít tan trong nước (0,0086 g/100 mL ở 30 °C); thực tế không tan trong ethanol 95%.\n- pH: 10,3 (dung dịch nước bão hòa).\n- Điểm chảy: 2.800 °C.",
+              "Dùng làm tá dược pha loãng có tính kiềm trong dạng thuốc rắn để điều chỉnh pH của viên nén, và để giữ nước dư nhằm duy trì khối hạt khô ráo. Kết hợp với silica có thể làm chất điều hòa chảy phụ trợ.",
+              "Tá dược kiềm hóa, độn"
+            ],
+            [
+              "5.",
+              "Povidone K30",
+              "- Cảm quan: bột mịn màu trắng đến trắng kem, không mùi hoặc gần như không mùi, hút ẩm.\n- Độ tan: tan tự do trong nước, ethanol 95%, methanol, cloroform và acid; thực tế không tan trong ether và hydrocarbon.\n- pH: 3,0 – 7,0 (dung dịch nước 5% kl/tt).\n- Điểm chảy: hóa mềm ở 150 °C.",
+              "Dung dịch povidone được dùng làm tá dược dính trong xát hạt ướt; cũng có thể thêm ở dạng bột khô rồi xát hạt tại chỗ. Hàm lượng sử dụng làm tá dược dính, pha loãng hoặc bao viên là 0,5 – 5%.",
+              "Tá dược dính"
+            ],
+            [
+              "6.",
+              "Magnesium stearate",
+              "- Cảm quan: bột trắng rất mịn, tỷ trọng khối thấp, mùi nhẹ của acid stearic và vị đặc trưng; sờ nhờn.\n- Độ tan: thực tế không tan trong ethanol, ethanol 95%, ether và nước; ít tan trong benzen nóng và ethanol 95% nóng.\n- Điểm chảy: 117 – 150 °C (dạng thương mại); 126 – 130 °C (dạng tinh khiết cao).",
+              "Được dùng rộng rãi trong dược phẩm với vai trò làm tá dược trơn cho viên nén và viên nang ở nồng độ 0,25 – 5,00% (kl/kl).",
+              "Tá dược trơn"
+            ]
           ]
         },
-        { "type": "paragraph", "text": "Cột \"Chức năng\" là suy luận từ vai trò thông dụng của từng tá dược; Thử nghiệm 1 không có cột chức năng — cần FD xác nhận, kèm lý do lựa chọn và khoảng hàm lượng khuyến cáo (Handbook of Pharmaceutical Excipients / FDA IID)." },
-        { "type": "paragraph", "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nghiên cứu tương hợp tá dược – dược chất (ví dụ DSC hỗn hợp nhị phân 1:1) — không có trong Thử nghiệm 1." }
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Nguồn dữ liệu cột \"Đặc tính lý hóa\" và \"Ứng dụng\": Handbook of Pharmaceutical Excipients, 6th Edition — Lactose, Monohydrate (tr. 364 – 369); Lactose, Monohydrate and Powdered Cellulose (tr. 374 – 375, synonym: Cellactose 80); Croscarmellose Sodium (tr. 206 – 208); Magnesium Oxide (tr. 400 – 401); Povidone (tr. 581 – 585); Magnesium Stearate (tr. 405 – 407). Trích dẫn đầy đủ ghi ở trang bìa. Chỉ tiêu nào tài liệu không nêu trong chuyên luận tương ứng thì không đưa vào bảng thay vì lấy từ nguồn khác."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Bảng trên chỉ gồm tá dược của lõi viên (tổng 100,00 mg). Sản phẩm là viên nén bao phim nên còn thành phần hệ màng bao, và các chất chỉ dùng trong quá trình sản xuất mà không còn trong thành phẩm (dung môi xát hạt, dung môi pha dịch bao) — không có trong Thử nghiệm 1. ICH Q8(R2) mục 2.1.2 (trang 7) yêu cầu phần này bao gồm mọi chất dùng trong sản xuất thuốc, dù có xuất hiện trong thành phẩm hay không."
+        },
+        {
+          "type": "heading3",
+          "text": "3.2.P.2.1.2.2. Nghiên cứu tương hợp dược chất – tá dược (Excipient compatibility)"
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nghiên cứu tương hợp tá dược – dược chất (ví dụ DSC hỗn hợp nhị phân 1:1, hoặc theo dõi hỗn hợp ở điều kiện lão hóa cấp tốc) — không có trong Thử nghiệm 1."
+        }
       ]
     },
     {
       "id": "P.2.2.1.1",
-      "status": "gap",
-      "gapReason": "Không có dữ liệu đặc tính sản phẩm đối chiếu (RMP) trong Thử nghiệm 1 — cần bổ sung thành phần định tính/định lượng và kết quả so sánh với sản phẩm đối chiếu."
+      "status": "covered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Thuốc đối chiếu được chọn cho sản phẩm này là Concor® 10 mg (viên nén bao phim chứa bisoprolol fumarat 10 mg), do FD xác nhận. Khảo sát đặc tính thuốc đối chiếu cung cấp thông tin giúp rút ngắn thời gian nghiên cứu mà vẫn đạt chất lượng tương đương; theo biểu mẫu của phòng, khảo sát được tiến hành theo ba hướng: thu thập dữ liệu công bố, thực nghiệm trên mẫu mua về, và kỹ thuật đảo ngược (reverse engineering). Tính đến bản thảo này, CHƯA có bất kỳ số liệu khảo sát nào được thực hiện — hai bảng dưới đây là khung theo biểu mẫu, mọi ô đều đang chờ dữ liệu."
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Tỷ lệ và thành phần tá dược thuốc đối chiếu"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Thành phần",
+            "Concor® 10 mg"
+          ],
+          "rows": [
+            [
+              "Thành phần tá dược",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Liệt kê từng tá dược kèm tỷ lệ. Nguồn định tính lấy từ SmPC hoặc tờ hướng dẫn sử dụng; tỷ lệ định lượng cần kỹ thuật đảo ngược vì nhà sản xuất không công bố."
+            ],
+            [
+              "Dạng bào chế",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác nhận từ nhãn hoặc SmPC."
+            ],
+            [
+              "Tài liệu tham khảo (TLTK)",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Ghi rõ nguồn của từng dòng trên: SmPC nước nào, phiên bản nào, ngày truy cập; hoặc số hiệu báo cáo thực nghiệm nội bộ."
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Đặc tính lý hóa của thuốc đối chiếu"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Thông tin",
+            "Concor® 10 mg (Lô …)"
+          ],
+          "rows": [
+            [
+              "Nhà sản xuất",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn hoặc tờ hướng dẫn sử dụng của lô mua về."
+            ],
+            [
+              "Số đăng ký",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn; ghi rõ số đăng ký tại thị trường mua mẫu."
+            ],
+            [
+              "Hạn dùng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn của lô mua về."
+            ],
+            [
+              "Điều kiện bảo quản",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn hoặc SmPC."
+            ],
+            [
+              "Quy cách đóng gói",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn; nêu loại vỉ, số viên mỗi vỉ và mỗi hộp."
+            ],
+            [
+              "Cảm quan",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Mô tả viên đối chiếu: hình dạng, màu sắc, ký hiệu dập hoặc khắc nếu có."
+            ],
+            [
+              "Khối lượng trung bình",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Cân theo phương pháp dược điển; ghi giá trị trung bình, lớn nhất, nhỏ nhất."
+            ],
+            [
+              "Kích thước viên",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đo đường kính và độ dày."
+            ],
+            [
+              "Độ cứng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đo trên cùng thiết bị dùng cho CT01 – CT03 để so sánh được."
+            ],
+            [
+              "Thời gian rã",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thử theo cùng điều kiện đã dùng ở Thử nghiệm 1."
+            ],
+            [
+              "Định lượng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thử theo phương pháp sẽ khai ở 3.2.P.5.2."
+            ],
+            [
+              "Tạp chất liên quan",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Định danh từng tạp theo chuyên luận Ph.Eur. 12 (tạp A, E, G) như đã nêu ở mục P.2.2.3."
+            ],
+            [
+              "Đồng đều hàm lượng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thử theo Ph.Eur. 2.9.40; ghi giá trị AV."
+            ],
+            [
+              "Hàm lượng chất bảo quản",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Không áp dụng nếu công thức đối chiếu không dùng chất bảo quản — cần xác nhận rồi ghi \"không áp dụng\" kèm lý do."
+            ],
+            [
+              "Tương đương độ hòa tan — điều kiện thử",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Ghi thiết bị, tốc độ khuấy, môi trường, thể tích. Phải trùng điều kiện dùng cho công thức của ta thì so sánh mới có nghĩa."
+            ],
+            [
+              "Tương đương độ hòa tan — hồ sơ theo thời gian",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Lấy nhiều thời điểm, không chỉ một giá trị 30 phút, để tính được hệ số tương đồng f2."
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Mục đích cuối của mục này là so sánh hồ sơ hòa tan của thuốc đối chiếu với công thức của ta — CT03 đạt trung bình 98,64% tại 30 phút (mục P.2.2.1.3). Vì vậy hồ sơ hòa tan của thuốc đối chiếu phải được lấy tại nhiều thời điểm và trong cùng điều kiện thử, nếu không sẽ không tính được hệ số tương đồng f2. Biểu mẫu của phòng còn có một biểu đồ hòa tan; bản render tự động chưa hỗ trợ hình nên biểu đồ phải bổ sung thủ công vào bản Word cuối."
+        },
+        {
+          "type": "paragraph",
+          "text": "Nguồn của mục này: cấu trúc hai bảng và danh mục chỉ tiêu lấy từ biểu mẫu P.2 của phòng và tài liệu mẫu 135-00 trong docs/raw. Không viện dẫn số liệu nào vì chưa có khảo sát."
+        }
+      ]
     },
     {
       "id": "P.2.2.1.2",
       "status": "covered",
       "blocks": [
-        { "type": "paragraph", "text": "Đây KHÔNG phải bảng QTPP/CQA chính thức (chưa có xác nhận mục tiêu/biện luận CQA từ FD) — đây là tổng hợp các chỉ tiêu và tiêu chuẩn thực tế đã dùng để đánh giá 3 công thức trong Thử nghiệm 1." },
+        {
+          "type": "paragraph",
+          "text": "Đây KHÔNG phải bảng QTPP/CQA chính thức (chưa có xác nhận mục tiêu/biện luận CQA từ FD) — đây là tổng hợp các chỉ tiêu và tiêu chuẩn thực tế đã dùng để đánh giá 3 công thức trong Thử nghiệm 1."
+        },
         {
           "type": "table",
-          "headers": ["Chỉ tiêu", "Tiêu chuẩn áp dụng trong Thử nghiệm 1"],
+          "headers": [
+            "Chỉ tiêu",
+            "Tiêu chuẩn áp dụng trong Thử nghiệm 1"
+          ],
           "rows": [
-            ["Cảm quan", "Viên nén tròn, bao phim trắng, hai mặt khum, khắc số \"10\" một mặt"],
-            ["Đồng đều khối lượng", "KLTB ± 5%"],
-            ["Độ rã", "≤ 15 phút"],
-            ["Định lượng (Assay)", "90–110% so với hàm lượng ghi nhãn"],
-            ["Độ hòa tan (30 phút)", "≥ 80% (Q) bisoprolol fumarate hòa tan"],
-            ["Tạp chất liên quan", "Tạp đơn ≤ 0,2%; tổng tạp ≤ 3,0%"],
-            ["Độ đồng đều hàm lượng", "AV < 15 (Ph.Eur./EP 2.9.40)"]
+            [
+              "Cảm quan",
+              "Viên nén tròn, bao phim trắng, hai mặt khum, khắc số \"10\" một mặt"
+            ],
+            [
+              "Đồng đều khối lượng",
+              "KLTB ± 5%"
+            ],
+            [
+              "Độ rã",
+              "≤ 15 phút"
+            ],
+            [
+              "Định lượng (Assay)",
+              "90–110% so với hàm lượng ghi nhãn"
+            ],
+            [
+              "Độ hòa tan (30 phút)",
+              "≥ 80% (Q) bisoprolol fumarate hòa tan"
+            ],
+            [
+              "Tạp chất liên quan",
+              "Tạp đơn ≤ 0,2%; tổng tạp ≤ 3,0%"
+            ],
+            [
+              "Độ đồng đều hàm lượng",
+              "AV < 15 (Ph.Eur./EP 2.9.40)"
+            ]
           ]
         },
-        { "type": "paragraph", "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] QTPP đầy đủ (dạng bào chế, đường dùng, PK/BE với RMP, độ ổn định ICH Q1A...) và bảng CQA có biện luận \"có phải CQA hay không\" — cần FD xây dựng và phê duyệt." }
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] QTPP đầy đủ (dạng bào chế, đường dùng, PK/BE với RMP, độ ổn định ICH Q1A...) và bảng CQA có biện luận \"có phải CQA hay không\" — cần FD xây dựng và phê duyệt."
+        },
+        {
+          "type": "heading3",
+          "text": "Xác định yếu tố trọng yếu và biện luận kiểm soát"
+        },
+        {
+          "type": "paragraph",
+          "text": "ICH Q8(R2) Part I (trang 6) đặt đây là yêu cầu nền: \"At a minimum, those aspects of drug substances, excipients, container closure systems, and manufacturing processes that are critical to product quality should be determined and control strategies justified\", và mô tả cách xác định: \"Critical formulation attributes and process parameters are generally identified through an assessment of the extent to which their variation can have impact on the quality of the drug product.\" Mục này chỉ kết luận cho yếu tố mà Thử nghiệm 1 đã thực sự khảo sát biến thiên; các yếu tố còn lại được ghi rõ là chưa đánh giá, không suy đoán."
+        },
+        {
+          "type": "paragraph",
+          "text": "Tỷ lệ croscarmellose sodium là thuộc tính công thức trọng yếu, đã chứng minh bằng thực nghiệm. Đây là biến số độc lập duy nhất giữa CT01 – CT03 (1% / 3% / 5% kl/kl, bù trừ bằng lactose monohydrate để giữ khối lượng viên 100 mg). Biến thiên của nó làm độ hòa tan 30 phút đổi từ 73,89% → 81,40% → 98,64% (tiêu chuẩn ≥ 80% Q) và độ rã tối đa từ 13'28\" → 8'57\" → 4'18\". Mức 1% không đạt độ hòa tan; mức 3% đạt trung bình nhưng giá trị Min 79,12% nằm dưới ngưỡng. Vậy độ hòa tan là chỉ tiêu chất lượng chịu ảnh hưởng trực tiếp của yếu tố này. Số liệu dẫn ở đây lấy từ bảng kết quả mục P.2.2.1.3, không phải số liệu mới."
+        },
+        {
+          "type": "paragraph",
+          "text": "Biện luận kiểm soát tương ứng: cố định croscarmellose sodium ở 5% kl/kl mang sang Thử nghiệm 2, và giữ độ hòa tan 30 phút (≥ 80% Q) cùng độ rã (≤ 15 phút) trong bộ chỉ tiêu kiểm tra viên thành phẩm nêu ở bảng trên. Ở mức 5%, giá trị Min đạt 96,15% và RSD giảm từ 7,57% (mức 1%) xuống 2,70%, tức cả biên an toàn lẫn độ lặp lại đều cải thiện. Lưu ý mức 5% chạm trần khoảng 0,5 – 5,0% mà Handbook of Pharmaceutical Excipients khuyến cáo cho viên nén, nên không còn dư địa nâng thêm; nếu Thử nghiệm 2 cần thêm biên an toàn thì phải điều chỉnh yếu tố khác."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa đánh giá tính trọng yếu của: thuộc tính dược chất (phân bố cỡ hạt, đa hình), các thông số quy trình (thời gian trộn, lực dập, điều kiện bao phim), hệ màng bao, và hệ thống bao bì. Thử nghiệm 1 giữ cố định hoặc không khảo sát các yếu tố này nên không có cơ sở kết luận theo cách ICH Q8(R2) trang 6 mô tả. Riêng magnesium stearate 3% kl/kl là biến nhiễu tiềm tàng đối với độ hòa tan, cần tách bạch trong thử nghiệm tiếp theo trước khi kết luận về tá dược rã là đầy đủ."
+        }
       ]
     },
     {
       "id": "P.2.2.1.3",
       "status": "covered",
       "blocks": [
-        { "type": "heading3", "text": "Thử nghiệm 1: Khảo sát tỷ lệ tá dược rã" },
-        { "type": "paragraph", "text": "Mục tiêu: Khảo sát ảnh hưởng của tỷ lệ tá dược rã croscarmellose sodium (Primellose) đến độ rã và độ hòa tan của viên nén bisoprolol fumarate 10 mg." },
-        { "type": "paragraph", "text": "Thông số cố định: cỡ lô 1.000 viên/công thức; khối lượng viên 100 mg; giữ nguyên các tá dược khác (Cellactose 80, MgO XP 103, Povidone K30, magnesium stearate); biến số khảo sát là tỷ lệ Primellose (1% / 3% / 5%), bù trừ bằng lactose monohydrate để giữ tổng khối lượng viên không đổi." },
-        { "type": "heading3", "text": "Bảng thành phần công thức (mg/viên = % kl/kl)" },
+        {
+          "type": "heading3",
+          "text": "Thử nghiệm 1: Khảo sát tỷ lệ tá dược rã"
+        },
+        {
+          "type": "paragraph",
+          "text": "Mục tiêu: Khảo sát ảnh hưởng của tỷ lệ tá dược rã croscarmellose sodium (Primellose) đến độ rã và độ hòa tan của viên nén bisoprolol fumarate 10 mg."
+        },
+        {
+          "type": "paragraph",
+          "text": "Thông số cố định: cỡ lô 1.000 viên/công thức; khối lượng viên 100 mg; giữ nguyên các tá dược khác (Cellactose 80, MgO XP 103, Povidone K30, magnesium stearate); biến số khảo sát là tỷ lệ Primellose (1% / 3% / 5%), bù trừ bằng lactose monohydrate để giữ tổng khối lượng viên không đổi."
+        },
+        {
+          "type": "heading3",
+          "text": "Bảng thành phần công thức (mg/viên = % kl/kl)"
+        },
         {
           "type": "table",
-          "headers": ["Thành phần", "CT01", "CT02", "CT03"],
+          "headers": [
+            "Thành phần",
+            "CT01",
+            "CT02",
+            "CT03"
+          ],
           "rows": [
-            ["Bisoprolol fumarate", "10,00", "10,00", "10,00"],
-            ["Lactose monohydrate", "17,70", "15,70", "13,70"],
-            ["Lactose monohydrate & cellulose powder 75:25 (Cellactose 80)", "63,00", "63,00", "63,00"],
-            ["Croscarmellose sodium (Primellose)", "1,00", "3,00", "5,00"],
-            ["Magnesium oxide (MgO XP 103)", "3,30", "3,30", "3,30"],
-            ["Povidone K30", "2,00", "2,00", "2,00"],
-            ["Magnesium stearate", "3,00", "3,00", "3,00"],
-            ["Tổng cộng", "100,00", "100,00", "100,00"]
+            [
+              "Bisoprolol fumarate",
+              "10,00",
+              "10,00",
+              "10,00"
+            ],
+            [
+              "Lactose monohydrate",
+              "17,70",
+              "15,70",
+              "13,70"
+            ],
+            [
+              "Lactose monohydrate & cellulose powder 75:25 (Cellactose 80)",
+              "63,00",
+              "63,00",
+              "63,00"
+            ],
+            [
+              "Croscarmellose sodium (Primellose)",
+              "1,00",
+              "3,00",
+              "5,00"
+            ],
+            [
+              "Magnesium oxide (MgO XP 103)",
+              "3,30",
+              "3,30",
+              "3,30"
+            ],
+            [
+              "Povidone K30",
+              "2,00",
+              "2,00",
+              "2,00"
+            ],
+            [
+              "Magnesium stearate",
+              "3,00",
+              "3,00",
+              "3,00"
+            ],
+            [
+              "Tổng cộng",
+              "100,00",
+              "100,00",
+              "100,00"
+            ]
           ]
         },
-        { "type": "heading3", "text": "Kết quả — Tính chất vật lý cốm (in-process control)" },
+        {
+          "type": "heading3",
+          "text": "Vai trò tá dược trong công thức"
+        },
+        {
+          "type": "paragraph",
+          "text": "Croscarmellose sodium là biến số độc lập duy nhất giữa CT01 – CT03. Lactose monohydrate giảm 17,70 → 15,70 → 13,70 mg/viên, đúng bằng phần tăng của croscarmellose sodium (1,00 → 3,00 → 5,00 mg), giữ khối lượng viên cố định 100 mg. Nhờ vậy khác biệt về thời gian rã và độ hòa tan giữa ba công thức có thể quy cho tỷ lệ tá dược rã."
+        },
+        {
+          "type": "paragraph",
+          "text": "Cả ba mức croscarmellose sodium đều nằm trong khoảng 0,5 – 5,0% mà Handbook of Pharmaceutical Excipients khuyến cáo cho viên nén: CT02 (3%) trùng mức khuyến cáo cho xát hạt ướt, CT01 (1%) thấp hơn mức đó, CT03 (5%) chạm giới hạn trên. Khoảng 0,5 – 1% chưa được khảo sát nên chưa kết luận được về vùng dưới của khoảng khuyến cáo. Lưu ý sau khi FD xác nhận quy trình là trộn dập thẳng: chuyên luận croscarmellose sodium trích ở mục P.2.1.2 nêu mức thông thường 2% cho dập thẳng và 3% cho xát hạt ướt, nên mốc đối chiếu đúng cho sản phẩm này là 2%, không phải 3%. Cả ba công thức đều nằm xa mốc đó, riêng CT03 ở 5% gấp 2,5 lần mức thông thường của dập thẳng — cần biện luận khi nộp hồ sơ."
+        },
+        {
+          "type": "paragraph",
+          "text": "Cellactose 80 giữ cố định 63,00 mg/viên (63% kl/kl), tạo nền viên bằng cơ chế nén kép: phần lactose vỡ giòn kết hợp phần cellulose biến dạng dẻo. Phần cellulose đồng thời hỗ trợ rã theo cơ chế mao dẫn. Tài liệu tham chiếu ghi nhận tá dược này ít nhạy với tá dược trơn hơn hỗn hợp vật lý tương ứng, nên nền công thức có khả năng dung nạp mức magnesium stearate cao tốt hơn nền lactose đơn thuần."
+        },
+        {
+          "type": "paragraph",
+          "text": "Magnesium oxide 3,30 mg/viên (3,3% kl/kl) đóng vai trò tá dược pha loãng có tính kiềm để điều chỉnh pH viên, phù hợp với yêu cầu ổn định bisoprolol fumarate — fumarate là muối của acid hữu cơ nên vi môi trường acid tại chỗ có thể thúc đẩy phân hủy. Thử nghiệm 1 không ghi mục đích sử dụng của magnesium oxide, nên vai trò thiết kế này cần FD xác nhận kèm dữ liệu độ ổn định chứng minh."
+        },
+        {
+          "type": "paragraph",
+          "text": "Magnesium stearate 3,00 mg/viên (3% kl/kl) nằm ở nửa trên khoảng 0,25 – 5,00% được khuyến cáo. Kết hợp với đặc tính thực tế không tan trong nước và diện tích bề mặt riêng lớn (trải màng kỵ nước trên bề mặt tiểu phân), mức này có khả năng làm chậm rã và giảm tốc độ hòa tan, tức là biến nhiễu tiềm tàng khi diễn giải kết quả Thử nghiệm 1. Cần FD xác nhận thời gian trộn trơn và đánh giá lại tỷ lệ này ở bước tối ưu công thức."
+        },
+        {
+          "type": "heading3",
+          "text": "Kết quả — Tính chất vật lý cốm (in-process control)"
+        },
         {
           "type": "table",
-          "headers": ["Chỉ tiêu", "CT01", "CT02", "CT03"],
+          "headers": [
+            "Chỉ tiêu",
+            "CT01",
+            "CT02",
+            "CT03"
+          ],
           "rows": [
-            ["Tỷ trọng biểu kiến – tĩnh (g/ml)", "0,521", "0,511", "0,518"],
-            ["Tỷ trọng biểu kiến – gõ (g/ml)", "0,695", "0,672", "0,682"],
-            ["Tỉ số Hausner", "1,33", "1,32", "1,32"],
-            ["Cỡ hạt ≥ 180 µm (%)", "28,11", "29,08", "30,07"],
-            ["Cỡ hạt 180–150 µm (%)", "19,33", "19,11", "18,21"],
-            ["Cỡ hạt 150–125 µm (%)", "13,17", "13,49", "14,67"],
-            ["Cỡ hạt 125–75 µm (%)", "16,98", "17,20", "17,35"],
-            ["Cỡ hạt < 75 µm (%)", "22,41", "21,12", "19,70"],
-            ["Độ ẩm (105°C, cân ẩm Halogen) (%)", "2,39", "2,37", "2,41"]
+            [
+              "Tỷ trọng biểu kiến – tĩnh (g/ml)",
+              "0,521",
+              "0,511",
+              "0,518"
+            ],
+            [
+              "Tỷ trọng biểu kiến – gõ (g/ml)",
+              "0,695",
+              "0,672",
+              "0,682"
+            ],
+            [
+              "Tỉ số Hausner",
+              "1,33",
+              "1,32",
+              "1,32"
+            ],
+            [
+              "Cỡ hạt ≥ 180 µm (%)",
+              "28,11",
+              "29,08",
+              "30,07"
+            ],
+            [
+              "Cỡ hạt 180–150 µm (%)",
+              "19,33",
+              "19,11",
+              "18,21"
+            ],
+            [
+              "Cỡ hạt 150–125 µm (%)",
+              "13,17",
+              "13,49",
+              "14,67"
+            ],
+            [
+              "Cỡ hạt 125–75 µm (%)",
+              "16,98",
+              "17,20",
+              "17,35"
+            ],
+            [
+              "Cỡ hạt < 75 µm (%)",
+              "22,41",
+              "21,12",
+              "19,70"
+            ],
+            [
+              "Độ ẩm (105°C, cân ẩm Halogen) (%)",
+              "2,39",
+              "2,37",
+              "2,41"
+            ]
           ]
         },
-        { "type": "heading3", "text": "Kết quả — Chỉ tiêu chất lượng viên thành phẩm" },
+        {
+          "type": "heading3",
+          "text": "Kết quả — Chỉ tiêu chất lượng viên thành phẩm"
+        },
         {
           "type": "table",
-          "headers": ["Chỉ tiêu (tiêu chuẩn)", "CT01", "CT02", "CT03"],
+          "headers": [
+            "Chỉ tiêu (tiêu chuẩn)",
+            "CT01",
+            "CT02",
+            "CT03"
+          ],
           "rows": [
-            ["Cảm quan", "Đạt", "Đạt", "Đạt"],
-            ["Đồng đều khối lượng – TB (mg)", "100,3", "100,4", "100,1"],
-            ["Đồng đều khối lượng – Max (mg, %)", "103 (+2,69%)", "102 (+1,59%)", "102 (+1,90%)"],
-            ["Đồng đều khối lượng – Min (mg, %)", "98 (−2,29%)", "99 (−1,39%)", "98 (−2,10%)"],
-            ["Độ cứng – TB (N)", "87,9", "90,1", "91,4"],
-            ["Độ cứng – Max/Min (N)", "94 / 84", "96 / 85", "96 / 86"],
-            ["Độ dày – TB (mm)", "2,75", "2,75", "2,76"],
-            ["Độ dày – Max/Min (mm)", "2,77 / 2,73", "2,78 / 2,73", "2,78 / 2,75"],
-            ["Độ mài mòn (%)", "0,05", "0,02", "0,01"],
-            ["Độ rã – Max", "13'28\"", "8'57\"", "4'18\""],
-            ["Độ rã – Min (spec ≤ 15 phút)", "11'05\"", "8'19\"", "3'37\""],
-            ["Định lượng (spec 90–110%) (%)", "100,31", "100,02", "99,99"],
-            ["Độ hòa tan 30 phút – TB (spec ≥ 80% Q) (%)", "73,89", "81,40", "98,64"],
-            ["Độ hòa tan – Max/Min (%)", "79,33 / 65,15", "87,67 / 79,12", "100,98 / 96,15"],
-            ["Độ hòa tan – RSD (%)", "7,57", "4,76", "2,70"],
-            ["Tạp đơn bất kỳ (spec ≤ 0,2%) (%)", "0,0544", "0,0514", "0,0508"],
-            ["Tổng tạp chất (spec ≤ 3,0%) (%)", "0,1916", "0,1918", "0,1839"],
-            ["Đồng đều hàm lượng – AV (spec < 15)", "3,71", "2,79", "3,04"]
+            [
+              "Cảm quan",
+              "Đạt",
+              "Đạt",
+              "Đạt"
+            ],
+            [
+              "Đồng đều khối lượng – TB (mg)",
+              "100,3",
+              "100,4",
+              "100,1"
+            ],
+            [
+              "Đồng đều khối lượng – Max (mg, %)",
+              "103 (+2,69%)",
+              "102 (+1,59%)",
+              "102 (+1,90%)"
+            ],
+            [
+              "Đồng đều khối lượng – Min (mg, %)",
+              "98 (−2,29%)",
+              "99 (−1,39%)",
+              "98 (−2,10%)"
+            ],
+            [
+              "Độ cứng – TB (N)",
+              "87,9",
+              "90,1",
+              "91,4"
+            ],
+            [
+              "Độ cứng – Max/Min (N)",
+              "94 / 84",
+              "96 / 85",
+              "96 / 86"
+            ],
+            [
+              "Độ dày – TB (mm)",
+              "2,75",
+              "2,75",
+              "2,76"
+            ],
+            [
+              "Độ dày – Max/Min (mm)",
+              "2,77 / 2,73",
+              "2,78 / 2,73",
+              "2,78 / 2,75"
+            ],
+            [
+              "Độ mài mòn (%)",
+              "0,05",
+              "0,02",
+              "0,01"
+            ],
+            [
+              "Độ rã – Max",
+              "13'28\"",
+              "8'57\"",
+              "4'18\""
+            ],
+            [
+              "Độ rã – Min (spec ≤ 15 phút)",
+              "11'05\"",
+              "8'19\"",
+              "3'37\""
+            ],
+            [
+              "Định lượng (spec 90–110%) (%)",
+              "100,31",
+              "100,02",
+              "99,99"
+            ],
+            [
+              "Độ hòa tan 30 phút – TB (spec ≥ 80% Q) (%)",
+              "73,89",
+              "81,40",
+              "98,64"
+            ],
+            [
+              "Độ hòa tan – Max/Min (%)",
+              "79,33 / 65,15",
+              "87,67 / 79,12",
+              "100,98 / 96,15"
+            ],
+            [
+              "Độ hòa tan – RSD (%)",
+              "7,57",
+              "4,76",
+              "2,70"
+            ],
+            [
+              "Tạp đơn bất kỳ (spec ≤ 0,2%) (%)",
+              "0,0544",
+              "0,0514",
+              "0,0508"
+            ],
+            [
+              "Tổng tạp chất (spec ≤ 3,0%) (%)",
+              "0,1916",
+              "0,1918",
+              "0,1839"
+            ],
+            [
+              "Đồng đều hàm lượng – AV (spec < 15)",
+              "3,71",
+              "2,79",
+              "3,04"
+            ]
           ]
         },
-        { "type": "heading3", "text": "Nhận xét / Kết luận (nguyên văn từ Thử nghiệm 1)" },
-        { "type": "paragraph", "text": "\"Khi tăng tỷ lệ tá dược rã croscarmellose sodium thì độ hòa tan của bisoprolol fumarate tăng lên đáng kể. Ở tỷ lệ 1% và 3%, độ hòa tan không đạt tiêu chuẩn. Do đó, chọn tỷ lệ tá dược rã trong công thức là 5% để thực hiện tiếp cho thử nghiệm 2.\"", "italic": true },
-        { "type": "paragraph", "text": "Diễn giải: CT01 (1%) không đạt độ hòa tan (TB 73,89% < 80% Q). CT02 (3%) đạt trung bình (81,40%) nhưng Min (79,12%) sát dưới ngưỡng — không ổn định. CT03 (5%) đạt cả độ hòa tan (TB 98,64%, Min 96,15%) và độ rã (max 4'18\" << 15 phút) với biên độ an toàn rõ rệt. CT03 được chọn mang sang Thử nghiệm 2." },
-        { "type": "paragraph", "text": "Công thức tạm thời sau Thử nghiệm 1: CT03 (Primellose 5%) là điểm khởi đầu cho Thử nghiệm 2, chưa phải công thức thương mại/biobatch cuối cùng — cần các thử nghiệm tiếp theo để hoàn thiện." }
+        {
+          "type": "heading3",
+          "text": "Nhận xét / Kết luận (nguyên văn từ Thử nghiệm 1)"
+        },
+        {
+          "type": "paragraph",
+          "text": "\"Khi tăng tỷ lệ tá dược rã croscarmellose sodium thì độ hòa tan của bisoprolol fumarate tăng lên đáng kể. Ở tỷ lệ 1% và 3%, độ hòa tan không đạt tiêu chuẩn. Do đó, chọn tỷ lệ tá dược rã trong công thức là 5% để thực hiện tiếp cho thử nghiệm 2.\"",
+          "italic": true
+        },
+        {
+          "type": "paragraph",
+          "text": "Diễn giải: CT01 (1%) không đạt độ hòa tan (TB 73,89% < 80% Q). CT02 (3%) đạt trung bình (81,40%) nhưng Min (79,12%) sát dưới ngưỡng — không ổn định. CT03 (5%) đạt cả độ hòa tan (TB 98,64%, Min 96,15%) và độ rã (max 4'18\" << 15 phút) với biên độ an toàn rõ rệt. CT03 được chọn mang sang Thử nghiệm 2."
+        },
+        {
+          "type": "paragraph",
+          "text": "Công thức tạm thời sau Thử nghiệm 1: CT03 (Primellose 5%) là điểm khởi đầu cho Thử nghiệm 2, chưa phải công thức thương mại/biobatch cuối cùng — cần các thử nghiệm tiếp theo để hoàn thiện."
+        },
+        {
+          "type": "heading3",
+          "text": "Đặc điểm thiết kế riêng của viên"
+        },
+        {
+          "type": "paragraph",
+          "text": "Viên được khắc số \"10\" trên một mặt. ICH Q8(R2) mục 2.2.1 (trang 8) yêu cầu: \"Any special design features of the drug product (e.g., tablet score line, overfill, anti-counterfeiting measure as it affects the drug product) should be identified and a rationale provided for their use.\" Ký hiệu này là dấu nhận dạng hàm lượng 10 mg, không phải vạch bẻ nên không nhằm mục đích chia liều và không đặt ra nghĩa vụ chứng minh đồng đều hàm lượng của nửa viên. Kết quả đồng đều khối lượng (100,1 mg trung bình, dao động −2,10% đến +1,90% ở CT03) và độ đồng đều hàm lượng (AV 3,04 ở CT03) không cho thấy tác động bất lợi của việc khắc. Đây là suy luận từ mô tả cảm quan trong Thử nghiệm 1; cần FD xác nhận chính thức mục đích của ký hiệu."
+        }
       ]
     },
     {
       "id": "P.2.2.2",
       "status": "covered",
       "blocks": [
-        { "type": "paragraph", "text": "Không thấy dược chất/tá dược bổ sung theo tỷ lệ overage trong công thức được cung cấp (tổng bisoprolol fumarate = 10,00 mg đúng bằng hàm lượng ghi nhãn dự kiến). Đây là quan sát dựa trên bảng thành phần, chưa phải xác nhận chính thức." },
-        { "type": "paragraph", "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác nhận chính thức từ FD về việc có/không áp dụng overage và lý do." }
+        {
+          "type": "paragraph",
+          "text": "Không thấy dược chất/tá dược bổ sung theo tỷ lệ overage trong công thức được cung cấp (tổng bisoprolol fumarate = 10,00 mg đúng bằng hàm lượng ghi nhãn dự kiến). Đây là quan sát dựa trên bảng thành phần, chưa phải xác nhận chính thức."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác nhận chính thức từ FD về việc có/không áp dụng overage và lý do."
+        }
       ]
     },
     {
       "id": "P.2.2.3",
       "status": "covered",
       "blocks": [
-        { "type": "heading3", "text": "Phương pháp hòa tan" },
-        { "type": "paragraph", "text": "Tiêu chuẩn đã áp dụng: ≥ 80% (Q) bisoprolol fumarate hòa tan trong 30 phút." },
-        { "type": "paragraph", "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Điều kiện phương pháp hòa tan cụ thể (thiết bị, tốc độ khuấy, môi trường, thể tích) và khả năng phân biệt của phương pháp (discriminatory power) — không có trong Thử nghiệm 1." },
-        { "type": "heading3", "text": "Hồ sơ tạp chất" },
-        { "type": "paragraph", "text": "Kết quả tạp chất (tạp đơn, tổng tạp) đã có trong bảng kết quả viên thành phẩm ở mục P.2.2.1.3." },
-        { "type": "paragraph", "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phương pháp phân tích tạp chất cụ thể (tham chiếu 3.2.P.5.2) chưa được nêu trong Thử nghiệm 1." }
+        {
+          "type": "heading3",
+          "text": "Phương pháp hòa tan"
+        },
+        {
+          "type": "paragraph",
+          "text": "Tiêu chuẩn đã áp dụng: ≥ 80% (Q) bisoprolol fumarate hòa tan trong 30 phút."
+        },
+        {
+          "type": "paragraph",
+          "text": "Khả năng phân biệt (discriminatory power) — biện luận hồi cứu từ Thử nghiệm 1: cùng một phương pháp hòa tan đã cho ba kết quả tách bạch 73,89% / 81,40% / 98,64% trên ba công thức chỉ khác nhau ở tỷ lệ tá dược rã, xếp đúng thứ tự với độ rã (13'28\" / 8'57\" / 4'18\"), và phân loại đạt/không đạt đúng ở ngưỡng 80% Q. Phương pháp do đó phân biệt được thay đổi có ý nghĩa về công thức. ICH Q8(R2) mục 2.2.3 (trang 8) diễn đạt phần này bằng \"could be provided\" nên đây không phải yêu cầu bắt buộc của guideline; mục riêng là theo tài liệu mẫu của phòng."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Điều kiện phương pháp hòa tan cụ thể (thiết bị, tốc độ khuấy, môi trường, thể tích, thời điểm lấy mẫu) — không có trong Thử nghiệm 1; cần trích từ hồ sơ phương pháp phân tích 3.2.P.5.2. Biện luận khả năng phân biệt ở trên không thay thế cho việc khai điều kiện phương pháp."
+        },
+        {
+          "type": "heading3",
+          "text": "Hồ sơ tạp chất"
+        },
+        {
+          "type": "paragraph",
+          "text": "Kết quả tạp chất (tạp đơn, tổng tạp) đã có trong bảng kết quả viên thành phẩm ở mục P.2.2.1.3."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phương pháp phân tích tạp chất cụ thể (tham chiếu 3.2.P.5.2) chưa được nêu trong Thử nghiệm 1. Về danh mục tạp: CoA nguyên liệu khai theo chuyên luận Ph.Eur. 12 và kiểm riêng từng tạp — tạp A (benzyl alcohol), tạp E, tạp G, mỗi tạp tối đa 0,1%. Tiêu chuẩn viên thành phẩm đang áp dụng ở mục P.2.2.1.2 lại chỉ ghi \"tạp đơn bất kỳ\" tối đa 0,2% và tổng tạp tối đa 3,0%, không nêu tên tạp nào. Đây là điểm không nhất quán cần giải quyết: nguyên liệu đầu vào đang bị kiểm chặt hơn thành phẩm, trong khi quá trình bào chế chỉ có thể làm tạp tăng thêm chứ không giảm đi. Cần FD xác nhận chuyên luận áp dụng cho thành phẩm và khai lại tiêu chuẩn theo đúng danh mục tạp của chuyên luận đó."
+        }
       ]
     },
     {
       "id": "P.2.3",
-      "status": "gap",
-      "gapReason": "Thử nghiệm 1 không mô tả quy trình sản xuất/pha chế (trộn, xát hạt, sấy, dập viên, bao phim). Toàn bộ mục cần dữ liệu bổ sung từ hồ sơ quy trình sản xuất/hồ sơ lô."
+      "status": "covered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Quy trình sản xuất được chọn cho sản phẩm này là trộn dập thẳng, do FD xác nhận — hồ sơ Thử nghiệm 1 không mô tả quy trình nên dữ kiện này không đến từ nguồn thử nghiệm. Trộn dập thẳng rút ngắn quá trình sản xuất và hạn chế phát sinh tạp so với xát hạt, nhưng đặt ra ba vấn đề phải giải quyết trong phát triển: độ đồng đều hàm lượng, tính chảy của hỗn hợp bột, và khả năng chịu nén. Biểu mẫu của phòng còn yêu cầu một sơ đồ quy trình; bản render tự động chưa hỗ trợ hình nên sơ đồ phải bổ sung thủ công vào bản Word cuối."
+        },
+        {
+          "type": "paragraph",
+          "text": "Phạm vi áp dụng của hai bảng dưới đây: bộ công đoạn và bộ thông số trọng yếu gắn với phương pháp trộn dập thẳng. Nếu FD đổi sang phương pháp khác — xát hạt ướt, phun sấy tầng sôi tạo hạt, cán ép, đóng tán (slugging), ép đùn nóng chảy — thì bộ công đoạn và các thông số trọng yếu đi kèm đều khác, và cả hai bảng phải được dựng lại theo phương pháp mới chứ không sửa từng ô."
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Đánh giá rủi ro ban đầu của quy trình sản xuất"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "CQA sản phẩm",
+            "Trộn sơ bộ",
+            "Trộn hoàn tất",
+            "Dập viên",
+            "Bao phim",
+            "Đóng gói"
+          ],
+          "rows": [
+            [
+              "Cảm quan",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Đồng đều khối lượng",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Độ rã",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Định lượng (Assay)",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Độ hòa tan (30 phút)",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Tạp chất liên quan",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Độ đồng đều hàm lượng",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Biện luận mức rủi ro theo công đoạn"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Công đoạn",
+            "Thông số trọng yếu dự kiến",
+            "Biện luận mức rủi ro"
+          ],
+          "rows": [
+            [
+              "Trộn sơ bộ",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác định và khai thời gian trộn, tốc độ, mức nạp thùng trộn.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu căn cứ cho mức rủi ro: kinh nghiệm sản xuất sản phẩm tương tự, hoặc dữ liệu thực nghiệm của công đoạn này."
+            ],
+            [
+              "Trộn hoàn tất",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác định và khai thời gian trộn tá dược trơn — trộn quá lâu làm chậm hòa tan.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu căn cứ cho mức rủi ro: kinh nghiệm sản xuất sản phẩm tương tự, hoặc dữ liệu thực nghiệm của công đoạn này."
+            ],
+            [
+              "Dập viên",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác định và khai lực dập, tốc độ dập, độ cứng mục tiêu.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu căn cứ cho mức rủi ro: kinh nghiệm sản xuất sản phẩm tương tự, hoặc dữ liệu thực nghiệm của công đoạn này."
+            ],
+            [
+              "Bao phim",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác định và khai nhiệt độ khí vào, tốc độ phun, mức tăng khối lượng màng bao.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu căn cứ cho mức rủi ro: kinh nghiệm sản xuất sản phẩm tương tự, hoặc dữ liệu thực nghiệm của công đoạn này."
+            ],
+            [
+              "Đóng gói",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác định và khai điều kiện môi trường đóng gói, độ kín vỉ.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu căn cứ cho mức rủi ro: kinh nghiệm sản xuất sản phẩm tương tự, hoặc dữ liệu thực nghiệm của công đoạn này."
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nâng cỡ lô: Thử nghiệm 1 thực hiện ở cỡ lô 1.000 viên mỗi công thức (mục P.2.2.1.3), tức quy mô phòng thí nghiệm. Cần thử nghiệm nâng cỡ lô lên quy mô pilot rồi thương mại để đánh giá tính lặp lại của thông số quy trình, sau đó mới lập được bảng đánh giá rủi ro cập nhật theo yêu cầu của biểu mẫu."
+        }
+      ]
     },
     {
       "id": "P.2.4",
-      "status": "gap",
-      "gapReason": "Không có thông tin bao bì sơ cấp/thứ cấp trong Thử nghiệm 1 — cần bổ sung."
+      "status": "covered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Bao bì được lựa chọn dựa trên đặc tính lý hóa của dược chất, dạng bào chế của sản phẩm, và khảo sát bao bì của thuốc đối chiếu (mục P.2.2.1.1). Chưa có quyết định bao bì nào cho sản phẩm này; hai bảng dưới đây là khung theo biểu mẫu của phòng."
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Bao bì sơ cấp"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Nội dung",
+            "Bao bì sơ cấp"
+          ],
+          "rows": [
+            [
+              "Vật liệu",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu vật liệu và đối chiếu với bao bì của thuốc đối chiếu."
+            ],
+            [
+              "Mô tả",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Quy cách và độ dày từng lớp màng, định lượng lớp nhôm."
+            ],
+            [
+              "Khả năng bảo vệ",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Biện luận khả năng chắn ẩm và chắn sáng, dựa trên độ ổn định của dược chất."
+            ],
+            [
+              "Tính tương hợp",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chứng minh không tương kỵ với dược chất và tá dược; dẫn chiếu dữ liệu độ ổn định."
+            ],
+            [
+              "Kiểm soát chất lượng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Tiêu chuẩn vật liệu bao bì — thuộc mục 3.2.P.7, dẫn chiếu sang khi có."
+            ],
+            [
+              "Dữ liệu độ ổn định",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Dẫn chiếu mục 3.2.P.8 khi có số liệu."
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Bao bì thứ cấp"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Nội dung",
+            "Bao bì thứ cấp"
+          ],
+          "rows": [
+            [
+              "Mô tả",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu loại hộp/túi và thông tin ghi nhãn kèm theo."
+            ],
+            [
+              "Chức năng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu vai trò bảo vệ bổ sung và vai trò mang thông tin nhãn."
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Lưu ý trình tự: tính tương hợp giữa thành phẩm và bao bì sơ cấp chỉ chứng minh được bằng số liệu độ ổn định của thành phẩm trong chính bao bì đó. Vì vậy mục này không thể đóng trước khi có dữ liệu ở 3.2.P.8, kể cả khi vật liệu bao bì đã được chọn."
+        }
+      ]
     },
     {
       "id": "P.2.5",
-      "status": "gap",
-      "gapReason": "Không có kết quả thử nghiệm vi sinh cho các công thức trong Thử nghiệm 1 — cần bổ sung. (Dự kiến áp dụng khung ICH Q6A / Ph.Eur. 5.1.4 cho dạng bào chế không vô khuẩn, nhưng đây là suy luận chung, không phải dữ liệu từ nguồn.)"
+      "status": "covered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Sản phẩm là dạng bào chế rắn dùng đường uống, không vô khuẩn. ICH Q6A trang 12 cho phép đề xuất không thử giới hạn vi sinh với dạng này nếu có biện luận khoa học chấp nhận được, và Decision Tree #8 (trang 31) nêu hai nhánh: có bằng chứng sản phẩm ức chế phát triển vi sinh thì tiêu chuẩn và phép thử có thể không cần thiết; không có bằng chứng đó thì lập tiêu chuẩn theo chuyên luận dược điển hài hòa và thử từng lô, sau khi các lô đạt ổn định mới xin chuyển sang skip-lot. Biểu mẫu của phòng đi theo nhánh thứ hai — thử định kỳ. Giới hạn và tần suất dưới đây lấy từ biểu mẫu; cần FD xác nhận áp dụng cho sản phẩm này."
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Giới hạn vi sinh áp dụng"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Chỉ tiêu",
+            "Giới hạn theo biểu mẫu",
+            "Kết quả"
+          ],
+          "rows": [
+            [
+              "Tổng số vi sinh vật hiếu khí (TAMC)",
+              "≤ 10³ CFU/g",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa có kết quả thử cho công thức nào của Thử nghiệm 1."
+            ],
+            [
+              "Tổng số nấm men và nấm mốc (TYMC)",
+              "≤ 10² CFU/g",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa có kết quả thử."
+            ],
+            [
+              "Escherichia coli",
+              "Không được có/g",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa có kết quả thử."
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Tần suất kiểm tra"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Đối tượng",
+            "Tần suất kiểm tra"
+          ],
+          "rows": [
+            [
+              "Ba lô thẩm định quy trình sản xuất",
+              "Một lần/năm đến hết hạn dùng, cộng thêm một năm sau đó"
+            ],
+            [
+              "Lô sản xuất thường niên",
+              "Mỗi năm một lô, hoặc mỗi mười lô"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Hai điểm cần làm rõ trước khi nộp. Thứ nhất, biểu mẫu của phòng dẫn chiếu Dược điển châu Âu EP 11.0 phụ lục 5.1.4, trong khi CoA nguyên liệu khai theo Ph.Eur. 12; cần thống nhất phiên bản dược điển áp dụng cho cả hồ sơ. Thứ hai, nguyên liệu đã được kiểm vi sinh trước khi sản xuất — xem ghi chú nguồn [3] ở mục P.2.1.1 — đó là một trong ba điều kiện mà ICH Q6A trang 12 nêu; hai điều kiện còn lại là thẩm định quy trình chứng minh không mang rủi ro nhiễm hoặc tăng sinh đáng kể, và bằng chứng về tính ức chế phát triển của viên."
+        }
+      ]
     },
     {
       "id": "P.2.6",
       "status": "covered",
       "blocks": [
-        { "type": "paragraph", "text": "Không áp dụng — sản phẩm là viên nén bao phim dùng đường uống trực tiếp, không cần pha hoàn nguyên với dung môi/chất pha loãng trước khi sử dụng. Đây là suy luận dựa trên dạng bào chế đã nêu trong Thử nghiệm 1 (viên nén bao phim); cần FD xác nhận chính thức." }
+        {
+          "type": "paragraph",
+          "text": "Không áp dụng — sản phẩm là viên nén bao phim dùng đường uống trực tiếp, không cần pha hoàn nguyên với dung môi/chất pha loãng trước khi sử dụng. Đây là suy luận dựa trên dạng bào chế đã nêu trong Thử nghiệm 1 (viên nén bao phim); cần FD xác nhận chính thức."
+        }
       ]
     }
   ]

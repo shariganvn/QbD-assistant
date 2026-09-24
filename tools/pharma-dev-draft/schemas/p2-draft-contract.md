@@ -8,9 +8,16 @@ a live Claude session), following `draft/checklist.md`.
 
 This contract is intentionally **not** shaped like `cowork-p2-kit/render/contract.mjs`'s
 `validateDraft()` (no `citations`, `evidenceLink`, `classification`, `citable` fields). That
-contract encodes the rationale pipeline's public-citation approval semantics; a P.2 draft has
-nothing external to cite — every fact traces back to exactly one supplied internal trial file,
-named once in `meta.sourceFile`.
+contract encodes the rationale pipeline's public-citation approval semantics, which a P.2 draft has
+no use for: there is no approval state, no citable/public classification, and no evidence-host
+allow-list.
+
+Provenance here is simpler but still explicit. Trial data comes from exactly one supplied file,
+named in `meta.sourceFile`. Where a section additionally states something from a reference work
+(excipient properties from a pharmacopoeial handbook, for example), every such work must be listed
+in `meta.referenceSources` and cited in the section text; the renderer prints that list on the
+cover page. A fact that is in neither the source file nor a declared reference source does not
+belong in the draft — mark the section `gap` instead.
 
 ## Top-level shape
 
@@ -23,7 +30,8 @@ named once in `meta.sourceFile`.
     "sourceFile": "string — filename of the trial docx this draft was built from",
     "draftDate": "YYYY-MM-DD",
     "preparer": "string — free text, e.g. \"Claude (session ...)\" or a person's name",
-    "extractionMethod": "xml-walk | liteparse — from Stage A's extracted.json"
+    "extractionMethod": "xml-walk | liteparse — from Stage A's extracted.json",
+    "referenceSources": ["string — optional; one entry per reference work a section quotes"]
   },
   "sections": [ /* see below — one entry per id in schemas/p2-outline.json, in that order */ ]
 }
@@ -61,15 +69,63 @@ Rules **not** enforced by the validator (judgment calls — see `draft/checklist
 { "type": "heading2", "text": "string" }
 { "type": "heading3", "text": "string" }
 { "type": "paragraph", "text": "string", "italic": false, "bold": false }   // italic/bold optional, default false
-{ "type": "table", "headers": ["string", "..."], "rows": [["string", "..."], "..."] }
+{ "type": "table",
+  "headers": ["string", "..."],
+  "rows": [["string", "..."], "..."],
+  "columnWidths": [520, 1680, "..."],          // optional, see below
+  "columnAlign": ["center", "left", "..."] }   // optional, see below
 ```
 
 Every `rows[i]` must have the same length as `headers`. Cell values are always strings (format
 numbers exactly as they appear in the source — e.g. `"98,64"` for Vietnamese comma-decimal, not
 `98.64`).
 
+A `\n` inside a cell value starts a new paragraph within that cell. A line that opens with `"- "`
+becomes a real Word list item (the prefix is stripped and Word draws the bullet); any other line
+renders plain. That mix is what lets one cell carry bulleted property lines around an unbulleted
+lead-in, e.g. `"Giới hạn sử dụng:\n- Viên nén: 0,5 – 5,0%\n- Viên nang: 10 – 25%"`. Newlines are
+only meaningful in cells — the validator rejects them in heading and paragraph text, where Word
+would swallow them.
+
+`columnWidths` and `columnAlign` are both optional and both must have exactly one entry per
+header when present:
+
+- `columnWidths` — positive integers in DXA units that must sum to `10000` (the renderer's page
+  width budget). Omit it and the renderer gives the first column 34% and splits the rest evenly,
+  which suits short label/number tables but not tables with several prose columns.
+- `columnAlign` — `"left"`, `"center"` or `"justify"` per column. Omit it and the first column is
+  left-aligned with the rest centred; centring is unreadable for long prose, so set it explicitly on
+  any table with paragraph-length cells (`"justify"` matches how the department's reference tables
+  set prose columns).
+
 ## What Stage C always adds regardless of the draft (not part of this contract)
 
 `render/builder.mjs` unconditionally prepends a scope-notice box and appends a sign-off table —
 these are fixed constants in the renderer, not settable through the draft JSON. See
 `tools/pharma-dev-draft/README.md` for why this is non-negotiable.
+
+## The P.2 form: `form` in `schemas/p2-outline.json`
+
+Every product brings a different active substance, different excipients, different quality
+attributes and, depending on the manufacturing method, a different set of unit operations. None of
+that may be fixed anywhere. What must not vary is the shape of the department's P.2 document, so
+each outline section may carry a `form` key that the validator enforces against **any** draft:
+
+- `headings` — the `heading3` texts the section must have, in order. `[]` means the section takes
+  no headings at all.
+- `tables` — one entry per table the section must have, in order. Each entry may declare:
+  - `columns` — exact header labels. `"*"` accepts any non-empty label, for a column whose title
+    carries a product name (the reference product, the trial the criteria came from). `"..."` as
+    the last entry accepts any number of further columns with any names — that is how the process
+    risk matrix takes whichever unit operations the chosen method has.
+  - `rows` — exact row labels, or `"variable"` when the product decides them (the excipient list,
+    the quality attributes, the process steps).
+  - `rowsFrom` — the id of another section whose first table supplies the row labels. The risk
+    matrix uses this so it always scores exactly the attributes the product declared, rather than a
+    list frozen into the schema.
+  - `headerless` — whether the printed header strip is suppressed, for label/value forms.
+
+Omit `headings` or `tables` to leave that aspect unconstrained; omit `form` entirely for a section
+with no fixed shape. Violations report as `E_FORM_HEADINGS`, `E_FORM_TABLE_COUNT`,
+`E_FORM_COLUMNS`, `E_FORM_ROWS` and `E_FORM_HEADERLESS`, each naming the section, the table and the
+label that differs.

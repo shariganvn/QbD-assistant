@@ -7,13 +7,22 @@
 
 import {
   Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell,
-  WidthType, ShadingType, BorderStyle, AlignmentType, VerticalAlign,
+  WidthType, ShadingType, BorderStyle, AlignmentType, VerticalAlign, LevelFormat,
 } from "docx";
 
-const TABLE_WIDTH = 10000;
+import { TABLE_WIDTH_DXA as TABLE_WIDTH } from "../schemas/layout.mjs";
+
 const HEADER_FILL = "D9D9D9";
 const NOTICE_FILL = "FFF2CC";
 const GAP_COLOR = "C00000";
+
+// The renderer's own tables (not driven by a draft) declare their widths here, named, so one test
+// can assert they all still fill TABLE_WIDTH if that budget ever changes.
+export const FIXED_TABLE_WIDTHS = {
+  gapRegister: [4200, 2400, 3400],
+  abbreviations: [2500, 7500],
+  signoff: [3600, 2400, 2400, 1600],
+};
 
 const cellBorder = { style: BorderStyle.SINGLE, size: 4, color: "999999" };
 const allBorders = { top: cellBorder, bottom: cellBorder, left: cellBorder, right: cellBorder };
@@ -42,34 +51,83 @@ const ABBREVIATIONS = [
   ["RSD", "Relative Standard Deviation – Độ lệch chuẩn tương đối"],
 ];
 
+// One Word list definition, referenced by every bulleted line in every cell. Registered on the
+// Document below; without that registration the paragraphs render unbulleted.
+const CELL_BULLET_REFERENCE = "cell-bullet";
+const CELL_BULLET_PREFIX = "- ";
+
+const NUMBERING_CONFIG = {
+  config: [{
+    reference: CELL_BULLET_REFERENCE,
+    levels: [{
+      level: 0,
+      format: LevelFormat.BULLET,
+      text: "\u2022",
+      alignment: AlignmentType.LEFT,
+      style: { paragraph: { indent: { left: 180, hanging: 180 } } },
+    }],
+  }],
+};
+
+// A newline in cell text starts a new paragraph inside the cell, and a line opening with "- "
+// becomes a real Word list item rather than a literal bullet character — matching how the
+// department's reference table is built. Word ignores "\n" inside a single run, so splitting here
+// is what actually produces the line break.
 function cellText(text, opts = {}) {
+  const lines = String(text).split("\n");
   return new TableCell({
     width: { size: opts.width || 1000, type: WidthType.DXA },
     borders: allBorders,
     shading: opts.header ? { type: ShadingType.CLEAR, fill: HEADER_FILL } : undefined,
     verticalAlign: VerticalAlign.CENTER,
-    children: [new Paragraph({
-      alignment: opts.align || AlignmentType.LEFT,
-      children: [new TextRun({ text: String(text), bold: !!opts.header, size: opts.size || 20 })],
-    })],
+    children: lines.map((line, index) => {
+      const bulleted = line.startsWith(CELL_BULLET_PREFIX);
+      return new Paragraph({
+        alignment: opts.align || AlignmentType.LEFT,
+        spacing: { after: index === lines.length - 1 ? 0 : 40 },
+        numbering: bulleted ? { reference: CELL_BULLET_REFERENCE, level: 0 } : undefined,
+        children: [new TextRun({
+          text: bulleted ? line.slice(CELL_BULLET_PREFIX.length) : line,
+          bold: !!opts.header,
+          size: opts.size || 20,
+        })],
+      });
+    }),
   });
 }
 
-function makeTable(headers, rows, widths) {
+const ALIGNMENTS = {
+  left: AlignmentType.LEFT,
+  center: AlignmentType.CENTER,
+  justify: AlignmentType.JUSTIFIED,
+};
+
+// `align` is an optional per-column array of "left"/"center"/"justify". Without it, the first
+// column is left-aligned and the rest centred — right for short numeric tables, wrong for prose.
+// `headerless` suppresses the header row for label/value forms, where the left column already
+// names each row and a "Property | Value" strip would only add noise. The headers still define the
+// columns; they just are not printed.
+function makeTable(headers, rows, widths, align, headerless) {
+  const alignFor = (i) => (align ? ALIGNMENTS[align[i]] : (i === 0 ? AlignmentType.LEFT : AlignmentType.CENTER));
   const headerRow = new TableRow({
     tableHeader: true,
     children: headers.map((h, i) => cellText(h, { header: true, width: widths[i], align: AlignmentType.CENTER })),
   });
   const bodyRows = rows.map((r) => new TableRow({
-    children: r.map((c, i) => cellText(c, { width: widths[i], align: i === 0 ? AlignmentType.LEFT : AlignmentType.CENTER })),
+    children: r.map((c, i) => cellText(c, { width: widths[i], align: alignFor(i) })),
   }));
-  return new Table({ width: { size: TABLE_WIDTH, type: WidthType.DXA }, columnWidths: widths, rows: [headerRow, ...bodyRows] });
+  return new Table({
+    width: { size: TABLE_WIDTH, type: WidthType.DXA },
+    columnWidths: widths,
+    rows: headerless ? bodyRows : [headerRow, ...bodyRows],
+  });
 }
 
-// Column widths sum to TABLE_WIDTH; first column gets extra room for labels, remaining columns
-// split the rest evenly. Works for draft tables of arbitrary column count (unlike the hand-written
-// scratchpad version, which had one hardcoded width array per specific table).
-function widthsFor(headerCount) {
+// Default when a table block declares no columnWidths: widths sum to TABLE_WIDTH; first column
+// gets extra room for labels, remaining columns split the rest evenly. Works for draft tables of
+// arbitrary column count (unlike the hand-written scratchpad version, which had one hardcoded
+// width array per specific table).
+export function widthsFor(headerCount) {
   if (headerCount <= 1) return [TABLE_WIDTH];
   const firstColumn = Math.round(TABLE_WIDTH * 0.34);
   const remaining = TABLE_WIDTH - firstColumn;
@@ -129,19 +187,45 @@ function renderBlock(block) {
     case "heading2": return [h2(block.text)];
     case "heading3": return [h3(block.text)];
     case "paragraph": return [bodyParagraph(block.text, { italic: block.italic, bold: block.bold })];
-    case "table": return [makeTable(block.headers, block.rows, widthsFor(block.headers.length))];
+    case "table": return [makeTable(
+      block.headers,
+      block.rows,
+      block.columnWidths ?? widthsFor(block.headers.length),
+      block.columnAlign,
+      block.headerless,
+    )];
     default: throw new Error(`unknown block type: ${block.type}`);
   }
+}
+
+// The prefix every draft uses to mark a value it has no source for. A section whose tables are
+// built out but hold nothing else is a form waiting to be filled, and the register has to say so:
+// reporting it as holding data would be a false statement in a document shaped like a submission.
+const GAP_MARKER = "[CHƯA CÓ DỮ LIỆU";
+
+// Derived from the cells rather than declared on the section, so it cannot go stale: the moment a
+// real value replaces a marker, the register stops calling the section a skeleton. Only the value
+// columns count — the first column holds row labels, which a skeleton has filled in by definition.
+function holdsOnlyPlaceholders(section) {
+  const valueCells = (section.blocks ?? [])
+    .filter((block) => block.type === "table")
+    .flatMap((block) => block.rows.flatMap((row) => row.slice(1)));
+  return valueCells.length > 0 && valueCells.every((cell) => cell.includes(GAP_MARKER));
+}
+
+export function dataStatusLabel(section) {
+  if (section?.status !== "covered") return "Không có dữ liệu";
+  return holdsOnlyPlaceholders(section) ? "Đã dựng khung, chưa có dữ liệu" : "Có dữ liệu (một phần hoặc đầy đủ)";
 }
 
 function gapRegisterTable(outline, draftSectionsById) {
   const rows = outline.sections.map((section) => {
     const draftSection = draftSectionsById.get(section.id);
-    const status = draftSection?.status === "covered" ? "Có dữ liệu (một phần hoặc đầy đủ)" : "Không có dữ liệu";
+    const status = dataStatusLabel(draftSection);
     const note = draftSection?.status === "gap" ? draftSection.gapReason : "—";
     return [`${section.ctdReference} ${section.headingVi}`, status, note];
   });
-  return makeTable(["Mục CTD", "Trạng thái dữ liệu", "Ghi chú"], rows, [4200, 2400, 3400]);
+  return makeTable(["Mục CTD", "Trạng thái dữ liệu", "Ghi chú"], rows, FIXED_TABLE_WIDTHS.gapRegister);
 }
 
 export async function buildDocumentBuffer(draft, outline) {
@@ -153,6 +237,19 @@ export async function buildDocumentBuffer(draft, outline) {
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 80 }, children: [new TextRun({ text: "(PHARMACEUTICAL DEVELOPMENT – CTD 3.2.P.2)", bold: true, size: 24, color: "555555" })] }),
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 40 }, children: [new TextRun({ text: `${draft.meta.productName} — Dược chất: ${draft.meta.apiName}`, bold: true, size: 22 })] }),
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 40 }, children: [new TextRun({ text: `Cơ sở dữ liệu: ${draft.meta.sourceFile}`, size: 20, italics: true })] }),
+  );
+
+  // The cover must name every source the document draws on, not just the trial file, so a reader
+  // is never told the content traces back to one source when a section quotes a reference work.
+  if (draft.meta.referenceSources) {
+    children.push(new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { after: 40 },
+      children: [new TextRun({ text: `Tài liệu tham chiếu: ${draft.meta.referenceSources.join("; ")}`, size: 20, italics: true })],
+    }));
+  }
+
+  children.push(
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 300 }, children: [new TextRun({ text: `${DRAFT_STATUS_LABEL} — Ngày soạn: ${draft.meta.draftDate}`, bold: true, size: 20, color: GAP_COLOR })] }),
   );
 
@@ -160,7 +257,7 @@ export async function buildDocumentBuffer(draft, outline) {
   children.push(spacer());
 
   children.push(h2("Danh mục chữ viết tắt"));
-  children.push(makeTable(["Viết tắt", "Giải thích"], ABBREVIATIONS, [2500, 7500]));
+  children.push(makeTable(["Viết tắt", "Giải thích"], ABBREVIATIONS, FIXED_TABLE_WIDTHS.abbreviations));
   children.push(spacer());
 
   children.push(h1("3.2.P.2 PHÁT TRIỂN DƯỢC HỌC (PHARMACEUTICAL DEVELOPMENT)"));
@@ -190,10 +287,11 @@ export async function buildDocumentBuffer(draft, outline) {
       ["Rà soát FD", "________________", "________________", ""],
       ["Phê duyệt QA/PO", "________________", "________________", ""],
     ],
-    [3600, 2400, 2400, 1600],
+    FIXED_TABLE_WIDTHS.signoff,
   ));
 
   const doc = new Document({
+    numbering: NUMBERING_CONFIG,
     sections: [{ properties: { page: { margin: { top: 900, bottom: 900, left: 900, right: 900 } } }, children }],
   });
   return Packer.toBuffer(doc);
