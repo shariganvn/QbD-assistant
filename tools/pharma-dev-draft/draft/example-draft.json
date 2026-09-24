@@ -136,7 +136,7 @@
       "status": "covered",
       "blocks": [
         {
-          "type": "heading3",
+          "type": "heading2",
           "text": "3.2.P.2.1.2.1. Đặc tính lý hóa (Physicochemical properties)"
         },
         {
@@ -221,7 +221,7 @@
           "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Bảng trên chỉ gồm tá dược của lõi viên (tổng 100,00 mg). Sản phẩm là viên nén bao phim nên còn thành phần hệ màng bao, và các chất chỉ dùng trong quá trình sản xuất mà không còn trong thành phẩm (dung môi xát hạt, dung môi pha dịch bao) — không có trong Thử nghiệm 1. ICH Q8(R2) mục 2.1.2 (trang 7) yêu cầu phần này bao gồm mọi chất dùng trong sản xuất thuốc, dù có xuất hiện trong thành phẩm hay không."
         },
         {
-          "type": "heading3",
+          "type": "heading2",
           "text": "3.2.P.2.1.2.2. Nghiên cứu tương hợp dược chất – tá dược (Excipient compatibility)"
         },
         {
@@ -402,7 +402,7 @@
           "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] QTPP đầy đủ (dạng bào chế, đường dùng, PK/BE với RMP, độ ổn định ICH Q1A...) và bảng CQA có biện luận \"có phải CQA hay không\" — cần FD xây dựng và phê duyệt."
         },
         {
-          "type": "heading3",
+          "type": "heading2",
           "text": "Xác định yếu tố trọng yếu và biện luận kiểm soát"
         },
         {
@@ -428,7 +428,7 @@
       "status": "covered",
       "blocks": [
         {
-          "type": "heading3",
+          "type": "heading2",
           "text": "Thử nghiệm 1: Khảo sát tỷ lệ tá dược rã"
         },
         {
@@ -440,7 +440,7 @@
           "text": "Thông số cố định: cỡ lô 1.000 viên/công thức; khối lượng viên 100 mg; giữ nguyên các tá dược khác (Cellactose 80, MgO XP 103, Povidone K30, magnesium stearate); biến số khảo sát là tỷ lệ Primellose (1% / 3% / 5%), bù trừ bằng lactose monohydrate để giữ tổng khối lượng viên không đổi."
         },
         {
-          "type": "heading3",
+          "type": "heading2",
           "text": "Bảng thành phần công thức (mg/viên = % kl/kl)"
         },
         {
@@ -503,7 +503,7 @@
           ]
         },
         {
-          "type": "heading3",
+          "type": "heading2",
           "text": "Vai trò tá dược trong công thức"
         },
         {
@@ -527,7 +527,7 @@
           "text": "Magnesium stearate 3,00 mg/viên (3% kl/kl) nằm ở nửa trên khoảng 0,25 – 5,00% được khuyến cáo. Kết hợp với đặc tính thực tế không tan trong nước và diện tích bề mặt riêng lớn (trải màng kỵ nước trên bề mặt tiểu phân), mức này có khả năng làm chậm rã và giảm tốc độ hòa tan, tức là biến nhiễu tiềm tàng khi diễn giải kết quả Thử nghiệm 1. Cần FD xác nhận thời gian trộn trơn và đánh giá lại tỷ lệ này ở bước tối ưu công thức."
         },
         {
-          "type": "heading3",
+          "type": "heading2",
           "text": "Kết quả — Tính chất vật lý cốm (in-process control)"
         },
         {
@@ -596,7 +596,7 @@
           ]
         },
         {
-          "type": "heading3",
+          "type": "heading2",
           "text": "Kết quả — Chỉ tiêu chất lượng viên thành phẩm"
         },
         {
@@ -719,7 +719,7 @@
           ]
         },
         {
-          "type": "heading3",
+          "type": "heading2",
           "text": "Nhận xét / Kết luận (nguyên văn từ Thử nghiệm 1)"
         },
         {
@@ -736,7 +736,7 @@
           "text": "Công thức tạm thời sau Thử nghiệm 1: CT03 (Primellose 5%) là điểm khởi đầu cho Thử nghiệm 2, chưa phải công thức thương mại/biobatch cuối cùng — cần các thử nghiệm tiếp theo để hoàn thiện."
         },
         {
-          "type": "heading3",
+          "type": "heading2",
           "text": "Đặc điểm thiết kế riêng của viên"
         },
         {
@@ -764,7 +764,7 @@
       "status": "covered",
       "blocks": [
         {
-          "type": "heading3",
+          "type": "heading2",
           "text": "Phương pháp hòa tan"
         },
         {
@@ -780,7 +780,7 @@
           "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Điều kiện phương pháp hòa tan cụ thể (thiết bị, tốc độ khuấy, môi trường, thể tích, thời điểm lấy mẫu) — không có trong Thử nghiệm 1; cần trích từ hồ sơ phương pháp phân tích 3.2.P.5.2. Biện luận khả năng phân biệt ở trên không thay thế cho việc khai điều kiện phương pháp."
         },
         {
-          "type": "heading3",
+          "type": "heading2",
           "text": "Hồ sơ tạp chất"
         },
         {

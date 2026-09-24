@@ -139,14 +139,41 @@ export function widthsFor(headerCount) {
   return widths;
 }
 
+// Heading level comes from how deep a section sits in the CTD numbering, not from a table mapping
+// section ids to levels. A map would be a second place the document's shape is written down, and it
+// would go stale the first time the outline gained a section. Word offers six built-in heading levels,
+// so the deepest numbering the form reaches is clamped to the last of them.
+const DOCUMENT_ROOT_REFERENCE = "3.2.P.2";
+const HEADING_LEVELS = [
+  HeadingLevel.HEADING_1, HeadingLevel.HEADING_2, HeadingLevel.HEADING_3,
+  HeadingLevel.HEADING_4, HeadingLevel.HEADING_5, HeadingLevel.HEADING_6,
+];
+const MAX_HEADING_LEVEL = HEADING_LEVELS.length;
+
+export function headingLevelFor(ctdReference) {
+  const suffix = String(ctdReference).startsWith(DOCUMENT_ROOT_REFERENCE)
+    ? String(ctdReference).slice(DOCUMENT_ROOT_REFERENCE.length)
+    : "";
+  const depth = suffix.split(".").filter(Boolean).length;
+  return Math.min(depth + 1, MAX_HEADING_LEVEL);
+}
+
+// Spacing tapers with depth so the hierarchy reads on the page as well as in the navigation pane.
+function heading(level, text) {
+  const clamped = Math.min(Math.max(level, 1), MAX_HEADING_LEVEL);
+  const before = Math.max(340 - clamped * 40, 140);
+  return new Paragraph({
+    heading: HEADING_LEVELS[clamped - 1],
+    spacing: { before, after: Math.round(before / 2) },
+    children: [new TextRun({ text })],
+  });
+}
+
 function h1(text) {
-  return new Paragraph({ heading: HeadingLevel.HEADING_1, spacing: { before: 320, after: 160 }, children: [new TextRun({ text })] });
+  return heading(1, text);
 }
 function h2(text) {
-  return new Paragraph({ heading: HeadingLevel.HEADING_2, spacing: { before: 260, after: 120 }, children: [new TextRun({ text })] });
-}
-function h3(text) {
-  return new Paragraph({ heading: HeadingLevel.HEADING_3, spacing: { before: 200, after: 100 }, children: [new TextRun({ text })] });
+  return heading(2, text);
 }
 function bodyParagraph(text, opts = {}) {
   return new Paragraph({
@@ -183,10 +210,12 @@ function noticeBox() {
   });
 }
 
-function renderBlock(block) {
+function renderBlock(block, sectionLevel = 1) {
   switch (block.type) {
-    case "heading2": return [h2(block.text)];
-    case "heading3": return [h3(block.text)];
+    // Relative to the section, not absolute: the block type says how far below its own section the
+    // heading sits, so a section's sub-heading can never come out ranking above the section itself.
+    case "heading2": return [heading(sectionLevel + 1, block.text)];
+    case "heading3": return [heading(sectionLevel + 2, block.text)];
     case "paragraph": return [bodyParagraph(block.text, { italic: block.italic, bold: block.bold })];
     case "table": return [makeTable(
       block.headers,
@@ -219,7 +248,9 @@ export function dataStatusLabel(section) {
 }
 
 function gapRegisterTable(outline, draftSectionsById) {
-  const rows = outline.sections.map((section) => {
+  // Leaves only. A container carries a heading and no content, so it has no data status to report and
+  // a row for it would state something untrue about a section that holds nothing by design.
+  const rows = outline.sections.filter((section) => !section.container).map((section) => {
     const draftSection = draftSectionsById.get(section.id);
     const status = dataStatusLabel(draftSection);
     const note = draftSection?.status === "gap" ? draftSection.gapReason : "—";
@@ -256,21 +287,23 @@ export async function buildDocumentBuffer(draft, outline) {
   children.push(noticeBox());
   children.push(spacer());
 
-  children.push(h2("Danh mục chữ viết tắt"));
+  children.push(h1("Danh mục chữ viết tắt"));
   children.push(makeTable(["Viết tắt", "Giải thích"], ABBREVIATIONS, FIXED_TABLE_WIDTHS.abbreviations));
   children.push(spacer());
 
   children.push(h1("3.2.P.2 PHÁT TRIỂN DƯỢC HỌC (PHARMACEUTICAL DEVELOPMENT)"));
 
   for (const outlineSection of outline.sections) {
-    children.push(h1(`${outlineSection.ctdReference} ${outlineSection.headingVi.toUpperCase()}`));
+    const level = headingLevelFor(outlineSection.ctdReference);
+    children.push(heading(level, `${outlineSection.ctdReference} ${outlineSection.headingVi.toUpperCase()}`));
+    if (outlineSection.container) continue;
     const draftSection = draftSectionsById.get(outlineSection.id);
     if (!draftSection || draftSection.status === "gap") {
       children.push(gapParagraph(draftSection?.gapReason ?? "Không có dữ liệu cho mục này."));
       continue;
     }
     for (const block of draftSection.blocks) {
-      children.push(...renderBlock(block));
+      children.push(...renderBlock(block, level));
     }
   }
 
@@ -279,7 +312,7 @@ export async function buildDocumentBuffer(draft, outline) {
   children.push(gapRegisterTable(outline, draftSectionsById));
 
   children.push(spacer());
-  children.push(h2("Ghi nhận soạn thảo và rà soát"));
+  children.push(h1("Ghi nhận soạn thảo và rà soát"));
   children.push(makeTable(
     ["Vai trò", "Họ tên", "Ngày", "Chữ ký"],
     [

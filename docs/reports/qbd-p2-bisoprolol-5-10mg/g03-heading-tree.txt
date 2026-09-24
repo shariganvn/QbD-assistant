@@ -1,0 +1,38 @@
+XSD validation: PASS
+
+Paragraphs: 572
+All validations PASSED!
+
+Text sanity checks: PASS
+
+--- cây heading của bản render ---
+H1 Danh mục chữ viết tắt
+H1 3.2.P.2 PHÁT TRIỂN DƯỢC HỌC (PHARMACEUTICAL DEVELOPMENT)
+  H2 3.2.P.2.1 THÀNH PHẦN CỦA THÀNH PHẨM (COMPONENTS OF THE DRUG PRODUCT)
+    H3 3.2.P.2.1.1 DƯỢC CHẤT (DRUG SUBSTANCE)
+    H3 3.2.P.2.1.2 TÁ DƯỢC (EXCIPIENTS)
+      H4 3.2.P.2.1.2.1. Đặc tính lý hóa (Physicochemical properties)
+      H4 3.2.P.2.1.2.2. Nghiên cứu tương hợp dược chất – tá dược (Excipient com
+  H2 3.2.P.2.2 THÀNH PHẨM (DRUG PRODUCT)
+    H3 3.2.P.2.2.1 PHÁT TRIỂN CÔNG THỨC (FORMULATION DEVELOPMENT)
+      H4 3.2.P.2.2.1.1 ĐẶC TÍNH SẢN PHẨM ĐỐI CHIẾU (CHARACTERIZATION OF REFEREN
+      H4 3.2.P.2.2.1.2 HỒ SƠ CHẤT LƯỢNG MỤC TIÊU VÀ CQA (QTPP / CQA)
+        H5 Xác định yếu tố trọng yếu và biện luận kiểm soát
+      H4 3.2.P.2.2.1.3 NGHIÊN CỨU PHÁT TRIỂN CÔNG THỨC (FORMULATION DEVELOPMENT
+        H5 Thử nghiệm 1: Khảo sát tỷ lệ tá dược rã
+        H5 Bảng thành phần công thức (mg/viên = % kl/kl)
+        H5 Vai trò tá dược trong công thức
+        H5 Kết quả — Tính chất vật lý cốm (in-process control)
+        H5 Kết quả — Chỉ tiêu chất lượng viên thành phẩm
+        H5 Nhận xét / Kết luận (nguyên văn từ Thử nghiệm 1)
+        H5 Đặc điểm thiết kế riêng của viên
+    H3 3.2.P.2.2.2 OVERAGES
+    H3 3.2.P.2.2.3 TÍNH CHẤT LÝ HÓA VÀ SINH HỌC (PHYSICOCHEMICAL AND BIOLOGIC
+      H4 Phương pháp hòa tan
+      H4 Hồ sơ tạp chất
+  H2 3.2.P.2.3 PHÁT TRIỂN QUY TRÌNH SẢN XUẤT (MANUFACTURING PROCESS DEVELOP
+  H2 3.2.P.2.4 HỆ THỐNG BAO BÌ (CONTAINER CLOSURE SYSTEM)
+  H2 3.2.P.2.5 ĐẶC TÍNH VI SINH (MICROBIOLOGICAL ATTRIBUTES)
+  H2 3.2.P.2.6 KHẢ NĂNG TƯƠNG THÍCH (COMPATIBILITY)
+H1 BẢNG TỔNG HỢP KHOẢNG TRỐNG DỮ LIỆU
+H1 Ghi nhận soạn thảo và rà soát

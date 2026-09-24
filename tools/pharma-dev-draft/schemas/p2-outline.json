@@ -3,6 +3,13 @@
   "schemaVersion": "1.0",
   "sections": [
     {
+      "id": "P.2.1",
+      "ctdReference": "3.2.P.2.1",
+      "headingVi": "Thành phần của thành phẩm (Components of the Drug Product)",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Nội dung nằm ở các mục con: dược chất và tá dược."
+    },
+    {
       "id": "P.2.1.1",
       "ctdReference": "3.2.P.2.1.1",
       "headingVi": "Dược chất (Drug Substance)",
@@ -63,6 +70,20 @@
           }
         ]
       }
+    },
+    {
+      "id": "P.2.2",
+      "ctdReference": "3.2.P.2.2",
+      "headingVi": "Thành phẩm (Drug Product)",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Nội dung nằm ở các mục con: phát triển công thức, overages, tính chất lý hóa và sinh học."
+    },
+    {
+      "id": "P.2.2.1",
+      "ctdReference": "3.2.P.2.2.1",
+      "headingVi": "Phát triển công thức (Formulation Development)",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Nội dung nằm ở các mục con: đặc tính sản phẩm đối chiếu, QTPP/CQA, nghiên cứu phát triển công thức."
     },
     {
       "id": "P.2.2.1.1",

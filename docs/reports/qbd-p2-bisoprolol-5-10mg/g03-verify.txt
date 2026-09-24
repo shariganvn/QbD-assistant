@@ -1,0 +1,58 @@
+TAP version 13
+# Subtest: heading level follows the depth of the CTD number
+ok 1 - heading level follows the depth of the CTD number
+  ---
+  duration_ms: 1.031176
+  type: 'test'
+  ...
+# Subtest: a numbering deeper than Word's heading styles is clamped, not dropped
+ok 2 - a numbering deeper than Word's heading styles is clamped, not dropped
+  ---
+  duration_ms: 0.130501
+  type: 'test'
+  ...
+# Subtest: every outline section's level is at most one deeper than the section before it
+ok 3 - every outline section's level is at most one deeper than the section before it
+  ---
+  duration_ms: 0.5452
+  type: 'test'
+  ...
+# Subtest: a container carries no form and no content of its own
+ok 4 - a container carries no form and no content of its own
+  ---
+  duration_ms: 0.361762
+  type: 'test'
+  ...
+# Subtest: every container has at least one child section
+ok 5 - every container has at least one child section
+  ---
+  duration_ms: 0.39058
+  type: 'test'
+  ...
+# Subtest: a draft entry for a container is rejected
+ok 6 - a draft entry for a container is rejected
+  ---
+  duration_ms: 3.263111
+  type: 'test'
+  ...
+# Subtest: a missing leaf is still reported, and a missing container is not
+ok 7 - a missing leaf is still reported, and a missing container is not
+  ---
+  duration_ms: 1.454317
+  type: 'test'
+  ...
+# Subtest: a heading3 block without a heading2 above it is rejected
+ok 8 - a heading3 block without a heading2 above it is rejected
+  ---
+  duration_ms: 1.065416
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 156.319065

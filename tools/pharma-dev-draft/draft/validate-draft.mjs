@@ -314,6 +314,10 @@ export function validateDraft(draft, outline = loadOutline()) {
 
   if (!Array.isArray(draft.sections)) fail("E_SECTIONS_SHAPE", "draft.sections must be an array");
 
+  // A container carries a heading and nothing else, so the draft holds no entry for it and the
+  // completeness check covers leaves only.
+  const containerIds = new Set(outline.sections.filter((section) => section.container).map((section) => section.id));
+  const leafIds = outline.sections.filter((section) => !section.container).map((section) => section.id);
   const outlineIds = outline.sections.map((section) => section.id);
   const seenIds = new Set();
 
@@ -321,6 +325,9 @@ export function validateDraft(draft, outline = loadOutline()) {
     if (typeof section?.id !== "string") fail("E_SECTION_ID", "every section must have a string id");
     if (!outlineIds.includes(section.id)) {
       fail("E_SECTION_UNKNOWN_ID", `section id "${section.id}" is not in schemas/p2-outline.json`);
+    }
+    if (containerIds.has(section.id)) {
+      fail("E_SECTION_CONTAINER_HAS_ENTRY", `section "${section.id}" is a container: it carries a heading only, so its content belongs to its child sections`);
     }
     if (seenIds.has(section.id)) fail("E_SECTION_DUPLICATE_ID", `section id "${section.id}" appears more than once`);
     seenIds.add(section.id);
@@ -342,12 +349,22 @@ export function validateDraft(draft, outline = loadOutline()) {
       section.blocks.forEach((block, index) => validateBlock(block, section.id, index));
       const spec = outline.sections.find((entry) => entry.id === section.id)?.form;
       if (spec) validateSectionForm(section, spec, draft);
+      // Block headings render relative to their section, so heading3 sits two levels in and needs a
+      // heading2 above it. Without one the section's own heading tree skips a level, and Word's
+      // navigation pane shows a broken branch however right the numbering text reads.
+      let sawHeading2 = false;
+      section.blocks.forEach((block, index) => {
+        if (block.type === "heading2") sawHeading2 = true;
+        if (block.type === "heading3" && !sawHeading2) {
+          fail("E_BLOCK_HEADING_SKIP", `sections[${section.id}].blocks[${index}] is a heading3 with no heading2 above it in the same section — it would skip a heading level`);
+        }
+      });
     } else {
       fail("E_SECTION_STATUS", `section "${section.id}".status must be "covered" or "gap", got: ${section.status}`);
     }
   }
 
-  const missingIds = outlineIds.filter((id) => !seenIds.has(id));
+  const missingIds = leafIds.filter((id) => !seenIds.has(id));
   if (missingIds.length > 0) {
     fail("E_SECTIONS_MISSING", `draft is missing required sections: ${missingIds.join(", ")}`);
   }
