@@ -53,7 +53,11 @@ function termsFromDraft() {
     // product. Deriving them from meta means the scan follows the worked example rather than having
     // to be updated alongside it.
     .filter((word) => word.length >= 5);
-  return [...new Set([...fromMeta, ...CONTENT_TERMS])].map((term) => term.toLowerCase());
+  // Which strengths a product has is the newest place a value could get pinned into the shape: a rule
+  // written for "the two strengths" passes every two-strength fixture. Scanning for the declared
+  // strengths themselves keeps that out of the form and out of the modules.
+  const strengths = draft.meta.strengths ?? [];
+  return [...new Set([...fromMeta, ...strengths, ...CONTENT_TERMS])].map((term) => term.toLowerCase());
 }
 
 test("no product name reaches a module", () => {

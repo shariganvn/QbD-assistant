@@ -147,6 +147,36 @@ function validateColumns(actual, expected, where) {
   });
 }
 
+// A product may have any number of strengths, and a table that reports per strength carries one
+// column group for each. The group SIZE is derived here rather than declared in the outline: the
+// house form uses one column per strength in the composition comparison and two (mass and per cent)
+// in the final formula, and a number written into the schema would be one more thing to keep in step
+// with the table it describes. When `perStrength` is set, `columns` declares only the fixed prefix.
+function validateStrengthColumns(table, tableSpec, draft, where) {
+  const strengths = draft.meta.strengths;
+  const fixedCount = Array.isArray(tableSpec.columns) ? tableSpec.columns.length : 0;
+  const remaining = table.headers.length - fixedCount;
+  if (remaining <= 0 || remaining % strengths.length !== 0) {
+    fail("E_FORM_STRENGTH_COLUMNS", `${where} must carry one equal column group per declared strength: ${remaining} column(s) after the ${fixedCount} fixed one(s) does not divide by ${strengths.length} strength(s)`);
+  }
+  const groupSize = remaining / strengths.length;
+  strengths.forEach((strength, index) => {
+    const label = table.headers[fixedCount + index * groupSize];
+    // The longest declared strength the label contains must be its own. Plain containment is too
+    // weak — "15 mg" contains "5 mg", so transposed groups would pass while every value sat under the
+    // wrong heading — and "contains no other strength" is too strong, because it would reject the
+    // correct "15 mg" label for exactly the same reason. Longest match separates the two: for a
+    // 5 mg / 15 mg pair, and for 2,5 mg / 5 mg, each label resolves to the strength it names.
+    const named = strengths
+      .filter((candidate) => label.includes(candidate))
+      .sort((a, b) => b.length - a.length);
+    if (named[0] !== strength) {
+      fail("E_FORM_STRENGTH_COLUMNS", `${where} column ${fixedCount + index * groupSize + 1} must name strength "${strength}", got "${label}"${named.length ? ` which names "${named[0]}"` : ""}`);
+    }
+  });
+  return groupSize;
+}
+
 function validateRows(table, tableSpec, draft, where) {
   if (tableSpec.rows === "variable") return;
   let expected = tableSpec.rows;
@@ -179,7 +209,19 @@ function validateSectionForm(section, spec, draft) {
   spec.tables.forEach((tableSpec, index) => {
     const table = tables[index];
     const where = `section "${section.id}" table ${index + 1}`;
-    if (Array.isArray(tableSpec.columns)) validateColumns(table.headers, tableSpec.columns, where);
+    if (tableSpec.perStrength) {
+      // The two make opposite claims about the trailing columns — one says "any number, any name",
+      // the other "exactly one group per strength" — so a table declaring both has no defined shape.
+      if (Array.isArray(tableSpec.columns) && tableSpec.columns.includes(COLUMN_REST)) {
+        fail("E_FORM_COLUMNS", `${where} declares both perStrength and an open-ended column list`);
+      }
+      if (Array.isArray(tableSpec.columns)) {
+        validateColumns(table.headers.slice(0, tableSpec.columns.length), tableSpec.columns, where);
+      }
+      validateStrengthColumns(table, tableSpec, draft, where);
+    } else if (Array.isArray(tableSpec.columns)) {
+      validateColumns(table.headers, tableSpec.columns, where);
+    }
     if (Boolean(table.headerless) !== Boolean(tableSpec.headerless)) {
       fail("E_FORM_HEADERLESS", `${where} must ${tableSpec.headerless ? "be" : "not be"} headerless`);
     }
@@ -187,7 +229,10 @@ function validateSectionForm(section, spec, draft) {
   });
 }
 
-export function validateDraft(draft) {
+// `outline` is injectable so a test can prove a form rule on a purpose-built form rather than only on
+// whichever shape the department's current outline happens to have. The CLI and the renderer pass
+// nothing and get the real one, so there is no second source of truth in normal use.
+export function validateDraft(draft, outline = loadOutline()) {
   if (typeof draft !== "object" || draft === null) fail("E_DRAFT_SHAPE", "draft must be an object");
   if (draft.schemaVersion !== "1.0") fail("E_SCHEMA_VERSION", `unsupported schemaVersion: ${draft.schemaVersion}`);
 
@@ -199,6 +244,29 @@ export function validateDraft(draft) {
   }
   if (!["xml-walk", "liteparse"].includes(draft.meta.extractionMethod)) {
     fail("E_META_FIELD", `draft.meta.extractionMethod must be "xml-walk" or "liteparse"`);
+  }
+  // Which strengths the document covers is data, so it is declared here rather than inferred from the
+  // product name. There is no upper bound: a two-strength product and a five-strength one take the
+  // same form.
+  if (!Array.isArray(draft.meta.strengths) || draft.meta.strengths.length === 0) {
+    fail("E_META_STRENGTHS", "draft.meta.strengths must be a non-empty array");
+  }
+  if (!draft.meta.strengths.every((strength) => typeof strength === "string" && strength.trim() !== "")) {
+    fail("E_META_STRENGTHS", "draft.meta.strengths entries must be non-empty strings");
+  }
+  if (new Set(draft.meta.strengths).size !== draft.meta.strengths.length) {
+    fail("E_META_STRENGTHS", "draft.meta.strengths must not repeat a strength");
+  }
+  // A strength listed here has no experimental source of its own — its composition comes from a
+  // proportional calculation. What that costs it is enforced where the tables are checked.
+  if (draft.meta.derivedStrengths !== undefined) {
+    if (!Array.isArray(draft.meta.derivedStrengths)) {
+      fail("E_META_STRENGTHS", "draft.meta.derivedStrengths must be an array when present");
+    }
+    const unknown = draft.meta.derivedStrengths.filter((strength) => !draft.meta.strengths.includes(strength));
+    if (unknown.length > 0) {
+      fail("E_META_STRENGTHS", `draft.meta.derivedStrengths names strength(s) absent from meta.strengths: ${unknown.join(", ")}`);
+    }
   }
   // Anything a section states that did not come out of sourceFile must be named here, so the
   // rendered cover page declares every source the document draws on rather than only the trial file.
@@ -213,7 +281,6 @@ export function validateDraft(draft) {
 
   if (!Array.isArray(draft.sections)) fail("E_SECTIONS_SHAPE", "draft.sections must be an array");
 
-  const outline = loadOutline();
   const outlineIds = outline.sections.map((section) => section.id);
   const seenIds = new Set();
 

@@ -34,10 +34,17 @@ deliberately.
    elsewhere.
 6. **Every outline id must appear exactly once**, `covered` or `gap` — never omit one just because
    nothing seemed to fit. An empty CTD section is itself information (a real gap for FD to close).
-7. **Fill `meta` completely**, including `extractionMethod` copied from `extracted.json` and a
+7. **Name every strength the document covers** in `meta.strengths`, and list in
+   `meta.derivedStrengths` any strength that has no trial data of its own — one whose composition you
+   worked out by proportion from a strength that was actually made. A proportion gives you a mass. It
+   does not give you a dissolution percentage, a hardness, a disintegration time or a content-uniformity
+   result, so every measured value for such a strength stays marked. The validator enforces this; the
+   reason it does is that nobody reading the finished Word file can tell a calculated number from a
+   measured one.
+8. **Fill `meta` completely**, including `extractionMethod` copied from `extracted.json` and a
    `preparer` field that's honest about who/what did the interpretation (e.g. "Claude, phiên làm
    việc <ngày>" or a person's name) — this draft is not attributable to "the system."
-8. **Run `node draft/validate-draft.mjs draft.json`** before rendering. Fix every reported error;
+9. **Run `node draft/validate-draft.mjs draft.json`** before rendering. Fix every reported error;
    the validator will not catch a wrong section mapping, only a malformed shape.
 
 ## What you are NOT trying to do

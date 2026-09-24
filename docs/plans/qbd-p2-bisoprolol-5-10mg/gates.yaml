@@ -72,14 +72,19 @@ gates:
       meta.strengths is required, is a non-empty array of distinct non-empty strings, and has no
       upper bound. For a table declaring form.perStrength, the validator derives the column-group
       size as (column count - fixed column count) / strengths.length, requires that division to be
-      exact, and requires the first column of each group to contain the corresponding strength string
-      verbatim. The group size is never declared in the schema, so it cannot drift from the table.
+      exact, and requires the first column of each group to name its own strength. The group size is
+      never declared in the schema, so it cannot drift from the table it describes. A group label is
+      resolved by LONGEST match against the declared strengths, not by plain containment: "15 mg"
+      contains "5 mg", so containment alone would accept transposed groups, while "names no other
+      strength" would reject the correct "15 mg" label for the same reason.
     boundary_owner: >
       schemas/p2-outline.json (form.perStrength) + draft/validate-draft.mjs
     fixture: >
-      three synthetic drafts built from the outline at test time: one declaring two strengths with a
-      correct two-column-per-strength table, one declaring two strengths with a single group, and one
-      declaring THREE strengths with a correct three-group table
+      draft/tests/fixtures/strength-form.mjs — a purpose-built two-table form (one column per strength,
+      and a mass plus per-cent pair per strength: both shapes the department's document uses) with a
+      draft builder taking any strength list. Kept out of a *.test.mjs file so the evidence scripts
+      import the same producer the tests use. validateDraft takes the outline as an optional second
+      argument for this; the CLI and renderer pass nothing and get the real outline.
     command: >
       node --test tools/pharma-dev-draft/draft/tests/*.test.mjs
     expected: >
@@ -88,8 +93,9 @@ gates:
       three-strength draft validates unchanged, proving no code path assumes exactly two.
     negative_cases:
       - Remaining column count not divisible by strengths.length -> E_FORM_STRENGTH_COLUMNS.
-      - A group's first column omits its strength string -> E_FORM_STRENGTH_COLUMNS.
-      - Two groups carry the same strength string -> E_FORM_STRENGTH_COLUMNS.
+      - A group's first column does not name its strength -> E_FORM_STRENGTH_COLUMNS.
+      - Groups transposed where one strength string contains another (5 mg / 15 mg) -> E_FORM_STRENGTH_COLUMNS.
+      - A table declares both perStrength and an open-ended column list -> E_FORM_COLUMNS.
       - meta.strengths absent, empty, or holding a duplicate -> E_META_STRENGTHS.
       - meta.derivedStrengths naming a strength absent from meta.strengths -> E_META_STRENGTHS.
     evidence: >

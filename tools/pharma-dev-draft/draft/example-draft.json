@@ -3,6 +3,9 @@
   "meta": {
     "productName": "Bisoprolol fumarate 10 mg, viên nén bao phim",
     "apiName": "Bisoprolol fumarate",
+    "strengths": [
+      "10 mg"
+    ],
     "sourceFile": "Thử nghiệm 1.docx (Khảo sát tỷ lệ tá dược rã)",
     "draftDate": "2026-08-20",
     "preparer": "Claude (phiên làm việc 2026-08-20, tổng hợp từ Thử nghiệm 1)",

@@ -25,8 +25,10 @@ belong in the draft — mark the section `gap` instead.
 {
   "schemaVersion": "1.0",
   "meta": {
-    "productName": "string — e.g. \"Bisoprolol fumarate 10 mg film-coated tablet\"",
+    "productName": "string — the product across every strength it covers",
     "apiName": "string — the active ingredient name",
+    "strengths": ["string — REQUIRED; one entry per strength the document covers, no duplicates, no upper bound"],
+    "derivedStrengths": ["string — optional; the subset of strengths that have no experimental source"],
     "sourceFile": "string — filename of the trial docx this draft was built from",
     "draftDate": "YYYY-MM-DD",
     "preparer": "string — free text, e.g. \"Claude (session ...)\" or a person's name",
@@ -124,8 +126,23 @@ each outline section may carry a `form` key that the validator enforces against 
     matrix uses this so it always scores exactly the attributes the product declared, rather than a
     list frozen into the schema.
   - `headerless` — whether the printed header strip is suppressed, for label/value forms.
+  - `perStrength` — the table reports per strength. `columns` then declares only the **fixed prefix**;
+    after it the table must carry exactly one equal column group per entry in `meta.strengths`. The
+    group size is **derived** by dividing the remaining columns by the strength count, never declared:
+    the department's form uses one column per strength in the composition comparison and two (mass and
+    per cent) in the final formula, and a size written into the schema would be one more number to
+    keep in step with the table it describes. The first column of each group must name that group's
+    strength, resolved by longest match so a 5 mg / 15 mg pair cannot be read in the wrong order.
+    `perStrength` cannot be combined with `"..."` — they make opposite claims about the trailing
+    columns.
 
 Omit `headings` or `tables` to leave that aspect unconstrained; omit `form` entirely for a section
 with no fixed shape. Violations report as `E_FORM_HEADINGS`, `E_FORM_TABLE_COUNT`,
-`E_FORM_COLUMNS`, `E_FORM_ROWS` and `E_FORM_HEADERLESS`, each naming the section, the table and the
-label that differs.
+`E_FORM_COLUMNS`, `E_FORM_ROWS`, `E_FORM_HEADERLESS` and `E_FORM_STRENGTH_COLUMNS`, each naming the
+section, the table and the label that differs. A malformed `meta.strengths` or `meta.derivedStrengths`
+reports as `E_META_STRENGTHS`.
+
+`validateDraft(draft, outline)` takes the outline as an optional second argument so a test can prove a
+form rule against a purpose-built form rather than only against whichever shape the department's
+current outline happens to have. The CLI and the renderer pass nothing and get the real outline, so
+normal use has one source of truth.
