@@ -1,13 +1,14 @@
 # Implementation Plan
 
-The active implementation plan is
-[docs/plans/qbd-p2-bisoprolol-5-10mg/plan.md](docs/plans/qbd-p2-bisoprolol-5-10mg/plan.md).
-This file remains the single authoritative router; follow that plan for the
-current change. Executable acceptance for it lives in
-`docs/plans/qbd-p2-bisoprolol-5-10mg/gates.yaml`.
+There is **no active implementation plan**. This file remains the single
+authoritative router; wait for a scope to be accepted before picking work up.
 
 ## Latest completed
 
+- [Two-strength P.2 plan](docs/plans/qbd-p2-bisoprolol-5-10mg/plan.md) — `completed` and read-only.
+  G-00..G-05 and G-07 hold evidence in `docs/reports/qbd-p2-bisoprolol-5-10mg/`. G-06, the
+  pharmacopoeia-version discovery gate, is `deferred`: it needs a verifiable source for the effective
+  EP version, not code.
 - `plans/260809-2001-rationale-explanation/plan.md` — `completed` and read-only.
 - [P.2.2.1 formulation-selection plan](docs/plans/qbd-p221-formulation-selection/plan.md) — completed
   and read-only.
