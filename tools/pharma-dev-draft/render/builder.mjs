@@ -13,6 +13,7 @@ import {
 import { TABLE_WIDTH_DXA as TABLE_WIDTH } from "../schemas/layout.mjs";
 import { GAP_LABEL, isGapText } from "../schemas/markers.mjs";
 import { tableValueCells } from "../schemas/table-shape.mjs";
+import { printableRequestRows } from "./data-request.mjs";
 
 const HEADER_FILL = "D9D9D9";
 const NOTICE_FILL = "FFF2CC";
@@ -21,6 +22,7 @@ const GAP_COLOR = "C00000";
 // The renderer's own tables (not driven by a draft) declare their widths here, named, so one test
 // can assert they all still fill TABLE_WIDTH if that budget ever changes.
 export const FIXED_TABLE_WIDTHS = {
+  dataRequest: [2000, 1900, 800, 5300],
   gapRegister: [4200, 2400, 3400],
   abbreviations: [2500, 7500],
   signoff: [3600, 2400, 2400, 1600],
@@ -322,6 +324,23 @@ export async function buildDocumentBuffer(draft, outline) {
   children.push(h1("BẢNG TỔNG HỢP KHOẢNG TRỐNG DỮ LIỆU"));
   children.push(bodyParagraph("Tổng hợp mức độ sẵn sàng dữ liệu theo từng mục CTD, phục vụ lập kế hoạch bổ sung dữ liệu tiếp theo."));
   children.push(gapRegisterTable(outline, draftSectionsById));
+
+  children.push(spacer());
+  children.push(h1("DANH MỤC DỮ LIỆU CẦN BỔ SUNG"));
+  children.push(bodyParagraph(
+    "Mỗi dòng dưới đây tương ứng một ô hoặc một câu đã đánh dấu trong tài liệu, và được sinh ra từ chính " +
+    "dấu đó chứ không khai riêng — điền một giá trị thật vào tài liệu là dòng tương ứng tự biến mất. Cột " +
+    "cuối là nguyên văn phần mô tả đi kèm dấu, nêu cần gì và lấy ở đâu. Trách nhiệm cung cấp thuộc bộ phận " +
+    "Phát triển sản phẩm (FD), trừ những dòng mà chính nội dung dòng đó nêu bên khác (nhà cung cấp nguyên " +
+    "liệu, QA, hoặc hồ sơ thuộc phần khác của bộ tài liệu).",
+  ));
+  const requestRows = printableRequestRows(draft, outline);
+  children.push(makeTable(
+    ["Mục CTD", "Hạng mục", "Hàm lượng", "Cần gì và lấy ở đâu"],
+    requestRows,
+    FIXED_TABLE_WIDTHS.dataRequest,
+    ["left", "left", "center", "justify"],
+  ));
 
   children.push(spacer());
   children.push(h1("Ghi nhận soạn thảo và rà soát"));

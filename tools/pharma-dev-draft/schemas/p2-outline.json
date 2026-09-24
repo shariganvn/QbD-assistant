@@ -112,15 +112,15 @@
       "id": "P.2.2.1.1",
       "ctdReference": "3.2.P.2.2.1.1",
       "headingVi": "Đặc tính sản phẩm đối chiếu (Characterization of Reference Product)",
-      "description": "Thành phần định tính/định lượng và kết quả thử nghiệm của sản phẩm đối chiếu (RMP) dùng để so sánh. Tên và hàm lượng RMP đổi theo sản phẩm nên nằm ở nhãn cột, không cố định. Biểu đồ hòa tan phải bổ sung thủ công.",
+      "description": "Thành phần định tính/định lượng và kết quả thử nghiệm của sản phẩm đối chiếu (RMP) dùng để so sánh. Tên và hàm lượng RMP đổi theo sản phẩm nên nằm ở nhãn cột, không cố định. Biểu đồ hòa tan phải bổ sung thủ công. Thuốc đối chiếu khảo sát theo từng hàm lượng: mỗi hàm lượng một cột. Bảng này KHÔNG phải bảng kết quả đo của sản phẩm mình — thuốc đối chiếu là mẫu mua về, đo được độc lập với việc mình đã bào chế hàm lượng đó hay chưa.",
       "form": {
         "headings": [],
         "tables": [
           {
             "columns": [
-              "Thành phần",
-              "*"
+              "Thành phần"
             ],
+            "perStrength": true,
             "rows": [
               "Thành phần tá dược",
               "Dạng bào chế",
@@ -129,9 +129,9 @@
           },
           {
             "columns": [
-              "Thông tin",
-              "*"
+              "Thông tin"
             ],
+            "perStrength": true,
             "rows": [
               "Nhà sản xuất",
               "Số đăng ký",
@@ -278,7 +278,20 @@
       "id": "P.2.2.3.1.4",
       "ctdReference": "3.2.P.2.2.3.1.4",
       "headingVi": "Hồ sơ hòa tan so sánh (Comparative dissolution profile)",
-      "description": "So sánh hòa tan giữa thành phẩm và sản phẩm đối chiếu, và giữa các hàm lượng với nhau khi hồ sơ xin miễn thử tương đương sinh học cho hàm lượng thấp. Cần nhiều thời điểm lấy mẫu và cùng điều kiện thử mới tính được f2. Biểu đồ phải bổ sung thủ công."
+      "description": "So sánh hòa tan giữa thành phẩm và sản phẩm đối chiếu, và giữa các hàm lượng với nhau khi hồ sơ xin miễn thử tương đương sinh học cho hàm lượng thấp. Cần nhiều thời điểm lấy mẫu và cùng điều kiện thử mới tính được f2. Biểu đồ phải bổ sung thủ công.",
+      "form": {
+        "headings": [],
+        "tables": [
+          {
+            "columns": [
+              "Thời điểm lấy mẫu"
+            ],
+            "perStrength": true,
+            "measuredOnly": true,
+            "rows": "variable"
+          }
+        ]
+      }
     },
     {
       "id": "P.2.2.3.2",

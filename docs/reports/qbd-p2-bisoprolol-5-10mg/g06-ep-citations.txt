@@ -1,0 +1,26 @@
+# G-06 — viện dẫn phiên bản dược điển trong bản thảo
+
+Lệnh: grep -nE 'EP 1[0-9]|Ph\.? ?Eur\.? ?1[0-9]' trên draft
+
+- 130:": "[3] Certificate of Analysis của nhà sản xuất Johnson Canady cho Bisoprolol fumarate Ph.Eur. 12, mã sản phẩm 71460, lô 488, ngày sản xuất 23/04/2026, hạn kiểm tra lại 23/04/2031, lượng giao 400,00 kg trong 16 kiện, ký bở
+- 134:� hồng ngoại đạt, nguyên văn ghi \"Conforms to 5th\" trong khi sản phẩm khai theo Ph.Eur. 12 nên cần làm rõ; tuân thủ ICH Q7, EU GMP Part II, 21 CFR Parts 210 & 211 và ICH Q3D. Về đơn vị cỡ hạt nêu trong bảng: CoA ghi \"
+- 985:êu trong Thử nghiệm 1. Về danh mục tạp: CoA nguyên liệu khai theo chuyên luận Ph.Eur. 12 và kiểm riêng từng tạp — tạp A (benzyl alcohol), tạp E, tạp G, mỗi tạp tối đa 0,1%. Tiêu chuẩn viên thành phẩm đang á
+- 1285:��c khi nộp. Thứ nhất, biểu mẫu của phòng dẫn chiếu Dược điển châu Âu EP 11.0 phụ lục 5.1.4, trong khi CoA nguyên liệu khai theo Ph.Eur. 12; cần thống nhất phiên bản dược điển áp dụng cho cả hồ s�
+
+## Kết luận
+
+Cả bốn chỗ đều gắn với một tài liệu có tên, không chỗ nào là tiêu chuẩn thành phẩm do bản thảo tự
+viết kèm số phiên bản:
+
+1. Dòng 130 — nguyên văn định danh CoA lô 488 của nhà cung cấp. Tuyên bố của nhà cung cấp về
+   nguyên liệu, giữ nguyên văn.
+2. Dòng 134 — nêu chính mâu thuẫn trên CoA ("Conforms to 5th" trong khi sản phẩm khai Ph.Eur. 12)
+   thành câu hỏi gửi nhà cung cấp.
+3. Dòng 985 — quy danh mục tạp cho CoA nguyên liệu, rồi nói rõ tiêu chuẩn viên thành phẩm đang
+   khai khác với danh mục đó.
+4. Dòng 1285 — nêu thẳng việc hồ sơ đang dẫn hai phiên bản và yêu cầu FD thống nhất.
+
+Gate giữ trạng thái `deferred`: chưa có nguồn xác minh phiên bản EP còn hiệu lực, và CoA là tuyên bố
+của nhà cung cấp về dược chất nên không phải authority cho tiêu chuẩn thành phẩm. Chuyển sang `pass`
+khi FD hoặc một nguồn kiểm chứng được nêu phiên bản kèm số supplement, và khi đó thay cách diễn đạt
+chờ ở một lượt.

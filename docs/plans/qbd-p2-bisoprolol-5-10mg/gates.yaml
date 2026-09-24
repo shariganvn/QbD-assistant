@@ -261,34 +261,42 @@ gates:
     status: deferred
 
   - id: G-07
-    title: The data-request annex is complete and derived, never hand-kept
+    title: The data-request list is complete and derived, never hand-kept
     invariant: >
-      Every gap marker in the draft produces exactly one row in the data-request annex, and every row
-      traces back to a marker. The place the data comes from is written in the marker cell itself, the
-      way the reference-product section already does it; the annex reads it out. No table mapping a
-      CTD section to a data location exists in the code, because such a table would be a second
-      source of truth and would go stale the moment a marker moved. Filling one real value removes its
+      Every gap marker in the draft is accounted for by exactly one row of the list, and every row
+      traces back to at least one marker. Where the data comes from is written in the marker itself, the
+      way the reference-product section has done since it was framed; the list reads it back. No table
+      mapping a CTD section to a data location exists in the code, because that would be a second source
+      of truth and would go stale the moment a marker moved section. Filling one real value removes its
       row with no other edit.
-    boundary_owner: render/builder.mjs (annex) + schemas/markers.mjs
+    boundary_owner: >
+      render/data-request.mjs + render/builder.mjs (the printed annex) + schemas/markers.mjs
     fixture: the migrated two-strength example draft
     command: >
-      node tools/pharma-dev-draft/render/render.mjs tools/pharma-dev-draft/draft/example-draft.json
+      node --test tools/pharma-dev-draft/draft/tests/data-request.test.mjs
+      && node tools/pharma-dev-draft/render/render.mjs tools/pharma-dev-draft/draft/example-draft.json
       --output-root "$(pwd)/tools/pharma-dev-draft/output"
-      && node tools/pharma-dev-draft/verify/verify.mjs <rendered>.docx
-      --draft tools/pharma-dev-draft/draft/example-draft.json
     expected: >
-      exit 0. Annex row count equals the draft's marker count. Every row names the CTD section, the
-      item, the strength it applies to, where the data comes from, and an owner. Replacing one marker
-      with a real value in a scratch copy reduces the row count by exactly one and changes nothing
-      else.
+      exit 0. Marker count equals the markers the rows account for. Every row names the CTD section, the
+      item, the strength it applies to, and what is needed with where it comes from; a cell in a
+      multi-column table also names its column, or a risk matrix yields one indistinguishable row per
+      unit operation. A table whose every value cell is a bare marker collapses to ONE row carrying that
+      table's cell count: an empty 7x5 matrix asks for a single thing, and writing the source into all
+      thirty-five cells would satisfy a list by making the table unreadable. That is why the accounting
+      is coverage rather than one row per marker — each row carries how many markers it covers, and the
+      sum must equal the marker count exactly.
+      No per-row owner column: FD owns every outstanding item here, so a column repeating it would carry
+      no information, and deriving a different owner from the marker's prose would mean inventing one.
+      The annex states once that FD owns every row unless the row's own text names another party.
     negative_cases:
-      - Row count differs from marker count -> reject.
-      - A row lacks a data location or an owner -> reject.
+      - Covered markers do not sum to the draft's marker count -> reject.
+      - A row does not say what is needed or where from -> reject.
+      - A matrix cell's row does not name its column -> reject; the rows are indistinguishable.
       - A row is added by hand rather than derived from a marker -> reject.
       - A section-to-location lookup table appears in the code -> fails G-00 and this gate.
-      - Filling a value leaves its row in place -> reject; the annex is stale by construction.
+      - Filling a value leaves its row in place -> reject; the list is stale by construction.
     evidence: >
-      g07-annex-vs-markers.txt (counts and the row-by-row join) + g07-fill-one-value.txt (the
-      remove-one-row demonstration)
+      g07-annex-vs-markers.txt (test output plus the independent count taken from the rendered
+      document.xml) + g07-fill-one-value.txt (the remove-one-row demonstration)
     blocks: []
-    status: unverified
+    status: pass

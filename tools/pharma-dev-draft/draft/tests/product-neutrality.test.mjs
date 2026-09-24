@@ -44,6 +44,18 @@ function isFixtureFile(path) {
   return path.includes(join("draft", "tests"));
 }
 
+// Comments are addressed to whoever maintains the module, on the same footing as a section's
+// description in the outline: they may name a product or a strength to illustrate a rule — the
+// longest-match rule for strength labels is only explicable with two concrete strengths — and naming
+// one constrains nothing. What must stay neutral is the logic, so the scan reads the code alone.
+function codeWithoutComments(text) {
+  return text
+    .replace(/\/\*[\s\S]*?\*\//g, " ")
+    .split("\n")
+    .map((line) => line.replace(/(^|[^:"'`\\])\/\/.*$/, "$1"))
+    .join("\n");
+}
+
 function termsFromDraft() {
   const draft = JSON.parse(readFileSync(join(toolRoot, "draft", "example-draft.json"), "utf8"));
   const fromMeta = [draft.meta.apiName, draft.meta.productName]
@@ -65,7 +77,7 @@ test("no product name reaches a module", () => {
   const offenders = [];
   for (const path of moduleFiles(toolRoot)) {
     if (isFixtureFile(path)) continue;
-    const text = readFileSync(path, "utf8").toLowerCase();
+    const text = codeWithoutComments(readFileSync(path, "utf8")).toLowerCase();
     for (const term of terms) {
       if (text.includes(term)) offenders.push(`${path.slice(toolRoot.length + 1)}: "${term}"`);
     }

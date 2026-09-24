@@ -1,10 +1,14 @@
 {
   "schemaVersion": "1.0",
   "meta": {
-    "productName": "Bisoprolol fumarate 10 mg, viên nén bao phim",
+    "productName": "Bisoprolol fumarate 5 mg và 10 mg, viên nén bao phim",
     "apiName": "Bisoprolol fumarate",
     "strengths": [
+      "5 mg",
       "10 mg"
+    ],
+    "derivedStrengths": [
+      "5 mg"
     ],
     "sourceFile": "Thử nghiệm 1.docx (Khảo sát tỷ lệ tá dược rã)",
     "draftDate": "2026-08-20",
@@ -41,7 +45,7 @@
             ],
             [
               "Tên IUPAC",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nguồn cần lấy: chuyên luận dược điển áp dụng."
             ],
             [
               "Số đăng ký CAS",
@@ -73,7 +77,7 @@
             ],
             [
               "Điểm chảy",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nguồn cần lấy: chuyên luận dược điển hoặc hồ sơ 3.2.S.3.1."
             ],
             [
               "pKa",
@@ -81,7 +85,7 @@
             ],
             [
               "Log P",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nguồn cần lấy: chuyên luận, y văn có bình duyệt, hoặc thực nghiệm."
             ],
             [
               "Độ ổn định hóa học",
@@ -89,23 +93,23 @@
             ],
             [
               "– Phân hủy do nhiệt",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nguồn cần lấy: nghiên cứu phân hủy cưỡng bức, hồ sơ 3.2.S.7."
             ],
             [
               "– Phân hủy do ẩm",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nguồn cần lấy: nghiên cứu phân hủy cưỡng bức, hồ sơ 3.2.S.7."
             ],
             [
               "– Phân hủy do peroxid",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nguồn cần lấy: nghiên cứu phân hủy cưỡng bức, hồ sơ 3.2.S.7."
             ],
             [
               "– Phân hủy do acid/base",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nguồn cần lấy: nghiên cứu phân hủy cưỡng bức, hồ sơ 3.2.S.7."
             ],
             [
               "– Phân hủy do ánh sáng",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nguồn cần lấy: nghiên cứu phân hủy cưỡng bức theo ICH Q1B, hồ sơ 3.2.S.7."
             ]
           ]
         },
@@ -255,19 +259,23 @@
           "type": "table",
           "headers": [
             "Thành phần",
+            "Concor® 5 mg",
             "Concor® 10 mg"
           ],
           "rows": [
             [
               "Thành phần tá dược",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Liệt kê từng tá dược kèm tỷ lệ. Nguồn định tính lấy từ SmPC hoặc tờ hướng dẫn sử dụng; tỷ lệ định lượng cần kỹ thuật đảo ngược vì nhà sản xuất không công bố.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Liệt kê từng tá dược kèm tỷ lệ. Nguồn định tính lấy từ SmPC hoặc tờ hướng dẫn sử dụng; tỷ lệ định lượng cần kỹ thuật đảo ngược vì nhà sản xuất không công bố."
             ],
             [
               "Dạng bào chế",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác nhận từ nhãn hoặc SmPC.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác nhận từ nhãn hoặc SmPC."
             ],
             [
               "Tài liệu tham khảo (TLTK)",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Ghi rõ nguồn của từng dòng trên: SmPC nước nào, phiên bản nào, ngày truy cập; hoặc số hiệu báo cáo thực nghiệm nội bộ.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Ghi rõ nguồn của từng dòng trên: SmPC nước nào, phiên bản nào, ngày truy cập; hoặc số hiệu báo cáo thực nghiệm nội bộ."
             ]
           ]
@@ -281,71 +289,88 @@
           "type": "table",
           "headers": [
             "Thông tin",
+            "Concor® 5 mg (Lô …)",
             "Concor® 10 mg (Lô …)"
           ],
           "rows": [
             [
               "Nhà sản xuất",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn hoặc tờ hướng dẫn sử dụng của lô mua về.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn hoặc tờ hướng dẫn sử dụng của lô mua về."
             ],
             [
               "Số đăng ký",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn; ghi rõ số đăng ký tại thị trường mua mẫu.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn; ghi rõ số đăng ký tại thị trường mua mẫu."
             ],
             [
               "Hạn dùng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn của lô mua về.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn của lô mua về."
             ],
             [
               "Điều kiện bảo quản",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn hoặc SmPC.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn hoặc SmPC."
             ],
             [
               "Quy cách đóng gói",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn; nêu loại vỉ, số viên mỗi vỉ và mỗi hộp.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn; nêu loại vỉ, số viên mỗi vỉ và mỗi hộp."
             ],
             [
               "Cảm quan",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Mô tả viên đối chiếu: hình dạng, màu sắc, ký hiệu dập hoặc khắc nếu có.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Mô tả viên đối chiếu: hình dạng, màu sắc, ký hiệu dập hoặc khắc nếu có."
             ],
             [
               "Khối lượng trung bình",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Cân theo phương pháp dược điển; ghi giá trị trung bình, lớn nhất, nhỏ nhất.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Cân theo phương pháp dược điển; ghi giá trị trung bình, lớn nhất, nhỏ nhất."
             ],
             [
               "Kích thước viên",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đo đường kính và độ dày.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đo đường kính và độ dày."
             ],
             [
               "Độ cứng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đo trên cùng thiết bị dùng cho CT01 – CT03 để so sánh được.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đo trên cùng thiết bị dùng cho CT01 – CT03 để so sánh được."
             ],
             [
               "Thời gian rã",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thử theo cùng điều kiện đã dùng ở Thử nghiệm 1.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thử theo cùng điều kiện đã dùng ở Thử nghiệm 1."
             ],
             [
               "Định lượng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thử theo phương pháp sẽ khai ở 3.2.P.5.2.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thử theo phương pháp sẽ khai ở 3.2.P.5.2."
             ],
             [
               "Tạp chất liên quan",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Định danh từng tạp theo chuyên luận Ph.Eur. 12 (tạp A, E, G) như đã nêu ở mục P.2.2.3.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Định danh từng tạp theo chuyên luận Ph.Eur. 12 (tạp A, E, G) như đã nêu ở mục P.2.2.3."
             ],
             [
               "Đồng đều hàm lượng",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thử theo Ph.Eur. 2.9.40; ghi giá trị AV.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thử theo Ph.Eur. 2.9.40; ghi giá trị AV."
             ],
             [
               "Hàm lượng chất bảo quản",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Không áp dụng nếu công thức đối chiếu không dùng chất bảo quản — cần xác nhận rồi ghi \"không áp dụng\" kèm lý do.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Không áp dụng nếu công thức đối chiếu không dùng chất bảo quản — cần xác nhận rồi ghi \"không áp dụng\" kèm lý do."
             ],
             [
               "Tương đương độ hòa tan — điều kiện thử",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Ghi thiết bị, tốc độ khuấy, môi trường, thể tích. Phải trùng điều kiện dùng cho công thức của ta thì so sánh mới có nghĩa.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Ghi thiết bị, tốc độ khuấy, môi trường, thể tích. Phải trùng điều kiện dùng cho công thức của ta thì so sánh mới có nghĩa."
             ],
             [
               "Tương đương độ hòa tan — hồ sơ theo thời gian",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Lấy nhiều thời điểm, không chỉ một giá trị 30 phút, để tính được hệ số tương đồng f2.",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Lấy nhiều thời điểm, không chỉ một giá trị 30 phút, để tính được hệ số tương đồng f2."
             ]
           ]
@@ -799,6 +824,7 @@
             "STT",
             "Tên thành phần",
             "Chức năng",
+            "5 mg",
             "10 mg"
           ],
           "rows": [
@@ -806,48 +832,56 @@
               "1",
               "Bisoprolol fumarate",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
             ],
             [
               "2",
               "Lactose monohydrate",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
             ],
             [
               "3",
               "Lactose monohydrate & cellulose powder 75:25 (Cellactose 80)",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
             ],
             [
               "4",
               "Croscarmellose sodium (Primellose)",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
             ],
             [
               "5",
               "Magnesium oxide (MgO XP 103)",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
             ],
             [
               "6",
               "Povidone K30",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
             ],
             [
               "7",
               "Magnesium stearate",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
             ],
             [
               "8",
               "Tổng cộng",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức"
             ]
           ],
@@ -855,6 +889,7 @@
             "center",
             "left",
             "left",
+            "center",
             "center"
           ]
         }
@@ -914,7 +949,26 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ hòa tan so sánh giữa thành phẩm và thuốc đối chiếu, và giữa các hàm lượng với nhau. Nguồn cần lấy: thực nghiệm hòa tan nhiều thời điểm trên cùng điều kiện thử. Mục 3.2.P.2.2.1.1 đang chờ chính bộ số liệu này cho thuốc đối chiếu; chưa có thì không tính được f2 và không có cơ sở xin miễn thử tương đương sinh học cho hàm lượng thấp."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ hòa tan so sánh giữa hai hàm lượng và với thuốc đối chiếu. Nguồn cần lấy: thực nghiệm hòa tan nhiều thời điểm trên cùng điều kiện thử, theo lịch lấy mẫu của phương pháp ở mục 3.2.P.2.2.3.1.2 (hiện chưa khai). Bảng dưới đây chỉ dựng dòng cho thời điểm 30 phút vì đó là thời điểm duy nhất hồ sơ hiện có tiêu chuẩn chấp nhận; tính f2 cần nhiều thời điểm hơn."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Thời điểm lấy mẫu",
+            "5 mg",
+            "10 mg"
+          ],
+          "rows": [
+            [
+              "30 phút",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] cần lô 5 mg được bào chế thật",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] cần thực nghiệm hòa tan trên lô 10 mg"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ hòa tan của thuốc đối chiếu Concor® ở từng hàm lượng, để so sánh. Nguồn cần lấy: thực nghiệm trên mẫu mua về; mục 3.2.P.2.2.1.1 đang chờ chính bộ số liệu này. Chưa có thì không có cơ sở xin miễn thử tương đương sinh học cho hàm lượng 5 mg."
         }
       ]
     },

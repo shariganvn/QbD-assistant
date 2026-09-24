@@ -159,7 +159,10 @@ test("the risk matrix has to follow the quality attributes the product declares"
 
 test("the form fixes the shape, not the product: labels carrying a product name may change", () => {
   const draft = loadExample();
-  formTable(draft, "P.2.2.1.1").headers[1] = "Thuốc gốc XYZ 20 mg";
+  // The reference product's name is the product's own business; what the form fixes is that each
+  // column group names the strength it reports on, so a brand can change while the strengths stay.
+  const [low, high] = draft.meta.strengths;
+  formTable(draft, "P.2.2.1.1").headers = ["Thành phần", `Thuốc gốc XYZ ${low}`, `Thuốc gốc XYZ ${high}`];
   assert.doesNotThrow(() => validateDraft(draft));
 });
 
@@ -183,8 +186,23 @@ test("a draft for an entirely different product validates on the same form", () 
   const draft = loadExample();
   // Nothing about this product survives: another active substance, other excipients, other quality
   // attributes, another reference product. Only the P.2 form stays, which is the point.
-  draft.meta.productName = "Metformin hydrochloride 500 mg viên nén bao phim";
+  draft.meta.productName = "Metformin hydrochloride 500 mg và 1000 mg viên nén bao phim";
   draft.meta.apiName = "Metformin hydrochloride";
+  // Other strengths too, and both of them made rather than calculated: nothing of this product's
+  // strength list survives either.
+  draft.meta.strengths = ["500 mg", "1000 mg"];
+  delete draft.meta.derivedStrengths;
+  for (const [sectionId, index, fixed] of [["P.2.2.1.1", 0, "Thành phần"], ["P.2.2.1.1", 1, "Thông tin"]]) {
+    const table = formTable(draft, sectionId, index);
+    table.headers = [fixed, ...draft.meta.strengths.map((strength) => `Glucophage® ${strength}`)];
+    table.rows = table.rows.map((row) => [row[0], row[1], row[1]]);
+  }
+  for (const [sectionId, fixedCount] of [["P.2.2.1.3.5", 3], ["P.2.2.3.1.4", 1]]) {
+    const table = formTable(draft, sectionId);
+    table.headers = [...table.headers.slice(0, fixedCount), ...draft.meta.strengths];
+    table.rows = table.rows.map((row) => [...row.slice(0, fixedCount), ...draft.meta.strengths.map(() => GAP_PREFIX)]);
+    delete table.columnAlign;
+  }
   const excipients = formTable(draft, "P.2.1.2.1");
   excipients.rows = [["1.", "Hypromellose", "—", "—", "Tá dược dính"]];
   const attributes = formTable(draft, "P.2.2.1.2.1");
@@ -196,8 +214,6 @@ test("a draft for an entirely different product validates on the same form", () 
     ["Xát hạt ướt", "Lượng dung môi", "Kinh nghiệm sản xuất"],
     ["Dập viên", "Lực dập", "Kinh nghiệm sản xuất"],
   ];
-  formTable(draft, "P.2.2.1.1").headers[1] = "Glucophage® 500 mg";
-  formTable(draft, "P.2.2.1.1", 1).headers[1] = "Glucophage® 500 mg (Lô …)";
   assert.doesNotThrow(() => validateDraft(draft));
 });
 

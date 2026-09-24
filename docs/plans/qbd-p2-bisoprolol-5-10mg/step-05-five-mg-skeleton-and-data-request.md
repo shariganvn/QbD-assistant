@@ -1,6 +1,6 @@
 # Step 05 — The 5 mg columns, and a data-request annex derived from them
 
-Status: unverified · Gate: G-07 · Depends on: steps 01, 02, 04
+Status: pass · Gate: G-07 · Depends on: steps 01, 02, 04
 
 ## Requirement
 

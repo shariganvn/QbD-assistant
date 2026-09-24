@@ -1,7 +1,7 @@
 ---
 title: "P.2 two-strength coverage and full house-form outline"
 description: "Give tools/pharma-dev-draft a strength dimension, the department's full P.2 outline with real heading nesting, and a machine-enforced rule that a strength with no experimental source can never carry a measured result. Worked example: Bisoprolol fumarate film-coated tablets 5 mg and 10 mg, where only 10 mg has trial data and 5 mg is a proportional calculation."
-status: planned
+status: completed
 priority: P1
 effort: "4-5d"
 issue: null
@@ -76,7 +76,7 @@ manual additions), and filling any gap that needs a source the repository does n
       CTD depth, the full 12-container/26-leaf outline. Closes W-1, W-2, W-3.
 - [x] `step-04-migrate-existing-content.md` — move every existing value into the new sections,
       adding no data. Depends on step 03.
-- [ ] `step-05-five-mg-skeleton-and-data-request.md` — build out the 5 mg columns as located
+- [x] `step-05-five-mg-skeleton-and-data-request.md` — build out the 5 mg columns as located
       markers and derive the data-request annex from them. Depends on steps 01, 02, 04.
 
 ## Dependencies
