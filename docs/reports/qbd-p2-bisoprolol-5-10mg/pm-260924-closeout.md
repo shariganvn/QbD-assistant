@@ -86,3 +86,7 @@ Danh mục đầy đủ 113 dòng nằm cuối bản Word đã render, sinh từ
 
 Renderer chưa chèn được hình. Công thức cấu tạo ở `3.2.P.2.1.1.1`, biểu đồ hòa tan ở `3.2.P.2.2.1.1`
 và `3.2.P.2.2.3.1.4`, sơ đồ quy trình ở `3.2.P.2.3` phải bổ sung thủ công vào bản Word.
+
+> **Đã gỡ ở workstream `qbd-p2-figures` (25/09/2026).** Renderer chèn được hình. Sơ đồ quy trình và
+> biểu đồ hòa tan Thử nghiệm 1 nay tự dựng từ chính bảng trong mục. Ba hình còn lại vẫn vắng, nhưng lý
+> do đổi từ "công cụ không làm được" sang "chưa có số liệu" — hai điều khác nhau với người đọc duyệt.

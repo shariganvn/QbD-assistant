@@ -5,6 +5,10 @@ authoritative router; wait for a scope to be accepted before picking work up.
 
 ## Latest completed
 
+- [P.2 figures plan](docs/plans/qbd-p2-figures/plan.md) — `completed` and read-only. G-08..G-11 hold
+  evidence in `docs/reports/qbd-p2-figures/`. G-12, the drug-substance property sources, is `blocked`:
+  the reference databases are denied by the environment's network policy, and PubMed was the wrong
+  database for those fields in any case.
 - [Two-strength P.2 plan](docs/plans/qbd-p2-bisoprolol-5-10mg/plan.md) — `completed` and read-only.
   G-00..G-05 and G-07 hold evidence in `docs/reports/qbd-p2-bisoprolol-5-10mg/`. G-06, the
   pharmacopoeia-version discovery gate, is `deferred`: it needs a verifiable source for the effective

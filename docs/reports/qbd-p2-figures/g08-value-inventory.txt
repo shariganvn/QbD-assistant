@@ -1,0 +1,7 @@
+values before: 240, after: 240
+lost: 2, duplicated: 0, moved: 0
+added: 2 (marker 0, prose 2, data 0)
+  ADDED PROSE in P.2.2.1.1: Mục đích cuối của mục này là so sánh hồ sơ hòa tan của thuốc đối chiếu với công thức của ta — CT03 đ
+  ADDED PROSE in P.2.3.1: Quy trình sản xuất được chọn cho sản phẩm này là trộn dập thẳng, do FD xác nhận — hồ sơ Thử nghiệm 1
+  LOST from P.2.2.1.1: Mục đích cuối của mục này là so sánh hồ sơ hòa tan của thuốc đối chiếu với công thức của ta — CT03 đạt trung bình 98,64%
+  LOST from P.2.3.1: Quy trình sản xuất được chọn cho sản phẩm này là trộn dập thẳng, do FD xác nhận — hồ sơ Thử nghiệm 1 không mô tả quy trì

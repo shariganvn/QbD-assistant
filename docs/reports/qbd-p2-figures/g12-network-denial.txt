@@ -1,0 +1,42 @@
+# G-12 — các nguồn tham chiếu dược bị chặn ở proxy
+
+Ngày dò: 2026-09-25. Đây là **policy denial** của environment, không phải lỗi tạm.
+
+## Kết quả dò từng host
+
+| Host | Vai trò | HTTP |
+|---|---|---|
+| `pubchem.ncbi.nlm.nih.gov` | cơ sở dữ liệu tính chất hóa chất — nơi IUPAC, điểm chảy, LogP, pKa thực sự nằm | chặn (403 tại CONNECT) |
+| `eutils.ncbi.nlm.nih.gov` | API của PubMed | chặn (403 tại CONNECT) |
+| `www.ema.europa.eu` | public assessment report | chặn (403 tại CONNECT) |
+| `www.accessdata.fda.gov` | nhãn thuốc FDA | chặn (403 tại CONNECT) |
+| `go.drugbank.com` | đối chiếu chéo | chặn (403 tại CONNECT) |
+
+## Hai điều ghi lại thay vì lách
+
+1. **PubMed vốn là sai cơ sở dữ liệu.** Nó lập chỉ mục trích dẫn và tóm tắt bài báo; IUPAC, điểm chảy,
+   LogP, pKa nằm ở PubChem, DrugBank hoặc chuyên luận dược điển.
+2. **Web search chạy được nhưng không đủ làm nguồn.** Nó trả snippet cộng tóm tắt, không có đường dẫn
+   tới giá trị gốc. Phòng đã yêu cầu link truy xuất được, và chính hồ sơ này từng mang một giá trị
+   "ai cũng biết" suốt bốn đợt: ghi dược chất tan trong ethanol trong khi CoA ghi methanol (W-9).
+
+## Tám ô trống, và ô nào mở mạng sẽ đóng được
+
+| Ô | Mở mạng có đóng được? |
+|---|---|
+| Tên IUPAC | có — PubChem |
+| Điểm chảy | có — PubChem hoặc chuyên luận |
+| Log P | có, nhưng phải phân biệt giá trị tính toán với giá trị thực nghiệm |
+| Phân hủy do nhiệt | **không** — thực nghiệm trên chính dược chất này, thuộc 3.2.S.7 |
+| Phân hủy do ẩm | **không** — như trên |
+| Phân hủy do peroxid | **không** — như trên |
+| Phân hủy do acid/base | **không** — như trên |
+| Phân hủy do ánh sáng | **không** — như trên |
+
+Mở mạng đóng được 3/8 ô. Năm dòng phân hủy cưỡng bức là kết quả thực nghiệm trên lô dược chất đang
+dùng; bài báo về bisoprolol của nhà sản xuất khác không thay thế được.
+
+## Cách mở
+
+Environment settings → Network access: chọn mức truy cập rộng hơn hoặc thêm các host trên vào danh
+sách cho phép. Mức truy cập mô tả ở https://code.claude.com/docs/en/claude-code-on-the-web

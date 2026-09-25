@@ -71,12 +71,49 @@ Rules **not** enforced by the validator (judgment calls — see `draft/checklist
 { "type": "heading2", "text": "string" }
 { "type": "heading3", "text": "string" }
 { "type": "paragraph", "text": "string", "italic": false, "bold": false }   // italic/bold optional, default false
+{ "type": "figure",
+  "kind": "flow" | "bars",
+  "fromTable": 0,                      // index of the table in THIS section the figure draws from
+  "fromAxis": "columns" | "rows",      // flow only: which axis holds the steps; default "columns"
+  "fromRow": "string",                 // bars only: the row label whose values are plotted
+  "threshold": "80", "thresholdLabel": "Ngưỡng Q = 80%", "axisLabel": "…",   // bars only, optional
+  "caption": "string" }                // required
+{ "type": "image", "path": "assets/…png", "caption": "string", "widthPt": 320 }
 { "type": "table",
   "headers": ["string", "..."],
   "rows": [["string", "..."], "..."],
   "columnWidths": [520, 1680, "..."],          // optional, see below
   "columnAlign": ["center", "left", "..."] }   // optional, see below
 ```
+
+### `figure` and `image`
+
+A `figure` **carries no numbers**. It names a table and a row already present in the same section, and
+the renderer reads the values out at render time. Copying them into the block would put one
+measurement in two places, and the two would disagree the first time one was corrected — the value
+inventory would report it as the duplicate it is.
+
+The second thing that buys: a figure cannot be drawn from data that does not exist. `validate-draft`
+resolves every figure against its table and rejects the draft with `E_FIGURE_SOURCE` when the table or
+row is missing, when a plotted cell still holds a gap marker, or when a value is not a number. An empty
+chart in a document shaped like a dossier reads as a measured result of zero, which is a stronger claim
+than the blank it would replace.
+
+`bars` reads the values as the source writes them — Vietnamese comma decimals — and prints them back
+in that form. A column below `threshold` is drawn in a different colour.
+
+`image` is for a figure that cannot be derived, such as a structural formula. `path` must sit under
+`assets/` with no parent-directory segment, and the file must exist: `E_IMAGE_PATH` and
+`E_IMAGE_MISSING`. Only the width is declared; the renderer keeps the file's own proportions so a
+supplied image is never silently stretched.
+
+Both need a `caption`; figures are numbered across the document in render order.
+
+**Rendering a figure needs Chromium.** There is no rasteriser in this environment, so the browser
+Playwright installs draws the SVG. It must be `headless_shell`, not `chrome --headless`, which in this
+container paints only box outlines and drops all text. A missing browser stops the render rather than
+omitting the figure — a figure that silently disappears is evidence removed without anyone being told.
+Point `PHARMA_DEV_HEADLESS_SHELL` at the binary if it lives somewhere unusual.
 
 Every `rows[i]` must have the same length as `headers`. Cell values are always strings (format
 numbers exactly as they appear in the source — e.g. `"98,64"` for Vietnamese comma-decimal, not

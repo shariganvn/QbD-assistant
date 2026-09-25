@@ -3,12 +3,13 @@
 // a table was mapped to the correct CTD section, or whether "covered" content is a verbatim copy
 // of the source (see draft/checklist.md for that judgment call).
 
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { TABLE_WIDTH_DXA } from "../schemas/layout.mjs";
 import { isGapText } from "../schemas/markers.mjs";
+import { barSeries, flowSteps } from "../render/figures/figure-source.mjs";
 
 const draftDir = dirname(fileURLToPath(import.meta.url));
 const toolRoot = join(draftDir, "..");
@@ -21,7 +22,13 @@ export class DraftContractError extends Error {
   }
 }
 
-const VALID_BLOCK_TYPES = new Set(["heading2", "heading3", "paragraph", "table"]);
+const VALID_BLOCK_TYPES = new Set(["heading2", "heading3", "paragraph", "table", "figure", "image"]);
+const VALID_FIGURE_KINDS = new Set(["flow", "bars"]);
+const VALID_FIGURE_AXES = new Set(["columns", "rows"]);
+// Supplied figures live in one directory under the tool. A draft naming an arbitrary path would let a
+// rendered dossier pull in a file nobody reviewed.
+const IMAGE_ROOT = "assets/";
+const VALID_IMAGE_EXTENSIONS = [".png", ".jpg", ".jpeg"];
 const VALID_COLUMN_ALIGN = new Set(["left", "center", "justify"]);
 // Keys the renderer actually reads. Anything else in a block is a typo the renderer would silently
 // ignore (falling back to default widths/alignment), so it is rejected rather than dropped.
@@ -30,6 +37,8 @@ const ALLOWED_BLOCK_KEYS = {
   heading3: new Set(["type", "text"]),
   paragraph: new Set(["type", "text", "italic", "bold"]),
   table: new Set(["type", "headers", "rows", "columnWidths", "columnAlign", "headerless"]),
+  figure: new Set(["type", "kind", "fromTable", "fromAxis", "fromRow", "threshold", "thresholdLabel", "axisLabel", "caption"]),
+  image: new Set(["type", "path", "caption", "widthPt"]),
 };
 const REQUIRED_META_FIELDS = ["productName", "apiName", "sourceFile", "draftDate", "preparer", "extractionMethod"];
 
@@ -61,6 +70,37 @@ function validateBlock(block, sectionId, index) {
     // text, so reject it instead of producing prose the author did not write.
     if (block.text.includes("\n")) {
       fail("E_BLOCK_TEXT", `${where}.text must not contain a newline — only table cells render line breaks`);
+    }
+  }
+  if (block.type === "figure") {
+    if (!VALID_FIGURE_KINDS.has(block.kind)) {
+      fail("E_FIGURE_SHAPE", `${where}.kind must be one of ${[...VALID_FIGURE_KINDS].join(", ")}, got: ${block.kind}`);
+    }
+    if (!Number.isInteger(block.fromTable) || block.fromTable < 0) {
+      fail("E_FIGURE_SHAPE", `${where}.fromTable must be a non-negative integer naming a table in the same section`);
+    }
+    if (typeof block.caption !== "string" || block.caption.trim() === "") {
+      fail("E_FIGURE_SHAPE", `${where}.caption must be a non-empty string — a figure with no caption states nothing about what it shows`);
+    }
+    if (block.kind === "flow" && block.fromAxis !== undefined && !VALID_FIGURE_AXES.has(block.fromAxis)) {
+      fail("E_FIGURE_SHAPE", `${where}.fromAxis must be one of ${[...VALID_FIGURE_AXES].join(", ")}`);
+    }
+    if (block.kind === "bars" && (typeof block.fromRow !== "string" || block.fromRow.trim() === "")) {
+      fail("E_FIGURE_SHAPE", `${where}.fromRow must name the table row the chart plots`);
+    }
+  }
+  if (block.type === "image") {
+    if (typeof block.path !== "string" || !block.path.startsWith(IMAGE_ROOT) || block.path.includes("..")) {
+      fail("E_IMAGE_PATH", `${where}.path must be a path under "${IMAGE_ROOT}" with no parent-directory segment, got: ${block.path}`);
+    }
+    if (!VALID_IMAGE_EXTENSIONS.some((extension) => block.path.toLowerCase().endsWith(extension))) {
+      fail("E_IMAGE_PATH", `${where}.path must end in one of ${VALID_IMAGE_EXTENSIONS.join(", ")}`);
+    }
+    if (typeof block.caption !== "string" || block.caption.trim() === "") {
+      fail("E_IMAGE_SHAPE", `${where}.caption must be a non-empty string`);
+    }
+    if (!existsSync(join(toolRoot, block.path))) {
+      fail("E_IMAGE_MISSING", `${where}.path "${block.path}" does not exist — rendering would drop the figure silently`);
     }
   }
   if (block.type === "table") {
@@ -349,6 +389,19 @@ export function validateDraft(draft, outline = loadOutline()) {
       section.blocks.forEach((block, index) => validateBlock(block, section.id, index));
       const spec = outline.sections.find((entry) => entry.id === section.id)?.form;
       if (spec) validateSectionForm(section, spec, draft);
+      // A figure names a table and a row rather than carrying numbers, so whether it can be drawn at
+      // all is decided here: the table has to exist, and a chart's row has to hold measurements
+      // rather than gap markers. Left to the renderer this surfaces as a broken run or, worse, as an
+      // empty chart that reads like a measured zero.
+      section.blocks.forEach((block, index) => {
+        if (block.type !== "figure") return;
+        try {
+          if (block.kind === "flow") flowSteps(section, block);
+          else barSeries(section, block);
+        } catch (error) {
+          fail("E_FIGURE_SOURCE", `sections[${section.id}].blocks[${index}]: ${error.message}`);
+        }
+      });
       // Block headings render relative to their section, so heading3 sits two levels in and needs a
       // heading2 above it. Without one the section's own heading tree skips a level, and Word's
       // navigation pane shows a broken branch however right the numbering text reads.

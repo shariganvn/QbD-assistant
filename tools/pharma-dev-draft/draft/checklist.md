@@ -44,7 +44,11 @@ deliberately.
 8. **Fill `meta` completely**, including `extractionMethod` copied from `extracted.json` and a
    `preparer` field that's honest about who/what did the interpretation (e.g. "Claude, phiên làm
    việc <ngày>" or a person's name) — this draft is not attributable to "the system."
-9. **Run `node draft/validate-draft.mjs draft.json`** before rendering. Fix every reported error;
+9. **Add a figure only where the section already holds the data.** A figure block names a table and a
+   row rather than carrying numbers, so the chart and the table cannot disagree, and a row still full
+   of markers refuses to be plotted. Do not "fill in" a chart for a section whose table is empty —
+   that is the same invention rule as everywhere else, in picture form.
+10. **Run `node draft/validate-draft.mjs draft.json`** before rendering. Fix every reported error;
    the validator will not catch a wrong section mapping, only a malformed shape.
 
 ## What you are NOT trying to do

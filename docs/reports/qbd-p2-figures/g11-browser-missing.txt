@@ -1,0 +1,106 @@
+TAP version 13
+# Subtest: a chart reads its values from the table row it names
+ok 1 - a chart reads its values from the table row it names
+  ---
+  duration_ms: 4.224044
+  type: 'test'
+  ...
+# Subtest: changing a value in the table changes the chart, because there is only one copy of it
+ok 2 - changing a value in the table changes the chart, because there is only one copy of it
+  ---
+  duration_ms: 1.251894
+  type: 'test'
+  ...
+# Subtest: a process flow takes its steps from the columns the risk matrix scores
+ok 3 - a process flow takes its steps from the columns the risk matrix scores
+  ---
+  duration_ms: 0.875627
+  type: 'test'
+  ...
+# Subtest: changing the manufacturing method redraws the flow with no code change
+ok 4 - changing the manufacturing method redraws the flow with no code change
+  ---
+  duration_ms: 1.490514
+  type: 'test'
+  ...
+# Subtest: a chart over a row of gap markers is rejected, not drawn as zeroes
+ok 5 - a chart over a row of gap markers is rejected, not drawn as zeroes
+  ---
+  duration_ms: 3.064555
+  type: 'test'
+  ...
+# Subtest: a chart naming a row the table does not have is rejected
+ok 6 - a chart naming a row the table does not have is rejected
+  ---
+  duration_ms: 1.437357
+  type: 'test'
+  ...
+# Subtest: a figure naming a table the section does not have is rejected
+ok 7 - a figure naming a table the section does not have is rejected
+  ---
+  duration_ms: 1.704725
+  type: 'test'
+  ...
+# Subtest: a chart over values that are not numbers is rejected
+ok 8 - a chart over values that are not numbers is rejected
+  ---
+  duration_ms: 1.562717
+  type: 'test'
+  ...
+# Subtest: a figure with no caption is rejected
+ok 9 - a figure with no caption is rejected
+  ---
+  duration_ms: 1.846032
+  type: 'test'
+  ...
+# Subtest: a supplied image outside the assets directory is rejected
+ok 10 - a supplied image outside the assets directory is rejected
+  ---
+  duration_ms: 1.4775
+  type: 'test'
+  ...
+# Subtest: a supplied image that does not exist is rejected rather than dropped
+ok 11 - a supplied image that does not exist is rejected rather than dropped
+  ---
+  duration_ms: 1.656513
+  type: 'test'
+  ...
+# Subtest: Vietnamese comma decimals are read as numbers and printed back unchanged
+ok 12 - Vietnamese comma decimals are read as numbers and printed back unchanged
+  ---
+  duration_ms: 0.542873
+  type: 'test'
+  ...
+# Subtest: the chart scale keeps the columns readable rather than rounding to the next power of ten
+ok 13 - the chart scale keeps the columns readable rather than rounding to the next power of ten
+  ---
+  duration_ms: 0.267316
+  type: 'test'
+  ...
+# Subtest: a long process flow wraps instead of running off the page
+ok 14 - a long process flow wraps instead of running off the page
+  ---
+  duration_ms: 0.445646
+  type: 'test'
+  ...
+# Subtest: a short step name is not broken across two lines
+ok 15 - a short step name is not broken across two lines
+  ---
+  duration_ms: 0.113522
+  type: 'test'
+  ...
+# Subtest: rendering stops when the browser is missing instead of dropping the figure
+ok 16 - rendering stops when the browser is missing instead of dropping the figure
+  ---
+  duration_ms: 49.455999
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 172.304137

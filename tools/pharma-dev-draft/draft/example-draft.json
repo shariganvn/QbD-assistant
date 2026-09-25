@@ -377,7 +377,7 @@
         },
         {
           "type": "paragraph",
-          "text": "Mục đích cuối của mục này là so sánh hồ sơ hòa tan của thuốc đối chiếu với công thức của ta — CT03 đạt trung bình 98,64% tại 30 phút (mục P.2.2.1.3). Vì vậy hồ sơ hòa tan của thuốc đối chiếu phải được lấy tại nhiều thời điểm và trong cùng điều kiện thử, nếu không sẽ không tính được hệ số tương đồng f2. Biểu mẫu của phòng còn có một biểu đồ hòa tan; bản render tự động chưa hỗ trợ hình nên biểu đồ phải bổ sung thủ công vào bản Word cuối."
+          "text": "Mục đích cuối của mục này là so sánh hồ sơ hòa tan của thuốc đối chiếu với công thức của ta — CT03 đạt trung bình 98,64% tại 30 phút (mục P.2.2.1.3). Vì vậy hồ sơ hòa tan của thuốc đối chiếu phải được lấy tại nhiều thời điểm và trong cùng điều kiện thử, nếu không sẽ không tính được hệ số tương đồng f2. Biểu mẫu của phòng còn có một biểu đồ hòa tan. Bản render dựng được biểu đồ từ số liệu trong bảng, nhưng mục này chưa có số liệu nào nên chưa có gì để vẽ; biểu đồ tự xuất hiện khi bảng trên được điền."
         },
         {
           "type": "paragraph",
@@ -774,6 +774,16 @@
           ]
         },
         {
+          "type": "figure",
+          "kind": "bars",
+          "fromTable": 2,
+          "fromRow": "Độ hòa tan 30 phút – TB (spec ≥ 80% Q) (%)",
+          "threshold": "80",
+          "thresholdLabel": "Ngưỡng Q = 80%",
+          "axisLabel": "Độ hòa tan trung bình tại 30 phút (%)",
+          "caption": "Độ hòa tan trung bình tại 30 phút của ba công thức. Cột dưới ngưỡng Q được tô khác màu; giá trị lấy nguyên văn từ bảng kết quả trên."
+        },
+        {
           "type": "heading2",
           "text": "Nhận xét / Kết luận (nguyên văn từ Thử nghiệm 1)"
         },
@@ -992,7 +1002,7 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Quy trình sản xuất được chọn cho sản phẩm này là trộn dập thẳng, do FD xác nhận — hồ sơ Thử nghiệm 1 không mô tả quy trình nên dữ kiện này không đến từ nguồn thử nghiệm. Trộn dập thẳng rút ngắn quá trình sản xuất và hạn chế phát sinh tạp so với xát hạt, nhưng đặt ra ba vấn đề phải giải quyết trong phát triển: độ đồng đều hàm lượng, tính chảy của hỗn hợp bột, và khả năng chịu nén. Biểu mẫu của phòng còn yêu cầu một sơ đồ quy trình; bản render tự động chưa hỗ trợ hình nên sơ đồ phải bổ sung thủ công vào bản Word cuối."
+          "text": "Quy trình sản xuất được chọn cho sản phẩm này là trộn dập thẳng, do FD xác nhận — hồ sơ Thử nghiệm 1 không mô tả quy trình nên dữ kiện này không đến từ nguồn thử nghiệm. Trộn dập thẳng rút ngắn quá trình sản xuất và hạn chế phát sinh tạp so với xát hạt, nhưng đặt ra ba vấn đề phải giải quyết trong phát triển: độ đồng đều hàm lượng, tính chảy của hỗn hợp bột, và khả năng chịu nén. Sơ đồ quy trình dưới đây dựng từ chính bộ công đoạn được chấm rủi ro trong bảng của mục này, nên đổi phương pháp pha chế là sơ đồ đổi theo."
         },
         {
           "type": "paragraph",
@@ -1071,6 +1081,13 @@
               "[CHƯA CÓ DỮ LIỆU]"
             ]
           ]
+        },
+        {
+          "type": "figure",
+          "kind": "flow",
+          "fromTable": 0,
+          "fromAxis": "columns",
+          "caption": "Sơ đồ quy trình sản xuất theo phương pháp trộn dập thẳng, dựng từ bộ công đoạn ở bảng đánh giá rủi ro trên."
         }
       ]
     },

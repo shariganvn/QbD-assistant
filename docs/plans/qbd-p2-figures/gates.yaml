@@ -1,0 +1,140 @@
+# Executable acceptance gates for qbd-p2-figures.
+# This file owns gate bodies. Step files describe implementation; they must not restate a full gate.
+
+version: 2
+workstream: qbd-p2-figures
+evidence_root: docs/reports/qbd-p2-figures
+
+environment_findings:
+  # Recorded because these decided the shape of the work, and because a later session would otherwise
+  # spend the same time rediscovering them.
+  rasterisers: "none present — no ImageMagick, librsvg, inkscape, PIL, cairosvg, matplotlib or rdkit"
+  browser: >
+    /opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell renders HTML and SVG to PNG
+    correctly, with Vietnamese diacritics intact. The sibling chrome-*/chrome --headless paints only box
+    outlines and drops all text and fills, with or without a virtual time budget and forced software
+    rasterisation. Use headless_shell.
+  blocked_hosts:
+    - "pubchem.ncbi.nlm.nih.gov — HTTP 403 at the egress proxy (policy denial)"
+    - "eutils.ncbi.nlm.nih.gov — HTTP 403 (this is the PubMed API)"
+    - "www.ema.europa.eu, www.accessdata.fda.gov, go.drugbank.com, www.chemicalbook.com — all blocked"
+
+gates:
+  - id: G-08
+    title: A figure draws from the table it names, and the numbers stay in one place
+    invariant: >
+      A figure block carries no numbers. It names a table in its own section and, for a chart, the row
+      to plot; the renderer reads the values at render time. One measurement therefore exists once, and
+      a chart cannot disagree with the table printed beside it. Changing a value in the table changes
+      the chart with no other edit.
+    boundary_owner: render/figures/figure-source.mjs + draft/validate-draft.mjs
+    fixture: the worked example's process risk matrix and trial results table
+    command: >
+      node --test tools/pharma-dev-draft/draft/tests/figures.test.mjs
+      && node tools/pharma-dev-draft/draft/tests/value-inventory.mjs
+      --before <previous example-draft.json> --after tools/pharma-dev-draft/draft/example-draft.json
+    expected: >
+      exit 0 for the tests. The chart's series equals the named row's cells and its labels equal the
+      table's value headers; the flow's steps equal the matrix's unit-operation columns. The value
+      inventory reports duplicated 0 and added data 0 — adding the figures introduced no copy of any
+      number. Two paragraphs report as lost-and-added: they were reworded on purpose, since they told
+      the reader to paste a picture in by hand and that is no longer true.
+    negative_cases:
+      - Numbers copied into the figure block -> value inventory reports a duplicate.
+      - A chart keeps its old values after the table is corrected -> reject; it holds its own copy.
+      - Changing the manufacturing method needs a code change to redraw the flow -> fails G-00's rule.
+    evidence: g08-figure-source.txt + g08-value-inventory.txt
+    blocks: [G-10]
+    status: pass
+
+  - id: G-09
+    title: A figure cannot be drawn from data that is not there
+    invariant: >
+      Resolution happens in the Stage B validator, upstream of the renderer. A figure whose table or
+      row is missing, whose plotted cells still hold gap markers, or whose values are not numbers is
+      rejected. An empty chart in a document shaped like a dossier reads as a measured result of zero,
+      which is a stronger claim than the blank it would replace. A supplied image outside `assets/`,
+      or one whose file is absent, is rejected rather than silently dropped.
+    boundary_owner: draft/validate-draft.mjs + render/figures/figure-source.mjs
+    fixture: the worked example, mutated one way at a time
+    command: node --test tools/pharma-dev-draft/draft/tests/figures.test.mjs
+    expected: >
+      exit 0. E_FIGURE_SOURCE for a missing table, a missing row, a marker in a plotted cell and a
+      non-numeric value; E_FIGURE_SHAPE for a figure with no caption; E_IMAGE_PATH for a path outside
+      assets/ or holding a parent-directory segment; E_IMAGE_MISSING for an absent file.
+    negative_cases:
+      - A marker row is plotted as zero -> reject.
+      - A missing image renders as nothing and the document is produced anyway -> reject.
+      - The check is moved into the renderer -> reject; a draft that cannot be drawn must not validate.
+    evidence: g09-refusals.txt
+    blocks: []
+    status: pass
+
+  - id: G-10
+    title: The rendered document carries its figures and stays valid
+    invariant: >
+      The document embeds one media part per figure block, passes schema validation, unzips cleanly,
+      and keeps the heading tree it had before figures existed.
+    boundary_owner: render/builder.mjs + verify/verify.mjs
+    fixture: the worked example
+    command: >
+      node tools/pharma-dev-draft/render/render.mjs tools/pharma-dev-draft/draft/example-draft.json
+      --output-root "$(pwd)/tools/pharma-dev-draft/output"
+      && node tools/pharma-dev-draft/verify/verify.mjs tools/pharma-dev-draft/output/<file>.docx
+      --draft tools/pharma-dev-draft/draft/example-draft.json
+      && unzip -l tools/pharma-dev-draft/output/<file>.docx | grep -c 'word/media/.*\.png'
+    expected: >
+      exit 0. XSD validation passes, text sanity checks pass, heading levels still skip nothing, and
+      word/media holds exactly 2 PNGs for the 2 figure blocks. unzip -t reports no errors.
+    negative_cases:
+      - Media part count differs from the figure block count -> reject.
+      - A figure is placed but the relationship is not written -> XSD or unzip -t fails.
+    evidence: g10-render-verify.txt
+    blocks: []
+    status: pass
+
+  - id: G-11
+    title: A missing browser stops the render rather than dropping the figure
+    invariant: >
+      There is no rasteriser in this environment, so figures depend on Chromium. If it cannot be found,
+      rendering fails loudly. Producing the document without the figure would remove evidence from a
+      registration-shaped file with nobody told, which is the one outcome worse than an error — the same
+      reason verify.mjs refuses to run without its schema validator.
+    boundary_owner: render/figures/browser-png.mjs
+    fixture: a subprocess with PLAYWRIGHT_BROWSERS_PATH pointed at a directory that does not exist
+    command: node --test tools/pharma-dev-draft/draft/tests/figures.test.mjs
+    expected: >
+      exit 0 for the test, which asserts the lookup raises E_BROWSER_MISSING and names the paths it
+      searched plus the environment variable that overrides them.
+    negative_cases:
+      - The renderer catches the error and omits the figure -> reject.
+      - A blank image is embedded instead -> reject; the size check exists for this.
+      - chrome --headless is used instead of headless_shell -> figures render as empty outlines.
+    evidence: g11-browser-missing.txt
+    blocks: []
+    status: pass
+
+  - id: G-12
+    title: Every drug-substance property taken from outside carries a retrievable source
+    invariant: >
+      A value from a chemical database is written into 3.2.P.2.1.1.1 only with its compound identifier
+      and a URL the reviewer can open, and with computed values (such as a predicted partition
+      coefficient) distinguished from experimentally determined ones. A search snippet is not a source:
+      the department asked for links it can follow, and this draft has already carried a confidently
+      wrong unsourced value through four passes.
+    boundary_owner: draft/example-draft.json — the numbered source notes under the properties table
+    fixture: the properties table's eight empty cells
+    command: >
+      curl -sS -o /dev/null -w '%{http_code}' https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/<api>/property/IUPACName/JSON
+    expected: >
+      200 rather than the 403 the egress proxy currently returns. Until then the cells keep their
+      markers, each naming where the value would come from. Five of the eight — the forced-degradation
+      rows — stay gaps regardless: they are experimental results on this substance and belong to
+      3.2.S.7, so no public database closes them.
+    negative_cases:
+      - A value is written from a search snippet with no retrievable source -> reject.
+      - A computed partition coefficient is presented as measured -> reject.
+      - A forced-degradation row is filled from published literature on another manufacturer's material -> reject.
+    evidence: g12-network-denial.txt
+    blocks: []
+    status: deferred

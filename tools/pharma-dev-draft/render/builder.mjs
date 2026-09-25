@@ -5,15 +5,22 @@
 // fixed constant below, not settable from the draft, so no caller can produce output from this
 // tool that omits the "internal draft, not FD-approved" framing.
 
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
 import {
   Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell,
-  WidthType, ShadingType, BorderStyle, AlignmentType, VerticalAlign, LevelFormat,
+  WidthType, ShadingType, BorderStyle, AlignmentType, VerticalAlign, LevelFormat, ImageRun,
 } from "docx";
 
 import { TABLE_WIDTH_DXA as TABLE_WIDTH } from "../schemas/layout.mjs";
 import { GAP_LABEL, isGapText } from "../schemas/markers.mjs";
 import { tableValueCells } from "../schemas/table-shape.mjs";
 import { printableRequestRows } from "./data-request.mjs";
+import { barChartPng } from "./figures/bar-chart.mjs";
+import { processFlowPng } from "./figures/process-flow.mjs";
+import { barSeries, flowSteps } from "./figures/figure-source.mjs";
 
 const HEADER_FILL = "D9D9D9";
 const NOTICE_FILL = "FFF2CC";
@@ -213,7 +220,67 @@ function noticeBox() {
   });
 }
 
-function renderBlock(block, sectionLevel = 1) {
+const toolRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
+
+// A figure is 96 dpi at the size it was laid out, then held to the text width so a wide process flow
+// does not run into the margin.
+const MAX_FIGURE_WIDTH_PT = 468;
+
+function figureParagraphs(png, width, height, caption, counter) {
+  const scale = Math.min(1, MAX_FIGURE_WIDTH_PT / width);
+  counter.count += 1;
+  return [
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { before: 160, after: 60 },
+      children: [new ImageRun({
+        type: "png",
+        data: png,
+        transformation: { width: Math.round(width * scale), height: Math.round(height * scale) },
+      })],
+    }),
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { after: 160 },
+      children: [new TextRun({ text: `Hình ${counter.count}. ${caption}`, italics: true, size: 19 })],
+    }),
+  ];
+}
+
+function renderFigure(block, section, counter) {
+  if (block.kind === "flow") {
+    const { png, width, height } = processFlowPng(flowSteps(section, block));
+    return figureParagraphs(png, width, height, block.caption, counter);
+  }
+  const series = barSeries(section, block);
+  const threshold = block.threshold === undefined ? undefined : Number(String(block.threshold).replace(",", "."));
+  const { png, width, height } = barChartPng(series, {
+    threshold,
+    thresholdLabel: block.thresholdLabel,
+    axisLabel: block.axisLabel,
+  });
+  return figureParagraphs(png, width, height, block.caption, counter);
+}
+
+function renderImage(block, counter) {
+  const png = readFileSync(join(toolRoot, block.path));
+  const width = block.widthPt ?? 320;
+  // Height is not declared: the draft says how wide the figure should sit and the renderer keeps the
+  // file's own proportions, so a supplied image can never be silently stretched.
+  const { width: pixelWidth, height: pixelHeight } = pngSize(png);
+  const height = Math.round((width * pixelHeight) / pixelWidth);
+  return figureParagraphs(png, width, height, block.caption, counter);
+}
+
+// PNG carries its dimensions in the IHDR chunk, always the first one, at a fixed offset.
+function pngSize(buffer) {
+  if (buffer.length < 24 || buffer.readUInt32BE(0) !== 0x89504e47) {
+    throw new Error("supplied figure is not a PNG; only PNG dimensions can be read without an image library");
+  }
+  return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
+}
+
+function renderBlock(block, sectionLevel = 1, section = undefined, counter = { count: 0 }) {
   switch (block.type) {
     // Relative to the section, not absolute: the block type says how far below its own section the
     // heading sits, so a section's sub-heading can never come out ranking above the section itself.
@@ -227,6 +294,8 @@ function renderBlock(block, sectionLevel = 1) {
       block.columnAlign,
       block.headerless,
     )];
+    case "figure": return renderFigure(block, section, counter);
+    case "image": return renderImage(block, counter);
     default: throw new Error(`unknown block type: ${block.type}`);
   }
 }
@@ -275,6 +344,8 @@ function gapRegisterTable(outline, draftSectionsById) {
 
 export async function buildDocumentBuffer(draft, outline) {
   const draftSectionsById = new Map(draft.sections.map((section) => [section.id, section]));
+  // Figures are numbered across the whole document, in the order they are rendered.
+  const figureCounter = { count: 0 };
   const children = [];
 
   children.push(
@@ -317,7 +388,7 @@ export async function buildDocumentBuffer(draft, outline) {
       continue;
     }
     for (const block of draftSection.blocks) {
-      children.push(...renderBlock(block, level));
+      children.push(...renderBlock(block, level, draftSection, figureCounter));
     }
   }
 
