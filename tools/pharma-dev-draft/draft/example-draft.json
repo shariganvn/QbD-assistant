@@ -714,12 +714,13 @@
               "—",
               "Dập viên"
             ]
-          ]
+          ],
+          "id": "quy-trinh-pha-che"
         },
         {
           "type": "figure",
           "kind": "process",
-          "fromTable": 0,
+          "fromTable": "quy-trinh-pha-che",
           "caption": "Sơ đồ quy trình pha chế dùng cho cả Thử nghiệm 1 và Thử nghiệm 2, dựng từ bảng các bước ở trên. Mỗi công đoạn trộn nhận thêm một nhóm thành phần đã rây; bước dập viên không thêm thành phần nào."
         },
         {
@@ -1003,12 +1004,13 @@
               "2,79",
               "3,04"
             ]
-          ]
+          ],
+          "id": "ket-qua-vien-tn1"
         },
         {
           "type": "figure",
           "kind": "bars",
-          "fromTable": 3,
+          "fromTable": "ket-qua-vien-tn1",
           "fromRow": "Độ hòa tan 30 phút – TB (spec ≥ 80% Q) (%)",
           "threshold": "80",
           "thresholdLabel": "Ngưỡng Q = 80%",
@@ -1549,12 +1551,13 @@
               "[CHƯA CÓ DỮ LIỆU]",
               "[CHƯA CÓ DỮ LIỆU]"
             ]
-          ]
+          ],
+          "id": "ma-tran-rui-ro-quy-trinh"
         },
         {
           "type": "figure",
           "kind": "flow",
-          "fromTable": 0,
+          "fromTable": "ma-tran-rui-ro-quy-trinh",
           "fromAxis": "columns",
           "caption": "Sơ đồ quy trình sản xuất theo phương pháp trộn dập thẳng, dựng từ bộ công đoạn ở bảng đánh giá rủi ro trên."
         }

@@ -24,6 +24,9 @@ const sectionOf = (draft, id) => draft.sections.find((section) => section.id ===
 // and its dissolution chart — so the kind is named rather than taking whichever comes first.
 const figureOf = (section, kind = "bars") =>
   section.blocks.find((block) => block.type === "figure" && block.kind === kind);
+// Resolved the way the renderer resolves it: by the name the figure gives, never by position.
+const tableFor = (section, figure) =>
+  section.blocks.find((block) => block.type === "table" && block.id === figure.fromTable);
 
 function expectFailure(draft, code) {
   assert.throws(() => validateDraft(draft), (error) => {
@@ -39,7 +42,7 @@ test("a chart reads its values from the table row it names", () => {
   const section = sectionOf(draft, "P.2.2.1.3.3");
   const figure = figureOf(section);
   const series = barSeries(section, figure);
-  const table = section.blocks.filter((block) => block.type === "table")[figure.fromTable];
+  const table = tableFor(section, figure);
   const row = table.rows.find((candidate) => candidate[0] === figure.fromRow);
   assert.deepEqual(series.map((entry) => entry.display), row.slice(1));
   assert.deepEqual(series.map((entry) => entry.label), table.headers.slice(1));
@@ -49,7 +52,7 @@ test("changing a value in the table changes the chart, because there is only one
   const draft = loadExample();
   const section = sectionOf(draft, "P.2.2.1.3.3");
   const figure = figureOf(section);
-  const table = section.blocks.filter((block) => block.type === "table")[figure.fromTable];
+  const table = tableFor(section, figure);
   table.rows.find((row) => row[0] === figure.fromRow)[1] = "42,00";
   assert.equal(barSeries(section, figure)[0].value, 42);
 });
@@ -58,7 +61,7 @@ test("a process flow takes its steps from the columns the risk matrix scores", (
   const draft = loadExample();
   const section = sectionOf(draft, "P.2.3.1");
   const figure = figureOf(section, "flow");
-  const table = section.blocks.filter((block) => block.type === "table")[figure.fromTable];
+  const table = tableFor(section, figure);
   assert.deepEqual(flowSteps(section, figure), table.headers.slice(1));
 });
 
@@ -79,7 +82,7 @@ test("a chart over a row of gap markers is rejected, not drawn as zeroes", () =>
   const draft = loadExample();
   const section = sectionOf(draft, "P.2.2.1.3.3");
   const figure = figureOf(section);
-  const table = section.blocks.filter((block) => block.type === "table")[figure.fromTable];
+  const table = tableFor(section, figure);
   const row = table.rows.find((candidate) => candidate[0] === figure.fromRow);
   row[1] = `${GAP_PREFIX} – CẦN BỔ SUNG] chưa đo`;
   expectFailure(draft, "E_FIGURE_SOURCE");
@@ -93,7 +96,7 @@ test("a chart naming a row the table does not have is rejected", () => {
 
 test("a figure naming a table the section does not have is rejected", () => {
   const draft = loadExample();
-  figureOf(sectionOf(draft, "P.2.3.1"), "flow").fromTable = 7;
+  figureOf(sectionOf(draft, "P.2.3.1"), "flow").fromTable = "bang-khong-ton-tai";
   expectFailure(draft, "E_FIGURE_SOURCE");
 });
 
@@ -101,7 +104,7 @@ test("a chart over values that are not numbers is rejected", () => {
   const draft = loadExample();
   const section = sectionOf(draft, "P.2.2.1.3.3");
   const figure = figureOf(section);
-  const table = section.blocks.filter((block) => block.type === "table")[figure.fromTable];
+  const table = tableFor(section, figure);
   table.rows.find((row) => row[0] === figure.fromRow)[1] = "Đạt";
   expectFailure(draft, "E_FIGURE_SOURCE");
 });

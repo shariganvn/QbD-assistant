@@ -36,7 +36,7 @@ const ALLOWED_BLOCK_KEYS = {
   heading2: new Set(["type", "text"]),
   heading3: new Set(["type", "text"]),
   paragraph: new Set(["type", "text", "italic", "bold"]),
-  table: new Set(["type", "headers", "rows", "columnWidths", "columnAlign", "headerless"]),
+  table: new Set(["type", "id", "headers", "rows", "columnWidths", "columnAlign", "headerless"]),
   figure: new Set(["type", "kind", "fromTable", "fromAxis", "fromRow", "threshold", "thresholdLabel", "axisLabel", "caption"]),
   image: new Set(["type", "path", "caption", "widthPt"]),
 };
@@ -76,8 +76,12 @@ function validateBlock(block, sectionId, index) {
     if (!VALID_FIGURE_KINDS.has(block.kind)) {
       fail("E_FIGURE_SHAPE", `${where}.kind must be one of ${[...VALID_FIGURE_KINDS].join(", ")}, got: ${block.kind}`);
     }
-    if (!Number.isInteger(block.fromTable) || block.fromTable < 0) {
-      fail("E_FIGURE_SHAPE", `${where}.fromTable must be a non-negative integer naming a table in the same section`);
+    // A name, not a number. The index this replaced was positional, so a table moved or inserted ahead
+    // of a figure silently redirected it; a name does not move when the table does. The old form is
+    // refused rather than accepted alongside — one field with two spellings is one field that will
+    // disagree with itself.
+    if (typeof block.fromTable !== "string" || block.fromTable.trim() === "") {
+      fail("E_FIGURE_SHAPE", `${where}.fromTable must name the id of a table in the same section${typeof block.fromTable === "number" ? " — a table index no longer resolves, give the table an id and name it here" : ""}`);
     }
     if (typeof block.caption !== "string" || block.caption.trim() === "") {
       fail("E_FIGURE_SHAPE", `${where}.caption must be a non-empty string — a figure with no caption states nothing about what it shows`);
@@ -584,6 +588,21 @@ export function validateDraft(draft, outline = loadOutline()) {
       // Block headings render relative to their section, so heading3 sits two levels in and needs a
       // heading2 above it. Without one the section's own heading tree skips a level, and Word's
       // navigation pane shows a broken branch however right the numbering text reads.
+      // Only tables a figure points at need an id, so the id is optional — but two tables answering to
+      // the same name would make the reference ambiguous, and the resolver would take whichever came
+      // first, which is the failure this whole change removes.
+      const tableIds = (section.blocks ?? [])
+        .filter((block) => block.type === "table" && block.id !== undefined)
+        .map((block) => block.id);
+      for (const id of tableIds) {
+        if (typeof id !== "string" || id.trim() === "") {
+          fail("E_TABLE_ID", `section "${section.id}" has a table whose id is not a non-empty string`);
+        }
+      }
+      if (new Set(tableIds).size !== tableIds.length) {
+        fail("E_TABLE_ID_DUPLICATE", `section "${section.id}" has two tables with the same id — a figure naming it could not say which one it means`);
+      }
+
       let sawHeading2 = false;
       section.blocks.forEach((block, index) => {
         if (block.type === "heading2") sawHeading2 = true;

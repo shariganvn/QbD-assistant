@@ -17,8 +17,10 @@ import { GAP_PREFIX } from "../../schemas/markers.mjs";
 
 const GAP = `${GAP_PREFIX} – CẦN BỔ SUNG] chờ nguồn`;
 
+const TABLE_ID = "quy-trinh";
 const processTable = (rows) => ({
   type: "table",
+  id: TABLE_ID,
   headers: ["Bước", "Thành phần đưa vào (đã rây)", "Công đoạn"],
   rows,
 });
@@ -42,20 +44,20 @@ function expectSourceError(match, run) {
 }
 
 test("the stages are read out of the table, and the block carries no step of its own", () => {
-  const stages = processStages(sectionWith(processTable(FOUR_STEPS)), { fromTable: 0 });
+  const stages = processStages(sectionWith(processTable(FOUR_STEPS)), { fromTable: TABLE_ID });
   assert.deepEqual(stages.map((stage) => stage.operation),
     ["Trộn đồng nhất 1", "Trộn đồng nhất 2", "Trộn hoàn tất", "Dập viên"]);
   assert.equal(stages[0].input, "Hoạt chất · Tá dược độn A · Tá dược độn B");
   // Correcting the table corrects the diagram, with no second edit anywhere.
   const corrected = FOUR_STEPS.map((row) => [...row]);
   corrected[1][1] = "Tá dược rã khác";
-  assert.equal(processStages(sectionWith(processTable(corrected)), { fromTable: 0 })[1].input, "Tá dược rã khác");
+  assert.equal(processStages(sectionWith(processTable(corrected)), { fromTable: TABLE_ID })[1].input, "Tá dược rã khác");
 });
 
 test("an em dash means the step adds nothing, and draws no input branch", () => {
   // A blank cell would read as "not applicable" — the failure the markers exist to prevent — so the
   // draft has to say which it means, and only the em dash means "deliberately nothing".
-  const stages = processStages(sectionWith(processTable(FOUR_STEPS)), { fromTable: 0 });
+  const stages = processStages(sectionWith(processTable(FOUR_STEPS)), { fromTable: TABLE_ID });
   assert.equal(stages[3].input, "");
 
   const { svg } = processStageSvg(stages);
@@ -66,18 +68,18 @@ test("an em dash means the step adds nothing, and draws no input branch", () => 
 test("a step with no unit operation is refused rather than drawn short", () => {
   const missing = FOUR_STEPS.map((row) => [...row]);
   missing[2][2] = "";
-  expectSourceError(/no unit operation/, () => processStages(sectionWith(processTable(missing)), { fromTable: 0 }));
+  expectSourceError(/no unit operation/, () => processStages(sectionWith(processTable(missing)), { fromTable: TABLE_ID }));
 
   const marked = FOUR_STEPS.map((row) => [...row]);
   marked[2][2] = GAP;
-  expectSourceError(/no unit operation/, () => processStages(sectionWith(processTable(marked)), { fromTable: 0 }));
+  expectSourceError(/no unit operation/, () => processStages(sectionWith(processTable(marked)), { fromTable: TABLE_ID }));
 });
 
 test("a gap marker where the components belong is refused, and says to write an em dash instead", () => {
   const marked = FOUR_STEPS.map((row) => [...row]);
   marked[3][1] = GAP;
   expectSourceError(/write "—" if the step adds nothing/,
-    () => processStages(sectionWith(processTable(marked)), { fromTable: 0 }));
+    () => processStages(sectionWith(processTable(marked)), { fromTable: TABLE_ID }));
 });
 
 test("the table shape is required outright, not guessed at", () => {
@@ -86,16 +88,17 @@ test("the table shape is required outright, not guessed at", () => {
   // A fourth column appended later would otherwise be drawn as the operation.
   const widened = {
     type: "table",
+    id: TABLE_ID,
     headers: ["Bước", "Thành phần đưa vào", "Công đoạn", "Ghi chú"],
     rows: FOUR_STEPS.map((row) => [...row, "—"]),
   };
-  expectSourceError(/exactly three/, () => processStages(sectionWith(widened), { fromTable: 0 }));
+  expectSourceError(/exactly three/, () => processStages(sectionWith(widened), { fromTable: TABLE_ID }));
 
-  expectSourceError(/no rows/, () => processStages(sectionWith(processTable([])), { fromTable: 0 }));
+  expectSourceError(/no rows/, () => processStages(sectionWith(processTable([])), { fromTable: TABLE_ID }));
 });
 
 test("every stage reaches the drawing, in the table's order", () => {
-  const { svg } = processStageSvg(processStages(sectionWith(processTable(FOUR_STEPS)), { fromTable: 0 }));
+  const { svg } = processStageSvg(processStages(sectionWith(processTable(FOUR_STEPS)), { fromTable: TABLE_ID }));
   const positions = ["Trộn đồng nhất 1", "Trộn đồng nhất 2", "Trộn hoàn tất", "Dập viên"]
     .map((operation) => svg.indexOf(operation));
   assert.ok(positions.every((position) => position !== -1), "every operation is drawn");
@@ -105,7 +108,7 @@ test("every stage reaches the drawing, in the table's order", () => {
 test("a component list is split one per line rather than wrapped as prose", () => {
   // Five excipients wrapped across three lines is a paragraph in a box, and the reader has to parse
   // the separators back out of it.
-  const { svg } = processStageSvg(processStages(sectionWith(processTable(FOUR_STEPS)), { fromTable: 0 }));
+  const { svg } = processStageSvg(processStages(sectionWith(processTable(FOUR_STEPS)), { fromTable: TABLE_ID }));
   for (const component of ["Hoạt chất", "Tá dược độn A", "Tá dược độn B"]) {
     assert.match(svg, new RegExp(`<tspan[^>]*>${component}</tspan>`), `${component} on its own line`);
   }

@@ -115,6 +115,16 @@ draft. Filling one real value, or settling one decision, removes exactly its own
 
 ### `figure` and `image`
 
+A `figure` names its table with `fromTable`, which is the **id of a table in the same section** — not
+an index. A table declares `id` only when a figure points at it, and two tables in one section may not
+share one. The reference used to be positional, and a table moved or inserted ahead of a figure
+silently redirected it three times; a name does not move when the table does. An index is refused
+rather than accepted alongside the name.
+
+Note the deliberate asymmetry with the outline: `form.tables[]` **is** positional, because it says
+"the Nth table of this section must have this shape" — that is format, and a table inserted in the
+middle should break it. A figure points at content, so it points by name.
+
 A `figure` has three kinds. `flow` draws a left-to-right chain of unit operations from one axis of a
 table; `bars` plots a named row; `process` draws unit operations down the page with the components
 added at each one branching in from the left.

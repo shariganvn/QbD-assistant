@@ -5,6 +5,12 @@ authoritative router; wait for a scope to be accepted before picking work up.
 
 ## Latest completed
 
+- [Table reference plan](docs/plans/qbd-p2-table-reference/plan.md) — `completed` and read-only.
+  G-29..G-31 hold evidence in `docs/reports/qbd-p2-table-reference/`. A figure now names its table by id
+  instead of counting to it, which removes a failure that had struck three times in two rounds and that
+  nothing aimed at it had ever caught. The outline's `form.tables[]` stays positional on purpose, and
+  the contract says why.
+
 - [Process diagram plan](docs/plans/qbd-p2-process-diagram/plan.md) — `completed` and read-only.
   G-26..G-28 hold evidence in `docs/reports/qbd-p2-process-diagram/`, including the rendered diagram. A
   third figure kind draws unit operations down the page with the components added at each one; Trial 2's
