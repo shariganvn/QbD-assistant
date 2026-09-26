@@ -57,30 +57,33 @@ Two consequences recorded rather than worked around:
 
 1. **PubMed was the wrong database anyway.** It indexes citations and abstracts; IUPAC name, melting
    point, LogP and pKa live in PubChem, DrugBank or a pharmacopoeial monograph.
-2. **The property cells stay empty.** Filling them from a search snippet would repeat W-9 exactly,
-   where a value everyone "knows" sat in the draft through four passes saying the substance dissolves
-   in ethanol while the certificate said methanol. G-12 opens when the network policy does.
+2. **The property cells stayed empty until the policy changed.** Filling them from a search snippet
+   would have repeated W-9 exactly, where a value everyone "knows" sat in the draft through four
+   passes saying the substance dissolves in ethanol while the certificate said methanol. The policy
+   was opened on 2026-09-26 and the cells were filled from PubChem with identifiers and retrieval
+   URLs — see step 08, whose central finding is that the salt itself has no experimental record, so
+   most of those values belong to the free base and every cell says which.
 
 Five of the eight empty cells would not be closed by any database: the forced-degradation rows are
 experimental results on this drug substance and belong to `3.2.S.7`.
 
-**No structural formula is drawn.** There is no chemistry toolkit here to generate one from a SMILES
-string, and hand-placing the bonds of a forty-carbon salt is a way to be quietly wrong about chemical
-identity. The `image` block exists so the file drops in the moment FD supplies it or PubChem becomes
-reachable.
+**No structural formula is drawn by this tool.** There is no chemistry toolkit here to generate one
+from a SMILES string, and hand-placing the bonds of a forty-carbon salt is a way to be quietly wrong
+about chemical identity. The `image` block exists for exactly that, and step 08 used it: the 2D
+structure now comes from PubChem, drawn by the source that holds the record.
 
 ## Ordered steps
 
 - [x] `step-06-figure-infrastructure.md` — browser bridge, flow and chart drawing, the `figure` and
       `image` blocks, source resolution at Stage B.
 - [x] `step-07-figures-in-the-draft.md` — the two figures that have data, and the corrected notes.
-- [ ] `step-08-physicochemical-sources.md` — blocked on the environment's network policy.
+- [x] `step-08-physicochemical-sources.md` — sourced from PubChem and the biowaiver monograph.
 
 ## Exit acceptance
 
-G-08..G-11 hold evidence under `docs/reports/qbd-p2-figures/`. G-12 is deferred with its condition
-recorded. The rendered document carries exactly two figures, passes schema validation, and the
-sections without data say why rather than asking for a paste-in.
+G-08..G-12 hold evidence under `docs/reports/qbd-p2-figures/`. The rendered document carries three
+figures, passes schema validation, and the sections without data say why rather than asking for a
+paste-in.
 
 ## Rollback
 

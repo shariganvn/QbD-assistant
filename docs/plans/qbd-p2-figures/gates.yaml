@@ -15,9 +15,12 @@ environment_findings:
     outlines and drops all text and fills, with or without a virtual time budget and forced software
     rasterisation. Use headless_shell.
   blocked_hosts:
-    - "pubchem.ncbi.nlm.nih.gov — HTTP 403 at the egress proxy (policy denial)"
-    - "eutils.ncbi.nlm.nih.gov — HTTP 403 (this is the PubMed API)"
-    - "www.ema.europa.eu, www.accessdata.fda.gov, go.drugbank.com, www.chemicalbook.com — all blocked"
+    # As first probed, 2026-09-25. The network policy was opened on 2026-09-26; see G-12 for the
+    # re-probe, which found PubChem reachable and EMA and FDA accessdata still denied.
+    - "pubchem.ncbi.nlm.nih.gov — HTTP 403 at the egress proxy (policy denial) — OPENED 2026-09-26"
+    - "eutils.ncbi.nlm.nih.gov — HTTP 403 (this is the PubMed API) — OPENED 2026-09-26"
+    - "www.ema.europa.eu, www.accessdata.fda.gov — still blocked"
+    - "go.drugbank.com — 403, but that is DrugBank's own bot protection; cited through PubChem instead"
 
 gates:
   - id: G-08
@@ -127,14 +130,28 @@ gates:
     command: >
       curl -sS -o /dev/null -w '%{http_code}' https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/<api>/property/IUPACName/JSON
     expected: >
-      200 rather than the 403 the egress proxy currently returns. Until then the cells keep their
-      markers, each naming where the value would come from. Five of the eight — the forced-degradation
+      200, which it now returns. Four marked cells were filled and one unsourced value replaced, each
+      carrying the note that names the compound identifier, the retrieval URL and the date. The decisive
+      finding: CID 5281064 — the salt, which is the drug substance — has NO Experimental Properties
+      record, so melting point, partition coefficient and dissociation constant are the FREE BASE's
+      (CID 2405) and every cell says so. The one exception is an HSDB record annotated
+      "/Bisoprolol hemifumarate/", which is this salt. Values PubChem computes (the systematic name, the
+      formula) are marked as computed, separately from values it aggregates from elsewhere. Where one
+      property has several published values they are all stated with their sources rather than one being
+      chosen. The formula PubChem returns matches the reference-standard certificate independently.
+      This gate does NOT close W-5: DrugBank, HMDB, HSDB and ChEMBL are secondary aggregators, and W-5
+      asks for reconciliation against the monograph. Five of the eight cells — the forced-degradation
       rows — stay gaps regardless: they are experimental results on this substance and belong to
       3.2.S.7, so no public database closes them.
     negative_cases:
       - A value is written from a search snippet with no retrievable source -> reject.
+      - A free-base property is attributed to the salt without saying so -> reject.
       - A computed partition coefficient is presented as measured -> reject.
+      - One value is chosen silently where the sources disagree -> reject; FD decides.
       - A forced-degradation row is filled from published literature on another manufacturer's material -> reject.
-    evidence: g12-network-denial.txt
+      - The solubility row is rewritten from a database while a batch certificate states it -> reject; this is W-9.
+    evidence: >
+      g12-pubchem-sources.txt (the re-probe, the salt's empty experimental record, and the independent
+      formula match) + g12-network-denial.txt (the blocked state it replaced)
     blocks: []
-    status: deferred
+    status: pass

@@ -19,7 +19,9 @@
       "ICH guideline Q8 (R2) on pharmaceutical development, Step 5. EMA/CHMP/ICH/167068/2004; 22/06/2017",
       "ICH Harmonised Tripartite Guideline Q6A. Specifications: Test Procedures and Acceptance Criteria for New Drug Substances and New Drug Products: Chemical Substances, Step 4; 06/10/1999",
       "Viện Kiểm nghiệm thuốc Trung ương. Chứng chỉ phân tích chuẩn đối chiếu thứ cấp Bisoprolol fumarat, SKS C0223252; ban hành 15/12/2020, adoption 18/05/2023",
-      "Certificate of Analysis — Bisoprolol fumarate Ph.Eur. 12, code 71460, lô 488, sản xuất 23/04/2026, re-test 23/04/2031; nhà sản xuất Johnson Canady"
+      "Certificate of Analysis — Bisoprolol fumarate Ph.Eur. 12, code 71460, lô 488, sản xuất 23/04/2026, re-test 23/04/2031; nhà sản xuất Johnson Canady",
+      "PubChem, National Library of Medicine (Hoa Kỳ). Bisoprolol fumarate CID 5281064 và bisoprolol CID 2405; truy cập 26/09/2026",
+      "Charoo NA, Shamsher AAA, Lian LY, Abrahamsson B, Cristofoletti R, Groot DW, Kopp S, Langguth P, Polli J, Shah VP, Dressman J. Biowaiver monograph for immediate-release solid oral dosage forms: bisoprolol fumarate. J Pharm Sci. 2014;103(2):378–91. PMID 24382794, doi:10.1002/jps.23817 — https://doi.org/10.1002/jps.23817 (tra cứu qua PubMed, 26/09/2026)"
     ]
   },
   "sections": [
@@ -45,7 +47,7 @@
             ],
             [
               "Tên IUPAC",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nguồn cần lấy: chuyên luận dược điển áp dụng."
+              "(E)-but-2-enedioic acid; bis(1-(propan-2-ylamino)-3-[4-(2-propan-2-yloxyethoxymethyl)phenoxy]propan-2-ol) [4]"
             ],
             [
               "Số đăng ký CAS",
@@ -53,7 +55,7 @@
             ],
             [
               "Công thức cấu tạo",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Cần chèn hình công thức cấu tạo; bản render tự động chưa hỗ trợ hình, phải bổ sung thủ công vào bản Word cuối."
+              "Xem hình dưới bảng. Cấu trúc muối 2:1 (hai phân tử bisoprolol trên một phân tử acid fumaric). [4]"
             ],
             [
               "Công thức phân tử",
@@ -77,15 +79,15 @@
             ],
             [
               "Điểm chảy",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nguồn cần lấy: chuyên luận dược điển hoặc hồ sơ 3.2.S.3.1."
+              "Muối hemifumarat: 100 °C. Base tự do: 100 – 103 °C. [4]"
             ],
             [
               "pKa",
-              "≈ 9,5 [1]"
+              "Base tự do: 9,57 · 9,5 · 9,27 (amin bậc hai) kèm 14,09 (nhóm alcol) — ba nguồn khác nhau. [4]"
             ],
             [
               "Log P",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nguồn cần lấy: chuyên luận, y văn có bình duyệt, hoặc thực nghiệm."
+              "Base tự do, thực nghiệm: 2,2 và 1,87 (hai nguồn khác nhau). Chưa có giá trị cho dạng muối. [4]"
             ],
             [
               "Độ ổn định hóa học",
@@ -131,7 +133,17 @@
         },
         {
           "type": "paragraph",
+          "text": "[4] PubChem, National Library of Medicine (Hoa Kỳ). Bisoprolol fumarate, CID 5281064 — https://pubchem.ncbi.nlm.nih.gov/compound/5281064 ; bisoprolol base tự do, CID 2405 — https://pubchem.ncbi.nlm.nih.gov/compound/2405 . Truy cập 26/09/2026. PHÂN BIỆT CHẤT, cần đọc kỹ: PubChem KHÔNG có mục Experimental Properties cho CID 5281064 (dạng muối). Điểm chảy, Log P và pKa nêu trên đều là giá trị của BASE TỰ DO, trừ một ngoại lệ — bản ghi HSDB có chú thích rõ \"/Bisoprolol hemifumarate/\": tinh thể, điểm chảy 100 °C, tan trong ethanol; hemifumarat (tỷ lệ 2:1) chính là bisoprolol fumarat của hồ sơ này. PHÂN BIỆT LOẠI GIÁ TRỊ: tên IUPAC và công thức phân tử là mô tả do PubChem TÍNH TOÁN (LexiChem), không phải kết quả thực nghiệm; điểm chảy, Log P và pKa là giá trị thực nghiệm PubChem tổng hợp lại từ nguồn khác. NGUỒN GỐC TỪNG GIÁ TRỊ: điểm chảy 100 – 103 °C và Log P 2,2 và pKa 9,5 — DrugBank DB00612; điểm chảy 100 °C và Log P 2,2 — Human Metabolome Database HMDB0014750; điểm chảy 100 °C của hemifumarat, Log P (log Kow) 1,87 và pKa 9,27/14,09 — Hazardous Substances Data Bank, https://pubchem.ncbi.nlm.nih.gov/source/hsdb/8316 ; pKa 9,57 — ChEMBL CHEMBL645. GIỚI HẠN CỦA NGUỒN NÀY: DrugBank, HMDB, HSDB và ChEMBL là nguồn tổng hợp thứ cấp, KHÔNG phải chuyên luận. Các giá trị trên đưa ô từ trạng thái không nguồn lên trạng thái có nguồn truy xuất được, nhưng CHƯA đóng được yêu cầu đối chiếu chuyên luận; vẫn phải xác nhận theo chuyên luận áp dụng trước khi nộp hồ sơ, và FD phải chốt một giá trị khi cùng một chỉ tiêu có nhiều số khác nhau. Công thức phân tử PubChem trả về là C40H66N2O12, khối lượng phân tử 767,0 — khớp với chứng chỉ chuẩn ở ghi chú [2]; hai nguồn độc lập trùng nhau. Lưu ý một điểm dễ nhầm: HSDB ghi hemifumarat tan trong ethanol, còn dòng Độ tan trong bảng lấy từ CoA lô 488 (nước rất dễ tan, methanol dễ tan). Hai điều này không mâu thuẫn vì khác dung môi; dòng Độ tan giữ nguyên nguồn CoA."
+        },
+        {
+          "type": "paragraph",
           "text": "Nguồn [3] còn nêu các chỉ tiêu không có dòng tương ứng trong biểu mẫu trên, ghi lại đây để tra cứu — các chỉ tiêu này thuộc phạm vi 3.2.S.4 Kiểm soát dược chất: hàm lượng acid fumaric 14,8 – 15,4% (giá trị lý thuyết của muối hemifumarat là 116,07 / 766,97 = 15,13%, nằm trong khoảng này); dung môi tồn dư tối đa 500 ppm; tổng vi sinh vật hiếu khí tối đa 1.000 CFU/g; tổng nấm men và nấm mốc tối đa 100 CFU/g; không có Escherichia coli và Salmonella; tạp A (benzyl alcohol), tạp E và tạp G mỗi tạp tối đa 0,1% theo HPLC; định tính bằng phổ hồng ngoại đạt, nguyên văn ghi \"Conforms to 5th\" trong khi sản phẩm khai theo Ph.Eur. 12 nên cần làm rõ; tuân thủ ICH Q7, EU GMP Part II, 21 CFR Parts 210 & 211 và ICH Q3D. Về đơn vị cỡ hạt nêu trong bảng: CoA ghi \"200 pm\"; 200 picomet nhỏ hơn kích thước một nguyên tử nên gần như chắc chắn là lỗi đánh máy của µm. Bản thảo giữ nguyên văn thay vì tự sửa số của nhà cung cấp; cần nhà cung cấp xác nhận trước khi nộp hồ sơ."
+        },
+        {
+          "type": "image",
+          "path": "assets/bisoprolol-fumarate-cid5281064.png",
+          "widthPt": 260,
+          "caption": "Công thức cấu tạo bisoprolol fumarat (muối 2:1). Nguồn: PubChem CID 5281064, https://pubchem.ncbi.nlm.nih.gov/compound/5281064 , truy cập 26/09/2026."
         }
       ]
     },
@@ -141,7 +153,15 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phân loại BCS thực nghiệm, hệ số thấm, sinh khả dụng tuyệt đối và dữ liệu dược động học của bisoprolol fumarate — nhóm thuộc tính mà ICH Q8(R2) mục 2.1.1 (trang 6) đòi nêu và bàn luận vì chúng quyết định thiết kế dạng bào chế phóng thích ngay và khả năng xin miễn thử tương đương sinh học. Nguồn cần lấy: chuyên luận dược điển áp dụng, hồ sơ 3.2.S, hoặc public assessment report của thuốc đối chiếu. Ghi chú [1] ở mục 3.2.P.2.1.1.1 có nhắc BCS nhưng tự khai là kiến thức tham khảo chưa đối chiếu, nên không dùng làm nguồn cho mục này."
+          "text": "Bisoprolol được xếp BCS Class I (độ tan cao, tính thấm cao) theo chuyên khảo miễn thử tương đương sinh học của loạt FIP/WHO dành riêng cho bisoprolol fumarat. Chuyên khảo kết luận có thể miễn thử tương đương sinh học cho dạng bào chế rắn uống phóng thích ngay nếu đồng thời: (1) chế phẩm chỉ chứa các tá dược quen thuộc, dùng ở mức thường dùng; và (2) cả chế phẩm thử lẫn thuốc đối chiếu hoặc hòa tan rất nhanh, hoặc hòa tan nhanh kèm chứng minh hồ sơ hòa tan tương đồng tại pH 1,2 · 4,5 · 6,8. Nguồn: Charoo NA, Shamsher AAA, Lian LY, Abrahamsson B, Cristofoletti R, Groot DW, Kopp S, Langguth P, Polli J, Shah VP, Dressman J. Biowaiver monograph for immediate-release solid oral dosage forms: bisoprolol fumarate. J Pharm Sci. 2014;103(2):378–91. PMID 24382794, doi:10.1002/jps.23817 — https://doi.org/10.1002/jps.23817 (tra cứu qua PubMed, 26/09/2026)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Phân loại này là kết luận của y văn có bình duyệt về hoạt chất nói chung, không phải kết quả đo trên lô dược chất và chế phẩm của hồ sơ này. Nó đủ để định hướng thiết kế và để nêu con đường miễn thử, nhưng không thay cho dữ liệu của chính sản phẩm khi nộp."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hệ số thấm đo được, sinh khả dụng tuyệt đối và dữ liệu dược động học của chính lô dược chất đang dùng. Nguồn cần lấy: hồ sơ 3.2.S, public assessment report của thuốc đối chiếu, hoặc thực nghiệm. Độ tan theo pH trong khoảng sinh lý — vế thứ nhất của phân loại BCS — cũng chưa có trong hồ sơ; dòng Độ tan ở mục 3.2.P.2.1.1.1 lấy từ CoA nguyên liệu, không phải độ tan theo pH."
         }
       ]
     },
@@ -959,7 +979,7 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ hòa tan so sánh giữa hai hàm lượng và với thuốc đối chiếu. Nguồn cần lấy: thực nghiệm hòa tan nhiều thời điểm trên cùng điều kiện thử, theo lịch lấy mẫu của phương pháp ở mục 3.2.P.2.2.3.1.2 (hiện chưa khai). Bảng dưới đây chỉ dựng dòng cho thời điểm 30 phút vì đó là thời điểm duy nhất hồ sơ hiện có tiêu chuẩn chấp nhận; tính f2 cần nhiều thời điểm hơn."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ hòa tan so sánh giữa hai hàm lượng và với thuốc đối chiếu. Chuyên khảo miễn thử tương đương sinh học cho bisoprolol fumarat nêu rõ điều kiện phải đạt: cả chế phẩm thử lẫn thuốc đối chiếu hoặc hòa tan rất nhanh, hoặc hòa tan nhanh kèm hồ sơ hòa tan tương đồng (f2) tại ba môi trường pH 1,2 · 4,5 · 6,8. Đây là con đường duy nhất để hàm lượng 5 mg tránh phải thử tương đương sinh học trên người, nên bộ số liệu cần lấy là ba môi trường đó, nhiều thời điểm, cùng điều kiện thử theo phương pháp ở mục 3.2.P.2.2.3.1.2 (hiện chưa khai). Bảng dưới đây mới chỉ dựng dòng cho thời điểm 30 phút vì đó là thời điểm duy nhất hồ sơ hiện có tiêu chuẩn chấp nhận. Nguồn điều kiện: Charoo NA, Shamsher AAA, Lian LY, Abrahamsson B, Cristofoletti R, Groot DW, Kopp S, Langguth P, Polli J, Shah VP, Dressman J. Biowaiver monograph for immediate-release solid oral dosage forms: bisoprolol fumarate. J Pharm Sci. 2014;103(2):378–91. PMID 24382794, doi:10.1002/jps.23817 — https://doi.org/10.1002/jps.23817 (tra cứu qua PubMed, 26/09/2026)."
         },
         {
           "type": "table",
