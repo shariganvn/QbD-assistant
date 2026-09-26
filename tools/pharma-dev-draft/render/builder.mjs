@@ -15,9 +15,10 @@ import {
 } from "docx";
 
 import { TABLE_WIDTH_DXA as TABLE_WIDTH } from "../schemas/layout.mjs";
-import { GAP_LABEL, isGapText } from "../schemas/markers.mjs";
+import { DECISION_LABEL, GAP_LABEL, isMarkedText } from "../schemas/markers.mjs";
 import { tableValueCells } from "../schemas/table-shape.mjs";
 import { printableRequestRows } from "./data-request.mjs";
+import { printableDecisionRows } from "./decision-register.mjs";
 import { barChartPng } from "./figures/bar-chart.mjs";
 import { processFlowPng } from "./figures/process-flow.mjs";
 import { barSeries, flowSteps } from "./figures/figure-source.mjs";
@@ -30,6 +31,7 @@ const GAP_COLOR = "C00000";
 // can assert they all still fill TABLE_WIDTH if that budget ever changes.
 export const FIXED_TABLE_WIDTHS = {
   dataRequest: [2000, 1900, 800, 5300],
+  decisionRegister: [2000, 1900, 1000, 5100],
   gapRegister: [4200, 2400, 3400],
   abbreviations: [2500, 7500],
   signoff: [3600, 2400, 2400, 1600],
@@ -42,7 +44,10 @@ const SCOPE_NOTICE_TITLE = "Lưu ý phạm vi tài liệu";
 const SCOPE_NOTICE_BODY_1 =
   "Tài liệu này là bản tổng hợp nội bộ, được soạn theo khung mục CTD 3.2.P.2 dựa trên nguồn dữ " +
   "liệu do người dùng cung cấp. Các mục không có dữ liệu nguồn được đánh dấu rõ " +
-  `"${GAP_LABEL}" thay vì suy diễn hoặc điền số liệu giả định.`;
+  `"${GAP_LABEL}" thay vì suy diễn hoặc điền số liệu giả định. Những chỗ dữ liệu đã có nhưng hai ` +
+  "nguồn không khớp, hoặc một giả định đang dùng mà chưa được phê duyệt, mang dấu riêng " +
+  `"${DECISION_LABEL}" — loại này không đóng được bằng phép đo, phải có người quyết. Cuối tài liệu ` +
+  "có hai danh mục tương ứng, cả hai sinh từ chính các dấu trong tài liệu.";
 const SCOPE_NOTICE_BODY_2 =
   "Tài liệu KHÔNG phải hồ sơ P.2.2/P.2.3 đã phê duyệt, không thay thế thẩm định của bộ phận Phát " +
   "triển sản phẩm (FD)/QA, và không được dùng để nộp hồ sơ đăng ký cho đến khi được rà soát, bổ " +
@@ -321,12 +326,13 @@ export function dataStatusLabel(section) {
   const cells = tableCellsOf(section);
   // A built-out form waiting to be filled is worth saying so, and it is the more useful of the two
   // empty states, so it is checked first.
-  if (cells.length > 0 && cells.every((cell) => isGapText(cell))) return "Đã dựng khung, chưa có dữ liệu";
+  if (cells.length > 0 && cells.every((cell) => isMarkedText(cell))) return "Đã dựng khung, chưa có dữ liệu";
   // Otherwise a section whose every statement is a marker holds nothing. Paragraphs have to count here:
   // a section that says only "this data is missing" would otherwise be reported as holding data, which
-  // is a false claim in a document shaped like a submission.
+  // is a false claim in a document shaped like a submission. An open decision counts as unsettled for
+  // the same reason: "somebody still has to choose this" is not a statement of data.
   const everything = [...cells, ...paragraphsOf(section)];
-  if (everything.length > 0 && everything.every((text) => isGapText(text))) return "Không có dữ liệu";
+  if (everything.length > 0 && everything.every((text) => isMarkedText(text))) return "Không có dữ liệu";
   return "Có dữ liệu (một phần hoặc đầy đủ)";
 }
 
@@ -412,6 +418,25 @@ export async function buildDocumentBuffer(draft, outline) {
     FIXED_TABLE_WIDTHS.dataRequest,
     ["left", "left", "center", "justify"],
   ));
+
+  const decisionRows = printableDecisionRows(draft, outline);
+  if (decisionRows.length > 0) {
+    children.push(spacer());
+    children.push(h1("DANH MỤC ĐIỂM CẦN QUYẾT ĐỊNH"));
+    children.push(bodyParagraph(
+      "Danh mục này khác danh mục trên ở bản chất việc phải làm. Ở trên là những chỗ CHƯA CÓ dữ liệu, " +
+      "đóng lại bằng cách đo hoặc lấy hồ sơ. Ở đây là những chỗ dữ liệu ĐÃ CÓ nhưng hai nguồn không " +
+      "khớp nhau, hoặc một giả định đang được dùng mà chưa được phê duyệt — không phép đo nào đóng " +
+      "được, phải có người có thẩm quyền chọn. Mỗi dòng sinh từ chính dấu trong tài liệu; cột người " +
+      "quyết đọc từ nguyên văn dấu đó.",
+    ));
+    children.push(makeTable(
+      ["Mục CTD", "Hạng mục", "Ai quyết", "Điều phải quyết"],
+      decisionRows,
+      FIXED_TABLE_WIDTHS.decisionRegister,
+      ["left", "left", "center", "justify"],
+    ));
+  }
 
   children.push(spacer());
   children.push(h1("Ghi nhận soạn thảo và rà soát"));

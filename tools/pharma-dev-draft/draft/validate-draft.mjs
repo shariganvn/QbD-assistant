@@ -8,7 +8,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { TABLE_WIDTH_DXA } from "../schemas/layout.mjs";
-import { isGapText } from "../schemas/markers.mjs";
+import { isDecisionText, isGapText, markerText } from "../schemas/markers.mjs";
 import { barSeries, flowSteps } from "../render/figures/figure-source.mjs";
 
 const draftDir = dirname(fileURLToPath(import.meta.url));
@@ -234,6 +234,9 @@ function validateMeasuredOnly(table, groupSpan, draft, where) {
     for (const row of table.rows) {
       for (let column = span.start; column < span.start + span.size; column++) {
         const cell = row[column];
+        if (isDecisionText(cell)) {
+          fail("E_DERIVED_STRENGTH_HAS_RESULT", `${where} row "${rowLabel(row)}" column ${column + 1} carries a decision marker for strength "${strength}": nobody can decide this cell, because the strength has no batch to measure. It must be marked as awaiting data`);
+        }
         if (!isGapText(cell)) {
           fail("E_DERIVED_STRENGTH_HAS_RESULT", `${where} row "${rowLabel(row)}" column ${column + 1} reports a measured value for strength "${strength}", which has no experimental source — it must be marked as awaiting data, not left blank and not filled in`);
         }
@@ -305,6 +308,63 @@ function validateSectionForm(section, spec, draft) {
 // `outline` is injectable so a test can prove a form rule on a purpose-built form rather than only on
 // whichever shape the department's current outline happens to have. The CLI and the renderer pass
 // nothing and get the real one, so there is no second source of truth in normal use.
+// Every place a marker can live, each with the path an error message needs. Derived by walking the
+// draft rather than listed, so a block type that gains a text field is covered without a second edit.
+function markedTexts(draft) {
+  const texts = [];
+  for (const section of draft.sections ?? []) {
+    if (typeof section?.id !== "string") continue;
+    if (typeof section.gapReason === "string") {
+      texts.push([`sections[${section.id}].gapReason`, section.gapReason]);
+    }
+    (section.blocks ?? []).forEach((block, index) => {
+      if (typeof block?.text === "string") {
+        texts.push([`sections[${section.id}].blocks[${index}].text`, block.text]);
+      }
+      if (block?.type !== "table") return;
+      (block.rows ?? []).forEach((row, rowIndex) => {
+        (row ?? []).forEach((cell, column) => {
+          if (typeof cell === "string") {
+            texts.push([`sections[${section.id}].blocks[${index}].rows[${rowIndex}][${column}]`, cell]);
+          }
+        });
+      });
+    });
+  }
+  return texts;
+}
+
+// The two marker kinds go to two different people and into two different registers, so a spot must
+// be one or the other. A decision also has to say what is to be decided and who decides it: an
+// unowned decision is a complaint, and the register exists to hand somebody a task.
+function validateMarkerKinds(draft) {
+  const texts = markedTexts(draft);
+
+  for (const [where, text] of texts) {
+    if (isGapText(text) && isDecisionText(text)) {
+      fail("E_MARKER_AMBIGUOUS", `${where} carries a gap marker and a decision marker at once: it would be listed in both registers, and a reader cannot tell whether it waits for data or for somebody to choose`);
+    }
+  }
+
+  const decisions = texts.filter(([, text]) => isDecisionText(text));
+  if (decisions.length === 0) return;
+
+  const owners = draft.meta.decisionOwners;
+  if (!Array.isArray(owners) || owners.length === 0) {
+    fail("E_META_DECISION_OWNERS", `draft holds ${decisions.length} decision marker(s), so draft.meta.decisionOwners must name who can settle them`);
+  }
+
+  for (const [where, text] of decisions) {
+    const body = markerText(text);
+    if (body === "") {
+      fail("E_DECISION_MARKER_SHAPE", `${where}: a decision marker must say what has to be decided — an empty one records that something is unresolved without saying what`);
+    }
+    if (!owners.some((owner) => body.includes(owner))) {
+      fail("E_DECISION_MARKER_SHAPE", `${where}: a decision marker must name who decides, from meta.decisionOwners (${owners.join(", ")}) — a decision with no owner is not a task anybody picks up`);
+    }
+  }
+}
+
 export function validateDraft(draft, outline = loadOutline()) {
   if (typeof draft !== "object" || draft === null) fail("E_DRAFT_SHAPE", "draft must be an object");
   if (draft.schemaVersion !== "1.0") fail("E_SCHEMA_VERSION", `unsupported schemaVersion: ${draft.schemaVersion}`);
@@ -349,6 +409,18 @@ export function validateDraft(draft, outline = loadOutline()) {
     }
     if (!draft.meta.referenceSources.every((source) => typeof source === "string" && source.trim() !== "")) {
       fail("E_META_REFERENCE_SOURCES", "draft.meta.referenceSources entries must be non-empty strings");
+    }
+  }
+
+  // Who can settle an open decision. Declared here, not built into the checker, so the rule holds for
+  // a department that names its roles differently. Required only when the draft actually holds a
+  // decision marker — see validateMarkerKinds.
+  if (draft.meta.decisionOwners !== undefined) {
+    if (!Array.isArray(draft.meta.decisionOwners) || draft.meta.decisionOwners.length === 0) {
+      fail("E_META_DECISION_OWNERS", "draft.meta.decisionOwners must be a non-empty array when present");
+    }
+    if (!draft.meta.decisionOwners.every((owner) => typeof owner === "string" && owner.trim() !== "")) {
+      fail("E_META_DECISION_OWNERS", "draft.meta.decisionOwners entries must be non-empty strings");
     }
   }
 
@@ -416,6 +488,8 @@ export function validateDraft(draft, outline = loadOutline()) {
       fail("E_SECTION_STATUS", `section "${section.id}".status must be "covered" or "gap", got: ${section.status}`);
     }
   }
+
+  validateMarkerKinds(draft);
 
   const missingIds = leafIds.filter((id) => !seenIds.has(id));
   if (missingIds.length > 0) {

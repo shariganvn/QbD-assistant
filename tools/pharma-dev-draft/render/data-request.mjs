@@ -8,20 +8,11 @@
 // the reference-product section has done it since that section was framed — and this module reads it
 // back. Filling one real value therefore removes exactly its own row, with no other edit.
 
-import { GAP_LABEL, GAP_PREFIX, isGapText } from "../schemas/markers.mjs";
+import { isGapText, markerText } from "../schemas/markers.mjs";
 import { labelColumnCount } from "../schemas/table-shape.mjs";
 
 const NO_STRENGTH = "—";
 
-// What is left of a marked cell once the marker label is taken off: the request itself.
-function requestText(text) {
-  const trimmed = String(text).trim();
-  for (const label of [GAP_LABEL, `${GAP_PREFIX}]`, GAP_PREFIX]) {
-    if (trimmed.startsWith(label)) return trimmed.slice(label.length).replace(/^[\s\]]+/, "").trim();
-  }
-  const index = trimmed.indexOf(GAP_PREFIX);
-  return index === -1 ? trimmed : trimmed.slice(index + GAP_PREFIX.length).replace(/^[\s\]]+/, "").trim();
-}
 
 // Which strength a column reports on, for a table the form marks perStrength. The group size is derived
 // the same way the validator derives it, from the column count rather than from a declaration.
@@ -56,7 +47,7 @@ function itemLabel(table, row, column, strength) {
 // round. Collapsed rows still account for every marker; the count is carried so a check can add them up.
 function isFullyBare(table) {
   const cells = table.rows.flatMap((row) => row.slice(labelColumnCount(table)));
-  return cells.length > 1 && cells.every((cell) => isGapText(cell) && requestText(cell) === "");
+  return cells.length > 1 && cells.every((cell) => isGapText(cell) && markerText(cell) === "");
 }
 
 // Rows carry a trailing marker count used only for the accounting check; the printed table drops it.
@@ -75,7 +66,7 @@ export function dataRequestRows(draft, outline) {
     const where = `${outlineSection.ctdReference} ${outlineSection.headingVi}`;
 
     if (!section || section.status === "gap") {
-      if (section?.gapReason) rows.push([where, outlineSection.headingVi, NO_STRENGTH, requestText(section.gapReason), 1]);
+      if (section?.gapReason) rows.push([where, outlineSection.headingVi, NO_STRENGTH, markerText(section.gapReason), 1]);
       continue;
     }
 
@@ -83,7 +74,7 @@ export function dataRequestRows(draft, outline) {
     let tableIndex = 0;
     for (const block of section.blocks ?? []) {
       if (block.type === "paragraph") {
-        if (isGapText(block.text)) rows.push([where, outlineSection.headingVi, NO_STRENGTH, requestText(block.text), 1]);
+        if (isGapText(block.text)) rows.push([where, outlineSection.headingVi, NO_STRENGTH, markerText(block.text), 1]);
         continue;
       }
       if (block.type !== "table") continue;
@@ -110,7 +101,7 @@ export function dataRequestRows(draft, outline) {
             where,
             itemLabel(block, row, column, strength) || outlineSection.headingVi,
             strength,
-            requestText(cell),
+            markerText(cell),
             1,
           ]);
         });

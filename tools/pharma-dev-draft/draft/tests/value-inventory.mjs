@@ -11,11 +11,11 @@
 //   node value-inventory.mjs --before <draft.json> --after <draft.json> [--json <out.json>]
 //
 // Exits non-zero if a value was lost or duplicated, or if the "after" draft introduced a table cell
-// holding something other than a gap marker — a restructuring pass adds no data.
+// holding something other than a marker — a restructuring pass adds no data.
 
 import { readFileSync, writeFileSync } from "node:fs";
 
-import { isGapText } from "../../schemas/markers.mjs";
+import { isMarkedText } from "../../schemas/markers.mjs";
 import { labelColumnCount } from "../../schemas/table-shape.mjs";
 
 // A "value" is something the document asserts: a paragraph's text, or a table cell outside the label
@@ -91,10 +91,11 @@ export function compareDrafts(before, after) {
   const added = [];
   for (const [value, places] of afterValues) {
     if (beforeValues.has(value)) continue;
-    // A marker states that data is missing. A new paragraph is prose framing a section the new form
-    // requires — reported so a reviewer reads it, not failed. A new table cell holding anything else is
-    // a measurement with no source, which is the one thing this pass must not produce.
-    const kind = isGapText(value) ? "marker" : afterTableValues.has(value) ? "DATA" : "prose";
+    // A marker states that a spot is unsettled — missing data, or an open decision. A new paragraph is
+    // prose framing a section the new form requires — reported so a reviewer reads it, not failed. A new
+    // table cell holding anything else is a measurement with no source, which is the one thing this
+    // pass must not produce.
+    const kind = isMarkedText(value) ? "marker" : afterTableValues.has(value) ? "DATA" : "prose";
     added.push({ value, in: [...new Set(places)], kind });
   }
 

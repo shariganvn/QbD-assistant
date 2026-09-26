@@ -33,7 +33,8 @@ belong in the draft — mark the section `gap` instead.
     "draftDate": "YYYY-MM-DD",
     "preparer": "string — free text, e.g. \"Claude (session ...)\" or a person's name",
     "extractionMethod": "xml-walk | liteparse — from Stage A's extracted.json",
-    "referenceSources": ["string — optional; one entry per reference work a section quotes"]
+    "referenceSources": ["string — optional; one entry per reference work a section quotes"],
+    "decisionOwners": ["string — REQUIRED once the draft holds a decision marker; the roles that can settle one"]
   },
   "sections": [ /* see below — one entry per id in schemas/p2-outline.json, in that order */ ]
 }
@@ -64,6 +65,30 @@ Rules **not** enforced by the validator (judgment calls — see `draft/checklist
 - Whether `blocks` content is a verbatim copy of the source (vs. paraphrased or invented) — the
   checklist requires verbatim copying, but the validator cannot check this against the original
   docx automatically.
+
+## The two markers
+
+An unfinished spot carries a marker, never a blank: a blank cell reads as "not applicable" in a
+document shaped like a dossier. Both labels are produced by `schemas/markers.mjs` and nowhere else.
+
+| Marker | Means | Closed by |
+|---|---|---|
+| `[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]` | nobody has measured this yet | producing the data |
+| `[CẦN QUYẾT ĐỊNH – CHƯA CHỐT]` | the data exists but two sources disagree, or an assumption is in use unapproved | somebody with the authority choosing |
+
+Rules the validator enforces:
+
+- One spot is one kind. A text carrying both labels is rejected (`E_MARKER_AMBIGUOUS`): it would be
+  listed in both registers, and a reader could not tell what it waits for.
+- A decision marker must say what has to be decided, and must name a role from `meta.decisionOwners`
+  (`E_DECISION_MARKER_SHAPE`). A decision with no owner is not a task anybody picks up. The roles are
+  declared in the draft rather than built into the checker, so a department that names its roles
+  differently is not wrong.
+- A cell in a `measuredOnly` table belonging to a `derivedStrengths` column must carry the **gap**
+  marker. A decision marker there is rejected: nobody can decide a cell whose strength has no batch.
+
+Each marker kind feeds its own annex at the end of the rendered document, both derived from the
+draft. Filling one real value, or settling one decision, removes exactly its own row.
 
 ## Block types
 
