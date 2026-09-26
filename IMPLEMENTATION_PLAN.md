@@ -5,6 +5,11 @@ authoritative router; wait for a scope to be accepted before picking work up.
 
 ## Latest completed
 
+- [Self-consistency plan](docs/plans/qbd-p2-self-consistency/plan.md) — `completed` and read-only.
+  G-23..G-25 hold evidence in `docs/reports/qbd-p2-self-consistency/`. Eleven internal references that
+  pointed at container sections now resolve to the leaves that hold the content, enforced at Stage B, and
+  the abbreviation table moved out of the renderer into the draft with five dead entries removed.
+
 - [Trial 2 plan](docs/plans/qbd-p2-trial-2/plan.md) — `completed` and read-only. G-19..G-22 hold evidence
   in `docs/reports/qbd-p2-trial-2/`. The first real dataset to reach the dossier: it settled the
   manufacturing process as direct compression and made the lubricant level the second experimentally
@@ -41,12 +46,6 @@ authoritative router; wait for a scope to be accepted before picking work up.
   connects.
 
 ## Queued (not active)
-
-- **Self-consistency clean-up, scoped and not started.** Two defects found while reading, both
-  machine-checkable, neither touching data: nine of seventeen internal cross-references point at
-  container sections that hold no content (`P.2.2.1.3` where `P.2.2.1.3.3` is meant, and similar), and
-  the abbreviation table lives hard-coded in `render/builder.mjs` while five of its ten entries name
-  terms the document never uses. Activate when a round is not carrying new data.
 
 - [Hardened end-to-end trial](plans/260805-1335-template-to-docx-end-to-end-trial/plan.md) —
   two-run determinism, forge negatives, Bubblewrap render,

@@ -34,7 +34,9 @@ belong in the draft — mark the section `gap` instead.
     "preparer": "string — free text, e.g. \"Claude (session ...)\" or a person's name",
     "extractionMethod": "xml-walk | liteparse — from Stage A's extracted.json",
     "referenceSources": ["string — optional; one entry per reference work a section quotes"],
-    "decisionOwners": ["string — REQUIRED once the draft holds a decision marker; the roles that can settle one"]
+    "decisionOwners": ["string — REQUIRED once the draft holds a decision marker; the roles that can settle one"],
+    "quotedNumbering": ["string — optional; section numbers quoted from ANOTHER document's numbering, not references to ours"],
+    "abbreviations": [["string — term", "string — explanation"], "optional; every declared term must appear in the document"]
   },
   "sections": [ /* see below — one entry per id in schemas/p2-outline.json, in that order */ ]
 }

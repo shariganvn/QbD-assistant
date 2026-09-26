@@ -192,6 +192,9 @@ test("a draft for an entirely different product validates on the same form", () 
   // strength list survives either.
   draft.meta.strengths = ["500 mg", "1000 mg"];
   delete draft.meta.derivedStrengths;
+  // The glossary describes this document's text, so it belongs to the content being replaced, not to
+  // the form. Another product declares its own; only a term the substituted text still uses stays.
+  draft.meta.abbreviations = [["CQA", "Critical Quality Attribute – Thuộc tính chất lượng trọng yếu"]];
   for (const [sectionId, index, fixed] of [["P.2.2.1.1", 0, "Thành phần"], ["P.2.2.1.1", 1, "Thông tin"]]) {
     const table = formTable(draft, sectionId, index);
     table.headers = [fixed, ...draft.meta.strengths.map((strength) => `Glucophage® ${strength}`)];

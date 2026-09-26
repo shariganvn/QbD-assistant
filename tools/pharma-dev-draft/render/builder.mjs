@@ -54,19 +54,6 @@ const SCOPE_NOTICE_BODY_2 =
   "sung dữ liệu và phê duyệt chính thức bởi FD.";
 const DRAFT_STATUS_LABEL = "Trạng thái: BẢN NHÁP NỘI BỘ – CHƯA THẨM ĐỊNH";
 
-const ABBREVIATIONS = [
-  ["API", "Active Pharmaceutical Ingredient – Dược chất"],
-  ["BCS", "Biopharmaceutics Classification System – Hệ thống phân loại sinh dược học"],
-  ["CQA", "Critical Quality Attribute – Thuộc tính chất lượng trọng yếu"],
-  ["CT", "Công thức (Formula)"],
-  ["CU", "Content Uniformity – Độ đồng đều hàm lượng"],
-  ["IPC", "In-Process Control – Kiểm soát trong quá trình"],
-  ["LOD", "Loss on Drying – Độ ẩm/hao hụt khi sấy"],
-  ["QTPP", "Quality Target Product Profile – Hồ sơ chất lượng mục tiêu sản phẩm"],
-  ["RMP", "Reference Medicinal Product – Sản phẩm đối chiếu"],
-  ["RSD", "Relative Standard Deviation – Độ lệch chuẩn tương đối"],
-];
-
 // One Word list definition, referenced by every bulleted line in every cell. Registered on the
 // Document below; without that registration the paragraphs render unbulleted.
 const CELL_BULLET_REFERENCE = "cell-bullet";
@@ -379,7 +366,13 @@ export async function buildDocumentBuffer(draft, outline) {
   children.push(spacer());
 
   children.push(h1("Danh mục chữ viết tắt"));
-  children.push(makeTable(["Viết tắt", "Giải thích"], ABBREVIATIONS, FIXED_TABLE_WIDTHS.abbreviations));
+  children.push(makeTable(
+    ["Viết tắt", "Giải thích"],
+    // Sorted here rather than in the draft: the order is layout, and asking the draft to keep a
+    // list alphabetical is asking for a list that drifts out of order.
+    [...(draft.meta.abbreviations ?? [])].sort((a, b) => a[0].localeCompare(b[0], "vi")),
+    FIXED_TABLE_WIDTHS.abbreviations,
+  ));
   children.push(spacer());
 
   children.push(h1("3.2.P.2 PHÁT TRIỂN DƯỢC HỌC (PHARMACEUTICAL DEVELOPMENT)"));

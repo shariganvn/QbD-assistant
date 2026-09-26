@@ -29,6 +29,123 @@
     "decisionOwners": [
       "FD",
       "QA"
+    ],
+    "quotedNumbering": [
+      "3.2.P.2.2.3.1.1.3"
+    ],
+    "abbreviations": [
+      [
+        "AV",
+        "Acceptance Value – Giá trị chấp nhận của phép thử độ đồng đều hàm lượng"
+      ],
+      [
+        "BCS",
+        "Biopharmaceutics Classification System – Hệ thống phân loại sinh dược học"
+      ],
+      [
+        "BE",
+        "Bioequivalence – Tương đương sinh học"
+      ],
+      [
+        "CAS",
+        "Chemical Abstracts Service – Số đăng ký hóa chất CAS"
+      ],
+      [
+        "CFU",
+        "Colony Forming Unit – Đơn vị hình thành khuẩn lạc"
+      ],
+      [
+        "CQA",
+        "Critical Quality Attribute – Thuộc tính chất lượng trọng yếu"
+      ],
+      [
+        "CT",
+        "Công thức (Formula)"
+      ],
+      [
+        "CTD",
+        "Common Technical Document – Hồ sơ kỹ thuật chung"
+      ],
+      [
+        "DSC",
+        "Differential Scanning Calorimetry – Phân tích nhiệt vi sai"
+      ],
+      [
+        "EMA",
+        "European Medicines Agency – Cơ quan Quản lý Dược phẩm châu Âu"
+      ],
+      [
+        "EP",
+        "European Pharmacopoeia – Dược điển châu Âu (Ph.Eur.)"
+      ],
+      [
+        "EPAR",
+        "European Public Assessment Report – Báo cáo đánh giá công khai của EMA"
+      ],
+      [
+        "FD",
+        "Formulation Development – Bộ phận Phát triển sản phẩm"
+      ],
+      [
+        "HPLC",
+        "High Performance Liquid Chromatography – Sắc ký lỏng hiệu năng cao"
+      ],
+      [
+        "ICH",
+        "International Council for Harmonisation – Hội đồng Hài hòa hóa Quốc tế"
+      ],
+      [
+        "INN",
+        "International Nonproprietary Name – Tên chung quốc tế"
+      ],
+      [
+        "IUPAC",
+        "International Union of Pure and Applied Chemistry – Danh pháp hóa học IUPAC"
+      ],
+      [
+        "KLTB",
+        "Khối lượng trung bình"
+      ],
+      [
+        "PK",
+        "Pharmacokinetics – Dược động học"
+      ],
+      [
+        "QA",
+        "Quality Assurance – Bộ phận Đảm bảo chất lượng"
+      ],
+      [
+        "QC",
+        "Quality Control – Bộ phận Kiểm tra chất lượng"
+      ],
+      [
+        "QTPP",
+        "Quality Target Product Profile – Hồ sơ chất lượng mục tiêu sản phẩm"
+      ],
+      [
+        "RSD",
+        "Relative Standard Deviation – Độ lệch chuẩn tương đối"
+      ],
+      [
+        "TAMC",
+        "Total Aerobic Microbial Count – Tổng số vi sinh vật hiếu khí"
+      ],
+      [
+        "TLTK",
+        "Tài liệu tham khảo"
+      ],
+      [
+        "TYMC",
+        "Total Yeasts and Moulds Count – Tổng số nấm men và nấm mốc"
+      ],
+      [
+        "USP",
+        "United States Pharmacopeia – Dược điển Hoa Kỳ"
+      ],
+      [
+        "WHO",
+        "World Health Organization – Tổ chức Y tế Thế giới"
+      ]
     ]
   },
   "sections": [
@@ -190,7 +307,7 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Danh mục tá dược sử dụng trong công thức, kèm đặc tính lý hóa, ứng dụng trong công thức dược phẩm và chức năng tương ứng. Thành phần định lượng theo từng công thức thử nghiệm được trình bày tại mục 3.2.P.2.2.1.3."
+          "text": "Danh mục tá dược sử dụng trong công thức, kèm đặc tính lý hóa, ứng dụng trong công thức dược phẩm và chức năng tương ứng. Thành phần định lượng theo từng công thức thử nghiệm được trình bày tại mục 3.2.P.2.2.1.3.3."
         },
         {
           "type": "table",
@@ -393,8 +510,8 @@
             ],
             [
               "Tạp chất liên quan",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Định danh từng tạp theo chuyên luận Ph.Eur. 12 (tạp A, E, G) như đã nêu ở mục P.2.2.3.",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Định danh từng tạp theo chuyên luận Ph.Eur. 12 (tạp A, E, G) như đã nêu ở mục P.2.2.3."
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Định danh từng tạp theo chuyên luận Ph.Eur. 12 (tạp A, E, G) như đã nêu ở mục P.2.2.3.2.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Định danh từng tạp theo chuyên luận Ph.Eur. 12 (tạp A, E, G) như đã nêu ở mục P.2.2.3.2."
             ],
             [
               "Đồng đều hàm lượng",
@@ -420,7 +537,7 @@
         },
         {
           "type": "paragraph",
-          "text": "Mục đích cuối của mục này là so sánh hồ sơ hòa tan của thuốc đối chiếu với công thức của ta — CT03 đạt trung bình 98,64% tại 30 phút (mục P.2.2.1.3). Vì vậy hồ sơ hòa tan của thuốc đối chiếu phải được lấy tại nhiều thời điểm và trong cùng điều kiện thử, nếu không sẽ không tính được hệ số tương đồng f2. Biểu mẫu của phòng còn có một biểu đồ hòa tan. Bản render dựng được biểu đồ từ số liệu trong bảng, nhưng mục này chưa có số liệu nào nên chưa có gì để vẽ; biểu đồ tự xuất hiện khi bảng trên được điền."
+          "text": "Mục đích cuối của mục này là so sánh hồ sơ hòa tan của thuốc đối chiếu với công thức của ta — CT03 đạt trung bình 98,64% tại 30 phút (mục P.2.2.1.3.3). Vì vậy hồ sơ hòa tan của thuốc đối chiếu phải được lấy tại nhiều thời điểm và trong cùng điều kiện thử, nếu không sẽ không tính được hệ số tương đồng f2. Biểu mẫu của phòng còn có một biểu đồ hòa tan. Bản render dựng được biểu đồ từ số liệu trong bảng, nhưng mục này chưa có số liệu nào nên chưa có gì để vẽ; biểu đồ tự xuất hiện khi bảng trên được điền."
         },
         {
           "type": "paragraph",
@@ -489,7 +606,7 @@
         },
         {
           "type": "paragraph",
-          "text": "Tỷ lệ croscarmellose sodium là thuộc tính công thức trọng yếu, đã chứng minh bằng thực nghiệm. Đây là biến số độc lập duy nhất giữa CT01 – CT03 (1% / 3% / 5% kl/kl, bù trừ bằng lactose monohydrate để giữ khối lượng viên 100 mg). Biến thiên của nó làm độ hòa tan 30 phút đổi từ 73,89% → 81,40% → 98,64% (tiêu chuẩn ≥ 80% Q) và độ rã tối đa từ 13'28\" → 8'57\" → 4'18\". Mức 1% không đạt độ hòa tan; mức 3% đạt trung bình nhưng giá trị Min 79,12% nằm dưới ngưỡng. Vậy độ hòa tan là chỉ tiêu chất lượng chịu ảnh hưởng trực tiếp của yếu tố này. Số liệu dẫn ở đây lấy từ bảng kết quả mục P.2.2.1.3, không phải số liệu mới."
+          "text": "Tỷ lệ croscarmellose sodium là thuộc tính công thức trọng yếu, đã chứng minh bằng thực nghiệm. Đây là biến số độc lập duy nhất giữa CT01 – CT03 (1% / 3% / 5% kl/kl, bù trừ bằng lactose monohydrate để giữ khối lượng viên 100 mg). Biến thiên của nó làm độ hòa tan 30 phút đổi từ 73,89% → 81,40% → 98,64% (tiêu chuẩn ≥ 80% Q) và độ rã tối đa từ 13'28\" → 8'57\" → 4'18\". Mức 1% không đạt độ hòa tan; mức 3% đạt trung bình nhưng giá trị Min 79,12% nằm dưới ngưỡng. Vậy độ hòa tan là chỉ tiêu chất lượng chịu ảnh hưởng trực tiếp của yếu tố này. Số liệu dẫn ở đây lấy từ bảng kết quả mục P.2.2.1.3.3, không phải số liệu mới."
         },
         {
           "type": "paragraph",
@@ -622,7 +739,7 @@
         },
         {
           "type": "paragraph",
-          "text": "Cả ba mức croscarmellose sodium đều nằm trong khoảng 0,5 – 5,0% mà Handbook of Pharmaceutical Excipients khuyến cáo cho viên nén: CT02 (3%) trùng mức khuyến cáo cho xát hạt ướt, CT01 (1%) thấp hơn mức đó, CT03 (5%) chạm giới hạn trên. Khoảng 0,5 – 1% chưa được khảo sát nên chưa kết luận được về vùng dưới của khoảng khuyến cáo. Lưu ý sau khi FD xác nhận quy trình là trộn dập thẳng: chuyên luận croscarmellose sodium trích ở mục P.2.1.2 nêu mức thông thường 2% cho dập thẳng và 3% cho xát hạt ướt, nên mốc đối chiếu đúng cho sản phẩm này là 2%, không phải 3%. Cả ba công thức đều nằm xa mốc đó, riêng CT03 ở 5% gấp 2,5 lần mức thông thường của dập thẳng — cần biện luận khi nộp hồ sơ."
+          "text": "Cả ba mức croscarmellose sodium đều nằm trong khoảng 0,5 – 5,0% mà Handbook of Pharmaceutical Excipients khuyến cáo cho viên nén: CT02 (3%) trùng mức khuyến cáo cho xát hạt ướt, CT01 (1%) thấp hơn mức đó, CT03 (5%) chạm giới hạn trên. Khoảng 0,5 – 1% chưa được khảo sát nên chưa kết luận được về vùng dưới của khoảng khuyến cáo. Lưu ý sau khi FD xác nhận quy trình là trộn dập thẳng: chuyên luận croscarmellose sodium trích ở mục P.2.1.2.1 nêu mức thông thường 2% cho dập thẳng và 3% cho xát hạt ướt, nên mốc đối chiếu đúng cho sản phẩm này là 2%, không phải 3%. Cả ba công thức đều nằm xa mốc đó, riêng CT03 ở 5% gấp 2,5 lần mức thông thường của dập thẳng — cần biện luận khi nộp hồ sơ."
         },
         {
           "type": "paragraph",
@@ -1276,15 +1393,15 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Kết quả tạp chất (tạp đơn, tổng tạp) đã có trong bảng kết quả viên thành phẩm ở mục P.2.2.1.3."
+          "text": "Kết quả tạp chất (tạp đơn, tổng tạp) đã có trong bảng kết quả viên thành phẩm ở mục P.2.2.1.3.3."
         },
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phương pháp phân tích tạp chất cụ thể (tham chiếu 3.2.P.5.2) chưa được nêu trong Thử nghiệm 1. Về danh mục tạp: CoA nguyên liệu khai theo chuyên luận Ph.Eur. 12 và kiểm riêng từng tạp — tạp A (benzyl alcohol), tạp E, tạp G, mỗi tạp tối đa 0,1%. Tiêu chuẩn viên thành phẩm đang áp dụng ở mục P.2.2.1.2 lại chỉ ghi \"tạp đơn bất kỳ\" tối đa 0,2% và tổng tạp tối đa 3,0%, không nêu tên tạp nào."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phương pháp phân tích tạp chất cụ thể (tham chiếu 3.2.P.5.2) chưa được nêu trong Thử nghiệm 1. Về danh mục tạp: CoA nguyên liệu khai theo chuyên luận Ph.Eur. 12 và kiểm riêng từng tạp — tạp A (benzyl alcohol), tạp E, tạp G, mỗi tạp tối đa 0,1%. Tiêu chuẩn viên thành phẩm đang áp dụng ở mục P.2.2.1.2.1 lại chỉ ghi \"tạp đơn bất kỳ\" tối đa 0,2% và tổng tạp tối đa 3,0%, không nêu tên tạp nào."
         },
         {
           "type": "paragraph",
-          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận chuyên luận áp dụng cho thành phẩm, rồi khai lại tiêu chuẩn tạp theo đúng danh mục tạp của chuyên luận đó. Hai nguồn trong hồ sơ đang không khớp: CoA nguyên liệu kiểm riêng từng tạp có tên, mỗi tạp tối đa 0,1%; tiêu chuẩn thành phẩm ở mục P.2.2.1.2 chỉ ghi \"tạp đơn bất kỳ\" tối đa 0,2% và tổng tạp tối đa 3,0%, không nêu tên tạp nào. Nguyên liệu đầu vào đang bị kiểm chặt hơn thành phẩm, trong khi bào chế chỉ có thể làm tạp tăng thêm chứ không giảm đi. Không phép đo nào giải quyết được chỗ này — cả hai con số đều đã có, chúng chỉ không thống nhất."
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận chuyên luận áp dụng cho thành phẩm, rồi khai lại tiêu chuẩn tạp theo đúng danh mục tạp của chuyên luận đó. Hai nguồn trong hồ sơ đang không khớp: CoA nguyên liệu kiểm riêng từng tạp có tên, mỗi tạp tối đa 0,1%; tiêu chuẩn thành phẩm ở mục P.2.2.1.2.1 chỉ ghi \"tạp đơn bất kỳ\" tối đa 0,2% và tổng tạp tối đa 3,0%, không nêu tên tạp nào. Nguyên liệu đầu vào đang bị kiểm chặt hơn thành phẩm, trong khi bào chế chỉ có thể làm tạp tăng thêm chứ không giảm đi. Không phép đo nào giải quyết được chỗ này — cả hai con số đều đã có, chúng chỉ không thống nhất."
         }
       ]
     },
@@ -1453,7 +1570,7 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Nâng cỡ lô: Thử nghiệm 1 thực hiện ở cỡ lô 1.000 viên mỗi công thức (mục P.2.2.1.3), tức quy mô phòng thí nghiệm. Cần thử nghiệm nâng cỡ lô lên quy mô pilot rồi thương mại để đánh giá tính lặp lại của thông số quy trình, sau đó mới lập được bảng đánh giá rủi ro cập nhật theo yêu cầu của biểu mẫu."
+          "text": "Nâng cỡ lô: Thử nghiệm 1 thực hiện ở cỡ lô 1.000 viên mỗi công thức (mục P.2.2.1.3.3), tức quy mô phòng thí nghiệm. Cần thử nghiệm nâng cỡ lô lên quy mô pilot rồi thương mại để đánh giá tính lặp lại của thông số quy trình, sau đó mới lập được bảng đánh giá rủi ro cập nhật theo yêu cầu của biểu mẫu."
         }
       ]
     },
@@ -1615,7 +1732,7 @@
         },
         {
           "type": "paragraph",
-          "text": "Về điều kiện của Q6A: nguyên liệu đã được kiểm vi sinh trước khi sản xuất — xem ghi chú nguồn [3] ở mục P.2.1.1 — đó là một trong hai điều kiện mà ICH Q6A trang 12 nêu; điều kiện còn lại là thẩm định quy trình chứng minh không mang rủi ro nhiễm hoặc tăng sinh đáng kể. Điều kiện thứ ba mà mục này từng quy về trang 12 — bằng chứng về tính ức chế phát triển của viên — thực ra đến từ Decision Tree #8 ở trang 31, không phải trang 12."
+          "text": "Về điều kiện của Q6A: nguyên liệu đã được kiểm vi sinh trước khi sản xuất — xem ghi chú nguồn [3] ở mục P.2.1.1.1 — đó là một trong hai điều kiện mà ICH Q6A trang 12 nêu; điều kiện còn lại là thẩm định quy trình chứng minh không mang rủi ro nhiễm hoặc tăng sinh đáng kể. Điều kiện thứ ba mà mục này từng quy về trang 12 — bằng chứng về tính ức chế phát triển của viên — thực ra đến từ Decision Tree #8 ở trang 31, không phải trang 12."
         },
         {
           "type": "paragraph",

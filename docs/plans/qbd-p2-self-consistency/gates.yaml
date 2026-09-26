@@ -1,0 +1,91 @@
+# Executable acceptance gates for qbd-p2-self-consistency.
+# This file owns gate bodies. Step files describe implementation; they must not restate a full gate.
+
+version: 2
+workstream: qbd-p2-self-consistency
+evidence_root: docs/reports/qbd-p2-self-consistency
+
+environment_findings:
+  tokenising_a_section_number: >
+    The same trap caught this work twice, from opposite sides, so it is written down rather than
+    remembered. A reference may end a sentence ("…tại mục 3.2.P.2.2.1.3."), so the pattern must not
+    treat the following period as part of the number, and must not refuse to match because of it. The
+    rule that satisfies both: reject only a DEEPER number — (?!\.\d) — never a bare period. Detecting
+    with (?:\.\d+)+ does this by construction; a rewrite pass written with (?![.0-9]) silently skipped
+    every reference that ended a sentence.
+
+gates:
+  - id: G-23
+    title: An internal reference lands on content
+    invariant: >
+      Every reference shaped like a P.2 section number, anywhere in the draft — paragraph, table cell,
+      figure caption or gapReason — must resolve to a LEAF of the outline. A container carries a heading
+      and no content, so a reader following a reference to one arrives nowhere, which in a submission
+      reads as a dead link. A number that does not exist in the outline at all is refused outright.
+    boundary_owner: draft/validate-draft.mjs — validateCrossReferences
+    fixture: a three-section outline with one container, plus the worked example
+    command: >
+      node --test tools/pharma-dev-draft/draft/tests/self-consistency.test.mjs
+      && node tools/pharma-dev-draft/draft/validate-draft.mjs tools/pharma-dev-draft/draft/example-draft.json
+    expected: >
+      exit 0. E_XREF_CONTAINER for a reference to a container, naming it and saying to point at the child
+      that holds the content; E_XREF_UNKNOWN for a number absent from the outline. Both the bare form
+      (P.2.1.2) and the qualified form (3.2.P.2.1.2) resolve. The worked example validates after eleven
+      redirects, and a re-scan finds no reference aimed at a container or at nothing.
+    negative_cases:
+      - A reference to a container passed because the number looks plausible -> reject.
+      - The rule applied to paragraphs only, so a caption or a table cell escapes -> reject.
+    evidence: g23-g25-self-consistency.txt
+    blocks: [G-24]
+    status: pass
+
+  - id: G-24
+    title: The reference pattern reads a number the way a reader does
+    invariant: >
+      Two things must hold at once. A sentence-ending period is not part of the number, so a reference
+      that closes a sentence is still found — and still rewritable. And "P.2" alone is the department's
+      form name, not a reference, so it is kept out by requiring at least one numeric segment rather than
+      by a list of phrases to ignore. The exception for a number quoted from another document's numbering
+      is declared in meta.quotedNumbering, and a section of THIS document may not be declared there.
+    boundary_owner: draft/validate-draft.mjs — INTERNAL_REFERENCE and meta.quotedNumbering
+    fixture: references in sentence-final position, the bare form name, a quoted foreign number
+    command: node --test tools/pharma-dev-draft/draft/tests/self-consistency.test.mjs
+    expected: >
+      exit 0. "Thành phần được trình bày tại mục 3.2.P.2.1.2." validates; the same sentence naming a
+      container fails. "biểu mẫu P.2 của phòng" is not flagged. A foreign number fails until declared,
+      and then passes. E_META_QUOTED_NUMBERING when a leaf or container of this outline is declared.
+    negative_cases:
+      - A pattern that swallows the trailing period misses a reference that ends a sentence.
+      - A pattern that refuses any following period misses the same one when rewriting it.
+      - The form name kept out by special-casing its phrase instead of by the pattern's shape.
+    evidence: g23-g25-self-consistency.txt
+    blocks: []
+    status: pass
+
+  - id: G-25
+    title: The glossary is data, and every term it declares is used
+    invariant: >
+      meta.abbreviations holds [term, explanation] pairs with no duplicates, the renderer reads it and
+      sorts it, and the hard-coded array is gone. Every declared term must appear in the document's own
+      text: an entry for a term the text does not use sends a reader looking for something that is not
+      there. Only this direction is checked. The reverse — every capitalised token must be glossed —
+      would flag Vietnamese words written in capitals and fragments of URLs, and a check that cries wolf
+      is a check people learn to ignore.
+    boundary_owner: draft/validate-draft.mjs + render/builder.mjs
+    fixture: the worked example, and the other-product draft on the same form
+    command: >
+      node --test tools/pharma-dev-draft/draft/tests/self-consistency.test.mjs
+      && npm run test:pharma-dev
+      && grep -c ABBREVIATIONS tools/pharma-dev-draft/render/builder.mjs
+    expected: >
+      exit 0, and the grep returns 0 — the array is no longer in the renderer. E_ABBREVIATION_UNUSED for
+      a declared term absent from the text; E_META_ABBREVIATIONS for a duplicate or a malformed pair. A
+      digit may follow a term (CT is used as CT01) but a letter may not (EP is not satisfied by EPAR).
+      The worked example declares 28 terms, all present; the five that named unused terms are gone.
+    negative_cases:
+      - The glossary left in the renderer while the draft also declares one -> two sources of truth.
+      - The rule relaxed because the other-product fixture failed -> the fixture was incomplete, not the rule.
+      - A check added for capitalised tokens not in the glossary -> a false-positive machine.
+    evidence: g23-g25-self-consistency.txt
+    blocks: []
+    status: pass

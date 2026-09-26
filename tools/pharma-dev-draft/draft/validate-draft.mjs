@@ -310,7 +310,7 @@ function validateSectionForm(section, spec, draft) {
 // nothing and get the real one, so there is no second source of truth in normal use.
 // Every place a marker can live, each with the path an error message needs. Derived by walking the
 // draft rather than listed, so a block type that gains a text field is covered without a second edit.
-function markedTexts(draft) {
+function everyText(draft) {
   const texts = [];
   for (const section of draft.sections ?? []) {
     if (typeof section?.id !== "string") continue;
@@ -320,6 +320,9 @@ function markedTexts(draft) {
     (section.blocks ?? []).forEach((block, index) => {
       if (typeof block?.text === "string") {
         texts.push([`sections[${section.id}].blocks[${index}].text`, block.text]);
+      }
+      if (typeof block?.caption === "string") {
+        texts.push([`sections[${section.id}].blocks[${index}].caption`, block.caption]);
       }
       if (block?.type !== "table") return;
       (block.rows ?? []).forEach((row, rowIndex) => {
@@ -338,7 +341,7 @@ function markedTexts(draft) {
 // be one or the other. A decision also has to say what is to be decided and who decides it: an
 // unowned decision is a complaint, and the register exists to hand somebody a task.
 function validateMarkerKinds(draft) {
-  const texts = markedTexts(draft);
+  const texts = everyText(draft);
 
   for (const [where, text] of texts) {
     if (isGapText(text) && isDecisionText(text)) {
@@ -361,6 +364,63 @@ function validateMarkerKinds(draft) {
     }
     if (!owners.some((owner) => body.includes(owner))) {
       fail("E_DECISION_MARKER_SHAPE", `${where}: a decision marker must name who decides, from meta.decisionOwners (${owners.join(", ")}) — a decision with no owner is not a task anybody picks up`);
+    }
+  }
+}
+
+// A reference the reader can follow. The document is full of "xem mục P.2.x", and a reference that
+// lands on a container lands on a heading with no content — which a reviewer reads as a dead link in a
+// submission. Two tokenising traps are handled by the shape of the pattern rather than by patching
+// afterwards: it requires at least one numeric segment, so the bare form name "biểu mẫu P.2" is not a
+// reference, and each segment requires a digit after the dot, so a sentence-ending period is not
+// swallowed into the number.
+const INTERNAL_REFERENCE = /(?:3\.2\.)?P\.2(?:\.\d+)+/g;
+
+function validateCrossReferences(draft, outline) {
+  const leafIds = new Set(outline.sections.filter((section) => !section.container).map((section) => section.id));
+  const containerIds = new Set(outline.sections.filter((section) => section.container).map((section) => section.id));
+  const quoted = new Set(draft.meta.quotedNumbering ?? []);
+
+  // Declaring one of our own sections as "quoted from elsewhere" would build a place to hide a broken
+  // link before anyone breaks one.
+  for (const entry of quoted) {
+    const bare = entry.replace(/^3\.2\./, "");
+    if (leafIds.has(bare) || containerIds.has(bare)) {
+      fail("E_META_QUOTED_NUMBERING", `draft.meta.quotedNumbering declares "${entry}", which is a section of this document — quotedNumbering is for numbers taken from another document's numbering, so declaring our own would let a real broken reference pass`);
+    }
+  }
+
+  for (const [where, text] of everyText(draft)) {
+    for (const match of text.matchAll(INTERNAL_REFERENCE)) {
+      const reference = match[0].replace(/^3\.2\./, "");
+      if (leafIds.has(reference) || quoted.has(reference) || quoted.has(match[0])) continue;
+      if (containerIds.has(reference)) {
+        fail("E_XREF_CONTAINER", `${where} points at "${match[0]}", which is a container: it carries a heading and no content, so a reader following the reference arrives nowhere. Name the child section that holds what is meant`);
+      }
+      fail("E_XREF_UNKNOWN", `${where} points at "${match[0]}", which is not a section of this document. If the number is quoted from another document's numbering, declare it in meta.quotedNumbering`);
+    }
+  }
+}
+
+// A glossary that lists a term the document never uses is a small untruth in the one place a reader
+// goes to resolve an unfamiliar one. Only this direction is checked: the reverse — every capitalised
+// token must be glossed — would flag Vietnamese words written in capitals and fragments of URLs, and a
+// check that cries wolf is a check people learn to ignore.
+function validateAbbreviationsAreUsed(draft) {
+  const declared = draft.meta.abbreviations ?? [];
+  if (declared.length === 0) return;
+  // Headers and row labels count here, unlike in the value inventory: a term is explained for the
+  // reader wherever it appears, and several live only in table labels.
+  const corpus = everyText(draft).map(([, text]) => text)
+    .concat(draft.sections.flatMap((section) => (section.blocks ?? [])
+      .filter((block) => block.type === "table")
+      .flatMap((block) => block.headers ?? [])))
+    .join(" ");
+  for (const [term] of declared) {
+    // A digit may follow — "CT" is used as CT01 — but a letter may not, or "EP" would match "EPAR".
+    const used = new RegExp(`(?<![A-Za-z])${term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?![A-Za-z])`).test(corpus);
+    if (!used) {
+      fail("E_ABBREVIATION_UNUSED", `draft.meta.abbreviations declares "${term}", which appears nowhere in the document — a glossary entry for a term the text does not use sends the reader looking for something that is not there`);
     }
   }
 }
@@ -437,6 +497,39 @@ export function validateDraft(draft, outline = loadOutline()) {
     }
   }
 
+  // Numbers this document quotes from another document's numbering rather than referring to its own
+  // sections — the department's worked example numbers two different subsections the same, and the
+  // dossier has to be able to say so. Declared here so the exception is data, not a list in the checker.
+  // A number that IS one of our sections must not be declared: that would pre-build a place to hide a
+  // broken link later.
+  if (draft.meta.quotedNumbering !== undefined) {
+    if (!Array.isArray(draft.meta.quotedNumbering) || draft.meta.quotedNumbering.length === 0) {
+      fail("E_META_QUOTED_NUMBERING", "draft.meta.quotedNumbering must be a non-empty array when present");
+    }
+    if (!draft.meta.quotedNumbering.every((entry) => typeof entry === "string" && entry.trim() !== "")) {
+      fail("E_META_QUOTED_NUMBERING", "draft.meta.quotedNumbering entries must be non-empty strings");
+    }
+  }
+
+  // The reader aid at the back of the document. It lives here rather than in the renderer because it
+  // describes this document's content, and a glossary kept beside the layout code goes stale against
+  // the text it explains — five of its ten entries named terms this document had stopped using.
+  if (draft.meta.abbreviations !== undefined) {
+    if (!Array.isArray(draft.meta.abbreviations) || draft.meta.abbreviations.length === 0) {
+      fail("E_META_ABBREVIATIONS", "draft.meta.abbreviations must be a non-empty array when present");
+    }
+    const terms = [];
+    for (const entry of draft.meta.abbreviations) {
+      if (!Array.isArray(entry) || entry.length !== 2 || !entry.every((part) => typeof part === "string" && part.trim() !== "")) {
+        fail("E_META_ABBREVIATIONS", "each draft.meta.abbreviations entry must be a [term, explanation] pair of non-empty strings");
+      }
+      terms.push(entry[0]);
+    }
+    if (new Set(terms).size !== terms.length) {
+      fail("E_META_ABBREVIATIONS", "draft.meta.abbreviations must not declare the same term twice");
+    }
+  }
+
   if (!Array.isArray(draft.sections)) fail("E_SECTIONS_SHAPE", "draft.sections must be an array");
 
   // A container carries a heading and nothing else, so the draft holds no entry for it and the
@@ -503,6 +596,8 @@ export function validateDraft(draft, outline = loadOutline()) {
   }
 
   validateMarkerKinds(draft);
+  validateCrossReferences(draft, outline);
+  validateAbbreviationsAreUsed(draft);
 
   const missingIds = leafIds.filter((id) => !seenIds.has(id));
   if (missingIds.length > 0) {
