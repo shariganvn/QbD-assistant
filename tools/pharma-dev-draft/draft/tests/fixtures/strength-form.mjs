@@ -59,7 +59,7 @@ export function strengthDraft(strengths, { groupLabels, group2Labels, derivedStr
       apiName: "Hoạt chất thử nghiệm",
       strengths,
       ...(derivedStrengths.length ? { derivedStrengths } : {}),
-      sourceFile: "fixture.docx",
+      sourceFiles: ["fixture.docx"],
       draftDate: "2026-09-24",
       preparer: "bộ kiểm quy tắc",
       extractionMethod: "xml-walk",

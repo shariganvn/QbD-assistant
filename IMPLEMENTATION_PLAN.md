@@ -5,6 +5,13 @@ authoritative router; wait for a scope to be accepted before picking work up.
 
 ## Latest completed
 
+- [Trial 2 plan](docs/plans/qbd-p2-trial-2/plan.md) — `completed` and read-only. G-19..G-22 hold evidence
+  in `docs/reports/qbd-p2-trial-2/`. The first real dataset to reach the dossier: it settled the
+  manufacturing process as direct compression and made the lubricant level the second experimentally
+  established critical attribute. Its finished-product results table is a partial copy of the first
+  trial's — 25 of 45 numeric cells verbatim, in a block pattern — so that table is named rather than
+  written, and FD owes either the real measurements or confirmation that these are the same batches.
+
 - [Decision register plan](docs/plans/qbd-p2-decision-register/plan.md) — `completed` and read-only.
   G-13..G-18 hold evidence in `docs/reports/qbd-p2-decision-register/`. The draft now carries a second
   marker kind for a conflict or an unapproved assumption, and the rendered document has a second annex
@@ -34,6 +41,12 @@ authoritative router; wait for a scope to be accepted before picking work up.
   connects.
 
 ## Queued (not active)
+
+- **Self-consistency clean-up, scoped and not started.** Two defects found while reading, both
+  machine-checkable, neither touching data: nine of seventeen internal cross-references point at
+  container sections that hold no content (`P.2.2.1.3` where `P.2.2.1.3.3` is meant, and similar), and
+  the abbreviation table lives hard-coded in `render/builder.mjs` while five of its ten entries name
+  terms the document never uses. Activate when a round is not carrying new data.
 
 - [Hardened end-to-end trial](plans/260805-1335-template-to-docx-end-to-end-trial/plan.md) —
   two-run determinism, forge negatives, Bubblewrap render,

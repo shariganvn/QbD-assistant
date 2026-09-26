@@ -358,7 +358,7 @@ export async function buildDocumentBuffer(draft, outline) {
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 80 }, children: [new TextRun({ text: "BÁO CÁO PHÁT TRIỂN DƯỢC HỌC", bold: true, size: 32 })] }),
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 80 }, children: [new TextRun({ text: "(PHARMACEUTICAL DEVELOPMENT – CTD 3.2.P.2)", bold: true, size: 24, color: "555555" })] }),
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 40 }, children: [new TextRun({ text: `${draft.meta.productName} — Dược chất: ${draft.meta.apiName}`, bold: true, size: 22 })] }),
-    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 40 }, children: [new TextRun({ text: `Cơ sở dữ liệu: ${draft.meta.sourceFile}`, size: 20, italics: true })] }),
+    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 40 }, children: [new TextRun({ text: `Cơ sở dữ liệu: ${draft.meta.sourceFiles.join(" · ")}`, size: 20, italics: true })] }),
   );
 
   // The cover must name every source the document draws on, not just the trial file, so a reader

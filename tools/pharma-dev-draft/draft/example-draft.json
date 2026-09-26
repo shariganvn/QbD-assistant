@@ -3,6 +3,10 @@
   "meta": {
     "productName": "Bisoprolol fumarate 5 mg và 10 mg, viên nén bao phim",
     "apiName": "Bisoprolol fumarate",
+    "sourceFiles": [
+      "Thử nghiệm 1.docx (Khảo sát tỷ lệ tá dược rã)",
+      "Thử nghiệm 2.docx (Khảo sát tỷ lệ tá dược trơn)"
+    ],
     "strengths": [
       "5 mg",
       "10 mg"
@@ -10,7 +14,6 @@
     "derivedStrengths": [
       "5 mg"
     ],
-    "sourceFile": "Thử nghiệm 1.docx (Khảo sát tỷ lệ tá dược rã)",
     "draftDate": "2026-08-20",
     "preparer": "Claude (phiên làm việc 2026-08-20, tổng hợp từ Thử nghiệm 1)",
     "extractionMethod": "xml-walk",
@@ -498,11 +501,15 @@
         },
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa đánh giá tính trọng yếu của: thuộc tính dược chất (phân bố cỡ hạt, đa hình), các thông số quy trình (thời gian trộn, lực dập, điều kiện bao phim), hệ màng bao, và hệ thống bao bì. Thử nghiệm 1 giữ cố định hoặc không khảo sát các yếu tố này nên không có cơ sở kết luận theo cách ICH Q8(R2) trang 6 mô tả. Riêng magnesium stearate 3% kl/kl là biến nhiễu tiềm tàng đối với độ hòa tan, cần tách bạch trong thử nghiệm tiếp theo trước khi kết luận về tá dược rã là đầy đủ."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa đánh giá tính trọng yếu của: thuộc tính dược chất (phân bố cỡ hạt, đa hình), các thông số quy trình (thời gian trộn, lực dập, điều kiện bao phim), hệ màng bao, và hệ thống bao bì. Thử nghiệm 1 giữ cố định hoặc không khảo sát các yếu tố này nên không có cơ sở kết luận theo cách ICH Q8(R2) trang 6 mô tả. Tá dược trơn đã được tách bạch ở Thử nghiệm 2 và không còn nằm trong danh sách này."
         },
         {
           "type": "paragraph",
-          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD quyết định có tách magnesium stearate thành một biến khảo sát riêng trong Thử nghiệm 2 hay không. Thử nghiệm 1 giữ mức 3% kl/kl cố định ở cả ba công thức, nên không thể biết mức trơn này có đang kìm độ hòa tan hay không; nếu có thì kết luận về tá dược rã đang gánh cả ảnh hưởng của tá dược trơn. Đây là quyết định thiết kế thử nghiệm, không phải số liệu còn thiếu."
+          "text": "Tỷ lệ magnesium stearate là thuộc tính công thức trọng yếu thứ hai, và Thử nghiệm 2 đã khảo sát biến thiên của nó đúng theo cơ chế ICH Q8(R2) trang 6 mô tả: nó là biến độc lập duy nhất giữa hai công thức (1% và 5% kl/kl, lactose monohydrate bù trừ để giữ khối lượng viên 100 mg), croscarmellose sodium giữ cố định ở 5%. Kết quả: ở 1%, dập viên bị dính chày — mức trơn không đủ cho quy trình dập thẳng; ở 5%, độ cứng giảm và độ mài mòn tăng. Biện luận kiểm soát tương ứng: giữ magnesium stearate ở 3% kl/kl, là mức đã dùng ở toàn bộ Thử nghiệm 1, và đưa độ cứng cùng độ mài mòn vào bộ chỉ tiêu theo dõi vì đó là hai chỉ tiêu chịu ảnh hưởng trực tiếp."
+        },
+        {
+          "type": "paragraph",
+          "text": "Hai giới hạn của kết luận này, nêu rõ chứ không để người đọc tự phát hiện. Thứ nhất, mức 3% không được thử trong Thử nghiệm 2, nên điều đã chứng minh là 3% tốt hơn cả 1% và 5%, không phải 3% là tối ưu trong khoảng giữa. Thứ hai, hai vế \"độ cứng giảm\" và \"độ mài mòn tăng\" dựa trên bảng kết quả viên của Thử nghiệm 2, mà bảng đó có phần lớn số liệu trùng nguyên văn Thử nghiệm 1 — xem mục 3.2.P.2.2.1.3.3. Vế dính chày ở 1% không phụ thuộc bảng đó, nên đó là phần bằng chứng vững nhất hiện có cho tính trọng yếu của tá dược trơn."
         }
       ]
     },
@@ -543,7 +550,7 @@
           "text": "Thông số cố định: cỡ lô 1.000 viên/công thức; khối lượng viên 100 mg; giữ nguyên các tá dược khác (Cellactose 80, MgO XP 103, Povidone K30, magnesium stearate); biến số khảo sát là tỷ lệ Primellose (1% / 3% / 5%), bù trừ bằng lactose monohydrate để giữ tổng khối lượng viên không đổi."
         },
         {
-          "type": "heading2",
+          "type": "heading3",
           "text": "Bảng thành phần công thức (mg/viên = % kl/kl)"
         },
         {
@@ -606,7 +613,7 @@
           ]
         },
         {
-          "type": "heading2",
+          "type": "heading3",
           "text": "Vai trò tá dược trong công thức"
         },
         {
@@ -630,7 +637,7 @@
           "text": "Magnesium stearate 3,00 mg/viên (3% kl/kl) nằm ở nửa trên khoảng 0,25 – 5,00% được khuyến cáo. Kết hợp với đặc tính thực tế không tan trong nước và diện tích bề mặt riêng lớn (trải màng kỵ nước trên bề mặt tiểu phân), mức này có khả năng làm chậm rã và giảm tốc độ hòa tan, tức là biến nhiễu tiềm tàng khi diễn giải kết quả Thử nghiệm 1. Cần FD xác nhận thời gian trộn trơn và đánh giá lại tỷ lệ này ở bước tối ưu công thức."
         },
         {
-          "type": "heading2",
+          "type": "heading3",
           "text": "Kết quả — Tính chất vật lý cốm (in-process control)"
         },
         {
@@ -699,7 +706,7 @@
           ]
         },
         {
-          "type": "heading2",
+          "type": "heading3",
           "text": "Kết quả — Chỉ tiêu chất lượng viên thành phẩm"
         },
         {
@@ -832,7 +839,7 @@
           "caption": "Độ hòa tan trung bình tại 30 phút của ba công thức. Cột dưới ngưỡng Q được tô khác màu; giá trị lấy nguyên văn từ bảng kết quả trên."
         },
         {
-          "type": "heading2",
+          "type": "heading3",
           "text": "Nhận xét / Kết luận (nguyên văn từ Thử nghiệm 1)"
         },
         {
@@ -850,6 +857,195 @@
         },
         {
           "type": "heading2",
+          "text": "Thử nghiệm 2: Khảo sát tỷ lệ tá dược trơn"
+        },
+        {
+          "type": "paragraph",
+          "text": "Mục tiêu (nguyên văn): \"Dựa vào kết quả ở thử nghiệm 1, tiến hành khảo sát tỷ lệ của magnesium stearate ở các nồng độ 1% và 5%.\" Cỡ lô 1.000 viên mỗi công thức, cùng cỡ lô với Thử nghiệm 1."
+        },
+        {
+          "type": "paragraph",
+          "text": "Thông số cố định: khối lượng viên 100 mg; croscarmellose sodium giữ ở 5% kl/kl — mức mà Thử nghiệm 1 kết luận là điểm khởi đầu; lactose monohydrate bù trừ để giữ tổng 100,00 mg. Magnesium stearate là biến số độc lập duy nhất giữa hai công thức. Cả hai công thức đều ở hàm lượng 10 mg; thử nghiệm này không có lô 5 mg nào."
+        },
+        {
+          "type": "heading3",
+          "text": "Tóm tắt quy trình pha chế"
+        },
+        {
+          "type": "paragraph",
+          "text": "Thử nghiệm 2 là tài liệu đầu tiên trong hồ sơ mô tả quy trình. Bộ công đoạn gồm: rây, trộn đồng nhất (hai lần), trộn hoàn tất với magnesium stearate đã rây, và dập viên. **Không có công đoạn tạo hạt, không có làm ẩm, không có sấy** — đây là quy trình trộn dập thẳng, và điều đó xác nhận tiền đề đã nêu ở mục 3.2.P.2.3.1. Povidone K30 có trong công thức nhưng được thêm ở dạng bột khô vào khối trộn, không phải dưới dạng dung dịch dính."
+        },
+        {
+          "type": "paragraph",
+          "text": "Từ đó cũng rõ nghĩa chữ \"cốm\" trong biểu mẫu của phòng: nó chỉ **khối bột đã trộn hoàn tất** sẵn sàng dập viên, không phải hạt ướt. Trước Thử nghiệm 2, tiêu đề bảng \"tính chất vật lý cốm\" ở Thử nghiệm 1 là căn cứ duy nhất để nghi quy trình có tạo hạt."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận TRÌNH TỰ chính xác của các công đoạn. Sơ đồ quy trình trong Thử nghiệm 2 vẽ bằng các hộp văn bản, nên công cụ trích xuất đọc theo thứ tự trong file XML chứ không theo thứ tự hình — bộ công đoạn là chắc chắn, thứ tự thì không. Bản thảo này cố ý không dựng lại trình tự bằng suy luận dược học, vì một trình tự đúng-theo-lẽ-thường vẫn là trình tự không có nguồn."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD bổ sung công đoạn bao phim vào quy trình, hoặc xác nhận nó thuộc hồ sơ khác. Tóm tắt quy trình của Thử nghiệm 2 kết thúc ở dập viên, trong khi chính bảng kết quả của nó mô tả cảm quan là \"viên nén ... bao phim màu trắng\" — nên viên đã được bao mà quy trình không khai công đoạn bao. Ma trận rủi ro ở mục 3.2.P.2.3.1 có cột \"Bao phim\", nên chỗ này phải khớp lại."
+        },
+        {
+          "type": "heading3",
+          "text": "Bảng thành phần công thức (mg/viên = % kl/kl)"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Thành phần",
+            "Mg stearat 1%",
+            "Mg stearat 5%"
+          ],
+          "rows": [
+            [
+              "Bisoprolol fumarate",
+              "10,00",
+              "10,00"
+            ],
+            [
+              "Lactose monohydrate",
+              "15,70",
+              "11,70"
+            ],
+            [
+              "Lactose monohydrate and cellulose powder (75:25)(Cellactose 80)",
+              "63,00",
+              "63,00"
+            ],
+            [
+              "Croscarmellose sodium(Primellose)",
+              "5,00",
+              "5,00"
+            ],
+            [
+              "Magnesium oxide (MgO XP 103)",
+              "3,30",
+              "3,30"
+            ],
+            [
+              "Povidone K30",
+              "2,00",
+              "2,00"
+            ],
+            [
+              "Magnesium stearate",
+              "1,00",
+              "5,00"
+            ],
+            [
+              "Tổng cộng",
+              "100,00",
+              "100,00"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Hai công thức chỉ khác nhau ở magnesium stearate (1,00 và 5,00 mg/viên), lactose monohydrate bù trừ (15,70 và 11,70 mg/viên). Cả hai cột cộng đúng 100,00 mg — đã kiểm lại bằng phép cộng, không nhận theo dòng \"Tổng cộng\" của tài liệu gốc."
+        },
+        {
+          "type": "heading3",
+          "text": "Kết quả — Tính chất vật lý khối bột trộn hoàn tất"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Thành phần",
+            "Mg stearat 1%",
+            "Mg stearat 5%"
+          ],
+          "rows": [
+            [
+              "Tỷ trọng biểu kiến – tĩnh (g/ml)",
+              "0,505",
+              "0,520"
+            ],
+            [
+              "Tỷ trọng biểu kiến – gõ (g/ml)",
+              "0,682",
+              "0,684"
+            ],
+            [
+              "Tỉ số Hausner",
+              "1,35",
+              "1,32"
+            ],
+            [
+              "Cỡ hạt ≥ 180 µm (%)",
+              "29,08",
+              "30,31"
+            ],
+            [
+              "Cỡ hạt 180 – 150 µm (%)",
+              "18,35",
+              "19,75"
+            ],
+            [
+              "Cỡ hạt 150 – 125 µm (%)",
+              "14,02",
+              "12,68"
+            ],
+            [
+              "Cỡ hạt 125 – 75 µm (%)",
+              "17,31",
+              "16,37"
+            ],
+            [
+              "Cỡ hạt < 75 µm (%)",
+              "21,24",
+              "20,89"
+            ],
+            [
+              "Độ ẩm (105 °C, cân ẩm Halogen) (%)",
+              "2,42",
+              "2,38"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Bảng này nhất quán nội tại, đã kiểm ba phép: tỉ số Hausner khớp đúng hai tỷ trọng của chính nó (0,682/0,505 = 1,3505 ≈ 1,35 và 0,684/0,520 = 1,3154 ≈ 1,32), và phân bố cỡ hạt cộng đủ 100,00% ở cả hai công thức. Tỉ số Hausner 1,32 – 1,35 xếp vào mức chảy kém, đúng mức đã thấy ở Thử nghiệm 1, và là điều phải theo dõi với một quy trình dập thẳng."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận ba số đo trong bảng cốm ở trên thuộc đúng lô của Thử nghiệm 2. Ba giá trị trùng nguyên văn Thử nghiệm 1: tỷ trọng gõ 0,682, tỉ số Hausner 1,32 và phân đoạn ≥ 180 µm 29,08%. Bằng chứng hai chiều, nên bản thảo không tự kết luận: chống lại, bảng kết quả viên của cùng tài liệu này có phần lớn số liệu là bản sao (nêu ở dưới); ủng hộ, ba phép kiểm nội tại của chính bảng cốm đều khớp, mà một bảng sao chép một phần thường không giữ được sự khớp đó. Ba giá trị này cũng là loại hay trùng thật: một tỉ số Hausner hai chữ số thập phân có ít giá trị khả dĩ."
+        },
+        {
+          "type": "heading3",
+          "text": "Kết quả — Chỉ tiêu chất lượng viên thành phẩm"
+        },
+        {
+          "type": "paragraph",
+          "text": "Bảng kết quả viên thành phẩm của Thử nghiệm 2 **không được đưa vào hồ sơ này**, vì phần lớn số liệu của nó trùng nguyên văn với Thử nghiệm 1. Đối chiếu từng ô: 28 trong 69 ô mang số của hai bảng kết quả Thử nghiệm 2 xuất hiện y nguyên trong bảng của Thử nghiệm 1, và không trùng ngẫu nhiên — toàn bộ khối độ cứng, độ dày, độ mài mòn, độ rã, định lượng, độ hòa tan và tạp chất của cột \"Mg stearat 1%\" khớp cột CT02, của cột \"Mg stearat 5%\" khớp cột CT03, trong khi khối đồng đều khối lượng lại khớp CT01 và CT02. Đó là dấu hiệu của một bảng được sao chép rồi sửa một phần, không phải một bộ số liệu độc lập."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD cấp bộ số liệu kiểm nghiệm thật của hai lô Thử nghiệm 2, hoặc xác nhận rằng hai công thức này chính là CT02 và CT03 của Thử nghiệm 1 được báo cáo lại. Đây không phải chỗ thiếu dữ liệu — số liệu đã có trong tài liệu nguồn — mà là chỗ không xác định được số liệu thuộc lô nào. Cho tới khi có xác nhận, không kết luận nào về chất lượng viên của Thử nghiệm 2 được dẫn trong hồ sơ, kể cả kết luận thuận lợi."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] QA xử lý một lỗi định danh trong tài liệu nguồn: dòng tiêu chuẩn độ hòa tan của Thử nghiệm 2 ghi nguyên văn \"≥ 80% (Q) lượng **pravastatin sodium** so với hàm lượng nhãn\" — pravastatin sodium là một hoạt chất khác hoàn toàn, không có trong sản phẩm này. Cùng dòng đó còn ghi \"cEP 2.9.40\". Bản thảo giữ nguyên văn và không tự sửa, vì sửa số liệu trong tài liệu nguồn là việc của người ký tài liệu đó; nhưng một tài liệu phát triển mang tên hoạt chất của sản phẩm khác thì không dùng được làm bằng chứng cho đến khi được phát hành lại."
+        },
+        {
+          "type": "heading3",
+          "text": "Nhận xét / Kết luận (nguyên văn từ Thử nghiệm 2)"
+        },
+        {
+          "type": "paragraph",
+          "text": "\"Ở tỷ lệ magnesium stearate 1%, dập viên bị dính chày ở vị trí số 40. Ở tỷ lệ magnesium stearate 5%, mặc dù các thuộc tính chất lượng trọng yếu đạt nhưng độ cứng viên giảm và độ mài mòn tăng. Do đó, tỷ lệ magnesium stearate tốt nhất là 3%.\""
+        },
+        {
+          "type": "paragraph",
+          "text": "Diễn giải, và giới hạn của nó: kết luận này là một lập luận kẹp hai đầu. Mức 3% không được thử trong Thử nghiệm 2 — nó là mức đã dùng cố định ở cả ba công thức của Thử nghiệm 1 — nên điều thử nghiệm này chứng minh là 3% tốt hơn cả 1% và 5%, chứ không phải 3% là tối ưu trong khoảng giữa. Hiện tượng dính chày ở 1% là bằng chứng chức năng trực tiếp: mức trơn đó không đủ cho quy trình dập thẳng. Mặt khác, độ cứng giảm và độ mài mòn tăng ở 5% là hệ quả đã biết của việc tăng tá dược trơn kỵ nước, vì lớp phủ magnesium stearate làm yếu liên kết giữa các tiểu phân."
+        },
+        {
+          "type": "paragraph",
+          "text": "Cảnh báo về sức nặng của bằng chứng: hai vế \"độ cứng giảm\" và \"độ mài mòn tăng\" dựa trên chính bảng kết quả đang bị nghi sao chép ở trên, nên chúng chưa phải bằng chứng đã xác nhận. Vế dính chày ở 1% thì không phụ thuộc bảng đó — nó là quan sát trong quá trình dập, ghi trong phần nhận xét."
+        },
+        {
+          "type": "heading2",
           "text": "Đặc điểm thiết kế riêng của viên"
         },
         {
@@ -859,6 +1055,10 @@
         {
           "type": "paragraph",
           "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận mục đích của ký hiệu khắc, và quyết định thiết kế viên cho hàm lượng 5 mg. Hai việc đi liền nhau: nếu ký hiệu là dấu nhận dạng hàm lượng thì viên 5 mg phải mang ký hiệu khác, nên thiết kế của nó KHÔNG suy được theo tỷ lệ từ viên 10 mg như công thức suy được. Biểu mẫu của phòng khắc vạch chỉ ở hàm lượng cao, tức hai hàm lượng không đồng nhất thiết kế — và nếu có vạch bẻ thì phát sinh nghĩa vụ chứng minh đồng đều hàm lượng của nửa viên theo ICH Q8(R2) mục 2.2.1 (trang 8)."
+        },
+        {
+          "type": "heading2",
+          "text": "Yêu cầu của mục 2.2.1 chưa có nội dung"
         },
         {
           "type": "paragraph",
@@ -1094,15 +1294,19 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Quy trình sản xuất được chọn cho sản phẩm này là trộn dập thẳng, do FD xác nhận — hồ sơ Thử nghiệm 1 không mô tả quy trình nên dữ kiện này không đến từ nguồn thử nghiệm. Trộn dập thẳng rút ngắn quá trình sản xuất và hạn chế phát sinh tạp so với xát hạt, nhưng đặt ra ba vấn đề phải giải quyết trong phát triển: độ đồng đều hàm lượng, tính chảy của hỗn hợp bột, và khả năng chịu nén. Sơ đồ quy trình dưới đây dựng từ chính bộ công đoạn được chấm rủi ro trong bảng của mục này, nên đổi phương pháp pha chế là sơ đồ đổi theo."
+          "text": "Quy trình sản xuất của sản phẩm này là trộn dập thẳng, và Thử nghiệm 2 là nguồn thực nghiệm xác nhận điều đó: tóm tắt quy trình của nó (xem mục 3.2.P.2.2.1.3.3) gồm rây, trộn đồng nhất, trộn hoàn tất và dập viên, không có công đoạn tạo hạt, không làm ẩm, không sấy. Trộn dập thẳng rút ngắn quá trình sản xuất và hạn chế phát sinh tạp so với xát hạt, nhưng đặt ra ba vấn đề phải giải quyết trong phát triển: độ đồng đều hàm lượng, tính chảy của hỗn hợp bột, và khả năng chịu nén. Sơ đồ quy trình dưới đây dựng từ chính bộ công đoạn được chấm rủi ro trong bảng của mục này, nên đổi phương pháp pha chế là sơ đồ đổi theo."
         },
         {
           "type": "paragraph",
-          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận quy trình thật đã dùng trong Thử nghiệm 1 là trộn dập thẳng hay xát hạt. Hồ sơ đang mang hai lời khai ngược nhau, và cả hai đều nằm trong tài liệu này: đoạn trên khai trộn dập thẳng, trong khi bảng kiểm soát trong quá trình của chính Thử nghiệm 1 mang tiêu đề \"Tính chất vật lý cốm\", đo độ ẩm 105 °C bằng cân ẩm Halogen và phân bố cỡ hạt qua năm phân đoạn rây — đó là mô tả của hạt, không phải của hỗn hợp bột dập thẳng. Công thức còn chứa Povidone K30 khai chức năng tá dược dính, mà chính chuyên luận trích ở mục P.2.1.2.1 mô tả povidone được dùng làm tá dược dính trong xát hạt ướt. Đây là quyết định chặn nhiều mục: nếu quy trình thật là xát hạt thì bộ năm công đoạn ở bảng dưới, sơ đồ quy trình dựng từ bảng đó, và mốc đối chiếu croscarmellose ở mục P.2.2.1.3.3 đều phải dựng lại — mốc dập thẳng và mốc xát hạt ướt không bằng nhau."
+          "text": "Một nghi vấn đã được giải quyết, ghi lại vì nó từng là điểm chặn lớn nhất của mục này. Bảng kiểm soát trong quá trình của Thử nghiệm 1 mang tiêu đề \"Tính chất vật lý cốm\" và đo độ ẩm ở 105 °C, nên đọc riêng Thử nghiệm 1 thì có cơ sở để nghi quy trình thật là xát hạt — và nếu đúng vậy thì bộ công đoạn ở bảng dưới, sơ đồ quy trình, cùng mốc đối chiếu tá dược rã đều phải dựng lại. Thử nghiệm 2 cho thấy không phải: chữ \"cốm\" trong biểu mẫu của phòng chỉ khối bột đã trộn hoàn tất, và Povidone K30 được thêm ở dạng bột khô chứ không phải dung dịch dính. Mốc đối chiếu croscarmellose 2% cho dập thẳng, đã dùng ở mục 3.2.P.2.2.1.3.3, vì thế là mốc đúng."
         },
         {
           "type": "paragraph",
           "text": "Phạm vi áp dụng của hai bảng dưới đây: bộ công đoạn và bộ thông số trọng yếu gắn với phương pháp trộn dập thẳng. Nếu FD đổi sang phương pháp khác — xát hạt ướt, phun sấy tầng sôi tạo hạt, cán ép, đóng tán (slugging), ép đùn nóng chảy — thì bộ công đoạn và các thông số trọng yếu đi kèm đều khác, và cả hai bảng phải được dựng lại theo phương pháp mới chứ không sửa từng ô."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD chốt bộ công đoạn dùng cho ma trận rủi ro, đối chiếu với tóm tắt quy trình của Thử nghiệm 2. Hai bộ hiện không khớp ở hai đầu: Thử nghiệm 2 có các công đoạn rây mà ma trận không có cột, còn ma trận có cột \"Bao phim\" và \"Đóng gói\" mà tóm tắt quy trình của Thử nghiệm 2 không nêu. Ma trận chấm rủi ro theo công đoạn, nên một công đoạn thiếu cột là một công đoạn không ai chấm rủi ro."
         },
         {
           "type": "paragraph",

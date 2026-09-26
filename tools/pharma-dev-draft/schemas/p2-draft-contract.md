@@ -13,7 +13,7 @@ no use for: there is no approval state, no citable/public classification, and no
 allow-list.
 
 Provenance here is simpler but still explicit. Trial data comes from exactly one supplied file,
-named in `meta.sourceFile`. Where a section additionally states something from a reference work
+named in `meta.sourceFiles`. Where a section additionally states something from a reference work
 (excipient properties from a pharmacopoeial handbook, for example), every such work must be listed
 in `meta.referenceSources` and cited in the section text; the renderer prints that list on the
 cover page. A fact that is in neither the source file nor a declared reference source does not
@@ -29,7 +29,7 @@ belong in the draft — mark the section `gap` instead.
     "apiName": "string — the active ingredient name",
     "strengths": ["string — REQUIRED; one entry per strength the document covers, no duplicates, no upper bound"],
     "derivedStrengths": ["string — optional; the subset of strengths that have no experimental source"],
-    "sourceFile": "string — filename of the trial docx this draft was built from",
+    "sourceFiles": ["string — REQUIRED; one entry per experimental source docx, no duplicates, no upper bound"],
     "draftDate": "YYYY-MM-DD",
     "preparer": "string — free text, e.g. \"Claude (session ...)\" or a person's name",
     "extractionMethod": "xml-walk | liteparse — from Stage A's extracted.json",

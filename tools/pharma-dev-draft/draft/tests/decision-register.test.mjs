@@ -44,7 +44,7 @@ function draftWith(sections, meta = {}) {
       productName: "Sản phẩm thử nghiệm quy tắc, viên nén bao phim",
       apiName: "Hoạt chất thử nghiệm",
       strengths: ["10 mg"],
-      sourceFile: "fixture.docx",
+      sourceFiles: ["fixture.docx"],
       draftDate: "2026-09-26",
       preparer: "bộ kiểm quy tắc",
       extractionMethod: "xml-walk",

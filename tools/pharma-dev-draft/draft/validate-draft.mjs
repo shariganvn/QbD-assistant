@@ -40,7 +40,7 @@ const ALLOWED_BLOCK_KEYS = {
   figure: new Set(["type", "kind", "fromTable", "fromAxis", "fromRow", "threshold", "thresholdLabel", "axisLabel", "caption"]),
   image: new Set(["type", "path", "caption", "widthPt"]),
 };
-const REQUIRED_META_FIELDS = ["productName", "apiName", "sourceFile", "draftDate", "preparer", "extractionMethod"];
+const REQUIRED_META_FIELDS = ["productName", "apiName", "draftDate", "preparer", "extractionMethod"];
 
 function loadOutline() {
   const raw = readFileSync(join(toolRoot, "schemas", "p2-outline.json"), "utf8");
@@ -378,6 +378,19 @@ export function validateDraft(draft, outline = loadOutline()) {
   if (!["xml-walk", "liteparse"].includes(draft.meta.extractionMethod)) {
     fail("E_META_FIELD", `draft.meta.extractionMethod must be "xml-walk" or "liteparse"`);
   }
+  // Which experimental sources the document draws on. A list, not a string, because the count is data:
+  // the worked example began with one trial file and gained a second, and a document that states its
+  // provenance in one field ends up stating it as "a.docx; b.docx" where nothing can check it.
+  if (!Array.isArray(draft.meta.sourceFiles) || draft.meta.sourceFiles.length === 0) {
+    fail("E_META_SOURCE_FILES", "draft.meta.sourceFiles must be a non-empty array of the experimental source filenames");
+  }
+  if (!draft.meta.sourceFiles.every((file) => typeof file === "string" && file.trim() !== "")) {
+    fail("E_META_SOURCE_FILES", "draft.meta.sourceFiles entries must be non-empty strings");
+  }
+  if (new Set(draft.meta.sourceFiles).size !== draft.meta.sourceFiles.length) {
+    fail("E_META_SOURCE_FILES", "draft.meta.sourceFiles must not name the same file twice");
+  }
+
   // Which strengths the document covers is data, so it is declared here rather than inferred from the
   // product name. There is no upper bound: a two-strength product and a five-strength one take the
   // same form.
@@ -401,7 +414,7 @@ export function validateDraft(draft, outline = loadOutline()) {
       fail("E_META_STRENGTHS", `draft.meta.derivedStrengths names strength(s) absent from meta.strengths: ${unknown.join(", ")}`);
     }
   }
-  // Anything a section states that did not come out of sourceFile must be named here, so the
+  // Anything a section states that did not come out of an experimental source must be named here, so the
   // rendered cover page declares every source the document draws on rather than only the trial file.
   if (draft.meta.referenceSources !== undefined) {
     if (!Array.isArray(draft.meta.referenceSources) || draft.meta.referenceSources.length === 0) {
