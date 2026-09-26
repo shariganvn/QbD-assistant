@@ -12,10 +12,14 @@ environment_findings:
     column into the lower half, a threshold label landing on the tallest column, and a threshold line
     struck through a value label. None of them is expressible as an assertion anyone thinks to write.
   fromTable_is_positional: >
-    A figure names its table by index within the section, so inserting a table ahead of an existing
-    figure shifts what that figure draws. It bit this round: the new process figure pointed at table 0,
-    which was the first trial's composition, and Stage B refused it on the column count. The refusal is
-    the safety net, but a section that grows tables is worth re-checking figure by figure.
+    A figure names its table by index within the section, so inserting or moving a table ahead of an
+    existing figure shifts what that figure draws. It bit three times across two rounds: the new process
+    figure pointed at the first trial's composition; then moving that table to the front redirected both
+    figures at once; then the test helper, written when a section held one figure, returned whichever
+    came first and five chart tests failed. Each was caught by a secondary check rather than by a rule
+    aimed at it — the column count for the process figure, the row name for the chart. A flow figure has
+    neither, so a misdirected one would silently draw a different set of unit operations. Naming the
+    table by a stable property instead of by position is the fix, and it is a contract change.
 
 gates:
   - id: G-26

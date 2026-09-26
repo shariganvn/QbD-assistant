@@ -47,7 +47,22 @@ Theo mô tả của FD, rây là xử lý **từng nhóm thành phần trước 
 của cả khối. Vẽ nó thành hộp trong chuỗi dọc sẽ nói sai điều đó — thành ra như thể cả khối được rây
 giữa hai lần trộn. Nên nó nằm ở nhãn cột ("đã rây") và ở một câu trong thân bài.
 
-## 6. Thử nghiệm 1: ghi chú, không vẽ lại
+## 6. FD chỉ định: sơ đồ ở Thử nghiệm 1, Thử nghiệm 2 ghi chú
+
+Bản đầu của đợt này đặt sơ đồ ở nhánh Thử nghiệm 2 và để ngỏ dấu quyết định hỏi hai thử nghiệm có
+dùng chung quy trình không. FD trả lời **có**, và chỉ định trình bày dưới **Thử nghiệm 1**. Sơ đồ và
+bảng các bước chuyển sang đó; Thử nghiệm 2 mang ghi chú trỏ sang nhánh Thử nghiệm 1. Dấu đóng:
+decision 20 → 19.
+
+Xuất xứ ghi ở cả hai nhánh, vì nó ngược chiều người đọc dễ đoán: bản mô tả bằng văn bản đến từ tài
+liệu **Thử nghiệm 2**; tài liệu Thử nghiệm 1 không mô tả quy trình; việc nó áp cho cả hai là xác nhận
+của FD. Ghi chú trỏ theo **tên nhánh** chứ không theo số mục CTD, vì hai thử nghiệm nằm chung một mục lá.
+
+Việc chuyển làm mọi chỉ số bảng dịch một bậc, và **cả hai hình trong mục đều trỏ sai ngay sau đó** —
+bắt được nhờ hai phép kiểm phụ (số cột cho sơ đồ quy trình, tên dòng cho biểu đồ), không nhờ luật nào
+nhắm vào chuyện này. Bộ test cũng đổ năm chỗ vì helper lấy hình đầu tiên của mục. Chi tiết ở step file.
+
+## 6b. Bản đầu của đợt: Thử nghiệm 1 ghi chú, không vẽ lại
 
 Tài liệu Thử nghiệm 1 không mô tả quy trình. Nhánh đó nhận một đoạn nêu các dấu hiệu (cùng bộ tá
 dược, cùng cỡ lô, cùng bộ chỉ tiêu IPC) và một **dấu quyết định** để FD xác nhận có cùng quy trình

@@ -20,7 +20,10 @@ import { GAP_PREFIX } from "../../schemas/markers.mjs";
 const toolRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const loadExample = () => JSON.parse(readFileSync(join(toolRoot, "draft", "example-draft.json"), "utf8"));
 const sectionOf = (draft, id) => draft.sections.find((section) => section.id === id);
-const figureOf = (section) => section.blocks.find((block) => block.type === "figure");
+// A section can hold more than one figure — the formulation study carries both its process diagram
+// and its dissolution chart — so the kind is named rather than taking whichever comes first.
+const figureOf = (section, kind = "bars") =>
+  section.blocks.find((block) => block.type === "figure" && block.kind === kind);
 
 function expectFailure(draft, code) {
   assert.throws(() => validateDraft(draft), (error) => {
@@ -54,7 +57,7 @@ test("changing a value in the table changes the chart, because there is only one
 test("a process flow takes its steps from the columns the risk matrix scores", () => {
   const draft = loadExample();
   const section = sectionOf(draft, "P.2.3.1");
-  const figure = figureOf(section);
+  const figure = figureOf(section, "flow");
   const table = section.blocks.filter((block) => block.type === "table")[figure.fromTable];
   assert.deepEqual(flowSteps(section, figure), table.headers.slice(1));
 });
@@ -65,7 +68,7 @@ test("changing the manufacturing method redraws the flow with no code change", (
   const table = section.blocks.filter((block) => block.type === "table")[0];
   table.headers = ["CQA sản phẩm", "Xát hạt ướt", "Sấy", "Dập viên"];
   table.rows = table.rows.map((row) => [row[0], GAP_PREFIX, GAP_PREFIX, GAP_PREFIX]);
-  assert.deepEqual(flowSteps(section, figureOf(section)), ["Xát hạt ướt", "Sấy", "Dập viên"]);
+  assert.deepEqual(flowSteps(section, figureOf(section, "flow")), ["Xát hạt ướt", "Sấy", "Dập viên"]);
 });
 
 // --- refusing to draw what is not there ------------------------------------
@@ -90,7 +93,7 @@ test("a chart naming a row the table does not have is rejected", () => {
 
 test("a figure naming a table the section does not have is rejected", () => {
   const draft = loadExample();
-  figureOf(sectionOf(draft, "P.2.3.1")).fromTable = 7;
+  figureOf(sectionOf(draft, "P.2.3.1"), "flow").fromTable = 7;
   expectFailure(draft, "E_FIGURE_SOURCE");
 });
 
@@ -105,7 +108,7 @@ test("a chart over values that are not numbers is rejected", () => {
 
 test("a figure with no caption is rejected", () => {
   const draft = loadExample();
-  delete figureOf(sectionOf(draft, "P.2.3.1")).caption;
+  delete figureOf(sectionOf(draft, "P.2.3.1"), "flow").caption;
   expectFailure(draft, "E_FIGURE_SHAPE");
 });
 

@@ -672,11 +672,59 @@
         },
         {
           "type": "paragraph",
-          "text": "Tài liệu Thử nghiệm 1 KHÔNG mô tả quy trình pha chế. Bộ tá dược, khối lượng viên và cỡ lô 1.000 viên giống Thử nghiệm 2, và bảng kiểm soát trong quá trình của nó đo cùng bộ chỉ tiêu của khối bột đã trộn hoàn tất — nhưng đó là dấu hiệu, không phải lời khai."
+          "text": "Cả hai thử nghiệm dùng chung một quy trình pha chế, do FD xác nhận. Xuất xứ của bản mô tả cần nói rõ vì nó không đến từ tài liệu của chính nhánh này: tài liệu Thử nghiệm 1 KHÔNG mô tả quy trình, bản mô tả bằng văn bản đến từ tài liệu Thử nghiệm 2, và FD xác nhận nó áp cho cả Thử nghiệm 1. Quy trình gồm bốn bước: trộn đồng nhất 1 với dược chất và các tá dược độn, trộn đồng nhất 2 thêm tá dược rã, trộn hoàn tất thêm tá dược trơn, rồi dập viên — mỗi nhóm thành phần được rây trước khi đưa vào. **Không có công đoạn tạo hạt, không có làm ẩm, không có sấy** — đây là quy trình trộn dập thẳng, và điều đó xác nhận tiền đề đã nêu ở mục 3.2.P.2.3.1. Povidone K30 có trong công thức nhưng được thêm ở dạng bột khô vào khối trộn, không phải dưới dạng dung dịch dính."
         },
         {
           "type": "paragraph",
-          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận Thử nghiệm 1 dùng cùng quy trình bốn bước như Thử nghiệm 2 hay không. Nếu giống thì mục này ghi chú trỏ sang sơ đồ ở nhánh Thử nghiệm 2 chứ không vẽ lại: một sơ đồ vẽ hai lần là một quy trình nằm hai chỗ, và chúng sẽ lệch nhau ngay lần đầu có người sửa một chỗ. Nếu khác thì nhánh này cần bảng các bước riêng."
+          "text": "Từ đó cũng rõ nghĩa chữ \"cốm\" trong biểu mẫu của phòng: nó chỉ **khối bột đã trộn hoàn tất** sẵn sàng dập viên, không phải hạt ướt. Trước Thử nghiệm 2, tiêu đề bảng \"tính chất vật lý cốm\" ở Thử nghiệm 1 là căn cứ duy nhất để nghi quy trình có tạo hạt."
+        },
+        {
+          "type": "paragraph",
+          "text": "Trình tự các công đoạn do FD cấp và được khai ở bảng dưới. Ghi lại vì sao bản thảo trước đó không tự dựng trình tự: sơ đồ trong tài liệu nguồn vẽ bằng các hộp văn bản, nên công cụ trích xuất đọc theo thứ tự trong file XML chứ không theo thứ tự hình — bộ công đoạn đọc được chắc chắn, thứ tự thì không, và một trình tự đúng-theo-lẽ-thường vẫn là trình tự không có nguồn."
+        },
+        {
+          "type": "paragraph",
+          "text": "Rây là xử lý từng nhóm thành phần TRƯỚC khi đưa vào khối trộn, không phải một công đoạn riêng của cả khối — nên nó nằm ở nhãn cột bảng dưới chứ không thành một hộp trong sơ đồ."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Bước",
+            "Thành phần đưa vào (đã rây)",
+            "Công đoạn"
+          ],
+          "rows": [
+            [
+              "1",
+              "Bisoprolol fumarate · Lactose monohydrate · Cellactose 80 · Povidone K30 · Magnesium oxide",
+              "Trộn đồng nhất 1"
+            ],
+            [
+              "2",
+              "Croscarmellose sodium",
+              "Trộn đồng nhất 2"
+            ],
+            [
+              "3",
+              "Magnesium stearate",
+              "Trộn hoàn tất"
+            ],
+            [
+              "4",
+              "—",
+              "Dập viên"
+            ]
+          ]
+        },
+        {
+          "type": "figure",
+          "kind": "process",
+          "fromTable": 0,
+          "caption": "Sơ đồ quy trình pha chế dùng cho cả Thử nghiệm 1 và Thử nghiệm 2, dựng từ bảng các bước ở trên. Mỗi công đoạn trộn nhận thêm một nhóm thành phần đã rây; bước dập viên không thêm thành phần nào."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD bổ sung công đoạn bao phim vào quy trình, hoặc xác nhận nó thuộc hồ sơ khác. Tóm tắt quy trình của Thử nghiệm 2 kết thúc ở dập viên, trong khi chính bảng kết quả của nó mô tả cảm quan là \"viên nén ... bao phim màu trắng\" — nên viên đã được bao mà quy trình không khai công đoạn bao. Ma trận rủi ro ở mục 3.2.P.2.3.1 có cột \"Bao phim\", nên chỗ này phải khớp lại."
         },
         {
           "type": "heading3",
@@ -960,7 +1008,7 @@
         {
           "type": "figure",
           "kind": "bars",
-          "fromTable": 2,
+          "fromTable": 3,
           "fromRow": "Độ hòa tan 30 phút – TB (spec ≥ 80% Q) (%)",
           "threshold": "80",
           "thresholdLabel": "Ngưỡng Q = 80%",
@@ -1002,59 +1050,11 @@
         },
         {
           "type": "paragraph",
-          "text": "Thử nghiệm 2 là tài liệu đầu tiên trong hồ sơ mô tả quy trình. Quy trình gồm bốn bước: trộn đồng nhất 1 với dược chất và các tá dược độn, trộn đồng nhất 2 thêm tá dược rã, trộn hoàn tất thêm tá dược trơn, rồi dập viên — mỗi nhóm thành phần được rây trước khi đưa vào. **Không có công đoạn tạo hạt, không có làm ẩm, không có sấy** — đây là quy trình trộn dập thẳng, và điều đó xác nhận tiền đề đã nêu ở mục 3.2.P.2.3.1. Povidone K30 có trong công thức nhưng được thêm ở dạng bột khô vào khối trộn, không phải dưới dạng dung dịch dính."
+          "text": "Quy trình pha chế của Thử nghiệm 2 giống Thử nghiệm 1 — xem bảng các bước và sơ đồ ở nhánh \"Thử nghiệm 1\" của mục này. Không vẽ lại ở đây: một quy trình vẽ hai lần là một quy trình nằm hai chỗ, và chúng sẽ lệch nhau ngay lần đầu có người sửa một chỗ."
         },
         {
           "type": "paragraph",
-          "text": "Từ đó cũng rõ nghĩa chữ \"cốm\" trong biểu mẫu của phòng: nó chỉ **khối bột đã trộn hoàn tất** sẵn sàng dập viên, không phải hạt ướt. Trước Thử nghiệm 2, tiêu đề bảng \"tính chất vật lý cốm\" ở Thử nghiệm 1 là căn cứ duy nhất để nghi quy trình có tạo hạt."
-        },
-        {
-          "type": "paragraph",
-          "text": "Trình tự các công đoạn do FD cấp và được khai ở bảng dưới. Ghi lại vì sao bản thảo trước đó không tự dựng trình tự: sơ đồ trong tài liệu nguồn vẽ bằng các hộp văn bản, nên công cụ trích xuất đọc theo thứ tự trong file XML chứ không theo thứ tự hình — bộ công đoạn đọc được chắc chắn, thứ tự thì không, và một trình tự đúng-theo-lẽ-thường vẫn là trình tự không có nguồn."
-        },
-        {
-          "type": "paragraph",
-          "text": "Rây là xử lý từng nhóm thành phần TRƯỚC khi đưa vào khối trộn, không phải một công đoạn riêng của cả khối — nên nó nằm ở nhãn cột bảng dưới chứ không thành một hộp trong sơ đồ."
-        },
-        {
-          "type": "table",
-          "headers": [
-            "Bước",
-            "Thành phần đưa vào (đã rây)",
-            "Công đoạn"
-          ],
-          "rows": [
-            [
-              "1",
-              "Bisoprolol fumarate · Lactose monohydrate · Cellactose 80 · Povidone K30 · Magnesium oxide",
-              "Trộn đồng nhất 1"
-            ],
-            [
-              "2",
-              "Croscarmellose sodium",
-              "Trộn đồng nhất 2"
-            ],
-            [
-              "3",
-              "Magnesium stearate",
-              "Trộn hoàn tất"
-            ],
-            [
-              "4",
-              "—",
-              "Dập viên"
-            ]
-          ]
-        },
-        {
-          "type": "figure",
-          "kind": "process",
-          "fromTable": 3,
-          "caption": "Sơ đồ quy trình pha chế Thử nghiệm 2, dựng từ bảng các bước ở trên. Mỗi công đoạn trộn nhận thêm một nhóm thành phần đã rây; bước dập viên không thêm thành phần nào."
-        },
-        {
-          "type": "paragraph",
-          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD bổ sung công đoạn bao phim vào quy trình, hoặc xác nhận nó thuộc hồ sơ khác. Tóm tắt quy trình của Thử nghiệm 2 kết thúc ở dập viên, trong khi chính bảng kết quả của nó mô tả cảm quan là \"viên nén ... bao phim màu trắng\" — nên viên đã được bao mà quy trình không khai công đoạn bao. Ma trận rủi ro ở mục 3.2.P.2.3.1 có cột \"Bao phim\", nên chỗ này phải khớp lại."
+          "text": "Lưu ý xuất xứ, vì nó đi ngược chiều người đọc dễ đoán: bản mô tả bằng văn bản của quy trình đến từ chính tài liệu Thử nghiệm 2 — tài liệu Thử nghiệm 1 không mô tả quy trình. Việc quy trình đó áp cho cả hai thử nghiệm là xác nhận của FD."
         },
         {
           "type": "heading3",

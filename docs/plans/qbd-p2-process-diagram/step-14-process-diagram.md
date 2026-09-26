@@ -71,3 +71,35 @@ because the matrix is their risk assessment — so it stays a decision, now a sp
 The older chain figure stays where it is. The two diagrams say different things: one is the process
 that ran in the laboratory, the other is the set of operations being scored for risk. Where they differ
 is the decision.
+
+---
+
+## Đợt sau — FD trả lời, và sơ đồ đổi nhánh (26/09/2026)
+
+Bước trên để ngỏ một dấu quyết định: cả hai thử nghiệm có dùng chung quy trình không. FD trả lời là
+**có**, và chỉ định trình bày dưới nhánh **Thử nghiệm 1**. Nên bảng các bước và sơ đồ chuyển sang
+Thử nghiệm 1; Thử nghiệm 2 nay mang ghi chú trỏ sang đó. Dấu quyết định đóng.
+
+Xuất xứ phải nói rõ ở **cả hai** nhánh, vì nó đi ngược chiều người đọc dễ đoán: bản mô tả bằng văn bản
+đến từ tài liệu **Thử nghiệm 2** — tài liệu Thử nghiệm 1 không mô tả quy trình — còn việc nó áp cho cả
+hai là xác nhận của FD. Một sơ đồ đứng dưới Thử nghiệm 1 mà không nói điều đó sẽ ngầm khai rằng tài
+liệu Thử nghiệm 1 mô tả nó.
+
+Ghi chú của Thử nghiệm 2 trỏ theo **tên nhánh**, không theo số mục CTD: hai thử nghiệm nằm trong cùng
+một mục lá, nên một tham chiếu kiểu `3.2.P.2.2.1.3.3` không phân biệt được chúng.
+
+### Cái bẫy `fromTable` cắn lần thứ hai, ở hai chỗ mới
+
+Chuyển bảng quy trình lên đầu mục làm mọi chỉ số bảng phía sau dịch một bậc. Hai hình trong mục đều
+trỏ sai ngay sau đó, và **không phải luật nào nhắm vào chuyện này bắt được** — mà là hai phép kiểm phụ:
+sơ đồ quy trình đổ vì bảng nó trỏ tới không đúng ba cột, biểu đồ hòa tan đổ vì tên dòng nó nêu không có
+trong bảng đó.
+
+Rồi bẫy đó cắn tiếp lần thứ ba, trong chính bộ test: `figureOf(section)` lấy **hình đầu tiên** của mục —
+viết khi mỗi mục chỉ có một hình. Nay mục này có hai, và hình quy trình đứng trước, nên năm test biểu đồ
+đổ. Helper nay nêu rõ loại hình cần lấy.
+
+Chỉ số bảng theo vị trí vẫn là chỗ yếu chưa vá: với loại `flow`, một hình trỏ nhầm bảng sẽ **vẽ ra bộ
+công đoạn khác mà không có gì báo**, vì flow không kiểm tên dòng hay số cột. Muốn chắc thì hình phải nêu
+bảng bằng một thuộc tính bền — ví dụ nhãn cột đầu — thay vì bằng vị trí. Đó là thay đổi contract, ghi
+lại ở đây chứ không tự làm trong đợt này.
