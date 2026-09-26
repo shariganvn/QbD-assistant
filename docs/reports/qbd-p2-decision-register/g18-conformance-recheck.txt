@@ -1,0 +1,106 @@
+# G-18 — Chạy lại đối chiếu ICH Q8(R2), và xác minh lại từng kết luận trước khi đổi status
+
+Ngày: 2026-09-26. Bản ghi đầy đủ nằm ở `docs/reports/qbd-p2-ich-q8r2-audit/ich-q8r2-format-audit.md`,
+mục "Đợt 11". File này ghi phần XÁC MINH: cái gì tôi tự kiểm chứ không nhận qua báo cáo của subagent.
+
+## Vì sao phải chạy lại
+
+Báo cáo đối chiếu dừng ở đợt ngày 28/08. Sau đó có ba đợt: outline hai hàm lượng (24/09), hình
+(25/09), nguồn PubChem + điều tra EMA/FDA (26/09). Một báo cáo lạc hậu không trung tính — nó là file
+mà phiên sau đọc để quyết định làm gì.
+
+## Công cụ, theo đúng luật của repo
+
+CLAUDE.md buộc dùng subagent khi đọc PDF. Dùng `ich_q8_r2_checker` với PyMuPDF. Decision Tree #8 của
+Q6A (tr. 31) không có text layer nên phải render PNG mới đọc được nội dung cây. Offset trang: Q8(R2)
+trang in = chỉ số PDF + 1; Q6A trang in = chỉ số PDF − 3.
+
+## Ba kết luận tôi tự kiểm lại trước khi ghi vào hồ sơ
+
+Nguyên tắc: một status chỉ được đổi khi có chỗ chứng minh, và một finding nghiêm trọng thì tự kiểm
+trên chính artefact chứ không nhận qua báo cáo.
+
+**1. N-1, xung đột tiền đề quy trình — kiểm trực tiếp trên draft.** In ra cấu trúc block của
+`P.2.2.1.3.3`:
+
+```
+H2[11] Kết quả — Tính chất vật lý cốm (in-process control)
+TBL[12] ["Chỉ tiêu","CT01","CT02","CT03"]
+        Tỷ trọng biểu kiến – tĩnh / – gõ / Tỉ số Hausner /
+        Cỡ hạt ≥ 180 µm / 180–150 / 150–125 / 125–75 / < 75 µm /
+        Độ ẩm (105°C, cân ẩm Halogen)
+TBL[4]  thành phần công thức — có dòng "Povidone K30"
+P[7]    "... CT02 (3%) trùng mức khuyến cáo cho xát hạt ướt ..."
+```
+
+Trong khi `P.2.3.1` block 0 khai "Quy trình sản xuất được chọn … là trộn dập thẳng, do FD xác nhận".
+Và `P.2.1.2.1` khai Povidone K30 chức năng "Tá dược dính", dẫn chuyên luận HPE mô tả povidone dùng
+làm tá dược dính trong xát hạt ướt. Xung đột có thật, nằm trong chính tài liệu. → dấu quyết định ở
+`P.2.3.1`.
+
+**2. D-13, biểu mẫu của phòng đánh số trùng — kiểm trực tiếp trên file docx.** Trích danh mục heading
+từ `docs/raw/135-00-Pharmaceutical Development-example.docx`:
+
+```
+'3.2.P.2.2.3.1.1 Sink condition.'
+'3.2.P.2.2.3.1.2 Dissolution method'
+'3.2.P.2.2.3.1.2 Discriminatory power of the method.'     ← trùng số với dòng trên
+'3.2.P.2.2.3.1.1.3 Comparative dissolution profile'       ← sâu hơn một cấp so với nhóm chứa nó
+```
+
+Và EP 11.0 trong `docs/raw/P 2_form_Edit 29-09-2025-example.docx`:
+
+```
+'Độ nhiễm khuẩn (Theo Dược điển Châu Âu EP 11.0, phụ lục 5.1.4):'
+```
+
+Cả hai xác nhận. → dấu quyết định ở `P.2.2.3.1.2` (đánh số) và `P.2.5` (phiên bản dược điển).
+
+**3. Đếm ô thuốc đối chiếu — đếm lại bằng script.**
+
+```
+bảng 1 (Tỷ lệ và thành phần tá dược):  3 dòng × 2 cột = 6 ô, 6 mang marker
+bảng 2 (Đặc tính lý hóa):             16 dòng × 2 cột = 32 ô, 32 mang marker
+tổng:                                 19 dòng, 38 ô, 38 mang marker
+```
+
+Báo cáo audit ghi "19 ô" — đếm dòng, và viết trước khi outline lên hai hàm lượng.
+`docs/reports/qbd-p2-figures/g12-ema-fda-followup.txt` đã ghi 38. Hai báo cáo trong repo từng mâu
+thuẫn nhau; nay hết.
+
+## Status đã đổi, kèm chỗ chứng minh
+
+| Finding | Cũ | Mới | Chỗ chứng minh |
+|---|---|---|---|
+| W-1 ba heading cha | chưa sửa | **đã đóng** | outline 38 entry = 12 container + 26 lá |
+| W-2 cấp heading | chưa sửa | **đã đóng** | chạy `headingLevelFor` trên cả 38 entry → cây H2→H6, không nhảy cấp |
+| W-3 nhóm risk assessment + QTPP/CQA | lệch chuẩn phòng | **đã đóng** (cấu trúc) | 6/6 mục có, thêm `P.2.2.1.2.2` vượt file mẫu |
+| C-1 criticality | "chưa làm dưới bất kỳ hình thức nào" | **đóng một phần**, câu cũ nay sai | `P.2.2.1.2.2` làm đủ ba việc Part I tr. 6 đòi cho yếu tố đã khảo sát biến thiên; mở 3/4 nhóm đối tượng |
+| W-5 lý hóa API | còn mở | **đóng một phần** | nguồn truy xuất ở mức từng-giá-trị; đối chiếu chuyên luận còn mở → D-10 |
+| W-9 dung môi | đã đóng | giữ | bảng theo CoA |
+| W-11 dòng độ tan/cỡ hạt | đã đóng | giữ | hai dòng có mặt |
+| W-12 mốc croscarmellose | đã đóng | giữ, **nhưng phụ thuộc N-1** | nếu quy trình thật là xát hạt thì mốc là 3%, không phải 2% |
+| `P.2.2.1.1` | 19 ô | **38 ô** | đếm lại bằng script, xem trên |
+
+## Finding mới, và đã đi đâu
+
+| # | Mức | Đã xử lý thế nào |
+|---|---|---|
+| N-1 tiền đề quy trình | CRITICAL | dấu quyết định ở `P.2.3.1` |
+| N-2 bốn yêu cầu 2.2.1 không có cả marker | CRITICAL | bốn dấu dữ liệu mới ở `P.2.2.1.3.3` — nay vào danh mục |
+| N-3 bộ CQA của 10 mg áp cho cả sản phẩm | WARNING | nằm trong dấu quyết định QTPP ở `P.2.2.1.2.1`, không tách riêng |
+| N-4 hai bộ môi trường hòa tan | WARNING | dấu quyết định ở `P.2.2.3.1.4`, nêu cả hai |
+| N-5 quy dẫn sai trang ở `P.2.5` | WARNING | **sửa văn bản** — ba điều kiện → hai ở tr. 12, điều kiện thứ ba từ Decision Tree #8 tr. 31 |
+| N-6 `P.2.4.1` thiếu ba dòng của 2.4 tr. 9 | WARNING | ba dòng thêm vào `form` của outline + ba dấu dữ liệu trong draft |
+| N-7 mâu thuẫn nội tại của Q8(R2) | INFO | ghi nhận; hồ sơ không tuyên bố design space/RTRT/QbD (grep = 0) nên không tự kích hoạt nghĩa vụ Annex |
+| N-8 công thức cuối thiếu chỗ khai màng bao | INFO | **một dấu dữ liệu**, không dựng sẵn dòng: hệ màng bao gồm nhiều thành phần và gồm những gì là quyết định của FD |
+| N-9 assay 90–110% không có nguồn guideline | INFO | ghi nhận, không phải vi phạm đã xác minh |
+| N-10 `status: gap` nay là code chết | INFO | ghi nhận để đừng ai tưởng cơ chế đó đang bảo vệ mình |
+| W-6 `meta.preparer` ghi AI | — | cố ý KHÔNG đưa vào danh mục quyết định của tài liệu: nó là thuộc tính của file, không phải nội dung một mục CTD. Ghi trong báo cáo audit |
+
+## Điều không đóng được ở đợt này, nói rõ
+
+Không ô dữ liệu nào được điền, vì không nguồn công bố nào với tới (xem `environment_findings` trong
+`gates.yaml`). Việc thật còn lại của P.2 vẫn là ba thứ không công cụ nào thay được: mua mẫu thuốc đối
+chiếu và đo, FD cấp mức rủi ro cùng thông số quy trình, và người có thẩm quyền chốt 16 quyết định
+trong danh mục mới.

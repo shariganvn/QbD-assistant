@@ -1,0 +1,22 @@
+# G-13..G-17 — hai loại marker, chạy trên bộ test riêng
+
+Ngày: 2026-09-26
+
+$ node --test tools/pharma-dev-draft/draft/tests/decision-register.test.mjs
+ok 1 - the two kinds are told apart by their own labels, and every marker counts as unsettled
+ok 2 - one spot cannot be both kinds at once
+ok 3 - a decision marker must name who decides, from the roles the draft declares
+ok 4 - a decision marker must say what has to be decided
+ok 5 - a draft holding a decision marker must declare who can settle one
+ok 6 - a decision marker cannot stand in for a gap in a derived strength's column
+ok 7 - the register names the section, the item and the owner, and carries no copy of the text
+ok 8 - every decision marker reaches the register exactly once, and the counts reconcile
+ok 9 - a section whose only content is an open decision does not report as holding data
+# tests 9
+# pass 9
+# fail 0
+
+$ npm run test:pharma-dev   # toàn bộ suite
+# tests 97
+# pass 97
+# fail 0

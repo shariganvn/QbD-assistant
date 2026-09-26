@@ -22,6 +22,10 @@
       "Certificate of Analysis — Bisoprolol fumarate Ph.Eur. 12, code 71460, lô 488, sản xuất 23/04/2026, re-test 23/04/2031; nhà sản xuất Johnson Canady",
       "PubChem, National Library of Medicine (Hoa Kỳ). Bisoprolol fumarate CID 5281064 và bisoprolol CID 2405; truy cập 26/09/2026",
       "Charoo NA, Shamsher AAA, Lian LY, Abrahamsson B, Cristofoletti R, Groot DW, Kopp S, Langguth P, Polli J, Shah VP, Dressman J. Biowaiver monograph for immediate-release solid oral dosage forms: bisoprolol fumarate. J Pharm Sci. 2014;103(2):378–91. PMID 24382794, doi:10.1002/jps.23817 — https://doi.org/10.1002/jps.23817 (tra cứu qua PubMed, 26/09/2026)"
+    ],
+    "decisionOwners": [
+      "FD",
+      "QA"
     ]
   },
   "sections": [
@@ -138,6 +142,18 @@
         {
           "type": "paragraph",
           "text": "Nguồn [3] còn nêu các chỉ tiêu không có dòng tương ứng trong biểu mẫu trên, ghi lại đây để tra cứu — các chỉ tiêu này thuộc phạm vi 3.2.S.4 Kiểm soát dược chất: hàm lượng acid fumaric 14,8 – 15,4% (giá trị lý thuyết của muối hemifumarat là 116,07 / 766,97 = 15,13%, nằm trong khoảng này); dung môi tồn dư tối đa 500 ppm; tổng vi sinh vật hiếu khí tối đa 1.000 CFU/g; tổng nấm men và nấm mốc tối đa 100 CFU/g; không có Escherichia coli và Salmonella; tạp A (benzyl alcohol), tạp E và tạp G mỗi tạp tối đa 0,1% theo HPLC; định tính bằng phổ hồng ngoại đạt, nguyên văn ghi \"Conforms to 5th\" trong khi sản phẩm khai theo Ph.Eur. 12 nên cần làm rõ; tuân thủ ICH Q7, EU GMP Part II, 21 CFR Parts 210 & 211 và ICH Q3D. Về đơn vị cỡ hạt nêu trong bảng: CoA ghi \"200 pm\"; 200 picomet nhỏ hơn kích thước một nguyên tử nên gần như chắc chắn là lỗi đánh máy của µm. Bản thảo giữ nguyên văn thay vì tự sửa số của nhà cung cấp; cần nhà cung cấp xác nhận trước khi nộp hồ sơ."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD chốt một giá trị cho mỗi chỉ tiêu đang có nhiều giá trị, để hồ sơ nộp đi mang một con số chứ không mang một dải. Ghi chú [4] nêu cả các giá trị và nguồn của chúng, nên đây không phải chỗ thiếu dữ liệu: pKa có ba giá trị từ ba nguồn, Log P có hai, điểm chảy có hai khoảng. Bản thảo cố ý không tự chọn, vì chọn im lặng là trình bày một sở thích như một kết quả."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD và QA cùng quyết định có chấp nhận khai giá trị của base tự do trong hồ sơ của dạng muối hay phải đo lại trên chính dạng muối. Nguồn không có sẵn dữ liệu cho muối: PubChem không có mục Experimental Properties cho CID 5281064, nên trừ một bản ghi ghi rõ dạng hemifumarat, mọi giá trị pKa, Log P và điểm chảy trong bảng trên đều là của base tự do CID 2405 và đều được ghi rõ như vậy. Quyết định này cũng là vế còn mở của yêu cầu đối chiếu chuyên luận, vì các nguồn đang dẫn là cơ sở dữ liệu tổng hợp thứ cấp, không phải chuyên luận."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] QA gửi văn bản hỏi nhà sản xuất nguyên liệu về hai chỗ trên CoA, và quyết định có chấp nhận CoA ở hiện trạng hay không. Thứ nhất, cỡ hạt ghi nguyên văn \"200 pm\" — 200 picomet nhỏ hơn một nguyên tử, nên gần như chắc là \"200 µm\", nhưng bản thảo giữ nguyên văn và không tự sửa số của nhà cung cấp trong một tài liệu đăng ký. Thứ hai, một ô định tính ghi \"Conforms to 5th\" trong khi nguyên liệu khai theo Ph.Eur. 12. Hai việc gộp chung một văn bản hỏi."
         },
         {
           "type": "image",
@@ -456,7 +472,7 @@
         },
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] QTPP đầy đủ (dạng bào chế, đường dùng, PK/BE với RMP, độ ổn định ICH Q1A...) và bảng CQA có biện luận \"có phải CQA hay không\" — cần FD xây dựng và phê duyệt."
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xây dựng và phê duyệt QTPP đầy đủ (dạng bào chế, đường dùng, mục tiêu PK/BE với thuốc đối chiếu, độ ổn định theo ICH Q1A, bao bì, hạn dùng mục tiêu) và bảng CQA kèm biện luận \"có phải CQA hay không\" cho từng chỉ tiêu. Bảng dưới đây là các chỉ tiêu ĐÃ dùng để đánh giá ba công thức, không phải mục tiêu đã chốt — một mục tiêu là điều được chọn, không phải điều đo được, nên không nguồn dữ liệu nào đóng được mục này."
         }
       ]
     },
@@ -478,7 +494,15 @@
         },
         {
           "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD quyết định có chấp nhận croscarmellose sodium 5% kl/kl làm mức cuối hay không, khi mức này đã chạm trần khoảng 0,5 – 5,0% mà Handbook of Pharmaceutical Excipients khuyến cáo cho viên nén. Dữ liệu đã đủ để thấy vấn đề: mức 5% đạt, nhưng không còn dư địa nâng nếu Thử nghiệm 2 cần thêm biên an toàn, nên phải chọn trước — giữ 5% và tìm biên an toàn ở yếu tố khác, hay đổi sang tá dược rã khác có khoảng rộng hơn."
+        },
+        {
+          "type": "paragraph",
           "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa đánh giá tính trọng yếu của: thuộc tính dược chất (phân bố cỡ hạt, đa hình), các thông số quy trình (thời gian trộn, lực dập, điều kiện bao phim), hệ màng bao, và hệ thống bao bì. Thử nghiệm 1 giữ cố định hoặc không khảo sát các yếu tố này nên không có cơ sở kết luận theo cách ICH Q8(R2) trang 6 mô tả. Riêng magnesium stearate 3% kl/kl là biến nhiễu tiềm tàng đối với độ hòa tan, cần tách bạch trong thử nghiệm tiếp theo trước khi kết luận về tá dược rã là đầy đủ."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD quyết định có tách magnesium stearate thành một biến khảo sát riêng trong Thử nghiệm 2 hay không. Thử nghiệm 1 giữ mức 3% kl/kl cố định ở cả ba công thức, nên không thể biết mức trơn này có đang kìm độ hòa tan hay không; nếu có thì kết luận về tá dược rã đang gánh cả ảnh hưởng của tá dược trơn. Đây là quyết định thiết kế thử nghiệm, không phải số liệu còn thiếu."
         }
       ]
     },
@@ -830,7 +854,31 @@
         },
         {
           "type": "paragraph",
-          "text": "Viên được khắc số \"10\" trên một mặt. ICH Q8(R2) mục 2.2.1 (trang 8) yêu cầu: \"Any special design features of the drug product (e.g., tablet score line, overfill, anti-counterfeiting measure as it affects the drug product) should be identified and a rationale provided for their use.\" Ký hiệu này là dấu nhận dạng hàm lượng 10 mg, không phải vạch bẻ nên không nhằm mục đích chia liều và không đặt ra nghĩa vụ chứng minh đồng đều hàm lượng của nửa viên. Kết quả đồng đều khối lượng (100,1 mg trung bình, dao động −2,10% đến +1,90% ở CT03) và độ đồng đều hàm lượng (AV 3,04 ở CT03) không cho thấy tác động bất lợi của việc khắc. Đây là suy luận từ mô tả cảm quan trong Thử nghiệm 1; cần FD xác nhận chính thức mục đích của ký hiệu."
+          "text": "Viên được khắc số \"10\" trên một mặt. ICH Q8(R2) mục 2.2.1 (trang 8) yêu cầu: \"Any special design features of the drug product (e.g., tablet score line, overfill, anti-counterfeiting measure as it affects the drug product) should be identified and a rationale provided for their use.\" Ký hiệu này là dấu nhận dạng hàm lượng 10 mg, không phải vạch bẻ nên không nhằm mục đích chia liều và không đặt ra nghĩa vụ chứng minh đồng đều hàm lượng của nửa viên. Kết quả đồng đều khối lượng (100,1 mg trung bình, dao động −2,10% đến +1,90% ở CT03) và độ đồng đều hàm lượng (AV 3,04 ở CT03) không cho thấy tác động bất lợi của việc khắc. Đây là suy luận từ mô tả cảm quan trong Thử nghiệm 1."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận mục đích của ký hiệu khắc, và quyết định thiết kế viên cho hàm lượng 5 mg. Hai việc đi liền nhau: nếu ký hiệu là dấu nhận dạng hàm lượng thì viên 5 mg phải mang ký hiệu khác, nên thiết kế của nó KHÔNG suy được theo tỷ lệ từ viên 10 mg như công thức suy được. Biểu mẫu của phòng khắc vạch chỉ ở hàm lượng cao, tức hai hàm lượng không đồng nhất thiết kế — và nếu có vạch bẻ thì phát sinh nghĩa vụ chứng minh đồng đều hàm lượng của nửa viên theo ICH Q8(R2) mục 2.2.1 (trang 8)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Bốn yêu cầu của ICH Q8(R2) mục 2.2.1 chưa có nội dung nào trong tài liệu này. Ghi thành các dấu riêng dưới đây thay vì để trống: một khoảng trống không được đánh dấu thì không vào danh mục nào và không ai đi lấy."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Tóm tắt các công thức đã dùng trong nghiên cứu an toàn và hiệu quả trên người, và trong mọi nghiên cứu sinh khả dụng hoặc tương đương sinh học liên quan. Nguồn cần lấy: hồ sơ nghiên cứu lâm sàng của FD; nếu sản phẩm đi đường miễn thử tương đương sinh học thì ghi rõ là không có nghiên cứu trên người, kèm căn cứ miễn."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Mô tả mọi thay đổi giữa công thức thương mại dự kiến và công thức của các lô lâm sàng pivotal cùng các lô độ ổn định chính, kèm lý do thay đổi. Nguồn cần lấy: hồ sơ lô của FD. Chưa chốt công thức cuối ở mục P.2.2.1.3.5 thì chưa lập được so sánh này."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Tóm tắt các nghiên cứu so sánh in vitro (ví dụ hòa tan) và in vivo (ví dụ tương đương sinh học), kèm số hiệu từng nghiên cứu để tra chéo, và tương quan in vitro – in vivo nếu có. Nguồn cần lấy: hồ sơ nghiên cứu của FD và mục 3.2.P.5.2."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Biện luận cho mọi khoảng tá dược khai trong công thức lô ở mục 3.2.P.3.2. Nguồn cần lấy: công thức lô đã chốt; một khoảng tá dược không có biện luận là một khoảng không được phép dùng."
         }
       ]
     },
@@ -926,6 +974,10 @@
             "center",
             "center"
           ]
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Bảng trên mới có thành phần lõi viên. Công thức cuối còn phải khai từng thành phần của hệ màng bao, và mọi chất dùng trong sản xuất mà không còn trong thành phẩm (dung môi pha dịch bao, dung môi xát hạt nếu có) — ICH Q8(R2) mục 2.1.2 trang 7 yêu cầu phần thành phần bao gồm mọi chất dùng trong sản xuất, dù có xuất hiện trong thành phẩm hay không. Nguồn cần lấy: quyết định của FD về hệ màng bao. Số dòng phải thêm tùy hệ được chọn, nên bảng trên không dựng sẵn dòng nào cho phần này."
         }
       ]
     },
@@ -939,7 +991,7 @@
         },
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác nhận chính thức từ FD về việc có/không áp dụng overage và lý do."
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận chính thức có hay không áp dụng overage cho dược chất và tá dược, kèm lý do. Bảng thành phần đã cho thấy tổng dược chất đúng bằng hàm lượng ghi nhãn dự kiến, nên đây không phải chỗ thiếu số liệu mà là chỗ cần một xác nhận có thẩm quyền: ICH Q8(R2) mục 2.2.2 (trang 8) coi overage là điều phải biện luận nếu có, và im lặng không phải là biện luận."
         }
       ]
     },
@@ -964,6 +1016,10 @@
         {
           "type": "paragraph",
           "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Điều kiện phương pháp hòa tan cụ thể (thiết bị, tốc độ khuấy, môi trường, thể tích, thời điểm lấy mẫu) — không có trong Thử nghiệm 1; cần trích từ hồ sơ phương pháp phân tích 3.2.P.5.2. Biện luận khả năng phân biệt ở trên không thay thế cho việc khai điều kiện phương pháp."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] QA và bộ phận kiểm soát tài liệu phê duyệt việc đánh số lại nhóm mục hòa tan so với biểu mẫu của phòng. Biểu mẫu gốc dùng CÙNG một số 3.2.P.2.2.3.1.2 cho hai mục khác nhau — \"Dissolution method\" và \"Discriminatory power of the method\" — và đặt \"Comparative dissolution profile\" ở 3.2.P.2.2.3.1.1.3, tức sâu hơn một cấp so với nhóm chứa nó. Tài liệu này đánh lại thành bốn mục 3.2.P.2.2.3.1.1 đến 3.2.P.2.2.3.1.4. Việc sửa là hợp lý, nhưng số mục CTD đi vào hồ sơ nộp nên lệch biểu mẫu phải có người ký chứ không lặng lẽ."
         }
       ]
     },
@@ -1003,6 +1059,14 @@
         {
           "type": "paragraph",
           "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ hòa tan của thuốc đối chiếu Concor® ở từng hàm lượng, để so sánh. Nguồn cần lấy: thực nghiệm trên mẫu mua về; mục 3.2.P.2.2.1.1 đang chờ chính bộ số liệu này. Chưa có thì không có cơ sở xin miễn thử tương đương sinh học cho hàm lượng 5 mg."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD chốt kế hoạch lấy mẫu hòa tan trước khi bắt đầu đo. Con số ≥ 80% Q tại 30 phút hiện đang gánh hai mục đích không tương thích: nó là tiêu chuẩn xuất xưởng của QC, và đồng thời là cơ sở duy nhất cho hồ sơ hòa tan so sánh dùng xin miễn thử tương đương sinh học cho hàm lượng 5 mg. Đường thứ hai đòi điểm 15 phút và nhiều thời điểm trên ba môi trường để tính được f2, mà bảng trên chỉ dựng đúng một dòng \"30 phút\" vì đó là thời điểm duy nhất có tiêu chuẩn. Chưa chốt thì mọi phép đo hòa tan sắp làm đều có nguy cơ phải đo lại."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD chốt bộ môi trường hòa tan so sánh. Hai nguồn trong hồ sơ ghi khác nhau ở môi trường thứ hai: chuyên luận biowaiver nêu pH 1,2 · 4,5 · 6,8 (dẫn ở mục P.2.1.1.2), còn định nghĩa rapidly dissolving của ICH Q6A nêu pH 1,2 · 4,0 · 6,8. Nêu cả hai chứ không tự chọn; chọn sai môi trường thì toàn bộ số liệu hòa tan so sánh không dùng được cho mục đích đã định."
         }
       ]
     },
@@ -1016,7 +1080,11 @@
         },
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phương pháp phân tích tạp chất cụ thể (tham chiếu 3.2.P.5.2) chưa được nêu trong Thử nghiệm 1. Về danh mục tạp: CoA nguyên liệu khai theo chuyên luận Ph.Eur. 12 và kiểm riêng từng tạp — tạp A (benzyl alcohol), tạp E, tạp G, mỗi tạp tối đa 0,1%. Tiêu chuẩn viên thành phẩm đang áp dụng ở mục P.2.2.1.2 lại chỉ ghi \"tạp đơn bất kỳ\" tối đa 0,2% và tổng tạp tối đa 3,0%, không nêu tên tạp nào. Đây là điểm không nhất quán cần giải quyết: nguyên liệu đầu vào đang bị kiểm chặt hơn thành phẩm, trong khi quá trình bào chế chỉ có thể làm tạp tăng thêm chứ không giảm đi. Cần FD xác nhận chuyên luận áp dụng cho thành phẩm và khai lại tiêu chuẩn theo đúng danh mục tạp của chuyên luận đó."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phương pháp phân tích tạp chất cụ thể (tham chiếu 3.2.P.5.2) chưa được nêu trong Thử nghiệm 1. Về danh mục tạp: CoA nguyên liệu khai theo chuyên luận Ph.Eur. 12 và kiểm riêng từng tạp — tạp A (benzyl alcohol), tạp E, tạp G, mỗi tạp tối đa 0,1%. Tiêu chuẩn viên thành phẩm đang áp dụng ở mục P.2.2.1.2 lại chỉ ghi \"tạp đơn bất kỳ\" tối đa 0,2% và tổng tạp tối đa 3,0%, không nêu tên tạp nào."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận chuyên luận áp dụng cho thành phẩm, rồi khai lại tiêu chuẩn tạp theo đúng danh mục tạp của chuyên luận đó. Hai nguồn trong hồ sơ đang không khớp: CoA nguyên liệu kiểm riêng từng tạp có tên, mỗi tạp tối đa 0,1%; tiêu chuẩn thành phẩm ở mục P.2.2.1.2 chỉ ghi \"tạp đơn bất kỳ\" tối đa 0,2% và tổng tạp tối đa 3,0%, không nêu tên tạp nào. Nguyên liệu đầu vào đang bị kiểm chặt hơn thành phẩm, trong khi bào chế chỉ có thể làm tạp tăng thêm chứ không giảm đi. Không phép đo nào giải quyết được chỗ này — cả hai con số đều đã có, chúng chỉ không thống nhất."
         }
       ]
     },
@@ -1027,6 +1095,10 @@
         {
           "type": "paragraph",
           "text": "Quy trình sản xuất được chọn cho sản phẩm này là trộn dập thẳng, do FD xác nhận — hồ sơ Thử nghiệm 1 không mô tả quy trình nên dữ kiện này không đến từ nguồn thử nghiệm. Trộn dập thẳng rút ngắn quá trình sản xuất và hạn chế phát sinh tạp so với xát hạt, nhưng đặt ra ba vấn đề phải giải quyết trong phát triển: độ đồng đều hàm lượng, tính chảy của hỗn hợp bột, và khả năng chịu nén. Sơ đồ quy trình dưới đây dựng từ chính bộ công đoạn được chấm rủi ro trong bảng của mục này, nên đổi phương pháp pha chế là sơ đồ đổi theo."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận quy trình thật đã dùng trong Thử nghiệm 1 là trộn dập thẳng hay xát hạt. Hồ sơ đang mang hai lời khai ngược nhau, và cả hai đều nằm trong tài liệu này: đoạn trên khai trộn dập thẳng, trong khi bảng kiểm soát trong quá trình của chính Thử nghiệm 1 mang tiêu đề \"Tính chất vật lý cốm\", đo độ ẩm 105 °C bằng cân ẩm Halogen và phân bố cỡ hạt qua năm phân đoạn rây — đó là mô tả của hạt, không phải của hỗn hợp bột dập thẳng. Công thức còn chứa Povidone K30 khai chức năng tá dược dính, mà chính chuyên luận trích ở mục P.2.1.2.1 mô tả povidone được dùng làm tá dược dính trong xát hạt ướt. Đây là quyết định chặn nhiều mục: nếu quy trình thật là xát hạt thì bộ năm công đoạn ở bảng dưới, sơ đồ quy trình dựng từ bảng đó, và mốc đối chiếu croscarmellose ở mục P.2.2.1.3.3 đều phải dựng lại — mốc dập thẳng và mốc xát hạt ướt không bằng nhau."
         },
         {
           "type": "paragraph",
@@ -1222,6 +1294,18 @@
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Tiêu chuẩn vật liệu bao bì — thuộc mục 3.2.P.7, dẫn chiếu sang khi có."
             ],
             [
+              "Tính toàn vẹn bao bì",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nghiên cứu chứng minh tính toàn vẹn của bao bì và nắp/mối hàn. Nguồn cần lấy: mục 3.2.P.7 và hồ sơ thẩm định bao gói."
+            ],
+            [
+              "Hấp phụ và thẩm thấu",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đánh giá hấp phụ dược chất lên vật liệu bao bì và thẩm thấu chất từ bao bì vào thành phẩm. Nguồn cần lấy: thực nghiệm cùng dữ liệu độ ổn định ở 3.2.P.8."
+            ],
+            [
+              "An toàn vật liệu",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chứng minh an toàn của vật liệu cấu tạo bao bì cho đường dùng này. Nguồn cần lấy: hồ sơ vật liệu của nhà cung cấp và mục 3.2.P.7."
+            ],
+            [
               "Dữ liệu độ ổn định",
               "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Dẫn chiếu mục 3.2.P.8 khi có số liệu."
             ]
@@ -1267,7 +1351,11 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Sản phẩm là dạng bào chế rắn dùng đường uống, không vô khuẩn. ICH Q6A trang 12 cho phép đề xuất không thử giới hạn vi sinh với dạng này nếu có biện luận khoa học chấp nhận được, và Decision Tree #8 (trang 31) nêu hai nhánh: có bằng chứng sản phẩm ức chế phát triển vi sinh thì tiêu chuẩn và phép thử có thể không cần thiết; không có bằng chứng đó thì lập tiêu chuẩn theo chuyên luận dược điển hài hòa và thử từng lô, sau khi các lô đạt ổn định mới xin chuyển sang skip-lot. Biểu mẫu của phòng đi theo nhánh thứ hai — thử định kỳ. Giới hạn và tần suất dưới đây lấy từ biểu mẫu; cần FD xác nhận áp dụng cho sản phẩm này."
+          "text": "Sản phẩm là dạng bào chế rắn dùng đường uống, không vô khuẩn. ICH Q6A trang 12 cho phép đề xuất không thử giới hạn vi sinh với dạng này nếu có biện luận khoa học chấp nhận được, và Decision Tree #8 (trang 31) nêu hai nhánh: có bằng chứng sản phẩm ức chế phát triển vi sinh thì tiêu chuẩn và phép thử có thể không cần thiết; không có bằng chứng đó thì lập tiêu chuẩn theo chuyên luận dược điển hài hòa và thử từng lô, sau khi các lô đạt ổn định mới xin chuyển sang skip-lot. Biểu mẫu của phòng đi theo nhánh thứ hai — thử định kỳ. Giới hạn và tần suất dưới đây lấy từ biểu mẫu."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận sản phẩm này đi theo nhánh thử định kỳ của ICH Q6A Decision Tree #8, và xác nhận bộ giới hạn cùng tần suất lấy từ biểu mẫu áp dụng cho sản phẩm này. Q6A trang 12 cho phép cả hai nhánh, nên việc chọn nhánh là một quyết định chứ không phải một kết quả thử."
         },
         {
           "type": "paragraph",
@@ -1323,7 +1411,11 @@
         },
         {
           "type": "paragraph",
-          "text": "Hai điểm cần làm rõ trước khi nộp. Thứ nhất, biểu mẫu của phòng dẫn chiếu Dược điển châu Âu EP 11.0 phụ lục 5.1.4, trong khi CoA nguyên liệu khai theo Ph.Eur. 12; cần thống nhất phiên bản dược điển áp dụng cho cả hồ sơ. Thứ hai, nguyên liệu đã được kiểm vi sinh trước khi sản xuất — xem ghi chú nguồn [3] ở mục P.2.1.1 — đó là một trong ba điều kiện mà ICH Q6A trang 12 nêu; hai điều kiện còn lại là thẩm định quy trình chứng minh không mang rủi ro nhiễm hoặc tăng sinh đáng kể, và bằng chứng về tính ức chế phát triển của viên."
+          "text": "Về điều kiện của Q6A: nguyên liệu đã được kiểm vi sinh trước khi sản xuất — xem ghi chú nguồn [3] ở mục P.2.1.1 — đó là một trong hai điều kiện mà ICH Q6A trang 12 nêu; điều kiện còn lại là thẩm định quy trình chứng minh không mang rủi ro nhiễm hoặc tăng sinh đáng kể. Điều kiện thứ ba mà mục này từng quy về trang 12 — bằng chứng về tính ức chế phát triển của viên — thực ra đến từ Decision Tree #8 ở trang 31, không phải trang 12."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] QA và FD thống nhất phiên bản dược điển áp dụng cho CẢ hồ sơ. Hồ sơ đang dẫn hai phiên bản khác nhau: biểu mẫu của phòng dẫn EP 11.0 phụ lục 5.1.4 cho giới hạn vi sinh, còn CoA nguyên liệu khai theo Ph.Eur. 12. Đây là xung đột giữa hai tài liệu đã có trong hồ sơ, không phải chỗ thiếu dữ liệu, và nó ảnh hưởng tới mọi mục dẫn chiếu dược điển chứ không riêng mục này."
         }
       ]
     },
@@ -1333,7 +1425,11 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Không áp dụng — sản phẩm là viên nén bao phim dùng đường uống trực tiếp, không cần pha hoàn nguyên với dung môi/chất pha loãng trước khi sử dụng. Đây là suy luận dựa trên dạng bào chế đã nêu trong Thử nghiệm 1 (viên nén bao phim); cần FD xác nhận chính thức."
+          "text": "Không áp dụng — sản phẩm là viên nén bao phim dùng đường uống trực tiếp, không cần pha hoàn nguyên với dung môi/chất pha loãng trước khi sử dụng. Đây là suy luận dựa trên dạng bào chế đã nêu trong Thử nghiệm 1 (viên nén bao phim)."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận chính thức kết luận \"không áp dụng\" ở trên. Kết luận này suy ra từ dạng bào chế chứ không từ một thử nghiệm, nên nó đúng hay sai tùy vào dạng bào chế cuối cùng được chốt; một mục ghi \"không áp dụng\" mà không ai xác nhận là một mục trống được viết cho giống như đã xong."
         }
       ]
     }

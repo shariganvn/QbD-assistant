@@ -616,3 +616,98 @@ sinh nguyên liệu đã có trên CoA lô 488.
 
 **Lệch chuẩn phòng** (Q8(R2) không đòi, file mẫu có): W-3 nhóm risk assessment và QTPP/CQA theo
 định dạng Annex.
+
+## Đợt 11 — Chạy lại đối chiếu sau ba đợt công việc, và đính chính trạng thái
+
+Ngày: 2026-09-26. Công cụ: subagent `ich_q8_r2_checker`, đọc lại Q8(R2) và Q6A bằng PyMuPDF; Decision
+Tree #8 (Q6A tr. 31) render PNG để đọc trực tiếp nội dung cây chứ không suy từ tên.
+
+Báo cáo này dừng ở Đợt 10 (28/08), trong khi sau đó có ba đợt: outline hai hàm lượng (24/09), hình
+(25/09), nguồn PubChem và điều tra EMA/FDA (26/09). Bốn kết luận dưới đây **đã sai** và được đính
+chính; chúng sai vì mô tả một hồ sơ không còn tồn tại, không phải vì đọc guideline sai.
+
+### Đính chính
+
+| Cũ | Đúng | Bằng chứng |
+|---|---|---|
+| W-1 thiếu ba heading cha — chưa sửa | **đã đóng** | outline nay 38 entry = 12 container + 26 lá; `P.2.1`, `P.2.2`, `P.2.2.1` đều có, thêm 9 container khác |
+| W-2 mọi heading render Heading 1 | **đã đóng** | `headingLevelFor` suy cấp từ độ sâu số CTD; chạy hàm trên cả 38 entry cho cây H2→H6, không nhảy cấp, không va chạm cấp |
+| W-3 thiếu nhóm risk assessment + QTPP/CQA | **đã đóng** (tư cách finding cấu trúc) | 6/6 mục có mặt; outline còn thêm `P.2.2.1.2.2` CQAs vượt file mẫu. Dữ liệu dưới `.3.2` và `.3.4` vẫn trống — đó là finding khác |
+| C-1 *"chưa làm điều này dưới bất kỳ hình thức nào"* | **đóng một phần; câu trên nay sai** | `P.2.2.1.2.2` làm đủ ba việc Part I tr. 6 đòi cho yếu tố đã khảo sát biến thiên: xác định (tỷ lệ croscarmellose), theo đúng cơ chế guideline mô tả (biến độc lập duy nhất giữa CT01–03), và biện luận control strategy (cố định 5%, giữ hòa tan + độ rã trong bộ chỉ tiêu). Mở: tr. 6 liệt kê **bốn** nhóm đối tượng, hồ sơ đóng được một phần của nhóm tá dược |
+| `P.2.2.1.1` là "19 ô" | **38 ô** | 19 dòng × 2 cột hàm lượng. Số cũ đếm dòng, và được viết trước khi outline lên hai hàm lượng. `docs/reports/qbd-p2-figures/g12-ema-fda-followup.txt` đã ghi 38; hai báo cáo từng mâu thuẫn nhau, nay hết |
+| W-5 | **đóng một phần** — đúng phần đối chiếu chuyên luận còn mở | pKa, Log P, điểm chảy nay truy xuất được ở mức từng-giá-trị (ghi chú [4] chỉ đích danh nguồn cho từng con số, kèm CID + URL + ngày). Còn mở: các nguồn đó là cơ sở dữ liệu tổng hợp **thứ cấp**, không phải chuyên luận — nay là D-10 trong danh mục quyết định |
+| W-9, W-11, W-12 | **đã đóng** | dung môi nay theo CoA; hai dòng độ tan và cỡ hạt có mặt; mốc croscarmellose đã đối chiếu đúng phương pháp |
+
+Thuốc đối chiếu: đã xác minh **không có EPAR** — thuốc đăng ký theo thủ tục quốc gia, cả hai URL EMA
+trả 404. Chi tiết ở `docs/reports/qbd-p2-figures/g12-ema-fda-followup.txt`.
+
+### Finding mới
+
+**N-1 (CRITICAL) — tiền đề quy trình mâu thuẫn với bằng chứng của chính Thử nghiệm 1.** `P.2.3.1` khai
+trộn dập thẳng. Nhưng trong cùng tài liệu: bảng kiểm soát trong quá trình của Thử nghiệm 1 mang tiêu đề
+"Tính chất vật lý cốm", đo độ ẩm 105 °C bằng cân ẩm Halogen và phân bố cỡ hạt qua năm phân đoạn rây; và
+công thức chứa Povidone K30 khai chức năng tá dược dính, mà chuyên luận trích ở `P.2.1.2.1` mô tả
+povidone dùng làm tá dược dính trong xát hạt ướt. Vi phạm 2.3 tr. 8 (*"The selection, the control, and
+any improvement of the manufacturing process … should be explained"*). Đã kiểm lại trực tiếp trên draft,
+không nhận qua báo cáo. Nếu quy trình thật là xát hạt thì bộ năm công đoạn `P.2.3.1`, sơ đồ quy trình
+dựng từ bảng đó, và kết luận W-12 về mốc croscarmellose đều phải dựng lại — đây là phần đã render thành
+văn xuôi thật, không phải marker. **Nay là D-0, dấu quyết định ở `P.2.3.1`.**
+
+**N-2 (CRITICAL) — bốn yêu cầu của 2.2.1 tr. 8 không có cả heading lẫn marker**, nên vô hình với bảng
+tổng hợp khoảng trống: tóm tắt công thức lâm sàng/BE; thay đổi so với lô pivotal và lô độ ổn định chính;
+nghiên cứu so sánh in vitro/in vivo kèm số hiệu và IVIVC; biện luận khoảng tá dược trong 3.2.P.3.2.
+Khác mọi khoảng trống khác của hồ sơ, bốn mục này không được đánh dấu nên không ai đi lấy. **Đã đóng
+bằng bốn dấu dữ liệu mới ở `P.2.2.1.3.3`** — nay chúng vào danh mục.
+
+**N-3 — bộ CQA ở `P.2.2.1.2.1` là của 10 mg nhưng đang áp cho cả sản phẩm.** `rowsFrom` buộc ma trận
+rủi ro `P.2.3.1` chấm đúng bộ này, tức bộ CQA 10 mg đang áp cho ma trận quy trình của cả hai hàm lượng;
+5 mg không có bộ CQA riêng. Ghi nhận, chưa đóng — nó nằm trong phạm vi QTPP mà FD phải xây (D-QTPP).
+
+**N-4 — hai nguồn trong hồ sơ ghi bộ môi trường hòa tan khác nhau.** Chuyên luận biowaiver nêu
+pH 1,2 · 4,5 · 6,8; định nghĩa *rapidly dissolving* của Q6A tr. 19 nêu pH 1,2 · **4,0** · 6,8. Lệch ở
+môi trường thứ hai. **Nay là dấu quyết định ở `P.2.2.3.1.4`**, nêu cả hai chứ không tự chọn.
+
+**N-5 — quy dẫn sai trang.** `P.2.5` quy ba điều kiện về Q6A tr. 12; trang đó chỉ nêu **hai**
+(*"unless its components are tested before manufacture and the manufacturing process is known, through
+validation studies, not to carry a significant risk…"*). Điều kiện thứ ba — bằng chứng tính ức chế phát
+triển — đến từ Decision Tree #8 tr. 31. Nội dung khoa học đúng, chỉ sai địa chỉ. **Đã sửa trong draft.**
+
+**N-6 — `P.2.4.1` thiếu ba dòng mà 2.4 tr. 9 nêu đích danh**: tính toàn vẹn bao bì, hấp phụ/thẩm thấu,
+an toàn vật liệu cấu tạo. Dòng "Tính tương hợp" không phủ hai vế sau. **Đã thêm ba dòng vào `form` của
+outline và ba dấu dữ liệu tương ứng trong draft.**
+
+**N-7 (INFO) — mâu thuẫn nội tại trong chính Q8(R2).** Annex tr. 12 vừa nói *"not intended to establish
+new standards or to introduce new regulatory requirements"* vừa dùng *"at a minimum"* cho năm phần tử
+QTPP/CQA/control strategy. Hồ sơ đang đứng chỗ an toàn: có QTPP/CQA theo cấu trúc file mẫu, và không
+tuyên bố design space / RTRT / QbD ở đâu (grep = 0), nên không tự kích hoạt nghĩa vụ nào của Annex.
+
+**N-8 — bảng công thức cuối không có chỗ khai hệ màng bao.** **Đã đóng bằng một dấu dữ liệu** thay vì
+thêm một dòng: hệ màng bao gồm nhiều thành phần và gồm những gì là quyết định của FD, nên dựng sẵn một
+dòng là giả định trước câu trả lời.
+
+**N-9 (INFO) — định lượng 90–110%**: không tìm thấy giới hạn số nào cho assay thành phẩm trong Q8(R2)
+hay Q6A. Điểm dễ bị hỏi khi thẩm định, không phải vi phạm đã xác minh.
+
+**N-10 (INFO) — cơ chế `status: gap` / `gapReason` nay không còn được dùng**: cả 26 mục `covered`, khoảng
+trống do marker gánh. Nhánh tương ứng trong builder là code chết với draft này. Không phải lỗi; ghi để
+đừng ai tưởng cơ chế đó đang bảo vệ mình.
+
+**W-6 / D-14 — `meta.preparer` vẫn ghi AI là người soạn thảo.** Không liên quan Q8(R2); là vấn đề data
+integrity, QA quyết. Chưa đóng, và cố ý không đưa vào danh mục quyết định của tài liệu: nó là thuộc tính
+của file, không phải nội dung một mục CTD.
+
+### Kết luận đợt này
+
+Hồ sơ **vẫn chưa đạt sàn Q8(R2) Part I**, nhưng khoảng cách đã đổi bản chất: từ "thiếu cả cấu trúc lẫn
+dữ liệu" nay gần như thuần **thiếu dữ liệu**. Hai mảng cấu trúc còn sót (N-2, N-6) đã đóng trong đợt này
+bằng cách đánh dấu, không bằng cách bịa nội dung.
+
+Điều quan trọng nhất không phải một khoảng trống dữ liệu mà là **N-1/D-0**: rẻ để giải — một câu xác
+nhận của FD — nhưng nếu giải sai thì kéo theo nhiều đoạn đã render thành văn xuôi thật. Sau đó là kế
+hoạch lấy mẫu hòa tan: con số 80% tại 30 phút đang gánh hai mục đích loại trừ nhau, và cho tới khi FD
+chốt thì mọi thực nghiệm hòa tan sắp làm đều có nguy cơ phải đo lại.
+
+Về format, Q8(R2) chỉ có đúng một câu chạm tới trình bày (tr. 6: *"Summary tables and graphs are
+encouraged where they add clarity and facilitate review."*) — câu này **ủng hộ** hai hình sinh từ bảng,
+vì cả hai dựng từ chính số liệu trong mục. Mọi nhận xét còn lại về bảng biểu, cấp heading và đánh số
+đều quy về ICH M4Q hoặc biểu mẫu của phòng, không quy về Q8(R2).
