@@ -272,6 +272,10 @@
         },
         {
           "type": "paragraph",
+          "text": "Về hướng thu thập dữ liệu công bố, phạm vi của nó hẹp hơn thường được giả định. Thuốc đối chiếu đăng ký theo thủ tục quốc gia, không qua thủ tục tập trung của EU, nên EMA không công bố báo cáo đánh giá công khai (EPAR) cho sản phẩm này: kiểm ngày 26/09/2026 tại https://www.ema.europa.eu/en/medicines/human/EPAR/concor và https://www.ema.europa.eu/en/medicines/human/EPAR/bisoprolol , cả hai trả HTTP 404. Vì vậy hướng này chỉ cấp được thông tin hành chính và thành phần định tính, lấy từ nhãn cùng tờ hướng dẫn sử dụng của chính lô mua về, đối chiếu với đăng ký quốc gia của thị trường mua mẫu. Toàn bộ chỉ tiêu chất lượng trong bảng thứ hai — cảm quan, khối lượng trung bình, kích thước, độ cứng, thời gian rã, định lượng, tạp chất, đồng đều hàm lượng và hòa tan — không có tài liệu công bố nào thay thế được phép đo; chúng chỉ có bằng thực nghiệm trên mẫu mua về."
+        },
+        {
+          "type": "paragraph",
           "italic": true,
           "text": "Bảng: Tỷ lệ và thành phần tá dược thuốc đối chiếu"
         },
@@ -315,13 +319,13 @@
           "rows": [
             [
               "Nhà sản xuất",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn hoặc tờ hướng dẫn sử dụng của lô mua về.",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn hoặc tờ hướng dẫn sử dụng của lô mua về."
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn hoặc tờ hướng dẫn sử dụng của lô mua về, rồi đối chiếu tên nhà sản xuất và nơi sản xuất với đăng ký quốc gia của thị trường mua mẫu. EMA không có EPAR cho sản phẩm này nên không dùng được làm nguồn xác nhận.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn hoặc tờ hướng dẫn sử dụng của lô mua về, rồi đối chiếu tên nhà sản xuất và nơi sản xuất với đăng ký quốc gia của thị trường mua mẫu. EMA không có EPAR cho sản phẩm này nên không dùng được làm nguồn xác nhận."
             ],
             [
               "Số đăng ký",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn; ghi rõ số đăng ký tại thị trường mua mẫu.",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn; ghi rõ số đăng ký tại thị trường mua mẫu."
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn; ghi rõ số đăng ký tại thị trường mua mẫu, và đối chiếu số đó với đăng ký quốc gia của thị trường đó để chứng minh thuốc còn hiệu lực đăng ký tại thời điểm mua mẫu. Nhãn một mình không chứng minh tình trạng lưu hành.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Trích từ nhãn; ghi rõ số đăng ký tại thị trường mua mẫu, và đối chiếu số đó với đăng ký quốc gia của thị trường đó để chứng minh thuốc còn hiệu lực đăng ký tại thời điểm mua mẫu. Nhãn một mình không chứng minh tình trạng lưu hành."
             ],
             [
               "Hạn dùng",

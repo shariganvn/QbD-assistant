@@ -14,13 +14,24 @@ environment_findings:
     correctly, with Vietnamese diacritics intact. The sibling chrome-*/chrome --headless paints only box
     outlines and drops all text and fills, with or without a virtual time budget and forced software
     rasterisation. Use headless_shell.
-  blocked_hosts:
-    # As first probed, 2026-09-25. The network policy was opened on 2026-09-26; see G-12 for the
-    # re-probe, which found PubChem reachable and EMA and FDA accessdata still denied.
-    - "pubchem.ncbi.nlm.nih.gov — HTTP 403 at the egress proxy (policy denial) — OPENED 2026-09-26"
-    - "eutils.ncbi.nlm.nih.gov — HTTP 403 (this is the PubMed API) — OPENED 2026-09-26"
-    - "www.ema.europa.eu, www.accessdata.fda.gov — still blocked"
-    - "go.drugbank.com — 403, but that is DrugBank's own bot protection; cited through PubChem instead"
+  allowlist_matching: >
+    The egress allowlist matches the EXACT hostname, not the domain and not a wildcard. Adding
+    ema.europa.eu and fda.gov changed nothing, because both sites redirect to their www. host and the
+    redirect target was still not on the list. Add the hostname a browser actually reaches.
+  host_reachability:
+    # First probed 2026-09-25; re-probed after each policy change, last on 2026-09-26. A host being
+    # reachable at the proxy does not mean the site will answer — two of these refuse us themselves.
+    - "pubchem.ncbi.nlm.nih.gov — 200. Open, and the primary source for the drug substance."
+    - "eutils.ncbi.nlm.nih.gov — 301. Open (ordinary redirect). This is the PubMed API."
+    - "www.ema.europa.eu — 200. Open; HTML and PDF both fetch. But /en/search answers 401, the
+       medicines catalogue is rendered in JS so a static fetch finds nothing, and repeated calls get
+       429 — only a document URL you already know will work. See g12-ema-fda-followup.txt."
+    - "www.accessdata.fda.gov — open at the proxy, and still unusable: FDA's own abuse detection
+       redirects every path to /apology_objects/abuse-detection-apology.html, which itself returns
+       404. Datacentre IPs are refused by FDA, so no allowlist entry fixes Drugs@FDA from here."
+    - "accessdata.fda.gov, fda.gov, www.geneesmiddeleninformatiebank.nl — 403 at the proxy, not on
+       the allowlist."
+    - "go.drugbank.com — 403 from DrugBank's own bot protection, not the proxy; cited through PubChem."
 
 gates:
   - id: G-08
