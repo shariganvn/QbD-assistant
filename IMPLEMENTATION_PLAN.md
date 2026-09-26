@@ -5,6 +5,12 @@ authoritative router; wait for a scope to be accepted before picking work up.
 
 ## Latest completed
 
+- [Process diagram plan](docs/plans/qbd-p2-process-diagram/plan.md) — `completed` and read-only.
+  G-26..G-28 hold evidence in `docs/reports/qbd-p2-process-diagram/`, including the rendered diagram. A
+  third figure kind draws unit operations down the page with the components added at each one; Trial 2's
+  process has a source now so its sequence decision closed, and Trial 1's branch carries a note and a
+  decision rather than a second copy of the same diagram.
+
 - [Self-consistency plan](docs/plans/qbd-p2-self-consistency/plan.md) — `completed` and read-only.
   G-23..G-25 hold evidence in `docs/reports/qbd-p2-self-consistency/`. Eleven internal references that
   pointed at container sections now resolve to the leaves that hold the content, enforced at Stage B, and

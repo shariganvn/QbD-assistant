@@ -115,6 +115,17 @@ draft. Filling one real value, or settling one decision, removes exactly its own
 
 ### `figure` and `image`
 
+A `figure` has three kinds. `flow` draws a left-to-right chain of unit operations from one axis of a
+table; `bars` plots a named row; `process` draws unit operations down the page with the components
+added at each one branching in from the left.
+
+A `process` figure's table must have **exactly three columns** — step number, components added, unit
+operation — and that shape is required rather than derived, because `labelColumnCount` models
+"ordinals plus one label column" and would put the components on the label side. In the components
+column, `—` means the step deliberately adds nothing and no input branch is drawn; a blank cell is not
+that, since a blank reads as "not applicable" everywhere else in this document. A gap marker in the
+operation column refuses the figure: a process missing a step reads as a different process.
+
 A `figure` **carries no numbers**. It names a table and a row already present in the same section, and
 the renderer reads the values out at render time. Copying them into the block would put one
 measurement in two places, and the two would disagree the first time one was corrected — the value

@@ -71,3 +71,33 @@ export function barSeries(section, { fromTable = 0, fromRow }) {
   }
   return series;
 }
+
+// The stages of a manufacturing process: what is added, and the operation it is added at.
+//
+// This one does not use labelColumnCount. That helper models "leading ordinals plus one label column",
+// which is right for a results table but wrong here: both non-ordinal columns are meaningful to the
+// diagram and they sit on opposite sides of the boundary it would draw. So the shape is required
+// outright — step number, components, operation — and anything else is refused rather than guessed at.
+// A fourth column appended later would otherwise be drawn as the operation.
+export function processStages(section, { fromTable = 0 }) {
+  const table = tableAt(section, fromTable);
+  if (table.headers.length !== 3) {
+    throw new FigureSourceError(`section "${section.id}" table ${fromTable} has ${table.headers.length} columns; a process diagram needs exactly three: step number, components added, unit operation`);
+  }
+  if (table.rows.length === 0) {
+    throw new FigureSourceError(`section "${section.id}" table ${fromTable} has no rows to draw a process from`);
+  }
+  return table.rows.map((row, index) => {
+    const input = String(row[1] ?? "").trim();
+    const operation = String(row[2] ?? "").trim();
+    if (operation === "" || isGapText(operation)) {
+      throw new FigureSourceError(`section "${section.id}" table ${fromTable} row ${index + 1} has no unit operation to draw — a process missing a step reads as a different process`);
+    }
+    if (isGapText(input)) {
+      throw new FigureSourceError(`section "${section.id}" table ${fromTable} row ${index + 1} has a gap marker where its components belong; write "—" if the step adds nothing`);
+    }
+    // An em dash means the step adds nothing, which compression does. A blank cell would read as
+    // "not applicable", so the draft has to say which it means and this turns that into no input box.
+    return { input: input === "—" ? "" : input, operation };
+  });
+}

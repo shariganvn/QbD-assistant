@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 
 import { TABLE_WIDTH_DXA } from "../schemas/layout.mjs";
 import { isDecisionText, isGapText, markerText } from "../schemas/markers.mjs";
-import { barSeries, flowSteps } from "../render/figures/figure-source.mjs";
+import { barSeries, flowSteps, processStages } from "../render/figures/figure-source.mjs";
 
 const draftDir = dirname(fileURLToPath(import.meta.url));
 const toolRoot = join(draftDir, "..");
@@ -23,7 +23,7 @@ export class DraftContractError extends Error {
 }
 
 const VALID_BLOCK_TYPES = new Set(["heading2", "heading3", "paragraph", "table", "figure", "image"]);
-const VALID_FIGURE_KINDS = new Set(["flow", "bars"]);
+const VALID_FIGURE_KINDS = new Set(["flow", "bars", "process"]);
 const VALID_FIGURE_AXES = new Set(["columns", "rows"]);
 // Supplied figures live in one directory under the tool. A draft naming an arbitrary path would let a
 // rendered dossier pull in a file nobody reviewed.
@@ -575,6 +575,7 @@ export function validateDraft(draft, outline = loadOutline()) {
         if (block.type !== "figure") return;
         try {
           if (block.kind === "flow") flowSteps(section, block);
+          else if (block.kind === "process") processStages(section, block);
           else barSeries(section, block);
         } catch (error) {
           fail("E_FIGURE_SOURCE", `sections[${section.id}].blocks[${index}]: ${error.message}`);

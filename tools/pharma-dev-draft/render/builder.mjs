@@ -20,8 +20,8 @@ import { tableValueCells } from "../schemas/table-shape.mjs";
 import { printableRequestRows } from "./data-request.mjs";
 import { printableDecisionRows } from "./decision-register.mjs";
 import { barChartPng } from "./figures/bar-chart.mjs";
-import { processFlowPng } from "./figures/process-flow.mjs";
-import { barSeries, flowSteps } from "./figures/figure-source.mjs";
+import { processFlowPng, processStagePng } from "./figures/process-flow.mjs";
+import { barSeries, flowSteps, processStages } from "./figures/figure-source.mjs";
 
 const HEADER_FILL = "D9D9D9";
 const NOTICE_FILL = "FFF2CC";
@@ -242,6 +242,10 @@ function figureParagraphs(png, width, height, caption, counter) {
 function renderFigure(block, section, counter) {
   if (block.kind === "flow") {
     const { png, width, height } = processFlowPng(flowSteps(section, block));
+    return figureParagraphs(png, width, height, block.caption, counter);
+  }
+  if (block.kind === "process") {
+    const { png, width, height } = processStagePng(processStages(section, block));
     return figureParagraphs(png, width, height, block.caption, counter);
   }
   const series = barSeries(section, block);

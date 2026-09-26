@@ -1,0 +1,96 @@
+# G-26..G-28 — sơ đồ quy trình pha chế, vẽ từ bảng trong mục
+
+Ngày: 2026-09-26. Nguồn trình tự: FD cấp trực tiếp trong phiên làm việc.
+
+## 1. Vì sao trình tự này có nguồn, còn lần trước thì không
+
+Đợt trước tôi để trình tự công đoạn thành dấu quyết định chứ không tự dựng. Lý do ghi lại vì nó
+là giới hạn của công cụ, không phải của tài liệu: sơ đồ trong file Thử nghiệm 2 vẽ bằng các hộp
+văn bản, mà xml-walk đọc theo thứ tự trong file XML chứ không theo thứ tự hình. Bộ công đoạn đọc
+được chắc chắn; thứ tự thì không. Nay FD cấp trình tự nên dấu đó đóng.
+
+## 2. Hình dạng bảng — và vì sao KHÔNG dùng labelColumnCount
+
+`labelColumnCount` mô hình hoá "các cột số thứ tự, cộng đúng một cột nhãn". Đúng cho bảng kết quả,
+sai cho bảng quy trình: cả hai cột không-số-thứ-tự đều là thứ sơ đồ cần vẽ, và chúng nằm hai bên
+ranh giới mà hàm đó vạch ra. Nên bảng quy trình phải **đúng ba cột** — số bước, thành phần đưa vào,
+công đoạn — và bất kỳ hình dạng nào khác bị từ chối chứ không đoán.
+
+Không đoán ở đây là quan trọng: thêm một cột "Ghi chú" vào cuối mà luật đọc "cột cuối là công
+đoạn" thì sơ đồ sẽ vẽ ghi chú thành công đoạn. Có test.
+
+## 3. Một quy ước, và lý do không đặt quy ước mới
+
+Ô `—` ở cột thành phần nghĩa là **bước đó không thêm thành phần nào** — bước dập viên. Renderer
+không vẽ nhánh cho ô đó.
+
+Không để trống, vì ô trống trong tài liệu này nghĩa là "không áp dụng" — đúng thứ mà hệ marker
+sinh ra để chặn. Và `—` không phải quy ước mới: bảng tá dược của draft đã dùng đúng ký tự đó.
+Marker ở cột thành phần thì bị từ chối kèm thông báo chỉ rõ phải viết `—` nếu bước đó không thêm gì.
+
+## 4. Sơ đồ đã render, xem bằng mắt
+
+`trial-2-process.png` trong cùng thư mục này — 446×327, bốn công đoạn chạy dọc, ba nhóm thành phần
+vào từ trái, bước dập viên không có nhánh, dấu tiếng Việt nguyên vẹn.
+
+Bước này không bỏ được. Đợt hình trước có **ba lỗi vẽ chỉ hiện ra khi mở ảnh thật**: trục làm tròn
+lên 200 làm mọi cột dồn xuống nửa dưới, nhãn ngưỡng đè lên cột cao nhất, và đường ngưỡng gạch
+ngang qua một nhãn giá trị. Không lỗi nào trong ba lỗi đó làm test đổ.
+
+Một quyết định vẽ đáng ghi: danh sách thành phần **tách mỗi chất một dòng** thay vì để wrap như văn
+xuôi. Năm tá dược wrap thành ba dòng là một đoạn văn nhét trong hộp, người đọc phải tự tách dấu
+phân cách ra lại.
+
+## 5. Rây không thành hộp trong sơ đồ
+
+Theo mô tả của FD, rây là xử lý **từng nhóm thành phần trước khi đưa vào**, không phải một công đoạn
+của cả khối. Vẽ nó thành hộp trong chuỗi dọc sẽ nói sai điều đó — thành ra như thể cả khối được rây
+giữa hai lần trộn. Nên nó nằm ở nhãn cột ("đã rây") và ở một câu trong thân bài.
+
+## 6. Thử nghiệm 1: ghi chú, không vẽ lại
+
+Tài liệu Thử nghiệm 1 không mô tả quy trình. Nhánh đó nhận một đoạn nêu các dấu hiệu (cùng bộ tá
+dược, cùng cỡ lô, cùng bộ chỉ tiêu IPC) và một **dấu quyết định** để FD xác nhận có cùng quy trình
+hay không — chứ không vẽ lại sơ đồ và không copy bảng.
+
+Đúng yêu cầu "nếu giống nhau thì ghi chú", và đúng luật chống trùng lặp đã có: một bảng quy trình
+copy sang nhánh khác sẽ bị `value-inventory` báo `duplicated`, y như bảng kết quả Thử nghiệm 2 đã
+bị chặn đợt trước.
+
+## 7. Ba điểm lệch với ma trận rủi ro
+
+| | Bộ công đoạn |
+|---|---|
+| Quy trình thật (Thử nghiệm 2) | Trộn đồng nhất 1 · Trộn đồng nhất 2 · Trộn hoàn tất · Dập viên |
+| Ma trận `P.2.3.1` | Trộn sơ bộ · Trộn hoàn tất · Dập viên · Bao phim · Đóng gói |
+
+Lệch ba chỗ: ma trận gộp hai lần trộn đồng nhất thành một cột; ma trận có Bao phim và Đóng gói mà
+quy trình không nêu; quy trình có rây mà ma trận không có cột để chấm. Cột nào vào ma trận là quyết
+định của FD — đó là đánh giá rủi ro của họ — nên vẫn là dấu quyết định, chỉ nêu đủ ba điểm.
+
+**Hình cũ ở `P.2.3.1` giữ nguyên.** Hai sơ đồ nói hai điều khác nhau: một là quy trình đã chạy ở
+phòng thí nghiệm, một là bộ công đoạn dùng để chấm rủi ro. Chỗ chúng lệch nhau chính là dấu quyết định.
+
+## 8. Xác minh
+
+```
+npm run test:pharma-dev                        → 114 pass, 0 fail (107 cũ + 7 mới)
+validate-draft.mjs <draft>                     → OK, 26 sections
+render + verify                                → XSD PASS, 4 PNG, unzip -t OK
+```
+
+values before: 300, after: 307
+lost: 3, duplicated: 0, moved: 0
+added: 10 (marker 2, prose 4, data 4)
+
+**`added data 4` — nói rõ chứ không lờ đi.** Kế hoạch của tôi viết `added data 0`; thực tế là 4, và
+bốn giá trị đó là: `Trộn đồng nhất 1`, `Trộn đồng nhất 2`, `Trộn hoàn tất`, `Dập viên` — **tên công
+đoạn**, không phải phép đo, không chứa số liệu nào. Chúng rơi vào cột giá trị vì `labelColumnCount`
+tính "Bước" và "Thành phần đưa vào" là nhãn. Mục đích của gate — không để một con số không nguồn
+lọt vào — vẫn giữ: bốn giá trị này là tên, và nguồn là FD.
+
+`lost 3` là ba văn bản cố ý thay: dấu quyết định về trình tự (nay có nguồn), câu tóm tắt bộ công
+đoạn (nay nêu được cả thứ tự), và dấu quyết định về ma trận (nay nêu đủ ba điểm lệch).
+
+Số dấu: **gap 149 không đổi** — đợt này không điền ô nào. **Decision 20 không đổi**: đóng một dấu
+(trình tự), mở một dấu (quy trình Thử nghiệm 1).

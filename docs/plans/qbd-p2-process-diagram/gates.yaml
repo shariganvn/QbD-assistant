@@ -1,0 +1,86 @@
+# Executable acceptance gates for qbd-p2-process-diagram.
+# This file owns gate bodies. Step files describe implementation; they must not restate a full gate.
+
+version: 2
+workstream: qbd-p2-process-diagram
+evidence_root: docs/reports/qbd-p2-process-diagram
+
+environment_findings:
+  looking_at_the_figure: >
+    A rendered figure is checked by opening it, not only by asserting on the SVG. The earlier figures
+    round shipped three faults that every test passed: an axis rounded up to 200 that squashed every
+    column into the lower half, a threshold label landing on the tallest column, and a threshold line
+    struck through a value label. None of them is expressible as an assertion anyone thinks to write.
+  fromTable_is_positional: >
+    A figure names its table by index within the section, so inserting a table ahead of an existing
+    figure shifts what that figure draws. It bit this round: the new process figure pointed at table 0,
+    which was the first trial's composition, and Stage B refused it on the column count. The refusal is
+    the safety net, but a section that grows tables is worth re-checking figure by figure.
+
+gates:
+  - id: G-26
+    title: The process diagram is drawn from the table beside it
+    invariant: >
+      A process figure block carries no step, no component and no order of its own. It names a table in
+      its own section; the renderer reads the components and the unit operation from each row at draw
+      time. Correcting the table corrects the diagram with no other edit, and the process therefore
+      exists in exactly one place in the document.
+    boundary_owner: render/figures/figure-source.mjs — processStages
+    fixture: a three-column process table built for the rule, plus the worked example
+    command: >
+      node --test tools/pharma-dev-draft/draft/tests/process-diagram.test.mjs
+      && node tools/pharma-dev-draft/draft/validate-draft.mjs tools/pharma-dev-draft/draft/example-draft.json
+    expected: >
+      exit 0. The stages equal the table's rows in order; changing a component in the table changes the
+      diagram. E_FIGURE_SOURCE when a row has no unit operation or carries a gap marker there — a
+      process missing a step reads as a shorter process — and when the table is not exactly three
+      columns, which is demanded rather than guessed at.
+    negative_cases:
+      - Step names written into the figure block -> the process lives in two places.
+      - The operation read as "the last column" -> a note column appended later is drawn as an operation.
+      - labelColumnCount used to split the table -> it puts the components on the label side.
+    evidence: g26-g28-process-diagram.txt
+    blocks: [G-27]
+    status: pass
+
+  - id: G-27
+    title: One process is drawn once, and a trial that reuses it says so
+    invariant: >
+      A trial whose process is another's carries a note naming the section that documents it, not a
+      second table and not a second diagram. The existing duplicate check enforces the consequence: a
+      copied process table reports as duplicated values, the same way the copied results table was
+      refused.
+    boundary_owner: draft/example-draft.json + draft/tests/value-inventory.mjs
+    fixture: the two trial branches of the formulation-development section
+    command: node tools/pharma-dev-draft/draft/tests/value-inventory.mjs --before <previous> --after <draft>
+    expected: >
+      duplicated 0. Trial 2 carries the table and the diagram; Trial 1 carries a paragraph naming the
+      signs that the process may be the same, and a decision marker for FD to confirm it, with no table
+      and no figure of its own.
+    negative_cases:
+      - Trial 1 given a copy of the table so it has "its own" process -> duplicated values.
+      - Trial 1 asserted to use the same process because the excipients match -> that is a sign, not a statement.
+    evidence: g26-g28-process-diagram.txt
+    blocks: []
+    status: pass
+
+  - id: G-28
+    title: A step that adds nothing says so, and the drawing shows it
+    invariant: >
+      An em dash in the components column means the step deliberately adds nothing, and the renderer
+      draws no input branch for it. A blank cell is not that: in this document a blank reads as "not
+      applicable", which is the failure the markers exist to prevent, so the draft has to say which it
+      means. The em dash is already the draft's character for this and no new convention is introduced.
+    boundary_owner: render/figures/figure-source.mjs + render/figures/process-flow.mjs
+    fixture: a four-step process whose last step adds nothing
+    command: node --test tools/pharma-dev-draft/draft/tests/process-diagram.test.mjs
+    expected: >
+      exit 0. Four operation boxes and three input boxes for a four-step process. E_FIGURE_SOURCE for a
+      gap marker in the components column, with a message naming the em dash as what to write instead.
+      Component lists split one per line rather than wrapping as prose.
+    negative_cases:
+      - A blank cell used for the compression step -> indistinguishable from "not applicable".
+      - An input box drawn for the step that adds nothing -> the diagram states a component that is not there.
+    evidence: g26-g28-process-diagram.txt + trial-2-process.png
+    blocks: []
+    status: pass

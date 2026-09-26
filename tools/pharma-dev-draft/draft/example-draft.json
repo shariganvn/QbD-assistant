@@ -668,6 +668,18 @@
         },
         {
           "type": "heading3",
+          "text": "Tóm tắt quy trình pha chế"
+        },
+        {
+          "type": "paragraph",
+          "text": "Tài liệu Thử nghiệm 1 KHÔNG mô tả quy trình pha chế. Bộ tá dược, khối lượng viên và cỡ lô 1.000 viên giống Thử nghiệm 2, và bảng kiểm soát trong quá trình của nó đo cùng bộ chỉ tiêu của khối bột đã trộn hoàn tất — nhưng đó là dấu hiệu, không phải lời khai."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận Thử nghiệm 1 dùng cùng quy trình bốn bước như Thử nghiệm 2 hay không. Nếu giống thì mục này ghi chú trỏ sang sơ đồ ở nhánh Thử nghiệm 2 chứ không vẽ lại: một sơ đồ vẽ hai lần là một quy trình nằm hai chỗ, và chúng sẽ lệch nhau ngay lần đầu có người sửa một chỗ. Nếu khác thì nhánh này cần bảng các bước riêng."
+        },
+        {
+          "type": "heading3",
           "text": "Bảng thành phần công thức (mg/viên = % kl/kl)"
         },
         {
@@ -990,7 +1002,7 @@
         },
         {
           "type": "paragraph",
-          "text": "Thử nghiệm 2 là tài liệu đầu tiên trong hồ sơ mô tả quy trình. Bộ công đoạn gồm: rây, trộn đồng nhất (hai lần), trộn hoàn tất với magnesium stearate đã rây, và dập viên. **Không có công đoạn tạo hạt, không có làm ẩm, không có sấy** — đây là quy trình trộn dập thẳng, và điều đó xác nhận tiền đề đã nêu ở mục 3.2.P.2.3.1. Povidone K30 có trong công thức nhưng được thêm ở dạng bột khô vào khối trộn, không phải dưới dạng dung dịch dính."
+          "text": "Thử nghiệm 2 là tài liệu đầu tiên trong hồ sơ mô tả quy trình. Quy trình gồm bốn bước: trộn đồng nhất 1 với dược chất và các tá dược độn, trộn đồng nhất 2 thêm tá dược rã, trộn hoàn tất thêm tá dược trơn, rồi dập viên — mỗi nhóm thành phần được rây trước khi đưa vào. **Không có công đoạn tạo hạt, không có làm ẩm, không có sấy** — đây là quy trình trộn dập thẳng, và điều đó xác nhận tiền đề đã nêu ở mục 3.2.P.2.3.1. Povidone K30 có trong công thức nhưng được thêm ở dạng bột khô vào khối trộn, không phải dưới dạng dung dịch dính."
         },
         {
           "type": "paragraph",
@@ -998,7 +1010,47 @@
         },
         {
           "type": "paragraph",
-          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận TRÌNH TỰ chính xác của các công đoạn. Sơ đồ quy trình trong Thử nghiệm 2 vẽ bằng các hộp văn bản, nên công cụ trích xuất đọc theo thứ tự trong file XML chứ không theo thứ tự hình — bộ công đoạn là chắc chắn, thứ tự thì không. Bản thảo này cố ý không dựng lại trình tự bằng suy luận dược học, vì một trình tự đúng-theo-lẽ-thường vẫn là trình tự không có nguồn."
+          "text": "Trình tự các công đoạn do FD cấp và được khai ở bảng dưới. Ghi lại vì sao bản thảo trước đó không tự dựng trình tự: sơ đồ trong tài liệu nguồn vẽ bằng các hộp văn bản, nên công cụ trích xuất đọc theo thứ tự trong file XML chứ không theo thứ tự hình — bộ công đoạn đọc được chắc chắn, thứ tự thì không, và một trình tự đúng-theo-lẽ-thường vẫn là trình tự không có nguồn."
+        },
+        {
+          "type": "paragraph",
+          "text": "Rây là xử lý từng nhóm thành phần TRƯỚC khi đưa vào khối trộn, không phải một công đoạn riêng của cả khối — nên nó nằm ở nhãn cột bảng dưới chứ không thành một hộp trong sơ đồ."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Bước",
+            "Thành phần đưa vào (đã rây)",
+            "Công đoạn"
+          ],
+          "rows": [
+            [
+              "1",
+              "Bisoprolol fumarate · Lactose monohydrate · Cellactose 80 · Povidone K30 · Magnesium oxide",
+              "Trộn đồng nhất 1"
+            ],
+            [
+              "2",
+              "Croscarmellose sodium",
+              "Trộn đồng nhất 2"
+            ],
+            [
+              "3",
+              "Magnesium stearate",
+              "Trộn hoàn tất"
+            ],
+            [
+              "4",
+              "—",
+              "Dập viên"
+            ]
+          ]
+        },
+        {
+          "type": "figure",
+          "kind": "process",
+          "fromTable": 3,
+          "caption": "Sơ đồ quy trình pha chế Thử nghiệm 2, dựng từ bảng các bước ở trên. Mỗi công đoạn trộn nhận thêm một nhóm thành phần đã rây; bước dập viên không thêm thành phần nào."
         },
         {
           "type": "paragraph",
@@ -1423,7 +1475,7 @@
         },
         {
           "type": "paragraph",
-          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD chốt bộ công đoạn dùng cho ma trận rủi ro, đối chiếu với tóm tắt quy trình của Thử nghiệm 2. Hai bộ hiện không khớp ở hai đầu: Thử nghiệm 2 có các công đoạn rây mà ma trận không có cột, còn ma trận có cột \"Bao phim\" và \"Đóng gói\" mà tóm tắt quy trình của Thử nghiệm 2 không nêu. Ma trận chấm rủi ro theo công đoạn, nên một công đoạn thiếu cột là một công đoạn không ai chấm rủi ro."
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD chốt bộ công đoạn dùng cho ma trận rủi ro, đối chiếu với quy trình bốn bước đã khai ở mục 3.2.P.2.2.1.3.3. Hai bộ lệch nhau ở ba chỗ, nêu đủ để khỏi phải dò lại: ma trận gộp hai lần trộn đồng nhất thành một cột \"Trộn sơ bộ\"; ma trận có cột \"Bao phim\" và \"Đóng gói\" mà quy trình của Thử nghiệm 2 không nêu; và quy trình có công đoạn rây từng nhóm thành phần mà ma trận không có cột để chấm. Ma trận chấm rủi ro theo công đoạn, nên một công đoạn không có cột là một công đoạn không ai chấm rủi ro."
         },
         {
           "type": "paragraph",
