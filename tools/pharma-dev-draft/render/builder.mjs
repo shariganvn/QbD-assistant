@@ -54,6 +54,33 @@ const SCOPE_NOTICE_BODY_2 =
   "sung dữ liệu và phê duyệt chính thức bởi FD.";
 const DRAFT_STATUS_LABEL = "Trạng thái: BẢN NHÁP NỘI BỘ – CHƯA THẨM ĐỊNH";
 
+// Xuất xứ của văn bản, không phải một chữ ký. Câu này nói bản nháp được dựng bằng gì và sửa lần cuối
+// khi nào; bảng ký duyệt ở cuối tài liệu nói ai chịu trách nhiệm. Hai điều đó không được lẫn vào nhau:
+// một dòng có cột "Chữ ký" mang tên một công cụ là một phát biểu sai về trách nhiệm.
+//
+// Câu này cố ý KHÔNG nhắc lại nguyên văn tiêu đề bảng ký duyệt: verify đếm tiêu đề đó để biết bảng chữ
+// ký bắt đầu từ đâu, nên một bản sao của cùng cụm từ sẽ làm phép kiểm vị trí đọc sai mốc.
+export function provenanceSentence(meta) {
+  return `Xuất xứ bản nháp: dựng tự động bởi ${meta.assembledBy}, trích nội dung nguồn bằng phương ` +
+    `pháp ${meta.extractionMethod}; lần sửa cuối ${meta.draftDate}. Mọi vai trò trong bảng ký duyệt ` +
+    "ở cuối tài liệu đều để trống, chờ người có thẩm quyền ký.";
+}
+
+export const SIGNOFF_HEADING = "Ghi nhận soạn thảo và rà soát";
+const SIGNATURE_BLANK = "________________";
+
+// Ba dòng, cả ba để trống. Hàm này KHÔNG nhận `meta`, và đó là nội dung của luật chứ không phải tình
+// cờ: một bảng có cột "Chữ ký" không được đọc bất cứ giá trị nào của file, nên nó không thể khai rằng
+// đã có người nhận trách nhiệm trong khi chưa ai ký. Điền sẵn tên công cụ — hay cả một ngày — vào dòng
+// "Soạn thảo" là đúng lỗi đó, và đã từng xảy ra.
+export function signoffRows() {
+  return [
+    ["Soạn thảo", SIGNATURE_BLANK, SIGNATURE_BLANK, ""],
+    ["Rà soát FD", SIGNATURE_BLANK, SIGNATURE_BLANK, ""],
+    ["Phê duyệt QA/PO", SIGNATURE_BLANK, SIGNATURE_BLANK, ""],
+  ];
+}
+
 // One Word list definition, referenced by every bulleted line in every cell. Registered on the
 // Document below; without that registration the paragraphs render unbulleted.
 const CELL_BULLET_REFERENCE = "cell-bullet";
@@ -193,7 +220,7 @@ function spacer() {
   return new Paragraph({ text: "", spacing: { after: 80 } });
 }
 
-function noticeBox() {
+function noticeBox(meta) {
   return new Table({
     width: { size: TABLE_WIDTH, type: WidthType.DXA },
     columnWidths: [TABLE_WIDTH],
@@ -205,6 +232,7 @@ function noticeBox() {
         children: [
           new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: SCOPE_NOTICE_TITLE, bold: true, size: 20 })] }),
           new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: SCOPE_NOTICE_BODY_1, size: 19 })] }),
+          new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: provenanceSentence(meta), size: 19 })] }),
           new Paragraph({ children: [new TextRun({ text: SCOPE_NOTICE_BODY_2, size: 19, bold: true })] }),
         ],
       })],
@@ -366,7 +394,7 @@ export async function buildDocumentBuffer(draft, outline) {
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 300 }, children: [new TextRun({ text: `${DRAFT_STATUS_LABEL} — Ngày soạn: ${draft.meta.draftDate}`, bold: true, size: 20, color: GAP_COLOR })] }),
   );
 
-  children.push(noticeBox());
+  children.push(noticeBox(draft.meta));
   children.push(spacer());
 
   children.push(h1("Danh mục chữ viết tắt"));
@@ -436,14 +464,10 @@ export async function buildDocumentBuffer(draft, outline) {
   }
 
   children.push(spacer());
-  children.push(h1("Ghi nhận soạn thảo và rà soát"));
+  children.push(h1(SIGNOFF_HEADING));
   children.push(makeTable(
     ["Vai trò", "Họ tên", "Ngày", "Chữ ký"],
-    [
-      [`Soạn thảo (${draft.meta.preparer})`, "—", draft.meta.draftDate, ""],
-      ["Rà soát FD", "________________", "________________", ""],
-      ["Phê duyệt QA/PO", "________________", "________________", ""],
-    ],
+    signoffRows(),
     FIXED_TABLE_WIDTHS.signoff,
   ));
 

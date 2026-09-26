@@ -14,8 +14,8 @@
     "derivedStrengths": [
       "5 mg"
     ],
-    "draftDate": "2026-08-20",
-    "preparer": "Claude (phiên làm việc 2026-08-20, tổng hợp từ Thử nghiệm 1)",
+    "draftDate": "2026-09-26",
+    "assembledBy": "Claude Code (xml-walk, tổng hợp từ Thử nghiệm 1 và Thử nghiệm 2)",
     "extractionMethod": "xml-walk",
     "referenceSources": [
       "Rowe RC, Sheskey PJ, Quinn ME (chủ biên). Handbook of Pharmaceutical Excipients, 6th Edition. London: Pharmaceutical Press; 2009",

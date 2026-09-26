@@ -1,0 +1,98 @@
+# Executable acceptance gates for qbd-p2-authorship.
+# This file owns gate bodies. Step files describe implementation; they must not restate a full gate.
+
+version: 2
+workstream: qbd-p2-authorship
+evidence_root: docs/reports/qbd-p2-authorship
+
+environment_findings:
+  statements_about_the_document_itself: >
+    Every other rule in this tool is about measurements, so a false statement about the document's own
+    authorship had nothing watching it: the field was called preparer, so it was printed into a table row
+    carrying a "Chữ ký" column, and the suite passed. When adding a field that names a person, a role or
+    a date, ask which of two things it is — provenance, which the document may state about itself, or
+    responsibility, which only a signature establishes. The two must not print in the same place.
+  positional_rules_beat_pattern_matching: >
+    A check that looked for AI-sounding strings would have accepted an invented person's name, which is
+    the same false statement better camouflaged. Where the wrongness is about WHERE something is
+    printed, the rule has to be about position — and the strongest form is to withhold the data: a
+    renderer that is never given meta cannot leak meta.
+
+gates:
+  - id: G-32
+    title: No role in the sign-off table arrives pre-filled
+    invariant: >
+      All three rows of the sign-off table — drafter, FD reviewer, QA/PO approver — carry a blank for the
+      name and a blank for the date, and nothing in the signature cell. The renderer of that table is not
+      given the draft's meta at all, so no field of the file can reach a row that has a signature column.
+      Stage B requires meta.assembledBy, and the old field name no longer satisfies the contract.
+    boundary_owner: render/builder.mjs — signoffRows + draft/validate-draft.mjs
+    fixture: the worked example, plus the same meta with assembledBy set to an invented person's name
+    command: >
+      node --test tools/pharma-dev-draft/draft/tests/authorship.test.mjs
+      && node tools/pharma-dev-draft/draft/validate-draft.mjs tools/pharma-dev-draft/draft/example-draft.json
+    expected: >
+      exit 0. signoffRows() takes no arguments and no meta value of the worked example appears in its
+      output; an invented person's name is kept off the signature lines exactly as a tool name is, and is
+      still stated as provenance rather than hidden. A draft missing assembledBy fails with E_META_FIELD
+      naming the field, and so does one that spells it preparer.
+    negative_cases:
+      - A rule that inspects the string for AI-sounding text -> passes an invented person's name.
+      - meta passed into the sign-off renderer for convenience -> the old failure reachable again.
+      - Both field names accepted during a transition -> one field with two spellings.
+    evidence: g32-g34-authorship.txt
+    blocks: [G-33]
+    status: pass
+
+  - id: G-33
+    title: The tool that assembled the draft is named once, as provenance, before the signatures
+    invariant: >
+      In the rendered document, meta.assembledBy appears exactly once, and its position is before the
+      sign-off heading. The scope notice states what assembled the draft, by what extraction method, and
+      the date of the last revision; the date is stated there and not repeated inside assembledBy, so the
+      two cannot drift apart.
+    boundary_owner: verify/verify.mjs — runSanityChecks
+    fixture: >
+      the rendered worked example, and a deliberately tampered build of render/builder.mjs that
+      reintroduces the exact removed line — the provenance paragraph dropped and the drafter row rebuilt
+      as `Soạn thảo (${draft.meta.assembledBy})` with the draft date beside it
+    command: >
+      node tools/pharma-dev-draft/render/render.mjs tools/pharma-dev-draft/draft/example-draft.json
+      && node tools/pharma-dev-draft/verify/verify.mjs
+         tools/pharma-dev-draft/output/p2-draft-bisoprolol-fumarate-2026-09-26.docx
+         --draft tools/pharma-dev-draft/draft/example-draft.json
+    expected: >
+      exit 0 with "Text sanity checks: PASS" for the real document. The tampered build still passes XSD
+      validation — nothing structural would ever have caught this — and then fails the text checks with
+      "meta.assembledBy is printed after the sign-off heading", exit 1. Recorded in the evidence, because
+      a rule that would pass either way proves nothing.
+    negative_cases:
+      - Printed twice, e.g. in the notice and on the cover -> count check fires.
+      - Printed only on the signature line -> position check fires.
+      - The provenance sentence repeating the sign-off heading verbatim -> the position boundary would be read wrong; asserted against.
+    evidence: g32-g34-authorship.txt
+    blocks: []
+    status: pass
+
+  - id: G-34
+    title: The conformance record no longer contradicts the draft about the manufacturing process
+    invariant: >
+      Round 12 closes N-1 with Trial 2's process summary, narrows D-0 to the operation set used by the
+      risk matrix, extends C-1 to two established critical formulation attributes with both limits of the
+      lubricant conclusion stated, records 2.3's description requirement as met, closes W-6/D-14, and
+      corrects the "most important open item" to the copied Trial 2 results table. The file is a
+      cumulative log: past conclusions stay as written and are corrected by name, never deleted.
+    boundary_owner: docs/reports/qbd-p2-ich-q8r2-audit/ich-q8r2-format-audit.md
+    fixture: the current draft, read directly rather than through an intermediate report
+    command: grep -n "xát hạt" docs/reports/qbd-p2-ich-q8r2-audit/ich-q8r2-format-audit.md
+    expected: >
+      Every remaining mention of wet granulation is one of: the excipient monograph quote whose own
+      conclusion is direct compression, the method-neutrality discussion, the log of a marker already
+      fixed, or the N-1 finding itself — which round 12 closes by name. No line asserts that this
+      product's process is anything other than direct compression.
+    negative_cases:
+      - Rewriting the stale finding in place -> deletes the record of who concluded what, when.
+      - Closing N-1 without stating the two limits of the lubricant conclusion -> a bracketing argument read as an optimum.
+    evidence: g32-g34-authorship.txt
+    blocks: []
+    status: pass

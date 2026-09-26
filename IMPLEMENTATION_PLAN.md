@@ -5,6 +5,13 @@ authoritative router; wait for a scope to be accepted before picking work up.
 
 ## Latest completed
 
+- [Authorship plan](docs/plans/qbd-p2-authorship/plan.md) — `completed` and read-only. G-32..G-34 hold
+  evidence in `docs/reports/qbd-p2-authorship/`. The sign-off table had named the tool that assembled the
+  draft as its drafter, with a date beside it; provenance now prints once in the scope notice and all
+  three signature rows are blank, enforced by print position rather than by inspecting the string. The
+  ICH Q8(R2) record's round 12 closes the process finding Trial 2 settled and corrects its conclusion:
+  the urgent item is Trial 2's copied results table, not a process question.
+
 - [Table reference plan](docs/plans/qbd-p2-table-reference/plan.md) — `completed` and read-only.
   G-29..G-31 hold evidence in `docs/reports/qbd-p2-table-reference/`. A figure now names its table by id
   instead of counting to it, which removes a failure that had struck three times in two rounds and that
@@ -32,9 +39,9 @@ authoritative router; wait for a scope to be accepted before picking work up.
 - [Decision register plan](docs/plans/qbd-p2-decision-register/plan.md) — `completed` and read-only.
   G-13..G-18 hold evidence in `docs/reports/qbd-p2-decision-register/`. The draft now carries a second
   marker kind for a conflict or an unapproved assumption, and the rendered document has a second annex
-  listing 16 decisions with their owners beside the 149 data requests. The ICH Q8(R2) conformance record
-  is current again; its most consequential finding is open and unresolved — the dossier states the
-  process is direct compression while the trial's own in-process data describes granules.
+  listing 16 decisions with their owners beside the 149 data requests. Its most consequential finding —
+  the dossier stating direct compression while the trial's own in-process data described granules — was
+  settled by the Trial 2 round below and closed in the record's round 12.
 - [P.2 figures plan](docs/plans/qbd-p2-figures/plan.md) — `completed` and read-only. G-08..G-12 all
   hold evidence in `docs/reports/qbd-p2-figures/`. The drug-substance properties are sourced from
   PubChem with identifiers and retrieval URLs; W-5 stays open, because those are secondary aggregators

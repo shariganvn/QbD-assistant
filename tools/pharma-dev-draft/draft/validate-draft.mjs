@@ -40,7 +40,10 @@ const ALLOWED_BLOCK_KEYS = {
   figure: new Set(["type", "kind", "fromTable", "fromAxis", "fromRow", "threshold", "thresholdLabel", "axisLabel", "caption"]),
   image: new Set(["type", "path", "caption", "widthPt"]),
 };
-const REQUIRED_META_FIELDS = ["productName", "apiName", "draftDate", "preparer", "extractionMethod"];
+// assembledBy, không phải preparer. Tên cũ đọc như "người soạn thảo", và vì thế nó đã tự trôi lên một
+// dòng của bảng ghi nhận ký duyệt — dòng có cột "Chữ ký". Trường này nói bản nháp được dựng bằng gì;
+// ai chịu trách nhiệm là việc của người ký, và văn bản không được tự khai thay họ.
+const REQUIRED_META_FIELDS = ["productName", "apiName", "draftDate", "assembledBy", "extractionMethod"];
 
 function loadOutline() {
   const raw = readFileSync(join(toolRoot, "schemas", "p2-outline.json"), "utf8");

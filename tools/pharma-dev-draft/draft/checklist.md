@@ -41,9 +41,12 @@ deliberately.
    result, so every measured value for such a strength stays marked. The validator enforces this; the
    reason it does is that nobody reading the finished Word file can tell a calculated number from a
    measured one.
-8. **Fill `meta` completely**, including `extractionMethod` copied from `extracted.json` and a
-   `preparer` field that's honest about who/what did the interpretation (e.g. "Claude, phiên làm
-   việc <ngày>" or a person's name) — this draft is not attributable to "the system."
+8. **Fill `meta` completely**, including `extractionMethod` copied from `extracted.json` and an
+   `assembledBy` field naming the tool that assembled the draft — this draft is not attributable to
+   "the system." `assembledBy` is **provenance, not authorship**: it prints in the scope notice, and
+   no name goes into the sign-off table, whose three rows stay blank for people to sign. Keep
+   `draftDate` at the date of the last revision; do not repeat that date inside `assembledBy`, or the
+   two drift apart at the next edit.
 9. **Add a figure only where the section already holds the data.** A figure block names a table and a
    row rather than carrying numbers, so the chart and the table cannot disagree, and a row still full
    of markers refuses to be plotted. Do not "fill in" a chart for a section whose table is empty —

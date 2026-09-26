@@ -61,7 +61,7 @@ export function strengthDraft(strengths, { groupLabels, group2Labels, derivedStr
       ...(derivedStrengths.length ? { derivedStrengths } : {}),
       sourceFiles: ["fixture.docx"],
       draftDate: "2026-09-24",
-      preparer: "bộ kiểm quy tắc",
+      assembledBy: "bộ kiểm quy tắc",
       extractionMethod: "xml-walk",
     },
     sections: [

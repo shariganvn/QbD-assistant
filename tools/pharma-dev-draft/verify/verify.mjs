@@ -15,6 +15,10 @@ import { join } from "node:path";
 
 import JSZip from "jszip";
 
+// The heading comes from the renderer rather than being spelled again here: two copies of the same
+// string in the two files that have to agree about it is the drift this whole document guards against.
+import { SIGNOFF_HEADING } from "../render/builder.mjs";
+
 class VerifyError extends Error {
   constructor(code, message, options) {
     super(message, options);
@@ -123,8 +127,21 @@ async function runSanityChecks(docxPath, draft) {
   const noticeCount = countOccurrences(text, "Lưu ý phạm vi tài liệu");
   if (noticeCount !== 1) failures.push(`scope-notice title should appear exactly once, found ${noticeCount}`);
 
-  const signoffCount = countOccurrences(text, "Ghi nhận soạn thảo và rà soát");
+  const signoffCount = countOccurrences(text, SIGNOFF_HEADING);
   if (signoffCount !== 1) failures.push(`sign-off section heading should appear exactly once, found ${signoffCount}`);
+
+  // Provenance is not a signature. The tool that assembled the draft is named once, in the scope
+  // notice; the sign-off table below it carries a "Chữ ký" column and belongs to people. The check is
+  // by print position, not by inspecting the string: a field holding a person's name must be kept off
+  // the signature lines for exactly the same reason one holding a tool's name must.
+  if (draft?.meta?.assembledBy) {
+    const assembledCount = countOccurrences(text, draft.meta.assembledBy);
+    if (assembledCount !== 1) {
+      failures.push(`meta.assembledBy should be printed exactly once, as provenance, found ${assembledCount}`);
+    } else if (signoffCount === 1 && text.indexOf(draft.meta.assembledBy) > text.indexOf(SIGNOFF_HEADING)) {
+      failures.push("meta.assembledBy is printed after the sign-off heading; provenance belongs in the scope notice, not on a signature line");
+    }
+  }
 
   if (draft) {
     const gapSections = draft.sections.filter((section) => section.status === "gap");

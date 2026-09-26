@@ -711,3 +711,33 @@ Về format, Q8(R2) chỉ có đúng một câu chạm tới trình bày (tr. 6:
 encouraged where they add clarity and facilitate review."*) — câu này **ủng hộ** hai hình sinh từ bảng,
 vì cả hai dựng từ chính số liệu trong mục. Mọi nhận xét còn lại về bảng biểu, cấp heading và đánh số
 đều quy về ICH M4Q hoặc biểu mẫu của phòng, không quy về Q8(R2).
+
+## Đợt 12 — Thử nghiệm 2 đóng N-1, và đính chính kết luận của Đợt 11
+
+Ngày: 2026-09-26. Đọc trực tiếp trên `tools/pharma-dev-draft/draft/example-draft.json` và trên bản docx
+đã render, không nhận qua báo cáo trung gian.
+
+Đợt 11 viết trước khi Thử nghiệm 2 được đưa vào hồ sơ. Hai kết luận của nó nay sai, và sai theo hướng
+gây thiệt: chúng chỉ người đọc đi hỏi một câu đã có câu trả lời, đồng thời gọi sai tên việc gấp nhất.
+
+### Đính chính
+
+| Cũ (Đợt 11) | Đúng | Bằng chứng |
+|---|---|---|
+| **N-1 (CRITICAL)** — tiền đề trộn dập thẳng mâu thuẫn với bằng chứng của chính Thử nghiệm 1 | **đóng** | Tóm tắt quy trình của Thử nghiệm 2: rây → trộn đồng nhất 1 → trộn đồng nhất 2 (thêm croscarmellose) → trộn hoàn tất (thêm magnesium stearate) → dập viên. Không có công đoạn tạo hạt, không làm ẩm, không sấy. Chữ "cốm" trong biểu mẫu của phòng chỉ khối bột đã trộn hoàn tất; Povidone K30 vào ở dạng bột khô, không phải dung dịch dính. Đã ghi thành văn ở `P.2.3.1` kèm lý do vì sao nghi vấn cũ có cơ sở |
+| **D-0** — "quy trình thật là gì" | **thay bằng một quyết định hẹp hơn**, vẫn mở | Không còn là chọn phương pháp mà là chốt **bộ công đoạn cho ma trận rủi ro**: ma trận gộp hai lần trộn đồng nhất thành một cột "Trộn sơ bộ"; ma trận có cột "Bao phim" và "Đóng gói" mà quy trình bốn bước không nêu; quy trình có công đoạn rây từng nhóm thành phần mà ma trận không có cột để chấm. Một công đoạn không có cột là một công đoạn không ai chấm rủi ro |
+| **C-1** — tr. 6 đòi bốn nhóm đối tượng, hồ sơ đóng được một phần của nhóm tá dược | **mở rộng phần đã đóng: hai yếu tố, không phải một** | Tỷ lệ magnesium stearate nay là thuộc tính công thức trọng yếu thứ hai, xác định đúng theo cơ chế tr. 6: biến độc lập duy nhất giữa hai công thức (1% và 5% kl/kl, lactose bù trừ, croscarmellose cố định 5%). Ở 1% dập viên dính chày; ở 5% độ cứng giảm và độ mài mòn tăng. Kiểm soát: giữ 3% kl/kl, đưa độ cứng và độ mài mòn vào bộ chỉ tiêu theo dõi |
+| — | **giới hạn của kết luận C-1 mới, ghi kèm chứ không để người đọc tự phát hiện** | Mức 3% **không được thử** trong Thử nghiệm 2: điều đã chứng minh là 3% tốt hơn cả 1% và 5%, không phải 3% tối ưu trong khoảng giữa. Và vế "độ cứng giảm / độ mài mòn tăng" dựa trên bảng kết quả viên của Thử nghiệm 2, bảng bị giữ ngoài hồ sơ vì sao chép. Vế dính chày ở 1% không phụ thuộc bảng đó, nên đó là phần bằng chứng vững nhất |
+| **2.3 tr. 8** (*"The selection, the control, and any improvement of the manufacturing process … should be explained"*) | **đạt phần mô tả và biện luận chọn quy trình** | `P.2.3.1` nay có quy trình được dẫn nguồn, sơ đồ bốn công đoạn sinh từ chính bảng quy trình, và phạm vi áp dụng nói rõ hai bảng phải dựng lại nếu FD đổi phương pháp. Còn mở: 35 ô mức rủi ro và 10 ô thông số quy trình |
+| **W-6 / D-14** — `meta.preparer` ghi AI là người soạn thảo | **đóng** | Trường đổi tên thành `meta.assembledBy` và chỉ in ở phần "Lưu ý phạm vi tài liệu" như xuất xứ. Bảng ký duyệt nay để trống cả ba dòng cho người ký. Luật ở `verify.mjs` chặn **theo vị trí in**, không theo việc đoán chuỗi: một tên người bịa ra cũng bị giữ khỏi dòng chữ ký y như tên một công cụ. Kiểm nghịch: dựng lại đúng lỗi cũ rồi render, `verify` đổ với exit 1 |
+| Kết luận *"điều quan trọng nhất là N-1/D-0"* | **đính chính — việc gấp nhất là bảng kết quả Thử nghiệm 2 bị sao chép** | Riêng bảng chỉ tiêu viên thành phẩm: **25 trong 45** ô số trùng nguyên văn Thử nghiệm 1, theo khối — độ cứng, độ dày, độ mài mòn, độ rã, định lượng, độ hòa tan, tạp chất của cột "Mg stearat 1%" khớp CT02 và của cột "Mg stearat 5%" khớp CT03, trong khi khối đồng đều khối lượng khớp CT01 và CT02. Cộng cả bảng cốm: **28 trong 69** ô. Bảng đã bị giữ ngoài hồ sơ và chỉ được nêu tên; không phép đo nào đóng được việc này, phải có người xác nhận số liệu thuộc lô nào |
+
+### Điều không đổi
+
+Hồ sơ **vẫn chưa đạt sàn Q8(R2) Part I**, và lý do vẫn thuần là thiếu dữ liệu: 149 dấu thiếu dữ liệu,
+19 điểm cần quyết định. Không dấu nào trong số đó đóng được bằng công cụ. Phân bố lớn nhất: 38 ô thuốc
+đối chiếu (`P.2.2.1.1`), 35 ô ma trận rủi ro quy trình, 26 ô công thức cuối, 10 ô thông số quy trình,
+9 ô bao bì sơ cấp.
+
+N-3 (bộ CQA 10 mg đang áp cho cả hai hàm lượng), N-4 đã thành dấu quyết định, N-5 đã sửa, N-6 đã đánh
+dấu, N-7 và N-9 vẫn là INFO — không đợt nào chạm tới chúng nên trạng thái giữ nguyên.

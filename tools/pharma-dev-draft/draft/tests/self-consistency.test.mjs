@@ -38,7 +38,7 @@ function draftWith(text, meta = {}) {
       sourceFiles: ["fixture.docx"],
       strengths: ["10 mg"],
       draftDate: "2026-09-26",
-      preparer: "bộ kiểm quy tắc",
+      assembledBy: "bộ kiểm quy tắc",
       extractionMethod: "xml-walk",
       ...meta,
     },
