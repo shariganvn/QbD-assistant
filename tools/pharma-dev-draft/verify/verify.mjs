@@ -18,6 +18,7 @@ import JSZip from "jszip";
 // The heading comes from the renderer rather than being spelled again here: two copies of the same
 // string in the two files that have to agree about it is the drift this whole document guards against.
 import { SIGNOFF_HEADING } from "../render/builder.mjs";
+import { draftFailures as referenceBoundaryFailures, identityFailures, loadReferenceTokens } from "./sample-boundary.mjs";
 
 class VerifyError extends Error {
   constructor(code, message, options) {
@@ -150,6 +151,13 @@ async function runSanityChecks(docxPath, draft) {
       if (count < 1) failures.push(`gap reason for section "${section.id}" not found in rendered text`);
     }
   }
+
+  // A document used as a format reference must not have become a source of data. Checked on the
+  // rendered text as well as on the draft, because the rendered file is what leaves this repo, and a
+  // value could in principle reach it through the renderer rather than through the draft.
+  const referenceTokens = loadReferenceTokens();
+  failures.push(...identityFailures(text, referenceTokens, "rendered text"));
+  if (draft) failures.push(...referenceBoundaryFailures(draft, referenceTokens));
 
   return failures;
 }

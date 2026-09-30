@@ -39,7 +39,7 @@ function expectFailure(draft, code) {
 
 test("a chart reads its values from the table row it names", () => {
   const draft = loadExample();
-  const section = sectionOf(draft, "P.2.2.1.3.3");
+  const section = sectionOf(draft, "P.2.2.1.3.3.1");
   const figure = figureOf(section);
   const series = barSeries(section, figure);
   const table = tableFor(section, figure);
@@ -50,7 +50,7 @@ test("a chart reads its values from the table row it names", () => {
 
 test("changing a value in the table changes the chart, because there is only one copy of it", () => {
   const draft = loadExample();
-  const section = sectionOf(draft, "P.2.2.1.3.3");
+  const section = sectionOf(draft, "P.2.2.1.3.3.1");
   const figure = figureOf(section);
   const table = tableFor(section, figure);
   table.rows.find((row) => row[0] === figure.fromRow)[1] = "42,00";
@@ -80,7 +80,7 @@ test("a chart over a row of gap markers is rejected, not drawn as zeroes", () =>
   // The failure this prevents: an empty chart in a document shaped like a dossier reads as a measured
   // result of nothing, which is a stronger claim than the blank it replaced.
   const draft = loadExample();
-  const section = sectionOf(draft, "P.2.2.1.3.3");
+  const section = sectionOf(draft, "P.2.2.1.3.3.1");
   const figure = figureOf(section);
   const table = tableFor(section, figure);
   const row = table.rows.find((candidate) => candidate[0] === figure.fromRow);
@@ -90,7 +90,7 @@ test("a chart over a row of gap markers is rejected, not drawn as zeroes", () =>
 
 test("a chart naming a row the table does not have is rejected", () => {
   const draft = loadExample();
-  figureOf(sectionOf(draft, "P.2.2.1.3.3")).fromRow = "Chỉ tiêu không tồn tại";
+  figureOf(sectionOf(draft, "P.2.2.1.3.3.1")).fromRow = "Chỉ tiêu không tồn tại";
   expectFailure(draft, "E_FIGURE_SOURCE");
 });
 
@@ -102,7 +102,7 @@ test("a figure naming a table the section does not have is rejected", () => {
 
 test("a chart over values that are not numbers is rejected", () => {
   const draft = loadExample();
-  const section = sectionOf(draft, "P.2.2.1.3.3");
+  const section = sectionOf(draft, "P.2.2.1.3.3.1");
   const figure = figureOf(section);
   const table = tableFor(section, figure);
   table.rows.find((row) => row[0] === figure.fromRow)[1] = "Đạt";

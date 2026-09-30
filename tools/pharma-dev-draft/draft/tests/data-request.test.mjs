@@ -55,16 +55,31 @@ test("filling one real value removes exactly one row", () => {
   assert.equal(accountedFor(after), accountedFor(before) - 1);
 });
 
+// The section holding the risk matrix also holds the table that justifies it — a pair belongs together.
+// So these two tests scope their assertions to the matrix's own requests rather than to everything the
+// section asks for: a matrix cell's request is labelled "<CQA> × <unit operation>", and the CQAs are the
+// matrix's row labels.
+function matrixOf(draft) {
+  return draft.sections.find((section) => section.id === "P.2.3.1").blocks.filter((block) => block.type === "table")[0];
+}
+
+function requestsForMatrix(draft, outline, matrix) {
+  const rowLabels = matrix.rows.map((row) => row[0]);
+  return dataRequestRows(draft, outline)
+    .filter((row) => row[0].startsWith("3.2.P.2.3.1 "))
+    .filter((row) => /Toàn bộ bảng/.test(row[1]) || rowLabels.some((label) => row[1].startsWith(`${label} ×`)));
+}
+
 test("a table with no cell filled in asks once, not once per cell", () => {
   // An empty risk matrix asks for a single thing: the assessment that fills it. Thirty-five rows saying
   // "a risk level is missing" would bury the requests that name something specific.
   const outline = loadOutline();
   const draft = loadExample();
-  const matrix = draft.sections.find((section) => section.id === "P.2.3.1").blocks.find((block) => block.type === "table");
+  const matrix = matrixOf(draft);
   const cellCount = matrix.rows.length * (matrix.headers.length - 1);
   assert.ok(cellCount > 5, "this test needs a matrix, not a two-cell table");
 
-  const rows = dataRequestRows(draft, outline).filter((row) => row[0].startsWith("3.2.P.2.3.1 "));
+  const rows = requestsForMatrix(draft, outline, matrix);
   assert.equal(rows.length, 1);
   assert.equal(rows[0][4], cellCount);
   assert.match(rows[0][1], /Toàn bộ bảng/);
@@ -73,12 +88,13 @@ test("a table with no cell filled in asks once, not once per cell", () => {
 test("one filled cell breaks the collapse, so the rest are asked for individually", () => {
   const outline = loadOutline();
   const draft = loadExample();
-  const matrix = draft.sections.find((section) => section.id === "P.2.3.1").blocks.find((block) => block.type === "table");
+  const matrix = matrixOf(draft);
   matrix.rows[0][1] = "Thấp";
 
-  const rows = dataRequestRows(draft, outline).filter((row) => row[0].startsWith("3.2.P.2.3.1 "));
+  const rows = requestsForMatrix(draft, outline, matrix);
   const cellCount = matrix.rows.length * (matrix.headers.length - 1);
   assert.equal(rows.length, cellCount - 1);
+  assert.ok(!rows.some((row) => /Toàn bộ bảng/.test(row[1])), "one filled cell means the table no longer collapses");
   // And each of them now names its column, or a reader cannot tell which cell is being asked about.
   assert.ok(rows.every((row) => row[1].includes(" × ")), "a matrix cell must name its unit operation");
 });

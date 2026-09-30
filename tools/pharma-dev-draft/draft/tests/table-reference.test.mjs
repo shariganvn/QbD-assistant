@@ -107,7 +107,7 @@ test("an unnamed table cannot be reached by accident", () => {
 
 test("two tables in one section may not answer to the same name", () => {
   const draft = loadExample();
-  const entry = draft.sections.find((candidate) => candidate.id === "P.2.2.1.3.3");
+  const entry = draft.sections.find((candidate) => candidate.id === "P.2.2.1.3.3.1");
   const tables = entry.blocks.filter((block) => block.type === "table");
   tables[1].id = tables.find((candidate) => candidate.id)?.id;
   expectCode("E_TABLE_ID_DUPLICATE", () => validateDraft(draft));

@@ -54,6 +54,20 @@ deliberately.
 10. **Run `node draft/validate-draft.mjs draft.json`** before rendering. Fix every reported error;
    the validator will not catch a wrong section mapping, only a malformed shape.
 
+11. **Never take a value from the document used as a format reference.** A finished P.2 for this same
+   product exists, written by another company from another formula — seven excipients differ out of seven
+   but one, and its core weight is not ours. It settles what sections a complete P.2 has and what shape
+   its tables take. It settles nothing about this product. `verify/sample-boundary.mjs` refuses its batch
+   numbers and supplier on sight, and refuses several of its measured values landing in one section, but
+   **it cannot catch a value retyped with a digit changed** — that part is yours, and the check existing
+   does not move the responsibility.
+
+   The line to hold while writing a gap reason: the **shape of a measurement** may be stated, because a
+   method comes from a pharmacopoeia or an ICH guideline and you can cite the copies in `docs/raw/`. An
+   **acceptance limit** may not — a humidity ceiling, a hardness range, an impurity threshold is a
+   decision this company owes, so it becomes `[CẦN QUYẾT ĐỊNH – CHƯA CHỐT]` addressed to whoever owns it.
+   Writing "so sánh với tài liệu tham chiếu" and copying its number is the failure this rule exists for.
+
 ## What you are NOT trying to do
 
 You are not trying to produce a submission-ready dossier section. You are producing an internal,

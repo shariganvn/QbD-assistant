@@ -174,7 +174,7 @@ test("the form fixes the shape, not the method: process steps may change with th
   const matrix = formTable(draft, "P.2.3.1");
   matrix.headers = ["CQA sản phẩm", "Xát hạt ướt", "Sấy", "Dập viên"];
   matrix.rows = matrix.rows.map((row) => [row[0], GAP_PREFIX, GAP_PREFIX, GAP_PREFIX]);
-  formTable(draft, "P.2.3.2.1").rows = [
+  formTable(draft, "P.2.3.1", 1).rows = [
     ["Xát hạt ướt", GAP_PREFIX, GAP_PREFIX],
     ["Sấy", GAP_PREFIX, GAP_PREFIX],
     ["Dập viên", GAP_PREFIX, GAP_PREFIX],
@@ -200,7 +200,7 @@ test("a draft for an entirely different product validates on the same form", () 
     table.headers = [fixed, ...draft.meta.strengths.map((strength) => `Glucophage® ${strength}`)];
     table.rows = table.rows.map((row) => [row[0], row[1], row[1]]);
   }
-  for (const [sectionId, fixedCount] of [["P.2.2.1.3.5", 3], ["P.2.2.3.1.4", 1]]) {
+  for (const [sectionId, fixedCount] of [["P.2.2.1.4", 3], ["P.2.2.3.2", 1]]) {
     const table = formTable(draft, sectionId);
     table.headers = [...table.headers.slice(0, fixedCount), ...draft.meta.strengths];
     table.rows = table.rows.map((row) => [...row.slice(0, fixedCount), ...draft.meta.strengths.map(() => GAP_PREFIX)]);
@@ -213,7 +213,7 @@ test("a draft for an entirely different product validates on the same form", () 
   const matrix = formTable(draft, "P.2.3.1");
   matrix.headers = ["CQA sản phẩm", "Xát hạt ướt", "Dập viên"];
   matrix.rows = attributes.rows.map((row) => [row[0], "Thấp", "Cao"]);
-  formTable(draft, "P.2.3.2.1").rows = [
+  formTable(draft, "P.2.3.1", 1).rows = [
     ["Xát hạt ướt", "Lượng dung môi", "Kinh nghiệm sản xuất"],
     ["Dập viên", "Lực dập", "Kinh nghiệm sản xuất"],
   ];

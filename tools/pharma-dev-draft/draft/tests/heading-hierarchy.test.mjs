@@ -28,7 +28,7 @@ test("heading level follows the depth of the CTD number", () => {
   assert.equal(headingLevelFor("3.2.P.2.1"), 2);
   assert.equal(headingLevelFor("3.2.P.2.1.1"), 3);
   assert.equal(headingLevelFor("3.2.P.2.2.1.3"), 4);
-  assert.equal(headingLevelFor("3.2.P.2.2.1.3.5"), 5);
+  assert.equal(headingLevelFor("3.2.P.2.2.1.3.3.1"), 6);
 });
 
 test("a numbering deeper than Word's heading styles is clamped, not dropped", () => {

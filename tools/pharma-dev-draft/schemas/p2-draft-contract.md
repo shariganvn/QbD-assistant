@@ -100,7 +100,7 @@ draft. Filling one real value, or settling one decision, removes exactly its own
 { "type": "paragraph", "text": "string", "italic": false, "bold": false }   // italic/bold optional, default false
 { "type": "figure",
   "kind": "flow" | "bars",
-  "fromTable": 0,                      // index of the table in THIS section the figure draws from
+  "fromTable": "ma-tran-rui-ro",       // id of a table in THIS section — a name, never an index
   "fromAxis": "columns" | "rows",      // flow only: which axis holds the steps; default "columns"
   "fromRow": "string",                 // bars only: the row label whose values are plotted
   "threshold": "80", "thresholdLabel": "Ngưỡng Q = 80%", "axisLabel": "…",   // bars only, optional
@@ -184,6 +184,32 @@ header when present:
   left-aligned with the rest centred; centring is unreadable for long prose, so set it explicitly on
   any table with paragraph-length cells (`"justify"` matches how the department's reference tables
   set prose columns).
+
+## The format reference is not a data source
+
+A finished P.2 for this same product, written by a different company from a different formula, is used as
+the authority on **structure and completeness**. It is authority on nothing else. Its formula shares one
+excipient with ours out of seven, and every measurement in it was made on a tablet nobody here produced,
+so a value taken from it is a fabricated result no matter how plausible it looks.
+
+`verify/sample-boundary.mjs` enforces this on the draft and on the rendered document, from hashes in
+`verify/format-reference-tokens.json` — hashes, so the blocklist is not itself a copy. Two rules:
+
+- An **identifier** from the reference — a batch number, a supplier, a DMF id — fails on one occurrence.
+  It names something another company made.
+- **Measured values** are grouped by the reference table they came from. One value in common is a
+  coincidence and passes; `minimumGroupMatch` or more from one group inside one section is a copied block.
+  This is the reasoning that found the first copied results table in this project.
+
+A value retyped with the other decimal separator hashes the same, so swapping a comma for a dot is not a
+way past it. Retyping a value and changing a digit is: the check cannot see that, and `draft/checklist.md`
+says so rather than implying a guarantee the code does not give.
+
+What *may* be taken from the reference is the shape of a measurement — thirty tablets across three
+batches, binary mixtures at 1:1, three dissolution media — because a method comes from a pharmacopoeia or
+an ICH guideline and can be cited from the references this repo holds. What may **not** be taken is an
+acceptance limit: a humidity ceiling, a hardness range, an impurity threshold. Those are decisions this
+company has to make, so they become `[CẦN QUYẾT ĐỊNH – CHƯA CHỐT]`, never a borrowed number.
 
 ## What Stage C always adds regardless of the draft (not part of this contract)
 
