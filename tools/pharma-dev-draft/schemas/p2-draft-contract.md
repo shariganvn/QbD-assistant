@@ -236,6 +236,15 @@ each outline section may carry a `form` key that the validator enforces against 
   - `rowsFrom` — the id of another section whose first table supplies the row labels. The risk
     matrix uses this so it always scores exactly the attributes the product declared, rather than a
     list frozen into the schema.
+  - `columnsFrom` — the id of another section whose first table supplies the columns. `columns`
+    then declares only the fixed prefix and ends in `"..."`, which stands for **exactly** the source's
+    columns after that prefix, in the same order. The updated risk matrix uses it to repeat the
+    initial matrix's columns.
+  - `columnsFromRows` — `{ "section": "<id>", "column": <n> }`: the columns are the cell `n` of each
+    row of that section's first table. Used where the source lists the things down a column and this
+    table lays them across — the process risk matrix takes its columns from the operation list in
+    `P.2.3.2`, so it cannot score an operation the list does not have or omit one it does.
+    Declaring both `columnsFrom` and `columnsFromRows` on one table is refused.
   - `headerless` — whether the printed header strip is suppressed, for label/value forms.
   - `perStrength` — the table reports per strength. `columns` then declares only the **fixed prefix**;
     after it the table must carry exactly one equal column group per entry in `meta.strengths`. The
@@ -266,3 +275,32 @@ reports as `E_META_STRENGTHS`.
 form rule against a purpose-built form rather than only against whichever shape the department's
 current outline happens to have. The CLI and the renderer pass nothing and get the real outline, so
 normal use has one source of truth.
+
+### Risk assessments: `riskAssessment` and `riskScale`
+
+A section whose `form` declares `riskAssessment: { "kind": "initial" | "updated", "pairs": "<id>" }`
+holds a **risk matrix** as its first table (rows are quality attributes, columns are the factors that
+could threaten them) and a **justification table** as its second. `riskScale` at the top of the outline
+is the ordered list of levels a matrix cell may hold, lowest first; it is the department's form, taken
+from the format reference, and **not confirmed by FD or regulatory affairs**.
+
+- Every matrix cell is a level of `riskScale` or a marker. Anything else — "khá thấp", a number —
+  cannot be compared with the initial assessment and is refused (`E_RISK_CELL_INVALID`).
+- An `updated` section names the `initial` one it revises in `pairs`. Its rows and columns repeat the
+  initial matrix's through `rowsFrom` and `columnsFrom` (`E_FORM_ROWS` / `E_FORM_COLUMNS`). A `pairs`
+  that does not name an initial assessment is an outline error (`E_OUTLINE_RISK_PAIR`).
+- A cell scored **lower** than the same cell in the initial matrix is a claim that something was
+  learned, so the updated section's justification table needs a row for it: first cell
+  `"<row label> × <column label>"`, last cell either a cross-reference to the section of the study that
+  lowered it or a marker saying that study is not attached yet (`E_RISK_LOWERED_NO_EVIDENCE`). The
+  reference must be to a section that exists, which the ordinary cross-reference check already
+  enforces.
+- A justification row for a cell that was **not** lowered is refused as stale
+  (`E_RISK_JUSTIFICATION_ORPHAN`). A row whose first cell is itself a marker is a placeholder and is
+  exempt.
+- A cell holding a marker, in either matrix, has no level, so nothing is compared.
+
+What this does **not** check: whether the cited study supports the lower score. That is a judgement for
+the reviewer; the rule only guarantees there is something to go and read. Only lowering is enforced —
+raising a cell needs no row, although a reviewer will want to know why.
+

@@ -171,6 +171,13 @@ test("the form fixes the shape, not the method: process steps may change with th
   // Direct compression is this product's method. Wet granulation, fluid-bed granulation, roller
   // compaction, slugging and hot-melt extrusion each bring a different set of unit operations, and
   // the risk matrix has to accept whichever set applies.
+  // The method is declared once, in the operation list. The matrix, its justification rows and the
+  // updated matrix all take their operations from it, so changing the method means changing that table.
+  formTable(draft, "P.2.3.2").rows = [
+    ["Xát hạt ướt", GAP_PREFIX],
+    ["Sấy", GAP_PREFIX],
+    ["Dập viên", GAP_PREFIX],
+  ];
   const matrix = formTable(draft, "P.2.3.1");
   matrix.headers = ["CQA sản phẩm", "Xát hạt ướt", "Sấy", "Dập viên"];
   matrix.rows = matrix.rows.map((row) => [row[0], GAP_PREFIX, GAP_PREFIX, GAP_PREFIX]);
@@ -179,6 +186,9 @@ test("the form fixes the shape, not the method: process steps may change with th
     ["Sấy", GAP_PREFIX, GAP_PREFIX],
     ["Dập viên", GAP_PREFIX, GAP_PREFIX],
   ];
+  const updated = formTable(draft, "P.2.3.4");
+  updated.headers = [...matrix.headers];
+  updated.rows = matrix.rows.map((row) => [...row]);
   assert.doesNotThrow(() => validateDraft(draft));
 });
 
@@ -210,6 +220,10 @@ test("a draft for an entirely different product validates on the same form", () 
   excipients.rows = [["1.", "Hypromellose", "—", "—", "Tá dược dính"]];
   const attributes = formTable(draft, "P.2.2.1.2.1");
   attributes.rows = [["Độ hòa tan (45 phút)", "≥ 75% (Q)"], ["Định lượng", "95–105%"]];
+  formTable(draft, "P.2.3.2").rows = [
+    ["Xát hạt ướt", GAP_PREFIX],
+    ["Dập viên", GAP_PREFIX],
+  ];
   const matrix = formTable(draft, "P.2.3.1");
   matrix.headers = ["CQA sản phẩm", "Xát hạt ướt", "Dập viên"];
   matrix.rows = attributes.rows.map((row) => [row[0], "Thấp", "Cao"]);
@@ -217,6 +231,13 @@ test("a draft for an entirely different product validates on the same form", () 
     ["Xát hạt ướt", "Lượng dung môi", "Kinh nghiệm sản xuất"],
     ["Dập viên", "Lực dập", "Kinh nghiệm sản xuất"],
   ];
+  // Every risk matrix scores the same quality attributes, so a different attribute list changes the
+  // rows of all of them; the updated process matrix also follows the initial one's operations.
+  for (const id of ["P.2.1.1.3", "P.2.1.1.4", "P.2.2.1.3.2", "P.2.2.1.3.4", "P.2.3.4"]) {
+    const table = formTable(draft, id);
+    if (id === "P.2.3.4") table.headers = [...matrix.headers];
+    table.rows = attributes.rows.map((row) => [row[0], ...table.headers.slice(1).map(() => GAP_PREFIX)]);
+  }
   assert.doesNotThrow(() => validateDraft(draft));
 });
 

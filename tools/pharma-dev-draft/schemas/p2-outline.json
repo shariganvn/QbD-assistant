@@ -1,6 +1,12 @@
 {
   "_caveat": "Taxonomy nguồn: một hồ sơ CTD 3.2.P.2 hoàn chỉnh dùng làm TÀI LIỆU THAM CHIẾU ĐỊNH DẠNG — cùng hoạt chất, cùng hai hàm lượng, cùng thuốc đối chiếu, nhưng của một công ty khác với công thức khác (7/7 tá dược khác, chỉ magnesium stearate trùng; khối lượng lõi khác). File đó CỐ Ý không nằm trong repo. Đánh số và phạm vi mục kế thừa từ nó; hai nguồn trước đó (docs/raw/135-00-Pharmaceutical Development-example.docx và biểu mẫu của phòng) đánh số khác ở 5 mục, và chỗ nào chúng đánh số con mà tài liệu tham chiếu chỉ dùng tiêu đề không số thì giữ số con của mình — một tiêu đề không số không làm đích tham chiếu được và không kiểm được sự tồn tại. CẢNH BÁO THẨM QUYỀN: cả ba nguồn đều CHƯA được FD/regulatory affairs xác nhận là taxonomy bắt buộc, và tài liệu tham chiếu định dạng là hồ sơ của công ty khác nên bản thân nó cũng không phải chuẩn do công ty này ban hành. Dùng làm khung sắp xếp nội dung, không phải authority. Giá trị số trong tài liệu tham chiếu KHÔNG được dùng: xem verify/sample-boundary.mjs và mục \"The format reference is not a data source\" trong schemas/p2-draft-contract.md.",
   "schemaVersion": "1.0",
+  "riskScale": [
+    "Thấp",
+    "Trung bình",
+    "Cao"
+  ],
+  "_riskScaleNote": "Thang mức rủi ro có thứ tự tăng dần. Hình dạng (ba mức) lấy từ hồ sơ tham chiếu định dạng, không phải từ quy định của FD: chưa có FD/regulatory xác nhận — đổi ở đây là đổi cho mọi ma trận.",
   "sections": [
     {
       "id": "P.2.1",
@@ -66,7 +72,27 @@
       "headingVi": "Đánh giá rủi ro ban đầu của thuộc tính dược chất (Initial risk assessment of drug substance attributes)",
       "description": "Ma trận rủi ro: mỗi CQA của thành phẩm theo từng thuộc tính của dược chất (cỡ hạt, đa hình, độ tan, hút ẩm, độ ổn định), kèm bảng biện luận cho từng mức. Đây là điểm xuất phát của lập luận giảm rủi ro; mục P.2.1.1.4 chỉ được hạ một mức nào nếu nêu được nghiên cứu đã hạ nó.",
       "form": {
-        "headings": []
+        "headings": [],
+        "riskAssessment": {
+          "kind": "initial"
+        },
+        "tables": [
+          {
+            "columns": [
+              "CQA sản phẩm",
+              "..."
+            ],
+            "rowsFrom": "P.2.2.1.2.1"
+          },
+          {
+            "columns": [
+              "Ô rủi ro (CQA × yếu tố)",
+              "Mức rủi ro",
+              "Biện luận mức rủi ro"
+            ],
+            "rows": "variable"
+          }
+        ]
       }
     },
     {
@@ -75,7 +101,29 @@
       "headingVi": "Đánh giá rủi ro cập nhật của thuộc tính dược chất (Updated risk assessment of drug substance attributes)",
       "description": "Ma trận rủi ro sau khi đã có dữ liệu, cùng nhãn dòng và nhãn cột với P.2.1.1.3, kèm bảng biện luận cho từng lần hạ mức. Một ô hạ xuống mà không nêu nghiên cứu nào là một phát biểu không truy được.",
       "form": {
-        "headings": []
+        "headings": [],
+        "riskAssessment": {
+          "kind": "updated",
+          "pairs": "P.2.1.1.3"
+        },
+        "tables": [
+          {
+            "columns": [
+              "CQA sản phẩm",
+              "..."
+            ],
+            "rowsFrom": "P.2.1.1.3",
+            "columnsFrom": "P.2.1.1.3"
+          },
+          {
+            "columns": [
+              "Ô rủi ro (CQA × yếu tố)",
+              "Mức ban đầu → cập nhật",
+              "Nghiên cứu đã hạ mức"
+            ],
+            "rows": "variable"
+          }
+        ]
       }
     },
     {
@@ -229,7 +277,30 @@
       "id": "P.2.2.1.3.2",
       "ctdReference": "3.2.P.2.2.1.3.2",
       "headingVi": "Đánh giá rủi ro ban đầu của biến công thức (Initial risk assessment of formulation variables)",
-      "description": "Mức rủi ro của từng biến công thức TRƯỚC khi có dữ liệu thực nghiệm, kèm lý do."
+      "description": "Mức rủi ro của từng biến công thức TRƯỚC khi có dữ liệu thực nghiệm, kèm lý do.",
+      "form": {
+        "headings": [],
+        "riskAssessment": {
+          "kind": "initial"
+        },
+        "tables": [
+          {
+            "columns": [
+              "CQA sản phẩm",
+              "..."
+            ],
+            "rowsFrom": "P.2.2.1.2.1"
+          },
+          {
+            "columns": [
+              "Ô rủi ro (CQA × yếu tố)",
+              "Mức rủi ro",
+              "Biện luận mức rủi ro"
+            ],
+            "rows": "variable"
+          }
+        ]
+      }
     },
     {
       "id": "P.2.2.1.3.3",
@@ -253,7 +324,32 @@
       "id": "P.2.2.1.3.4",
       "ctdReference": "3.2.P.2.2.1.3.4",
       "headingVi": "Đánh giá rủi ro cập nhật của biến công thức (Updated risk assessment of formulation variables)",
-      "description": "Mức rủi ro của từng biến công thức SAU khi có dữ liệu, kèm lý do thay đổi so với đánh giá ban đầu."
+      "description": "Mức rủi ro của từng biến công thức SAU khi có dữ liệu, kèm lý do thay đổi so với đánh giá ban đầu.",
+      "form": {
+        "headings": [],
+        "riskAssessment": {
+          "kind": "updated",
+          "pairs": "P.2.2.1.3.2"
+        },
+        "tables": [
+          {
+            "columns": [
+              "CQA sản phẩm",
+              "..."
+            ],
+            "rowsFrom": "P.2.2.1.3.2",
+            "columnsFrom": "P.2.2.1.3.2"
+          },
+          {
+            "columns": [
+              "Ô rủi ro (CQA × yếu tố)",
+              "Mức ban đầu → cập nhật",
+              "Nghiên cứu đã hạ mức"
+            ],
+            "rows": "variable"
+          }
+        ]
+      }
     },
     {
       "id": "P.2.2.1.4",
@@ -401,13 +497,20 @@
       "description": "Ma trận rủi ro CQA × công đoạn. Dòng phải trùng đúng danh mục chỉ tiêu khai ở P.2.2.1.2.1; cột là các công đoạn của phương pháp đã chọn. Hai bảng, theo thứ tự: ma trận mức rủi ro, rồi bảng biện luận cho từng mức. Bảng biện luận trước đây nằm ở mục phát triển quy trình, cách ma trận nó biện luận một mục — một cặp bị tách rời thì người đọc không đối chiếu được, nên nó về đứng cạnh ma trận.",
       "form": {
         "headings": [],
+        "riskAssessment": {
+          "kind": "initial"
+        },
         "tables": [
           {
             "columns": [
               "CQA sản phẩm",
               "..."
             ],
-            "rowsFrom": "P.2.2.1.2.1"
+            "rowsFrom": "P.2.2.1.2.1",
+            "columnsFromRows": {
+              "section": "P.2.3.2",
+              "column": 0
+            }
           },
           {
             "columns": [
@@ -415,7 +518,7 @@
               "Thông số trọng yếu dự kiến",
               "Biện luận mức rủi ro"
             ],
-            "rows": "variable"
+            "rowsFrom": "P.2.3.2"
           }
         ]
       }
@@ -424,8 +527,19 @@
       "id": "P.2.3.2",
       "ctdReference": "3.2.P.2.3.2",
       "headingVi": "Phát triển quy trình sản xuất (Manufacturing process development)",
-      "container": true,
-      "description": "Mục cha, chỉ mang heading. Việc phát triển từng công đoạn nằm ở các mục con, mỗi công đoạn một mục."
+      "description": "Danh mục công đoạn của quy trình sản xuất — nguồn duy nhất cho mọi nơi cần liệt kê công đoạn: cột của ma trận rủi ro ở P.2.3.1, các dòng biện luận ở đó, và (về sau) các mục phát triển từng công đoạn. Mỗi dòng một công đoạn; cột phụ nói công đoạn đó đã được xác nhận là có trong quy trình thương mại hay chưa, và ô chưa xác nhận là dấu thiếu dữ liệu. Hợp của hai bộ công đoạn đã từng được khai riêng (ma trận rủi ro và quy trình của thử nghiệm) và chúng lệch nhau, nên một công đoạn chỉ có ở một bên vẫn được giữ lại cho FD chốt, không bị bỏ lặng lẽ. Mô tả quy trình, sơ đồ và phát triển từng công đoạn thuộc các mục con.",
+      "form": {
+        "headings": [],
+        "tables": [
+          {
+            "columns": [
+              "Công đoạn",
+              "Có trong quy trình thương mại"
+            ],
+            "rows": "variable"
+          }
+        ]
+      }
     },
     {
       "id": "P.2.3.2.1",
@@ -500,7 +614,32 @@
       "id": "P.2.3.4",
       "ctdReference": "3.2.P.2.3.4",
       "headingVi": "Đánh giá rủi ro cập nhật của quy trình sản xuất (Updated risk assessment of the manufacturing process)",
-      "description": "Mức rủi ro của từng công đoạn SAU khi có dữ liệu chạy quy trình."
+      "description": "Mức rủi ro của từng công đoạn SAU khi có dữ liệu chạy quy trình.",
+      "form": {
+        "headings": [],
+        "riskAssessment": {
+          "kind": "updated",
+          "pairs": "P.2.3.1"
+        },
+        "tables": [
+          {
+            "columns": [
+              "CQA sản phẩm",
+              "..."
+            ],
+            "rowsFrom": "P.2.3.1",
+            "columnsFrom": "P.2.3.1"
+          },
+          {
+            "columns": [
+              "Ô rủi ro (CQA × yếu tố)",
+              "Mức ban đầu → cập nhật",
+              "Nghiên cứu đã hạ mức"
+            ],
+            "rows": "variable"
+          }
+        ]
+      }
     },
     {
       "id": "P.2.4",
@@ -595,5 +734,5 @@
       "description": "Tương thích với dung môi/thiết bị hoàn nguyên/pha loãng nếu sản phẩm cần pha trước khi dùng; ghi \"không áp dụng\" kèm lý do nếu sản phẩm dùng trực tiếp."
     }
   ],
-  "_formSpec": "Khoá `form` mô tả HÌNH DẠNG bắt buộc của mục, không mô tả nội dung — để một draft của sản phẩm bất kỳ vẫn bị giữ đúng format P.2. `headings`: danh sách heading3 bắt buộc theo thứ tự ([] = không được có heading). `tables`: đúng số bảng, đúng thứ tự; mỗi bảng khai `columns` (nhãn cột chính xác; \"*\" = bất kỳ chuỗi không rỗng, dùng cho nhãn mang tên sản phẩm; \"...\" ở cuối = các cột còn lại tự do về số lượng và tên), và một trong `rows` (nhãn dòng chính xác) / `rows: \"variable\"` (do sản phẩm quyết định) / `rowsFrom: \"<id mục>\"` (phải trùng nhãn dòng bảng đầu của mục đó). `perStrength: true`: bảng báo cáo theo hàm lượng — `columns` khi đó chỉ khai TIỀN TỐ cột cố định, phần đuôi phải là đúng một nhóm cột cho mỗi hàm lượng trong `meta.strengths`. Số cột mỗi nhóm được SUY ra bằng phép chia, không khai trong schema: biểu mẫu của phòng dùng một cột mỗi hàm lượng ở bảng so sánh thành phần và hai cột (mg và %) ở công thức cuối, mà một con số viết vào schema là thêm một thứ phải giữ đồng bộ tay với bảng nó mô tả. Nhãn cột đầu mỗi nhóm phải nêu đúng hàm lượng của nhóm, xét theo khớp dài nhất. `measuredOnly: true`: bảng chứa KẾT QUẢ ĐO (IPC/QC, hòa tan, độ cứng, độ rã, đồng đều hàm lượng, khảo sát thuốc đối chiếu, độ ổn định). Với bảng này, mọi ô thuộc cột của một hàm lượng khai trong `meta.derivedStrengths` bắt buộc mang marker: tỷ lệ công thức suy ra được khối lượng, không suy ra được số đo, và ô trống bị đọc thành \"không áp dụng\" chứ không phải \"chưa có\". Bảng thành phần KHÔNG khai `measuredOnly` vì thành phần là lượng khai báo, tỷ lệ cấp được. Không được khai `perStrength` cùng `\"...\"`. Bỏ `headings` hoặc `tables` nghĩa là không ràng buộc phần đó. Mục không khai `form` thì tự do."
+  "_formSpec": "Khoá `form` mô tả HÌNH DẠNG bắt buộc của mục, không mô tả nội dung — để một draft của sản phẩm bất kỳ vẫn bị giữ đúng format P.2. `headings`: danh sách heading3 bắt buộc theo thứ tự ([] = không được có heading). `tables`: đúng số bảng, đúng thứ tự; mỗi bảng khai `columns` (nhãn cột chính xác; \"*\" = bất kỳ chuỗi không rỗng, dùng cho nhãn mang tên sản phẩm; \"...\" ở cuối = các cột còn lại tự do về số lượng và tên), và một trong `rows` (nhãn dòng chính xác) / `rows: \"variable\"` (do sản phẩm quyết định) / `rowsFrom: \"<id mục>\"` (phải trùng nhãn dòng bảng đầu của mục đó). `perStrength: true`: bảng báo cáo theo hàm lượng — `columns` khi đó chỉ khai TIỀN TỐ cột cố định, phần đuôi phải là đúng một nhóm cột cho mỗi hàm lượng trong `meta.strengths`. Số cột mỗi nhóm được SUY ra bằng phép chia, không khai trong schema: biểu mẫu của phòng dùng một cột mỗi hàm lượng ở bảng so sánh thành phần và hai cột (mg và %) ở công thức cuối, mà một con số viết vào schema là thêm một thứ phải giữ đồng bộ tay với bảng nó mô tả. Nhãn cột đầu mỗi nhóm phải nêu đúng hàm lượng của nhóm, xét theo khớp dài nhất. `measuredOnly: true`: bảng chứa KẾT QUẢ ĐO (IPC/QC, hòa tan, độ cứng, độ rã, đồng đều hàm lượng, khảo sát thuốc đối chiếu, độ ổn định). Với bảng này, mọi ô thuộc cột của một hàm lượng khai trong `meta.derivedStrengths` bắt buộc mang marker: tỷ lệ công thức suy ra được khối lượng, không suy ra được số đo, và ô trống bị đọc thành \"không áp dụng\" chứ không phải \"chưa có\". Bảng thành phần KHÔNG khai `measuredOnly` vì thành phần là lượng khai báo, tỷ lệ cấp được. Không được khai `perStrength` cùng `\"...\"`. Bỏ `headings` hoặc `tables` nghĩa là không ràng buộc phần đó. Mục không khai `form` thì tự do. `columnsFrom: \"<id mục>\"`: cột (sau tiền tố cố định) phải trùng nhãn cột bảng đầu của mục đó; `columnsFromRows: {section, column}`: cột phải trùng ô thứ `column` của từng dòng bảng đầu của mục đó — dùng khi nguồn liệt kê theo chiều dọc còn bảng này trải theo chiều ngang. `columns` khi đó phải kết thúc bằng \"...\" và đại diện đúng các nhãn suy ra: bảng không thêm được cột nguồn không có, cũng không bỏ được cột nguồn có. `riskAssessment: {kind: \"initial\"|\"updated\", pairs}`: bảng đầu của mục là ma trận (dòng = CQA, cột = yếu tố; ô là một mức trong `riskScale` hoặc một dấu), bảng thứ hai là bảng biện luận. Mục `updated` trỏ `pairs` tới mục `initial` của nó; ô nào thấp hơn ô tương ứng ở bản ban đầu phải có một dòng biện luận (ô đầu = \"<nhãn dòng> × <nhãn cột>\", ô cuối = tham chiếu tới mục nghiên cứu đã hạ nó, hoặc một dấu)."
 }

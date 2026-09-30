@@ -68,6 +68,13 @@ deliberately.
    decision this company owes, so it becomes `[CẦN QUYẾT ĐỊNH – CHƯA CHỐT]` addressed to whoever owns it.
    Writing "so sánh với tài liệu tham chiếu" and copying its number is the failure this rule exists for.
 
+12. **Risk levels are the formulation department's, not yours.** A matrix cell you cannot source stays
+   a marker — never a level inferred from how the trial turned out, which would turn a result into a
+   prediction. When FD does supply levels, a cell lowered in an updated assessment needs a row in its
+   justification table citing the section of the study that lowered it; Stage B refuses the draft
+   without one. The operations a process matrix scores come from the operation list in `P.2.3.2`:
+   change the list, not the matrix.
+
 ## What you are NOT trying to do
 
 You are not trying to produce a submission-ready dossier section. You are producing an internal,

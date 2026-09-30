@@ -71,6 +71,7 @@ export function compareDrafts(before, after) {
 
   const lost = [];
   const duplicated = [];
+  const repeatedMarkers = [];
   const moved = [];
   for (const [value, fromSections] of beforeValues) {
     const destinations = afterValues.get(value);
@@ -81,8 +82,13 @@ export function compareDrafts(before, after) {
     const places = [...new Set(destinations)];
     // One occurrence per occurrence it had before. A value the source draft legitimately stated twice
     // is allowed to appear twice; what is rejected is a count that grew during the move.
+    // A marker repeated across new skeleton tables is the point of a skeleton, not a finding stated
+    // twice: a marker asserts nothing, so two of them cannot read as two findings that agree. They are
+    // counted on their own line so the growth stays visible, but only a repeated non-marker value
+    // fails the pass.
     if (destinations.length > fromSections.length) {
-      duplicated.push({ value, before: fromSections.length, after: destinations.length, in: places });
+      const growth = { value, before: fromSections.length, after: destinations.length, in: places };
+      (isMarkedText(value) ? repeatedMarkers : duplicated).push(growth);
     }
     const origin = [...new Set(fromSections)];
     if (places.join("|") !== origin.join("|")) moved.push({ value, from: origin, to: places });
@@ -99,7 +105,7 @@ export function compareDrafts(before, after) {
     added.push({ value, in: [...new Set(places)], kind });
   }
 
-  return { lost, duplicated, moved, added };
+  return { lost, duplicated, repeatedMarkers, moved, added };
 }
 
 function argumentValue(flag) {
@@ -125,6 +131,10 @@ function main() {
 
   process.stdout.write(`values before: ${valuesOf(before).size}, after: ${valuesOf(after).size}\n`);
   process.stdout.write(`lost: ${report.lost.length}, duplicated: ${report.duplicated.length}, moved: ${report.moved.length}\n`);
+  if (report.repeatedMarkers.length) {
+    const extra = report.repeatedMarkers.reduce((sum, entry) => sum + entry.after - entry.before, 0);
+    process.stdout.write(`repeated markers: ${report.repeatedMarkers.length} value(s), ${extra} more occurrence(s) — skeleton cells, not findings\n`);
+  }
   process.stdout.write(`added: ${report.added.length} (marker ${report.added.filter((e) => e.kind === "marker").length}, prose ${report.added.filter((e) => e.kind === "prose").length}, data ${introducedData.length})\n`);
   for (const entry of report.added.filter((e) => e.kind === "prose")) {
     process.stdout.write(`  ADDED PROSE in ${entry.in.join(",")}: ${entry.value.slice(0, 100)}\n`);

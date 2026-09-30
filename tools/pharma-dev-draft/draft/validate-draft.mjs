@@ -8,7 +8,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { TABLE_WIDTH_DXA } from "../schemas/layout.mjs";
-import { isDecisionText, isGapText, markerText } from "../schemas/markers.mjs";
+import { isDecisionText, isGapText, isMarkedText, markerText } from "../schemas/markers.mjs";
 import { barSeries, flowSteps, processStages } from "../render/figures/figure-source.mjs";
 
 const draftDir = dirname(fileURLToPath(import.meta.url));
@@ -269,6 +269,119 @@ function validateRows(table, tableSpec, draft, where) {
   }
 }
 
+// A table whose columns name things another part of the document already lists must not list them
+// again by hand: the two copies drift, and the drift is the defect. `columnsFrom` takes the labels
+// from another section's first table; `columnsFromRows` takes them from the first cell of each row of
+// that table, for the case where the source lists the things down a column and this table lays them
+// across. Either way the declared `columns` ends in "..." and stands for exactly the derived labels,
+// so what the table may not do is add a column the source does not have or leave one out.
+function expectedDerivedColumns(tableSpec, draft, where) {
+  if (!Array.isArray(tableSpec.columns)) fail("E_FORM_COLUMNS", `${where} derives its columns but declares no fixed column prefix`);
+  if (tableSpec.columnsFrom !== undefined && tableSpec.columnsFromRows !== undefined) {
+    fail("E_FORM_COLUMNS", `${where} declares both columnsFrom and columnsFromRows — it would have two sources for one set of columns`);
+  }
+  const fixedCount = tableSpec.columns.length - 1;
+  if (tableSpec.columns[fixedCount] !== COLUMN_REST) {
+    fail("E_FORM_COLUMNS", `${where} derives its columns, so its declared columns must end in "${COLUMN_REST}"`);
+  }
+  if (typeof tableSpec.columnsFrom === "string") {
+    const source = draft.sections.find((entry) => entry.id === tableSpec.columnsFrom)
+      ?.blocks?.find((block) => block.type === "table");
+    if (!source) fail("E_FORM_COLUMNS", `${where} takes its columns from section "${tableSpec.columnsFrom}", which has no table`);
+    return { fixedCount, labels: source.headers.slice(fixedCount), from: tableSpec.columnsFrom };
+  }
+  const { section, column } = tableSpec.columnsFromRows;
+  const source = draft.sections.find((entry) => entry.id === section)?.blocks?.find((block) => block.type === "table");
+  if (!source) fail("E_FORM_COLUMNS", `${where} takes its columns from the rows of section "${section}", which has no table`);
+  return { fixedCount, labels: source.rows.map((row) => row[column]), from: section };
+}
+
+function validateDerivedColumns(table, tableSpec, draft, where) {
+  const { fixedCount, labels, from } = expectedDerivedColumns(tableSpec, draft, where);
+  const actual = table.headers.slice(fixedCount);
+  if (actual.length !== labels.length || actual.some((label, index) => label !== labels[index])) {
+    fail("E_FORM_COLUMNS", `${where} columns do not match section "${from}", which is their source. Expected: ${labels.join(" | ")}. Got: ${actual.join(" | ")}`);
+  }
+}
+
+// A risk matrix scores each quality attribute (row) against each thing that could threaten it
+// (column). The updated matrix repeats the initial one's rows and columns — that is enforced by the
+// form's rowsFrom/columnsFrom — and is allowed to score some cells lower. A cell scored lower is a
+// claim that something was learned, and a claim nobody can trace is the one thing a reviewer cannot
+// accept from a risk assessment: the justification table has to say which study lowered it. Whether
+// that study SUPPORTS the lower score is a judgement this code cannot make; it can only make sure the
+// claim is attached to something a reader can go and read, or openly marked as not yet attached.
+// A cell still holding a marker has no level, so there is nothing to compare and it is skipped.
+const JUSTIFICATION_KEY_SEPARATOR = " × ";
+
+function riskLevel(cell, scale, where) {
+  if (isMarkedText(cell)) return null;
+  const level = scale.indexOf(String(cell).trim());
+  if (level === -1) {
+    fail("E_RISK_CELL_INVALID", `${where} holds "${cell}", which is neither a level of the risk scale (${scale.join(" | ")}) nor a marker — a free-text cell cannot be compared with the initial assessment`);
+  }
+  return level;
+}
+
+function matrixLevels(section, scale) {
+  const matrix = section.blocks.find((block) => block.type === "table");
+  if (!matrix) fail("E_RISK_MATRIX_MISSING", `section "${section.id}" is a risk assessment but has no matrix`);
+  const levels = new Map();
+  matrix.rows.forEach((row) => {
+    matrix.headers.slice(1).forEach((header, index) => {
+      const where = `section "${section.id}" matrix cell "${row[0]}${JUSTIFICATION_KEY_SEPARATOR}${header}"`;
+      levels.set(`${row[0]}${JUSTIFICATION_KEY_SEPARATOR}${header}`, riskLevel(row[index + 1], scale, where));
+    });
+  });
+  return levels;
+}
+
+function validateRiskAssessment(section, spec, draft, outline) {
+  const scale = outline.riskScale;
+  if (!Array.isArray(scale) || scale.length < 2 || new Set(scale).size !== scale.length) {
+    fail("E_OUTLINE_RISK_SCALE", `section "${section.id}" declares a risk assessment, so the outline must declare riskScale as an ordered list of at least two distinct levels`);
+  }
+  if (!["initial", "updated"].includes(spec.kind)) {
+    fail("E_OUTLINE_RISK_KIND", `section "${section.id}" riskAssessment.kind must be "initial" or "updated", got: ${spec.kind}`);
+  }
+  const current = matrixLevels(section, scale);
+  if (spec.kind === "initial") return;
+
+  const target = outline.sections.find((entry) => entry.id === spec.pairs);
+  if (target?.form?.riskAssessment?.kind !== "initial") {
+    fail("E_OUTLINE_RISK_PAIR", `section "${section.id}" is an updated risk assessment, so "pairs" must name an initial one; "${spec.pairs}" is not`);
+  }
+  const initialSection = draft.sections.find((entry) => entry.id === spec.pairs);
+  if (!initialSection?.blocks?.some((block) => block.type === "table")) {
+    fail("E_RISK_PAIR_MISSING", `section "${section.id}" pairs with "${spec.pairs}", which has no matrix in this draft`);
+  }
+  const initial = matrixLevels(initialSection, scale);
+
+  const justification = section.blocks.filter((block) => block.type === "table")[1];
+  if (!justification) {
+    fail("E_RISK_JUSTIFICATION_MISSING", `section "${section.id}" has no justification table after its matrix`);
+  }
+  const rows = new Map(justification.rows.map((row) => [row[0], row[row.length - 1]]));
+
+  const lowered = new Set();
+  for (const [key, level] of current) {
+    const before = initial.get(key);
+    if (level === null || before === null || before === undefined || level >= before) continue;
+    lowered.add(key);
+    const evidence = rows.get(key);
+    const traceable = evidence !== undefined && (isMarkedText(evidence) || new RegExp(INTERNAL_REFERENCE.source).test(evidence));
+    if (!traceable) {
+      fail("E_RISK_LOWERED_NO_EVIDENCE", `section "${section.id}" scores "${key}" lower than section "${spec.pairs}" (${scale[level]} against ${scale[before]}) but its justification table ${evidence === undefined ? "has no row for that cell" : "does not name the study that lowered it"} — cite the section of the study, or mark the cell as awaiting one`);
+    }
+  }
+  for (const key of rows.keys()) {
+    // A row still carrying a marker in its first cell is a placeholder for a justification not yet
+    // written, not a claim about any cell.
+    if (isMarkedText(key) || lowered.has(key)) continue;
+    fail("E_RISK_JUSTIFICATION_ORPHAN", `section "${section.id}" justifies "${key}", which is not a cell scored lower than section "${spec.pairs}" — a justification for a cell that did not change is either a stale row or a cell that was changed back without the matrix being updated`);
+  }
+}
+
 function validateSectionForm(section, spec, draft) {
   if (Array.isArray(spec.headings)) {
     const actual = section.blocks.filter((block) => block.type.startsWith("heading")).map((block) => block.text);
@@ -302,6 +415,9 @@ function validateSectionForm(section, spec, draft) {
         };
         validateMeasuredOnly(table, spanFor, draft, where);
       }
+    } else if (tableSpec.columnsFrom !== undefined || tableSpec.columnsFromRows !== undefined) {
+      validateColumns(table.headers.slice(0, tableSpec.columns.length - 1), tableSpec.columns.slice(0, -1), where);
+      validateDerivedColumns(table, tableSpec, draft, where);
     } else if (Array.isArray(tableSpec.columns)) {
       validateColumns(table.headers, tableSpec.columns, where);
     }
@@ -574,6 +690,7 @@ export function validateDraft(draft, outline = loadOutline()) {
       section.blocks.forEach((block, index) => validateBlock(block, section.id, index));
       const spec = outline.sections.find((entry) => entry.id === section.id)?.form;
       if (spec) validateSectionForm(section, spec, draft);
+      if (spec?.riskAssessment) validateRiskAssessment(section, spec.riskAssessment, draft, outline);
       // A figure names a table and a row rather than carrying numbers, so whether it can be drawn at
       // all is decided here: the table has to exist, and a chart's row has to hold measurements
       // rather than gap markers. Left to the renderer this surfaces as a broken run or, worse, as an
