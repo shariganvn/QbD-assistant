@@ -1,0 +1,161 @@
+# G-19..G-22 — Thử nghiệm 2: cái gì vào hồ sơ, cái gì không, và vì sao
+
+Ngày: 2026-09-26. Nguồn: `Thử nghiệm 2.docx` (Khảo sát tỷ lệ tá dược trơn), qua Stage A
+`extract/extract.mjs` đường xml-walk. Mọi số trong hồ sơ lấy từ `trial2-extracted.json`,
+không lấy từ bản tóm tắt văn xuôi nào.
+
+## 1. Stage A đọc được gì
+
+```
+node tools/pharma-dev-draft/extract/extract.mjs "Thử nghiệm 2.docx" -o trial2-extracted.json
+→ method=xml-walk, paragraphs=33, tables=3
+   table[0]  9 dòng × 6 cột  — thành phần hai công thức (mg và % cho mỗi công thức)
+   table[1]  9 dòng × 5 cột  — tính chất vật lý khối bột trộn hoàn tất
+   table[2] 22 dòng × 5 cột  — chỉ tiêu chất lượng viên thành phẩm
+```
+
+## 2. Phát hiện quan trọng nhất: bảng kết quả viên là bản sao một phần của Thử nghiệm 1
+
+Đối chiếu từng ô, chuẩn hóa khoảng trắng, dấu gạch và ký tự nháy (TN2 dùng `”` `’` nơi TN1 dùng
+`"` `'`) — nếu không chuẩn hóa thì bốn ô độ rã lọt lưới:
+
+| Ô trong bảng kết quả viên của TN2 | Trùng ô nào của TN1 |
+|---|---|
+| `100,3` | CT01 / Đồng đều khối lượng – TB (mg) |
+| `100,4` | CT02 / Đồng đều khối lượng – TB (mg) |
+| `103 (+ 2,69%)` | CT01 / Đồng đều khối lượng – Max (mg, %) |
+| `102 (+ 1,59%)` | CT02 / Đồng đều khối lượng – Max (mg, %) |
+| `98 (- 2,29%)` | CT01 / Đồng đều khối lượng – Min (mg, %) |
+| `99 (- 1,39%)` | CT02 / Đồng đều khối lượng – Min (mg, %) |
+| `90,1` | CT02 / Độ cứng – TB (N) |
+| `91,4` | CT03 / Độ cứng – TB (N) |
+| `2,75` | CT01 / Độ dày – TB (mm) ; CT02 / Độ dày – TB (mm) |
+| `2,75` | CT01 / Độ dày – TB (mm) ; CT02 / Độ dày – TB (mm) |
+| `0,02` | CT02 / Độ mài mòn (%) |
+| `0,01` | CT03 / Độ mài mòn (%) |
+| `8”57”` | CT02 / Độ rã – Max |
+| `4’18”` | CT03 / Độ rã – Max |
+| `8’19”` | CT02 / Độ rã – Min (spec ≤ 15 phút) |
+| `3’37”` | CT03 / Độ rã – Min (spec ≤ 15 phút) |
+| `100,02` | CT02 / Định lượng (spec 90–110%) (%) |
+| `99,99` | CT03 / Định lượng (spec 90–110%) (%) |
+| `81,40` | CT02 / Độ hòa tan 30 phút – TB (spec ≥ 80% Q) (%) |
+| `98,64` | CT03 / Độ hòa tan 30 phút – TB (spec ≥ 80% Q) (%) |
+| `4,76` | CT02 / Độ hòa tan – RSD (%) |
+| `2,70` | CT03 / Độ hòa tan – RSD (%) |
+| `0,0544` | CT01 / Tạp đơn bất kỳ (spec ≤ 0,2%) (%) |
+| `0,0508` | CT03 / Tạp đơn bất kỳ (spec ≤ 0,2%) (%) |
+| `0,1839` | CT03 / Tổng tạp chất (spec ≤ 3,0%) (%) |
+
+ô mang số trong bảng kết quả viên TN2: 45 | trùng nguyên văn TN1: 25
+
+Cộng cả bảng cốm: **28 trong 69** ô mang số của hai bảng kết quả TN2 trùng nguyên văn TN1.
+
+Và không trùng ngẫu nhiên — có hoa văn rõ:
+
+| Khối chỉ tiêu | Cột "Mg stearat 1%" khớp | Cột "Mg stearat 5%" khớp |
+|---|---|---|
+| độ cứng, độ dày, độ mài mòn, độ rã, định lượng, hòa tan, tạp chất | **CT02** | **CT03** |
+| đồng đều khối lượng (TB, Max, Min) | **CT01** | **CT02** |
+
+Một bộ số liệu độc lập không xếp được thành hoa văn đó. Đây là dấu hiệu của bảng được sao chép
+rồi sửa một phần — và phần bị sửa lệch một cột so với phần không sửa.
+
+## 3. Chính gate của repo từ chối bảng đó — đã thử thật
+
+Dựng một bản thử trong scratchpad có ghi bảng kết quả TN2 vào hồ sơ, rồi chạy công cụ đối chiếu
+giá trị đã dựng hai đợt trước:
+
+```
+values before: 267, after: 289
+lost: 0, duplicated: 17, moved: 0
+added: 22 (marker 0, prose 0, data 22)
+  DUPLICATED 3->4 in P.2.2.1.3.3: Đạt
+...
+```
+
+`duplicated 17`, `added data 22`, exit 1. Công cụ này được viết cho một đợt cấu trúc lại, với lý
+do ghi trong chính comment của nó: *một giá trị bị nhân đôi đọc với người duyệt như hai phát hiện
+độc lập tình cờ trùng nhau*. Đây đúng là trường hợp đó, và nó bắt được.
+
+## 4. Hai lỗi định danh trong tài liệu nguồn
+
+Dòng tiêu chuẩn độ hòa tan của TN2, nguyên văn:
+
+```
+Độ hòa tan (%): ≥ 80% (Q) lượng pravastatin sodium so với hàm lượng nhãn được hòa tan trong 30 phút TB 81,40 98,64
+```
+
+**pravastatin sodium** là hoạt chất khác hoàn toàn, không có trong sản phẩm này. Và "cEP 2.9.40"
+ở dòng đồng đều hàm lượng là lỗi chính tả của "EP 2.9.40". Bản thảo giữ nguyên văn, không tự sửa
+số liệu trong tài liệu nguồn, và ghi thành dấu quyết định cho QA.
+
+## 5. Cái gì VÀO hồ sơ, và vì sao chỉ những cái đó
+
+| Nội dung | Vào? | Căn cứ |
+|---|---|---|
+| Bộ công đoạn: rây · trộn đồng nhất · trộn hoàn tất · dập viên; KHÔNG tạo hạt, KHÔNG làm ẩm, KHÔNG sấy | **có** | mô tả quy trình, không phải số đo; đọc được chắc chắn từ tập hợp hộp văn bản |
+| Thành phần hai công thức | **có** | lượng khai báo, không phải số đo; cộng lại đúng 100,00 mg cả hai cột — kiểm bằng phép cộng, không nhận theo dòng "Tổng cộng" của nguồn |
+| Tính chất vật lý khối bột trộn hoàn tất | **có, kèm dấu quyết định** | nhất quán nội tại (xem mục 6); 3 trong 24 ô trùng TN1 nên vẫn cần xác nhận |
+| Nhận xét/kết luận nguyên văn | **có** | là trích dẫn kết luận của phòng, đúng bất kể xuất xứ bảng |
+| **Bảng chỉ tiêu chất lượng viên thành phẩm** | **KHÔNG** | 25 trong 45 ô là bản sao TN1 theo hoa văn ở mục 2; không xác định được số liệu thuộc lô nào |
+| Trình tự các công đoạn | **KHÔNG** | sơ đồ vẽ bằng hộp văn bản, xml-walk đọc theo thứ tự XML chứ không theo thứ tự hình — bộ công đoạn chắc chắn, trình tự thì không |
+
+Trình tự "rây → trộn 1 → trộn 2 → trộn hoàn tất → dập" là điều hiển nhiên về mặt dược học, và đó
+chính là lý do không viết vào: một trình tự đúng-theo-lẽ-thường vẫn là trình tự không có nguồn.
+
+## 6. Ba phép kiểm nội tại của bảng cốm — lý do nó được vào
+
+```
+cột 1: gõ/tĩnh = 1.3505  bảng ghi Hausner 1.35  → KHỚP
+cột 2: gõ/tĩnh = 1.3154  bảng ghi Hausner 1.32  → KHỚP
+cột 1: tổng phân bố cỡ hạt = 100.00%
+cột 2: tổng phân bố cỡ hạt = 100.00%
+```
+
+Một bảng bị sao chép rồi sửa một phần thường không giữ được cả ba sự khớp này. Đó là bằng chứng
+ủng hộ bảng cốm là thật — nhưng không phải bằng chứng đủ, nên mục vẫn mang dấu quyết định.
+
+## 7. Hai quyết định đã ĐÓNG, và sáu quyết định MỚI
+
+| | Trước | Sau |
+|---|---|---|
+| gap marker | 149 | **149** |
+| dòng phụ lục dữ liệu | 115 | 115 |
+| decision marker | 16 | **20** |
+
+Đóng hai: **quy trình** (trộn dập thẳng hay xát hạt — TN2 trả lời dứt khoát) và **tá dược trơn là
+biến nhiễu hay biến trọng yếu** (TN2 tách nó thành biến khảo sát riêng, nên nay là thuộc tính trọng
+yếu thứ hai đạt sàn ICH Q8(R2) Part I tr. 6).
+
+Mở sáu: trình tự công đoạn · công đoạn bao phim thiếu trong tóm tắt quy trình dù cảm quan mô tả
+viên bao phim · bộ công đoạn không khớp cột của ma trận rủi ro · bảng kết quả viên là bản sao ·
+ba số đo trùng trong bảng cốm · lỗi "pravastatin sodium" và "cEP".
+
+Số quyết định TĂNG dù có dữ liệu thật. Đó là kết quả trung thực: một tài liệu có lỗi sao chép đã
+chứng minh thì đặt ra nhiều câu hỏi hơn số câu nó trả lời.
+
+Số gap marker **không đổi**: những ô mà TN2 có thể điền đúng là các ô chỉ tiêu viên thành phẩm, và
+đó là bảng bị từ chối. Không ô nào bị điền bằng số liệu không xác định được lô.
+
+## 8. Hàm lượng 5 mg vẫn là hàm lượng suy theo tỷ lệ
+
+Cả hai công thức của TN2 đều ở 10 mg (bisoprolol fumarate 10,00 mg/viên). Không có lô 5 mg nào.
+`meta.derivedStrengths` giữ nguyên `["5 mg"]`, và 24 ô thuộc cột 5 mg của các bảng kết quả vẫn
+buộc mang dấu. Hai thử nghiệm ở 10 mg không làm nên một lô 5 mg.
+
+## 9. Xác minh
+
+```
+npm run test:pharma-dev                          → 97 pass, 0 fail
+validate-draft.mjs <draft>                       → OK, 26 sections
+value-inventory --before <trước> --after <sau>    → duplicated 11, added data 16, lost 4
+render + verify                                  → XSD PASS, 3 PNG, unzip -t OK, 1388 đoạn
+```
+
+`duplicated 11`: **tám** là giá trị thành phần (10,00 · 15,70 · 63,00 · 1,00 · 5,00 · 3,30 · 2,00 ·
+100,00) mà hai công thức dùng chung — lượng khai báo, không phải số đo, đúng phân biệt mà luật
+`measuredOnly` đã dựng. **Ba** là số đo trong bảng cốm, đã ghi thành dấu quyết định trong hồ sơ
+chứ không bỏ qua. `added data 16`: mọi giá trị đều truy được về `trial2-extracted.json`.
+`lost 4`: bốn văn bản cố ý viết lại — hai dấu quyết định đã đóng, và hai câu về tiền đề quy trình
+nay có nguồn thực nghiệm.

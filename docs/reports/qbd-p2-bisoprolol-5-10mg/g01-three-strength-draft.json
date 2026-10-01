@@ -1,0 +1,80 @@
+{
+  "_note": "Draft khai BA hàm lượng, validate PASS không sửa một dòng code nào. Đây là bằng chứng số hàm lượng là dữ liệu, không phải giả định gài trong code: một luật viết cho \"hai hàm lượng\" vẫn pass mọi fixture hai hàm lượng.",
+  "_outline": "Form dùng để kiểm: tools/pharma-dev-draft/draft/tests/fixtures/strength-form.mjs",
+  "_derivedGroupSizes": {
+    "X.1": 1,
+    "X.2": 2
+  },
+  "draft": {
+    "schemaVersion": "1.0",
+    "meta": {
+      "productName": "Sản phẩm thử nghiệm quy tắc, viên nén bao phim",
+      "apiName": "Hoạt chất thử nghiệm",
+      "strengths": [
+        "2,5 mg",
+        "5 mg",
+        "10 mg"
+      ],
+      "sourceFile": "fixture.docx",
+      "draftDate": "2026-09-24",
+      "preparer": "bộ kiểm quy tắc",
+      "extractionMethod": "xml-walk"
+    },
+    "sections": [
+      {
+        "id": "X.1",
+        "status": "covered",
+        "blocks": [
+          {
+            "type": "table",
+            "headers": [
+              "Thành phần",
+              "2,5 mg",
+              "5 mg",
+              "10 mg"
+            ],
+            "rows": [
+              [
+                "Hoạt chất",
+                "10,00",
+                "10,00",
+                "10,00"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "id": "X.2",
+        "status": "covered",
+        "blocks": [
+          {
+            "type": "table",
+            "headers": [
+              "STT",
+              "Tên thành phần",
+              "2,5 mg (mg)",
+              "2,5 mg (%)",
+              "5 mg (mg)",
+              "5 mg (%)",
+              "10 mg (mg)",
+              "10 mg (%)"
+            ],
+            "rows": [
+              [
+                "1",
+                "Hoạt chất",
+                "10,00",
+                "10,00",
+                "10,00",
+                "10,00",
+                "10,00",
+                "10,00"
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

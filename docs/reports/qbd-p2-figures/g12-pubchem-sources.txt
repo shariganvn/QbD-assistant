@@ -1,0 +1,60 @@
+# G-12 — nguồn cho tính chất dược chất, sau khi mở mạng
+
+Ngày: 2026-09-26. Bản ghi trạng thái chặn trước đó giữ ở `g12-network-denial.txt`.
+
+## Dò lại từng host
+
+| Host | HTTP | Ghi chú |
+|---|---|---|
+| `pubchem.ncbi.nlm.nih.gov` | 200 | mở — nguồn chính của đợt này |
+| `eutils.ncbi.nlm.nih.gov` | 301 | mở (chuyển hướng thường) |
+| `www.ema.europa.eu` | chặn | vẫn chặn ở proxy |
+| `www.accessdata.fda.gov` | chặn | vẫn chặn ở proxy |
+| `go.drugbank.com` | 403 | 403 — bảo vệ bot của chính DrugBank, không phải proxy; ta trích DrugBank qua PubChem |
+
+## Điểm quan trọng nhất: muối không có dữ liệu thực nghiệm
+
+```
+GET /rest/pug_view/data/compound/5281064/JSON/?heading=Experimental+Properties
+{
+  "Fault": {
+    "Code": "PUGVIEW.NotFound",
+    "Message": "No data found"
+  }
+}
+```
+
+CID 5281064 là bisoprolol fumarat — dạng muối, đúng dược chất của hồ sơ. PubChem KHÔNG có mục
+Experimental Properties cho nó. Mọi điểm chảy, Log P, pKa đều nằm ở base tự do (CID 2405). Gán giá
+trị của base cho muối mà không nói rõ là đúng loại lỗi W-5, nên mỗi ô đều mang nhãn chất.
+
+Ngoại lệ duy nhất: HSDB có bản ghi chú thích "/Bisoprolol hemifumarate/" — hemifumarat (2:1) chính là
+bisoprolol fumarat của hồ sơ, nên điểm chảy 100 °C ở đó nói thẳng về dược chất.
+
+## Đối chiếu chéo tự có
+
+```
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 5281064,
+        "MolecularFormula": "C40H66N2O12",
+        "MolecularWeight": "767.0"
+      }
+    ]
+  }
+}
+```
+
+Khớp đúng `(C18H31NO4)2·C4H4O4` mà bản thảo đã đối chiếu từ chứng chỉ chuẩn ở ghi chú [2]. Hai nguồn
+độc lập trùng nhau.
+
+## Giới hạn: gate này KHÔNG đóng W-5
+
+DrugBank, HMDB, HSDB, ChEMBL là nguồn tổng hợp thứ cấp. W-5 đòi đối chiếu **chuyên luận**. Các ô đi từ
+"không nguồn" lên "có nguồn truy xuất được" — đó là điều G-12 đòi và nay đạt — nhưng W-5 vẫn mở.
+
+## Năm dòng phân hủy cưỡng bức vẫn là gap
+
+Thực nghiệm trên chính lô dược chất đang dùng, thuộc 3.2.S.7. Mở mạng không đổi được điều này.

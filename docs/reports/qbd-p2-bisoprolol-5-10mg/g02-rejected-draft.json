@@ -1,0 +1,41 @@
+{
+  "_note": "Ô độ hòa tan của hàm lượng 5 mg — hàm lượng khai là suy theo tỷ lệ, không có lô bào chế — bị điền một giá trị đo trông hoàn toàn hợp lý. Validator chặn ở Stage B, trước renderer, nên tài liệu chứa số liệu này không thể được tạo ra.",
+  "_rejection": {
+    "code": "E_DERIVED_STRENGTH_HAS_RESULT",
+    "message": "section \"X.3\" table 1 row \"Độ hòa tan\" column 2 reports a measured value for strength \"5 mg\", which has no experimental source — it must be marked as awaiting data, not left blank and not filled in"
+  },
+  "_measuredOnlyTable": {
+    "columns": [
+      "Chỉ tiêu"
+    ],
+    "perStrength": true,
+    "measuredOnly": true,
+    "rows": "variable"
+  },
+  "offendingSection": {
+    "id": "X.3",
+    "status": "covered",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Chỉ tiêu",
+          "5 mg",
+          "10 mg"
+        ],
+        "rows": [
+          [
+            "Độ hòa tan",
+            "98,64",
+            "98,64"
+          ],
+          [
+            "Độ cứng",
+            "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] cần lô 5 mg được bào chế thật",
+            "98,64"
+          ]
+        ]
+      }
+    ]
+  }
+}

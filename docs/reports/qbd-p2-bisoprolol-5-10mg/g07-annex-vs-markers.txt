@@ -1,0 +1,74 @@
+TAP version 13
+# Subtest: every marker in the draft is accounted for by exactly one row
+ok 1 - every marker in the draft is accounted for by exactly one row
+  ---
+  duration_ms: 5.154531
+  type: 'test'
+  ...
+# Subtest: every row names the section, the item and what is needed
+ok 2 - every row names the section, the item and what is needed
+  ---
+  duration_ms: 2.391272
+  type: 'test'
+  ...
+# Subtest: a row in a per-strength table says which strength it is about
+ok 3 - a row in a per-strength table says which strength it is about
+  ---
+  duration_ms: 1.401288
+  type: 'test'
+  ...
+# Subtest: filling one real value removes exactly one row
+ok 4 - filling one real value removes exactly one row
+  ---
+  duration_ms: 4.079399
+  type: 'test'
+  ...
+# Subtest: a table with no cell filled in asks once, not once per cell
+ok 5 - a table with no cell filled in asks once, not once per cell
+  ---
+  duration_ms: 1.606362
+  type: 'test'
+  ...
+# Subtest: one filled cell breaks the collapse, so the rest are asked for individually
+ok 6 - one filled cell breaks the collapse, so the rest are asked for individually
+  ---
+  duration_ms: 1.830238
+  type: 'test'
+  ...
+# Subtest: the list follows the markers even for a product with different sections filled
+ok 7 - the list follows the markers even for a product with different sections filled
+  ---
+  duration_ms: 1.296951
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 105.420886
+
+## Phép join đếm độc lập
+
+Đếm marker trong draft và đếm dòng phụ lục trong file .docx đã render bằng hai đường khác nhau:
+
+| Đại lượng | Giá trị |
+|---|---|
+| marker trong draft | 147 |
+| dòng phụ lục sinh ra | 113 |
+| marker được các dòng đó phủ | 147 |
+| dòng phụ lục render trong document.xml | 113 (đếm bằng parser XML trên file .docx) |
+
+Chênh 147 − 113 = 34 là phần gộp của đúng một bảng: ma trận rủi ro 7 CQA × 5 công đoạn ở
+3.2.P.2.3.1, toàn bộ 35 ô chưa điền, gộp thành một dòng yêu cầu cả bảng.
+
+## Phân bổ theo hàm lượng
+
+| Hàm lượng | Số dòng |
+|---|---|
+| — | 57 |
+| 5 mg | 28 |
+| 10 mg | 28 |

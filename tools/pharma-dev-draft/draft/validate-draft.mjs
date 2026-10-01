@@ -3,11 +3,14 @@
 // a table was mapped to the correct CTD section, or whether "covered" content is a verbatim copy
 // of the source (see draft/checklist.md for that judgment call).
 
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { TABLE_WIDTH_DXA } from "../schemas/layout.mjs";
+import { isDecisionText, isGapText, isMarkedText, markerText } from "../schemas/markers.mjs";
+import { barSeries, flowSteps, processStages, profileSeries } from "../render/figures/figure-source.mjs";
+import { labelColumnCount } from "../schemas/table-shape.mjs";
 
 const draftDir = dirname(fileURLToPath(import.meta.url));
 const toolRoot = join(draftDir, "..");
@@ -20,7 +23,13 @@ export class DraftContractError extends Error {
   }
 }
 
-const VALID_BLOCK_TYPES = new Set(["heading2", "heading3", "paragraph", "table"]);
+const VALID_BLOCK_TYPES = new Set(["heading2", "heading3", "paragraph", "table", "figure", "image"]);
+const VALID_FIGURE_KINDS = new Set(["flow", "bars", "process", "profile"]);
+const VALID_FIGURE_AXES = new Set(["columns", "rows"]);
+// Supplied figures live in one directory under the tool. A draft naming an arbitrary path would let a
+// rendered dossier pull in a file nobody reviewed.
+const IMAGE_ROOT = "assets/";
+const VALID_IMAGE_EXTENSIONS = [".png", ".jpg", ".jpeg"];
 const VALID_COLUMN_ALIGN = new Set(["left", "center", "justify"]);
 // Keys the renderer actually reads. Anything else in a block is a typo the renderer would silently
 // ignore (falling back to default widths/alignment), so it is rejected rather than dropped.
@@ -28,9 +37,14 @@ const ALLOWED_BLOCK_KEYS = {
   heading2: new Set(["type", "text"]),
   heading3: new Set(["type", "text"]),
   paragraph: new Set(["type", "text", "italic", "bold"]),
-  table: new Set(["type", "headers", "rows", "columnWidths", "columnAlign", "headerless"]),
+  table: new Set(["type", "id", "headers", "rows", "columnWidths", "columnAlign", "headerless"]),
+  figure: new Set(["type", "kind", "fromTable", "fromAxis", "fromRow", "threshold", "thresholdLabel", "axisLabel", "caption"]),
+  image: new Set(["type", "path", "caption", "widthPt"]),
 };
-const REQUIRED_META_FIELDS = ["productName", "apiName", "sourceFile", "draftDate", "preparer", "extractionMethod"];
+// assembledBy, không phải preparer. Tên cũ đọc như "người soạn thảo", và vì thế nó đã tự trôi lên một
+// dòng của bảng ghi nhận ký duyệt — dòng có cột "Chữ ký". Trường này nói bản nháp được dựng bằng gì;
+// ai chịu trách nhiệm là việc của người ký, và văn bản không được tự khai thay họ.
+const REQUIRED_META_FIELDS = ["productName", "apiName", "draftDate", "assembledBy", "extractionMethod"];
 
 function loadOutline() {
   const raw = readFileSync(join(toolRoot, "schemas", "p2-outline.json"), "utf8");
@@ -60,6 +74,41 @@ function validateBlock(block, sectionId, index) {
     // text, so reject it instead of producing prose the author did not write.
     if (block.text.includes("\n")) {
       fail("E_BLOCK_TEXT", `${where}.text must not contain a newline — only table cells render line breaks`);
+    }
+  }
+  if (block.type === "figure") {
+    if (!VALID_FIGURE_KINDS.has(block.kind)) {
+      fail("E_FIGURE_SHAPE", `${where}.kind must be one of ${[...VALID_FIGURE_KINDS].join(", ")}, got: ${block.kind}`);
+    }
+    // A name, not a number. The index this replaced was positional, so a table moved or inserted ahead
+    // of a figure silently redirected it; a name does not move when the table does. The old form is
+    // refused rather than accepted alongside — one field with two spellings is one field that will
+    // disagree with itself.
+    if (typeof block.fromTable !== "string" || block.fromTable.trim() === "") {
+      fail("E_FIGURE_SHAPE", `${where}.fromTable must name the id of a table in the same section${typeof block.fromTable === "number" ? " — a table index no longer resolves, give the table an id and name it here" : ""}`);
+    }
+    if (typeof block.caption !== "string" || block.caption.trim() === "") {
+      fail("E_FIGURE_SHAPE", `${where}.caption must be a non-empty string — a figure with no caption states nothing about what it shows`);
+    }
+    if (block.kind === "flow" && block.fromAxis !== undefined && !VALID_FIGURE_AXES.has(block.fromAxis)) {
+      fail("E_FIGURE_SHAPE", `${where}.fromAxis must be one of ${[...VALID_FIGURE_AXES].join(", ")}`);
+    }
+    if (block.kind === "bars" && (typeof block.fromRow !== "string" || block.fromRow.trim() === "")) {
+      fail("E_FIGURE_SHAPE", `${where}.fromRow must name the table row the chart plots`);
+    }
+  }
+  if (block.type === "image") {
+    if (typeof block.path !== "string" || !block.path.startsWith(IMAGE_ROOT) || block.path.includes("..")) {
+      fail("E_IMAGE_PATH", `${where}.path must be a path under "${IMAGE_ROOT}" with no parent-directory segment, got: ${block.path}`);
+    }
+    if (!VALID_IMAGE_EXTENSIONS.some((extension) => block.path.toLowerCase().endsWith(extension))) {
+      fail("E_IMAGE_PATH", `${where}.path must end in one of ${VALID_IMAGE_EXTENSIONS.join(", ")}`);
+    }
+    if (typeof block.caption !== "string" || block.caption.trim() === "") {
+      fail("E_IMAGE_SHAPE", `${where}.caption must be a non-empty string`);
+    }
+    if (!existsSync(join(toolRoot, block.path))) {
+      fail("E_IMAGE_MISSING", `${where}.path "${block.path}" does not exist — rendering would drop the figure silently`);
     }
   }
   if (block.type === "table") {
@@ -147,6 +196,63 @@ function validateColumns(actual, expected, where) {
   });
 }
 
+// A product may have any number of strengths, and a table that reports per strength carries one
+// column group for each. The group SIZE is derived here rather than declared in the outline: the
+// house form uses one column per strength in the composition comparison and two (mass and per cent)
+// in the final formula, and a number written into the schema would be one more thing to keep in step
+// with the table it describes. When `perStrength` is set, `columns` declares only the fixed prefix.
+function validateStrengthColumns(table, tableSpec, draft, where) {
+  const strengths = draft.meta.strengths;
+  const fixedCount = Array.isArray(tableSpec.columns) ? tableSpec.columns.length : 0;
+  const remaining = table.headers.length - fixedCount;
+  if (remaining <= 0 || remaining % strengths.length !== 0) {
+    fail("E_FORM_STRENGTH_COLUMNS", `${where} must carry one equal column group per declared strength: ${remaining} column(s) after the ${fixedCount} fixed one(s) does not divide by ${strengths.length} strength(s)`);
+  }
+  const groupSize = remaining / strengths.length;
+  strengths.forEach((strength, index) => {
+    const label = table.headers[fixedCount + index * groupSize];
+    // The longest declared strength the label contains must be its own. Plain containment is too
+    // weak — "15 mg" contains "5 mg", so transposed groups would pass while every value sat under the
+    // wrong heading — and "contains no other strength" is too strong, because it would reject the
+    // correct "15 mg" label for exactly the same reason. Longest match separates the two: for a
+    // 5 mg / 15 mg pair, and for 2,5 mg / 5 mg, each label resolves to the strength it names.
+    const named = strengths
+      .filter((candidate) => label.includes(candidate))
+      .sort((a, b) => b.length - a.length);
+    if (named[0] !== strength) {
+      fail("E_FORM_STRENGTH_COLUMNS", `${where} column ${fixedCount + index * groupSize + 1} must name strength "${strength}", got "${label}"${named.length ? ` which names "${named[0]}"` : ""}`);
+    }
+  });
+  return groupSize;
+}
+
+// A strength with no experimental source of its own can carry a calculated quantity and nothing more.
+// Proportion gives a mass; it does not give a dissolution percentage, a hardness, a disintegration
+// time or a content-uniformity result. Any table the form marks `measuredOnly` therefore has to show
+// a gap in that strength's columns, because nobody reading the finished document can tell a
+// calculated number from a measured one, and a blank cell reads as "not applicable" rather than as
+// "not known". Enforced here, upstream of the renderer, so such a document cannot be produced at all.
+function validateMeasuredOnly(table, groupSpan, draft, where) {
+  const derived = draft.meta.derivedStrengths ?? [];
+  if (derived.length === 0) return;
+  const rowLabel = (row) => row[0] ?? "";
+  for (const strength of derived) {
+    const span = groupSpan(strength);
+    if (!span) continue;
+    for (const row of table.rows) {
+      for (let column = span.start; column < span.start + span.size; column++) {
+        const cell = row[column];
+        if (isDecisionText(cell)) {
+          fail("E_DERIVED_STRENGTH_HAS_RESULT", `${where} row "${rowLabel(row)}" column ${column + 1} carries a decision marker for strength "${strength}": nobody can decide this cell, because the strength has no batch to measure. It must be marked as awaiting data`);
+        }
+        if (!isGapText(cell)) {
+          fail("E_DERIVED_STRENGTH_HAS_RESULT", `${where} row "${rowLabel(row)}" column ${column + 1} reports a measured value for strength "${strength}", which has no experimental source — it must be marked as awaiting data, not left blank and not filled in`);
+        }
+      }
+    }
+  }
+}
+
 function validateRows(table, tableSpec, draft, where) {
   if (tableSpec.rows === "variable") return;
   let expected = tableSpec.rows;
@@ -164,6 +270,314 @@ function validateRows(table, tableSpec, draft, where) {
   }
 }
 
+// A table whose columns name things another part of the document already lists must not list them
+// again by hand: the two copies drift, and the drift is the defect. `columnsFrom` takes the labels
+// from another section's first table; `columnsFromRows` takes them from the first cell of each row of
+// that table, for the case where the source lists the things down a column and this table lays them
+// across. Either way the declared `columns` ends in "..." and stands for exactly the derived labels,
+// so what the table may not do is add a column the source does not have or leave one out.
+function expectedDerivedColumns(tableSpec, draft, where) {
+  if (!Array.isArray(tableSpec.columns)) fail("E_FORM_COLUMNS", `${where} derives its columns but declares no fixed column prefix`);
+  if (tableSpec.columnsFrom !== undefined && tableSpec.columnsFromRows !== undefined) {
+    fail("E_FORM_COLUMNS", `${where} declares both columnsFrom and columnsFromRows — it would have two sources for one set of columns`);
+  }
+  const fixedCount = tableSpec.columns.length - 1;
+  if (tableSpec.columns[fixedCount] !== COLUMN_REST) {
+    fail("E_FORM_COLUMNS", `${where} derives its columns, so its declared columns must end in "${COLUMN_REST}"`);
+  }
+  if (typeof tableSpec.columnsFrom === "string") {
+    const source = draft.sections.find((entry) => entry.id === tableSpec.columnsFrom)
+      ?.blocks?.find((block) => block.type === "table");
+    if (!source) fail("E_FORM_COLUMNS", `${where} takes its columns from section "${tableSpec.columnsFrom}", which has no table`);
+    return { fixedCount, labels: source.headers.slice(fixedCount), from: tableSpec.columnsFrom };
+  }
+  const { section, column } = tableSpec.columnsFromRows;
+  const source = draft.sections.find((entry) => entry.id === section)?.blocks?.find((block) => block.type === "table");
+  if (!source) fail("E_FORM_COLUMNS", `${where} takes its columns from the rows of section "${section}", which has no table`);
+  return { fixedCount, labels: source.rows.map((row) => row[column]), from: section };
+}
+
+function validateDerivedColumns(table, tableSpec, draft, where) {
+  const { fixedCount, labels, from } = expectedDerivedColumns(tableSpec, draft, where);
+  const actual = table.headers.slice(fixedCount);
+  if (actual.length !== labels.length || actual.some((label, index) => label !== labels[index])) {
+    fail("E_FORM_COLUMNS", `${where} columns do not match section "${from}", which is their source. Expected: ${labels.join(" | ")}. Got: ${actual.join(" | ")}`);
+  }
+}
+
+// A risk matrix scores each quality attribute (row) against each thing that could threaten it
+// (column). The updated matrix repeats the initial one's rows and columns — that is enforced by the
+// form's rowsFrom/columnsFrom — and is allowed to score some cells lower. A cell scored lower is a
+// claim that something was learned, and a claim nobody can trace is the one thing a reviewer cannot
+// accept from a risk assessment: the justification table has to say which study lowered it. Whether
+// that study SUPPORTS the lower score is a judgement this code cannot make; it can only make sure the
+// claim is attached to something a reader can go and read, or openly marked as not yet attached.
+// A cell still holding a marker has no level, so there is nothing to compare and it is skipped.
+const JUSTIFICATION_KEY_SEPARATOR = " × ";
+
+function riskLevel(cell, scale, where) {
+  if (isMarkedText(cell)) return null;
+  const level = scale.indexOf(String(cell).trim());
+  if (level === -1) {
+    fail("E_RISK_CELL_INVALID", `${where} holds "${cell}", which is neither a level of the risk scale (${scale.join(" | ")}) nor a marker — a free-text cell cannot be compared with the initial assessment`);
+  }
+  return level;
+}
+
+function matrixLevels(section, scale) {
+  const matrix = section.blocks.find((block) => block.type === "table");
+  if (!matrix) fail("E_RISK_MATRIX_MISSING", `section "${section.id}" is a risk assessment but has no matrix`);
+  const levels = new Map();
+  matrix.rows.forEach((row) => {
+    matrix.headers.slice(1).forEach((header, index) => {
+      const where = `section "${section.id}" matrix cell "${row[0]}${JUSTIFICATION_KEY_SEPARATOR}${header}"`;
+      levels.set(`${row[0]}${JUSTIFICATION_KEY_SEPARATOR}${header}`, riskLevel(row[index + 1], scale, where));
+    });
+  });
+  return levels;
+}
+
+function validateRiskAssessment(section, spec, draft, outline) {
+  const scale = outline.riskScale;
+  if (!Array.isArray(scale) || scale.length < 2 || new Set(scale).size !== scale.length) {
+    fail("E_OUTLINE_RISK_SCALE", `section "${section.id}" declares a risk assessment, so the outline must declare riskScale as an ordered list of at least two distinct levels`);
+  }
+  if (!["initial", "updated"].includes(spec.kind)) {
+    fail("E_OUTLINE_RISK_KIND", `section "${section.id}" riskAssessment.kind must be "initial" or "updated", got: ${spec.kind}`);
+  }
+  const current = matrixLevels(section, scale);
+  if (spec.kind === "initial") return;
+
+  const target = outline.sections.find((entry) => entry.id === spec.pairs);
+  if (target?.form?.riskAssessment?.kind !== "initial") {
+    fail("E_OUTLINE_RISK_PAIR", `section "${section.id}" is an updated risk assessment, so "pairs" must name an initial one; "${spec.pairs}" is not`);
+  }
+  const initialSection = draft.sections.find((entry) => entry.id === spec.pairs);
+  if (!initialSection?.blocks?.some((block) => block.type === "table")) {
+    fail("E_RISK_PAIR_MISSING", `section "${section.id}" pairs with "${spec.pairs}", which has no matrix in this draft`);
+  }
+  const initial = matrixLevels(initialSection, scale);
+
+  const justification = section.blocks.filter((block) => block.type === "table")[1];
+  if (!justification) {
+    fail("E_RISK_JUSTIFICATION_MISSING", `section "${section.id}" has no justification table after its matrix`);
+  }
+  const rows = new Map(justification.rows.map((row) => [row[0], row[row.length - 1]]));
+
+  const lowered = new Set();
+  for (const [key, level] of current) {
+    const before = initial.get(key);
+    if (level === null || before === null || before === undefined || level >= before) continue;
+    lowered.add(key);
+    const evidence = rows.get(key);
+    const traceable = evidence !== undefined && (isMarkedText(evidence) || new RegExp(INTERNAL_REFERENCE.source).test(evidence));
+    if (!traceable) {
+      fail("E_RISK_LOWERED_NO_EVIDENCE", `section "${section.id}" scores "${key}" lower than section "${spec.pairs}" (${scale[level]} against ${scale[before]}) but its justification table ${evidence === undefined ? "has no row for that cell" : "does not name the study that lowered it"} — cite the section of the study, or mark the cell as awaiting one`);
+    }
+  }
+  for (const key of rows.keys()) {
+    // A row still carrying a marker in its first cell is a placeholder for a justification not yet
+    // written, not a claim about any cell.
+    if (isMarkedText(key) || lowered.has(key)) continue;
+    fail("E_RISK_JUSTIFICATION_ORPHAN", `section "${section.id}" justifies "${key}", which is not a cell scored lower than section "${spec.pairs}" — a justification for a cell that did not change is either a stale row or a cell that was changed back without the matrix being updated`);
+  }
+}
+
+// The operation list names each unit operation of the process and says where its development is
+// reported. Two things must hold, and they are different failures. Every operation points at exactly
+// one development section — or carries a marker saying it has none yet — because an operation with no
+// development narrative is one nobody studied and nothing in the document says so. And every section
+// that develops operations is pointed at by at least one of them, because a development section for an
+// operation the list does not have is a study of something the process does not do. One section may
+// serve several operations (three mixing steps, one blending study); the reverse is the error.
+//
+// A product with no film coat has no coating operation, and the form cannot drop the coating section,
+// so the draft declares in meta.notApplicableSections that the section does not apply. That is a
+// declaration, checked for contradiction below, not a way to leave a section uncited.
+function developmentSectionIds(outline) {
+  return outline.sections.filter((entry) => entry.form?.developsOperations).map((entry) => entry.id);
+}
+
+function validateProcessDevelopmentOutline(outline) {
+  if (developmentSectionIds(outline).length > 0 && !outline.sections.some((entry) => entry.form?.operationList)) {
+    fail("E_OUTLINE_PROCESS_DEVELOPMENT", "the outline marks sections as developing operations but no section declares the operation list that points at them");
+  }
+}
+
+function validateOperationList(section, spec, draft, outline) {
+  const table = section.blocks.find((block) => block.type === "table");
+  if (!table) fail("E_PROCESS_DEVELOPMENT_UNKNOWN", `section "${section.id}" is the operation list but has no table`);
+  const column = spec.developmentColumn;
+  if (!Number.isInteger(column) || column < 1 || column >= table.headers.length) {
+    fail("E_OUTLINE_PROCESS_DEVELOPMENT", `section "${section.id}" operationList.developmentColumn must index a column of its table after the operation names`);
+  }
+  const developing = developmentSectionIds(outline);
+  const notApplicable = draft.meta.notApplicableSections ?? [];
+  const cited = new Set();
+  for (const row of table.rows) {
+    const cell = row[column];
+    if (isMarkedText(cell)) continue;
+    const references = [...new Set((cell.match(new RegExp(INTERNAL_REFERENCE.source, "g")) ?? []).map((reference) => reference.replace(/^3\.2\./, "")))];
+    if (references.length > 1) {
+      fail("E_PROCESS_DEVELOPMENT_MULTIPLE", `operation "${row[0]}" points at ${references.length} development sections (${references.join(", ")}) — it has to point at one, or carry a marker`);
+    }
+    if (references.length === 0 || !developing.includes(references[0])) {
+      fail("E_PROCESS_DEVELOPMENT_UNKNOWN", `operation "${row[0]}" must point at the section that develops it (${developing.join(", ")}) or carry a marker, got: "${cell}"`);
+    }
+    if (notApplicable.includes(references[0])) {
+      fail("E_PROCESS_DEVELOPMENT_CONTRADICTION", `operation "${row[0]}" points at section "${references[0]}", which meta.notApplicableSections declares does not apply`);
+    }
+    cited.add(references[0]);
+  }
+  for (const id of developing) {
+    if (!cited.has(id) && !notApplicable.includes(id)) {
+      fail("E_PROCESS_DEVELOPMENT_UNUSED", `section "${id}" develops an operation, but no operation in the list points at it — either an operation is missing from the list, or the section does not apply and has to be declared in meta.notApplicableSections`);
+    }
+  }
+}
+
+// Some sections report one strength: the physico-chemical characteristics, the breakability test and
+// the scale-up of each strength. The outline fixes a family of them (one per position in
+// meta.strengths) and each declares its position in `strengthIndex`, so which section belongs to which
+// strength is declared rather than inferred from the order the headings happen to come in.
+//
+// The outline is a fixed list while the number of strengths has no upper bound, so a draft with more
+// strengths than the family has sections cannot be given the missing ones here. It is refused, and the
+// outline has to gain a section. The reverse — a product with fewer strengths than the family has
+// sections — leaves a section with no strength, which the draft declares in
+// meta.notApplicableSections instead of letting it sit there reading as an unfilled gap.
+function strengthSectionsOf(outline) {
+  return outline.sections.filter((entry) => Number.isInteger(entry.form?.strengthIndex));
+}
+
+function parentId(id) {
+  return id.slice(0, id.lastIndexOf("."));
+}
+
+function validateNotApplicable(draft, outline) {
+  const declared = draft.meta.notApplicableSections;
+  if (declared === undefined) return;
+  const allowed = [...developmentSectionIds(outline), ...strengthSectionsOf(outline).map((entry) => entry.id)];
+  if (!Array.isArray(declared) || !declared.every((id) => allowed.includes(id))) {
+    fail("E_META_NOT_APPLICABLE", `draft.meta.notApplicableSections must list only sections that develop an operation or report one strength (${allowed.join(", ")})`);
+  }
+}
+
+function validateStrengthSections(draft, outline) {
+  const sections = strengthSectionsOf(outline);
+  if (sections.length === 0) return;
+  const count = draft.meta.strengths.length;
+  const notApplicable = draft.meta.notApplicableSections ?? [];
+  const families = new Map();
+  for (const entry of sections) {
+    const family = parentId(entry.id);
+    if (!families.has(family)) families.set(family, []);
+    families.get(family).push(entry);
+  }
+  for (const [family, members] of families) {
+    const indices = members.map((entry) => entry.form.strengthIndex).sort((a, b) => a - b);
+    if (indices.some((index, position) => index !== position)) {
+      fail("E_OUTLINE_STRENGTH_SECTION", `the sections under "${family}" must take strengthIndex 0, 1, 2… with no gap and no repeat, got: ${indices.join(", ")}`);
+    }
+    if (count > members.length) {
+      fail("E_STRENGTH_SECTIONS_MISSING", `the draft declares ${count} strengths but the outline has ${members.length} per-strength section(s) under "${family}" — the document cannot report ${count - members.length} of them. Add a section to the outline for each`);
+    }
+    for (const entry of members) {
+      const real = entry.form.strengthIndex < count;
+      if (real && notApplicable.includes(entry.id)) {
+        fail("E_STRENGTH_SECTION_CONTRADICTION", `section "${entry.id}" reports strength "${draft.meta.strengths[entry.form.strengthIndex]}", which the draft declares, yet meta.notApplicableSections says it does not apply`);
+      }
+      if (!real && !notApplicable.includes(entry.id)) {
+        fail("E_STRENGTH_SECTION_ORPHAN", `section "${entry.id}" reports strength number ${entry.form.strengthIndex + 1} but the draft declares ${count} — declare it in meta.notApplicableSections`);
+      }
+    }
+  }
+}
+
+// A strength in meta.derivedStrengths has a composition worked out by proportion and no batch of its
+// own, so the section reporting it can hold no measurement. The table rule is the one
+// validateMeasuredOnly applies to a column group: every value cell is a gap marker, and a decision
+// marker is refused because nobody can decide a cell for a batch that does not exist. The prose rule
+// is a heuristic and is meant as one — a number with a unit, or a number with two decimals, outside the
+// strength's own name. A reference to another section ("3.2.P.2.3.3") never matches: its parts have
+// one digit after the point, and a digit run preceded by a point is not read as a number. A measurement written in words, or
+// a bare number with no unit, gets past it. It exists so the common failure, a hardness or a
+// percentage typed into the wrong strength's section, cannot reach the printed document.
+const MEASUREMENT_UNITS = "mg|µg|mcg|kg|g|%|kN|kp|N|mm|cm|µm|mL|ml|L|phút|giây|giờ|min|h|s|rpm|°C|viên|lô";
+const MEASUREMENT_TOKEN = new RegExp(
+  `(?<![\\p{L}\\p{N}.,])\\d+(?:[.,]\\d+)?\\s*(?:${MEASUREMENT_UNITS})(?![\\p{L}])|(?<![\\p{L}\\p{N}.,])\\d+[.,]\\d{2,}(?![\\p{N}])`,
+  "gu",
+);
+
+export function measurementTokens(text, strengths) {
+  let rest = String(text);
+  for (const strength of strengths) rest = rest.split(strength).join(" ");
+  return rest.match(MEASUREMENT_TOKEN) ?? [];
+}
+
+function validateDerivedStrengthSection(section, spec, draft) {
+  const strength = draft.meta.strengths[spec.strengthIndex];
+  if (strength === undefined || !(draft.meta.derivedStrengths ?? []).includes(strength)) return;
+  const say = (where, what) => `section "${section.id}" reports strength "${strength}", which has no batch of its own, yet ${where} ${what}`;
+  section.blocks.forEach((block, index) => {
+    if (block.type === "paragraph") {
+      const found = measurementTokens(block.text, draft.meta.strengths);
+      if (found.length > 0) {
+        fail("E_DERIVED_SECTION_HAS_RESULT", say(`blocks[${index}]`, `holds what reads as a measurement ("${found[0]}") — a calculated strength gets a mass from proportion, never a result`));
+      }
+    }
+    if (block.type !== "table") return;
+    const skip = labelColumnCount(block);
+    block.rows.forEach((row) => {
+      row.slice(skip).forEach((cell) => {
+        if (isDecisionText(cell)) {
+          fail("E_DERIVED_SECTION_HAS_RESULT", say(`row "${row[0]}"`, "carries a decision marker: nobody can decide a cell for a batch that does not exist — it has to be marked as awaiting data"));
+        }
+        if (!isGapText(cell)) {
+          fail("E_DERIVED_SECTION_HAS_RESULT", say(`row "${row[0]}"`, `holds "${cell}" in a value cell — it has to be marked as awaiting data, not left blank and not filled in`));
+        }
+      });
+    });
+  });
+}
+
+// A comparative dissolution table with no similarity statement is an equivalence conclusion left
+// hanging: the reader cannot tell whether the profiles were compared and found alike, were never
+// compared, or were exempt. Each row of the similarity table therefore holds exactly one of: an f2
+// value, a marker saying the comparison is still to be done, or a statement that f2 does not apply
+// together with the condition that makes it so. A bare "không áp dụng" is refused, because it gives
+// the reader an exemption with nothing to check it against.
+//
+// What this does not do: it does not recompute f2 from the profiles or judge whether the stated
+// condition is true or enough. It makes sure a condition is written down where a reviewer can test it.
+const F2_NOT_APPLICABLE = /^\s*(không áp dụng|n\/?a)\b/i;
+const F2_NUMBER = /^\d{1,3}(?:[.,]\d+)?$/;
+const F2_CONDITION_MIN_WORDS = 6;
+
+function validateSimilarity(section) {
+  const table = section.blocks.filter((block) => block.type === "table")[1];
+  if (!table || table.rows.length === 0) {
+    fail("E_F2_MISSING", `section "${section.id}" compares dissolution profiles but its similarity table has no row — state f2, or that it does not apply and why`);
+  }
+  table.rows.forEach((row) => {
+    const [comparison, f2, condition] = row;
+    if (isMarkedText(f2)) return;
+    if (F2_NUMBER.test(String(f2).trim())) {
+      const value = Number(String(f2).trim().replace(",", "."));
+      if (value > 100) fail("E_F2_CELL_INVALID", `section "${section.id}" comparison "${comparison}" gives f2 = ${f2}, which is outside 0–100`);
+      return;
+    }
+    if (!F2_NOT_APPLICABLE.test(String(f2))) {
+      fail("E_F2_CELL_INVALID", `section "${section.id}" comparison "${comparison}" has "${f2}" for f2 — give the value, a marker, or "không áp dụng" with its condition`);
+    }
+    if (isMarkedText(condition)) return;
+    const words = String(condition).trim().split(/\s+/).filter(Boolean);
+    if (words.length < F2_CONDITION_MIN_WORDS || F2_NOT_APPLICABLE.test(String(condition))) {
+      fail("E_F2_UNCONDITIONAL", `section "${section.id}" comparison "${comparison}" says f2 does not apply without saying under what condition — an exemption nobody can check is not a finding`);
+    }
+  });
+}
+
 function validateSectionForm(section, spec, draft) {
   if (Array.isArray(spec.headings)) {
     const actual = section.blocks.filter((block) => block.type.startsWith("heading")).map((block) => block.text);
@@ -179,7 +593,30 @@ function validateSectionForm(section, spec, draft) {
   spec.tables.forEach((tableSpec, index) => {
     const table = tables[index];
     const where = `section "${section.id}" table ${index + 1}`;
-    if (Array.isArray(tableSpec.columns)) validateColumns(table.headers, tableSpec.columns, where);
+    if (tableSpec.perStrength) {
+      // The two make opposite claims about the trailing columns — one says "any number, any name",
+      // the other "exactly one group per strength" — so a table declaring both has no defined shape.
+      if (Array.isArray(tableSpec.columns) && tableSpec.columns.includes(COLUMN_REST)) {
+        fail("E_FORM_COLUMNS", `${where} declares both perStrength and an open-ended column list`);
+      }
+      if (Array.isArray(tableSpec.columns)) {
+        validateColumns(table.headers.slice(0, tableSpec.columns.length), tableSpec.columns, where);
+      }
+      const groupSize = validateStrengthColumns(table, tableSpec, draft, where);
+      if (tableSpec.measuredOnly) {
+        const fixedCount = Array.isArray(tableSpec.columns) ? tableSpec.columns.length : 0;
+        const spanFor = (strength) => {
+          const index = draft.meta.strengths.indexOf(strength);
+          return index < 0 ? undefined : { start: fixedCount + index * groupSize, size: groupSize };
+        };
+        validateMeasuredOnly(table, spanFor, draft, where);
+      }
+    } else if (tableSpec.columnsFrom !== undefined || tableSpec.columnsFromRows !== undefined) {
+      validateColumns(table.headers.slice(0, tableSpec.columns.length - 1), tableSpec.columns.slice(0, -1), where);
+      validateDerivedColumns(table, tableSpec, draft, where);
+    } else if (Array.isArray(tableSpec.columns)) {
+      validateColumns(table.headers, tableSpec.columns, where);
+    }
     if (Boolean(table.headerless) !== Boolean(tableSpec.headerless)) {
       fail("E_FORM_HEADERLESS", `${where} must ${tableSpec.headerless ? "be" : "not be"} headerless`);
     }
@@ -187,7 +624,127 @@ function validateSectionForm(section, spec, draft) {
   });
 }
 
-export function validateDraft(draft) {
+// `outline` is injectable so a test can prove a form rule on a purpose-built form rather than only on
+// whichever shape the department's current outline happens to have. The CLI and the renderer pass
+// nothing and get the real one, so there is no second source of truth in normal use.
+// Every place a marker can live, each with the path an error message needs. Derived by walking the
+// draft rather than listed, so a block type that gains a text field is covered without a second edit.
+function everyText(draft) {
+  const texts = [];
+  for (const section of draft.sections ?? []) {
+    if (typeof section?.id !== "string") continue;
+    if (typeof section.gapReason === "string") {
+      texts.push([`sections[${section.id}].gapReason`, section.gapReason]);
+    }
+    (section.blocks ?? []).forEach((block, index) => {
+      if (typeof block?.text === "string") {
+        texts.push([`sections[${section.id}].blocks[${index}].text`, block.text]);
+      }
+      if (typeof block?.caption === "string") {
+        texts.push([`sections[${section.id}].blocks[${index}].caption`, block.caption]);
+      }
+      if (block?.type !== "table") return;
+      (block.rows ?? []).forEach((row, rowIndex) => {
+        (row ?? []).forEach((cell, column) => {
+          if (typeof cell === "string") {
+            texts.push([`sections[${section.id}].blocks[${index}].rows[${rowIndex}][${column}]`, cell]);
+          }
+        });
+      });
+    });
+  }
+  return texts;
+}
+
+// The two marker kinds go to two different people and into two different registers, so a spot must
+// be one or the other. A decision also has to say what is to be decided and who decides it: an
+// unowned decision is a complaint, and the register exists to hand somebody a task.
+function validateMarkerKinds(draft) {
+  const texts = everyText(draft);
+
+  for (const [where, text] of texts) {
+    if (isGapText(text) && isDecisionText(text)) {
+      fail("E_MARKER_AMBIGUOUS", `${where} carries a gap marker and a decision marker at once: it would be listed in both registers, and a reader cannot tell whether it waits for data or for somebody to choose`);
+    }
+  }
+
+  const decisions = texts.filter(([, text]) => isDecisionText(text));
+  if (decisions.length === 0) return;
+
+  const owners = draft.meta.decisionOwners;
+  if (!Array.isArray(owners) || owners.length === 0) {
+    fail("E_META_DECISION_OWNERS", `draft holds ${decisions.length} decision marker(s), so draft.meta.decisionOwners must name who can settle them`);
+  }
+
+  for (const [where, text] of decisions) {
+    const body = markerText(text);
+    if (body === "") {
+      fail("E_DECISION_MARKER_SHAPE", `${where}: a decision marker must say what has to be decided — an empty one records that something is unresolved without saying what`);
+    }
+    if (!owners.some((owner) => body.includes(owner))) {
+      fail("E_DECISION_MARKER_SHAPE", `${where}: a decision marker must name who decides, from meta.decisionOwners (${owners.join(", ")}) — a decision with no owner is not a task anybody picks up`);
+    }
+  }
+}
+
+// A reference the reader can follow. The document is full of "xem mục P.2.x", and a reference that
+// lands on a container lands on a heading with no content — which a reviewer reads as a dead link in a
+// submission. Two tokenising traps are handled by the shape of the pattern rather than by patching
+// afterwards: it requires at least one numeric segment, so the bare form name "biểu mẫu P.2" is not a
+// reference, and each segment requires a digit after the dot, so a sentence-ending period is not
+// swallowed into the number.
+const INTERNAL_REFERENCE = /(?:3\.2\.)?P\.2(?:\.\d+)+/g;
+
+function validateCrossReferences(draft, outline) {
+  const leafIds = new Set(outline.sections.filter((section) => !section.container).map((section) => section.id));
+  const containerIds = new Set(outline.sections.filter((section) => section.container).map((section) => section.id));
+  const quoted = new Set(draft.meta.quotedNumbering ?? []);
+
+  // Declaring one of our own sections as "quoted from elsewhere" would build a place to hide a broken
+  // link before anyone breaks one.
+  for (const entry of quoted) {
+    const bare = entry.replace(/^3\.2\./, "");
+    if (leafIds.has(bare) || containerIds.has(bare)) {
+      fail("E_META_QUOTED_NUMBERING", `draft.meta.quotedNumbering declares "${entry}", which is a section of this document — quotedNumbering is for numbers taken from another document's numbering, so declaring our own would let a real broken reference pass`);
+    }
+  }
+
+  for (const [where, text] of everyText(draft)) {
+    for (const match of text.matchAll(INTERNAL_REFERENCE)) {
+      const reference = match[0].replace(/^3\.2\./, "");
+      if (leafIds.has(reference) || quoted.has(reference) || quoted.has(match[0])) continue;
+      if (containerIds.has(reference)) {
+        fail("E_XREF_CONTAINER", `${where} points at "${match[0]}", which is a container: it carries a heading and no content, so a reader following the reference arrives nowhere. Name the child section that holds what is meant`);
+      }
+      fail("E_XREF_UNKNOWN", `${where} points at "${match[0]}", which is not a section of this document. If the number is quoted from another document's numbering, declare it in meta.quotedNumbering`);
+    }
+  }
+}
+
+// A glossary that lists a term the document never uses is a small untruth in the one place a reader
+// goes to resolve an unfamiliar one. Only this direction is checked: the reverse — every capitalised
+// token must be glossed — would flag Vietnamese words written in capitals and fragments of URLs, and a
+// check that cries wolf is a check people learn to ignore.
+function validateAbbreviationsAreUsed(draft) {
+  const declared = draft.meta.abbreviations ?? [];
+  if (declared.length === 0) return;
+  // Headers and row labels count here, unlike in the value inventory: a term is explained for the
+  // reader wherever it appears, and several live only in table labels.
+  const corpus = everyText(draft).map(([, text]) => text)
+    .concat(draft.sections.flatMap((section) => (section.blocks ?? [])
+      .filter((block) => block.type === "table")
+      .flatMap((block) => block.headers ?? [])))
+    .join(" ");
+  for (const [term] of declared) {
+    // A digit may follow — "CT" is used as CT01 — but a letter may not, or "EP" would match "EPAR".
+    const used = new RegExp(`(?<![A-Za-z])${term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?![A-Za-z])`).test(corpus);
+    if (!used) {
+      fail("E_ABBREVIATION_UNUSED", `draft.meta.abbreviations declares "${term}", which appears nowhere in the document — a glossary entry for a term the text does not use sends the reader looking for something that is not there`);
+    }
+  }
+}
+
+export function validateDraft(draft, outline = loadOutline()) {
   if (typeof draft !== "object" || draft === null) fail("E_DRAFT_SHAPE", "draft must be an object");
   if (draft.schemaVersion !== "1.0") fail("E_SCHEMA_VERSION", `unsupported schemaVersion: ${draft.schemaVersion}`);
 
@@ -200,7 +757,43 @@ export function validateDraft(draft) {
   if (!["xml-walk", "liteparse"].includes(draft.meta.extractionMethod)) {
     fail("E_META_FIELD", `draft.meta.extractionMethod must be "xml-walk" or "liteparse"`);
   }
-  // Anything a section states that did not come out of sourceFile must be named here, so the
+  // Which experimental sources the document draws on. A list, not a string, because the count is data:
+  // the worked example began with one trial file and gained a second, and a document that states its
+  // provenance in one field ends up stating it as "a.docx; b.docx" where nothing can check it.
+  if (!Array.isArray(draft.meta.sourceFiles) || draft.meta.sourceFiles.length === 0) {
+    fail("E_META_SOURCE_FILES", "draft.meta.sourceFiles must be a non-empty array of the experimental source filenames");
+  }
+  if (!draft.meta.sourceFiles.every((file) => typeof file === "string" && file.trim() !== "")) {
+    fail("E_META_SOURCE_FILES", "draft.meta.sourceFiles entries must be non-empty strings");
+  }
+  if (new Set(draft.meta.sourceFiles).size !== draft.meta.sourceFiles.length) {
+    fail("E_META_SOURCE_FILES", "draft.meta.sourceFiles must not name the same file twice");
+  }
+
+  // Which strengths the document covers is data, so it is declared here rather than inferred from the
+  // product name. There is no upper bound: a two-strength product and a five-strength one take the
+  // same form.
+  if (!Array.isArray(draft.meta.strengths) || draft.meta.strengths.length === 0) {
+    fail("E_META_STRENGTHS", "draft.meta.strengths must be a non-empty array");
+  }
+  if (!draft.meta.strengths.every((strength) => typeof strength === "string" && strength.trim() !== "")) {
+    fail("E_META_STRENGTHS", "draft.meta.strengths entries must be non-empty strings");
+  }
+  if (new Set(draft.meta.strengths).size !== draft.meta.strengths.length) {
+    fail("E_META_STRENGTHS", "draft.meta.strengths must not repeat a strength");
+  }
+  // A strength listed here has no experimental source of its own — its composition comes from a
+  // proportional calculation. What that costs it is enforced where the tables are checked.
+  if (draft.meta.derivedStrengths !== undefined) {
+    if (!Array.isArray(draft.meta.derivedStrengths)) {
+      fail("E_META_STRENGTHS", "draft.meta.derivedStrengths must be an array when present");
+    }
+    const unknown = draft.meta.derivedStrengths.filter((strength) => !draft.meta.strengths.includes(strength));
+    if (unknown.length > 0) {
+      fail("E_META_STRENGTHS", `draft.meta.derivedStrengths names strength(s) absent from meta.strengths: ${unknown.join(", ")}`);
+    }
+  }
+  // Anything a section states that did not come out of an experimental source must be named here, so the
   // rendered cover page declares every source the document draws on rather than only the trial file.
   if (draft.meta.referenceSources !== undefined) {
     if (!Array.isArray(draft.meta.referenceSources) || draft.meta.referenceSources.length === 0) {
@@ -211,16 +804,74 @@ export function validateDraft(draft) {
     }
   }
 
+  // Who can settle an open decision. Declared here, not built into the checker, so the rule holds for
+  // a department that names its roles differently. Required only when the draft actually holds a
+  // decision marker — see validateMarkerKinds.
+  if (draft.meta.decisionOwners !== undefined) {
+    if (!Array.isArray(draft.meta.decisionOwners) || draft.meta.decisionOwners.length === 0) {
+      fail("E_META_DECISION_OWNERS", "draft.meta.decisionOwners must be a non-empty array when present");
+    }
+    if (!draft.meta.decisionOwners.every((owner) => typeof owner === "string" && owner.trim() !== "")) {
+      fail("E_META_DECISION_OWNERS", "draft.meta.decisionOwners entries must be non-empty strings");
+    }
+  }
+
+  // Numbers this document quotes from another document's numbering rather than referring to its own
+  // sections — the department's worked example numbers two different subsections the same, and the
+  // dossier has to be able to say so. Declared here so the exception is data, not a list in the checker.
+  // A number that IS one of our sections must not be declared: that would pre-build a place to hide a
+  // broken link later.
+  if (draft.meta.quotedNumbering !== undefined) {
+    if (!Array.isArray(draft.meta.quotedNumbering) || draft.meta.quotedNumbering.length === 0) {
+      fail("E_META_QUOTED_NUMBERING", "draft.meta.quotedNumbering must be a non-empty array when present");
+    }
+    if (!draft.meta.quotedNumbering.every((entry) => typeof entry === "string" && entry.trim() !== "")) {
+      fail("E_META_QUOTED_NUMBERING", "draft.meta.quotedNumbering entries must be non-empty strings");
+    }
+  }
+
+  // The reader aid at the back of the document. It lives here rather than in the renderer because it
+  // describes this document's content, and a glossary kept beside the layout code goes stale against
+  // the text it explains — five of its ten entries named terms this document had stopped using.
+  if (draft.meta.abbreviations !== undefined) {
+    if (!Array.isArray(draft.meta.abbreviations) || draft.meta.abbreviations.length === 0) {
+      fail("E_META_ABBREVIATIONS", "draft.meta.abbreviations must be a non-empty array when present");
+    }
+    const terms = [];
+    for (const entry of draft.meta.abbreviations) {
+      if (!Array.isArray(entry) || entry.length !== 2 || !entry.every((part) => typeof part === "string" && part.trim() !== "")) {
+        fail("E_META_ABBREVIATIONS", "each draft.meta.abbreviations entry must be a [term, explanation] pair of non-empty strings");
+      }
+      terms.push(entry[0]);
+    }
+    if (new Set(terms).size !== terms.length) {
+      fail("E_META_ABBREVIATIONS", "draft.meta.abbreviations must not declare the same term twice");
+    }
+  }
+
   if (!Array.isArray(draft.sections)) fail("E_SECTIONS_SHAPE", "draft.sections must be an array");
 
-  const outline = loadOutline();
+  // A container carries a heading and nothing else, so the draft holds no entry for it and the
+  // completeness check covers leaves only.
+  const containerIds = new Set(outline.sections.filter((section) => section.container).map((section) => section.id));
+  const leafIds = outline.sections.filter((section) => !section.container).map((section) => section.id);
   const outlineIds = outline.sections.map((section) => section.id);
   const seenIds = new Set();
+
+  // Rules about how the outline and the draft's declarations fit together come first: a draft with
+  // more strengths than the outline has sections would otherwise be reported through whichever table
+  // the extra strength broke first, which says nothing about the cause.
+  validateProcessDevelopmentOutline(outline);
+  validateNotApplicable(draft, outline);
+  validateStrengthSections(draft, outline);
 
   for (const section of draft.sections) {
     if (typeof section?.id !== "string") fail("E_SECTION_ID", "every section must have a string id");
     if (!outlineIds.includes(section.id)) {
       fail("E_SECTION_UNKNOWN_ID", `section id "${section.id}" is not in schemas/p2-outline.json`);
+    }
+    if (containerIds.has(section.id)) {
+      fail("E_SECTION_CONTAINER_HAS_ENTRY", `section "${section.id}" is a container: it carries a heading only, so its content belongs to its child sections`);
     }
     if (seenIds.has(section.id)) fail("E_SECTION_DUPLICATE_ID", `section id "${section.id}" appears more than once`);
     seenIds.add(section.id);
@@ -242,12 +893,60 @@ export function validateDraft(draft) {
       section.blocks.forEach((block, index) => validateBlock(block, section.id, index));
       const spec = outline.sections.find((entry) => entry.id === section.id)?.form;
       if (spec) validateSectionForm(section, spec, draft);
+      if (spec?.riskAssessment) validateRiskAssessment(section, spec.riskAssessment, draft, outline);
+      if (spec?.operationList) validateOperationList(section, spec.operationList, draft, outline);
+      if (Number.isInteger(spec?.strengthIndex)) validateDerivedStrengthSection(section, spec, draft);
+      if (spec?.similarity) validateSimilarity(section);
+      // A figure names a table and a row rather than carrying numbers, so whether it can be drawn at
+      // all is decided here: the table has to exist, and a chart's row has to hold measurements
+      // rather than gap markers. Left to the renderer this surfaces as a broken run or, worse, as an
+      // empty chart that reads like a measured zero.
+      section.blocks.forEach((block, index) => {
+        if (block.type !== "figure") return;
+        try {
+          if (block.kind === "flow") flowSteps(section, block);
+          else if (block.kind === "process") processStages(section, block);
+          else if (block.kind === "profile") profileSeries(section, block);
+          else barSeries(section, block);
+        } catch (error) {
+          fail("E_FIGURE_SOURCE", `sections[${section.id}].blocks[${index}]: ${error.message}`);
+        }
+      });
+      // Block headings render relative to their section, so heading3 sits two levels in and needs a
+      // heading2 above it. Without one the section's own heading tree skips a level, and Word's
+      // navigation pane shows a broken branch however right the numbering text reads.
+      // Only tables a figure points at need an id, so the id is optional — but two tables answering to
+      // the same name would make the reference ambiguous, and the resolver would take whichever came
+      // first, which is the failure this whole change removes.
+      const tableIds = (section.blocks ?? [])
+        .filter((block) => block.type === "table" && block.id !== undefined)
+        .map((block) => block.id);
+      for (const id of tableIds) {
+        if (typeof id !== "string" || id.trim() === "") {
+          fail("E_TABLE_ID", `section "${section.id}" has a table whose id is not a non-empty string`);
+        }
+      }
+      if (new Set(tableIds).size !== tableIds.length) {
+        fail("E_TABLE_ID_DUPLICATE", `section "${section.id}" has two tables with the same id — a figure naming it could not say which one it means`);
+      }
+
+      let sawHeading2 = false;
+      section.blocks.forEach((block, index) => {
+        if (block.type === "heading2") sawHeading2 = true;
+        if (block.type === "heading3" && !sawHeading2) {
+          fail("E_BLOCK_HEADING_SKIP", `sections[${section.id}].blocks[${index}] is a heading3 with no heading2 above it in the same section — it would skip a heading level`);
+        }
+      });
     } else {
       fail("E_SECTION_STATUS", `section "${section.id}".status must be "covered" or "gap", got: ${section.status}`);
     }
   }
 
-  const missingIds = outlineIds.filter((id) => !seenIds.has(id));
+  validateMarkerKinds(draft);
+  validateCrossReferences(draft, outline);
+  validateAbbreviationsAreUsed(draft);
+
+  const missingIds = leafIds.filter((id) => !seenIds.has(id));
   if (missingIds.length > 0) {
     fail("E_SECTIONS_MISSING", `draft is missing required sections: ${missingIds.join(", ")}`);
   }

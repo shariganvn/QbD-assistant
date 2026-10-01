@@ -69,5 +69,7 @@ for future non-`.docx` or scanned input, but does not attempt table reconstructi
 | `extract/` | Stage A: docx → `extracted.json`. |
 | `draft/` | Stage B: `extracted.json` → `draft.json` (checklist + structural validator + worked example). |
 | `render/` | Stage C: `draft.json` → `.docx`. |
+| `render/figures/` | Draws process flows and charts from the draft's own tables, via Chromium. |
+| `assets/` | Figures that cannot be derived — a structural formula, for instance — referenced by an `image` block. |
 | `verify/` | Post-render checks. |
 | `output/` | Generated `.docx` files — gitignored, not tracked deliverables. |

@@ -34,11 +34,53 @@ deliberately.
    elsewhere.
 6. **Every outline id must appear exactly once**, `covered` or `gap` — never omit one just because
    nothing seemed to fit. An empty CTD section is itself information (a real gap for FD to close).
-7. **Fill `meta` completely**, including `extractionMethod` copied from `extracted.json` and a
-   `preparer` field that's honest about who/what did the interpretation (e.g. "Claude, phiên làm
-   việc <ngày>" or a person's name) — this draft is not attributable to "the system."
-8. **Run `node draft/validate-draft.mjs draft.json`** before rendering. Fix every reported error;
+7. **Name every strength the document covers** in `meta.strengths`, and list in
+   `meta.derivedStrengths` any strength that has no trial data of its own — one whose composition you
+   worked out by proportion from a strength that was actually made. A proportion gives you a mass. It
+   does not give you a dissolution percentage, a hardness, a disintegration time or a content-uniformity
+   result, so every measured value for such a strength stays marked. The validator enforces this; the
+   reason it does is that nobody reading the finished Word file can tell a calculated number from a
+   measured one.
+8. **Fill `meta` completely**, including `extractionMethod` copied from `extracted.json` and an
+   `assembledBy` field naming the tool that assembled the draft — this draft is not attributable to
+   "the system." `assembledBy` is **provenance, not authorship**: it prints in the scope notice, and
+   no name goes into the sign-off table, whose three rows stay blank for people to sign. Keep
+   `draftDate` at the date of the last revision; do not repeat that date inside `assembledBy`, or the
+   two drift apart at the next edit.
+9. **Add a figure only where the section already holds the data.** A figure block names a table and a
+   row rather than carrying numbers, so the chart and the table cannot disagree, and a row still full
+   of markers refuses to be plotted. Do not "fill in" a chart for a section whose table is empty —
+   that is the same invention rule as everywhere else, in picture form.
+10. **Run `node draft/validate-draft.mjs draft.json`** before rendering. Fix every reported error;
    the validator will not catch a wrong section mapping, only a malformed shape.
+
+11. **Never take a value from the document used as a format reference.** A finished P.2 for this same
+   product exists, written by another company from another formula — seven excipients differ out of seven
+   but one, and its core weight is not ours. It settles what sections a complete P.2 has and what shape
+   its tables take. It settles nothing about this product. `verify/sample-boundary.mjs` refuses its batch
+   numbers and supplier on sight, and refuses several of its measured values landing in one section, but
+   **it cannot catch a value retyped with a digit changed** — that part is yours, and the check existing
+   does not move the responsibility.
+
+   The line to hold while writing a gap reason: the **shape of a measurement** may be stated, because a
+   method comes from a pharmacopoeia or an ICH guideline and you can cite the copies in `docs/raw/`. An
+   **acceptance limit** may not — a humidity ceiling, a hardness range, an impurity threshold is a
+   decision this company owes, so it becomes `[CẦN QUYẾT ĐỊNH – CHƯA CHỐT]` addressed to whoever owns it.
+   Writing "so sánh với tài liệu tham chiếu" and copying its number is the failure this rule exists for.
+
+12. **Risk levels are the formulation department's, not yours.** A matrix cell you cannot source stays
+   a marker — never a level inferred from how the trial turned out, which would turn a result into a
+   prediction. When FD does supply levels, a cell lowered in an updated assessment needs a row in its
+   justification table citing the section of the study that lowered it; Stage B refuses the draft
+   without one. The operations a process matrix scores come from the operation list in `P.2.3.2`:
+   change the list, not the matrix.
+
+13. **A section for one strength says which strength, and a strength with no batch gets no number.** The
+   outline binds each such section to a position in `meta.strengths`; write the content for that
+   strength, not for "the other one". For a strength listed in `meta.derivedStrengths`, every result
+   cell stays a marker and the prose carries no measurement — Stage B catches a number with a unit or
+   two decimals, but not a result written in words, so read the section yourself. A number a method
+   needs (a count of tablets or batches) goes in the parent section, as a decision for FD.
 
 ## What you are NOT trying to do
 

@@ -1,0 +1,88 @@
+Evidence — G-32..G-34 (authorship and the conformance record)
+Date: 2026-09-26   Branch: claude/codebase-architecture-summary-po0utr
+
+=== 1. Test suite (129 tests: 122 previous + 7 new) ===
+# tests 129
+# suites 0
+# pass 129
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 710.880954
+
+=== 2. Stage B ===
+OK: tools/pharma-dev-draft/draft/example-draft.json — 26 sections, all valid.
+
+=== 3. value-inventory against HEAD (no measurement added or moved) ===
+values before: 307, after: 307
+lost: 0, duplicated: 0, moved: 0
+added: 0 (marker 0, prose 0, data 0)
+
+=== 4. Render + verify ===
+XSD validation: PASS
+
+Paragraphs: 1442
+All validations PASSED!
+
+Text sanity checks: PASS
+exit=0
+
+=== 5. The negative case that matters: the old bug reintroduced, then rendered and verified ===
+Tamper applied to render/builder.mjs in place (backed up and restored afterwards):
+  a) the provenance paragraph removed from the scope notice
+  b) the drafter row rebuilt as [`Soạn thảo (${draft.meta.assembledBy})`, "—", draft.meta.draftDate, ""]
+     — i.e. exactly the line this round removed.
+
+Rendered output: XSD PASS (the document is structurally fine; that is the point — nothing
+structural would ever have caught this), then:
+
+XSD validation: PASS
+
+Paragraphs: 1441
+All validations PASSED!
+
+Text sanity checks: FAIL
+  - meta.assembledBy is printed after the sign-off heading; provenance belongs in the scope notice, not on a signature line
+verify exit=1
+
+Builder restored from backup; the authorship tests pass again against the restored file:
+# tests 7
+# pass 7
+# fail 0
+
+=== 6. Rendered sign-off table and provenance sentence, read out of word/document.xml ===
+Xuất xứ bản nháp: dựng tự động bởi Claude Code (xml-walk, tổng hợp từ Thử nghiệm 1 và Thử nghiệm 2), trích nội dung nguồn bằng phương pháp xml-walk; lần sửa cuối 2026-09-26. Mọi vai trò trong bảng ký duyệt ở cuối tài liệu đều để trống, chờ người có thẩm quyền ký.Tài liệu KHÔNG phải hồ sơ P.2.2/P.2.
+
+Ghi nhận soạn thảo và rà soát|Vai trò|Họ tên|Ngày|Chữ ký|Soạn thảo|________________|________________||Rà soát FD|________________|________________||Phê duyệt QA/PO|________________|________________|
+
+=== 7. The four figures are byte-identical to the previous render ===
+p2-draft-bisoprolol-fumarate-2026-08-20.docx
+    156fcf5709bd0078f7cda3236f56a0906dc2e4bf.png 24100
+    5798e201329814d8156332d940ff92767d2b657f.png 9412
+    90a08c728e1ccb91a5be77687066b886fdf5c771.png 18333
+    965048a304d9c3c7569d66a9c39c18597cf26105.png 54049
+p2-draft-bisoprolol-fumarate-2026-09-26.docx
+    156fcf5709bd0078f7cda3236f56a0906dc2e4bf.png 24100
+    5798e201329814d8156332d940ff92767d2b657f.png 9412
+    90a08c728e1ccb91a5be77687066b886fdf5c771.png 18333
+    965048a304d9c3c7569d66a9c39c18597cf26105.png 54049
+=== 8. Marker counts unchanged ===
+gap 149 / decision 19
+
+=== 9. G-34 — no statement in the conformance record still contradicts the draft ===
+grep -n "xát hạt" docs/reports/qbd-p2-ich-q8r2-audit/ich-q8r2-format-audit.md:
+203:(3%) "trùng mức khuyến cáo cho xát hạt ướt". Nhưng bảng tá dược ở `P.2.1.2` đã trích sẵn chuyên
+204:luận: *"Thông thường 2% cho dập thẳng và 3% cho xát hạt ướt"*. Quy trình của sản phẩm là **trộn dập
+495:bisoprolol trộn dập thẳng chỉ là ví dụ để dựng hệ thống; thực tế còn xát hạt ướt, phun sấy tầng sôi
+527:- `P.2.2.1.2` — marker criticality liệt kê "điều kiện xát hạt" trong các thông số chưa đánh giá;
+528:  quy trình là dập thẳng nên không có công đoạn xát hạt. Đã bỏ vế đó, giữ thời gian trộn, lực dập,
+576:đổi ma trận từ năm công đoạn dập thẳng sang ba công đoạn xát hạt ướt.
+650:povidone dùng làm tá dược dính trong xát hạt ướt. Vi phạm 2.3 tr. 8 (*"The selection, the control, and
+652:không nhận qua báo cáo. Nếu quy trình thật là xát hạt thì bộ năm công đoạn `P.2.3.1`, sơ đồ quy trình
+
+Each remaining mention is one of: the excipient monograph quote whose own conclusion is direct
+compression (203-204), the method-neutrality discussion (495, 576), the log of a marker already
+fixed (527-528), and the N-1 finding itself (650-652), which round 12 closes by name. The old
+wording stays: this file is a cumulative log, and deleting a past conclusion deletes the record
+of who concluded what, when.

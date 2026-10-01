@@ -1,0 +1,93 @@
+# G-29..G-31 — hình trỏ tới bảng bằng tên, không bằng vị trí
+
+Ngày: 2026-09-26. Đợt này không thêm nội dung nào cho hồ sơ; nó gỡ một chỗ mà công cụ có thể làm
+hỏng hồ sơ một cách không ai thấy.
+
+## 1. Lỗi cũ, và vì sao nó nguy hiểm
+
+`fromTable` là chỉ số theo vị trí trong mục. Nó đã cắn **ba lần trong hai đợt**:
+
+| Lần | Chuyện gì | Cái gì bắt được |
+|---|---|---|
+| 1 | Hình quy trình mới khai `fromTable: 0` — hoá ra là bảng thành phần Thử nghiệm 1 | luật "đúng ba cột" của `process` |
+| 2 | Chuyển bảng quy trình lên đầu mục → cả hai hình trong mục trỏ sai cùng lúc | số cột (process), tên dòng (bars) |
+| 3 | `figureOf(section)` trong test lấy hình đầu tiên | 5 test biểu đồ đổ |
+
+Không lần nào do một luật **nhắm vào chuyện này** bắt được — đều là phép kiểm phụ tình cờ có.
+
+Loại `flow` **không có phép kiểm phụ nào**: nó đọc thẳng nhãn cột thành tên công đoạn. Một hình
+`flow` trỏ nhầm bảng sẽ vẽ ra **một bộ công đoạn sản xuất khác** trong hồ sơ đăng ký, im lặng.
+
+## 2. Bằng chứng lỗi nay KHÔNG XẢY RA ĐƯỢC, chứ không phải chỉ bị canh
+
+Phép kiểm nghịch: đảo thứ tự bảng trong từng mục có hình, rồi so hai cách giải — theo tên (mới) và
+theo vị trí (cũ, dựng lại để so).
+
+```
+P.2.2.1.3.3   process  | theo tên: GIỮ ĐÚNG  | theo vị trí (cách cũ): ĐỔI  
+      cách cũ sẽ vẽ từ: Thành phần|Mg stearat 1%|Mg stearat 5%
+P.2.2.1.3.3   bars     | theo tên: GIỮ ĐÚNG  | theo vị trí (cách cũ): ĐỔI  
+      cách cũ sẽ vẽ từ: Chỉ tiêu|CT01|CT02|CT03
+P.2.3.1       flow     | theo tên: GIỮ ĐÚNG  | theo vị trí (cách cũ): GIỮ ĐÚNG
+```
+
+Với cách cũ, sau khi xáo thì **sơ đồ quy trình sẽ vẽ từ bảng cốm Thử nghiệm 2** và biểu đồ hòa tan
+vẽ từ bảng IPC. Với tên thì cả ba giữ đúng bảng.
+
+Hình `flow` ở `P.2.3.1` không đổi trong phép này vì mục đó chỉ có một bảng — nên nó có test riêng
+(chèn một bảng mồi vào đầu mục rồi đòi `flowSteps` vẫn ra đúng bộ công đoạn cũ). Đó là loại mà ba
+lần trước không gì bắt được, nên nó là gate quan trọng nhất của đợt.
+
+## 3. Ba quyết định thiết kế
+
+**Không giữ tương thích với số thứ tự.** Một trường hai cách viết là một trường sẽ tự mâu thuẫn —
+cùng lý do đã bỏ hẳn `sourceFile` khi thêm `sourceFiles`. Khai số thì bị từ chối kèm thông báo bảo
+đặt id cho bảng rồi nêu tên.
+
+**`id` chỉ bắt buộc với bảng được hình trỏ tới.** Một yêu cầu không ai dùng là một yêu cầu sẽ mốc —
+cùng lối `decisionOwners` chỉ bắt buộc khi có dấu quyết định. Có test cho việc bảng không có hình
+trỏ tới thì không cần id.
+
+**Duy nhất trong phạm vi một mục là đủ**, vì hình chỉ đọc bảng cùng mục.
+
+Và một cái bẫy tự gài mà tôi phải chặn: bỏ `fromTable` đi thì `find(t => t.id === undefined)` sẽ
+khớp đúng một bảng **không có id** — tức lỗi cũ đội lốt mới. `tableAt` từ chối thẳng một tham chiếu
+không phải chuỗi. Có test.
+
+## 4. Phân biệt cố ý giữ: form theo vị trí, hình theo tên
+
+`form.tables[]` trong outline **nên** theo vị trí — nó nói "bảng thứ N của mục này phải có hình dạng
+này", đó là **format**, và chèn một bảng vào giữa thì form đổ là đúng. Hình trỏ tới **nội dung**, nên
+trỏ theo tên. Ghi vào contract để đợt sau không ai "thống nhất" hai thứ này.
+
+## 5. Ba tên đặt theo nội dung
+
+| Mục | Bảng | id |
+|---|---|---|
+| `P.2.2.1.3.3` | Bước · Thành phần đưa vào · Công đoạn | `quy-trinh-pha-che` |
+| `P.2.2.1.3.3` | Chỉ tiêu (tiêu chuẩn) · CT01 · CT02 · CT03 | `ket-qua-vien-tn1` |
+| `P.2.3.1` | CQA sản phẩm × công đoạn | `ma-tran-rui-ro-quy-trinh` |
+
+Tên nói bảng đó **là gì**, nên chuyển chỗ không làm tên sai.
+
+## 6. Xác minh
+
+```
+npm run test:pharma-dev                  → 122 pass, 0 fail (114 cũ + 8 mới)
+validate-draft.mjs <draft>               → OK, 26 sections
+value-inventory                          → lost 0, duplicated 0, added 0
+render + verify                          → XSD PASS, unzip -t OK
+```
+
+`added 0` và `lost 0` là đúng hình dạng của đợt này: `id` là khoá cấu trúc, không phải giá trị ô.
+
+**Bốn hình render ra giống hệt từng byte:**
+
+```
+  trước 18333  →  sau 18333  khớp
+  trước 24100  →  sau 24100  khớp
+  trước 54049  →  sau 54049  khớp
+  trước 9412  →  sau 9412  khớp
+```
+
+Số dấu không đổi: gap 149, decision 19.

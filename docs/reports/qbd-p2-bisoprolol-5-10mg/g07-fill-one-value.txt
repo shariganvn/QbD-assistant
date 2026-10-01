@@ -1,0 +1,17 @@
+# G-07 — điền một giá trị thật, mất đúng một dòng
+
+Thao tác trên bản sao trong bộ nhớ, không sửa file: điền một giá trị thật vào ô hàm lượng thấp của
+dòng "Thành phần tá dược" ở mục 3.2.P.2.2.1.1, rồi sinh lại phụ lục.
+
+| Đại lượng | Trước | Sau |
+|---|---|---|
+| marker trong draft | 147 | 146 |
+| dòng phụ lục | 113 | 112 |
+| marker được phủ | 147 | 146 |
+
+## Dòng biến mất
+
+- 3.2.P.2.2.1.1 Đặc tính sản phẩm đối chiếu (Characterization of Reference Product) — Thành phần tá dược — 5 mg — Liệt kê từng tá dược kèm tỷ lệ. Nguồn định tính lấy từ SmPC hoặc tờ hướng dẫn sử dụng; tỷ lệ định lượng cần kỹ
+
+Đúng 1 dòng biến mất và không dòng nào khác đổi. Không có bước nào phải gạch tay:
+phụ lục đọc ra từ chính dấu trong tài liệu, nên điền giá trị là dòng tự rút.

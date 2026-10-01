@@ -1,0 +1,70 @@
+# Evidence for qbd-p2-format-reference (G-35..G-47)
+# Generated 2026-10-01T06:37Z at ba8a8c1 plus the uncommitted phase-6 working tree
+
+## G-35 format-reference boundary: draft, rendered document, and every file the workstream wrote
+Format-reference boundary: PASS (18 identifiers, 44 value groups checked)
+# tests 14
+# pass 14
+# fail 0
+
+## G-36 renumbering moved content and added no data (d64d792 -> e716880, the phase-1 commit)
+values before: 307, after: 328
+lost: 12, duplicated: 0, moved: 155
+added: 33 (marker 26, pointer 0, prose 7, data 0)
+
+## G-37 every outline id once, every cross-reference lands on a leaf
+OK: tools/pharma-dev-draft/draft/example-draft.json — 43 sections, all valid.
+# tests 18
+# pass 18
+# fail 0
+
+## G-38 G-39 G-40 risk-assessment pairs
+# tests 23
+# pass 23
+# fail 0
+
+## G-41 operation list <-> development sections
+# tests 14
+# pass 14
+# fail 0
+
+## G-42 G-43 strength sections
+# tests 20
+# pass 20
+# fail 0
+
+## G-44 G-45 dissolution profile and f2
+# tests 22
+# pass 22
+# fail 0
+
+## G-46 work order, and added sections carry a marker and no data
+# tests 12
+# pass 12
+# fail 0
+
+## G-47 report consistency and reference scan
+# tests 3
+# pass 3
+# fail 0
+
+## whole suite
+# tests 234
+# pass 234
+# fail 0
+
+## rendered document
+All validations PASSED!
+
+Text sanity checks: PASS
+No errors detected in compressed data of tools/pharma-dev-draft/output/p2-draft-bisoprolol-fumarate-2026-09-30.docx.
+
+## negative evidence recorded when each rule was written (each rule switched off in turn, its tests then fail)
+risk-assessment: lowering rule, orphan rule; process-development: unused, multiple, contradiction, cited-set; strength-section: missing-section, orphan, contradiction, prose, table-cell, strength-name exemption; dissolution-profile: missing-row, unconditional, range, monotonic, series-cap, two-point, unit; work-order: added-section marker and measurement checks
+G-35 also caught its own author: three comments written in phase 1 quoted the reference dossier's batch numbers; fixed in this phase. The phase-1 commit (e716880) still carries them in history.
+
+## Correction, 2026-10-01
+The last line above says the phase-1 commit still carries the two batch numbers in history. It no longer does:
+the six commits of this workstream were rewritten on the branch at the owner's request. The final tree is
+identical to the one before (same tree hash), and a scan of every commit's message and added lines over the
+whole branch finds no identifier. The commit hashes quoted elsewhere in this directory predate the rewrite.

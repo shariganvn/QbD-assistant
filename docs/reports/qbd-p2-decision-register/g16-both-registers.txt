@@ -1,0 +1,73 @@
+# G-16 — hai danh mục, cả hai sinh từ draft, và đối chiếu số độc lập
+
+Ngày: 2026-09-26
+
+## Đếm hai chiều: tổng marker mỗi dòng phủ, so với đếm marker trực tiếp trong draft
+
+| Danh mục | marker trong draft | dòng phụ lục | tổng marker các dòng phủ |
+|---|---|---|---|
+| Dữ liệu cần bổ sung | 149 | 115 | 149 |
+| Điểm cần quyết định | 16 | 16 | 16 |
+
+Số mục có quyết định: 11
+
+| Ai quyết | Mục CTD | Điều phải quyết (rút ngắn) |
+|---|---|---|
+| FD | 3.2.P.2.1.1.1 | FD chốt một giá trị cho mỗi chỉ tiêu đang có nhiều giá trị, để hồ sơ nộp đi ma… |
+| FD · QA | 3.2.P.2.1.1.1 | FD và QA cùng quyết định có chấp nhận khai giá trị của base tự do trong hồ sơ … |
+| QA | 3.2.P.2.1.1.1 | QA gửi văn bản hỏi nhà sản xuất nguyên liệu về hai chỗ trên CoA, và quyết định… |
+| FD · QA | 3.2.P.2.2.1.2.1 | FD xây dựng và phê duyệt QTPP đầy đủ (dạng bào chế, đường dùng, mục tiêu PK/BE… |
+| FD | 3.2.P.2.2.1.2.2 | FD quyết định có chấp nhận croscarmellose sodium 5% kl/kl làm mức cuối hay khô… |
+| FD | 3.2.P.2.2.1.2.2 | FD quyết định có tách magnesium stearate thành một biến khảo sát riêng trong T… |
+| FD | 3.2.P.2.2.1.3.3 | FD xác nhận mục đích của ký hiệu khắc, và quyết định thiết kế viên cho hàm lượ… |
+| FD | 3.2.P.2.2.2 | FD xác nhận chính thức có hay không áp dụng overage cho dược chất và tá dược, … |
+| QA | 3.2.P.2.2.3.1.2 | QA và bộ phận kiểm soát tài liệu phê duyệt việc đánh số lại nhóm mục hòa tan s… |
+| FD | 3.2.P.2.2.3.1.4 | FD chốt kế hoạch lấy mẫu hòa tan trước khi bắt đầu đo. Con số ≥ 80% Q tại 30 p… |
+| FD | 3.2.P.2.2.3.1.4 | FD chốt bộ môi trường hòa tan so sánh. Hai nguồn trong hồ sơ ghi khác nhau ở m… |
+| FD | 3.2.P.2.2.3.2 | FD xác nhận chuyên luận áp dụng cho thành phẩm, rồi khai lại tiêu chuẩn tạp th… |
+| FD | 3.2.P.2.3.1 | FD xác nhận quy trình thật đã dùng trong Thử nghiệm 1 là trộn dập thẳng hay xá… |
+| FD | 3.2.P.2.5 | FD xác nhận sản phẩm này đi theo nhánh thử định kỳ của ICH Q6A Decision Tree #… |
+| FD · QA | 3.2.P.2.5 | QA và FD thống nhất phiên bản dược điển áp dụng cho CẢ hồ sơ. Hồ sơ đang dẫn h… |
+| FD | 3.2.P.2.6 | FD xác nhận chính thức kết luận "không áp dụng" ở trên. Kết luận này suy ra từ… |
+
+## Bảo toàn marker qua đợt này
+
+| | Trước | Sau |
+|---|---|---|
+| gap marker | 143 | 149 |
+| dòng phụ lục dữ liệu | 109 | 115 |
+| decision marker | 0 | 16 |
+
+149 = 143 − 3 (phân loại lại thành quyết định) + 9 (đánh dấu bốn yêu cầu 2.2.1 vô hình, ba dòng bao bì mới, một dòng màng bao).
+16 = 3 (phân loại lại) + 13 (mới, từ văn xuôi đã có hoặc từ đợt đối chiếu).
+
+## value-inventory giữa bản trước và sau đợt này
+
+values before: 244, after: 267
+lost: 7, duplicated: 0, moved: 0
+added: 30 (marker 25, prose 5, data 0)
+  ADDED PROSE in P.2.2.1.3.3: Viên được khắc số "10" trên một mặt. ICH Q8(R2) mục 2.2.1 (trang 8) yêu cầu: "Any special design fea
+  ADDED PROSE in P.2.2.1.3.3: Bốn yêu cầu của ICH Q8(R2) mục 2.2.1 chưa có nội dung nào trong tài liệu này. Ghi thành các dấu riên
+  ADDED PROSE in P.2.5: Sản phẩm là dạng bào chế rắn dùng đường uống, không vô khuẩn. ICH Q6A trang 12 cho phép đề xuất khôn
+  ADDED PROSE in P.2.5: Về điều kiện của Q6A: nguyên liệu đã được kiểm vi sinh trước khi sản xuất — xem ghi chú nguồn [3] ở 
+  ADDED PROSE in P.2.6: Không áp dụng — sản phẩm là viên nén bao phim dùng đường uống trực tiếp, không cần pha hoàn nguyên v
+  LOST from P.2.2.1.2.1: [CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] QTPP đầy đủ (dạng bào chế, đường dùng, PK/BE với RMP, độ ổn định ICH Q1A...) và bảng CQA
+  LOST from P.2.2.1.3.3: Viên được khắc số "10" trên một mặt. ICH Q8(R2) mục 2.2.1 (trang 8) yêu cầu: "Any special design features of the drug pr
+  LOST from P.2.2.2: [CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác nhận chính thức từ FD về việc có/không áp dụng overage và lý do.
+  LOST from P.2.2.3.2: [CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phương pháp phân tích tạp chất cụ thể (tham chiếu 3.2.P.5.2) chưa được nêu trong Thử ngh
+  LOST from P.2.5: Sản phẩm là dạng bào chế rắn dùng đường uống, không vô khuẩn. ICH Q6A trang 12 cho phép đề xuất không thử giới hạn vi si
+  LOST from P.2.5: Hai điểm cần làm rõ trước khi nộp. Thứ nhất, biểu mẫu của phòng dẫn chiếu Dược điển châu Âu EP 11.0 phụ lục 5.1.4, trong
+  LOST from P.2.6: Không áp dụng — sản phẩm là viên nén bao phim dùng đường uống trực tiếp, không cần pha hoàn nguyên với dung môi/chất pha
+
+Exit 1 do 'lost: 7'. Bảy dòng đó là bảy văn bản cố ý rút gọn hoặc phân loại lại, mỗi cái có bản
+thay thế trong danh sách added. Hai tiêu chí thật của gate — duplicated 0 và added data 0 — đều đạt.
+
+## Render + verify
+
+Written: /home/user/QbD-assistant/tools/pharma-dev-draft/output/p2-draft-bisoprolol-fumarate-2026-08-20.docx (105259 bytes)
+XSD validation: PASS
+Paragraphs: 1291
+All validations PASSED!
+Text sanity checks: PASS
+PNG trong word/media: 3
+No errors detected in compressed data of tools/pharma-dev-draft/output/p2-draft-bisoprolol-fumarate-2026-08-20.docx.

@@ -1,0 +1,104 @@
+# G-23..G-25 — tài liệu tự kiểm được đường dẫn nội bộ và bảng viết tắt
+
+Ngày: 2026-09-26. Đợt này không thêm số liệu nào; nó sửa lỗi tài liệu tự gây ra.
+
+## 1. Cross-reference: 11 lần xuất hiện trỏ vào mục không có nội dung
+
+Trước khi có gate, không gì kiểm các câu "xem mục P.2.x". Dò ra 6 tham chiếu phân biệt, **11 lần**
+xuất hiện (con số 9 tôi nêu trước đó là đếm cặp (tham chiếu, mục) — hai trong số đó mỗi cái nằm ở
+hai ô bảng riêng).
+
+| Nêu ở | Dẫn tới | Loại | Đã sửa thành | Nội dung thật nằm ở đó |
+|---|---|---|---|---|
+| `P.2.1.2.1` | `3.2.P.2.2.1.3` | container | `3.2.P.2.2.1.3.3` | bảng thành phần Thử nghiệm 1 |
+| `P.2.2.1.1` ×2 ô | `P.2.2.3` | container | `P.2.2.3.2` | danh mục tạp Ph.Eur. 12 |
+| `P.2.2.1.1` | `P.2.2.1.3` | container | `P.2.2.1.3.3` | kết quả hòa tan CT03 |
+| `P.2.2.1.2.2` | `P.2.2.1.3` | container | `P.2.2.1.3.3` | bảng kết quả Thử nghiệm 1 |
+| `P.2.2.1.3.3` | `P.2.1.2` | container | `P.2.1.2.1` | chuyên luận croscarmellose |
+| `P.2.2.3.2` | `P.2.2.1.3` | container | `P.2.2.1.3.3` | bảng kết quả viên |
+| `P.2.2.3.2` ×2 | `P.2.2.1.2` | container | `P.2.2.1.2.1` | bảng tiêu chuẩn viên |
+| `P.2.3.2.3` | `P.2.2.1.3` | container | `P.2.2.1.3.3` | cỡ lô 1.000 viên |
+| `P.2.5` | `P.2.1.1` | container | `P.2.1.1.1` | ghi chú nguồn [3] |
+| `P.2.2.3.1.2` | `3.2.P.2.2.3.1.1.3` | **không tồn tại** | **giữ nguyên** | đang trích số sai của biểu mẫu → khai vào `meta.quotedNumbering` |
+
+Kiểm rằng chỉ tham chiếu bị đổi, không câu nào bị đổi: so từng text trước/sau, thay mọi tham chiếu
+bằng `<REF>` rồi đòi phần còn lại giống nhau từng byte. 11 text sửa, 0 cảnh báo.
+
+## 2. Bẫy tokenise — bắt chính tôi hai lần, từ hai phía ngược nhau
+
+Đây là phần đáng ghi nhất của đợt này.
+
+Regex **phát hiện** phải không được ăn dấu chấm cuối câu. `(?:\.\d+)+` đòi chữ số sau mỗi dấu chấm,
+nên `…mục P.2.2.3.` đọc ra `P.2.2.3` rồi dừng. Lần dò đầu tiên tôi viết `(?![.0-9])` và **mất 2 chỗ**
+— đếm 6 thay vì 9 cặp.
+
+Rồi regex **sửa** mắc đúng bẫy đó từ phía kia: `(?![.0-9])` từ chối khớp khi phía sau là dấu chấm,
+nên chính tham chiếu kết thúc câu (`tại mục 3.2.P.2.2.1.3.`) bị bỏ sót ở lượt sửa đầu — 7 thay vì 11.
+Luật đúng là hẹp hơn: **chỉ từ chối một số sâu hơn**, tức `(?!\.\d)`.
+
+Cả hai chiều đều có test riêng, vì cùng một bẫy đã gài được tôi hai lần.
+
+## 3. Hai thứ KHÔNG bị bắt, và vì sao
+
+`P.2` trần trong "biểu mẫu P.2 của phòng" là **tên biểu mẫu**, không phải tham chiếu. Giữ nó ngoài
+bằng cấu trúc — đòi ít nhất một nhóm `.<số>` — chứ không bằng danh sách cụm từ cần bỏ qua.
+
+`3.2.P.2.2.3.1.1.3` là số của biểu mẫu phòng, khai trong `meta.quotedNumbering`. Và một mục lá của
+chính tài liệu **không được** khai vào đó: khai vậy là dựng sẵn chỗ để che một liên kết vỡ sau này.
+Có test.
+
+## 4. Bảng viết tắt: ra khỏi code, và khớp lại với văn bản
+
+`ABBREVIATIONS` là mảng hard-code trong `render/builder.mjs` — vi phạm trực tiếp luật nền *dữ liệu ở
+draft, không ở code*. Và nó lệch: **5 trong 10** từ khai không xuất hiện ở đâu trong tài liệu.
+
+| | Từ |
+|---|---|
+| bỏ (tài liệu không dùng) | API · CU · IPC · LOD · RMP |
+| giữ | BCS · CQA · CT · QTPP · RSD |
+| thêm | AV · BE · CAS · CFU · CTD · DSC · EMA · EP · EPAR · FD · HPLC · ICH · INN · IUPAC · KLTB · PK · QA · QC · TAMC · TLTK · TYMC · USP · WHO |
+
+Tổng 28 dòng, sinh từ `meta.abbreviations`, renderer tự sắp thứ tự (thứ tự là format).
+
+Không thêm mã định danh nhất thời (CID, PMID, SKS, HMDB, HSDB, CHEMBL) vì đã giải thích ngay tại chỗ
+trong ghi chú nguồn; không thêm STT vì phổ dụng trong mọi bảng tiếng Việt.
+
+**Gate chỉ đi một chiều.** "Mọi từ đã khai phải xuất hiện" là kiểm lành mạnh — nó bắt đúng 5 từ chết,
+và nó giữ phán đoán của tôi trung thực: thêm một từ tài liệu không dùng thì validate đổ ngay. Chiều
+ngược lại — mọi chữ viết hoa phải được giải thích — **cố ý không làm**: scan thô bắt cả BASE, QUY,
+SUNG, NGU (chữ Việt viết hoa và mảnh URL), tức máy sinh false positive, và một gate hay báo sai là
+gate người ta học cách bỏ qua.
+
+Biên từ cho phép chữ số liền sau (`CT` khớp `CT01`) nhưng không cho chữ cái (`EP` không được thỏa
+bằng `EPAR`). Có test cho cả hai.
+
+## 5. Test product-neutrality đổ, và nó đúng
+
+Test "một draft của sản phẩm hoàn toàn khác vẫn validate trên cùng biểu mẫu" đổ ngay khi thêm luật:
+
+```
+draft.meta.abbreviations declares "KLTB", which appears nowhere in the document
+```
+
+Fixture đó thay thế có hệ thống mọi thứ thuộc về sản phẩm — tên, hoạt chất, hàm lượng, tá dược, chỉ
+tiêu, ma trận rủi ro, bảng thông số. Bảng viết tắt **cũng** thuộc về nội dung, nên nó phải nằm trong
+danh sách được thay. Sửa fixture một dòng, không nới luật. Đây là bằng chứng luật đặt đúng chỗ: nó
+phân biệt được cái gì là biểu mẫu và cái gì là nội dung.
+
+## 6. Xác minh
+
+```
+npm run test:pharma-dev                        → 107 pass, 0 fail (97 cũ + 10 mới)
+validate-draft.mjs <draft>                     → OK, 26 sections
+dò lại cross-reference                         → 0 trỏ container, 0 không tồn tại
+value-inventory --before <trước> --after <sau>  → duplicated 0, added data 0
+render + verify                                → XSD PASS, 3 PNG, unzip -t OK
+```
+
+values before: 300, after: 300
+lost: 10, duplicated: 0, moved: 0
+added: 10 (marker 3, prose 7, data 0)
+
+`added data 0` là điều kiện của đợt này: sửa số hiệu mục thì không phải thêm số liệu.
+`lost 10` và `added prose 7` là 11 text bị sửa tham chiếu (một số text trùng nội dung nhau).
+Số dấu không đổi: gap 149, decision 20.

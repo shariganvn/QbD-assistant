@@ -1,0 +1,50 @@
+# Cố tình ghim tên công đoạn làm nhãn dòng của form P.2.3, rồi chạy gate.
+# Mục đích: chứng minh gate chặn thật, không chỉ pass trên cây sạch.
+
+TAP version 13
+# Subtest: no product name reaches a module
+ok 1 - no product name reaches a module
+  ---
+  duration_ms: 5.159924
+  type: 'test'
+  ...
+# Subtest: no product name reaches the enforced part of the outline
+not ok 2 - no product name reaches the enforced part of the outline
+  ---
+  duration_ms: 2.772763
+  type: 'test'
+  location: '/home/user/QbD-assistant/tools/pharma-dev-draft/draft/tests/product-neutrality.test.mjs:83:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    product-specific literals found in the enforced outline: dập thẳng
+    + actual - expected
+    
+    + [
+    +   'dập thẳng'
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0: 'dập thẳng'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/QbD-assistant/tools/pharma-dev-draft/draft/tests/product-neutrality.test.mjs:90:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 1
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 89.879217
