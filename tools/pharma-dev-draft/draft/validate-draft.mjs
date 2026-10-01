@@ -382,6 +382,62 @@ function validateRiskAssessment(section, spec, draft, outline) {
   }
 }
 
+// The operation list names each unit operation of the process and says where its development is
+// reported. Two things must hold, and they are different failures. Every operation points at exactly
+// one development section — or carries a marker saying it has none yet — because an operation with no
+// development narrative is one nobody studied and nothing in the document says so. And every section
+// that develops operations is pointed at by at least one of them, because a development section for an
+// operation the list does not have is a study of something the process does not do. One section may
+// serve several operations (three mixing steps, one blending study); the reverse is the error.
+//
+// A product with no film coat has no coating operation, and the form cannot drop the coating section,
+// so the draft declares in meta.notApplicableSections that the section does not apply. That is a
+// declaration, checked for contradiction below, not a way to leave a section uncited.
+function developmentSectionIds(outline) {
+  return outline.sections.filter((entry) => entry.form?.developsOperations).map((entry) => entry.id);
+}
+
+function validateProcessDevelopmentOutline(outline) {
+  if (developmentSectionIds(outline).length > 0 && !outline.sections.some((entry) => entry.form?.operationList)) {
+    fail("E_OUTLINE_PROCESS_DEVELOPMENT", "the outline marks sections as developing operations but no section declares the operation list that points at them");
+  }
+}
+
+function validateOperationList(section, spec, draft, outline) {
+  const table = section.blocks.find((block) => block.type === "table");
+  if (!table) fail("E_PROCESS_DEVELOPMENT_UNKNOWN", `section "${section.id}" is the operation list but has no table`);
+  const column = spec.developmentColumn;
+  if (!Number.isInteger(column) || column < 1 || column >= table.headers.length) {
+    fail("E_OUTLINE_PROCESS_DEVELOPMENT", `section "${section.id}" operationList.developmentColumn must index a column of its table after the operation names`);
+  }
+  const developing = developmentSectionIds(outline);
+  const notApplicable = draft.meta.notApplicableSections ?? [];
+  if (!Array.isArray(notApplicable) || !notApplicable.every((id) => developing.includes(id))) {
+    fail("E_META_NOT_APPLICABLE", `draft.meta.notApplicableSections must list only sections that develop an operation (${developing.join(", ")})`);
+  }
+  const cited = new Set();
+  for (const row of table.rows) {
+    const cell = row[column];
+    if (isMarkedText(cell)) continue;
+    const references = [...new Set((cell.match(new RegExp(INTERNAL_REFERENCE.source, "g")) ?? []).map((reference) => reference.replace(/^3\.2\./, "")))];
+    if (references.length > 1) {
+      fail("E_PROCESS_DEVELOPMENT_MULTIPLE", `operation "${row[0]}" points at ${references.length} development sections (${references.join(", ")}) — it has to point at one, or carry a marker`);
+    }
+    if (references.length === 0 || !developing.includes(references[0])) {
+      fail("E_PROCESS_DEVELOPMENT_UNKNOWN", `operation "${row[0]}" must point at the section that develops it (${developing.join(", ")}) or carry a marker, got: "${cell}"`);
+    }
+    if (notApplicable.includes(references[0])) {
+      fail("E_PROCESS_DEVELOPMENT_CONTRADICTION", `operation "${row[0]}" points at section "${references[0]}", which meta.notApplicableSections declares does not apply`);
+    }
+    cited.add(references[0]);
+  }
+  for (const id of developing) {
+    if (!cited.has(id) && !notApplicable.includes(id)) {
+      fail("E_PROCESS_DEVELOPMENT_UNUSED", `section "${id}" develops an operation, but no operation in the list points at it — either an operation is missing from the list, or the section does not apply and has to be declared in meta.notApplicableSections`);
+    }
+  }
+}
+
 function validateSectionForm(section, spec, draft) {
   if (Array.isArray(spec.headings)) {
     const actual = section.blocks.filter((block) => block.type.startsWith("heading")).map((block) => block.text);
@@ -691,6 +747,7 @@ export function validateDraft(draft, outline = loadOutline()) {
       const spec = outline.sections.find((entry) => entry.id === section.id)?.form;
       if (spec) validateSectionForm(section, spec, draft);
       if (spec?.riskAssessment) validateRiskAssessment(section, spec.riskAssessment, draft, outline);
+      if (spec?.operationList) validateOperationList(section, spec.operationList, draft, outline);
       // A figure names a table and a row rather than carrying numbers, so whether it can be drawn at
       // all is decided here: the table has to exist, and a chart's row has to hold measurements
       // rather than gap markers. Left to the renderer this surfaces as a broken run or, worse, as an
@@ -735,6 +792,7 @@ export function validateDraft(draft, outline = loadOutline()) {
     }
   }
 
+  validateProcessDevelopmentOutline(outline);
   validateMarkerKinds(draft);
   validateCrossReferences(draft, outline);
   validateAbbreviationsAreUsed(draft);

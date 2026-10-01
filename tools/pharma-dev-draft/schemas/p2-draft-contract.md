@@ -304,3 +304,30 @@ What this does **not** check: whether the cited study supports the lower score. 
 the reviewer; the rule only guarantees there is something to go and read. Only lowering is enforced —
 raising a cell needs no row, although a reviewer will want to know why.
 
+### The operation list: `operationList`, `developsOperations` and `meta.notApplicableSections`
+
+The process section `P.2.3.2` holds the one table in the document that lists the manufacturing
+operations. The risk matrix columns, the matrix's justification rows and the flow diagram all read from
+it, so the document cannot describe the process two ways. Its `form` declares
+`operationList: { "developmentColumn": n }`, and the sections that report the development of an
+operation (blending, compression, coating) declare `developsOperations: true`.
+
+- Cell `n` of every operation row points at the section that develops it — a section reference such as
+  `3.2.P.2.3.2.3` — or carries a marker saying it has no development study yet. An operation pointing at
+  no development section, or at one that does not develop operations, reports
+  `E_PROCESS_DEVELOPMENT_UNKNOWN`; pointing at two reports `E_PROCESS_DEVELOPMENT_MULTIPLE`.
+- One section may serve several operations (three mixing steps, one blending study). The reverse is the
+  error: a section that develops operations and is pointed at by none reports
+  `E_PROCESS_DEVELOPMENT_UNUSED`.
+- The form cannot drop a development section a product does not need — an uncoated tablet still has the
+  coating section. The draft declares `meta.notApplicableSections: ["<section id>"]` instead. Such a
+  section is exempt from being pointed at, and being pointed at while declared not applicable is
+  `E_PROCESS_DEVELOPMENT_CONTRADICTION`. Naming a section that does not develop operations is
+  `E_META_NOT_APPLICABLE`. The declaration says that the section does not apply; why is for the
+  section's own text.
+- An outline that marks developing sections but declares no operation list is
+  `E_OUTLINE_PROCESS_DEVELOPMENT`.
+
+What this does not check: whether a development section actually studies the operations that point at
+it. It guarantees that the pointing exists and is consistent, not that the study is any good.
+

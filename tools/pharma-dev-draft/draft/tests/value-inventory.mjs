@@ -64,6 +64,12 @@ function tableValuesOf(draft) {
   return cells;
 }
 
+// A cell made of nothing but references to other sections of the same document ("3.2.P.2.3.2.3") points
+// at where something is reported. It asserts nothing about the product, so it is not a measurement
+// with no source. Anything with a word of its own beside the reference is still counted as data.
+const SECTION_REFERENCE = "(?:3\\.2\\.)?P\\.2(?:\\.\\d+)+";
+const POINTER_CELL = new RegExp(`^\\s*${SECTION_REFERENCE}(?:\\s*(?:,|;|và)\\s*${SECTION_REFERENCE})*\\s*$`);
+
 export function compareDrafts(before, after) {
   const beforeValues = valuesOf(before);
   const afterValues = valuesOf(after);
@@ -101,7 +107,7 @@ export function compareDrafts(before, after) {
     // prose framing a section the new form requires — reported so a reviewer reads it, not failed. A new
     // table cell holding anything else is a measurement with no source, which is the one thing this
     // pass must not produce.
-    const kind = isMarkedText(value) ? "marker" : afterTableValues.has(value) ? "DATA" : "prose";
+    const kind = isMarkedText(value) ? "marker" : afterTableValues.has(value) ? (POINTER_CELL.test(value) ? "pointer" : "DATA") : "prose";
     added.push({ value, in: [...new Set(places)], kind });
   }
 
@@ -135,7 +141,7 @@ function main() {
     const extra = report.repeatedMarkers.reduce((sum, entry) => sum + entry.after - entry.before, 0);
     process.stdout.write(`repeated markers: ${report.repeatedMarkers.length} value(s), ${extra} more occurrence(s) — skeleton cells, not findings\n`);
   }
-  process.stdout.write(`added: ${report.added.length} (marker ${report.added.filter((e) => e.kind === "marker").length}, prose ${report.added.filter((e) => e.kind === "prose").length}, data ${introducedData.length})\n`);
+  process.stdout.write(`added: ${report.added.length} (marker ${report.added.filter((e) => e.kind === "marker").length}, pointer ${report.added.filter((e) => e.kind === "pointer").length}, prose ${report.added.filter((e) => e.kind === "prose").length}, data ${introducedData.length})\n`);
   for (const entry of report.added.filter((e) => e.kind === "prose")) {
     process.stdout.write(`  ADDED PROSE in ${entry.in.join(",")}: ${entry.value.slice(0, 100)}\n`);
   }

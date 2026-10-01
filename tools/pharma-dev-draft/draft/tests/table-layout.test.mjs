@@ -173,10 +173,13 @@ test("the form fixes the shape, not the method: process steps may change with th
   // the risk matrix has to accept whichever set applies.
   // The method is declared once, in the operation list. The matrix, its justification rows and the
   // updated matrix all take their operations from it, so changing the method means changing that table.
+  // The product is not coated, so the coating section is declared not to apply rather than left
+  // without an operation pointing at it.
+  draft.meta.notApplicableSections = ["P.2.3.2.5"];
   formTable(draft, "P.2.3.2").rows = [
-    ["Xát hạt ướt", GAP_PREFIX],
-    ["Sấy", GAP_PREFIX],
-    ["Dập viên", GAP_PREFIX],
+    ["Xát hạt ướt", GAP_PREFIX, "3.2.P.2.3.2.3"],
+    ["Sấy", GAP_PREFIX, GAP_PREFIX],
+    ["Dập viên", GAP_PREFIX, "3.2.P.2.3.2.4"],
   ];
   const matrix = formTable(draft, "P.2.3.1");
   matrix.headers = ["CQA sản phẩm", "Xát hạt ướt", "Sấy", "Dập viên"];
@@ -220,9 +223,10 @@ test("a draft for an entirely different product validates on the same form", () 
   excipients.rows = [["1.", "Hypromellose", "—", "—", "Tá dược dính"]];
   const attributes = formTable(draft, "P.2.2.1.2.1");
   attributes.rows = [["Độ hòa tan (45 phút)", "≥ 75% (Q)"], ["Định lượng", "95–105%"]];
+  draft.meta.notApplicableSections = ["P.2.3.2.5"];
   formTable(draft, "P.2.3.2").rows = [
-    ["Xát hạt ướt", GAP_PREFIX],
-    ["Dập viên", GAP_PREFIX],
+    ["Xát hạt ướt", GAP_PREFIX, "3.2.P.2.3.2.3"],
+    ["Dập viên", GAP_PREFIX, "3.2.P.2.3.2.4"],
   ];
   const matrix = formTable(draft, "P.2.3.1");
   matrix.headers = ["CQA sản phẩm", "Xát hạt ướt", "Dập viên"];

@@ -57,20 +57,19 @@ test("changing a value in the table changes the chart, because there is only one
   assert.equal(barSeries(section, figure)[0].value, 42);
 });
 
-test("a process flow takes its steps from the columns the risk matrix scores", () => {
+test("a process flow takes its steps from the operation list, the one place operations are declared", () => {
   const draft = loadExample();
-  const section = sectionOf(draft, "P.2.3.1");
+  const section = sectionOf(draft, "P.2.3.2");
   const figure = figureOf(section, "flow");
   const table = tableFor(section, figure);
-  assert.deepEqual(flowSteps(section, figure), table.headers.slice(1));
+  assert.deepEqual(flowSteps(section, figure), table.rows.map((row) => row[0]));
 });
 
 test("changing the manufacturing method redraws the flow with no code change", () => {
   const draft = loadExample();
-  const section = sectionOf(draft, "P.2.3.1");
+  const section = sectionOf(draft, "P.2.3.2");
   const table = section.blocks.filter((block) => block.type === "table")[0];
-  table.headers = ["CQA sản phẩm", "Xát hạt ướt", "Sấy", "Dập viên"];
-  table.rows = table.rows.map((row) => [row[0], GAP_PREFIX, GAP_PREFIX, GAP_PREFIX]);
+  table.rows = ["Xát hạt ướt", "Sấy", "Dập viên"].map((name) => [name, GAP_PREFIX, GAP_PREFIX]);
   assert.deepEqual(flowSteps(section, figureOf(section, "flow")), ["Xát hạt ướt", "Sấy", "Dập viên"]);
 });
 
@@ -96,7 +95,7 @@ test("a chart naming a row the table does not have is rejected", () => {
 
 test("a figure naming a table the section does not have is rejected", () => {
   const draft = loadExample();
-  figureOf(sectionOf(draft, "P.2.3.1"), "flow").fromTable = "bang-khong-ton-tai";
+  figureOf(sectionOf(draft, "P.2.3.2"), "flow").fromTable = "bang-khong-ton-tai";
   expectFailure(draft, "E_FIGURE_SOURCE");
 });
 
@@ -111,7 +110,7 @@ test("a chart over values that are not numbers is rejected", () => {
 
 test("a figure with no caption is rejected", () => {
   const draft = loadExample();
-  delete figureOf(sectionOf(draft, "P.2.3.1"), "flow").caption;
+  delete figureOf(sectionOf(draft, "P.2.3.2"), "flow").caption;
   expectFailure(draft, "E_FIGURE_SHAPE");
 });
 

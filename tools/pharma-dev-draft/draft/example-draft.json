@@ -1921,7 +1921,7 @@
         },
         {
           "type": "paragraph",
-          "text": "Các cột của ma trận dưới đây là các công đoạn ở bảng danh mục tại mục 3.2.P.2.3.2, và các dòng của bảng biện luận theo sau cũng vậy: ma trận chấm rủi ro theo công đoạn, nên một công đoạn không có cột là một công đoạn không ai chấm. Bộ công đoạn là quyết định còn mở của FD, ghi ở mục đó."
+          "text": "Các cột của ma trận dưới đây là các công đoạn ở bảng danh mục tại mục 3.2.P.2.3.2, và các dòng của bảng biện luận theo sau cũng vậy: ma trận chấm rủi ro theo công đoạn, nên một công đoạn không có cột là một công đoạn không ai chấm. Bộ công đoạn là quyết định còn mở của FD, ghi ở mục đó. Sơ đồ luồng của các công đoạn này nằm cạnh bảng danh mục, ở mục đó."
         },
         {
           "type": "paragraph",
@@ -2015,13 +2015,6 @@
           "id": "ma-tran-rui-ro-quy-trinh"
         },
         {
-          "type": "figure",
-          "kind": "flow",
-          "fromTable": "ma-tran-rui-ro-quy-trinh",
-          "fromAxis": "columns",
-          "caption": "Sơ đồ quy trình sản xuất theo phương pháp trộn dập thẳng, dựng từ bộ công đoạn ở bảng đánh giá rủi ro trên."
-        },
-        {
           "type": "paragraph",
           "italic": true,
           "text": "Bảng: Biện luận mức rủi ro theo công đoạn"
@@ -2079,7 +2072,7 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Bảng dưới là danh mục công đoạn của quy trình sản xuất, và là nơi duy nhất công đoạn được liệt kê: cột của ma trận rủi ro ở mục 3.2.P.2.3.1 và các dòng biện luận ở đó đều lấy từ bảng này, nên ma trận không còn tự khai được bộ công đoạn riêng. Hai bộ công đoạn đã từng được khai tách rời và lệch nhau, nên bảng lấy hợp của hai bộ. Rây, trộn đồng nhất 1, trộn đồng nhất 2, trộn hoàn tất và dập viên là các công đoạn của quy trình thử nghiệm (mục 3.2.P.2.2.1.3.3.1; rây ở đó là xử lý từng nhóm thành phần trước khi đưa vào khối trộn, không phải một bước riêng của cả khối). Bao phim và đóng gói chỉ có trong ma trận rủi ro cũ, không có trong quy trình thử nghiệm vốn dừng ở dập viên. Cột của bảng nói công đoạn đó đã được xác nhận là có trong quy trình thương mại hay chưa."
+          "text": "Bảng dưới là danh mục công đoạn của quy trình sản xuất, và là nơi duy nhất công đoạn được liệt kê: cột của ma trận rủi ro ở mục 3.2.P.2.3.1 và các dòng biện luận ở đó đều lấy từ bảng này, nên ma trận không còn tự khai được bộ công đoạn riêng. Hai bộ công đoạn đã từng được khai tách rời và lệch nhau, nên bảng lấy hợp của hai bộ. Rây, trộn đồng nhất 1, trộn đồng nhất 2, trộn hoàn tất và dập viên là các công đoạn của quy trình thử nghiệm (mục 3.2.P.2.2.1.3.3.1; rây ở đó là xử lý từng nhóm thành phần trước khi đưa vào khối trộn, không phải một bước riêng của cả khối). Bao phim và đóng gói chỉ có trong ma trận rủi ro cũ, không có trong quy trình thử nghiệm vốn dừng ở dập viên. Cột của bảng nói công đoạn đó đã được xác nhận là có trong quy trình thương mại hay chưa. Cột cuối nói mục nào báo cáo việc phát triển từng công đoạn: một công đoạn trỏ tới đúng một mục, và một mục có thể nhận nhiều công đoạn (ba lần trộn do một mục trộn báo cáo). Quy trình của thử nghiệm phòng thí nghiệm ở mục 3.2.P.2.2.1.3.3.1 không chuyển sang đây — đó là quy trình của thử nghiệm, không phải quy trình thương mại."
         },
         {
           "type": "paragraph",
@@ -2091,38 +2084,57 @@
           "id": "danh-muc-cong-doan",
           "headers": [
             "Công đoạn",
-            "Có trong quy trình thương mại"
+            "Có trong quy trình thương mại",
+            "Mục phát triển"
           ],
           "rows": [
             [
               "Rây",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ lô hoặc công thức gốc của quy trình thương mại, để xác nhận công đoạn này có hay không."
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ lô hoặc công thức gốc của quy trình thương mại, để xác nhận công đoạn này có hay không.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa có mục phát triển riêng cho công đoạn rây. FD quyết định có cần một mục riêng hay gộp vào mục của công đoạn kề."
             ],
             [
               "Trộn đồng nhất 1",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ lô hoặc công thức gốc của quy trình thương mại, để xác nhận công đoạn này có hay không."
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ lô hoặc công thức gốc của quy trình thương mại, để xác nhận công đoạn này có hay không.",
+              "3.2.P.2.3.2.3"
             ],
             [
               "Trộn đồng nhất 2",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ lô hoặc công thức gốc của quy trình thương mại, để xác nhận công đoạn này có hay không."
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ lô hoặc công thức gốc của quy trình thương mại, để xác nhận công đoạn này có hay không.",
+              "3.2.P.2.3.2.3"
             ],
             [
               "Trộn hoàn tất",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ lô hoặc công thức gốc của quy trình thương mại, để xác nhận công đoạn này có hay không."
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ lô hoặc công thức gốc của quy trình thương mại, để xác nhận công đoạn này có hay không.",
+              "3.2.P.2.3.2.3"
             ],
             [
               "Dập viên",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ lô hoặc công thức gốc của quy trình thương mại, để xác nhận công đoạn này có hay không."
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ lô hoặc công thức gốc của quy trình thương mại, để xác nhận công đoạn này có hay không.",
+              "3.2.P.2.3.2.4"
             ],
             [
               "Bao phim",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ lô hoặc công thức gốc của quy trình thương mại, để xác nhận công đoạn này có hay không."
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ lô hoặc công thức gốc của quy trình thương mại, để xác nhận công đoạn này có hay không.",
+              "3.2.P.2.3.2.5"
             ],
             [
               "Đóng gói",
-              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ lô hoặc công thức gốc của quy trình thương mại, để xác nhận công đoạn này có hay không."
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ lô hoặc công thức gốc của quy trình thương mại, để xác nhận công đoạn này có hay không.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa có mục phát triển riêng cho công đoạn đóng gói. FD quyết định có cần một mục riêng hay gộp vào mục của công đoạn kề."
             ]
           ]
+        },
+        {
+          "type": "figure",
+          "kind": "flow",
+          "fromTable": "danh-muc-cong-doan",
+          "fromAxis": "rows",
+          "caption": "Sơ đồ luồng các công đoạn, dựng từ bảng danh mục ở trên. Danh mục chưa được FD xác nhận là quy trình thương mại, nên sơ đồ cũng chưa phải sơ đồ của quy trình thương mại."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Mô tả quy trình sản xuất thương mại: công thức gốc, cỡ lô thương mại, thiết bị dùng cho từng công đoạn và trình tự thêm từng nhóm thành phần. ICH Q8(R2) mục 2.3 đòi mô tả việc chọn, kiểm soát và cải tiến quy trình dùng cho lô thương mại (mục 3.2.P.3.3); quy trình ở mục 3.2.P.2.2.1.3.3.1 là quy trình thử nghiệm ở quy mô phòng thí nghiệm và không thay cho mô tả này. Nguồn cần lấy: công thức gốc và hồ sơ lô của FD."
         },
         {
           "type": "paragraph",
@@ -2136,7 +2148,7 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Điều kiện môi trường được kiểm soát ở từng công đoạn, và cơ chế đòi kiểm soát nó. Với sản phẩm này, hồ sơ tạp chất ở mục P.2.2.3.3.1 là đầu vào: một tạp phân hủy do oxy hóa hay do ẩm làm độ ẩm và nhiệt độ phòng thành thông số của quy trình chứ không phải điều kiện nhà xưởng chung."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Điều kiện môi trường được kiểm soát ở từng công đoạn, và cơ chế đòi kiểm soát nó. Đề bài: (1) chỉ ra công đoạn nào nhạy với độ ẩm hoặc nhiệt độ phòng, căn cứ vào hồ sơ tạp chất ở mục 3.2.P.2.2.3.3.1 (nếu một tạp phân hủy do ẩm hoặc oxy hóa, độ ẩm và nhiệt độ phòng là thông số của quy trình chứ không phải điều kiện nhà xưởng chung) và vào độ bền với ẩm của dược chất ở mục 3.2.P.2.1.1.1; (2) với mỗi công đoạn đó, đo độ ẩm tương đối và nhiệt độ tại phòng trong các lô đã chạy, song song với đáp ứng nhạy với chúng (hàm ẩm khối bột, tạp phân hủy, độ cứng, dính chày); (3) phương pháp đo độ ẩm và nhiệt độ phòng: cần đối chiếu dược điển — repo không giữ bản nào. Khung: ICH Q8(R2) mục 2.3 — chương trình phát triển quy trình phải xác định thông số trọng yếu cần theo dõi hoặc kiểm soát. Ngưỡng cho từng công đoạn là quyết định của FD, ghi ở dưới."
         },
         {
           "type": "paragraph",
@@ -2150,7 +2162,11 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hàm ẩm được theo dõi ở điểm nào trong quy trình, đo bằng phương pháp nào, và vì sao nó trọng yếu với công thức này. Nguồn: dữ liệu kiểm soát trong quy trình của các lô đã pha chế."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hàm ẩm được theo dõi ở đâu trong quy trình và vì sao nó trọng yếu với công thức này. Đề bài: (1) điểm lấy mẫu — khối bột sau từng bước trộn, khối bột trước dập, và viên nhân sau dập; (2) mỗi điểm đo hàm ẩm bằng một phương pháp phải khai (mất khối lượng khi sấy hoặc chuẩn độ nước), phương pháp và điều kiện theo dược điển — cần đối chiếu, repo không giữ bản; (3) đặt hàm ẩm cạnh đáp ứng có thể bị nó làm xấu đi (tạp phân hủy do ẩm, độ cứng, dính chày) để thấy ngưỡng nằm ở đâu. Bảng kiểm soát trong quá trình của Thử nghiệm 1 (mục 3.2.P.2.2.1.3.3.1) đã đo độ ẩm; đó là đầu vào, chưa phải khảo sát hàm ẩm theo công đoạn. Nguồn cần lấy: dữ liệu kiểm soát trong quá trình của các lô đã pha chế."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD chốt giới hạn hàm ẩm ở từng điểm kiểm soát, kèm cơ sở của từng giới hạn. Một giới hạn lấy từ tài liệu tham chiếu định dạng là giới hạn của công thức khác."
         }
       ]
     },
@@ -2160,7 +2176,7 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Khảo sát công đoạn trộn: thông số nào thay đổi (thời gian, tốc độ, mức nạp thiết bị), đáp ứng nào đo để kết luận (đồng đều hàm lượng, độ chảy, tỷ trọng khối), và ở mấy mức. Mục P.2.2.1.3.3 đã có trình tự công đoạn; mục này cần khoảng làm việc của từng công đoạn đó."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Khảo sát ba công đoạn trộn của danh mục ở mục 3.2.P.2.3.2 (trộn đồng nhất 1, trộn đồng nhất 2, trộn hoàn tất). Đề bài: (1) thông số thay đổi ở mỗi công đoạn — thời gian trộn, tốc độ, mức nạp thùng trộn — và số mức khảo sát; (2) đáp ứng đo — độ đồng đều hàm lượng của khối bột (lấy mẫu ở nhiều vị trí trong thùng trộn), độ chảy, tỷ trọng khối; riêng ở công đoạn trộn hoàn tất có tá dược trơn, đo thêm độ hòa tan của viên dập từ khối bột đó, vì trộn quá lâu với tá dược trơn làm chậm hòa tan; (3) phương pháp thử độ đồng đều đơn vị liều của viên thành phẩm: ICH Q6A nêu dùng quy trình dược điển, cần đối chiếu — repo không giữ bản; phương pháp lấy mẫu khối bột do FD chốt. Mục 3.2.P.2.2.1.3.3.1 đã có trình tự các bước trộn của quy trình thử nghiệm; mục này cần khoảng làm việc của từng bước."
         },
         {
           "type": "paragraph",
@@ -2174,7 +2190,7 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Khảo sát công đoạn dập viên: lực dập và tốc độ máy ở mấy mức, và đáp ứng nào đo ở từng mức — khối lượng viên, độ cứng, độ mài mòn, thời gian rã, độ hòa tan. Kết luận của Thử nghiệm 2 về tá dược trơn đã chạm tới hiện tượng dính chày; phần thông số máy thì chưa có số nào."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Khảo sát công đoạn dập viên. Đề bài: (1) thông số — lực dập và tốc độ máy dập, ở mấy mức; (2) đáp ứng đo ở từng mức — khối lượng viên, độ cứng, độ mài mòn, thời gian rã, độ hòa tan; (3) ICH Q6A (mục 2.3 và phần về dạng bào chế rắn) nêu độ cứng và độ mài mòn thường là kiểm soát trong quá trình, không đưa vào tiêu chuẩn thành phẩm, nên chúng được khảo sát ở đây để chốt khoảng làm việc chứ không để đặt tiêu chuẩn. Kết luận của Thử nghiệm 2 về tá dược trơn đã chạm tới hiện tượng dính chày; phần thông số máy thì chưa có số nào."
         },
         {
           "type": "paragraph",
@@ -2188,11 +2204,11 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thông số bao phim và mức tăng khối lượng màng bao được chốt, kèm kết quả kiểm tra viên sau bao. Thành phần màng bao còn là một khoảng trống riêng ở mục công thức cuối."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Khảo sát công đoạn bao phim. Đề bài: (1) thông số — nhiệt độ khí vào, tốc độ phun, và mức tăng khối lượng màng bao; (2) đáp ứng đo trên viên sau bao — ngoại quan, mức tăng khối lượng thực tế, thời gian rã và độ hòa tan so với viên nhân; (3) thành phần màng bao còn là một khoảng trống riêng ở mục công thức cuối (3.2.P.2.2.1.4), nên chưa thể chốt thông số trước khi biết màng bao là gì."
         },
         {
           "type": "paragraph",
-          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận sản phẩm có bao phim trong quy trình đã chốt — ma trận rủi ro ở mục P.2.3.1 có cột bao phim trong khi trình tự công đoạn ở P.2.2.1.3.3 thì không, và hai chỗ đó phải nói cùng một điều."
+          "text": "Việc sản phẩm có bao phim trong quy trình thương mại là quyết định của FD, đã nêu ở danh mục công đoạn tại mục 3.2.P.2.3.2 — mục này không lặp lại quyết định đó. Nếu FD xác nhận sản phẩm không bao phim thì mục này được khai là không áp dụng."
         }
       ]
     },
@@ -2203,6 +2219,40 @@
         {
           "type": "paragraph",
           "text": "Nâng cỡ lô: Thử nghiệm 1 thực hiện ở cỡ lô 1.000 viên mỗi công thức (mục P.2.2.1.3.3.1), tức quy mô phòng thí nghiệm. Cần thử nghiệm nâng cỡ lô lên quy mô pilot rồi thương mại để đánh giá tính lặp lại của thông số quy trình, sau đó mới lập được bảng đánh giá rủi ro cập nhật theo yêu cầu của biểu mẫu."
+        },
+        {
+          "type": "paragraph",
+          "text": "Bảng: Nâng cỡ lô theo quy mô",
+          "italic": true
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Quy mô",
+            "Cỡ lô",
+            "Thiết bị",
+            "Hiệu suất"
+          ],
+          "rows": [
+            [
+              "Phòng thí nghiệm",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Cỡ lô ở quy mô phòng thí nghiệm.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thiết bị dùng cho từng công đoạn ở quy mô phòng thí nghiệm.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hiệu suất của lô ở quy mô phòng thí nghiệm, theo hồ sơ lô."
+            ],
+            [
+              "Pilot",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Cỡ lô ở quy mô pilot.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thiết bị dùng cho từng công đoạn ở quy mô pilot.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hiệu suất của lô ở quy mô pilot, theo hồ sơ lô."
+            ],
+            [
+              "Thương mại",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Cỡ lô ở quy mô thương mại.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thiết bị dùng cho từng công đoạn ở quy mô thương mại.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hiệu suất của lô ở quy mô thương mại, theo hồ sơ lô."
+            ]
+          ]
         }
       ]
     },

@@ -64,14 +64,14 @@ test("a flow figure survives the shuffle too, and it is the kind with no other c
   // A chart would have been caught by its row name and a process diagram by its column count. A flow
   // reads column headings straight into unit operation names, so nothing else would have noticed.
   const draft = loadExample();
-  const risk = draft.sections.find((entry) => entry.id === "P.2.3.1");
-  const figure = risk.blocks.find((block) => block.type === "figure");
-  const steps = flowSteps(risk, figure);
+  const operations = draft.sections.find((entry) => entry.id === "P.2.3.2");
+  const figure = operations.blocks.find((block) => block.type === "figure");
+  const steps = flowSteps(operations, figure);
 
-  const decoy = table("bang-khac", ["CQA", "Xát hạt ướt", "Sấy"], [["Độ rã", "Cao", "Cao"]]);
-  risk.blocks.unshift(decoy);
-  assert.deepEqual(flowSteps(risk, figure), steps, "the flow still draws the operations it named");
-  assert.notDeepEqual(steps, decoy.headers.slice(1), "and the decoy would have been a different process");
+  const decoy = table("bang-khac", ["Công đoạn", "Ghi chú"], [["Xát hạt ướt", "—"], ["Sấy", "—"]]);
+  operations.blocks.unshift(decoy);
+  assert.deepEqual(flowSteps(operations, figure), steps, "the flow still draws the operations it named");
+  assert.notDeepEqual(steps, decoy.rows.map((row) => row[0]), "and the decoy would have been a different process");
 });
 
 test("a figure naming a table that is not there is refused, and the message lists the real names", () => {
