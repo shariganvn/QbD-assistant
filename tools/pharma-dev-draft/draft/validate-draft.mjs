@@ -509,7 +509,7 @@ const MEASUREMENT_TOKEN = new RegExp(
   "gu",
 );
 
-function measurementTokens(text, strengths) {
+export function measurementTokens(text, strengths) {
   let rest = String(text);
   for (const strength of strengths) rest = rest.split(strength).join(" ");
   return rest.match(MEASUREMENT_TOKEN) ?? [];

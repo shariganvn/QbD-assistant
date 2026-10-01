@@ -5,6 +5,15 @@ authoritative router; wait for a scope to be accepted before picking work up.
 
 ## Latest completed
 
+- [Format-reference plan](docs/plans/qbd-p2-format-reference/plan.md) — `completed` and read-only.
+  G-35..G-47 hold evidence in `docs/reports/qbd-p2-format-reference/`. A finished P.2 for the same product,
+  written by another company, supplied structure and no data: the draft grew from 26 to 43 sections with
+  content, with paired risk matrices (a lowered score must cite its study), one operation list that the
+  process matrix and flow diagram read from, per-strength sections (a strength with no batch holds no
+  measurement), a dissolution-profile figure, a required f2 statement, and the data-request annex regrouped
+  as a work order by experiment. No measurement was added: 396 gaps and 26 decisions still wait on FD, and
+  the rules about lowered risk, profile figures and an unbatched strength have not met real data.
+
 - [Authorship plan](docs/plans/qbd-p2-authorship/plan.md) — `completed` and read-only. G-32..G-34 hold
   evidence in `docs/reports/qbd-p2-authorship/`. The sign-off table had named the tool that assembled the
   draft as its drafter, with a date beside it; provenance now prints once in the scope notice and all

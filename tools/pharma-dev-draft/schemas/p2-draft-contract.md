@@ -391,3 +391,22 @@ leave unsaid, and an exemption impossible to claim with nothing to check it agai
 recompute f2 from the profiles and does not judge whether a stated condition is true or sufficient; a
 reviewer still has to test the condition against the data.
 
+### The data-request annex is a work order: `workOrder` and `dataOwner`
+
+The annex of data still to be supplied is grouped by **experiment**, not by section number, so whoever
+receives the document is handed work they can start ("run the breakability test on both strengths") and
+not a list of holes. Each leaf section of the outline declares `form.workOrder.experiment`, the label of
+the experiment its markers belong to; sections with the same label form one entry. The label belongs to
+the form — the same section is the same kind of experiment for every product — not to the draft.
+
+- A request is still read out of its marker (`render/data-request.mjs`), so filling one value removes
+  exactly that line. `render/work-order.mjs` only regroups; nothing is declared per request.
+- The recipient is read from the request's own text: a department from `meta.decisionOwners` that the text
+  names, otherwise the outline's `dataOwner` (FD). `dataOwner` records how the department already works —
+  FD supplies unless the marker says otherwise — and has no FD or regulatory sign-off as a rule.
+- A section the outline does not map falls into a visible bucket, "Chưa xếp vào thí nghiệm nào", rather
+  than into whichever group came before it. A test requires every leaf of the committed outline to name an
+  experiment, so a new section cannot be forgotten.
+- The annex opens with one summary line per experiment (requests, strengths, recipients), then each
+  experiment's lines with the CTD section, item, strength, recipient and what is needed and from where.
+

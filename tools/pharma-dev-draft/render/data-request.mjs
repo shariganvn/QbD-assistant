@@ -51,7 +51,8 @@ function isFullyBare(table) {
   return cells.length > 1 && cells.every((cell) => isGapText(cell) && markerText(cell) === "");
 }
 
-// Rows carry a trailing marker count used only for the accounting check; the printed table drops it.
+// Rows carry a marker count (for the accounting check) and the id of the section they came from (for
+// the work order); the printed table drops both.
 export function printableRequestRows(draft, outline) {
   return dataRequestRows(draft, outline).map((row) => row.slice(0, 4));
 }
@@ -71,7 +72,7 @@ export function dataRequestRows(draft, outline) {
     const sectionStrength = strengths[outlineSection.form?.strengthIndex] ?? NO_STRENGTH;
 
     if (!section || section.status === "gap") {
-      if (section?.gapReason) rows.push([where, heading, sectionStrength, markerText(section.gapReason), 1]);
+      if (section?.gapReason) rows.push([where, heading, sectionStrength, markerText(section.gapReason), 1, outlineSection.id]);
       continue;
     }
 
@@ -79,7 +80,7 @@ export function dataRequestRows(draft, outline) {
     let tableIndex = 0;
     for (const block of section.blocks ?? []) {
       if (block.type === "paragraph") {
-        if (isGapText(block.text)) rows.push([where, heading, sectionStrength, markerText(block.text), 1]);
+        if (isGapText(block.text)) rows.push([where, heading, sectionStrength, markerText(block.text), 1, outlineSection.id]);
         continue;
       }
       if (block.type !== "table") continue;
@@ -95,6 +96,7 @@ export function dataRequestRows(draft, outline) {
           sectionStrength,
           `Chưa ô nào được điền. Cần bộ dữ liệu điền trọn bảng (${block.rows.length} dòng × ${block.headers.length - skip} cột); nguồn nêu ở phần nội dung của mục.`,
           cellCount,
+          outlineSection.id,
         ]);
         continue;
       }
@@ -108,6 +110,7 @@ export function dataRequestRows(draft, outline) {
             strength !== NO_STRENGTH ? strength : sectionStrength,
             markerText(cell),
             1,
+            outlineSection.id,
           ]);
         });
       }

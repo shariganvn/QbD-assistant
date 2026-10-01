@@ -18,7 +18,7 @@ import { headingFor } from "../schemas/headings.mjs";
 import { TABLE_WIDTH_DXA as TABLE_WIDTH } from "../schemas/layout.mjs";
 import { DECISION_LABEL, GAP_LABEL, isMarkedText } from "../schemas/markers.mjs";
 import { tableValueCells } from "../schemas/table-shape.mjs";
-import { printableRequestRows } from "./data-request.mjs";
+import { printableWorkOrder } from "./work-order.mjs";
 import { printableDecisionRows } from "./decision-register.mjs";
 import { barChartPng } from "./figures/bar-chart.mjs";
 import { profileChartPng } from "./figures/profile-chart.mjs";
@@ -32,7 +32,8 @@ const GAP_COLOR = "C00000";
 // The renderer's own tables (not driven by a draft) declare their widths here, named, so one test
 // can assert they all still fill TABLE_WIDTH if that budget ever changes.
 export const FIXED_TABLE_WIDTHS = {
-  dataRequest: [2000, 1900, 800, 5300],
+  workOrderSummary: [3600, 1200, 2000, 3200],
+  workOrder: [1800, 1700, 800, 800, 4900],
   decisionRegister: [2000, 1900, 1000, 5100],
   gapRegister: [4200, 2400, 3400],
   abbreviations: [2500, 7500],
@@ -441,19 +442,31 @@ export async function buildDocumentBuffer(draft, outline) {
   children.push(spacer());
   children.push(h1("DANH MỤC DỮ LIỆU CẦN BỔ SUNG"));
   children.push(bodyParagraph(
-    "Mỗi dòng dưới đây tương ứng một ô hoặc một câu đã đánh dấu trong tài liệu, và được sinh ra từ chính " +
-    "dấu đó chứ không khai riêng — điền một giá trị thật vào tài liệu là dòng tương ứng tự biến mất. Cột " +
-    "cuối là nguyên văn phần mô tả đi kèm dấu, nêu cần gì và lấy ở đâu. Trách nhiệm cung cấp thuộc bộ phận " +
-    "Phát triển sản phẩm (FD), trừ những dòng mà chính nội dung dòng đó nêu bên khác (nhà cung cấp nguyên " +
-    "liệu, QA, hoặc hồ sơ thuộc phần khác của bộ tài liệu).",
+    "Danh mục này được gom theo THÍ NGHIỆM, không theo thứ tự mục: mỗi đầu việc là một việc người nhận " +
+    "có thể bắt tay làm, và nó đóng lại nhiều mục cùng lúc. Mỗi dòng bên trong vẫn tương ứng một ô hoặc " +
+    "một câu đã đánh dấu trong tài liệu, được sinh ra từ chính dấu đó chứ không khai riêng — điền một " +
+    "giá trị thật vào tài liệu là dòng tương ứng tự biến mất. Cột cuối là nguyên văn phần mô tả đi kèm " +
+    "dấu, nêu cần gì và lấy ở đâu. Người nhận mặc định là bộ phận Phát triển sản phẩm (FD), trừ những " +
+    "dòng mà chính nội dung dòng đó nêu bên khác (nhà cung cấp nguyên liệu, QA, hoặc hồ sơ thuộc phần " +
+    "khác của bộ tài liệu).",
   ));
-  const requestRows = printableRequestRows(draft, outline);
+  const workOrder = printableWorkOrder(draft, outline);
   children.push(makeTable(
-    ["Mục CTD", "Hạng mục", "Hàm lượng", "Cần gì và lấy ở đâu"],
-    requestRows,
-    FIXED_TABLE_WIDTHS.dataRequest,
-    ["left", "left", "center", "justify"],
+    ["Thí nghiệm", "Số dòng", "Hàm lượng", "Người nhận"],
+    workOrder.summary,
+    FIXED_TABLE_WIDTHS.workOrderSummary,
+    ["left", "center", "center", "left"],
   ));
+  for (const group of workOrder.tables) {
+    children.push(spacer());
+    children.push(heading(2, group.experiment));
+    children.push(makeTable(
+      ["Mục CTD", "Hạng mục", "Hàm lượng", "Người nhận", "Cần gì và lấy ở đâu"],
+      group.rows,
+      FIXED_TABLE_WIDTHS.workOrder,
+      ["left", "left", "center", "center", "justify"],
+    ));
+  }
 
   const decisionRows = printableDecisionRows(draft, outline);
   if (decisionRows.length > 0) {

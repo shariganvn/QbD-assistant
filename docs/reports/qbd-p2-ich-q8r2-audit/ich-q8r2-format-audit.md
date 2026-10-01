@@ -741,3 +741,62 @@ Hồ sơ **vẫn chưa đạt sàn Q8(R2) Part I**, và lý do vẫn thuần là
 
 N-3 (bộ CQA 10 mg đang áp cho cả hai hàm lượng), N-4 đã thành dấu quyết định, N-5 đã sửa, N-6 đã đánh
 dấu, N-7 và N-9 vẫn là INFO — không đợt nào chạm tới chúng nên trạng thái giữ nguyên.
+
+## Đợt 13 — Cấu trúc lấy từ một hồ sơ P.2 tham chiếu, và những gì nó không đóng được
+
+Ngày: 2026-10-01. Đọc trực tiếp `tools/pharma-dev-draft/schemas/p2-outline.json` và `draft/example-draft.json`
+ở thời điểm viết. **Không chạy lại subagent `ich_q8_r2_checker`**: các trạng thái dưới đây là kết quả đọc
+outline, draft và test, không phải một lượt đối chiếu lại từng điều khoản với PDF. Chi tiết và bằng chứng ở
+`docs/reports/qbd-p2-format-reference/`.
+
+### Phạm vi của đợt này: định dạng, không phải dữ liệu
+
+Tài liệu tham chiếu là hồ sơ của công ty khác, công thức khác ở mọi tá dược trừ tá dược trơn. Nó đóng được
+những finding về **hình dạng** của P.2 và **không đóng finding nào về dữ liệu**. Không phép đo nào được thêm.
+
+### Đánh số mới — bảng đối chiếu cho các đợt trước
+
+Các đợt 1–12 cố ý không bị sửa và dẫn số mục cũ. Đối chiếu cho người đọc lại chúng:
+
+| Số cũ | Số mới |
+|---|---|
+| `P.2.2.1.3.5` (công thức cuối) | `P.2.2.1.4` |
+| `P.2.2.3.1.4` (hồ sơ hòa tan so sánh) | `P.2.2.3.2` |
+| `P.2.2.3.2` (hồ sơ tạp chất) | `P.2.2.3.3.1` |
+| `P.2.3.2.3` (nâng cỡ lô) | `P.2.3.3` |
+| `P.2.3.2.2` (đánh giá rủi ro cập nhật của quy trình) | `P.2.3.4` |
+| `P.2.2.1.3.3` (hai thử nghiệm) | tách thành `P.2.2.1.3.3.1` (Thử nghiệm 1) và `P.2.2.1.3.3.2` (Thử nghiệm 2) |
+| `P.2.3.2.1` (mô tả quy trình và bảng biện luận) | số được dùng lại cho mục kiểm soát môi trường; bảng biện luận chuyển về `P.2.3.1` cạnh ma trận của nó |
+
+Cẩn thận: `P.2.3.2` và `P.2.2.3.2` là chuỗi ký tự mà **ý nghĩa đã đổi** — chuỗi này trong các đợt cũ chỉ vào
+mục cũ, không phải mục mang số đó hôm nay.
+
+### Trạng thái các finding bị chạm tới
+
+| Finding | Trạng thái | Ghi chú |
+|---|---|---|
+| **W-3** — thiếu nhóm risk assessment so với file mẫu phòng | **đóng ở mức cấu trúc** | Ba cặp ma trận (dược chất, biến công thức, quy trình), mỗi ma trận kèm bảng biện luận, dựng bằng khung có dấu. Chưa ô nào có mức: mức là việc của FD. Một ô hạ mức phải dẫn tới mục nghiên cứu đã hạ nó. |
+| **D-0** — bộ công đoạn cho ma trận rủi ro (đợt 12) | **chuyển từ một đoạn văn thành một bảng**, vẫn mở | `P.2.3.2` là danh mục công đoạn duy nhất; cột ma trận và sơ đồ luồng đọc từ đó. Hợp của hai bộ công đoạn (rây, hai lần trộn đồng nhất, trộn hoàn tất, dập viên, bao phim, đóng gói); cột "có trong quy trình thương mại" toàn dấu. |
+| **2.3 tr. 8–9** (quy trình, thông số trọng yếu) | **thêm khung, chưa thêm dữ liệu** | Năm mục phát triển (kiểm soát môi trường, hàm ẩm, trộn, dập viên, bao phim), mỗi công đoạn trỏ tới mục phát triển của nó. Q8(R2) 2.3 đòi xác định thông số quy trình trọng yếu; chưa có thông số nào được xác định. |
+| **N-3** — bộ CQA 10 mg áp cho cả hai hàm lượng | **không đổi** | Đặc tính lý hóa, tách vạch và nâng cỡ lô nay tách theo hàm lượng, nhưng QTPP/CQA vẫn một bộ. |
+| **N-4** — hai nguồn ghi hai bộ môi trường hòa tan | **không đổi, vẫn mở** | Nay có bảng f2 theo môi trường; hai bộ vẫn chưa được chọn. |
+| **I-1** — vắng design space, DoE đa biến | **được xác nhận thêm** | Tài liệu tham chiếu cũng không có chúng. Vẫn là lựa chọn hợp lệ. |
+| **N-2, N-5, N-6, N-7, N-9, W-4..W-13** | **không đổi** | Không phần nào của đợt này chạm tới. |
+
+### Một lỗi của chính đợt công việc, đã phát hiện và sửa
+
+Hai danh mục cuối tài liệu từng đếm 149 dấu thiếu dữ liệu và 19 dấu cần quyết định (đợt 12); nay là **396 và
+26**. Con số tăng vì các ô của khung mới, không vì phát hiện thêm thiếu sót. Ngoài ra, một luật quét toàn bộ
+file của công cụ tìm thấy ba comment ở giai đoạn đầu trích nguyên số lô của tài liệu tham chiếu — đúng loại
+thông tin mà luật biên giới tồn tại để giữ ra ngoài. Đã sửa trong đợt này; lịch sử git của commit đó vẫn mang
+chúng.
+
+### Kết luận đợt này
+
+Hồ sơ **vẫn chưa đạt sàn Q8(R2) Part I**, và lý do vẫn thuần là thiếu dữ liệu. Cái đổi là **bản đồ của khoảng
+trống**: 17 chỗ trước đây không ai thấy là thiếu nay có mục và có dấu, và danh mục dữ liệu cần bổ sung được
+gom theo 12 thí nghiệm thay vì theo thứ tự mục, nên người nhận thấy việc có thể bắt tay làm.
+
+Việc gấp nhất không đổi so với đợt 12: bảng kết quả Thử nghiệm 2 có 25 trong 45 ô trùng nguyên văn Thử
+nghiệm 1. Ba luật mới — hạ mức rủi ro phải dẫn nghiên cứu, hàm lượng suy ra không có số đo, câu f2 không được
+thiếu — **chưa bị bản nháp thật thử** vì chưa có dữ liệu để chúng tác động lên.
