@@ -12,6 +12,7 @@
 import { isGapText } from "../../schemas/markers.mjs";
 import { labelColumnCount } from "../../schemas/table-shape.mjs";
 import { parseValue } from "./bar-chart.mjs";
+import { MAX_PROFILE_SERIES } from "./profile-chart.mjs";
 
 export class FigureSourceError extends Error {
   constructor(message) {
@@ -111,3 +112,55 @@ export function processStages(section, { fromTable }) {
     return { input: input === "—" ? "" : input, operation };
   });
 }
+
+// A dissolution profile: the row labels are the sampling times and every value column is one series.
+// The time is the number the label starts with ("15 phút" is 15, unit "phút"), so the table stays the
+// one place the sampling schedule is written. Everything that would make a profile mean something
+// other than what the table says is refused: a gap or a non-number in any cell, times that do not
+// increase, a single time point (a line needs two), or more series than the palette can keep apart.
+export function profileSeries(section, { fromTable }) {
+  const table = tableAt(section, fromTable);
+  const skip = labelColumnCount(table);
+  const where = `section "${section.id}" table "${fromTable}"`;
+  if (table.rows.length < 2) {
+    throw new FigureSourceError(`${where} has ${table.rows.length} sampling time(s); a profile needs at least two`);
+  }
+  const times = table.rows.map((row) => {
+    const label = String(row[0] ?? "").trim();
+    const value = parseValue(label);
+    if (value === undefined) {
+      throw new FigureSourceError(`${where} row "${label}" does not start with a sampling time a profile can plot`);
+    }
+    return { value, display: String(label.match(/^[0-9]+(?:[.,][0-9]+)?/)[0]), unit: label.replace(/^[0-9]+(?:[.,][0-9]+)?\s*/, "") };
+  });
+  times.forEach((time, index) => {
+    if (index > 0 && time.value <= times[index - 1].value) {
+      throw new FigureSourceError(`${where} sampling times must increase down the table, but "${time.display}" follows "${times[index - 1].display}"`);
+    }
+  });
+  const unit = times[0].unit;
+  if (times.some((time) => time.unit !== unit)) {
+    throw new FigureSourceError(`${where} mixes time units (${[...new Set(times.map((time) => time.unit))].join(", ")}) — a profile has one time axis`);
+  }
+  const labels = table.headers.slice(skip).map((header) => String(header).trim());
+  if (labels.length === 0) throw new FigureSourceError(`${where} has no value columns`);
+  if (labels.length > MAX_PROFILE_SERIES) {
+    throw new FigureSourceError(`${where} has ${labels.length} series; a profile draws at most ${MAX_PROFILE_SERIES}, because past that the colours can no longer be told apart — split the table, one figure per medium or per strength`);
+  }
+  const series = labels.map((label, column) => ({
+    label,
+    points: table.rows.map((row) => {
+      const cell = row[skip + column];
+      if (isGapText(cell)) {
+        throw new FigureSourceError(`${where} has no measurement for "${label}" at "${row[0]}" — a figure cannot be drawn from a gap`);
+      }
+      const value = parseValue(cell);
+      if (value === undefined) {
+        throw new FigureSourceError(`${where} "${label}" at "${row[0]}" is "${cell}", which is not a number a chart can plot`);
+      }
+      return { display: String(cell).trim(), value };
+    }),
+  }));
+  return { times: times.map(({ value, display }) => ({ value, display })), timeUnit: unit, series };
+}
+

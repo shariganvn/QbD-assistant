@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 
 import { TABLE_WIDTH_DXA } from "../schemas/layout.mjs";
 import { isDecisionText, isGapText, isMarkedText, markerText } from "../schemas/markers.mjs";
-import { barSeries, flowSteps, processStages } from "../render/figures/figure-source.mjs";
+import { barSeries, flowSteps, processStages, profileSeries } from "../render/figures/figure-source.mjs";
 import { labelColumnCount } from "../schemas/table-shape.mjs";
 
 const draftDir = dirname(fileURLToPath(import.meta.url));
@@ -24,7 +24,7 @@ export class DraftContractError extends Error {
 }
 
 const VALID_BLOCK_TYPES = new Set(["heading2", "heading3", "paragraph", "table", "figure", "image"]);
-const VALID_FIGURE_KINDS = new Set(["flow", "bars", "process"]);
+const VALID_FIGURE_KINDS = new Set(["flow", "bars", "process", "profile"]);
 const VALID_FIGURE_AXES = new Set(["columns", "rows"]);
 // Supplied figures live in one directory under the tool. A draft naming an arbitrary path would let a
 // rendered dossier pull in a file nobody reviewed.
@@ -541,6 +541,43 @@ function validateDerivedStrengthSection(section, spec, draft) {
   });
 }
 
+// A comparative dissolution table with no similarity statement is an equivalence conclusion left
+// hanging: the reader cannot tell whether the profiles were compared and found alike, were never
+// compared, or were exempt. Each row of the similarity table therefore holds exactly one of: an f2
+// value, a marker saying the comparison is still to be done, or a statement that f2 does not apply
+// together with the condition that makes it so. A bare "không áp dụng" is refused, because it gives
+// the reader an exemption with nothing to check it against.
+//
+// What this does not do: it does not recompute f2 from the profiles or judge whether the stated
+// condition is true or enough. It makes sure a condition is written down where a reviewer can test it.
+const F2_NOT_APPLICABLE = /^\s*(không áp dụng|n\/?a)\b/i;
+const F2_NUMBER = /^\d{1,3}(?:[.,]\d+)?$/;
+const F2_CONDITION_MIN_WORDS = 6;
+
+function validateSimilarity(section) {
+  const table = section.blocks.filter((block) => block.type === "table")[1];
+  if (!table || table.rows.length === 0) {
+    fail("E_F2_MISSING", `section "${section.id}" compares dissolution profiles but its similarity table has no row — state f2, or that it does not apply and why`);
+  }
+  table.rows.forEach((row) => {
+    const [comparison, f2, condition] = row;
+    if (isMarkedText(f2)) return;
+    if (F2_NUMBER.test(String(f2).trim())) {
+      const value = Number(String(f2).trim().replace(",", "."));
+      if (value > 100) fail("E_F2_CELL_INVALID", `section "${section.id}" comparison "${comparison}" gives f2 = ${f2}, which is outside 0–100`);
+      return;
+    }
+    if (!F2_NOT_APPLICABLE.test(String(f2))) {
+      fail("E_F2_CELL_INVALID", `section "${section.id}" comparison "${comparison}" has "${f2}" for f2 — give the value, a marker, or "không áp dụng" with its condition`);
+    }
+    if (isMarkedText(condition)) return;
+    const words = String(condition).trim().split(/\s+/).filter(Boolean);
+    if (words.length < F2_CONDITION_MIN_WORDS || F2_NOT_APPLICABLE.test(String(condition))) {
+      fail("E_F2_UNCONDITIONAL", `section "${section.id}" comparison "${comparison}" says f2 does not apply without saying under what condition — an exemption nobody can check is not a finding`);
+    }
+  });
+}
+
 function validateSectionForm(section, spec, draft) {
   if (Array.isArray(spec.headings)) {
     const actual = section.blocks.filter((block) => block.type.startsWith("heading")).map((block) => block.text);
@@ -859,6 +896,7 @@ export function validateDraft(draft, outline = loadOutline()) {
       if (spec?.riskAssessment) validateRiskAssessment(section, spec.riskAssessment, draft, outline);
       if (spec?.operationList) validateOperationList(section, spec.operationList, draft, outline);
       if (Number.isInteger(spec?.strengthIndex)) validateDerivedStrengthSection(section, spec, draft);
+      if (spec?.similarity) validateSimilarity(section);
       // A figure names a table and a row rather than carrying numbers, so whether it can be drawn at
       // all is decided here: the table has to exist, and a chart's row has to hold measurements
       // rather than gap markers. Left to the renderer this surfaces as a broken run or, worse, as an
@@ -868,6 +906,7 @@ export function validateDraft(draft, outline = loadOutline()) {
         try {
           if (block.kind === "flow") flowSteps(section, block);
           else if (block.kind === "process") processStages(section, block);
+          else if (block.kind === "profile") profileSeries(section, block);
           else barSeries(section, block);
         } catch (error) {
           fail("E_FIGURE_SOURCE", `sections[${section.id}].blocks[${index}]: ${error.message}`);

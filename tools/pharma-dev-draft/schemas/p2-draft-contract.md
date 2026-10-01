@@ -99,11 +99,11 @@ draft. Filling one real value, or settling one decision, removes exactly its own
 { "type": "heading3", "text": "string" }
 { "type": "paragraph", "text": "string", "italic": false, "bold": false }   // italic/bold optional, default false
 { "type": "figure",
-  "kind": "flow" | "bars",
+  "kind": "flow" | "bars" | "process" | "profile",
   "fromTable": "ma-tran-rui-ro",       // id of a table in THIS section — a name, never an index
   "fromAxis": "columns" | "rows",      // flow only: which axis holds the steps; default "columns"
   "fromRow": "string",                 // bars only: the row label whose values are plotted
-  "threshold": "80", "thresholdLabel": "Ngưỡng Q = 80%", "axisLabel": "…",   // bars only, optional
+  "threshold": "80", "thresholdLabel": "Ngưỡng Q = 80%", "axisLabel": "…",   // bars and profile, optional
   "caption": "string" }                // required
 { "type": "image", "path": "assets/…png", "caption": "string", "widthPt": 320 }
 { "type": "table",
@@ -125,9 +125,9 @@ Note the deliberate asymmetry with the outline: `form.tables[]` **is** positiona
 "the Nth table of this section must have this shape" — that is format, and a table inserted in the
 middle should break it. A figure points at content, so it points by name.
 
-A `figure` has three kinds. `flow` draws a left-to-right chain of unit operations from one axis of a
+A `figure` has four kinds. `flow` draws a left-to-right chain of unit operations from one axis of a
 table; `bars` plots a named row; `process` draws unit operations down the page with the components
-added at each one branching in from the left.
+added at each one branching in from the left; `profile` draws a dissolution profile, described below.
 
 A `process` figure's table must have **exactly three columns** — step number, components added, unit
 operation — and that shape is required rather than derived, because `labelColumnCount` models
@@ -149,6 +149,16 @@ than the blank it would replace.
 
 `bars` reads the values as the source writes them — Vietnamese comma decimals — and prints them back
 in that form. A column below `threshold` is drawn in a different colour.
+
+`profile` reads the table's row labels as sampling times (the number a label starts with: "15 phút" is
+15, unit "phút") and draws every value column as one line. It is refused (`E_FIGURE_SOURCE`) when a cell
+is a marker or not a number, when the times do not increase or mix units, when there are fewer than two
+time points, or when there are more than **three** series — three is how many reference-palette colours
+stay apart under every colour-vision deficiency when all pairs can appear together, so a wider table is
+split into one figure per medium or per strength. Colour is never the only identity: each series has
+its own marker shape and is named in a legend and at the end of its line, and the table the figure was
+read from sits directly above it. The block carries no number of its own, so correcting the table
+redraws the line.
 
 `image` is for a figure that cannot be derived, such as a structural formula. `path` must sit under
 `assets/` with no parent-directory segment, and the file must exist: `E_IMAGE_PATH` and
@@ -363,4 +373,21 @@ the wrong strength's section — not every one. A measurement written in words, 
 unit, gets past it, and so does a measurement in a section the outline does not bind to a strength.
 Reading the section is still the author's job. Method statements that need a number (how many tablets,
 how many batches) belong in the parent section, where the design is shared and the strengths are not.
+
+### The similarity table: `similarity` and f2
+
+A section whose `form` declares `similarity: true` compares dissolution profiles, and its second table is
+the f2 statement: column 1 the medium and pair compared, column 2 f2, column 3 the condition under which
+f2 does not apply. The table needs at least one row (`E_F2_MISSING`), and every row holds exactly one of
+
+- an f2 value between 0 and 100 (`E_F2_CELL_INVALID` otherwise);
+- a marker, meaning the comparison is still to be done;
+- "không áp dụng" together with the condition that makes it so — at least six words, not itself a
+  bare "không áp dụng" (`E_F2_UNCONDITIONAL`). A condition that is itself a marker is accepted as
+  pending.
+
+Anything else in the f2 cell is `E_F2_CELL_INVALID`. This makes the equivalence conclusion impossible to
+leave unsaid, and an exemption impossible to claim with nothing to check it against. It does **not**
+recompute f2 from the profiles and does not judge whether a stated condition is true or sufficient; a
+reviewer still has to test the condition against the data.
 

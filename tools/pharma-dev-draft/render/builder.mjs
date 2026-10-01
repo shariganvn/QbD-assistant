@@ -21,8 +21,9 @@ import { tableValueCells } from "../schemas/table-shape.mjs";
 import { printableRequestRows } from "./data-request.mjs";
 import { printableDecisionRows } from "./decision-register.mjs";
 import { barChartPng } from "./figures/bar-chart.mjs";
+import { profileChartPng } from "./figures/profile-chart.mjs";
 import { processFlowPng, processStagePng } from "./figures/process-flow.mjs";
-import { barSeries, flowSteps, processStages } from "./figures/figure-source.mjs";
+import { barSeries, flowSteps, processStages, profileSeries } from "./figures/figure-source.mjs";
 
 const HEADER_FILL = "D9D9D9";
 const NOTICE_FILL = "FFF2CC";
@@ -275,6 +276,15 @@ function renderFigure(block, section, counter) {
   }
   if (block.kind === "process") {
     const { png, width, height } = processStagePng(processStages(section, block));
+    return figureParagraphs(png, width, height, block.caption, counter);
+  }
+  if (block.kind === "profile") {
+    const threshold = block.threshold === undefined ? undefined : Number(String(block.threshold).replace(",", "."));
+    const { png, width, height } = profileChartPng(profileSeries(section, block), {
+      threshold,
+      thresholdLabel: block.thresholdLabel,
+      axisLabel: block.axisLabel,
+    });
     return figureParagraphs(png, width, height, block.caption, counter);
   }
   const series = barSeries(section, block);

@@ -1819,6 +1819,26 @@
         },
         {
           "type": "paragraph",
+          "italic": true,
+          "text": "Bảng: Hồ sơ tương đồng (f2) theo môi trường và cặp so sánh"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Môi trường và cặp so sánh",
+            "f2",
+            "Điều kiện không áp dụng f2"
+          ],
+          "rows": [
+            [
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Mỗi môi trường và mỗi cặp so sánh (thành phẩm với thuốc đối chiếu, và giữa các hàm lượng) một dòng.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] f2 tính từ hồ sơ hòa tan ở bảng trên, cùng thời điểm lấy mẫu cho cả hai chế phẩm.",
+              "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nếu cặp nào được xem là không cần tính f2 vì cả hai hòa tan rất nhanh, nêu điều kiện đó và số liệu chứng minh nó; chỉ ghi \"không áp dụng\" thì không đủ."
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
           "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ hòa tan của thuốc đối chiếu Concor® ở từng hàm lượng, để so sánh. Nguồn cần lấy: thực nghiệm trên mẫu mua về; mục 3.2.P.2.2.1.1 đang chờ chính bộ số liệu này. Chưa có thì không có cơ sở xin miễn thử tương đương sinh học cho hàm lượng 5 mg."
         },
         {
