@@ -800,3 +800,8 @@ gom theo 12 thí nghiệm thay vì theo thứ tự mục, nên người nhận t
 Việc gấp nhất không đổi so với đợt 12: bảng kết quả Thử nghiệm 2 có 25 trong 45 ô trùng nguyên văn Thử
 nghiệm 1. Ba luật mới — hạ mức rủi ro phải dẫn nghiên cứu, hàm lượng suy ra không có số đo, câu f2 không được
 thiếu — **chưa bị bản nháp thật thử** vì chưa có dữ liệu để chúng tác động lên.
+
+**Đính chính cho Đợt 13 (2026-10-01):** câu "lịch sử git của commit đó vẫn mang chúng" ở mục *Một lỗi của
+chính đợt công việc* không còn đúng. Theo yêu cầu của người phụ trách, sáu commit của đợt này được viết lại
+trên nhánh để không commit nào mang số lô; cây cuối cùng giống hệt cây trước khi viết lại, và một lượt quét
+từng commit của nhánh không còn tìm thấy định danh nào. Các số commit nêu ở phần này đã đổi.

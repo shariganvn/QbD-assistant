@@ -62,3 +62,9 @@ No errors detected in compressed data of tools/pharma-dev-draft/output/p2-draft-
 ## negative evidence recorded when each rule was written (each rule switched off in turn, its tests then fail)
 risk-assessment: lowering rule, orphan rule; process-development: unused, multiple, contradiction, cited-set; strength-section: missing-section, orphan, contradiction, prose, table-cell, strength-name exemption; dissolution-profile: missing-row, unconditional, range, monotonic, series-cap, two-point, unit; work-order: added-section marker and measurement checks
 G-35 also caught its own author: three comments written in phase 1 quoted the reference dossier's batch numbers; fixed in this phase. The phase-1 commit (e716880) still carries them in history.
+
+## Correction, 2026-10-01
+The last line above says the phase-1 commit still carries the two batch numbers in history. It no longer does:
+the six commits of this workstream were rewritten on the branch at the owner's request. The final tree is
+identical to the one before (same tree hash), and a scan of every commit's message and added lines over the
+whole branch finds no identifier. The commit hashes quoted elsewhere in this directory predate the rewrite.
