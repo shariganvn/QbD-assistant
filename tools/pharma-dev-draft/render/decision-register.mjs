@@ -14,6 +14,7 @@
 // meta.decisionOwners. There is no table here mapping a section to a role: that would be a second
 // source of truth, and the first time a decision moved section the two would disagree.
 
+import { headingFor } from "../schemas/headings.mjs";
 import { isDecisionText, markerText } from "../schemas/markers.mjs";
 import { labelColumnCount } from "../schemas/table-shape.mjs";
 
@@ -46,13 +47,14 @@ export function decisionRows(draft, outline) {
     if (outlineSection.container) continue;
     const section = sectionsById.get(outlineSection.id);
     if (!section || section.status === "gap") continue;
-    const where = `${outlineSection.ctdReference} ${outlineSection.headingVi}`;
+    const heading = headingFor(outlineSection, draft.meta);
+    const where = `${outlineSection.ctdReference} ${heading}`;
 
     for (const block of section.blocks ?? []) {
       if (block.type === "paragraph") {
         if (!isDecisionText(block.text)) continue;
         const body = markerText(block.text);
-        rows.push([where, outlineSection.headingVi, ownersNamed(body, owners), body, 1]);
+        rows.push([where, heading, ownersNamed(body, owners), body, 1]);
         continue;
       }
       if (block.type !== "table") continue;
@@ -60,7 +62,7 @@ export function decisionRows(draft, outline) {
         row.forEach((cell) => {
           if (!isDecisionText(cell)) return;
           const body = markerText(cell);
-          rows.push([where, rowLabel(block, row) || outlineSection.headingVi, ownersNamed(body, owners), body, 1]);
+          rows.push([where, rowLabel(block, row) || heading, ownersNamed(body, owners), body, 1]);
         });
       }
     }

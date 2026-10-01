@@ -1855,7 +1855,53 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đặc tính lý hóa đo được của hàm lượng này: cảm quan, khối lượng trung bình và độ phân tán, kích thước viên, độ cứng, độ mài mòn, thời gian rã, định lượng, đồng đều hàm lượng. Nguồn: phiếu kiểm nghiệm của lô thật ở quy mô đã chốt."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đặc tính lý hóa đo được của hàm lượng này, theo bảng dưới. Hàm lượng này chưa có lô nào, nên mọi kết quả ở mục này là dấu thiếu dữ liệu: tỷ lệ công thức cho khối lượng, không cho độ cứng, độ rã hay phần trăm hòa tan. Nguồn: phiếu kiểm nghiệm của lô đầu tiên khi lô đó được sản xuất."
+        },
+        {
+          "type": "paragraph",
+          "text": "Bảng: Đặc tính lý hóa của viên theo hàm lượng",
+          "italic": true
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Chỉ tiêu",
+            "Kết quả đo"
+          ],
+          "rows": [
+            [
+              "Cảm quan",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Khối lượng trung bình",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Kích thước viên",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Độ cứng",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Độ mài mòn",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Thời gian rã",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Định lượng",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Độ đồng đều hàm lượng",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ]
+          ]
         }
       ]
     },
@@ -1865,7 +1911,53 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Cùng bộ chỉ tiêu như mục hàm lượng còn lại, đo trên lô thật của hàm lượng này. Một hàm lượng suy ra từ tỷ lệ công thức không có số đo nào của riêng nó: tỷ lệ cho khối lượng, không cho độ cứng, độ rã hay phần trăm hòa tan."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đặc tính lý hóa đo được của hàm lượng này, cùng bộ chỉ tiêu và cùng bảng như mục của hàm lượng kia. Kết quả của các công thức thử ở mục 3.2.P.2.2.1.3.3.1 và 3.2.P.2.2.1.3.3.2 là của công thức thử, không phải của công thức đã chốt, nên không thay cho bảng này. Nguồn: phiếu kiểm nghiệm của lô thật ở quy mô đã chốt."
+        },
+        {
+          "type": "paragraph",
+          "text": "Bảng: Đặc tính lý hóa của viên theo hàm lượng",
+          "italic": true
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Chỉ tiêu",
+            "Kết quả đo"
+          ],
+          "rows": [
+            [
+              "Cảm quan",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Khối lượng trung bình",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Kích thước viên",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Độ cứng",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Độ mài mòn",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Thời gian rã",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Định lượng",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ],
+            [
+              "Độ đồng đều hàm lượng",
+              "[CHƯA CÓ DỮ LIỆU]"
+            ]
+          ]
         }
       ]
     },
@@ -1880,6 +1972,10 @@
         {
           "type": "paragraph",
           "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD xác nhận viên của sản phẩm này có vạch chia và vạch đó dùng để chia liều hay chỉ để nhận dạng. Nếu chỉ để nhận dạng thì phép thử không áp dụng, và phải ghi rõ là không áp dụng kèm lý do — bỏ trống sẽ bị đọc thành chưa làm."
+        },
+        {
+          "type": "paragraph",
+          "text": "[CẦN QUYẾT ĐỊNH – CHƯA CHỐT] FD chốt thiết kế phép thử tách vạch: số viên thử và số lô, theo phép thử phân chia viên của dược điển. Repo không giữ bản dược điển nào nên con số không được viết ở đây; một con số lấy từ tài liệu tham chiếu định dạng là thiết kế của công thức khác."
         }
       ]
     },
@@ -1889,7 +1985,7 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Kết quả tách vạch của hàm lượng này. Số viên thử và số lô phải nêu rõ, vì kết luận về mức phân tán không đọc được nếu không biết nó dựa trên bao nhiêu viên."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Kết quả tách vạch của hàm lượng này, theo thiết kế phép thử ở mục 3.2.P.2.2.3.4. Hàm lượng này chưa có lô nào nên chưa thể có kết quả. Khi có, số viên thử và số lô phải nêu rõ, vì kết luận về mức phân tán không đọc được nếu không biết nó dựa trên bao nhiêu viên."
         }
       ]
     },
@@ -1899,7 +1995,7 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Kết quả tách vạch của hàm lượng còn lại, cùng thiết kế phép thử."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Kết quả tách vạch của hàm lượng này, cùng thiết kế phép thử ở mục 3.2.P.2.2.3.4. Số viên thử và số lô phải nêu rõ, vì kết luận về mức phân tán không đọc được nếu không biết nó dựa trên bao nhiêu viên."
         }
       ]
     },
@@ -2262,7 +2358,7 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nâng cỡ lô của hàm lượng này: cỡ lô ở từng quy mô, thiết bị dùng ở từng quy mô, hiệu suất, và kết quả kiểm nghiệm của lô ở quy mô mới. Nguồn: hồ sơ lô pilot và lô thẩm định."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nâng cỡ lô của hàm lượng này: cỡ lô ở từng quy mô, thiết bị dùng ở từng quy mô, hiệu suất, và kết quả kiểm nghiệm của lô ở quy mô mới. Hàm lượng này chưa có lô nào ở quy mô nào, nên phải ghi rõ là chưa thực hiện chứ không để trống — một ô trống bị đọc thành không áp dụng. Nguồn: hồ sơ lô pilot và lô thẩm định khi có."
         }
       ]
     },
@@ -2272,7 +2368,7 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Cùng bộ dữ liệu cho hàm lượng còn lại. Nếu hàm lượng này chưa có lô nào ở quy mô lớn thì ghi rõ là chưa thực hiện, chứ không để trống — một ô trống bị đọc thành không áp dụng."
+          "text": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nâng cỡ lô của hàm lượng này: cỡ lô ở từng quy mô, thiết bị dùng ở từng quy mô, hiệu suất, và kết quả kiểm nghiệm của lô ở quy mô mới. Nguồn: hồ sơ lô pilot và lô thẩm định."
         }
       ]
     },

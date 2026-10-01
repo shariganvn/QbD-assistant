@@ -8,6 +8,7 @@
 // the reference-product section has done it since that section was framed — and this module reads it
 // back. Filling one real value therefore removes exactly its own row, with no other edit.
 
+import { headingFor } from "../schemas/headings.mjs";
 import { isGapText, markerText } from "../schemas/markers.mjs";
 import { labelColumnCount } from "../schemas/table-shape.mjs";
 
@@ -63,10 +64,14 @@ export function dataRequestRows(draft, outline) {
   for (const outlineSection of outline.sections) {
     if (outlineSection.container) continue;
     const section = sectionsById.get(outlineSection.id);
-    const where = `${outlineSection.ctdReference} ${outlineSection.headingVi}`;
+    const heading = headingFor(outlineSection, draft.meta);
+    const where = `${outlineSection.ctdReference} ${heading}`;
+    // A section that reports one strength says so in every request it raises, so a list grouped by
+    // strength needs no second lookup.
+    const sectionStrength = strengths[outlineSection.form?.strengthIndex] ?? NO_STRENGTH;
 
     if (!section || section.status === "gap") {
-      if (section?.gapReason) rows.push([where, outlineSection.headingVi, NO_STRENGTH, markerText(section.gapReason), 1]);
+      if (section?.gapReason) rows.push([where, heading, sectionStrength, markerText(section.gapReason), 1]);
       continue;
     }
 
@@ -74,7 +79,7 @@ export function dataRequestRows(draft, outline) {
     let tableIndex = 0;
     for (const block of section.blocks ?? []) {
       if (block.type === "paragraph") {
-        if (isGapText(block.text)) rows.push([where, outlineSection.headingVi, NO_STRENGTH, markerText(block.text), 1]);
+        if (isGapText(block.text)) rows.push([where, heading, sectionStrength, markerText(block.text), 1]);
         continue;
       }
       if (block.type !== "table") continue;
@@ -87,7 +92,7 @@ export function dataRequestRows(draft, outline) {
         rows.push([
           where,
           `Toàn bộ bảng: ${block.headers.slice(0, skip).join(" ")} × ${columns}`,
-          NO_STRENGTH,
+          sectionStrength,
           `Chưa ô nào được điền. Cần bộ dữ liệu điền trọn bảng (${block.rows.length} dòng × ${block.headers.length - skip} cột); nguồn nêu ở phần nội dung của mục.`,
           cellCount,
         ]);
@@ -99,8 +104,8 @@ export function dataRequestRows(draft, outline) {
           const strength = strengthForColumn(block, tableSpec, strengths, column);
           rows.push([
             where,
-            itemLabel(block, row, column, strength) || outlineSection.headingVi,
-            strength,
+            itemLabel(block, row, column, strength) || heading,
+            strength !== NO_STRENGTH ? strength : sectionStrength,
             markerText(cell),
             1,
           ]);

@@ -14,6 +14,7 @@ import {
   WidthType, ShadingType, BorderStyle, AlignmentType, VerticalAlign, LevelFormat, ImageRun,
 } from "docx";
 
+import { headingFor } from "../schemas/headings.mjs";
 import { TABLE_WIDTH_DXA as TABLE_WIDTH } from "../schemas/layout.mjs";
 import { DECISION_LABEL, GAP_LABEL, isMarkedText } from "../schemas/markers.mjs";
 import { tableValueCells } from "../schemas/table-shape.mjs";
@@ -355,14 +356,14 @@ export function dataStatusLabel(section) {
   return "Có dữ liệu (một phần hoặc đầy đủ)";
 }
 
-function gapRegisterTable(outline, draftSectionsById) {
+function gapRegisterTable(outline, draftSectionsById, meta) {
   // Leaves only. A container carries a heading and no content, so it has no data status to report and
   // a row for it would state something untrue about a section that holds nothing by design.
   const rows = outline.sections.filter((section) => !section.container).map((section) => {
     const draftSection = draftSectionsById.get(section.id);
     const status = dataStatusLabel(draftSection);
     const note = draftSection?.status === "gap" ? draftSection.gapReason : "—";
-    return [`${section.ctdReference} ${section.headingVi}`, status, note];
+    return [`${section.ctdReference} ${headingFor(section, meta)}`, status, note];
   });
   return makeTable(["Mục CTD", "Trạng thái dữ liệu", "Ghi chú"], rows, FIXED_TABLE_WIDTHS.gapRegister);
 }
@@ -411,7 +412,7 @@ export async function buildDocumentBuffer(draft, outline) {
 
   for (const outlineSection of outline.sections) {
     const level = headingLevelFor(outlineSection.ctdReference);
-    children.push(heading(level, `${outlineSection.ctdReference} ${outlineSection.headingVi.toUpperCase()}`));
+    children.push(heading(level, `${outlineSection.ctdReference} ${headingFor(outlineSection, draft.meta).toUpperCase()}`));
     if (outlineSection.container) continue;
     const draftSection = draftSectionsById.get(outlineSection.id);
     if (!draftSection || draftSection.status === "gap") {
@@ -425,7 +426,7 @@ export async function buildDocumentBuffer(draft, outline) {
 
   children.push(h1("BẢNG TỔNG HỢP KHOẢNG TRỐNG DỮ LIỆU"));
   children.push(bodyParagraph("Tổng hợp mức độ sẵn sàng dữ liệu theo từng mục CTD, phục vụ lập kế hoạch bổ sung dữ liệu tiếp theo."));
-  children.push(gapRegisterTable(outline, draftSectionsById));
+  children.push(gapRegisterTable(outline, draftSectionsById, draft.meta));
 
   children.push(spacer());
   children.push(h1("DANH MỤC DỮ LIỆU CẦN BỔ SUNG"));

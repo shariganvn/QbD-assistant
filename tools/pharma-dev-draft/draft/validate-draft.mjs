@@ -10,6 +10,7 @@ import { fileURLToPath } from "node:url";
 import { TABLE_WIDTH_DXA } from "../schemas/layout.mjs";
 import { isDecisionText, isGapText, isMarkedText, markerText } from "../schemas/markers.mjs";
 import { barSeries, flowSteps, processStages } from "../render/figures/figure-source.mjs";
+import { labelColumnCount } from "../schemas/table-shape.mjs";
 
 const draftDir = dirname(fileURLToPath(import.meta.url));
 const toolRoot = join(draftDir, "..");
@@ -412,9 +413,6 @@ function validateOperationList(section, spec, draft, outline) {
   }
   const developing = developmentSectionIds(outline);
   const notApplicable = draft.meta.notApplicableSections ?? [];
-  if (!Array.isArray(notApplicable) || !notApplicable.every((id) => developing.includes(id))) {
-    fail("E_META_NOT_APPLICABLE", `draft.meta.notApplicableSections must list only sections that develop an operation (${developing.join(", ")})`);
-  }
   const cited = new Set();
   for (const row of table.rows) {
     const cell = row[column];
@@ -436,6 +434,111 @@ function validateOperationList(section, spec, draft, outline) {
       fail("E_PROCESS_DEVELOPMENT_UNUSED", `section "${id}" develops an operation, but no operation in the list points at it — either an operation is missing from the list, or the section does not apply and has to be declared in meta.notApplicableSections`);
     }
   }
+}
+
+// Some sections report one strength: the physico-chemical characteristics, the breakability test and
+// the scale-up of each strength. The outline fixes a family of them (one per position in
+// meta.strengths) and each declares its position in `strengthIndex`, so which section belongs to which
+// strength is declared rather than inferred from the order the headings happen to come in.
+//
+// The outline is a fixed list while the number of strengths has no upper bound, so a draft with more
+// strengths than the family has sections cannot be given the missing ones here. It is refused, and the
+// outline has to gain a section. The reverse — a product with fewer strengths than the family has
+// sections — leaves a section with no strength, which the draft declares in
+// meta.notApplicableSections instead of letting it sit there reading as an unfilled gap.
+function strengthSectionsOf(outline) {
+  return outline.sections.filter((entry) => Number.isInteger(entry.form?.strengthIndex));
+}
+
+function parentId(id) {
+  return id.slice(0, id.lastIndexOf("."));
+}
+
+function validateNotApplicable(draft, outline) {
+  const declared = draft.meta.notApplicableSections;
+  if (declared === undefined) return;
+  const allowed = [...developmentSectionIds(outline), ...strengthSectionsOf(outline).map((entry) => entry.id)];
+  if (!Array.isArray(declared) || !declared.every((id) => allowed.includes(id))) {
+    fail("E_META_NOT_APPLICABLE", `draft.meta.notApplicableSections must list only sections that develop an operation or report one strength (${allowed.join(", ")})`);
+  }
+}
+
+function validateStrengthSections(draft, outline) {
+  const sections = strengthSectionsOf(outline);
+  if (sections.length === 0) return;
+  const count = draft.meta.strengths.length;
+  const notApplicable = draft.meta.notApplicableSections ?? [];
+  const families = new Map();
+  for (const entry of sections) {
+    const family = parentId(entry.id);
+    if (!families.has(family)) families.set(family, []);
+    families.get(family).push(entry);
+  }
+  for (const [family, members] of families) {
+    const indices = members.map((entry) => entry.form.strengthIndex).sort((a, b) => a - b);
+    if (indices.some((index, position) => index !== position)) {
+      fail("E_OUTLINE_STRENGTH_SECTION", `the sections under "${family}" must take strengthIndex 0, 1, 2… with no gap and no repeat, got: ${indices.join(", ")}`);
+    }
+    if (count > members.length) {
+      fail("E_STRENGTH_SECTIONS_MISSING", `the draft declares ${count} strengths but the outline has ${members.length} per-strength section(s) under "${family}" — the document cannot report ${count - members.length} of them. Add a section to the outline for each`);
+    }
+    for (const entry of members) {
+      const real = entry.form.strengthIndex < count;
+      if (real && notApplicable.includes(entry.id)) {
+        fail("E_STRENGTH_SECTION_CONTRADICTION", `section "${entry.id}" reports strength "${draft.meta.strengths[entry.form.strengthIndex]}", which the draft declares, yet meta.notApplicableSections says it does not apply`);
+      }
+      if (!real && !notApplicable.includes(entry.id)) {
+        fail("E_STRENGTH_SECTION_ORPHAN", `section "${entry.id}" reports strength number ${entry.form.strengthIndex + 1} but the draft declares ${count} — declare it in meta.notApplicableSections`);
+      }
+    }
+  }
+}
+
+// A strength in meta.derivedStrengths has a composition worked out by proportion and no batch of its
+// own, so the section reporting it can hold no measurement. The table rule is the one
+// validateMeasuredOnly applies to a column group: every value cell is a gap marker, and a decision
+// marker is refused because nobody can decide a cell for a batch that does not exist. The prose rule
+// is a heuristic and is meant as one — a number with a unit, or a number with two decimals, outside the
+// strength's own name. A reference to another section ("3.2.P.2.3.3") never matches: its parts have
+// one digit after the point, and a digit run preceded by a point is not read as a number. A measurement written in words, or
+// a bare number with no unit, gets past it. It exists so the common failure, a hardness or a
+// percentage typed into the wrong strength's section, cannot reach the printed document.
+const MEASUREMENT_UNITS = "mg|µg|mcg|kg|g|%|kN|kp|N|mm|cm|µm|mL|ml|L|phút|giây|giờ|min|h|s|rpm|°C|viên|lô";
+const MEASUREMENT_TOKEN = new RegExp(
+  `(?<![\\p{L}\\p{N}.,])\\d+(?:[.,]\\d+)?\\s*(?:${MEASUREMENT_UNITS})(?![\\p{L}])|(?<![\\p{L}\\p{N}.,])\\d+[.,]\\d{2,}(?![\\p{N}])`,
+  "gu",
+);
+
+function measurementTokens(text, strengths) {
+  let rest = String(text);
+  for (const strength of strengths) rest = rest.split(strength).join(" ");
+  return rest.match(MEASUREMENT_TOKEN) ?? [];
+}
+
+function validateDerivedStrengthSection(section, spec, draft) {
+  const strength = draft.meta.strengths[spec.strengthIndex];
+  if (strength === undefined || !(draft.meta.derivedStrengths ?? []).includes(strength)) return;
+  const say = (where, what) => `section "${section.id}" reports strength "${strength}", which has no batch of its own, yet ${where} ${what}`;
+  section.blocks.forEach((block, index) => {
+    if (block.type === "paragraph") {
+      const found = measurementTokens(block.text, draft.meta.strengths);
+      if (found.length > 0) {
+        fail("E_DERIVED_SECTION_HAS_RESULT", say(`blocks[${index}]`, `holds what reads as a measurement ("${found[0]}") — a calculated strength gets a mass from proportion, never a result`));
+      }
+    }
+    if (block.type !== "table") return;
+    const skip = labelColumnCount(block);
+    block.rows.forEach((row) => {
+      row.slice(skip).forEach((cell) => {
+        if (isDecisionText(cell)) {
+          fail("E_DERIVED_SECTION_HAS_RESULT", say(`row "${row[0]}"`, "carries a decision marker: nobody can decide a cell for a batch that does not exist — it has to be marked as awaiting data"));
+        }
+        if (!isGapText(cell)) {
+          fail("E_DERIVED_SECTION_HAS_RESULT", say(`row "${row[0]}"`, `holds "${cell}" in a value cell — it has to be marked as awaiting data, not left blank and not filled in`));
+        }
+      });
+    });
+  });
 }
 
 function validateSectionForm(section, spec, draft) {
@@ -718,6 +821,13 @@ export function validateDraft(draft, outline = loadOutline()) {
   const outlineIds = outline.sections.map((section) => section.id);
   const seenIds = new Set();
 
+  // Rules about how the outline and the draft's declarations fit together come first: a draft with
+  // more strengths than the outline has sections would otherwise be reported through whichever table
+  // the extra strength broke first, which says nothing about the cause.
+  validateProcessDevelopmentOutline(outline);
+  validateNotApplicable(draft, outline);
+  validateStrengthSections(draft, outline);
+
   for (const section of draft.sections) {
     if (typeof section?.id !== "string") fail("E_SECTION_ID", "every section must have a string id");
     if (!outlineIds.includes(section.id)) {
@@ -748,6 +858,7 @@ export function validateDraft(draft, outline = loadOutline()) {
       if (spec) validateSectionForm(section, spec, draft);
       if (spec?.riskAssessment) validateRiskAssessment(section, spec.riskAssessment, draft, outline);
       if (spec?.operationList) validateOperationList(section, spec.operationList, draft, outline);
+      if (Number.isInteger(spec?.strengthIndex)) validateDerivedStrengthSection(section, spec, draft);
       // A figure names a table and a row rather than carrying numbers, so whether it can be drawn at
       // all is decided here: the table has to exist, and a chart's row has to hold measurements
       // rather than gap markers. Left to the renderer this surfaces as a broken run or, worse, as an
@@ -792,7 +903,6 @@ export function validateDraft(draft, outline = loadOutline()) {
     }
   }
 
-  validateProcessDevelopmentOutline(outline);
   validateMarkerKinds(draft);
   validateCrossReferences(draft, outline);
   validateAbbreviationsAreUsed(draft);

@@ -331,3 +331,36 @@ operation (blending, compression, coating) declare `developsOperations: true`.
 What this does not check: whether a development section actually studies the operations that point at
 it. It guarantees that the pointing exists and is consistent, not that the study is any good.
 
+### Sections that report one strength: `strengthIndex` and `{strength}`
+
+Some sections report a single strength — the physico-chemical characteristics, the breakability test
+and the scale-up of each strength. A section declares which one in its `form`:
+`strengthIndex: n` is the strength at position `n` (from 0) in `meta.strengths`. The order is the
+draft's own, not the order of any reference document. An outline `headingVi` may hold `{strength}`,
+which every printed list of the section — the document heading, the gap register, the data requests and
+the decisions — replaces with that strength's name (`schemas/headings.mjs`); a position past the end of
+`meta.strengths` prints "không áp dụng".
+
+Sections under the same parent form a family, one per position. The outline is a fixed list while the
+number of strengths has no upper bound, so:
+
+- More strengths than a family has sections is refused (`E_STRENGTH_SECTIONS_MISSING`) rather than
+  papered over: the outline has to gain a section for each. This is a real limit of a fixed outline,
+  not something the validator can supply.
+- Fewer strengths than sections leaves a section with no strength. The draft lists it in
+  `meta.notApplicableSections` (the same list the operation sections use); leaving it out is
+  `E_STRENGTH_SECTION_ORPHAN`, and listing a section whose strength the draft does declare is
+  `E_STRENGTH_SECTION_CONTRADICTION`. Positions that skip or repeat are `E_OUTLINE_STRENGTH_SECTION`.
+
+**A strength with no batch holds no measurement.** For a section whose strength is in
+`meta.derivedStrengths`, Stage B refuses (`E_DERIVED_SECTION_HAS_RESULT`) any table value cell that is
+not a gap marker — a decision marker too, since nobody can decide a cell for a batch that does not
+exist — and any paragraph holding a token that reads as a measurement: a number followed by a unit, or a
+number with two or more decimals, once the strength names themselves ("5 mg") are set aside.
+
+This is a heuristic, and it is meant to stop the common failure — a hardness or a percentage typed into
+the wrong strength's section — not every one. A measurement written in words, or a bare number with no
+unit, gets past it, and so does a measurement in a section the outline does not bind to a strength.
+Reading the section is still the author's job. Method statements that need a number (how many tablets,
+how many batches) belong in the parent section, where the design is shared and the strengths are not.
+

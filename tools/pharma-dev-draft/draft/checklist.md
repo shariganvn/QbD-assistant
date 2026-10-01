@@ -75,6 +75,13 @@ deliberately.
    without one. The operations a process matrix scores come from the operation list in `P.2.3.2`:
    change the list, not the matrix.
 
+13. **A section for one strength says which strength, and a strength with no batch gets no number.** The
+   outline binds each such section to a position in `meta.strengths`; write the content for that
+   strength, not for "the other one". For a strength listed in `meta.derivedStrengths`, every result
+   cell stays a marker and the prose carries no measurement — Stage B catches a number with a unit or
+   two decimals, but not a result written in words, so read the section yourself. A number a method
+   needs (a count of tablets or batches) goes in the parent section, as a decision for FD.
+
 ## What you are NOT trying to do
 
 You are not trying to produce a submission-ready dossier section. You are producing an internal,
