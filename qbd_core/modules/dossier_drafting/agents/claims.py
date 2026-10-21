@@ -40,3 +40,13 @@ def tagged(text: str, evidence_ids: Sequence[str], pool: Mapping[str, EvidenceRe
         prov = pool[evidence_id].provenance
         tags.append(f"[tổng hợp: {prov.file}, trang {prov.page}, {evidence_id}]")
     return f"{text.strip()} {' '.join(tags)}"
+
+
+def items_of(data: Mapping[str, object], key: str) -> list[dict]:
+    """The dict entries of a list the model returned under `key`; anything else yields nothing."""
+    items = data.get(key)
+    return [i for i in items if isinstance(i, dict)] if isinstance(items, list) else []
+
+
+def covered(section_id: str, blocks: list[dict]) -> dict:
+    return {"id": section_id, "status": "covered", "blocks": blocks}

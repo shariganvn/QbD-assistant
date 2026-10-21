@@ -46,6 +46,8 @@ class Capture:
 
     def complete(self, request):
         self.requests.append(request)
+        if any("QTPP Builder" in p.text for p in request.payload.parts):
+            return json.dumps({"items": []})
         ids = [m.group(1) for p in request.payload.parts if (m := EVIDENCE.match(p.text))]
         row = {"label": "Số đăng ký CAS", "value": "CAS 134523-03-8.", "evidence_ids": ids[:1]}
         return json.dumps({"properties": [row], "biology": []})
@@ -71,10 +73,9 @@ def files(tmp_path):
         }
     )
     assemble_draft(intake, InMemoryKnowledge(load_documents(docs)), date(2026, 10, 21), llm=setup)
-    request = capture.requests[0]
-    answer = capture.complete(request)
+    answers = {request_digest(r): capture.complete(r) for r in list(capture.requests)}
     recording = tmp_path / "recording.json"
-    recording.write_text(json.dumps({request_digest(request): answer}), encoding="utf-8")
+    recording.write_text(json.dumps(answers), encoding="utf-8")
     return docs, manifest, recording
 
 

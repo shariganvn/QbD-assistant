@@ -75,19 +75,21 @@ def intake():
 class Scripted:
     """Answers from the evidence ids found in the request, and remembers what it was sent."""
 
-    def __init__(self, build, destination=Destination.REMOTE):
+    def __init__(self, build, destination=Destination.REMOTE, qtpp=None):
         self.build = build
+        self.qtpp = qtpp or (lambda pool: '{"items": []}')
         self.sent = []
         self.destination = destination
 
     def complete(self, request):
         self.sent.append(request)
+        asks_for_qtpp = any("QTPP Builder" in p.text for p in request.payload.parts)
         pool = {}
         for part in request.payload.parts:
             match = part.kind == "evidence" and EVIDENCE_ID.match(part.text)
             if match:
                 pool[match.group(1)] = match.group(2)
-        return self.build(pool)
+        return (self.qtpp if asks_for_qtpp else self.build)(pool)
 
 
 def by_text(pool, needle):
@@ -284,7 +286,7 @@ def test_a_run_without_a_model_is_unchanged_and_names_the_waiting_agent():
 
 def test_recorded_answers_replay_by_request_digest():
     first, provider = draft_with(good)
-    recorded = {request_digest(r): good(_pool(r)) for r in provider.sent}
+    recorded = {request_digest(r): provider.complete(r) for r in list(provider.sent)}
     setup = LlmSetup(ProviderGateway(RecordedProvider(recorded), {MODEL}, manifest()), MODEL)
     again = assemble_draft(intake(), InMemoryKnowledge(documents()), TODAY, llm=setup)
     assert again.draft == first.draft

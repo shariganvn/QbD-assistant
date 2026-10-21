@@ -7,7 +7,7 @@ from datetime import date
 from typing import Any
 
 from qbd_core.modules.dossier_drafting import config
-from qbd_core.modules.dossier_drafting.agents import api_properties
+from qbd_core.modules.dossier_drafting.agents import api_properties, qtpp
 from qbd_core.modules.dossier_drafting.agents.llm import LlmSetup
 from qbd_core.modules.dossier_drafting.agents.registry import (
     agents_for_section,
@@ -107,9 +107,11 @@ def _agent_note(section_id: str, ran: set[str]) -> str:
         return "chưa có agent phụ trách mục này"
     notes = []
     for agent in agents:
-        status, _ = status_of(agent.id)
+        status, why = status_of(agent.id)
         if status == "pending":
             notes.append(f"agent {agent.id} ({agent.name}) chưa được dựng")
+        elif status == "blocked":
+            notes.append(f"agent {agent.id} ({agent.name}) bị chặn: {why}")
         elif agent.id in ran:
             notes.append(f"agent {agent.id} đã chạy nhưng chưa có kết quả dùng được")
         else:
@@ -157,6 +159,11 @@ def assemble_draft(
         by_agent = result.sections
         used.update(result.cited)
         agent_log += result.notes or [f"agent {api_properties.AGENT_ID}: ran"]
+        plan = qtpp.run(llm, intake, knowledge)
+        ran.add(qtpp.AGENT_ID)
+        by_agent.update(plan.sections)
+        used.update(plan.cited)
+        agent_log += plan.notes or [f"agent {qtpp.AGENT_ID}: ran"]
     for section in leaf_sections(outline):
         sid = section["id"]
         if sid in not_applicable:

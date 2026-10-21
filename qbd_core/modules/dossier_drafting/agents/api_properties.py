@@ -8,7 +8,12 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-from qbd_core.modules.dossier_drafting.agents.claims import check_claim, tagged
+from qbd_core.modules.dossier_drafting.agents.claims import (
+    check_claim,
+    covered,
+    items_of,
+    tagged,
+)
 from qbd_core.modules.dossier_drafting.agents.llm import (
     AgentOutputError,
     Answer,
@@ -85,26 +90,17 @@ def run(
             "headerless": True,
         }
         block = [table]
-        result.sections[PROPERTIES_SECTION] = _covered(PROPERTIES_SECTION, block)
+        result.sections[PROPERTIES_SECTION] = covered(PROPERTIES_SECTION, block)
     blocks = _biology(answer, result)
     if blocks:
-        result.sections[BIOLOGY_SECTION] = _covered(BIOLOGY_SECTION, blocks)
+        result.sections[BIOLOGY_SECTION] = covered(BIOLOGY_SECTION, blocks)
     return result
-
-
-def _covered(section_id: str, blocks: list[dict[str, Any]]) -> dict[str, Any]:
-    return {"id": section_id, "status": "covered", "blocks": blocks}
-
-
-def _items(answer: Answer, key: str) -> list[dict[str, Any]]:
-    items = answer.data.get(key)
-    return [i for i in items if isinstance(i, dict)] if isinstance(items, list) else []
 
 
 def _properties(answer: Answer, row_labels: list[str], result: ApiPropertiesResult):
     values: dict[str, str] = {}
     rejected: dict[str, str] = {}
-    for item in _items(answer, "properties"):
+    for item in items_of(answer.data, "properties"):
         label = item.get("label")
         skip = label not in row_labels or label in NEEDS_AN_IMAGE
         if skip or label in values or label in rejected:
@@ -120,7 +116,7 @@ def _properties(answer: Answer, row_labels: list[str], result: ApiPropertiesResu
 
 def _biology(answer: Answer, result: ApiPropertiesResult) -> list[dict[str, Any]]:
     blocks = []
-    for item in _items(answer, "biology"):
+    for item in items_of(answer.data, "biology"):
         if check_claim(item.get("text"), item.get("evidence_ids"), answer.pool):
             continue
         text = tagged(item["text"], item["evidence_ids"], answer.pool)

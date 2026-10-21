@@ -8,7 +8,7 @@ from functools import cache
 from importlib.resources import files
 from typing import Literal
 
-Status = Literal["implemented", "partial", "pending"]
+Status = Literal["implemented", "partial", "blocked", "pending"]
 
 
 @dataclass(frozen=True)
@@ -42,6 +42,16 @@ IMPLEMENTED: dict[str, tuple[Status, str]] = {
     "2.3": ("implemented", "quality_gate.numbering (market: eu, domestic, both)"),
     "3.4": ("partial", "dossier_drafting.config.groups and propose_cqa (candidates)"),
     "3.5": ("implemented", "dossier_drafting.cqa (confirmation gate)"),
+    "1.1": ("partial", "retrieval is done inside agent 4.1; no separate collector output"),
+    "1.4": (
+        "partial",
+        "substance name is taken as typed; no identity resolution or ambiguity stop",
+    ),
+    "3.1": (
+        "blocked",
+        "needs strengths and measured reference-product data, not among the three inputs",
+    ),
+    "3.2": ("implemented", "dossier_drafting.agents.qtpp"),
     "4.1": ("implemented", "dossier_drafting.agents.api_properties"),
     "12.1": ("implemented", "quality_gate.checklist (Appendix C)"),
     "12.3": ("implemented", "quality_gate.consistency"),
