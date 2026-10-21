@@ -1,0 +1,16 @@
+G-09 evidence (HTML page and export buttons), 2026-10-21
+Scope: synthetic documents; output is one self-contained HTML file per the user's decision.
+$ python3 -m pytest qbd_core/modules/rendering -q
+..........................                                               [100%]
+26 passed in 5.36s
+
+Browser run (headless Chromium via Playwright, inside test_browser_export_buttons):
+ - Word button downloads p2-orientation-draft.doc, starts with the Word namespace, contains the scope notice, does not contain the toolbar
+ - print media hides the toolbar; a PDF is produced (starts with %PDF); no page error
+ - The PDF button calls window.print(), which opens a dialog and cannot be driven by automation; the print stylesheet it relies on is what page.pdf uses.
+
+Negative controls (each reverted afterwards): fixed-script check disabled: 1 failed; blank sign-off check disabled: 1 failed; HTML escaping removed: 1 failed.
+Tampered pages the verifier rejects: second notice, extra script, link out, filled signature, image, missing button, removed gap text.
+
+Whole project: 152 passed in 8.42s; ruff: All checks passed!
+Not verified: visual match to SAMPLE_P2-Sample_Aceholder (file not readable from here); CI run of the new node-dependent tests.

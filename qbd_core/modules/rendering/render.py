@@ -1,4 +1,4 @@
-"""Render a draft to .docx by running the existing Node tool as a command-line program."""
+"""Render a draft to a single HTML file, after the Stage B validator accepted it."""
 
 from __future__ import annotations
 
@@ -9,32 +9,34 @@ import re
 import shutil
 import subprocess
 import tempfile
-import zipfile
 from pathlib import Path
 from typing import Any
 
-from qbd_core.modules.rendering.content_hash import content_sha256
 from qbd_core.modules.rendering.errors import RenderFailed
+from qbd_core.modules.rendering.html_doc import build_html
 from qbd_core.modules.rendering.models import RenderedDocument
+from qbd_core.modules.rendering.verify import verify_html
 
 DEFAULT_TOOL_ROOT = Path(__file__).resolve().parents[3] / "tools" / "pharma-dev-draft"
-DEFAULT_NAME = "p2-orientation-draft.docx"
+DEFAULT_NAME = "p2-orientation-draft.html"
 _CODE = re.compile(r"^(E_[A-Z0-9_]+):", re.MULTILINE)
-_NAME = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*\.docx$")
+_NAME = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*\.html$")
 
 
-def _run(command: list[str], timeout: float, step: str) -> subprocess.CompletedProcess[str]:
+def _validate(draft_path: Path, tool: Path, node: str, timeout: float) -> None:
+    command = [node, str(tool / "draft" / "validate-draft.mjs"), str(draft_path)]
     try:
-        return subprocess.run(command, capture_output=True, text=True, timeout=timeout, check=False)
+        result = subprocess.run(
+            command, capture_output=True, text=True, timeout=timeout, check=False
+        )
     except FileNotFoundError as error:
-        raise RenderFailed("E_TOOL_MISSING", command[0]) from error
+        raise RenderFailed("E_TOOL_MISSING", node) from error
     except subprocess.TimeoutExpired as error:
-        raise RenderFailed("E_RENDER_TIMEOUT", step) from error
-
-
-def _code_of(result: subprocess.CompletedProcess[str], fallback: str) -> RenderFailed:
-    found = _CODE.search(result.stderr or "")
-    return RenderFailed(found.group(1) if found else fallback, (result.stderr or "").strip()[-400:])
+        raise RenderFailed("E_RENDER_TIMEOUT", "validate") from error
+    if result.returncode != 0:
+        output = (result.stdout or "") + (result.stderr or "")
+        found = _CODE.search(output)
+        raise RenderFailed(found.group(1) if found else "E_DRAFT_INVALID", output.strip()[-400:])
 
 
 def _sha256(path: Path) -> str:
@@ -48,9 +50,9 @@ def render_draft(
     *,
     tool_root: str | Path = DEFAULT_TOOL_ROOT,
     node: str = "node",
-    timeout: float = 120,
+    timeout: float = 60,
 ) -> RenderedDocument:
-    """Render and verify in a staging folder, then replace the output in one step.
+    """Validate, build, verify in a staging folder, then replace the output in one step.
 
     Any failure leaves the previous output (if any) untouched and removes the staging folder.
     """
@@ -63,51 +65,21 @@ def render_draft(
     try:
         draft_path = stage / "draft.json"
         draft_path.write_text(json.dumps(draft, ensure_ascii=False, indent=2), encoding="utf-8")
-        staged_docx = stage / name
-        render = _run(
-            [
-                node,
-                str(tool / "render" / "render.mjs"),
-                str(draft_path),
-                "--output-root",
-                str(stage),
-                "--output-name",
-                name,
-            ],
-            timeout,
-            "render",
-        )
-        if render.returncode != 0:
-            raise _code_of(render, "E_RENDER_FAILED")
-        if not staged_docx.is_file() or staged_docx.stat().st_size == 0:
-            raise RenderFailed("E_RENDER_NO_OUTPUT", name)
-        verify = _run(
-            [
-                node,
-                str(tool / "verify" / "verify.mjs"),
-                str(staged_docx),
-                "--draft",
-                str(draft_path),
-            ],
-            timeout,
-            "verify",
-        )
-        if verify.returncode != 0:
-            raise RenderFailed(
-                "E_VERIFY_FAILED", ((verify.stdout or "") + (verify.stderr or ""))[-400:]
-            )
+        _validate(draft_path, tool, node, timeout)
+        outline = json.loads((tool / "schemas" / "p2-outline.json").read_text(encoding="utf-8"))
+        page = build_html(draft, outline)
+        failures = verify_html(page, draft)
+        if failures:
+            raise RenderFailed("E_VERIFY_FAILED", "; ".join(failures[:5]))
+        staged = stage / name
+        staged.write_text(page, encoding="utf-8")
         final = out_dir / name
-        digest, draft_digest = _sha256(staged_docx), _sha256(draft_path)
-        try:
-            content = content_sha256(staged_docx)
-        except zipfile.BadZipFile as error:
-            raise RenderFailed("E_OUTPUT_INVALID", name) from error
-        os.replace(staged_docx, final)
+        digest, draft_digest = _sha256(staged), _sha256(draft_path)
+        os.replace(staged, final)
         return RenderedDocument(
             path=str(final),
             size=final.stat().st_size,
-            docx_sha256=digest,
-            content_sha256=content,
+            html_sha256=digest,
             draft_sha256=draft_digest,
         )
     finally:

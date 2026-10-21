@@ -16,6 +16,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     commands = parser.add_subparsers(dest="command")
     run.add_arguments(commands.add_parser("run", help="build a draft from the three inputs"))
+    run.add_render_arguments(commands.add_parser("render", help="render a draft to one HTML file"))
     run.add_propose_arguments(commands.add_parser("cqa-propose", help="write the CQA proposal"))
     return parser
 
@@ -24,6 +25,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.command == "run":
         return run.run(args)
+    if args.command == "render":
+        return run.render(args)
     if args.command == "cqa-propose":
         return run.propose(args)
     build_parser().print_help()

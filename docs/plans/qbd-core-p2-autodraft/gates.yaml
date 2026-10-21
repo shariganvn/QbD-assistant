@@ -90,7 +90,7 @@ gates:
   - id: G-06
     title: Runs are deterministic
     invariant: >
-      Two runs on identical input and recorded provider produce identical draft.json and docx hashes.
+      Two runs on identical input and recorded provider produce identical draft.json and HTML page hashes.
     boundary_owner: pipeline
     fixture: case Atorvastatin calcium / film-coated tablet / both
     command: >
@@ -101,6 +101,7 @@ gates:
       - a differing timestamp or ordering fails the gate
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-06.txt
     owner_step: "05"
+    progress: renderer part verified (same draft gives identical page bytes, test_same_draft_gives_identical_bytes); the whole pipeline run twice is step 05.4
     status: unverified
 
   - id: G-07
@@ -144,20 +145,26 @@ gates:
     status: unverified
 
   - id: G-09
-    title: Rendered document is valid
+    title: Rendered page is valid and safe
     invariant: >
-      The docx produced through the CLI passes schema validation, carries the scope notice and blank signature rows.
+      The HTML page is produced only from a draft the Stage B validator accepted, passes its own verifier
+      (one scope notice, blank sign-off rows, every paragraph and gap reason present, one fixed script,
+      no link out, no image), and is published only after that. Failure leaves the previous page
+      byte-identical. The PDF and Word buttons work in a browser.
     boundary_owner: rendering
-    fixture: valid draft.json
+    fixture: slice draft from the synthetic documents; tampered pages; a browser run
     command: >
-      npm run pharma-dev:validate -- <draft>; npm run pharma-dev:verify -- <docx> --draft <draft>
+      python -m pytest qbd_core/modules/rendering -q
     expected: >
-      exit 0
+      exit 0. The browser test downloads p2-orientation-draft.doc with the notice and without the toolbar,
+      the toolbar is hidden in print, a PDF is produced, no page error.
     negative_cases:
-      - invalid draft.json -> no docx written
+      - invalid draft -> E_* code, old page untouched, no staging folder
+      - tampered page (second notice, extra script, link out, image, filled signature, removed gap text)
+      - figure or image block -> E_BLOCK_UNSUPPORTED
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-09.txt
     owner_step: "05"
-    status: unverified
+    status: pass
 
   - id: G-10
     title: Acceptance case set

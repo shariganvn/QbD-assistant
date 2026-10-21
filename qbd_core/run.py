@@ -20,6 +20,7 @@ from qbd_core.modules.dossier_drafting.api import (
     validate_intake,
 )
 from qbd_core.modules.evidence.api import InMemoryKnowledge, load_documents
+from qbd_core.modules.rendering.api import DEFAULT_NAME, RenderFailed, render_draft
 
 
 def add_arguments(parser: argparse.ArgumentParser) -> None:
@@ -88,4 +89,24 @@ def propose(args: argparse.Namespace) -> int:
         return 2
     _write_atomically(Path(args.out), proposal.model_dump_json(indent=2) + "\n")
     print(f"proposal written: {len(proposal.candidates)} candidates, group {proposal.group}")
+    return 0
+
+
+def add_render_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--draft", required=True, help="draft.json produced by `run`")
+    parser.add_argument("--out-dir", required=True)
+    parser.add_argument("--name", default=DEFAULT_NAME)
+
+
+def render(args: argparse.Namespace) -> int:
+    try:
+        draft = json.loads(Path(args.draft).read_text(encoding="utf-8"))
+        result = render_draft(draft, args.out_dir, args.name)
+    except (OSError, ValueError) as error:
+        print(f"unreadable draft: {error}", file=sys.stderr)
+        return 6
+    except RenderFailed as failed:
+        print(f"render failed: {failed.code}", file=sys.stderr)
+        return 6
+    print(f"html written: {result.path} ({result.size} bytes)")
     return 0
