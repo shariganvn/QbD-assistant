@@ -1,0 +1,10 @@
+# G-19 evidence, 2026-10-21
+$ python -m pytest qbd_core/modules/dossier_drafting/tests/test_final_formula.py -q
+10 passed in 1.22s
+
+$ python -m pytest qbd_core -q
+362 passed in 15.31s
+
+Mutations (reverted, each caught):
+- formula.py: no-numbers check removed -> test fails
+- trial_intake.py: none_of exclusion removed -> tests fail

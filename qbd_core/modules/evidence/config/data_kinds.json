@@ -1,5 +1,5 @@
 {
-  "source": "Header words of the team's trial-report tables, taken from the department's example report. A table is recognised only when exactly one kind matches; each inner list is a group of synonyms and every group needs one hit.",
+  "source": "Header words of the team's trial-report tables, taken from the department's example report. A table is recognised only when exactly one kind matches; each inner list is a group of synonyms and every group needs one hit. A kind may also list none_of groups: any hit rules it out.",
   "kinds": [
     {
       "id": "solubility",
@@ -40,6 +40,26 @@
       ]
     },
     {
+      "id": "final_formula",
+      "label": "Công thức cuối kèm chức năng",
+      "all_of": [
+        [
+          "name of ingredient",
+          "tên nguyên liệu",
+          "tên thành phần",
+          "ingredients",
+          "components"
+        ],
+        [
+          "function",
+          "chức năng"
+        ],
+        [
+          "mg"
+        ]
+      ]
+    },
+    {
       "id": "composition",
       "label": "Công thức theo hàm lượng",
       "all_of": [
@@ -52,6 +72,12 @@
         ],
         [
           "mg"
+        ]
+      ],
+      "none_of": [
+        [
+          "function",
+          "chức năng"
         ]
       ]
     },

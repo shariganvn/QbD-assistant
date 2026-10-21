@@ -22,6 +22,7 @@ from qbd_core.modules.dossier_drafting.cqa import (
 )
 from qbd_core.modules.dossier_drafting.data_sections import data_sections
 from qbd_core.modules.dossier_drafting.dissolution import build_section as dissolution_section
+from qbd_core.modules.dossier_drafting.formula import build_section as formula_section
 from qbd_core.modules.dossier_drafting.models import COMBINATION_OUT_OF_SOP, IntakeResult
 from qbd_core.modules.dossier_drafting.outline import (
     leaf_sections,
@@ -197,6 +198,10 @@ def assemble_draft(
     if comparative is not None:
         by_agent[comparative["id"]] = comparative
     agent_log += [f"agent 8.2: {note}" for note in comparative_notes]
+    final, final_notes = formula_section(trial, tuple(strengths))
+    if final is not None:
+        by_agent[final["id"]] = final
+    agent_log += [f"agent 6.4: {note}" for note in final_notes]
     for section in leaf_sections(outline):
         sid = section["id"]
         if sid in not_applicable:

@@ -337,3 +337,21 @@ gates:
       (a template); the notes name each table left out.
     status: pass
 
+  - id: G-19
+    title: Final formula is copied cell by cell with a tag, or left a gap
+    invariant: >
+      P.2.2.1.4 is filled only from a final_formula table that has at least one number, with one equal
+      column group per declared strength; every copied cell carries its cell tag and a blank cell is a
+      marked gap; a table with another layout, an odd column count or no numbers is reported and the
+      section stays a gap. A formula table is never also counted as a composition table.
+    boundary_owner: dossier_drafting + evidence
+    fixture: minimal .docx formula tables built in the test, and the example report
+    command: python -m pytest qbd_core/modules/dossier_drafting/tests/test_final_formula.py -q
+    expected: exit 0; the draft passes Stage B and the quality gate; a changed amount is blocked.
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-19.txt
+    owner_step: "07"
+    scope_note: >
+      The example report's formula table is empty, so nothing is filled from it. Amounts are copied as
+      written; no proportion is calculated and no strength is declared derived.
+    status: pass
+

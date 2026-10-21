@@ -36,7 +36,7 @@ def read_strengths(trial: TrialData | None) -> Strengths:
     if trial is None:
         return Strengths()
     found: dict[str, tuple[tuple[str, str], ...]] = {}
-    for table in trial.of_kind("composition"):
+    for table in (*trial.of_kind("composition"), *trial.of_kind("final_formula")):
         labels = _labels(table.headers)
         if labels:
             found[f"{table.file}, bảng {table.index}"] = tuple(labels)

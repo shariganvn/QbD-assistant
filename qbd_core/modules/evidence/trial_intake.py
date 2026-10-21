@@ -57,10 +57,17 @@ Extractor = Callable[[Path], dict]
 
 
 @cache
-def kinds() -> tuple[tuple[str, tuple[tuple[str, ...], ...]], ...]:
+def kinds() -> tuple[tuple[str, tuple[tuple[str, ...], ...], tuple[str, ...]], ...]:
     text = files("qbd_core.modules.evidence").joinpath("config", "data_kinds.json")
     raw = json.loads(text.read_text("utf-8"))["kinds"]
-    return tuple((k["id"], tuple(tuple(g) for g in k["all_of"])) for k in raw)
+    return tuple(
+        (
+            k["id"],
+            tuple(tuple(g) for g in k["all_of"]),
+            tuple(word for group in k.get("none_of", []) for word in group),
+        )
+        for k in raw
+    )
 
 
 def _fold(text: str) -> str:
@@ -72,8 +79,9 @@ def classify(headers: tuple[str, ...]) -> tuple[str | None, str]:
     haystack = _fold(" | ".join(headers))
     matched = [
         kind
-        for kind, groups in kinds()
+        for kind, groups, excluded in kinds()
         if all(any(word in haystack for word in group) for group in groups)
+        and not any(word in haystack for word in excluded)
     ]
     if len(matched) == 1:
         return matched[0], ""
