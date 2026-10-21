@@ -44,7 +44,7 @@ IMPLEMENTED: dict[str, tuple[Status, str]] = {
     "3.5": ("implemented", "dossier_drafting.cqa (confirmation gate)"),
     "1.3": (
         "partial",
-        "evidence.trial_intake: tables named or listed as not recognised; only sink data used so far",
+        "evidence.trial_intake: tables named or listed as unrecognised; only sink data used",
     ),
     "1.1": ("partial", "retrieval is done inside agent 4.1; no separate collector output"),
     "1.4": (
