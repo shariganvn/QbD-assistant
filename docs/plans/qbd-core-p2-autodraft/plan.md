@@ -28,7 +28,7 @@ Architecture: `docs/architecture/ADR-qbd-core-module-boundaries.md`.
 | Step | File | Status |
 |---|---|---|
 | 00 Governance | step-00-governance.md | [x] |
-| 01 Skeleton and contracts | step-01-skeleton-contracts.md | [ ] |
+| 01 Skeleton and contracts | step-01-skeleton-contracts.md | [x] local; CI run pending |
 | 02 Intake and config | step-02-intake-config.md | [ ] |
 | 03 Evidence and egress | step-03-evidence-egress.md | [ ] |
 | 04 Dossier drafting | step-04-dossier-drafting.md | [ ] |

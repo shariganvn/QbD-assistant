@@ -1,0 +1,26 @@
+[project]
+name = "qbd-core"
+version = "0.1.0"
+description = "Orientation draft of the P.2 report from active substance, dosage form and market."
+requires-python = ">=3.11"
+dependencies = ["pydantic>=2.7,<3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["qbd_core*"]
+
+[tool.pytest.ini_options]
+testpaths = ["qbd_core"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

@@ -11,3 +11,9 @@ artifacts/
 .claude/metadata.json
 .claude/settings.local.json
 .gitnexus
+
+# Python
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/

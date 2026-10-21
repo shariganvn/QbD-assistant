@@ -31,6 +31,7 @@ installing Windows equivalents alone.
 | Ghostscript | `gs` | `sudo apt install ghostscript` | LiteParse PDF conversion support and ingest prerequisite probe. |
 | Tesseract language data | `eng` and `vie` tessdata | `sudo apt install tesseract-ocr tesseract-ocr-vie` | Required by the current ingest prerequisite configuration; OCR execution remains deferred. |
 | Bubblewrap | `bwrap` `0.11.1` (verified 2026-07-23) | `sudo apt install bubblewrap` | Required by G-P3-04 for the isolated offline renderer run. Version retained from fresh G-P3-04 evidence. |
+| Python + pydantic | Python >=3.11 (verified 3.11.15); `pydantic>=2.7,<3` in `pyproject.toml` | `python -m pip install -e ".[dev]"` | `qbd_core` runtime and data contracts; verified by `python -m pytest -q` and `ruff check qbd_core`. Dev tools: pytest, ruff. |
 
 ## Windows-host procedure
 
