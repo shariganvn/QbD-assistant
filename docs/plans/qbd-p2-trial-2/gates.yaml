@@ -1,0 +1,115 @@
+# Executable acceptance gates for qbd-p2-trial-2.
+# This file owns gate bodies. Step files describe implementation; they must not restate a full gate.
+
+version: 2
+workstream: qbd-p2-trial-2
+evidence_root: docs/reports/qbd-p2-trial-2
+
+environment_findings:
+  stage_a_on_textboxes: >
+    xml-walk reads a flow diagram's text boxes in XML order, not visual order. The step SET is therefore
+    reliable and the step SEQUENCE is not. Any future diagram-shaped source has the same limit: read the
+    set from the extraction, and get the order confirmed rather than inferred.
+  quote_characters: >
+    Trial 2 writes minutes and seconds with the typographic marks ” and ’ where Trial 1 uses " and '.
+    A duplicate check that does not normalise them misses four disintegration cells. Normalise quotes,
+    dashes and whitespace before comparing values across sources.
+
+gates:
+  - id: G-19
+    title: Every Trial 2 number in the draft came out of Stage A
+    invariant: >
+      Numbers reach the draft through extract/extract.mjs (xml-walk), never through a prose summary of
+      the document — not a subagent's report and not a reading by eye. A table's row-to-column mapping is
+      written out explicitly where the source has cells without sub-labels, because a value that lands in
+      the neighbouring formulation's column is a wrong number in a registration dossier.
+    boundary_owner: extract/extract.mjs + draft/example-draft.json
+    fixture: Thử nghiệm 2.docx
+    command: >
+      node tools/pharma-dev-draft/extract/extract.mjs "<Thử nghiệm 2.docx>" -o trial2-extracted.json
+      && node tools/pharma-dev-draft/draft/tests/value-inventory.mjs --before <previous> --after <draft>
+    expected: >
+      exit 0 for the extraction: method=xml-walk, 33 paragraphs, 3 tables (9x6, 9x5, 22x5). Every value
+      the inventory reports as added data is present in trial2-extracted.json. Independent arithmetic
+      checks pass on what was written: both compositions sum to 100,00 mg, both Hausner ratios equal
+      their own tapped/bulk quotient, both particle-size distributions sum to 100,00%.
+    negative_cases:
+      - A number taken from a subagent's summary instead of the extraction -> reject.
+      - The "Tổng cộng" row trusted instead of adding the components -> reject; check the arithmetic.
+      - A row whose source cell has no sub-label mapped by a general rule -> reject; map it explicitly.
+    evidence: g19-g22-trial-2.txt
+    blocks: [G-22]
+    status: pass
+
+  - id: G-20
+    title: The number of experimental sources is data, and the cover page states all of them
+    invariant: >
+      meta.sourceFiles is a required non-empty array with no duplicate filenames, and the cover page
+      prints every entry. The old single-string field is removed rather than kept as an alias: one field
+      with two spellings is one field that will disagree with itself.
+    boundary_owner: draft/validate-draft.mjs + render/builder.mjs
+    fixture: the worked example and the two test fixtures
+    command: >
+      node tools/pharma-dev-draft/draft/validate-draft.mjs tools/pharma-dev-draft/draft/example-draft.json
+      && npm run test:pharma-dev
+    expected: >
+      exit 0. E_META_SOURCE_FILES for a missing or empty array, for a non-string entry, and for the same
+      filename twice. The rendered cover line names both trial files.
+    negative_cases:
+      - Two filenames concatenated into one string entry -> nothing can count them.
+      - sourceFile kept working alongside sourceFiles -> reject.
+    evidence: g19-g22-trial-2.txt
+    blocks: []
+    status: pass
+
+  - id: G-21
+    title: Each trial is its own branch of the heading tree
+    invariant: >
+      The heading that names a trial sits above that trial's parts, not beside them. With two trials in
+      one section, a results table level with the trial heading belongs to no trial that a reader can
+      identify. Content that speaks about the whole section keeps the outer level.
+    boundary_owner: draft/example-draft.json + draft/validate-draft.mjs
+    fixture: P.2.2.1.3.3 with both trials
+    command: >
+      node tools/pharma-dev-draft/draft/validate-draft.mjs tools/pharma-dev-draft/draft/example-draft.json
+      && node tools/pharma-dev-draft/verify/verify.mjs <rendered> --draft <draft>
+    expected: >
+      exit 0, and the heading tree skips no level. Two heading2 trial branches, each with its own
+      heading3 parts; the tablet-design group and the section-wide ICH Q8 2.2.1 requirements at
+      heading2. E_BLOCK_HEADING_SKIP still refuses a heading3 with no heading2 above it.
+    negative_cases:
+      - Trial 2's tables added as heading2 siblings -> a reader cannot tell which trial they belong to.
+      - The section-wide requirements left under the tablet-design heading -> wrong parent.
+    evidence: g19-g22-trial-2.txt
+    blocks: []
+    status: pass
+
+  - id: G-22
+    title: A measurement whose batch cannot be identified does not enter the dossier
+    invariant: >
+      Before a source's measurements are written down, they are compared cell by cell against the
+      measurements already in the document, with quotes, dashes and whitespace normalised. Values that
+      match verbatim are investigated rather than written: a duplicate reads to a reviewer as two
+      independent findings that happen to agree. Where the match forms a pattern across whole blocks of
+      a table, the table is kept out and named, because the question is not whether the numbers are
+      plausible but which batch they describe. A declared quantity (a composition) is not a measurement
+      and repeats legitimately between formulations.
+    boundary_owner: draft/example-draft.json + draft/tests/value-inventory.mjs
+    fixture: Trial 2's two results tables against Trial 1's
+    command: >
+      node tools/pharma-dev-draft/draft/tests/value-inventory.mjs --before <previous> --after <draft>
+      && <cell-by-cell comparison with quote normalisation>
+    expected: >
+      exit 1 on the trial run that writes the finished-product table (duplicated 17, added data 22),
+      which is why that table is not in the draft. On the draft as committed: duplicated 11, of which
+      eight are composition values two formulations share and three are blend measurements recorded as
+      an open decision; added data 16, every value traceable to the extraction. The gap-marker count is
+      unchanged at 149 — no marked cell was filled with a measurement of unidentified provenance.
+    negative_cases:
+      - The copied table written in because its values look plausible -> reject.
+      - The three matching blend values passed over in silence while the other table is flagged -> reject.
+      - A composition value counted as a duplicated measurement -> reject; the distinction is declared vs measured.
+      - A decision closed because the source "probably" answers it -> reject; the process sequence stays open.
+    evidence: g19-g22-trial-2.txt
+    blocks: []
+    status: pass

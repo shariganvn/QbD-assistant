@@ -1,0 +1,112 @@
+# Theo dõi tiếp G-12 — mở EMA và FDA, và điều tra ra một tài liệu không tồn tại
+
+Ngày: 2026-09-26. Nối tiếp `g12-pubchem-sources.txt`. Không mở lại gate nào; plan
+`qbd-p2-figures` vẫn `completed`. Đây là bằng chứng về một nguồn hoá ra không có.
+
+## 1. Bài học về allowlist: khớp hostname chính xác
+
+Vòng trước đã thêm `ema.europa.eu` và `fda.gov` vào allowlist mà vẫn không lấy được gì.
+Nguyên nhân: allowlist khớp **hostname chính xác**, không khớp domain hay wildcard, mà cả hai
+site đều chuyển hướng sang `www.`. Thêm đúng hostname `www.` thì thông.
+
+## 2. Dò lại từng host
+
+| Host | Vòng trước | 26/09/2026 | Ghi chú |
+|---|---|---|---|
+| `pubchem.ncbi.nlm.nih.gov` | 200 | 200 | mở, đã dùng làm nguồn chính |
+| `www.ema.europa.eu` | chặn ở proxy | **200** | mở — HTML và PDF đều lấy được |
+| `www.ema.europa.eu/en/search` | — | 401 | WAF của EMA từ chối, không phải proxy |
+| `www.accessdata.fda.gov` | chặn ở proxy | **302 → apology** | proxy đã mở; **FDA tự từ chối** |
+| `accessdata.fda.gov` (không `www.`) | chặn | 403 ở proxy | chưa có trong allowlist |
+| `fda.gov` (không `www.`) | chặn | 403 ở proxy | chưa có trong allowlist |
+| `www.geneesmiddeleninformatiebank.nl` | chặn | 403 ở proxy | chưa có trong allowlist |
+
+Lệnh dùng cho cả bảng:
+
+```
+curl -sS -o /dev/null -m 25 -w '%{http_code} %{redirect_url}\n' <URL>
+```
+
+## 3. Kết quả điều tra EMA: không có EPAR cho thuốc đối chiếu
+
+```
+https://www.ema.europa.eu/en/medicines/human/EPAR/concor      → 404
+https://www.ema.europa.eu/en/medicines/human/EPAR/bisoprolol  → 404
+```
+
+EMA chỉ công bố EPAR cho thuốc đăng ký theo **thủ tục tập trung**. Thuốc đối chiếu của hồ sơ
+này đăng ký theo từng quốc gia; chính tài liệu PSUSA của EMA xếp các sản phẩm chứa bisoprolol
+vào nhóm *"nationally authorised medicinal products"*. Không có thủ tục tập trung thì không có
+EPAR — nên đây là câu trả lời "không tồn tại", không phải "chưa tìm thấy".
+
+Hai hạn chế kỹ thuật, ghi để phiên sau khỏi dò lại:
+
+- **Không tra cứu tự động được trên EMA.** `/en/search` trả 401; trang danh mục thuốc render
+  bằng JS nên fetch tĩnh ra 0 kết quả; gọi liên tiếp bị 429. Chỉ URL tài liệu trực tiếp mới lấy
+  được, tức phải biết trước đường dẫn.
+- **FDA chặn IP datacentre, mở host không giải quyết được.** Mọi đường dẫn dưới
+  `www.accessdata.fda.gov` bị chuyển hướng về `/apology_objects/abuse-detection-apology.html`,
+  và trang đó tự trả 404. Đây là cơ chế của chính FDA, sau proxy. Kết luận: Drugs@FDA không dùng
+  được từ container này bất kể allowlist.
+
+Chưa kiểm được (FDA chặn), ghi lại như giả thiết cần xác minh: tên thương mại của thuốc đối
+chiếu không phải tên lưu hành tại Mỹ, nên ngay cả khi vào được Drugs@FDA thì hồ sơ ở đó cũng là
+của sản phẩm khác, không phải của lô đối chiếu sẽ mua.
+
+## 4. Điều quan trọng hơn: tài liệu công bố đóng được rất ít
+
+Đếm lại `3.2.P.2.2.1.1` — 19 dòng × 2 cột hàm lượng = **38 ô đang mang dấu**:
+
+| Nhóm | Số dòng | Nguồn thật sự |
+|---|---|---|
+| Thành phần định tính, dạng bào chế, nhà sản xuất, số đăng ký, hạn dùng, điều kiện bảo quản, quy cách đóng gói | 7 | nhãn / tờ HDSD của **lô mua về**, đối chiếu đăng ký quốc gia |
+| Dòng ghi tài liệu tham khảo | 1 | không phải dữ liệu; ghi nguồn của các dòng trên |
+| Cảm quan, khối lượng TB, kích thước, độ cứng, thời gian rã, định lượng, tạp chất liên quan, đồng đều hàm lượng, hàm lượng chất bảo quản, hai dòng hòa tan | 11 | **đo trên mẫu mua về** — không tài liệu công bố nào thay được |
+
+Hai lưu ý về giới hạn của cột "nguồn":
+
+- Thành phần tá dược: nhãn/SmPC chỉ cho **định tính**. Tỷ lệ định lượng phải bằng kỹ thuật đảo
+  ngược, vì nhà sản xuất không công bố.
+- Cảm quan: SmPC có mô tả dạng bào chế, nhưng ô này khai viên của **lô mua về**, nên vẫn là
+  quan sát thực nghiệm.
+
+Tức đúng điều biểu mẫu của phòng nói từ đầu: khảo sát thuốc đối chiếu đi theo ba hướng, và hai
+trong ba là thực nghiệm và kỹ thuật đảo ngược. Hướng "thu thập dữ liệu công bố" là hướng nhỏ
+nhất, và nó không chứa EPAR.
+
+## 5. Đã ghi vào hồ sơ
+
+`3.2.P.2.2.1.1` nhận một đoạn nêu rõ: không có EPAR (kèm hai đường dẫn đã kiểm 404), nên hướng
+dữ liệu công bố chỉ cấp được thông tin hành chính và thành phần định tính; toàn bộ chỉ tiêu chất
+lượng chỉ có bằng thực nghiệm.
+
+Hai dấu **Nhà sản xuất** và **Số đăng ký** trước đó đã trỏ về nhãn của lô mua về. Nay thêm vế
+còn thiếu: phải **đối chiếu với đăng ký quốc gia của thị trường mua mẫu**, vì nhãn một mình
+không chứng minh thuốc còn hiệu lực đăng ký tại thời điểm mua. Điều này đóng đúng việc FD nêu
+trong bản phỏng vấn khi được hỏi người ngoài ngành hay bỏ sót gì: *tình trạng lưu hành của thuốc
+đối chứng*.
+
+Không ô nào được điền. Số dấu trước và sau đều **143** — đợt này không lấy được dữ liệu, chỉ làm
+rõ nguồn.
+
+## 6. Xác minh
+
+```
+node --test tools/pharma-dev-draft/draft/tests/*.test.mjs        → 88 pass, 0 fail
+node tools/pharma-dev-draft/draft/validate-draft.mjs <draft>     → OK, 26 sections
+value-inventory --before <trước> --after <sau>                   → duplicated 0, added data 0
+                                                                   (added: marker 2, prose 1)
+render + verify                                                  → XSD PASS, 3 PNG, unzip -t OK
+grep -c 'CHƯA CÓ DỮ LIỆU' <draft>                                → 143 trước, 143 sau
+```
+
+Hai dòng `lost` trong value-inventory là hai dấu cũ bị thay bằng bản dài hơn, khớp với
+`added marker 2`. Không có `added data`.
+
+## 7. Còn lại, nếu muốn một public assessment report thật
+
+Cơ quan quản lý quốc gia là nguồn đúng, không phải EMA. Ví dụ Geneesmiddeleninformatiebank của
+Hà Lan công bố PAR cho thuốc đăng ký theo thủ tục quốc gia và phi tập trung; host
+`www.geneesmiddeleninformatiebank.nl` hiện còn chặn ở proxy. Nhưng đó là PAR của một generic
+khác, không phải của thuốc đối chiếu đã chọn, nên giá trị cho hồ sơ này hạn chế — và nó vẫn
+không đóng được 11 dòng chỉ tiêu chất lượng, vì không PAR nào công bố số đo của lô ta mua.

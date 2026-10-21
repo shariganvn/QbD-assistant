@@ -1,0 +1,152 @@
+# Executable acceptance gates for qbd-p2-decision-register.
+# This file owns gate bodies. Step files describe implementation; they must not restate a full gate.
+
+version: 2
+workstream: qbd-p2-decision-register
+evidence_root: docs/reports/qbd-p2-decision-register
+
+environment_findings:
+  # Carried forward because a later session would otherwise rediscover them. Host state and the browser
+  # finding live in docs/plans/qbd-p2-figures/gates.yaml; only what this round learned is here.
+  pdf_reading: >
+    The Q8(R2) and Q6A PDFs are read through the ich_q8_r2_checker subagent with PyMuPDF, as CLAUDE.md
+    requires. Q6A's decision trees (pp. 22–31) have no text layer — they must be rendered to PNG to be
+    read. Page offsets: Q8(R2) printed page = PDF index + 1; Q6A printed page = PDF index − 3.
+  no_new_public_data: >
+    Probed before planning, so the round was not built on hope. EMA /referrals/bisoprolol and
+    /referrals/concor both 404, then 429 rate-limit. PubMed for pH-dependent solubility returns exactly
+    one article — the biowaiver monograph itself, with no PMC full text. No cell in P.2 could be filled
+    from a public source this round, which is why the work is about what the document says rather than
+    what it holds.
+
+gates:
+  - id: G-13
+    title: One spot is one kind of unfinished
+    invariant: >
+      A gap marker says nobody has measured this; a decision marker says the data exists but two sources
+      disagree, or an assumption is in use unapproved. A text carrying both labels is rejected: it would
+      appear in both registers, and a reader could not tell whether it waits for an experiment or for
+      somebody to choose. Both labels are produced by schemas/markers.mjs and nowhere else.
+    boundary_owner: schemas/markers.mjs + draft/validate-draft.mjs
+    fixture: a two-leaf outline built for the rule, plus the worked example
+    command: node --test tools/pharma-dev-draft/draft/tests/decision-register.test.mjs
+    expected: >
+      exit 0. E_MARKER_AMBIGUOUS for a text holding both prefixes. isGapText and isDecisionText each
+      recognise only their own kind; isMarkedText recognises both and is what the readiness register uses.
+    negative_cases:
+      - A decision marker used where a value is simply absent -> it belongs in the data register.
+      - A second copy of either label written into a module -> markers.mjs is the only producer.
+    evidence: g13-g17-marker-kinds.txt
+    blocks: [G-16, G-17]
+    status: pass
+
+  - id: G-14
+    title: A decision names what must be decided and who decides it
+    invariant: >
+      A decision marker must carry text after its label, and that text must name a role declared in
+      meta.decisionOwners. A decision with no owner is a complaint, not a task anybody picks up. The role
+      list is data: a department that calls its roles something else declares them and the rule holds.
+      meta.decisionOwners is required exactly when the draft holds a decision marker — a requirement
+      nothing uses is a requirement that goes stale.
+    boundary_owner: draft/validate-draft.mjs
+    fixture: the same two-leaf outline, one marker mutated at a time
+    command: node --test tools/pharma-dev-draft/draft/tests/decision-register.test.mjs
+    expected: >
+      exit 0. E_DECISION_MARKER_SHAPE for an empty decision and for one naming no declared role;
+      E_META_DECISION_OWNERS when a draft holds decisions without declaring who settles them. A draft
+      with no decisions validates without the field.
+    negative_cases:
+      - The role list hard-coded as FD/QA in the checker -> wrong for any other department.
+      - A marker saying only "cần xem lại" -> reject.
+    evidence: g13-g17-marker-kinds.txt
+    blocks: []
+    status: pass
+
+  - id: G-15
+    title: The second marker is not a way around the strength rule
+    invariant: >
+      A cell in a measuredOnly table belonging to a column of a strength listed in meta.derivedStrengths
+      must carry the GAP marker. A decision marker there is rejected: the strength has no batch, so there
+      is nothing to decide and nothing measured to report. Proportion yields a mass, never a measurement,
+      and that rule must not be reachable through a new label.
+    boundary_owner: draft/validate-draft.mjs — validateMeasuredOnly
+    fixture: the strength-form fixture with one result cell swapped for a decision marker
+    command: node --test tools/pharma-dev-draft/draft/tests/decision-register.test.mjs
+    expected: >
+      exit 0. E_DERIVED_STRENGTH_HAS_RESULT, with a message that names the decision marker specifically
+      rather than reporting it as a measured value.
+    negative_cases:
+      - validateMeasuredOnly widened to accept either marker -> the strength rule stops holding.
+    evidence: g13-g17-marker-kinds.txt
+    blocks: []
+    status: pass
+
+  - id: G-16
+    title: Every decision reaches its own annex exactly once, and the counts reconcile
+    invariant: >
+      The decisions annex is derived from the draft, like the data annex beside it. Every decision marker
+      yields one row naming its section, its item and its owner; the owner is read out of the marker's own
+      text against meta.decisionOwners, so there is no table mapping a section to a role that could
+      disagree with the marker the first time one moved. Per-row marker counts sum to the total the draft
+      holds, counted independently.
+    boundary_owner: render/decision-register.mjs + render/builder.mjs
+    fixture: the worked example
+    command: >
+      node --test tools/pharma-dev-draft/draft/tests/decision-register.test.mjs
+      && node --input-type=module -e "<compare decisionRows sum against decisionCount>"
+    expected: >
+      exit 0. For the worked example: 16 decision markers -> 16 rows, covered 16, across 11 sections,
+      owners FD / QA / FD · QA. Several roles named in one sentence come out in declaration order, so the
+      register sorts the same way whatever order the sentence used. Settling one decision removes exactly
+      its own row.
+    negative_cases:
+      - A decision added to the draft and the annex unchanged -> reject.
+      - A gap marker appearing in the decisions annex, or the reverse -> reject.
+    evidence: g16-both-registers.txt
+    blocks: []
+    status: pass
+
+  - id: G-17
+    title: The readiness register does not read an open decision as data
+    invariant: >
+      The gap register is the one place the document summarises its own readiness, so a wrong row there is
+      a false statement about a whole section. A section whose only statement is "somebody still has to
+      choose this" holds no settled content and must not report "Có dữ liệu".
+    boundary_owner: render/builder.mjs — dataStatusLabel
+    fixture: a section holding only a decision; a skeleton mixing both kinds; a table with one real value
+    command: node --test tools/pharma-dev-draft/draft/tests/decision-register.test.mjs
+    expected: >
+      exit 0. Only a decision -> "Không có dữ liệu". A built-out table of markers of either kind ->
+      "Đã dựng khung, chưa có dữ liệu". One real value beside a decision -> "Có dữ liệu".
+    negative_cases:
+      - dataStatusLabel left reading isGapText only -> a section of open decisions reports as holding data.
+    evidence: g13-g17-marker-kinds.txt
+    blocks: []
+    status: pass
+
+  - id: G-18
+    title: The conformance record states each finding's real status
+    invariant: >
+      A report that says a closed finding is open is worse than no report: it is the file a later session
+      reads to decide what to work on. Every finding in the ICH Q8(R2) record is re-checked against the
+      current draft and outline, and a status is changed only with the place that closed it named.
+    boundary_owner: docs/reports/qbd-p2-ich-q8r2-audit/ich-q8r2-format-audit.md
+    fixture: the current draft and outline, against the guideline PDFs in docs/raw/
+    command: >
+      the ich_q8_r2_checker subagent over the current draft; then verify each claimed closure directly
+      (run headingLevelFor over all 38 outline entries; count the reference-product marker cells; read
+      P.2.2.1.2.2 against Part I p. 6)
+    expected: >
+      W-1, W-2, W-3, W-9, W-11, W-12 closed with the place named. C-1 corrected from "not done in any
+      form" to partial, with the three things Part I p. 6 asks and the three of four target groups still
+      open. W-5 partial: per-value retrievable sources, monograph reconciliation still open. The
+      reference-product count corrected from 19 to 38 cells, ending a contradiction between two reports
+      in this repo. The premise conflict over the manufacturing process recorded as CRITICAL, verified
+      directly on the draft rather than taken from the subagent.
+    negative_cases:
+      - A status changed on the subagent's word without checking the artefact -> reject.
+      - Earlier rounds rewritten instead of appended -> the file is a cumulative log.
+      - A new finding closed by rewriting when it needs data or a decision -> reject.
+    evidence: g18-conformance-recheck.txt
+    blocks: []
+    status: pass

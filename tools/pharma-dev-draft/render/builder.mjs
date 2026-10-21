@@ -5,12 +5,25 @@
 // fixed constant below, not settable from the draft, so no caller can produce output from this
 // tool that omits the "internal draft, not FD-approved" framing.
 
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
 import {
   Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell,
-  WidthType, ShadingType, BorderStyle, AlignmentType, VerticalAlign, LevelFormat,
+  WidthType, ShadingType, BorderStyle, AlignmentType, VerticalAlign, LevelFormat, ImageRun,
 } from "docx";
 
+import { headingFor } from "../schemas/headings.mjs";
 import { TABLE_WIDTH_DXA as TABLE_WIDTH } from "../schemas/layout.mjs";
+import { DECISION_LABEL, GAP_LABEL, isMarkedText } from "../schemas/markers.mjs";
+import { tableValueCells } from "../schemas/table-shape.mjs";
+import { printableWorkOrder } from "./work-order.mjs";
+import { printableDecisionRows } from "./decision-register.mjs";
+import { barChartPng } from "./figures/bar-chart.mjs";
+import { profileChartPng } from "./figures/profile-chart.mjs";
+import { processFlowPng, processStagePng } from "./figures/process-flow.mjs";
+import { barSeries, flowSteps, processStages, profileSeries } from "./figures/figure-source.mjs";
 
 const HEADER_FILL = "D9D9D9";
 const NOTICE_FILL = "FFF2CC";
@@ -19,6 +32,9 @@ const GAP_COLOR = "C00000";
 // The renderer's own tables (not driven by a draft) declare their widths here, named, so one test
 // can assert they all still fill TABLE_WIDTH if that budget ever changes.
 export const FIXED_TABLE_WIDTHS = {
+  workOrderSummary: [3600, 1200, 2000, 3200],
+  workOrder: [1800, 1700, 800, 800, 4900],
+  decisionRegister: [2000, 1900, 1000, 5100],
   gapRegister: [4200, 2400, 3400],
   abbreviations: [2500, 7500],
   signoff: [3600, 2400, 2400, 1600],
@@ -31,25 +47,42 @@ const SCOPE_NOTICE_TITLE = "Lưu ý phạm vi tài liệu";
 const SCOPE_NOTICE_BODY_1 =
   "Tài liệu này là bản tổng hợp nội bộ, được soạn theo khung mục CTD 3.2.P.2 dựa trên nguồn dữ " +
   "liệu do người dùng cung cấp. Các mục không có dữ liệu nguồn được đánh dấu rõ " +
-  "\"[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]\" thay vì suy diễn hoặc điền số liệu giả định.";
+  `"${GAP_LABEL}" thay vì suy diễn hoặc điền số liệu giả định. Những chỗ dữ liệu đã có nhưng hai ` +
+  "nguồn không khớp, hoặc một giả định đang dùng mà chưa được phê duyệt, mang dấu riêng " +
+  `"${DECISION_LABEL}" — loại này không đóng được bằng phép đo, phải có người quyết. Cuối tài liệu ` +
+  "có hai danh mục tương ứng, cả hai sinh từ chính các dấu trong tài liệu.";
 const SCOPE_NOTICE_BODY_2 =
   "Tài liệu KHÔNG phải hồ sơ P.2.2/P.2.3 đã phê duyệt, không thay thế thẩm định của bộ phận Phát " +
   "triển sản phẩm (FD)/QA, và không được dùng để nộp hồ sơ đăng ký cho đến khi được rà soát, bổ " +
   "sung dữ liệu và phê duyệt chính thức bởi FD.";
 const DRAFT_STATUS_LABEL = "Trạng thái: BẢN NHÁP NỘI BỘ – CHƯA THẨM ĐỊNH";
 
-const ABBREVIATIONS = [
-  ["API", "Active Pharmaceutical Ingredient – Dược chất"],
-  ["BCS", "Biopharmaceutics Classification System – Hệ thống phân loại sinh dược học"],
-  ["CQA", "Critical Quality Attribute – Thuộc tính chất lượng trọng yếu"],
-  ["CT", "Công thức (Formula)"],
-  ["CU", "Content Uniformity – Độ đồng đều hàm lượng"],
-  ["IPC", "In-Process Control – Kiểm soát trong quá trình"],
-  ["LOD", "Loss on Drying – Độ ẩm/hao hụt khi sấy"],
-  ["QTPP", "Quality Target Product Profile – Hồ sơ chất lượng mục tiêu sản phẩm"],
-  ["RMP", "Reference Medicinal Product – Sản phẩm đối chiếu"],
-  ["RSD", "Relative Standard Deviation – Độ lệch chuẩn tương đối"],
-];
+// Xuất xứ của văn bản, không phải một chữ ký. Câu này nói bản nháp được dựng bằng gì và sửa lần cuối
+// khi nào; bảng ký duyệt ở cuối tài liệu nói ai chịu trách nhiệm. Hai điều đó không được lẫn vào nhau:
+// một dòng có cột "Chữ ký" mang tên một công cụ là một phát biểu sai về trách nhiệm.
+//
+// Câu này cố ý KHÔNG nhắc lại nguyên văn tiêu đề bảng ký duyệt: verify đếm tiêu đề đó để biết bảng chữ
+// ký bắt đầu từ đâu, nên một bản sao của cùng cụm từ sẽ làm phép kiểm vị trí đọc sai mốc.
+export function provenanceSentence(meta) {
+  return `Xuất xứ bản nháp: dựng tự động bởi ${meta.assembledBy}, trích nội dung nguồn bằng phương ` +
+    `pháp ${meta.extractionMethod}; lần sửa cuối ${meta.draftDate}. Mọi vai trò trong bảng ký duyệt ` +
+    "ở cuối tài liệu đều để trống, chờ người có thẩm quyền ký.";
+}
+
+export const SIGNOFF_HEADING = "Ghi nhận soạn thảo và rà soát";
+const SIGNATURE_BLANK = "________________";
+
+// Ba dòng, cả ba để trống. Hàm này KHÔNG nhận `meta`, và đó là nội dung của luật chứ không phải tình
+// cờ: một bảng có cột "Chữ ký" không được đọc bất cứ giá trị nào của file, nên nó không thể khai rằng
+// đã có người nhận trách nhiệm trong khi chưa ai ký. Điền sẵn tên công cụ — hay cả một ngày — vào dòng
+// "Soạn thảo" là đúng lỗi đó, và đã từng xảy ra.
+export function signoffRows() {
+  return [
+    ["Soạn thảo", SIGNATURE_BLANK, SIGNATURE_BLANK, ""],
+    ["Rà soát FD", SIGNATURE_BLANK, SIGNATURE_BLANK, ""],
+    ["Phê duyệt QA/PO", SIGNATURE_BLANK, SIGNATURE_BLANK, ""],
+  ];
+}
 
 // One Word list definition, referenced by every bulleted line in every cell. Registered on the
 // Document below; without that registration the paragraphs render unbulleted.
@@ -138,14 +171,41 @@ export function widthsFor(headerCount) {
   return widths;
 }
 
+// Heading level comes from how deep a section sits in the CTD numbering, not from a table mapping
+// section ids to levels. A map would be a second place the document's shape is written down, and it
+// would go stale the first time the outline gained a section. Word offers six built-in heading levels,
+// so the deepest numbering the form reaches is clamped to the last of them.
+const DOCUMENT_ROOT_REFERENCE = "3.2.P.2";
+const HEADING_LEVELS = [
+  HeadingLevel.HEADING_1, HeadingLevel.HEADING_2, HeadingLevel.HEADING_3,
+  HeadingLevel.HEADING_4, HeadingLevel.HEADING_5, HeadingLevel.HEADING_6,
+];
+const MAX_HEADING_LEVEL = HEADING_LEVELS.length;
+
+export function headingLevelFor(ctdReference) {
+  const suffix = String(ctdReference).startsWith(DOCUMENT_ROOT_REFERENCE)
+    ? String(ctdReference).slice(DOCUMENT_ROOT_REFERENCE.length)
+    : "";
+  const depth = suffix.split(".").filter(Boolean).length;
+  return Math.min(depth + 1, MAX_HEADING_LEVEL);
+}
+
+// Spacing tapers with depth so the hierarchy reads on the page as well as in the navigation pane.
+function heading(level, text) {
+  const clamped = Math.min(Math.max(level, 1), MAX_HEADING_LEVEL);
+  const before = Math.max(340 - clamped * 40, 140);
+  return new Paragraph({
+    heading: HEADING_LEVELS[clamped - 1],
+    spacing: { before, after: Math.round(before / 2) },
+    children: [new TextRun({ text })],
+  });
+}
+
 function h1(text) {
-  return new Paragraph({ heading: HeadingLevel.HEADING_1, spacing: { before: 320, after: 160 }, children: [new TextRun({ text })] });
+  return heading(1, text);
 }
 function h2(text) {
-  return new Paragraph({ heading: HeadingLevel.HEADING_2, spacing: { before: 260, after: 120 }, children: [new TextRun({ text })] });
-}
-function h3(text) {
-  return new Paragraph({ heading: HeadingLevel.HEADING_3, spacing: { before: 200, after: 100 }, children: [new TextRun({ text })] });
+  return heading(2, text);
 }
 function bodyParagraph(text, opts = {}) {
   return new Paragraph({
@@ -156,14 +216,14 @@ function bodyParagraph(text, opts = {}) {
 function gapParagraph(text) {
   return new Paragraph({
     spacing: { after: 160 },
-    children: [new TextRun({ text: `[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] ${text}`, bold: true, italics: true, color: GAP_COLOR, size: 20 })],
+    children: [new TextRun({ text: `${GAP_LABEL} ${text}`, bold: true, italics: true, color: GAP_COLOR, size: 20 })],
   });
 }
 function spacer() {
   return new Paragraph({ text: "", spacing: { after: 80 } });
 }
 
-function noticeBox() {
+function noticeBox(meta) {
   return new Table({
     width: { size: TABLE_WIDTH, type: WidthType.DXA },
     columnWidths: [TABLE_WIDTH],
@@ -175,6 +235,7 @@ function noticeBox() {
         children: [
           new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: SCOPE_NOTICE_TITLE, bold: true, size: 20 })] }),
           new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: SCOPE_NOTICE_BODY_1, size: 19 })] }),
+          new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: provenanceSentence(meta), size: 19 })] }),
           new Paragraph({ children: [new TextRun({ text: SCOPE_NOTICE_BODY_2, size: 19, bold: true })] }),
         ],
       })],
@@ -182,10 +243,85 @@ function noticeBox() {
   });
 }
 
-function renderBlock(block) {
+const toolRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
+
+// A figure is 96 dpi at the size it was laid out, then held to the text width so a wide process flow
+// does not run into the margin.
+const MAX_FIGURE_WIDTH_PT = 468;
+
+function figureParagraphs(png, width, height, caption, counter) {
+  const scale = Math.min(1, MAX_FIGURE_WIDTH_PT / width);
+  counter.count += 1;
+  return [
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { before: 160, after: 60 },
+      children: [new ImageRun({
+        type: "png",
+        data: png,
+        transformation: { width: Math.round(width * scale), height: Math.round(height * scale) },
+      })],
+    }),
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { after: 160 },
+      children: [new TextRun({ text: `Hình ${counter.count}. ${caption}`, italics: true, size: 19 })],
+    }),
+  ];
+}
+
+function renderFigure(block, section, counter) {
+  if (block.kind === "flow") {
+    const { png, width, height } = processFlowPng(flowSteps(section, block));
+    return figureParagraphs(png, width, height, block.caption, counter);
+  }
+  if (block.kind === "process") {
+    const { png, width, height } = processStagePng(processStages(section, block));
+    return figureParagraphs(png, width, height, block.caption, counter);
+  }
+  if (block.kind === "profile") {
+    const threshold = block.threshold === undefined ? undefined : Number(String(block.threshold).replace(",", "."));
+    const { png, width, height } = profileChartPng(profileSeries(section, block), {
+      threshold,
+      thresholdLabel: block.thresholdLabel,
+      axisLabel: block.axisLabel,
+    });
+    return figureParagraphs(png, width, height, block.caption, counter);
+  }
+  const series = barSeries(section, block);
+  const threshold = block.threshold === undefined ? undefined : Number(String(block.threshold).replace(",", "."));
+  const { png, width, height } = barChartPng(series, {
+    threshold,
+    thresholdLabel: block.thresholdLabel,
+    axisLabel: block.axisLabel,
+  });
+  return figureParagraphs(png, width, height, block.caption, counter);
+}
+
+function renderImage(block, counter) {
+  const png = readFileSync(join(toolRoot, block.path));
+  const width = block.widthPt ?? 320;
+  // Height is not declared: the draft says how wide the figure should sit and the renderer keeps the
+  // file's own proportions, so a supplied image can never be silently stretched.
+  const { width: pixelWidth, height: pixelHeight } = pngSize(png);
+  const height = Math.round((width * pixelHeight) / pixelWidth);
+  return figureParagraphs(png, width, height, block.caption, counter);
+}
+
+// PNG carries its dimensions in the IHDR chunk, always the first one, at a fixed offset.
+function pngSize(buffer) {
+  if (buffer.length < 24 || buffer.readUInt32BE(0) !== 0x89504e47) {
+    throw new Error("supplied figure is not a PNG; only PNG dimensions can be read without an image library");
+  }
+  return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
+}
+
+function renderBlock(block, sectionLevel = 1, section = undefined, counter = { count: 0 }) {
   switch (block.type) {
-    case "heading2": return [h2(block.text)];
-    case "heading3": return [h3(block.text)];
+    // Relative to the section, not absolute: the block type says how far below its own section the
+    // heading sits, so a section's sub-heading can never come out ranking above the section itself.
+    case "heading2": return [heading(sectionLevel + 1, block.text)];
+    case "heading3": return [heading(sectionLevel + 2, block.text)];
     case "paragraph": return [bodyParagraph(block.text, { italic: block.italic, bold: block.bold })];
     case "table": return [makeTable(
       block.headers,
@@ -194,49 +330,66 @@ function renderBlock(block) {
       block.columnAlign,
       block.headerless,
     )];
+    case "figure": return renderFigure(block, section, counter);
+    case "image": return renderImage(block, counter);
     default: throw new Error(`unknown block type: ${block.type}`);
   }
 }
 
-// The prefix every draft uses to mark a value it has no source for. A section whose tables are
-// built out but hold nothing else is a form waiting to be filled, and the register has to say so:
-// reporting it as holding data would be a false statement in a document shaped like a submission.
-const GAP_MARKER = "[CHƯA CÓ DỮ LIỆU";
+// A section whose tables are built out but hold nothing else is a form waiting to be filled, and
+// the register has to say so: reporting it as holding data would be a false statement in a document
+// shaped like a submission. What counts as marked comes from schemas/markers.mjs.
 
-// Derived from the cells rather than declared on the section, so it cannot go stale: the moment a
-// real value replaces a marker, the register stops calling the section a skeleton. Only the value
-// columns count — the first column holds row labels, which a skeleton has filled in by definition.
-function holdsOnlyPlaceholders(section) {
-  const valueCells = (section.blocks ?? [])
-    .filter((block) => block.type === "table")
-    .flatMap((block) => block.rows.flatMap((row) => row.slice(1)));
-  return valueCells.length > 0 && valueCells.every((cell) => cell.includes(GAP_MARKER));
+// Derived from the content rather than declared on the section, so it cannot go stale: the moment a real
+// value replaces a marker, the register stops calling the section empty. Label columns do not count —
+// a skeleton has its row labels filled in by definition, so counting them would report a form that
+// holds nothing at all as holding data.
+function tableCellsOf(section) {
+  return (section.blocks ?? []).filter((block) => block.type === "table").flatMap(tableValueCells);
+}
+
+function paragraphsOf(section) {
+  return (section.blocks ?? []).filter((block) => block.type === "paragraph").map((block) => block.text);
 }
 
 export function dataStatusLabel(section) {
   if (section?.status !== "covered") return "Không có dữ liệu";
-  return holdsOnlyPlaceholders(section) ? "Đã dựng khung, chưa có dữ liệu" : "Có dữ liệu (một phần hoặc đầy đủ)";
+  const cells = tableCellsOf(section);
+  // A built-out form waiting to be filled is worth saying so, and it is the more useful of the two
+  // empty states, so it is checked first.
+  if (cells.length > 0 && cells.every((cell) => isMarkedText(cell))) return "Đã dựng khung, chưa có dữ liệu";
+  // Otherwise a section whose every statement is a marker holds nothing. Paragraphs have to count here:
+  // a section that says only "this data is missing" would otherwise be reported as holding data, which
+  // is a false claim in a document shaped like a submission. An open decision counts as unsettled for
+  // the same reason: "somebody still has to choose this" is not a statement of data.
+  const everything = [...cells, ...paragraphsOf(section)];
+  if (everything.length > 0 && everything.every((text) => isMarkedText(text))) return "Không có dữ liệu";
+  return "Có dữ liệu (một phần hoặc đầy đủ)";
 }
 
-function gapRegisterTable(outline, draftSectionsById) {
-  const rows = outline.sections.map((section) => {
+function gapRegisterTable(outline, draftSectionsById, meta) {
+  // Leaves only. A container carries a heading and no content, so it has no data status to report and
+  // a row for it would state something untrue about a section that holds nothing by design.
+  const rows = outline.sections.filter((section) => !section.container).map((section) => {
     const draftSection = draftSectionsById.get(section.id);
     const status = dataStatusLabel(draftSection);
     const note = draftSection?.status === "gap" ? draftSection.gapReason : "—";
-    return [`${section.ctdReference} ${section.headingVi}`, status, note];
+    return [`${section.ctdReference} ${headingFor(section, meta)}`, status, note];
   });
   return makeTable(["Mục CTD", "Trạng thái dữ liệu", "Ghi chú"], rows, FIXED_TABLE_WIDTHS.gapRegister);
 }
 
 export async function buildDocumentBuffer(draft, outline) {
   const draftSectionsById = new Map(draft.sections.map((section) => [section.id, section]));
+  // Figures are numbered across the whole document, in the order they are rendered.
+  const figureCounter = { count: 0 };
   const children = [];
 
   children.push(
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 80 }, children: [new TextRun({ text: "BÁO CÁO PHÁT TRIỂN DƯỢC HỌC", bold: true, size: 32 })] }),
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 80 }, children: [new TextRun({ text: "(PHARMACEUTICAL DEVELOPMENT – CTD 3.2.P.2)", bold: true, size: 24, color: "555555" })] }),
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 40 }, children: [new TextRun({ text: `${draft.meta.productName} — Dược chất: ${draft.meta.apiName}`, bold: true, size: 22 })] }),
-    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 40 }, children: [new TextRun({ text: `Cơ sở dữ liệu: ${draft.meta.sourceFile}`, size: 20, italics: true })] }),
+    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 40 }, children: [new TextRun({ text: `Cơ sở dữ liệu: ${draft.meta.sourceFiles.join(" · ")}`, size: 20, italics: true })] }),
   );
 
   // The cover must name every source the document draws on, not just the trial file, so a reader
@@ -253,40 +406,92 @@ export async function buildDocumentBuffer(draft, outline) {
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 300 }, children: [new TextRun({ text: `${DRAFT_STATUS_LABEL} — Ngày soạn: ${draft.meta.draftDate}`, bold: true, size: 20, color: GAP_COLOR })] }),
   );
 
-  children.push(noticeBox());
+  children.push(noticeBox(draft.meta));
   children.push(spacer());
 
-  children.push(h2("Danh mục chữ viết tắt"));
-  children.push(makeTable(["Viết tắt", "Giải thích"], ABBREVIATIONS, FIXED_TABLE_WIDTHS.abbreviations));
+  children.push(h1("Danh mục chữ viết tắt"));
+  children.push(makeTable(
+    ["Viết tắt", "Giải thích"],
+    // Sorted here rather than in the draft: the order is layout, and asking the draft to keep a
+    // list alphabetical is asking for a list that drifts out of order.
+    [...(draft.meta.abbreviations ?? [])].sort((a, b) => a[0].localeCompare(b[0], "vi")),
+    FIXED_TABLE_WIDTHS.abbreviations,
+  ));
   children.push(spacer());
 
   children.push(h1("3.2.P.2 PHÁT TRIỂN DƯỢC HỌC (PHARMACEUTICAL DEVELOPMENT)"));
 
   for (const outlineSection of outline.sections) {
-    children.push(h1(`${outlineSection.ctdReference} ${outlineSection.headingVi.toUpperCase()}`));
+    const level = headingLevelFor(outlineSection.ctdReference);
+    children.push(heading(level, `${outlineSection.ctdReference} ${headingFor(outlineSection, draft.meta).toUpperCase()}`));
+    if (outlineSection.container) continue;
     const draftSection = draftSectionsById.get(outlineSection.id);
     if (!draftSection || draftSection.status === "gap") {
       children.push(gapParagraph(draftSection?.gapReason ?? "Không có dữ liệu cho mục này."));
       continue;
     }
     for (const block of draftSection.blocks) {
-      children.push(...renderBlock(block));
+      children.push(...renderBlock(block, level, draftSection, figureCounter));
     }
   }
 
   children.push(h1("BẢNG TỔNG HỢP KHOẢNG TRỐNG DỮ LIỆU"));
   children.push(bodyParagraph("Tổng hợp mức độ sẵn sàng dữ liệu theo từng mục CTD, phục vụ lập kế hoạch bổ sung dữ liệu tiếp theo."));
-  children.push(gapRegisterTable(outline, draftSectionsById));
+  children.push(gapRegisterTable(outline, draftSectionsById, draft.meta));
 
   children.push(spacer());
-  children.push(h2("Ghi nhận soạn thảo và rà soát"));
+  children.push(h1("DANH MỤC DỮ LIỆU CẦN BỔ SUNG"));
+  children.push(bodyParagraph(
+    "Danh mục này được gom theo THÍ NGHIỆM, không theo thứ tự mục: mỗi đầu việc là một việc người nhận " +
+    "có thể bắt tay làm, và nó đóng lại nhiều mục cùng lúc. Mỗi dòng bên trong vẫn tương ứng một ô hoặc " +
+    "một câu đã đánh dấu trong tài liệu, được sinh ra từ chính dấu đó chứ không khai riêng — điền một " +
+    "giá trị thật vào tài liệu là dòng tương ứng tự biến mất. Cột cuối là nguyên văn phần mô tả đi kèm " +
+    "dấu, nêu cần gì và lấy ở đâu. Người nhận mặc định là bộ phận Phát triển sản phẩm (FD), trừ những " +
+    "dòng mà chính nội dung dòng đó nêu bên khác (nhà cung cấp nguyên liệu, QA, hoặc hồ sơ thuộc phần " +
+    "khác của bộ tài liệu).",
+  ));
+  const workOrder = printableWorkOrder(draft, outline);
+  children.push(makeTable(
+    ["Thí nghiệm", "Số dòng", "Hàm lượng", "Người nhận"],
+    workOrder.summary,
+    FIXED_TABLE_WIDTHS.workOrderSummary,
+    ["left", "center", "center", "left"],
+  ));
+  for (const group of workOrder.tables) {
+    children.push(spacer());
+    children.push(heading(2, group.experiment));
+    children.push(makeTable(
+      ["Mục CTD", "Hạng mục", "Hàm lượng", "Người nhận", "Cần gì và lấy ở đâu"],
+      group.rows,
+      FIXED_TABLE_WIDTHS.workOrder,
+      ["left", "left", "center", "center", "justify"],
+    ));
+  }
+
+  const decisionRows = printableDecisionRows(draft, outline);
+  if (decisionRows.length > 0) {
+    children.push(spacer());
+    children.push(h1("DANH MỤC ĐIỂM CẦN QUYẾT ĐỊNH"));
+    children.push(bodyParagraph(
+      "Danh mục này khác danh mục trên ở bản chất việc phải làm. Ở trên là những chỗ CHƯA CÓ dữ liệu, " +
+      "đóng lại bằng cách đo hoặc lấy hồ sơ. Ở đây là những chỗ dữ liệu ĐÃ CÓ nhưng hai nguồn không " +
+      "khớp nhau, hoặc một giả định đang được dùng mà chưa được phê duyệt — không phép đo nào đóng " +
+      "được, phải có người có thẩm quyền chọn. Mỗi dòng sinh từ chính dấu trong tài liệu; cột người " +
+      "quyết đọc từ nguyên văn dấu đó.",
+    ));
+    children.push(makeTable(
+      ["Mục CTD", "Hạng mục", "Ai quyết", "Điều phải quyết"],
+      decisionRows,
+      FIXED_TABLE_WIDTHS.decisionRegister,
+      ["left", "left", "center", "justify"],
+    ));
+  }
+
+  children.push(spacer());
+  children.push(h1(SIGNOFF_HEADING));
   children.push(makeTable(
     ["Vai trò", "Họ tên", "Ngày", "Chữ ký"],
-    [
-      [`Soạn thảo (${draft.meta.preparer})`, "—", draft.meta.draftDate, ""],
-      ["Rà soát FD", "________________", "________________", ""],
-      ["Phê duyệt QA/PO", "________________", "________________", ""],
-    ],
+    signoffRows(),
     FIXED_TABLE_WIDTHS.signoff,
   ));
 

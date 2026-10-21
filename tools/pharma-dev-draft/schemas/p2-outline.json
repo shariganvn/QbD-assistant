@@ -1,12 +1,34 @@
 {
-  "_caveat": "Taxonomy nguồn: docs/raw/135-00-Pharmaceutical Development-example.docx (worked CTD 3.2.P.2 example). Đánh số/phạm vi mục kế thừa cùng caveat với cowork-p2-kit/template/p2-template.md: chưa được FD/regulatory affairs xác nhận chính thức là taxonomy bắt buộc — dùng làm khung sắp xếp nội dung, không phải authority.",
+  "_caveat": "Taxonomy nguồn: một hồ sơ CTD 3.2.P.2 hoàn chỉnh dùng làm TÀI LIỆU THAM CHIẾU ĐỊNH DẠNG — cùng hoạt chất, cùng hai hàm lượng, cùng thuốc đối chiếu, nhưng của một công ty khác với công thức khác (7/7 tá dược khác, chỉ magnesium stearate trùng; khối lượng lõi khác). File đó CỐ Ý không nằm trong repo. Đánh số và phạm vi mục kế thừa từ nó; hai nguồn trước đó (docs/raw/135-00-Pharmaceutical Development-example.docx và biểu mẫu của phòng) đánh số khác ở 5 mục, và chỗ nào chúng đánh số con mà tài liệu tham chiếu chỉ dùng tiêu đề không số thì giữ số con của mình — một tiêu đề không số không làm đích tham chiếu được và không kiểm được sự tồn tại. CẢNH BÁO THẨM QUYỀN: cả ba nguồn đều CHƯA được FD/regulatory affairs xác nhận là taxonomy bắt buộc, và tài liệu tham chiếu định dạng là hồ sơ của công ty khác nên bản thân nó cũng không phải chuẩn do công ty này ban hành. Dùng làm khung sắp xếp nội dung, không phải authority. Giá trị số trong tài liệu tham chiếu KHÔNG được dùng: xem verify/sample-boundary.mjs và mục \"The format reference is not a data source\" trong schemas/p2-draft-contract.md.",
   "schemaVersion": "1.0",
+  "riskScale": [
+    "Thấp",
+    "Trung bình",
+    "Cao"
+  ],
+  "_riskScaleNote": "Thang mức rủi ro có thứ tự tăng dần. Hình dạng (ba mức) lấy từ hồ sơ tham chiếu định dạng, không phải từ quy định của FD: chưa có FD/regulatory xác nhận — đổi ở đây là đổi cho mọi ma trận.",
+  "dataOwner": "FD",
+  "_dataOwnerNote": "Người nhận mặc định của một yêu cầu dữ liệu khi chính nội dung dấu không nêu bên khác. Là cách phòng đang làm (FD cung cấp, trừ nhà cung cấp, QA hoặc hồ sơ thuộc phần khác), chưa có FD/regulatory xác nhận thành quy định.",
   "sections": [
+    {
+      "id": "P.2.1",
+      "ctdReference": "3.2.P.2.1",
+      "headingVi": "Thành phần của thành phẩm (Components of the Drug Product)",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Nội dung nằm ở các mục con: dược chất và tá dược."
+    },
     {
       "id": "P.2.1.1",
       "ctdReference": "3.2.P.2.1.1",
       "headingVi": "Dược chất (Drug Substance)",
-      "description": "Tính chất lý hóa và sinh học của dược chất, trình bày theo biểu mẫu General properties của phòng. Khối trích dẫn đánh số đặt dưới bảng; ô công thức cấu tạo cần hình, phải bổ sung thủ công vì renderer không hỗ trợ hình.",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Tính chất lý hóa tách khỏi tính chất sinh học theo biểu mẫu của phòng."
+    },
+    {
+      "id": "P.2.1.1.1",
+      "ctdReference": "3.2.P.2.1.1.1",
+      "headingVi": "Tính chất lý hóa (Physicochemical properties)",
+      "description": "Trình bày theo biểu mẫu General properties của phòng: ĐÚNG MỘT bảng nhãn–giá trị, phía dưới là khối trích dẫn đánh số. Đưa thêm bao nhiêu tài liệu về dược chất cũng không được thêm bảng hay heading; chỉ tiêu nào biểu mẫu không có dòng thì ghi vào khối trích dẫn. Ô công thức cấu tạo cần hình: đưa file ảnh vào assets/ rồi khai block image, renderer chèn được.",
       "form": {
         "headings": [],
         "tables": [
@@ -37,19 +59,103 @@
               "– Phân hủy do ánh sáng"
             ]
           }
-        ]
+        ],
+        "workOrder": {
+          "experiment": "Tính chất dược chất và tá dược"
+        }
+      }
+    },
+    {
+      "id": "P.2.1.1.2",
+      "ctdReference": "3.2.P.2.1.1.2",
+      "headingVi": "Tính chất sinh học (Biological properties)",
+      "description": "Phân loại BCS, tính thấm, sinh khả dụng, dữ liệu dược động học liên quan tới thiết kế dạng bào chế. Không có dòng biểu mẫu cố định; giá trị nào chưa đối chiếu được nguồn thì đánh dấu, không suy từ kiến thức tham khảo.",
+      "form": {
+        "workOrder": {
+          "experiment": "Tính chất dược chất và tá dược"
+        }
+      }
+    },
+    {
+      "id": "P.2.1.1.3",
+      "ctdReference": "3.2.P.2.1.1.3",
+      "headingVi": "Đánh giá rủi ro ban đầu của thuộc tính dược chất (Initial risk assessment of drug substance attributes)",
+      "description": "Ma trận rủi ro: mỗi CQA của thành phẩm theo từng thuộc tính của dược chất (cỡ hạt, đa hình, độ tan, hút ẩm, độ ổn định), kèm bảng biện luận cho từng mức. Đây là điểm xuất phát của lập luận giảm rủi ro; mục P.2.1.1.4 chỉ được hạ một mức nào nếu nêu được nghiên cứu đã hạ nó.",
+      "form": {
+        "headings": [],
+        "riskAssessment": {
+          "kind": "initial"
+        },
+        "tables": [
+          {
+            "columns": [
+              "CQA sản phẩm",
+              "..."
+            ],
+            "rowsFrom": "P.2.2.1.2.1"
+          },
+          {
+            "columns": [
+              "Ô rủi ro (CQA × yếu tố)",
+              "Mức rủi ro",
+              "Biện luận mức rủi ro"
+            ],
+            "rows": "variable"
+          }
+        ],
+        "workOrder": {
+          "experiment": "Đánh giá rủi ro (mức và biện luận)"
+        }
+      }
+    },
+    {
+      "id": "P.2.1.1.4",
+      "ctdReference": "3.2.P.2.1.1.4",
+      "headingVi": "Đánh giá rủi ro cập nhật của thuộc tính dược chất (Updated risk assessment of drug substance attributes)",
+      "description": "Ma trận rủi ro sau khi đã có dữ liệu, cùng nhãn dòng và nhãn cột với P.2.1.1.3, kèm bảng biện luận cho từng lần hạ mức. Một ô hạ xuống mà không nêu nghiên cứu nào là một phát biểu không truy được.",
+      "form": {
+        "headings": [],
+        "riskAssessment": {
+          "kind": "updated",
+          "pairs": "P.2.1.1.3"
+        },
+        "tables": [
+          {
+            "columns": [
+              "CQA sản phẩm",
+              "..."
+            ],
+            "rowsFrom": "P.2.1.1.3",
+            "columnsFrom": "P.2.1.1.3"
+          },
+          {
+            "columns": [
+              "Ô rủi ro (CQA × yếu tố)",
+              "Mức ban đầu → cập nhật",
+              "Nghiên cứu đã hạ mức"
+            ],
+            "rows": "variable"
+          }
+        ],
+        "workOrder": {
+          "experiment": "Đánh giá rủi ro (mức và biện luận)"
+        }
       }
     },
     {
       "id": "P.2.1.2",
       "ctdReference": "3.2.P.2.1.2",
       "headingVi": "Tá dược (Excipients)",
-      "description": "Danh mục tá dược, chức năng, lý do lựa chọn, khoảng hàm lượng khuyến cáo, và nghiên cứu tương hợp tá dược – dược chất. Số dòng và tên tá dược thay đổi theo từng công thức.",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Nội dung nằm ở hai mục con theo biểu mẫu của phòng."
+    },
+    {
+      "id": "P.2.1.2.1",
+      "ctdReference": "3.2.P.2.1.2.1",
+      "headingVi": "Đặc tính lý hóa (Physicochemical properties)",
+      "description": "Danh mục tá dược, chức năng, lý do lựa chọn và khoảng hàm lượng khuyến cáo. Số dòng và tên tá dược thay đổi theo từng công thức. Phải gồm mọi chất dùng trong sản xuất, kể cả chất không còn trong thành phẩm (hệ màng bao, dung môi xát hạt, processing aid).",
       "form": {
-        "headings": [
-          "3.2.P.2.1.2.1. Đặc tính lý hóa (Physicochemical properties)",
-          "3.2.P.2.1.2.2. Nghiên cứu tương hợp dược chất – tá dược (Excipient compatibility)"
-        ],
+        "headings": [],
         "tables": [
           {
             "columns": [
@@ -61,22 +167,62 @@
             ],
             "rows": "variable"
           }
-        ]
+        ],
+        "workOrder": {
+          "experiment": "Tính chất dược chất và tá dược"
+        }
       }
+    },
+    {
+      "id": "P.2.1.2.2",
+      "ctdReference": "3.2.P.2.1.2.2",
+      "headingVi": "Nghiên cứu tương hợp dược chất – tá dược (Excipient compatibility)",
+      "description": "Thiết kế nghiên cứu, điều kiện bảo quản, chỉ tiêu theo dõi và kết luận tương hợp. Ghi chú vị trí: ICH Q8(R2) đặt yêu cầu tương hợp dược chất–tá dược ở mục 2.1.1, biểu mẫu của phòng đặt ở đây; bản này theo biểu mẫu của phòng.",
+      "form": {
+        "workOrder": {
+          "experiment": "Nghiên cứu tương hợp dược chất – tá dược"
+        }
+      }
+    },
+    {
+      "id": "P.2.1.2.3",
+      "ctdReference": "3.2.P.2.1.2.3",
+      "headingVi": "Lựa chọn grade tá dược (Excipient grade selection)",
+      "description": "Vì sao chọn đúng grade đó cho từng tá dược — cỡ hạt, độ nhớt, mức độ thay thế, loại trực tiếp dập được hay không — dựa trên thành phần định tính của thuốc đối chiếu và kết quả tương hợp ở P.2.1.2.2. Tên thương mại của grade là thông tin của nhà cung cấp, phải dẫn nguồn.",
+      "form": {
+        "headings": [],
+        "workOrder": {
+          "experiment": "Tính chất dược chất và tá dược"
+        }
+      }
+    },
+    {
+      "id": "P.2.2",
+      "ctdReference": "3.2.P.2.2",
+      "headingVi": "Thành phẩm (Drug Product)",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Nội dung nằm ở các mục con: phát triển công thức, overages, tính chất lý hóa và sinh học."
+    },
+    {
+      "id": "P.2.2.1",
+      "ctdReference": "3.2.P.2.2.1",
+      "headingVi": "Phát triển công thức (Formulation Development)",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading."
     },
     {
       "id": "P.2.2.1.1",
       "ctdReference": "3.2.P.2.2.1.1",
       "headingVi": "Đặc tính sản phẩm đối chiếu (Characterization of Reference Product)",
-      "description": "Thành phần định tính/định lượng và kết quả thử nghiệm của sản phẩm đối chiếu (RMP) dùng để so sánh. Tên và hàm lượng RMP đổi theo sản phẩm nên nằm ở nhãn cột, không cố định. Biểu đồ hòa tan phải bổ sung thủ công.",
+      "description": "Thành phần định tính/định lượng và kết quả thử nghiệm của sản phẩm đối chiếu (RMP) dùng để so sánh. Tên và hàm lượng RMP đổi theo sản phẩm nên nằm ở nhãn cột, không cố định. Biểu đồ hòa tan dựng được bằng block figure khi bảng đã có số liệu; chưa có số liệu thì chưa có gì để vẽ. Thuốc đối chiếu khảo sát theo từng hàm lượng: mỗi hàm lượng một cột. Bảng này KHÔNG phải bảng kết quả đo của sản phẩm mình — thuốc đối chiếu là mẫu mua về, đo được độc lập với việc mình đã bào chế hàm lượng đó hay chưa.",
       "form": {
         "headings": [],
         "tables": [
           {
             "columns": [
-              "Thành phần",
-              "*"
+              "Thành phần"
             ],
+            "perStrength": true,
             "rows": [
               "Thành phần tá dược",
               "Dạng bào chế",
@@ -85,9 +231,9 @@
           },
           {
             "columns": [
-              "Thông tin",
-              "*"
+              "Thông tin"
             ],
+            "perStrength": true,
             "rows": [
               "Nhà sản xuất",
               "Số đăng ký",
@@ -107,18 +253,26 @@
               "Tương đương độ hòa tan — hồ sơ theo thời gian"
             ]
           }
-        ]
+        ],
+        "workOrder": {
+          "experiment": "Khảo sát thuốc đối chiếu"
+        }
       }
     },
     {
       "id": "P.2.2.1.2",
       "ctdReference": "3.2.P.2.2.1.2",
       "headingVi": "Hồ sơ chất lượng mục tiêu và CQA (QTPP / CQA)",
-      "description": "Bảng chỉ tiêu chất lượng và biện luận CQA. Danh mục chỉ tiêu đổi theo sản phẩm; mục P.2.3 phải chấm rủi ro đúng danh mục này.",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Bảng chỉ tiêu và phần biện luận tính trọng yếu tách thành hai mục con theo biểu mẫu của phòng."
+    },
+    {
+      "id": "P.2.2.1.2.1",
+      "ctdReference": "3.2.P.2.2.1.2.1",
+      "headingVi": "Hồ sơ chất lượng mục tiêu (QTPP)",
+      "description": "Bảng chỉ tiêu chất lượng mục tiêu. Danh mục chỉ tiêu đổi theo sản phẩm; ma trận rủi ro ở P.2.3.1 phải chấm đúng danh mục này.",
       "form": {
-        "headings": [
-          "Xác định yếu tố trọng yếu và biện luận kiểm soát"
-        ],
+        "headings": [],
         "tables": [
           {
             "columns": [
@@ -127,47 +281,379 @@
             ],
             "rows": "variable"
           }
-        ]
+        ],
+        "workOrder": {
+          "experiment": "Xác lập QTPP và CQA"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.1.2.2",
+      "ctdReference": "3.2.P.2.2.1.2.2",
+      "headingVi": "Thuộc tính chất lượng trọng yếu (CQAs)",
+      "description": "Biện luận yếu tố nào là trọng yếu với chất lượng thành phẩm và kiểm soát bằng cách nào. ICH Q8(R2) Part I trang 6 đòi xác định các yếu tố critical to product quality và biện luận control strategy, không bắt buộc theo đúng thuật ngữ Annex.",
+      "form": {
+        "workOrder": {
+          "experiment": "Xác lập QTPP và CQA"
+        }
       }
     },
     {
       "id": "P.2.2.1.3",
       "ctdReference": "3.2.P.2.2.1.3",
       "headingVi": "Nghiên cứu phát triển công thức (Formulation Development Study)",
-      "description": "Các thử nghiệm sàng lọc/khảo sát công thức: thông số cố định, bảng thành phần từng công thức, kết quả IPC/QC, đánh giá rủi ro trước/sau, kết luận và công thức được chọn mang sang giai đoạn tiếp theo."
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Các mục con đi theo trình tự của biểu mẫu: thử nghiệm thăm dò, đánh giá rủi ro ban đầu, nghiên cứu chính, đánh giá rủi ro cập nhật, công thức cuối."
     },
     {
-      "id": "P.2.2.2",
-      "ctdReference": "3.2.P.2.2.2",
-      "headingVi": "Overages",
-      "description": "Có/không sử dụng overage cho dược chất hoặc tá dược, và lý do."
-    },
-    {
-      "id": "P.2.2.3",
-      "ctdReference": "3.2.P.2.2.3",
-      "headingVi": "Tính chất lý hóa và sinh học (Physicochemical and Biological Properties)",
-      "description": "Phát triển phương pháp hòa tan và hồ sơ tạp chất của thành phẩm.",
+      "id": "P.2.2.1.3.1",
+      "ctdReference": "3.2.P.2.2.1.3.1",
+      "headingVi": "Lựa chọn phương pháp pha chế (Process selection)",
+      "description": "Vì sao chọn phương pháp pha chế này chứ không phương pháp khác, dẫn từ tính chất của dược chất và của công thức. Biểu mẫu trước đây đặt ở đây mục \"thử nghiệm thăm dò\"; tài liệu tham chiếu định dạng đặt mục lựa chọn phương pháp, và đó là câu hỏi Q8(R2) mục 2.3 thực sự đòi trả lời.",
       "form": {
-        "headings": [
-          "Phương pháp hòa tan",
-          "Hồ sơ tạp chất"
-        ]
+        "workOrder": {
+          "experiment": "Phát triển công thức"
+        }
       }
     },
     {
-      "id": "P.2.3",
-      "ctdReference": "3.2.P.2.3",
-      "headingVi": "Phát triển quy trình sản xuất (Manufacturing Process Development)",
-      "description": "Phát triển quy trình sản xuất: đánh giá rủi ro, nghiên cứu từng công đoạn, nâng cỡ lô. Bộ công đoạn KHÔNG cố định — nó phụ thuộc phương pháp pha chế đã chọn (trộn dập thẳng, xát hạt ướt, phun sấy tầng sôi tạo hạt, cán ép, đóng tán, ép đùn nóng chảy…), và mỗi phương pháp có bộ thông số trọng yếu riêng; đổi phương pháp thì dựng lại cả hai bảng. Sơ đồ quy trình phải bổ sung thủ công.",
+      "id": "P.2.2.1.3.2",
+      "ctdReference": "3.2.P.2.2.1.3.2",
+      "headingVi": "Đánh giá rủi ro ban đầu của biến công thức (Initial risk assessment of formulation variables)",
+      "description": "Mức rủi ro của từng biến công thức TRƯỚC khi có dữ liệu thực nghiệm, kèm lý do.",
       "form": {
         "headings": [],
+        "riskAssessment": {
+          "kind": "initial"
+        },
         "tables": [
           {
             "columns": [
               "CQA sản phẩm",
               "..."
             ],
-            "rowsFrom": "P.2.2.1.2"
+            "rowsFrom": "P.2.2.1.2.1"
+          },
+          {
+            "columns": [
+              "Ô rủi ro (CQA × yếu tố)",
+              "Mức rủi ro",
+              "Biện luận mức rủi ro"
+            ],
+            "rows": "variable"
+          }
+        ],
+        "workOrder": {
+          "experiment": "Đánh giá rủi ro (mức và biện luận)"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.1.3.3",
+      "ctdReference": "3.2.P.2.2.1.3.3",
+      "headingVi": "Nghiên cứu phát triển công thức (Formulation development study)",
+      "description": "Mục cha CÓ nội dung: phần khung của cả nghiên cứu phát triển công thức — đặc điểm thiết kế riêng của viên, và những yêu cầu của Q8(R2) mục 2.2.1 chưa có nội dung. Từng nghiên cứu nằm ở mục con, mỗi nghiên cứu một mục.",
+      "form": {
+        "workOrder": {
+          "experiment": "Phát triển công thức"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.1.3.3.1",
+      "ctdReference": "3.2.P.2.2.1.3.3.1",
+      "headingVi": "Nghiên cứu phát triển công thức #1 (Formulation development study #1)",
+      "description": "Một nghiên cứu phát triển công thức: mục tiêu, thông số cố định, bảng thành phần, kết quả, kết luận. Mỗi nghiên cứu được đánh số riêng thay vì gộp vào một mục, để một nghiên cứu thêm vào sau không phải chen vào giữa nội dung của nghiên cứu trước.",
+      "form": {
+        "workOrder": {
+          "experiment": "Phát triển công thức"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.1.3.3.2",
+      "ctdReference": "3.2.P.2.2.1.3.3.2",
+      "headingVi": "Nghiên cứu phát triển công thức #2 (Formulation development study #2)",
+      "description": "Nghiên cứu phát triển công thức thứ hai, cùng hình dạng với #1. Nếu nó dùng lại quy trình hay công thức của nghiên cứu trước thì dẫn chiếu, không chép lại.",
+      "form": {
+        "workOrder": {
+          "experiment": "Phát triển công thức"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.1.3.4",
+      "ctdReference": "3.2.P.2.2.1.3.4",
+      "headingVi": "Đánh giá rủi ro cập nhật của biến công thức (Updated risk assessment of formulation variables)",
+      "description": "Mức rủi ro của từng biến công thức SAU khi có dữ liệu, kèm lý do thay đổi so với đánh giá ban đầu.",
+      "form": {
+        "headings": [],
+        "riskAssessment": {
+          "kind": "updated",
+          "pairs": "P.2.2.1.3.2"
+        },
+        "tables": [
+          {
+            "columns": [
+              "CQA sản phẩm",
+              "..."
+            ],
+            "rowsFrom": "P.2.2.1.3.2",
+            "columnsFrom": "P.2.2.1.3.2"
+          },
+          {
+            "columns": [
+              "Ô rủi ro (CQA × yếu tố)",
+              "Mức ban đầu → cập nhật",
+              "Nghiên cứu đã hạ mức"
+            ],
+            "rows": "variable"
+          }
+        ],
+        "workOrder": {
+          "experiment": "Đánh giá rủi ro (mức và biện luận)"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.1.4",
+      "ctdReference": "3.2.P.2.2.1.4",
+      "headingVi": "Công thức cuối (Final formulation)",
+      "description": "Công thức chốt, khai theo từng hàm lượng. Bảng thành phần KHÔNG phải bảng kết quả đo: thành phần là lượng khai báo nên tỷ lệ cấp được, và đây là chỗ duy nhất một hàm lượng suy theo tỷ lệ được mang số. Mục phải nói rõ hàm lượng nào là khối lượng tính chứ chưa phải công thức đã bào chế.",
+      "form": {
+        "headings": [],
+        "tables": [
+          {
+            "columns": [
+              "STT",
+              "Tên thành phần",
+              "Chức năng"
+            ],
+            "perStrength": true,
+            "rows": "variable"
+          }
+        ],
+        "workOrder": {
+          "experiment": "Phát triển công thức"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.2",
+      "ctdReference": "3.2.P.2.2.2",
+      "headingVi": "Overages",
+      "description": "Có/không sử dụng overage cho dược chất hoặc tá dược, và lý do.",
+      "form": {
+        "workOrder": {
+          "experiment": "Phát triển công thức"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.3",
+      "ctdReference": "3.2.P.2.2.3",
+      "headingVi": "Tính chất lý hóa và sinh học (Physicochemical and Biological Properties)",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading."
+    },
+    {
+      "id": "P.2.2.3.1",
+      "ctdReference": "3.2.P.2.2.3.1",
+      "headingVi": "Phát triển phương pháp hòa tan (Development of a dissolution method)",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Đánh số các mục con đã được chỉnh so với file mẫu: file mẫu dùng 3.2.P.2.2.3.1.2 cho HAI mục khác nhau và có một mục 3.2.P.2.2.3.1.1.3 sâu hơn nhóm chứa nó. Bản này đánh lại .1 điều kiện sink, .2 phương pháp, .3 khả năng phân biệt, .4 hòa tan so sánh — chờ FD ký deviation."
+    },
+    {
+      "id": "P.2.2.3.1.1",
+      "ctdReference": "3.2.P.2.2.3.1.1",
+      "headingVi": "Điều kiện sink (Sink condition)",
+      "description": "Độ tan của dược chất trong môi trường thử và thể tích cần để đạt điều kiện sink.",
+      "form": {
+        "workOrder": {
+          "experiment": "Phương pháp và hồ sơ hòa tan"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.3.1.2",
+      "ctdReference": "3.2.P.2.2.3.1.2",
+      "headingVi": "Phương pháp hòa tan (Dissolution method)",
+      "description": "Thiết bị, tốc độ, môi trường, thể tích, thời điểm lấy mẫu và cách định lượng. Trích từ hồ sơ 3.2.P.5.2; không suy ra được từ báo cáo thử nghiệm công thức.",
+      "form": {
+        "workOrder": {
+          "experiment": "Phương pháp và hồ sơ hòa tan"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.3.1.3",
+      "ctdReference": "3.2.P.2.2.3.1.3",
+      "headingVi": "Khả năng phân biệt của phương pháp (Discriminatory power)",
+      "description": "Bằng chứng phương pháp phân biệt được các công thức khác nhau. ICH Q8(R2) trang 8 dùng \"could be provided\" nên đây là kỳ vọng mềm của guideline, nhưng biểu mẫu của phòng đòi một mục riêng.",
+      "form": {
+        "workOrder": {
+          "experiment": "Phương pháp và hồ sơ hòa tan"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.3.2",
+      "ctdReference": "3.2.P.2.2.3.2",
+      "headingVi": "Hồ sơ hòa tan so sánh (Comparative dissolution profile)",
+      "description": "So sánh hòa tan giữa thành phẩm và sản phẩm đối chiếu, và giữa các hàm lượng với nhau khi hồ sơ xin miễn thử tương đương sinh học cho hàm lượng thấp. Cần nhiều thời điểm lấy mẫu và cùng điều kiện thử mới tính được f2. Bảng thứ hai nói về f2: mỗi môi trường và cặp so sánh một dòng, mang giá trị f2, hoặc dấu cho biết chưa so sánh, hoặc \"không áp dụng\" kèm điều kiện làm nó không áp dụng. Hồ sơ hòa tan vẽ được bằng block figure kiểu profile khi bảng đã có số liệu (tối đa ba cột).",
+      "form": {
+        "headings": [],
+        "tables": [
+          {
+            "columns": [
+              "Thời điểm lấy mẫu"
+            ],
+            "perStrength": true,
+            "measuredOnly": true,
+            "rows": "variable"
+          },
+          {
+            "columns": [
+              "Môi trường và cặp so sánh",
+              "f2",
+              "Điều kiện không áp dụng f2"
+            ],
+            "rows": "variable"
+          }
+        ],
+        "similarity": true,
+        "workOrder": {
+          "experiment": "Phương pháp và hồ sơ hòa tan"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.3.3",
+      "ctdReference": "3.2.P.2.2.3.3",
+      "headingVi": "Đặc tính lý hóa của viên (Physico-chemical characteristics)",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Nội dung nằm ở các mục con: hồ sơ tạp chất, rồi đặc tính đo được của từng hàm lượng."
+    },
+    {
+      "id": "P.2.2.3.3.1",
+      "ctdReference": "3.2.P.2.2.3.3.1",
+      "headingVi": "Hồ sơ tạp chất của viên (Impurity profile of tablets)",
+      "description": "Danh mục tạp theo chuyên luận áp dụng, giới hạn và kết quả thực đo trên thành phẩm.",
+      "form": {
+        "workOrder": {
+          "experiment": "Đặc tính lý hóa của lô thành phẩm"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.3.3.2",
+      "ctdReference": "3.2.P.2.2.3.3.2",
+      "headingVi": "Đặc tính lý hóa — hàm lượng {strength}",
+      "description": "Đặc tính lý hóa đo được của hàm lượng ở vị trí 1 trong meta.strengths: cảm quan, khối lượng trung bình, kích thước, độ cứng, độ mài mòn, thời gian rã, định lượng, đồng đều hàm lượng, trong một bảng Chỉ tiêu × Kết quả đo. Một hàm lượng khai trong meta.derivedStrengths chưa có lô thật nào: mục của nó không được chứa số đo, và mọi ô kết quả là dấu thiếu dữ liệu.",
+      "form": {
+        "headings": [],
+        "strengthIndex": 0,
+        "tables": [
+          {
+            "columns": [
+              "Chỉ tiêu",
+              "Kết quả đo"
+            ],
+            "rows": "variable"
+          }
+        ],
+        "workOrder": {
+          "experiment": "Đặc tính lý hóa của lô thành phẩm"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.3.3.3",
+      "ctdReference": "3.2.P.2.2.3.3.3",
+      "headingVi": "Đặc tính lý hóa — hàm lượng {strength}",
+      "description": "Cùng hình dạng với mục trên, cho hàm lượng ở vị trí 2 trong meta.strengths.",
+      "form": {
+        "headings": [],
+        "strengthIndex": 1,
+        "tables": [
+          {
+            "columns": [
+              "Chỉ tiêu",
+              "Kết quả đo"
+            ],
+            "rows": "variable"
+          }
+        ],
+        "workOrder": {
+          "experiment": "Đặc tính lý hóa của lô thành phẩm"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.3.4",
+      "ctdReference": "3.2.P.2.2.3.4",
+      "headingVi": "Phép thử tách vạch (Breakability test)",
+      "description": "Viên có vạch chia phải chứng minh chia được: khối lượng các nửa viên và mức phân tán của chúng theo phép thử phân chia viên của dược điển. Mục này mang phần chung — thiết kế phép thử và tiêu chí chấp nhận; kết quả của từng hàm lượng nằm ở mục con.",
+      "form": {
+        "workOrder": {
+          "experiment": "Phép thử tách vạch"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.3.4.1",
+      "ctdReference": "3.2.P.2.2.3.4.1",
+      "headingVi": "Phép thử tách vạch — hàm lượng {strength}",
+      "description": "Kết quả tách vạch của hàm lượng ở vị trí 1 trong meta.strengths, theo thiết kế phép thử ở mục cha. Hàm lượng suy ra không có số đo.",
+      "form": {
+        "headings": [],
+        "strengthIndex": 0,
+        "workOrder": {
+          "experiment": "Phép thử tách vạch"
+        }
+      }
+    },
+    {
+      "id": "P.2.2.3.4.2",
+      "ctdReference": "3.2.P.2.2.3.4.2",
+      "headingVi": "Phép thử tách vạch — hàm lượng {strength}",
+      "description": "Kết quả tách vạch của hàm lượng ở vị trí 2 trong meta.strengths, cùng thiết kế phép thử.",
+      "form": {
+        "headings": [],
+        "strengthIndex": 1,
+        "workOrder": {
+          "experiment": "Phép thử tách vạch"
+        }
+      }
+    },
+    {
+      "id": "P.2.3",
+      "ctdReference": "3.2.P.2.3",
+      "headingVi": "Phát triển quy trình sản xuất (Manufacturing Process Development)",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Bộ công đoạn KHÔNG cố định — nó phụ thuộc phương pháp pha chế đã chọn (trộn dập thẳng, xát hạt ướt, phun sấy tầng sôi tạo hạt, cán ép, đóng tán, ép đùn nóng chảy…), và mỗi phương pháp có bộ thông số trọng yếu riêng; đổi phương pháp thì dựng lại các bảng. Sơ đồ quy trình dựng từ bộ công đoạn trong bảng của mục con, bằng block figure."
+    },
+    {
+      "id": "P.2.3.1",
+      "ctdReference": "3.2.P.2.3.1",
+      "headingVi": "Đánh giá rủi ro ban đầu của quy trình (Initial risk assessment of the manufacturing process)",
+      "description": "Ma trận rủi ro CQA × công đoạn. Dòng phải trùng đúng danh mục chỉ tiêu khai ở P.2.2.1.2.1; cột là các công đoạn của phương pháp đã chọn. Hai bảng, theo thứ tự: ma trận mức rủi ro, rồi bảng biện luận cho từng mức. Bảng biện luận trước đây nằm ở mục phát triển quy trình, cách ma trận nó biện luận một mục — một cặp bị tách rời thì người đọc không đối chiếu được, nên nó về đứng cạnh ma trận.",
+      "form": {
+        "headings": [],
+        "riskAssessment": {
+          "kind": "initial"
+        },
+        "tables": [
+          {
+            "columns": [
+              "CQA sản phẩm",
+              "..."
+            ],
+            "rowsFrom": "P.2.2.1.2.1",
+            "columnsFromRows": {
+              "section": "P.2.3.2",
+              "column": 0
+            }
           },
           {
             "columns": [
@@ -175,16 +661,201 @@
               "Thông số trọng yếu dự kiến",
               "Biện luận mức rủi ro"
             ],
+            "rowsFrom": "P.2.3.2"
+          }
+        ],
+        "workOrder": {
+          "experiment": "Đánh giá rủi ro (mức và biện luận)"
+        }
+      }
+    },
+    {
+      "id": "P.2.3.2",
+      "ctdReference": "3.2.P.2.3.2",
+      "headingVi": "Phát triển quy trình sản xuất (Manufacturing process development)",
+      "description": "Danh mục công đoạn của quy trình sản xuất — nguồn duy nhất cho mọi nơi cần liệt kê công đoạn: cột của ma trận rủi ro ở P.2.3.1, các dòng biện luận ở đó, và sơ đồ luồng của mục này. Mỗi dòng một công đoạn; cột thứ hai nói công đoạn đó đã được xác nhận là có trong quy trình thương mại hay chưa, cột thứ ba nói mục nào báo cáo việc phát triển nó (đúng một mục, hoặc một dấu nếu chưa có nghiên cứu phát triển riêng). Ô chưa xác nhận là dấu thiếu dữ liệu. Hợp của hai bộ công đoạn đã từng được khai riêng (ma trận rủi ro và quy trình của thử nghiệm) và chúng lệch nhau, nên một công đoạn chỉ có ở một bên vẫn được giữ lại cho FD chốt, không bị bỏ lặng lẽ. Quy trình của thử nghiệm phòng thí nghiệm nằm ở P.2.2.1.3.3.1 và không chuyển sang đây: đó là quy trình của thử nghiệm, không phải quy trình thương mại. Mục này còn mô tả quy trình thương mại và vẽ sơ đồ luồng từ bảng danh mục.",
+      "form": {
+        "headings": [],
+        "operationList": {
+          "developmentColumn": 2
+        },
+        "tables": [
+          {
+            "columns": [
+              "Công đoạn",
+              "Có trong quy trình thương mại",
+              "Mục phát triển"
+            ],
             "rows": "variable"
           }
-        ]
+        ],
+        "workOrder": {
+          "experiment": "Phát triển quy trình sản xuất"
+        }
+      }
+    },
+    {
+      "id": "P.2.3.2.1",
+      "ctdReference": "3.2.P.2.3.2.1",
+      "headingVi": "Chiến lược kiểm soát điều kiện môi trường (Environmental conditions control strategy)",
+      "description": "Điều kiện môi trường nào được kiểm soát ở công đoạn nào, và cơ chế nào đòi kiểm soát nó — ví dụ một tạp phân hủy do oxy hóa tăng theo ẩm và nhiệt. Ngưỡng cụ thể là quyết định của FD, không phải con số lấy từ tài liệu tham chiếu định dạng.",
+      "form": {
+        "headings": [],
+        "workOrder": {
+          "experiment": "Phát triển quy trình sản xuất"
+        }
+      }
+    },
+    {
+      "id": "P.2.3.2.2",
+      "ctdReference": "3.2.P.2.3.2.2",
+      "headingVi": "Hàm ẩm (Moisture content)",
+      "description": "Hàm ẩm được theo dõi ở đâu trong quy trình, đo bằng phương pháp nào, và vì sao nó trọng yếu với sản phẩm này.",
+      "form": {
+        "headings": [],
+        "workOrder": {
+          "experiment": "Phát triển quy trình sản xuất"
+        }
+      }
+    },
+    {
+      "id": "P.2.3.2.3",
+      "ctdReference": "3.2.P.2.3.2.3",
+      "headingVi": "Phát triển công đoạn trộn (Blending process development)",
+      "description": "Thông số của công đoạn trộn được khảo sát (thời gian, tốc độ, mức nạp), đáp ứng nào được đo để kết luận (đồng đều hàm lượng, độ chảy), và khoảng nào được chốt.",
+      "form": {
+        "headings": [],
+        "developsOperations": true,
+        "workOrder": {
+          "experiment": "Phát triển quy trình sản xuất"
+        }
+      }
+    },
+    {
+      "id": "P.2.3.2.4",
+      "ctdReference": "3.2.P.2.3.2.4",
+      "headingVi": "Phát triển công đoạn dập viên (Tablet compression process development)",
+      "description": "Lực dập và tốc độ máy được khảo sát, đáp ứng nào được đo (khối lượng, độ cứng, độ mài mòn, độ rã, hòa tan), và khoảng nào được chốt.",
+      "form": {
+        "headings": [],
+        "developsOperations": true,
+        "workOrder": {
+          "experiment": "Phát triển quy trình sản xuất"
+        }
+      }
+    },
+    {
+      "id": "P.2.3.2.5",
+      "ctdReference": "3.2.P.2.3.2.5",
+      "headingVi": "Phát triển công đoạn bao phim (Film coating process development)",
+      "description": "Thông số bao phim được khảo sát và mức tăng khối lượng màng bao được chốt, kèm kết quả kiểm tra viên sau bao. Nếu sản phẩm không bao phim thì ghi rõ là không áp dụng.",
+      "form": {
+        "headings": [],
+        "developsOperations": true,
+        "workOrder": {
+          "experiment": "Phát triển quy trình sản xuất"
+        }
+      }
+    },
+    {
+      "id": "P.2.3.3",
+      "ctdReference": "3.2.P.2.3.3",
+      "headingVi": "Nâng cỡ lô từ phòng thí nghiệm lên pilot và thương mại (Scale-up from lab to pilot and commercial scale)",
+      "description": "Mục cha CÓ nội dung: phần chung của việc nâng cỡ lô — các cỡ lô đã thực hiện, thiết bị, và những thông số phải giữ khi đổi quy mô. Kết quả của từng hàm lượng nằm ở mục con.",
+      "form": {
+        "headings": [],
+        "tables": [
+          {
+            "columns": [
+              "Quy mô",
+              "Cỡ lô",
+              "Thiết bị",
+              "Hiệu suất"
+            ],
+            "rows": [
+              "Phòng thí nghiệm",
+              "Pilot",
+              "Thương mại"
+            ]
+          }
+        ],
+        "workOrder": {
+          "experiment": "Nâng cỡ lô"
+        }
+      }
+    },
+    {
+      "id": "P.2.3.3.1",
+      "ctdReference": "3.2.P.2.3.3.1",
+      "headingVi": "Nâng cỡ lô — hàm lượng {strength}",
+      "description": "Nâng cỡ lô của hàm lượng ở vị trí 1 trong meta.strengths: cỡ lô ở từng quy mô, thiết bị, hiệu suất, kết quả kiểm nghiệm của lô ở quy mô mới. Hàm lượng suy ra chưa có lô nào nên không có số đo.",
+      "form": {
+        "headings": [],
+        "strengthIndex": 0,
+        "workOrder": {
+          "experiment": "Nâng cỡ lô"
+        }
+      }
+    },
+    {
+      "id": "P.2.3.3.2",
+      "ctdReference": "3.2.P.2.3.3.2",
+      "headingVi": "Nâng cỡ lô — hàm lượng {strength}",
+      "description": "Cùng hình dạng, cho hàm lượng ở vị trí 2 trong meta.strengths.",
+      "form": {
+        "headings": [],
+        "strengthIndex": 1,
+        "workOrder": {
+          "experiment": "Nâng cỡ lô"
+        }
+      }
+    },
+    {
+      "id": "P.2.3.4",
+      "ctdReference": "3.2.P.2.3.4",
+      "headingVi": "Đánh giá rủi ro cập nhật của quy trình sản xuất (Updated risk assessment of the manufacturing process)",
+      "description": "Mức rủi ro của từng công đoạn SAU khi có dữ liệu chạy quy trình.",
+      "form": {
+        "headings": [],
+        "riskAssessment": {
+          "kind": "updated",
+          "pairs": "P.2.3.1"
+        },
+        "tables": [
+          {
+            "columns": [
+              "CQA sản phẩm",
+              "..."
+            ],
+            "rowsFrom": "P.2.3.1",
+            "columnsFrom": "P.2.3.1"
+          },
+          {
+            "columns": [
+              "Ô rủi ro (CQA × yếu tố)",
+              "Mức ban đầu → cập nhật",
+              "Nghiên cứu đã hạ mức"
+            ],
+            "rows": "variable"
+          }
+        ],
+        "workOrder": {
+          "experiment": "Đánh giá rủi ro (mức và biện luận)"
+        }
       }
     },
     {
       "id": "P.2.4",
       "ctdReference": "3.2.P.2.4",
       "headingVi": "Hệ thống bao bì (Container Closure System)",
-      "description": "Bao bì sơ cấp và thứ cấp: vật liệu, khả năng bảo vệ, tính tương hợp. Mục chỉ đóng được sau khi có dữ liệu độ ổn định ở 3.2.P.8, vì tính tương hợp chứng minh bằng chính dữ liệu đó.",
+      "container": true,
+      "description": "Mục cha, chỉ mang heading. Mục chỉ đóng được sau khi có dữ liệu độ ổn định ở 3.2.P.8, vì tính tương hợp chứng minh bằng chính dữ liệu đó."
+    },
+    {
+      "id": "P.2.4.1",
+      "ctdReference": "3.2.P.2.4.1",
+      "headingVi": "Bao bì sơ cấp (Primary packaging material)",
+      "description": "Vật liệu, mô tả, khả năng bảo vệ, tính tương hợp, kiểm soát chất lượng và dữ liệu độ ổn định của bao bì tiếp xúc trực tiếp.",
       "form": {
         "headings": [],
         "tables": [
@@ -199,9 +870,26 @@
               "Khả năng bảo vệ",
               "Tính tương hợp",
               "Kiểm soát chất lượng",
+              "Tính toàn vẹn bao bì",
+              "Hấp phụ và thẩm thấu",
+              "An toàn vật liệu",
               "Dữ liệu độ ổn định"
             ]
-          },
+          }
+        ],
+        "workOrder": {
+          "experiment": "Hệ bao bì, vi sinh và tương thích"
+        }
+      }
+    },
+    {
+      "id": "P.2.4.2",
+      "ctdReference": "3.2.P.2.4.2",
+      "headingVi": "Bao bì thứ cấp (Secondary packaging material)",
+      "description": "Mô tả và chức năng của bao bì ngoài.",
+      "form": {
+        "headings": [],
+        "tables": [
           {
             "columns": [
               "Nội dung",
@@ -212,7 +900,10 @@
               "Chức năng"
             ]
           }
-        ]
+        ],
+        "workOrder": {
+          "experiment": "Hệ bao bì, vi sinh và tương thích"
+        }
       }
     },
     {
@@ -242,15 +933,23 @@
             ],
             "rows": "variable"
           }
-        ]
+        ],
+        "workOrder": {
+          "experiment": "Hệ bao bì, vi sinh và tương thích"
+        }
       }
     },
     {
       "id": "P.2.6",
       "ctdReference": "3.2.P.2.6",
       "headingVi": "Khả năng tương thích (Compatibility)",
-      "description": "Tương thích với dung môi/thiết bị hoàn nguyên/pha loãng nếu sản phẩm cần pha trước khi dùng; ghi \"không áp dụng\" kèm lý do nếu sản phẩm dùng trực tiếp."
+      "description": "Tương thích với dung môi/thiết bị hoàn nguyên/pha loãng nếu sản phẩm cần pha trước khi dùng; ghi \"không áp dụng\" kèm lý do nếu sản phẩm dùng trực tiếp.",
+      "form": {
+        "workOrder": {
+          "experiment": "Hệ bao bì, vi sinh và tương thích"
+        }
+      }
     }
   ],
-  "_formSpec": "Khoá `form` mô tả HÌNH DẠNG bắt buộc của mục, không mô tả nội dung — để một draft của sản phẩm bất kỳ vẫn bị giữ đúng format P.2. `headings`: danh sách heading3 bắt buộc theo thứ tự ([] = không được có heading). `tables`: đúng số bảng, đúng thứ tự; mỗi bảng khai `columns` (nhãn cột chính xác; \"*\" = bất kỳ chuỗi không rỗng, dùng cho nhãn mang tên sản phẩm; \"...\" ở cuối = các cột còn lại tự do về số lượng và tên), và một trong `rows` (nhãn dòng chính xác) / `rows: \"variable\"` (do sản phẩm quyết định) / `rowsFrom: \"<id mục>\"` (phải trùng nhãn dòng bảng đầu của mục đó). Bỏ `headings` hoặc `tables` nghĩa là không ràng buộc phần đó. Mục không khai `form` thì tự do."
+  "_formSpec": "Khoá `form` mô tả HÌNH DẠNG bắt buộc của mục, không mô tả nội dung — để một draft của sản phẩm bất kỳ vẫn bị giữ đúng format P.2. `headings`: danh sách heading3 bắt buộc theo thứ tự ([] = không được có heading). `tables`: đúng số bảng, đúng thứ tự; mỗi bảng khai `columns` (nhãn cột chính xác; \"*\" = bất kỳ chuỗi không rỗng, dùng cho nhãn mang tên sản phẩm; \"...\" ở cuối = các cột còn lại tự do về số lượng và tên), và một trong `rows` (nhãn dòng chính xác) / `rows: \"variable\"` (do sản phẩm quyết định) / `rowsFrom: \"<id mục>\"` (phải trùng nhãn dòng bảng đầu của mục đó). `perStrength: true`: bảng báo cáo theo hàm lượng — `columns` khi đó chỉ khai TIỀN TỐ cột cố định, phần đuôi phải là đúng một nhóm cột cho mỗi hàm lượng trong `meta.strengths`. Số cột mỗi nhóm được SUY ra bằng phép chia, không khai trong schema: biểu mẫu của phòng dùng một cột mỗi hàm lượng ở bảng so sánh thành phần và hai cột (mg và %) ở công thức cuối, mà một con số viết vào schema là thêm một thứ phải giữ đồng bộ tay với bảng nó mô tả. Nhãn cột đầu mỗi nhóm phải nêu đúng hàm lượng của nhóm, xét theo khớp dài nhất. `measuredOnly: true`: bảng chứa KẾT QUẢ ĐO (IPC/QC, hòa tan, độ cứng, độ rã, đồng đều hàm lượng, khảo sát thuốc đối chiếu, độ ổn định). Với bảng này, mọi ô thuộc cột của một hàm lượng khai trong `meta.derivedStrengths` bắt buộc mang marker: tỷ lệ công thức suy ra được khối lượng, không suy ra được số đo, và ô trống bị đọc thành \"không áp dụng\" chứ không phải \"chưa có\". Bảng thành phần KHÔNG khai `measuredOnly` vì thành phần là lượng khai báo, tỷ lệ cấp được. Không được khai `perStrength` cùng `\"...\"`. Bỏ `headings` hoặc `tables` nghĩa là không ràng buộc phần đó. Mục không khai `form` thì tự do. `columnsFrom: \"<id mục>\"`: cột (sau tiền tố cố định) phải trùng nhãn cột bảng đầu của mục đó; `columnsFromRows: {section, column}`: cột phải trùng ô thứ `column` của từng dòng bảng đầu của mục đó — dùng khi nguồn liệt kê theo chiều dọc còn bảng này trải theo chiều ngang. `columns` khi đó phải kết thúc bằng \"...\" và đại diện đúng các nhãn suy ra: bảng không thêm được cột nguồn không có, cũng không bỏ được cột nguồn có. `riskAssessment: {kind: \"initial\"|\"updated\", pairs}`: bảng đầu của mục là ma trận (dòng = CQA, cột = yếu tố; ô là một mức trong `riskScale` hoặc một dấu), bảng thứ hai là bảng biện luận. Mục `updated` trỏ `pairs` tới mục `initial` của nó; ô nào thấp hơn ô tương ứng ở bản ban đầu phải có một dòng biện luận (ô đầu = \"<nhãn dòng> × <nhãn cột>\", ô cuối = tham chiếu tới mục nghiên cứu đã hạ nó, hoặc một dấu). `operationList: {developmentColumn: n}`: bảng đầu của mục là danh mục công đoạn; cột thứ n của mỗi dòng phải trỏ tới đúng một mục có `developsOperations: true` hoặc mang dấu, và mỗi mục có `developsOperations` phải được ít nhất một dòng trỏ tới (hoặc được khai trong `meta.notApplicableSections`). `strengthIndex: n`: mục báo cáo đúng một hàm lượng — hàm lượng thứ n (từ 0) trong `meta.strengths`; `headingVi` của mục có thể chứa `{strength}` và được thay bằng tên hàm lượng khi in. Các mục cùng cha lập thành một họ, mỗi vị trí một mục. Mục của hàm lượng nằm trong `meta.derivedStrengths` không được chứa số đo: mọi ô giá trị là dấu thiếu dữ liệu, và đoạn văn không được có token dạng số đo. `similarity: true`: bảng thứ hai của mục là bảng f2 (cột 1 = môi trường và cặp so sánh, cột 2 = f2, cột 3 = điều kiện không áp dụng); phải có ít nhất một dòng, và mỗi dòng mang một giá trị f2 trong 0–100, hoặc một dấu, hoặc \"không áp dụng\" kèm điều kiện đủ dài để kiểm được. `workOrder: {experiment}`: nhãn thí nghiệm mà mọi dấu thiếu dữ liệu của mục thuộc về; các mục cùng nhãn được gom thành một đầu việc trong danh mục dữ liệu cần bổ sung. Nhãn là hình dạng của biểu mẫu (cùng mục thì cùng loại thí nghiệm với mọi sản phẩm), không phải dữ liệu."
 }

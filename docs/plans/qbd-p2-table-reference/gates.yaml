@@ -1,0 +1,79 @@
+# Executable acceptance gates for qbd-p2-table-reference.
+# This file owns gate bodies. Step files describe implementation; they must not restate a full gate.
+
+version: 2
+workstream: qbd-p2-table-reference
+evidence_root: docs/reports/qbd-p2-table-reference
+
+environment_findings:
+  positional_references_in_general: >
+    This repo now points at content by name everywhere it matters — a section by id, a chart's row by
+    label, a figure's table by id — and keeps position only where position IS the statement, which is
+    the outline's form: "the Nth table of this section has this shape". When adding a reference, ask
+    which of the two it is. Getting it wrong is quiet: the document still renders, it just says
+    something else.
+
+gates:
+  - id: G-29
+    title: A figure resolves to its table by name, and moving tables cannot redirect it
+    invariant: >
+      fromTable names the id of a table in the same section. Reordering or inserting tables leaves every
+      figure drawing the same table it drew before. The positional form is refused outright rather than
+      accepted alongside: one field with two spellings is one field that will disagree with itself.
+    boundary_owner: render/figures/figure-source.mjs — tableAt + draft/validate-draft.mjs
+    fixture: the worked example, with its sections' tables reversed one section at a time
+    command: >
+      node --test tools/pharma-dev-draft/draft/tests/table-reference.test.mjs
+      && node tools/pharma-dev-draft/draft/validate-draft.mjs tools/pharma-dev-draft/draft/example-draft.json
+    expected: >
+      exit 0. Every figure in the example resolves to the same table before and after its section's
+      tables are reversed. An integer fromTable fails with E_FIGURE_SHAPE, and the message says to give
+      the table an id and name it. Under the old positional form the same shuffle redirects the process
+      diagram to the second trial's blend table and the chart to the in-process table — recorded in the
+      evidence, because a check that would pass either way proves nothing.
+    negative_cases:
+      - An index accepted alongside a name -> two spellings of one field.
+      - fromTable omitted, so the lookup matches a table that declares no id -> the old failure in a new hat.
+    evidence: g29-g31-table-reference.txt
+    blocks: [G-31]
+    status: pass
+
+  - id: G-30
+    title: A name resolves to exactly one table, or the draft is refused
+    invariant: >
+      Two tables in one section may not share an id, or a figure naming it could not say which it means.
+      A figure naming a table that is not there is refused at Stage B, and the message lists the ids that
+      do exist so the author can pick. An id is required only of a table a figure points at — a rule
+      nothing uses is a rule that goes stale.
+    boundary_owner: draft/validate-draft.mjs
+    fixture: the worked example with a duplicated id, and a figure naming a misspelt table
+    command: node --test tools/pharma-dev-draft/draft/tests/table-reference.test.mjs
+    expected: >
+      exit 0. E_TABLE_ID_DUPLICATE for two tables sharing a name; E_FIGURE_SOURCE naming the real ids
+      for a reference that resolves to nothing. A section whose tables carry no id validates, as long as
+      no figure points at them.
+    negative_cases:
+      - Ids required on every table -> noise on tables nothing references.
+      - Uniqueness demanded across the whole document -> a constraint nobody needs, forcing long names.
+    evidence: g29-g31-table-reference.txt
+    blocks: []
+    status: pass
+
+  - id: G-31
+    title: The flow kind is protected too, and it is the one that had nothing
+    invariant: >
+      A chart would be caught by its row name and a process diagram by its column count. A flow figure
+      reads column headings straight into unit operation names, so a misdirected one draws a different
+      manufacturing process and nothing notices. It must survive a table inserted ahead of it.
+    boundary_owner: render/figures/figure-source.mjs
+    fixture: the risk-matrix section with a decoy table unshifted in front of its own
+    command: node --test tools/pharma-dev-draft/draft/tests/table-reference.test.mjs
+    expected: >
+      exit 0. flowSteps returns the same unit operations after a decoy table is inserted at the head of
+      the section, and the test also asserts the decoy would have produced a different process — so the
+      assertion cannot pass by the two being equal.
+    negative_cases:
+      - The decoy chosen to have the same columns -> the test would pass without proving anything.
+    evidence: g29-g31-table-reference.txt
+    blocks: []
+    status: pass

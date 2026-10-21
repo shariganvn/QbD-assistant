@@ -1,11 +1,65 @@
 # Implementation Plan
 
-The active implementation plan is
-`plans/260809-2001-rationale-explanation/plan.md`. This file remains the
-single authoritative router; follow that plan for the current change.
+There is **no active implementation plan**. This file remains the single
+authoritative router; wait for a scope to be accepted before picking work up.
 
 ## Latest completed
 
+- [Format-reference plan](docs/plans/qbd-p2-format-reference/plan.md) — `completed` and read-only.
+  G-35..G-47 hold evidence in `docs/reports/qbd-p2-format-reference/`. A finished P.2 for the same product,
+  written by another company, supplied structure and no data: the draft grew from 26 to 43 sections with
+  content, with paired risk matrices (a lowered score must cite its study), one operation list that the
+  process matrix and flow diagram read from, per-strength sections (a strength with no batch holds no
+  measurement), a dissolution-profile figure, a required f2 statement, and the data-request annex regrouped
+  as a work order by experiment. No measurement was added: 396 gaps and 26 decisions still wait on FD, and
+  the rules about lowered risk, profile figures and an unbatched strength have not met real data.
+
+- [Authorship plan](docs/plans/qbd-p2-authorship/plan.md) — `completed` and read-only. G-32..G-34 hold
+  evidence in `docs/reports/qbd-p2-authorship/`. The sign-off table had named the tool that assembled the
+  draft as its drafter, with a date beside it; provenance now prints once in the scope notice and all
+  three signature rows are blank, enforced by print position rather than by inspecting the string. The
+  ICH Q8(R2) record's round 12 closes the process finding Trial 2 settled and corrects its conclusion:
+  the urgent item is Trial 2's copied results table, not a process question.
+
+- [Table reference plan](docs/plans/qbd-p2-table-reference/plan.md) — `completed` and read-only.
+  G-29..G-31 hold evidence in `docs/reports/qbd-p2-table-reference/`. A figure now names its table by id
+  instead of counting to it, which removes a failure that had struck three times in two rounds and that
+  nothing aimed at it had ever caught. The outline's `form.tables[]` stays positional on purpose, and
+  the contract says why.
+
+- [Process diagram plan](docs/plans/qbd-p2-process-diagram/plan.md) — `completed` and read-only.
+  G-26..G-28 hold evidence in `docs/reports/qbd-p2-process-diagram/`, including the rendered diagram. A
+  third figure kind draws unit operations down the page with the components added at each one; Trial 2's
+  process has a source now so its sequence decision closed, and Trial 1's branch carries a note and a
+  decision rather than a second copy of the same diagram.
+
+- [Self-consistency plan](docs/plans/qbd-p2-self-consistency/plan.md) — `completed` and read-only.
+  G-23..G-25 hold evidence in `docs/reports/qbd-p2-self-consistency/`. Eleven internal references that
+  pointed at container sections now resolve to the leaves that hold the content, enforced at Stage B, and
+  the abbreviation table moved out of the renderer into the draft with five dead entries removed.
+
+- [Trial 2 plan](docs/plans/qbd-p2-trial-2/plan.md) — `completed` and read-only. G-19..G-22 hold evidence
+  in `docs/reports/qbd-p2-trial-2/`. The first real dataset to reach the dossier: it settled the
+  manufacturing process as direct compression and made the lubricant level the second experimentally
+  established critical attribute. Its finished-product results table is a partial copy of the first
+  trial's — 25 of 45 numeric cells verbatim, in a block pattern — so that table is named rather than
+  written, and FD owes either the real measurements or confirmation that these are the same batches.
+
+- [Decision register plan](docs/plans/qbd-p2-decision-register/plan.md) — `completed` and read-only.
+  G-13..G-18 hold evidence in `docs/reports/qbd-p2-decision-register/`. The draft now carries a second
+  marker kind for a conflict or an unapproved assumption, and the rendered document has a second annex
+  listing 16 decisions with their owners beside the 149 data requests. Its most consequential finding —
+  the dossier stating direct compression while the trial's own in-process data described granules — was
+  settled by the Trial 2 round below and closed in the record's round 12.
+- [P.2 figures plan](docs/plans/qbd-p2-figures/plan.md) — `completed` and read-only. G-08..G-12 all
+  hold evidence in `docs/reports/qbd-p2-figures/`. The drug-substance properties are sourced from
+  PubChem with identifiers and retrieval URLs; W-5 stays open, because those are secondary aggregators
+  and it asks for reconciliation against the monograph.
+- [Two-strength P.2 plan](docs/plans/qbd-p2-bisoprolol-5-10mg/plan.md) — `completed` and read-only.
+  G-00..G-05 and G-07 hold evidence in `docs/reports/qbd-p2-bisoprolol-5-10mg/`. G-06, the
+  pharmacopoeia-version discovery gate, is `deferred`: it needs a verifiable source for the effective
+  EP version, not code.
+- `plans/260809-2001-rationale-explanation/plan.md` — `completed` and read-only.
 - [P.2.2.1 formulation-selection plan](docs/plans/qbd-p221-formulation-selection/plan.md) — completed
   and read-only.
 

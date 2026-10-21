@@ -1,0 +1,82 @@
+TAP version 13
+# Subtest: a two-strength draft validates on both group sizes
+ok 1 - a two-strength draft validates on both group sizes
+  ---
+  duration_ms: 1.845204
+  type: 'test'
+  ...
+# Subtest: three strengths validate unchanged: the count is data, not a built-in assumption
+ok 2 - three strengths validate unchanged: the count is data, not a built-in assumption
+  ---
+  duration_ms: 0.296607
+  type: 'test'
+  ...
+# Subtest: one strength validates: a single-strength product takes the same form
+ok 3 - one strength validates: a single-strength product takes the same form
+  ---
+  duration_ms: 0.15056
+  type: 'test'
+  ...
+# Subtest: a table missing a strength's column group is rejected
+ok 4 - a table missing a strength's column group is rejected
+  ---
+  duration_ms: 0.600478
+  type: 'test'
+  ...
+# Subtest: an unequal column split across strengths is rejected
+ok 5 - an unequal column split across strengths is rejected
+  ---
+  duration_ms: 0.300385
+  type: 'test'
+  ...
+# Subtest: a column group that does not name its strength is rejected
+ok 6 - a column group that does not name its strength is rejected
+  ---
+  duration_ms: 0.290276
+  type: 'test'
+  ...
+# Subtest: transposed column groups are rejected even when one label contains the other
+ok 7 - transposed column groups are rejected even when one label contains the other
+  ---
+  duration_ms: 0.159416
+  type: 'test'
+  ...
+# Subtest: strengths in the right order validate even when one label contains the other
+ok 8 - strengths in the right order validate even when one label contains the other
+  ---
+  duration_ms: 0.217363
+  type: 'test'
+  ...
+# Subtest: meta.strengths must be present and well formed
+ok 9 - meta.strengths must be present and well formed
+  ---
+  duration_ms: 0.388018
+  type: 'test'
+  ...
+# Subtest: meta.derivedStrengths must name a declared strength
+ok 10 - meta.derivedStrengths must name a declared strength
+  ---
+  duration_ms: 0.4516
+  type: 'test'
+  ...
+# Subtest: meta.derivedStrengths accepts a subset of the declared strengths
+ok 11 - meta.derivedStrengths accepts a subset of the declared strengths
+  ---
+  duration_ms: 0.263953
+  type: 'test'
+  ...
+# Subtest: perStrength and an open-ended column list cannot both be declared
+ok 12 - perStrength and an open-ended column list cannot both be declared
+  ---
+  duration_ms: 0.259897
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 96.939341

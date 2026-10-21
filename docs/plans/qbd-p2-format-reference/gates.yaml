@@ -1,0 +1,260 @@
+# Executable acceptance gates for qbd-p2-format-reference.
+# This file owns gate bodies. Step files describe implementation; they must not restate a full gate.
+
+version: 2
+workstream: qbd-p2-format-reference
+evidence_root: docs/reports/qbd-p2-format-reference
+
+environment_findings:
+  a_reference_for_format_is_not_a_source_of_data: >
+    A finished P.2 for the same product exists, written by another company from another formula. It
+    settles what sections a complete P.2 has and what shape its tables take, and nothing about this
+    product's values. The boundary is enforced by hashes, so the file that blocks the reference is not
+    itself a copy of it. The first version of that file stored the reference's table captions, which
+    carry its batch numbers; and three comments written in the same phase quoted two of those numbers.
+    G-47's file scan found the comments. A rule about leaking is only as good as what it scans.
+  the_repository_holds_no_pharmacopoeia: >
+    docs/raw holds ICH Q8(R2), ICH Q6A, QbD for ANDAs and the Handbook of Pharmaceutical Excipients.
+    A method statement that needs a pharmacopoeia says so and does not cite one it cannot open, and a
+    figure such as a number of tablets or batches is a decision for FD, not something to copy.
+  a_green_run_over_an_empty_draft_proves_less_than_it_says: >
+    No risk level, no dissolution result and no measurement exists in the draft yet, so the rules about
+    lowered scores, profile figures and a strength with no batch have nothing real to act on. Their
+    evidence is purpose-built outlines and filled copies, and each suite has a test that says out loud
+    what the committed draft has not yet exercised.
+
+gates:
+  - id: G-35
+    title: No identifier of the format reference reaches the draft, the document or any file written
+    invariant: >
+      No batch number, supplier or material identifier of the reference dossier appears in the draft, in
+      the rendered text, or in any text file under tools/pharma-dev-draft or in the comparison report,
+      this plan, or the ICH Q8(R2) record. Three or more measured values from one reference table
+      landing in one section also fail. A single shared value passes, so the rule is not a nuisance.
+    boundary_owner: verify/sample-boundary.mjs, verify/reference-tokens.mjs, draft/tests/reference-scan.test.mjs
+    fixture: >
+      verify/format-reference-tokens.json (hashes only, 18 identifiers and 44 value groups) and a
+      synthetic token list in the tests, so the test files carry none of the reference's values
+    command: >
+      node tools/pharma-dev-draft/verify/sample-boundary.mjs tools/pharma-dev-draft/draft/example-draft.json
+      && node --test tools/pharma-dev-draft/draft/tests/reference-boundary.test.mjs tools/pharma-dev-draft/draft/tests/reference-scan.test.mjs
+    expected: >
+      exit 0, "Format-reference boundary: PASS". Identity on sight fails; three values from one group fail;
+      one value passes; a decimal comma and a decimal point hash alike; the token file is hashes only, its
+      group labels are table numbers and nothing else, and it does not trip its own rule.
+    negative_cases:
+      - A caption stored as a group label -> the file holds a batch number in plaintext.
+      - A report that quotes an identifier "for reference" -> the file scan fails.
+      - The rule applied only to the draft -> a comment or a report carries the identifier.
+    evidence: gates-g35-g47.txt
+    blocks: [G-36]
+    status: pass
+
+  - id: G-36
+    title: Renumbering moved content and added no data
+    invariant: >
+      The commit that migrated to the new numbering lost no value except corrected cross-references and
+      one deliberately rewritten decision record, duplicated none, and added no table cell holding
+      anything but a marker.
+    boundary_owner: draft/tests/value-inventory.mjs
+    fixture: the draft at d64d792 against the draft at e716880
+    command: >
+      node tools/pharma-dev-draft/draft/tests/value-inventory.mjs --before <draft at d64d792> --after <draft at e716880>
+    expected: >
+      lost 12 (11 corrected references and the rewritten numbering record), duplicated 0, moved 155,
+      added data 0.
+    negative_cases:
+      - A digit changed while the id changes -> added data is not 0.
+      - A value left behind in the section it moved out of -> duplicated is not 0.
+    evidence: gates-g35-g47.txt
+    blocks: [G-37]
+    status: pass
+
+  - id: G-37
+    title: Every outline id appears once and every cross-reference lands on a leaf
+    invariant: >
+      The draft holds exactly one entry per leaf of the outline and none for a container, and an internal
+      reference names a section with content — never a container, never an id that no longer exists.
+    boundary_owner: draft/validate-draft.mjs
+    fixture: the worked example, and purpose-built outlines in self-consistency.test.mjs
+    command: >
+      node tools/pharma-dev-draft/draft/validate-draft.mjs tools/pharma-dev-draft/draft/example-draft.json
+      && node --test tools/pharma-dev-draft/draft/tests/self-consistency.test.mjs tools/pharma-dev-draft/draft/tests/heading-hierarchy.test.mjs
+    expected: exit 0, 43 sections valid.
+    negative_cases:
+      - A reference to a container -> E_XREF_CONTAINER.
+      - A reference to an id the renumbering removed -> E_XREF_UNKNOWN.
+    evidence: gates-g35-g47.txt
+    blocks: [G-38]
+    status: pass
+
+  - id: G-38
+    title: An updated risk matrix repeats the initial one's labels
+    invariant: The updated matrix has the initial matrix's rows and columns, in the same order.
+    boundary_owner: draft/validate-draft.mjs (columnsFrom, rowsFrom)
+    fixture: purpose-built outline in draft/tests/risk-assessment.test.mjs
+    command: node --test tools/pharma-dev-draft/draft/tests/risk-assessment.test.mjs
+    expected: exit 0
+    negative_cases:
+      - A renamed quality attribute or column in the updated matrix -> E_FORM_ROWS / E_FORM_COLUMNS.
+    evidence: gates-g35-g47.txt
+    blocks: [G-39]
+    status: pass
+
+  - id: G-39
+    title: A lowered risk names the study that lowered it
+    invariant: >
+      A cell scored lower than the same cell in the initial matrix has a justification row citing a section
+      of the document, or a marker saying the study is not attached. A row for a cell that did not change
+      is refused. Only lowering is enforced.
+    boundary_owner: draft/validate-draft.mjs (validateRiskAssessment)
+    fixture: purpose-built outline; the committed draft holds no level yet
+    command: node --test tools/pharma-dev-draft/draft/tests/risk-assessment.test.mjs
+    expected: >
+      exit 0. Lowering with no row, or a row naming no study, or citing a section that does not exist, is
+      refused; a free-text cell is refused. The committed draft is stated, in a test, not to exercise the rule.
+    negative_cases:
+      - Level set to the low value with nothing attached -> E_RISK_LOWERED_NO_EVIDENCE.
+      - A stale justification row -> E_RISK_JUSTIFICATION_ORPHAN.
+    evidence: gates-g35-g47.txt
+    blocks: [G-40]
+    status: pass
+
+  - id: G-40
+    title: The process matrix's columns are the operation list's
+    invariant: >
+      The process risk matrix takes its columns from the operation list in P.2.3.2 and cannot add, drop or
+      reorder one. The matrix's justification rows and the flow diagram read from the same list.
+    boundary_owner: draft/validate-draft.mjs (columnsFromRows)
+    fixture: purpose-built outline and the committed draft
+    command: node --test tools/pharma-dev-draft/draft/tests/risk-assessment.test.mjs
+    expected: exit 0
+    negative_cases:
+      - A column the list does not have -> E_FORM_COLUMNS.
+      - An operation added to the list with no column -> E_FORM_COLUMNS.
+    evidence: gates-g35-g47.txt
+    blocks: [G-41]
+    status: pass
+
+  - id: G-41
+    title: Every operation points at one development section, and every development section is pointed at
+    invariant: >
+      Each operation names exactly one development section or carries a marker; each section that develops
+      operations is named by at least one operation, or declared not applicable in meta.notApplicableSections.
+      The invariant was restated from "exactly one section each way": seven operations, three development
+      sections, and one section covering three mixing steps.
+    boundary_owner: draft/validate-draft.mjs (validateOperationList)
+    fixture: purpose-built outline and the committed draft
+    command: node --test tools/pharma-dev-draft/draft/tests/process-development.test.mjs
+    expected: exit 0
+    negative_cases:
+      - An operation pointing at two sections, or none -> E_PROCESS_DEVELOPMENT_MULTIPLE / _UNKNOWN.
+      - A development section no operation points at -> E_PROCESS_DEVELOPMENT_UNUSED.
+      - A section both declared not applicable and pointed at -> E_PROCESS_DEVELOPMENT_CONTRADICTION.
+    evidence: gates-g35-g47.txt
+    blocks: [G-42]
+    status: pass
+
+  - id: G-42
+    title: A strength with no batch holds no measurement
+    invariant: >
+      For a strength in meta.derivedStrengths, its sections hold only gap-marked value cells and prose with
+      no number carrying a unit or two decimals. The prose rule is a heuristic and is documented as one.
+    boundary_owner: draft/validate-draft.mjs (validateDerivedStrengthSection)
+    fixture: purpose-built outline and the committed draft
+    command: node --test tools/pharma-dev-draft/draft/tests/strength-section.test.mjs
+    expected: exit 0
+    negative_cases:
+      - A hardness in the derived strength's table -> E_DERIVED_SECTION_HAS_RESULT.
+      - A decision marker in a derived strength's cell -> E_DERIVED_SECTION_HAS_RESULT.
+      - A measurement written in words -> passes; stated limit.
+    evidence: gates-g35-g47.txt
+    blocks: [G-43]
+    status: pass
+
+  - id: G-43
+    title: Every declared strength has a section, and every section a strength
+    invariant: >
+      More strengths than a family has sections is refused; a section left with no strength must be declared
+      not applicable; declaring a real strength's section not applicable is a contradiction. The outline is
+      a fixed list, so the validator cannot supply a missing section, only refuse the draft.
+    boundary_owner: draft/validate-draft.mjs (validateStrengthSections)
+    fixture: purpose-built outline and the committed draft with a third strength added
+    command: node --test tools/pharma-dev-draft/draft/tests/strength-section.test.mjs
+    expected: exit 0
+    negative_cases:
+      - Three strengths, two sections -> E_STRENGTH_SECTIONS_MISSING.
+      - One strength with the second section undeclared -> E_STRENGTH_SECTION_ORPHAN.
+    evidence: gates-g35-g47.txt
+    blocks: [G-44]
+    status: pass
+
+  - id: G-44
+    title: A comparative dissolution section states similarity, and an exemption carries its condition
+    invariant: >
+      The similarity table has a row; each row holds an f2 in 0-100, a marker, or "không áp dụng" with a
+      condition of at least six words. Stage B does not recompute f2 or judge the condition.
+    boundary_owner: draft/validate-draft.mjs (validateSimilarity)
+    fixture: the committed draft and variants of its similarity table
+    command: node --test tools/pharma-dev-draft/draft/tests/dissolution-profile.test.mjs
+    expected: exit 0
+    negative_cases:
+      - No row -> E_F2_MISSING.
+      - A bare exemption, "N/A", or a two-word condition -> E_F2_UNCONDITIONAL.
+      - f2 above 100, or a word in the f2 cell -> E_F2_CELL_INVALID.
+    evidence: gates-g35-g47.txt
+    blocks: [G-45]
+    status: pass
+
+  - id: G-45
+    title: A profile figure takes its numbers from the table and refuses to draw what the table does not state
+    invariant: >
+      The figure block names a table and carries no value of its own; correcting the table redraws the line.
+      A gap, a non-number, times that do not increase or mix units, fewer than two points, or more than three
+      series refuse the figure. No profile figure is in the committed document yet, because the section has
+      no dissolution result; the kind is proved on a filled copy.
+    boundary_owner: render/figures/figure-source.mjs (profileSeries), render/figures/profile-chart.mjs
+    fixture: the committed draft with the dissolution table filled in a test
+    command: node --test tools/pharma-dev-draft/draft/tests/dissolution-profile.test.mjs
+    expected: exit 0, including a PNG rasterisation.
+    negative_cases:
+      - A gap marker in any cell -> E_FIGURE_SOURCE.
+      - Four series -> E_FIGURE_SOURCE, naming the split.
+    evidence: gates-g35-g47.txt
+    blocks: [G-46]
+    status: pass
+
+  - id: G-46
+    title: Added sections carry a marker and no data, and the annex is a work order
+    invariant: >
+      Every section added by this workstream holds at least one marker, no measurement-shaped number and no
+      value cell but a marker or a pointer. Every leaf of the outline names the experiment its markers belong
+      to; the grouped annex accounts for every marker exactly once and filling a value removes one line.
+    boundary_owner: render/work-order.mjs, schemas/p2-outline.json (form.workOrder)
+    fixture: the committed outline and draft
+    command: node --test tools/pharma-dev-draft/draft/tests/work-order.test.mjs
+    expected: exit 0
+    negative_cases:
+      - A number with a unit typed into an added section -> the test fails.
+      - A marker removed from an added section -> the test fails.
+      - A section the outline does not map -> lands in a visible "ungrouped" bucket.
+    evidence: gates-g35-g47.txt
+    blocks: [G-47]
+    status: pass
+
+  - id: G-47
+    title: The comparison report agrees with the outline, and nothing the workstream wrote leaks the reference
+    invariant: >
+      Every section id the report names exists in the outline, and the file scan of G-35 is clean over the
+      tool, this plan, the report and the ICH Q8(R2) record. The report's other statements are checked by
+      reading, not by a test.
+    boundary_owner: draft/tests/reference-scan.test.mjs
+    fixture: the repository files
+    command: node --test tools/pharma-dev-draft/draft/tests/reference-scan.test.mjs
+    expected: exit 0
+    negative_cases:
+      - A section renumbered after the report was written -> the report test names it.
+      - An identifier quoted in prose -> the scan fails (it did, in three comments, before they were fixed).
+    evidence: gates-g35-g47.txt
+    blocks: []
+    status: pass

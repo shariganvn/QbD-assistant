@@ -1,0 +1,23 @@
+# G-10 — bản render mang hình, kiểm toàn phần
+
+Written: /home/user/QbD-assistant/tools/pharma-dev-draft/output/p2-draft-bisoprolol-fumarate-2026-08-20.docx (83227 bytes)
+
+XSD validation: PASS
+
+Paragraphs: 1180
+All validations PASSED!
+
+Text sanity checks: PASS
+
+## media part
+        0  2026-09-25 08:28   word/media/
+    24100  2026-09-25 08:28   word/media/156fcf5709bd0078f7cda3236f56a0906dc2e4bf.png
+    18333  2026-09-25 08:28   word/media/90a08c728e1ccb91a5be77687066b886fdf5c771.png
+
+## block figure trong draft
+  P.2.2.1.3.3 — figure/bars — Độ hòa tan trung bình tại 30 phút của ba công thức. Cột dưới ngưỡng Q 
+  P.2.3.1 — figure/flow — Sơ đồ quy trình sản xuất theo phương pháp trộn dập thẳng, dựng từ bộ c
+tổng: 2
+
+## unzip -t
+No errors detected in compressed data of tools/pharma-dev-draft/output/p2-draft-bisoprolol-fumarate-2026-08-20.docx.

@@ -1,0 +1,1743 @@
+{
+  "lost": [],
+  "duplicated": [],
+  "moved": [
+    {
+      "value": "Bisoprolol fumarate [1]",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "104344-23-2 (dạng hemifumarat) [1]",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Cần chèn hình công thức cấu tạo; bản render tự động chưa hỗ trợ hình, phải bổ sung thủ công vào bản Word cuối.",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "(C18H31NO4)2·C4H4O4, tương đương C40H66N2O12 [2]",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "≈ 766,96 g/mol [1]",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "Bột màu trắng hoặc gần như trắng — kết quả lô 488: Đạt [3]",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "Trong nước: rất dễ tan (very soluble) — Đạt. Trong methanol: dễ tan (freely soluble) — Đạt [3]",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "Tối thiểu 75% nhỏ hơn \"200 pm\" (nguyên văn CoA; xem [3] về đơn vị) [3]",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "≈ 9,5 [1]",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa có nghiên cứu phân hủy cưỡng bức cho dược chất.",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "Nguồn trích dẫn cho bảng trên. Ô đánh dấu [CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] là chưa có nguồn nào cung cấp giá trị, không phải chưa điền.",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "[1] Kiến thức dược điển và tài liệu tham khảo phổ biến — CHƯA đối chiếu trực tiếp với chuyên luận USP, BP hoặc Ph.Eur. hiện hành. Các giá trị mang nhãn này phải được thay bằng giá trị trích từ chuyên luận, kèm tên và ấn bản chuyên luận, trước khi nộp hồ sơ.",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "[2] Chứng chỉ phân tích chuẩn đối chiếu thứ cấp Bisoprolol fumarat, SKS C0223252, Viện Kiểm nghiệm thuốc Trung ương, ban hành 15/12/2020, date of adoption 18/05/2023. Chứng chỉ ghi công thức C40H66N2O12, khai triển khớp với dạng cấu trúc nêu trong bảng. Lưu ý phạm vi: chứng chỉ đặc trưng cho chất chuẩn dùng trong phép thử định tính và định lượng, không phải cho lô nguyên liệu dùng sản xuất.",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "[3] Certificate of Analysis của nhà sản xuất Johnson Canady cho Bisoprolol fumarate Ph.Eur. 12, mã sản phẩm 71460, lô 488, ngày sản xuất 23/04/2026, hạn kiểm tra lại 23/04/2031, lượng giao 400,00 kg trong 16 kiện, ký bởi QC Manager. Hồ sơ Thử nghiệm 1 không ghi số lô dược chất đã dùng nên chưa có cơ sở khẳng định đây đúng là lô bào chế CT01 – CT03; cần đối chiếu hồ sơ lô.",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "Nguồn [3] còn nêu các chỉ tiêu không có dòng tương ứng trong biểu mẫu trên, ghi lại đây để tra cứu — các chỉ tiêu này thuộc phạm vi 3.2.S.4 Kiểm soát dược chất: hàm lượng acid fumaric 14,8 – 15,4% (giá trị lý thuyết của muối hemifumarat là 116,07 / 766,97 = 15,13%, nằm trong khoảng này); dung môi tồn dư tối đa 500 ppm; tổng vi sinh vật hiếu khí tối đa 1.000 CFU/g; tổng nấm men và nấm mốc tối đa 100 CFU/g; không có Escherichia coli và Salmonella; tạp A (benzyl alcohol), tạp E và tạp G mỗi tạp tối đa 0,1% theo HPLC; định tính bằng phổ hồng ngoại đạt, nguyên văn ghi \"Conforms to 5th\" trong khi sản phẩm khai theo Ph.Eur. 12 nên cần làm rõ; tuân thủ ICH Q7, EU GMP Part II, 21 CFR Parts 210 & 211 và ICH Q3D. Về đơn vị cỡ hạt nêu trong bảng: CoA ghi \"200 pm\"; 200 picomet nhỏ hơn kích thước một nguyên tử nên gần như chắc chắn là lỗi đánh máy của µm. Bản thảo giữ nguyên văn thay vì tự sửa số của nhà cung cấp; cần nhà cung cấp xác nhận trước khi nộp hồ sơ.",
+      "from": [
+        "P.2.1.1"
+      ],
+      "to": [
+        "P.2.1.1.1"
+      ]
+    },
+    {
+      "value": "Danh mục tá dược sử dụng trong công thức, kèm đặc tính lý hóa, ứng dụng trong công thức dược phẩm và chức năng tương ứng. Thành phần định lượng theo từng công thức thử nghiệm được trình bày tại mục 3.2.P.2.2.1.3.",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Lactose monohydrate",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "- Cảm quan: dạng bột hay tiểu phân kết tinh màu trắng đến trắng ngà, không mùi, vị hơi ngọt.\n- Độ tan ở 20 °C: tan trong 5,24 phần nước; thực tế không tan trong cloroform, ethanol, ether.\n- Điểm chảy: 201 – 202 °C (dạng α-lactose monohydrate đã khử nước).",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Được ứng dụng rộng rãi làm tá dược độn và pha loãng trong viên nén và viên nang. Grade mịn thường dùng cho xát hạt ướt vì cỡ hạt nhỏ giúp trộn đều hơn và sử dụng tá dược dính hiệu quả hơn.",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Tá dược độn",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Lactose monohydrate & cellulose powder 75:25 (Cellactose 80)",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "- Cảm quan: bột màu trắng hoặc gần như trắng, không mùi; chứa 73 – 77% lactose monohydrate và 23 – 27% cellulose bột.\n- Độ tan: tan một phần trong nước.\n- pH: 4,0 – 7,0.\n- Góc nghỉ: 32 – 35°; hàm ẩm 4 – 7%.",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Dùng trong viên nén dập thẳng để cải thiện khả năng chịu nén. Vượt trội so với hỗn hợp vật lý của các thành phần về khả năng pha loãng, độ bền kéo và độ nhạy với tá dược trơn.",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Tá dược độn, dính",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Croscarmellose sodium (Primellose)",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "- Cảm quan: bột màu trắng hoặc trắng xám, không mùi.\n- Độ tan: không tan trong nước nhưng trương nở nhanh 4 – 8 lần thể tích ban đầu; thực tế không tan trong aceton, ethanol và toluen.\n- pH: 5,0 – 7,0 (phân tán trong nước).",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Làm tá dược rã cho viên nén, viên nang và hạt; dùng được cho cả dập thẳng lẫn xát hạt ướt. Thông thường 2% cho dập thẳng và 3% cho xát hạt ướt.\nGiới hạn sử dụng:\n- Tá dược rã (viên nén): 0,5 – 5,0%\n- Tá dược rã (viên nang): 10 – 25%",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Tá dược rã",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Magnesium oxide (MgO XP 103)",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "- Cảm quan: bột mịn màu trắng, không mùi; có dạng nhẹ và dạng nặng khác nhau về thể tích biểu kiến.\n- Độ tan: tan trong acid loãng và dung dịch muối amoni; rất ít tan trong nước (0,0086 g/100 mL ở 30 °C); thực tế không tan trong ethanol 95%.\n- pH: 10,3 (dung dịch nước bão hòa).\n- Điểm chảy: 2.800 °C.",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Dùng làm tá dược pha loãng có tính kiềm trong dạng thuốc rắn để điều chỉnh pH của viên nén, và để giữ nước dư nhằm duy trì khối hạt khô ráo. Kết hợp với silica có thể làm chất điều hòa chảy phụ trợ.",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Tá dược kiềm hóa, độn",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Povidone K30",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "- Cảm quan: bột mịn màu trắng đến trắng kem, không mùi hoặc gần như không mùi, hút ẩm.\n- Độ tan: tan tự do trong nước, ethanol 95%, methanol, cloroform và acid; thực tế không tan trong ether và hydrocarbon.\n- pH: 3,0 – 7,0 (dung dịch nước 5% kl/tt).\n- Điểm chảy: hóa mềm ở 150 °C.",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Dung dịch povidone được dùng làm tá dược dính trong xát hạt ướt; cũng có thể thêm ở dạng bột khô rồi xát hạt tại chỗ. Hàm lượng sử dụng làm tá dược dính, pha loãng hoặc bao viên là 0,5 – 5%.",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Tá dược dính",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Magnesium stearate",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "- Cảm quan: bột trắng rất mịn, tỷ trọng khối thấp, mùi nhẹ của acid stearic và vị đặc trưng; sờ nhờn.\n- Độ tan: thực tế không tan trong ethanol, ethanol 95%, ether và nước; ít tan trong benzen nóng và ethanol 95% nóng.\n- Điểm chảy: 117 – 150 °C (dạng thương mại); 126 – 130 °C (dạng tinh khiết cao).",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Được dùng rộng rãi trong dược phẩm với vai trò làm tá dược trơn cho viên nén và viên nang ở nồng độ 0,25 – 5,00% (kl/kl).",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Tá dược trơn",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Nguồn dữ liệu cột \"Đặc tính lý hóa\" và \"Ứng dụng\": Handbook of Pharmaceutical Excipients, 6th Edition — Lactose, Monohydrate (tr. 364 – 369); Lactose, Monohydrate and Powdered Cellulose (tr. 374 – 375, synonym: Cellactose 80); Croscarmellose Sodium (tr. 206 – 208); Magnesium Oxide (tr. 400 – 401); Povidone (tr. 581 – 585); Magnesium Stearate (tr. 405 – 407). Trích dẫn đầy đủ ghi ở trang bìa. Chỉ tiêu nào tài liệu không nêu trong chuyên luận tương ứng thì không đưa vào bảng thay vì lấy từ nguồn khác.",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Bảng trên chỉ gồm tá dược của lõi viên (tổng 100,00 mg). Sản phẩm là viên nén bao phim nên còn thành phần hệ màng bao, và các chất chỉ dùng trong quá trình sản xuất mà không còn trong thành phẩm (dung môi xát hạt, dung môi pha dịch bao) — không có trong Thử nghiệm 1. ICH Q8(R2) mục 2.1.2 (trang 7) yêu cầu phần này bao gồm mọi chất dùng trong sản xuất thuốc, dù có xuất hiện trong thành phẩm hay không.",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nghiên cứu tương hợp tá dược – dược chất (ví dụ DSC hỗn hợp nhị phân 1:1, hoặc theo dõi hỗn hợp ở điều kiện lão hóa cấp tốc) — không có trong Thử nghiệm 1.",
+      "from": [
+        "P.2.1.2"
+      ],
+      "to": [
+        "P.2.1.2.2"
+      ]
+    },
+    {
+      "value": "Đây KHÔNG phải bảng QTPP/CQA chính thức (chưa có xác nhận mục tiêu/biện luận CQA từ FD) — đây là tổng hợp các chỉ tiêu và tiêu chuẩn thực tế đã dùng để đánh giá 3 công thức trong Thử nghiệm 1.",
+      "from": [
+        "P.2.2.1.2"
+      ],
+      "to": [
+        "P.2.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Viên nén tròn, bao phim trắng, hai mặt khum, khắc số \"10\" một mặt",
+      "from": [
+        "P.2.2.1.2"
+      ],
+      "to": [
+        "P.2.2.1.2.1"
+      ]
+    },
+    {
+      "value": "KLTB ± 5%",
+      "from": [
+        "P.2.2.1.2"
+      ],
+      "to": [
+        "P.2.2.1.2.1"
+      ]
+    },
+    {
+      "value": "≤ 15 phút",
+      "from": [
+        "P.2.2.1.2"
+      ],
+      "to": [
+        "P.2.2.1.2.1"
+      ]
+    },
+    {
+      "value": "90–110% so với hàm lượng ghi nhãn",
+      "from": [
+        "P.2.2.1.2"
+      ],
+      "to": [
+        "P.2.2.1.2.1"
+      ]
+    },
+    {
+      "value": "≥ 80% (Q) bisoprolol fumarate hòa tan",
+      "from": [
+        "P.2.2.1.2"
+      ],
+      "to": [
+        "P.2.2.1.2.1"
+      ]
+    },
+    {
+      "value": "Tạp đơn ≤ 0,2%; tổng tạp ≤ 3,0%",
+      "from": [
+        "P.2.2.1.2"
+      ],
+      "to": [
+        "P.2.2.1.2.1"
+      ]
+    },
+    {
+      "value": "AV < 15 (Ph.Eur./EP 2.9.40)",
+      "from": [
+        "P.2.2.1.2"
+      ],
+      "to": [
+        "P.2.2.1.2.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] QTPP đầy đủ (dạng bào chế, đường dùng, PK/BE với RMP, độ ổn định ICH Q1A...) và bảng CQA có biện luận \"có phải CQA hay không\" — cần FD xây dựng và phê duyệt.",
+      "from": [
+        "P.2.2.1.2"
+      ],
+      "to": [
+        "P.2.2.1.2.1"
+      ]
+    },
+    {
+      "value": "ICH Q8(R2) Part I (trang 6) đặt đây là yêu cầu nền: \"At a minimum, those aspects of drug substances, excipients, container closure systems, and manufacturing processes that are critical to product quality should be determined and control strategies justified\", và mô tả cách xác định: \"Critical formulation attributes and process parameters are generally identified through an assessment of the extent to which their variation can have impact on the quality of the drug product.\" Mục này chỉ kết luận cho yếu tố mà Thử nghiệm 1 đã thực sự khảo sát biến thiên; các yếu tố còn lại được ghi rõ là chưa đánh giá, không suy đoán.",
+      "from": [
+        "P.2.2.1.2"
+      ],
+      "to": [
+        "P.2.2.1.2.2"
+      ]
+    },
+    {
+      "value": "Tỷ lệ croscarmellose sodium là thuộc tính công thức trọng yếu, đã chứng minh bằng thực nghiệm. Đây là biến số độc lập duy nhất giữa CT01 – CT03 (1% / 3% / 5% kl/kl, bù trừ bằng lactose monohydrate để giữ khối lượng viên 100 mg). Biến thiên của nó làm độ hòa tan 30 phút đổi từ 73,89% → 81,40% → 98,64% (tiêu chuẩn ≥ 80% Q) và độ rã tối đa từ 13'28\" → 8'57\" → 4'18\". Mức 1% không đạt độ hòa tan; mức 3% đạt trung bình nhưng giá trị Min 79,12% nằm dưới ngưỡng. Vậy độ hòa tan là chỉ tiêu chất lượng chịu ảnh hưởng trực tiếp của yếu tố này. Số liệu dẫn ở đây lấy từ bảng kết quả mục P.2.2.1.3, không phải số liệu mới.",
+      "from": [
+        "P.2.2.1.2"
+      ],
+      "to": [
+        "P.2.2.1.2.2"
+      ]
+    },
+    {
+      "value": "Biện luận kiểm soát tương ứng: cố định croscarmellose sodium ở 5% kl/kl mang sang Thử nghiệm 2, và giữ độ hòa tan 30 phút (≥ 80% Q) cùng độ rã (≤ 15 phút) trong bộ chỉ tiêu kiểm tra viên thành phẩm nêu ở bảng trên. Ở mức 5%, giá trị Min đạt 96,15% và RSD giảm từ 7,57% (mức 1%) xuống 2,70%, tức cả biên an toàn lẫn độ lặp lại đều cải thiện. Lưu ý mức 5% chạm trần khoảng 0,5 – 5,0% mà Handbook of Pharmaceutical Excipients khuyến cáo cho viên nén, nên không còn dư địa nâng thêm; nếu Thử nghiệm 2 cần thêm biên an toàn thì phải điều chỉnh yếu tố khác.",
+      "from": [
+        "P.2.2.1.2"
+      ],
+      "to": [
+        "P.2.2.1.2.2"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chưa đánh giá tính trọng yếu của: thuộc tính dược chất (phân bố cỡ hạt, đa hình), các thông số quy trình (thời gian trộn, lực dập, điều kiện bao phim), hệ màng bao, và hệ thống bao bì. Thử nghiệm 1 giữ cố định hoặc không khảo sát các yếu tố này nên không có cơ sở kết luận theo cách ICH Q8(R2) trang 6 mô tả. Riêng magnesium stearate 3% kl/kl là biến nhiễu tiềm tàng đối với độ hòa tan, cần tách bạch trong thử nghiệm tiếp theo trước khi kết luận về tá dược rã là đầy đủ.",
+      "from": [
+        "P.2.2.1.2"
+      ],
+      "to": [
+        "P.2.2.1.2.2"
+      ]
+    },
+    {
+      "value": "Mục tiêu: Khảo sát ảnh hưởng của tỷ lệ tá dược rã croscarmellose sodium (Primellose) đến độ rã và độ hòa tan của viên nén bisoprolol fumarate 10 mg.",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "Thông số cố định: cỡ lô 1.000 viên/công thức; khối lượng viên 100 mg; giữ nguyên các tá dược khác (Cellactose 80, MgO XP 103, Povidone K30, magnesium stearate); biến số khảo sát là tỷ lệ Primellose (1% / 3% / 5%), bù trừ bằng lactose monohydrate để giữ tổng khối lượng viên không đổi.",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "10,00",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "17,70",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "15,70",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "13,70",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "63,00",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "1,00",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "3,00",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "5,00",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "3,30",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "2,00",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "100,00",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "Croscarmellose sodium là biến số độc lập duy nhất giữa CT01 – CT03. Lactose monohydrate giảm 17,70 → 15,70 → 13,70 mg/viên, đúng bằng phần tăng của croscarmellose sodium (1,00 → 3,00 → 5,00 mg), giữ khối lượng viên cố định 100 mg. Nhờ vậy khác biệt về thời gian rã và độ hòa tan giữa ba công thức có thể quy cho tỷ lệ tá dược rã.",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "Cả ba mức croscarmellose sodium đều nằm trong khoảng 0,5 – 5,0% mà Handbook of Pharmaceutical Excipients khuyến cáo cho viên nén: CT02 (3%) trùng mức khuyến cáo cho xát hạt ướt, CT01 (1%) thấp hơn mức đó, CT03 (5%) chạm giới hạn trên. Khoảng 0,5 – 1% chưa được khảo sát nên chưa kết luận được về vùng dưới của khoảng khuyến cáo. Lưu ý sau khi FD xác nhận quy trình là trộn dập thẳng: chuyên luận croscarmellose sodium trích ở mục P.2.1.2 nêu mức thông thường 2% cho dập thẳng và 3% cho xát hạt ướt, nên mốc đối chiếu đúng cho sản phẩm này là 2%, không phải 3%. Cả ba công thức đều nằm xa mốc đó, riêng CT03 ở 5% gấp 2,5 lần mức thông thường của dập thẳng — cần biện luận khi nộp hồ sơ.",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "Cellactose 80 giữ cố định 63,00 mg/viên (63% kl/kl), tạo nền viên bằng cơ chế nén kép: phần lactose vỡ giòn kết hợp phần cellulose biến dạng dẻo. Phần cellulose đồng thời hỗ trợ rã theo cơ chế mao dẫn. Tài liệu tham chiếu ghi nhận tá dược này ít nhạy với tá dược trơn hơn hỗn hợp vật lý tương ứng, nên nền công thức có khả năng dung nạp mức magnesium stearate cao tốt hơn nền lactose đơn thuần.",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "Magnesium oxide 3,30 mg/viên (3,3% kl/kl) đóng vai trò tá dược pha loãng có tính kiềm để điều chỉnh pH viên, phù hợp với yêu cầu ổn định bisoprolol fumarate — fumarate là muối của acid hữu cơ nên vi môi trường acid tại chỗ có thể thúc đẩy phân hủy. Thử nghiệm 1 không ghi mục đích sử dụng của magnesium oxide, nên vai trò thiết kế này cần FD xác nhận kèm dữ liệu độ ổn định chứng minh.",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "Magnesium stearate 3,00 mg/viên (3% kl/kl) nằm ở nửa trên khoảng 0,25 – 5,00% được khuyến cáo. Kết hợp với đặc tính thực tế không tan trong nước và diện tích bề mặt riêng lớn (trải màng kỵ nước trên bề mặt tiểu phân), mức này có khả năng làm chậm rã và giảm tốc độ hòa tan, tức là biến nhiễu tiềm tàng khi diễn giải kết quả Thử nghiệm 1. Cần FD xác nhận thời gian trộn trơn và đánh giá lại tỷ lệ này ở bước tối ưu công thức.",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "0,521",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "0,511",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "0,518",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "0,695",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "0,672",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "0,682",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "1,33",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "1,32",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "28,11",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "29,08",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "30,07",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "19,33",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "19,11",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "18,21",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "13,17",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "13,49",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "14,67",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "16,98",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "17,20",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "17,35",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "22,41",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "21,12",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "19,70",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "2,39",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "2,37",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "2,41",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "Đạt",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "100,3",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "100,4",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "100,1",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "103 (+2,69%)",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "102 (+1,59%)",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "102 (+1,90%)",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "98 (−2,29%)",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "99 (−1,39%)",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "98 (−2,10%)",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "87,9",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "90,1",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "91,4",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "94 / 84",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "96 / 85",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "96 / 86",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "2,75",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "2,76",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "2,77 / 2,73",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "2,78 / 2,73",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "2,78 / 2,75",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "0,05",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "0,02",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "0,01",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "13'28\"",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "8'57\"",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "4'18\"",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "11'05\"",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "8'19\"",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "3'37\"",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "100,31",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "100,02",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "99,99",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "73,89",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "81,40",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "98,64",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "79,33 / 65,15",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "87,67 / 79,12",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "100,98 / 96,15",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "7,57",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "4,76",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "2,70",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "0,0544",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "0,0514",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "0,0508",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "0,1916",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "0,1918",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "0,1839",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "3,71",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "2,79",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "3,04",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "\"Khi tăng tỷ lệ tá dược rã croscarmellose sodium thì độ hòa tan của bisoprolol fumarate tăng lên đáng kể. Ở tỷ lệ 1% và 3%, độ hòa tan không đạt tiêu chuẩn. Do đó, chọn tỷ lệ tá dược rã trong công thức là 5% để thực hiện tiếp cho thử nghiệm 2.\"",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "Diễn giải: CT01 (1%) không đạt độ hòa tan (TB 73,89% < 80% Q). CT02 (3%) đạt trung bình (81,40%) nhưng Min (79,12%) sát dưới ngưỡng — không ổn định. CT03 (5%) đạt cả độ hòa tan (TB 98,64%, Min 96,15%) và độ rã (max 4'18\" << 15 phút) với biên độ an toàn rõ rệt. CT03 được chọn mang sang Thử nghiệm 2.",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "Công thức tạm thời sau Thử nghiệm 1: CT03 (Primellose 5%) là điểm khởi đầu cho Thử nghiệm 2, chưa phải công thức thương mại/biobatch cuối cùng — cần các thử nghiệm tiếp theo để hoàn thiện.",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "Viên được khắc số \"10\" trên một mặt. ICH Q8(R2) mục 2.2.1 (trang 8) yêu cầu: \"Any special design features of the drug product (e.g., tablet score line, overfill, anti-counterfeiting measure as it affects the drug product) should be identified and a rationale provided for their use.\" Ký hiệu này là dấu nhận dạng hàm lượng 10 mg, không phải vạch bẻ nên không nhằm mục đích chia liều và không đặt ra nghĩa vụ chứng minh đồng đều hàm lượng của nửa viên. Kết quả đồng đều khối lượng (100,1 mg trung bình, dao động −2,10% đến +1,90% ở CT03) và độ đồng đều hàm lượng (AV 3,04 ở CT03) không cho thấy tác động bất lợi của việc khắc. Đây là suy luận từ mô tả cảm quan trong Thử nghiệm 1; cần FD xác nhận chính thức mục đích của ký hiệu.",
+      "from": [
+        "P.2.2.1.3"
+      ],
+      "to": [
+        "P.2.2.1.3.3"
+      ]
+    },
+    {
+      "value": "Tiêu chuẩn đã áp dụng: ≥ 80% (Q) bisoprolol fumarate hòa tan trong 30 phút.",
+      "from": [
+        "P.2.2.3"
+      ],
+      "to": [
+        "P.2.2.3.1.2"
+      ]
+    },
+    {
+      "value": "Khả năng phân biệt (discriminatory power) — biện luận hồi cứu từ Thử nghiệm 1: cùng một phương pháp hòa tan đã cho ba kết quả tách bạch 73,89% / 81,40% / 98,64% trên ba công thức chỉ khác nhau ở tỷ lệ tá dược rã, xếp đúng thứ tự với độ rã (13'28\" / 8'57\" / 4'18\"), và phân loại đạt/không đạt đúng ở ngưỡng 80% Q. Phương pháp do đó phân biệt được thay đổi có ý nghĩa về công thức. ICH Q8(R2) mục 2.2.3 (trang 8) diễn đạt phần này bằng \"could be provided\" nên đây không phải yêu cầu bắt buộc của guideline; mục riêng là theo tài liệu mẫu của phòng.",
+      "from": [
+        "P.2.2.3"
+      ],
+      "to": [
+        "P.2.2.3.1.3"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Điều kiện phương pháp hòa tan cụ thể (thiết bị, tốc độ khuấy, môi trường, thể tích, thời điểm lấy mẫu) — không có trong Thử nghiệm 1; cần trích từ hồ sơ phương pháp phân tích 3.2.P.5.2. Biện luận khả năng phân biệt ở trên không thay thế cho việc khai điều kiện phương pháp.",
+      "from": [
+        "P.2.2.3"
+      ],
+      "to": [
+        "P.2.2.3.1.2"
+      ]
+    },
+    {
+      "value": "Kết quả tạp chất (tạp đơn, tổng tạp) đã có trong bảng kết quả viên thành phẩm ở mục P.2.2.1.3.",
+      "from": [
+        "P.2.2.3"
+      ],
+      "to": [
+        "P.2.2.3.2"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phương pháp phân tích tạp chất cụ thể (tham chiếu 3.2.P.5.2) chưa được nêu trong Thử nghiệm 1. Về danh mục tạp: CoA nguyên liệu khai theo chuyên luận Ph.Eur. 12 và kiểm riêng từng tạp — tạp A (benzyl alcohol), tạp E, tạp G, mỗi tạp tối đa 0,1%. Tiêu chuẩn viên thành phẩm đang áp dụng ở mục P.2.2.1.2 lại chỉ ghi \"tạp đơn bất kỳ\" tối đa 0,2% và tổng tạp tối đa 3,0%, không nêu tên tạp nào. Đây là điểm không nhất quán cần giải quyết: nguyên liệu đầu vào đang bị kiểm chặt hơn thành phẩm, trong khi quá trình bào chế chỉ có thể làm tạp tăng thêm chứ không giảm đi. Cần FD xác nhận chuyên luận áp dụng cho thành phẩm và khai lại tiêu chuẩn theo đúng danh mục tạp của chuyên luận đó.",
+      "from": [
+        "P.2.2.3"
+      ],
+      "to": [
+        "P.2.2.3.2"
+      ]
+    },
+    {
+      "value": "Quy trình sản xuất được chọn cho sản phẩm này là trộn dập thẳng, do FD xác nhận — hồ sơ Thử nghiệm 1 không mô tả quy trình nên dữ kiện này không đến từ nguồn thử nghiệm. Trộn dập thẳng rút ngắn quá trình sản xuất và hạn chế phát sinh tạp so với xát hạt, nhưng đặt ra ba vấn đề phải giải quyết trong phát triển: độ đồng đều hàm lượng, tính chảy của hỗn hợp bột, và khả năng chịu nén. Biểu mẫu của phòng còn yêu cầu một sơ đồ quy trình; bản render tự động chưa hỗ trợ hình nên sơ đồ phải bổ sung thủ công vào bản Word cuối.",
+      "from": [
+        "P.2.3"
+      ],
+      "to": [
+        "P.2.3.1"
+      ]
+    },
+    {
+      "value": "Phạm vi áp dụng của hai bảng dưới đây: bộ công đoạn và bộ thông số trọng yếu gắn với phương pháp trộn dập thẳng. Nếu FD đổi sang phương pháp khác — xát hạt ướt, phun sấy tầng sôi tạo hạt, cán ép, đóng tán (slugging), ép đùn nóng chảy — thì bộ công đoạn và các thông số trọng yếu đi kèm đều khác, và cả hai bảng phải được dựng lại theo phương pháp mới chứ không sửa từng ô.",
+      "from": [
+        "P.2.3"
+      ],
+      "to": [
+        "P.2.3.1"
+      ]
+    },
+    {
+      "value": "Bảng: Đánh giá rủi ro ban đầu của quy trình sản xuất",
+      "from": [
+        "P.2.3"
+      ],
+      "to": [
+        "P.2.3.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU]",
+      "from": [
+        "P.2.3"
+      ],
+      "to": [
+        "P.2.3.1"
+      ]
+    },
+    {
+      "value": "Bảng: Biện luận mức rủi ro theo công đoạn",
+      "from": [
+        "P.2.3"
+      ],
+      "to": [
+        "P.2.3.2.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác định và khai thời gian trộn, tốc độ, mức nạp thùng trộn.",
+      "from": [
+        "P.2.3"
+      ],
+      "to": [
+        "P.2.3.2.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu căn cứ cho mức rủi ro: kinh nghiệm sản xuất sản phẩm tương tự, hoặc dữ liệu thực nghiệm của công đoạn này.",
+      "from": [
+        "P.2.3"
+      ],
+      "to": [
+        "P.2.3.2.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác định và khai thời gian trộn tá dược trơn — trộn quá lâu làm chậm hòa tan.",
+      "from": [
+        "P.2.3"
+      ],
+      "to": [
+        "P.2.3.2.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác định và khai lực dập, tốc độ dập, độ cứng mục tiêu.",
+      "from": [
+        "P.2.3"
+      ],
+      "to": [
+        "P.2.3.2.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác định và khai nhiệt độ khí vào, tốc độ phun, mức tăng khối lượng màng bao.",
+      "from": [
+        "P.2.3"
+      ],
+      "to": [
+        "P.2.3.2.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Xác định và khai điều kiện môi trường đóng gói, độ kín vỉ.",
+      "from": [
+        "P.2.3"
+      ],
+      "to": [
+        "P.2.3.2.1"
+      ]
+    },
+    {
+      "value": "Nâng cỡ lô: Thử nghiệm 1 thực hiện ở cỡ lô 1.000 viên mỗi công thức (mục P.2.2.1.3), tức quy mô phòng thí nghiệm. Cần thử nghiệm nâng cỡ lô lên quy mô pilot rồi thương mại để đánh giá tính lặp lại của thông số quy trình, sau đó mới lập được bảng đánh giá rủi ro cập nhật theo yêu cầu của biểu mẫu.",
+      "from": [
+        "P.2.3"
+      ],
+      "to": [
+        "P.2.3.2.3"
+      ]
+    },
+    {
+      "value": "Bao bì được lựa chọn dựa trên đặc tính lý hóa của dược chất, dạng bào chế của sản phẩm, và khảo sát bao bì của thuốc đối chiếu (mục P.2.2.1.1). Chưa có quyết định bao bì nào cho sản phẩm này; hai bảng dưới đây là khung theo biểu mẫu của phòng.",
+      "from": [
+        "P.2.4"
+      ],
+      "to": [
+        "P.2.4.1"
+      ]
+    },
+    {
+      "value": "Bảng: Bao bì sơ cấp",
+      "from": [
+        "P.2.4"
+      ],
+      "to": [
+        "P.2.4.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu vật liệu và đối chiếu với bao bì của thuốc đối chiếu.",
+      "from": [
+        "P.2.4"
+      ],
+      "to": [
+        "P.2.4.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Quy cách và độ dày từng lớp màng, định lượng lớp nhôm.",
+      "from": [
+        "P.2.4"
+      ],
+      "to": [
+        "P.2.4.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Biện luận khả năng chắn ẩm và chắn sáng, dựa trên độ ổn định của dược chất.",
+      "from": [
+        "P.2.4"
+      ],
+      "to": [
+        "P.2.4.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Chứng minh không tương kỵ với dược chất và tá dược; dẫn chiếu dữ liệu độ ổn định.",
+      "from": [
+        "P.2.4"
+      ],
+      "to": [
+        "P.2.4.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Tiêu chuẩn vật liệu bao bì — thuộc mục 3.2.P.7, dẫn chiếu sang khi có.",
+      "from": [
+        "P.2.4"
+      ],
+      "to": [
+        "P.2.4.1"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Dẫn chiếu mục 3.2.P.8 khi có số liệu.",
+      "from": [
+        "P.2.4"
+      ],
+      "to": [
+        "P.2.4.1"
+      ]
+    },
+    {
+      "value": "Bảng: Bao bì thứ cấp",
+      "from": [
+        "P.2.4"
+      ],
+      "to": [
+        "P.2.4.2"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu loại hộp/túi và thông tin ghi nhãn kèm theo.",
+      "from": [
+        "P.2.4"
+      ],
+      "to": [
+        "P.2.4.2"
+      ]
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Nêu vai trò bảo vệ bổ sung và vai trò mang thông tin nhãn.",
+      "from": [
+        "P.2.4"
+      ],
+      "to": [
+        "P.2.4.2"
+      ]
+    },
+    {
+      "value": "Lưu ý trình tự: tính tương hợp giữa thành phẩm và bao bì sơ cấp chỉ chứng minh được bằng số liệu độ ổn định của thành phẩm trong chính bao bì đó. Vì vậy mục này không thể đóng trước khi có dữ liệu ở 3.2.P.8, kể cả khi vật liệu bao bì đã được chọn.",
+      "from": [
+        "P.2.4"
+      ],
+      "to": [
+        "P.2.4.1"
+      ]
+    }
+  ],
+  "added": [
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Phân loại BCS thực nghiệm, hệ số thấm, sinh khả dụng tuyệt đối và dữ liệu dược động học của bisoprolol fumarate — nhóm thuộc tính mà ICH Q8(R2) mục 2.1.1 (trang 6) đòi nêu và bàn luận vì chúng quyết định thiết kế dạng bào chế phóng thích ngay và khả năng xin miễn thử tương đương sinh học. Nguồn cần lấy: chuyên luận dược điển áp dụng, hồ sơ 3.2.S, hoặc public assessment report của thuốc đối chiếu. Ghi chú [1] ở mục 3.2.P.2.1.1.1 có nhắc BCS nhưng tự khai là kiến thức tham khảo chưa đối chiếu, nên không dùng làm nguồn cho mục này.",
+      "in": [
+        "P.2.1.1.2"
+      ],
+      "kind": "marker"
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Thử nghiệm thăm dò chọn loại tá dược và khoảng khảo sát trước Thử nghiệm 1. Nguồn cần lấy: hồ sơ nghiên cứu của FD trước giai đoạn khảo sát tỷ lệ tá dược rã; nếu không có thử nghiệm thăm dò nào thì ghi rõ là không thực hiện, kèm lý do.",
+      "in": [
+        "P.2.2.1.3.1"
+      ],
+      "kind": "marker"
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đánh giá rủi ro của từng biến công thức TRƯỚC khi có dữ liệu Thử nghiệm 1, theo biểu mẫu của phòng. Nguồn cần lấy: biên bản đánh giá rủi ro của FD lập trước khi bào chế. Bản thảo này không dựng ngược đánh giá đó từ kết quả đã biết — làm vậy là biến kết quả thành tiên đoán.",
+      "in": [
+        "P.2.2.1.3.2"
+      ],
+      "kind": "marker"
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đánh giá rủi ro cập nhật sau Thử nghiệm 1, kèm lý do thay đổi mức so với đánh giá ban đầu. Nguồn cần lấy: biên bản đánh giá rủi ro cập nhật của FD. Phần biện luận tính trọng yếu của tỷ lệ tá dược rã đã có ở mục 3.2.P.2.2.1.2.2 nhưng đó là biện luận CQA, không thay cho bảng rủi ro theo biến công thức.",
+      "in": [
+        "P.2.2.1.3.4"
+      ],
+      "kind": "marker"
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Công thức cuối phải là công thức đã được FD chốt, khai theo từng hàm lượng đăng ký. Thử nghiệm 1 kết luận CT03 là điểm khởi đầu cho Thử nghiệm 2 chứ không phải công thức chốt (nguyên văn ở mục 3.2.P.2.2.1.3.3), nên không có công thức nào được mang sang đây. Nguồn cần lấy: quyết định chốt công thức của FD sau khi hoàn tất chuỗi thử nghiệm. Bảng dưới đây là khung theo biểu mẫu; chưa ô nào được điền.",
+      "in": [
+        "P.2.2.1.3.5"
+      ],
+      "kind": "marker"
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chức năng theo công thức chốt",
+      "in": [
+        "P.2.2.1.3.5"
+      ],
+      "kind": "marker"
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chờ FD chốt công thức",
+      "in": [
+        "P.2.2.1.3.5"
+      ],
+      "kind": "marker"
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Điều kiện sink: độ tan của bisoprolol fumarate trong môi trường thử và thể tích môi trường cần để đạt điều kiện sink. Nguồn cần lấy: hồ sơ phát triển phương pháp ở 3.2.P.5.2. Độ tan trong nước và methanol đã có ở mục 3.2.P.2.1.1.1 nhưng lấy từ CoA nguyên liệu, không phải độ tan theo môi trường thử hòa tan.",
+      "in": [
+        "P.2.2.3.1.1"
+      ],
+      "kind": "marker"
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Hồ sơ hòa tan so sánh giữa thành phẩm và thuốc đối chiếu, và giữa các hàm lượng với nhau. Nguồn cần lấy: thực nghiệm hòa tan nhiều thời điểm trên cùng điều kiện thử. Mục 3.2.P.2.2.1.1 đang chờ chính bộ số liệu này cho thuốc đối chiếu; chưa có thì không tính được f2 và không có cơ sở xin miễn thử tương đương sinh học cho hàm lượng thấp.",
+      "in": [
+        "P.2.2.3.1.4"
+      ],
+      "kind": "marker"
+    },
+    {
+      "value": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] Đánh giá rủi ro cập nhật của quy trình sau khi có dữ liệu chạy thật. Nguồn cần lấy: hồ sơ lô và biên bản đánh giá rủi ro cập nhật của FD.",
+      "in": [
+        "P.2.3.2.2"
+      ],
+      "kind": "marker"
+    }
+  ]
+}

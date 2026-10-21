@@ -10,10 +10,15 @@
 // validator script it depends on cannot be found rather than silently skipping the check.
 
 import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
-import { existsSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 
 import JSZip from "jszip";
+
+// The heading comes from the renderer rather than being spelled again here: two copies of the same
+// string in the two files that have to agree about it is the drift this whole document guards against.
+import { SIGNOFF_HEADING } from "../render/builder.mjs";
+import { draftFailures as referenceBoundaryFailures, identityFailures, loadReferenceTokens } from "./sample-boundary.mjs";
 
 class VerifyError extends Error {
   constructor(code, message, options) {
@@ -23,17 +28,32 @@ class VerifyError extends Error {
   }
 }
 
-const VALIDATE_PY_CANDIDATES = [
-  process.env.DOCX_SKILL_VALIDATE_PY,
-  "/root/.claude/skills/synced/docx/scripts/office/validate.py",
-].filter(Boolean);
+// The docx skill has been installed at more than one layout, and a synced copy sits under a
+// per-install directory whose name is a pair of identifiers. Search the known roots rather than
+// pinning one path, and keep the environment override first so a machine that puts it somewhere else
+// can still say where.
+const VALIDATE_PY_SUFFIX = "docx/scripts/office/validate.py";
+const VALIDATE_PY_ROOTS = ["/mnt/skills/public", "/root/.claude/skills/synced"];
+
+function syncedCandidates() {
+  const found = [];
+  for (const root of VALIDATE_PY_ROOTS) {
+    found.push(join(root, VALIDATE_PY_SUFFIX));
+    if (!existsSync(root)) continue;
+    for (const entry of readdirSync(root, { withFileTypes: true })) {
+      if (entry.isDirectory()) found.push(join(root, entry.name, VALIDATE_PY_SUFFIX));
+    }
+  }
+  return found;
+}
 
 function findValidatePy() {
-  const found = VALIDATE_PY_CANDIDATES.find((path) => existsSync(path));
+  const candidates = [process.env.DOCX_SKILL_VALIDATE_PY, ...syncedCandidates()].filter(Boolean);
+  const found = candidates.find((path) => existsSync(path));
   if (!found) {
     throw new VerifyError(
       "E_VALIDATOR_MISSING",
-      `docx skill's validate.py not found (checked: ${VALIDATE_PY_CANDIDATES.join(", ")}). ` +
+      `docx skill's validate.py not found (checked: ${candidates.join(", ")}). ` +
       "Set DOCX_SKILL_VALIDATE_PY to its path, or install the docx skill.",
     );
   }
@@ -63,6 +83,39 @@ async function extractText(docxPath) {
   return texts.join("");
 }
 
+// Heading levels in document order. Word derives its navigation pane and any generated table of
+// contents from these, so a document whose levels jump — 1 straight to 3 — shows a flat or broken
+// tree to the reviewer who uses it to navigate, no matter how correct the numbering text looks.
+async function extractHeadingLevels(docxPath) {
+  const buffer = readFileSync(docxPath);
+  const zip = await JSZip.loadAsync(buffer);
+  const documentXmlFile = zip.file("word/document.xml");
+  if (!documentXmlFile) throw new VerifyError("E_NO_DOCUMENT_XML", `word/document.xml not found in ${docxPath}`);
+  const xml = await documentXmlFile.async("string");
+  const levels = [];
+  // Each paragraph carries at most one style reference; a heading's is Heading1..Heading6.
+  const paragraphPattern = /<w:p\b[\s\S]*?<\/w:p>/g;
+  let paragraph;
+  while ((paragraph = paragraphPattern.exec(xml)) !== null) {
+    const style = /<w:pStyle\s+w:val="Heading(\d)"\s*\/>/.exec(paragraph[0]);
+    if (style) levels.push(Number(style[1]));
+  }
+  return levels;
+}
+
+function headingTreeFailures(levels) {
+  const failures = [];
+  if (levels.length === 0) return ["no heading paragraph found — the document has no navigable structure"];
+  let previous = 0;
+  levels.forEach((level, index) => {
+    if (level > previous + 1) {
+      failures.push(`heading ${index + 1} jumps from level ${previous} to level ${level}; a level may only deepen one step at a time`);
+    }
+    previous = level;
+  });
+  return failures;
+}
+
 function countOccurrences(haystack, needle) {
   if (!needle) return 0;
   return haystack.split(needle).length - 1;
@@ -70,13 +123,26 @@ function countOccurrences(haystack, needle) {
 
 async function runSanityChecks(docxPath, draft) {
   const text = await extractText(docxPath);
-  const failures = [];
+  const failures = [...headingTreeFailures(await extractHeadingLevels(docxPath))];
 
   const noticeCount = countOccurrences(text, "Lưu ý phạm vi tài liệu");
   if (noticeCount !== 1) failures.push(`scope-notice title should appear exactly once, found ${noticeCount}`);
 
-  const signoffCount = countOccurrences(text, "Ghi nhận soạn thảo và rà soát");
+  const signoffCount = countOccurrences(text, SIGNOFF_HEADING);
   if (signoffCount !== 1) failures.push(`sign-off section heading should appear exactly once, found ${signoffCount}`);
+
+  // Provenance is not a signature. The tool that assembled the draft is named once, in the scope
+  // notice; the sign-off table below it carries a "Chữ ký" column and belongs to people. The check is
+  // by print position, not by inspecting the string: a field holding a person's name must be kept off
+  // the signature lines for exactly the same reason one holding a tool's name must.
+  if (draft?.meta?.assembledBy) {
+    const assembledCount = countOccurrences(text, draft.meta.assembledBy);
+    if (assembledCount !== 1) {
+      failures.push(`meta.assembledBy should be printed exactly once, as provenance, found ${assembledCount}`);
+    } else if (signoffCount === 1 && text.indexOf(draft.meta.assembledBy) > text.indexOf(SIGNOFF_HEADING)) {
+      failures.push("meta.assembledBy is printed after the sign-off heading; provenance belongs in the scope notice, not on a signature line");
+    }
+  }
 
   if (draft) {
     const gapSections = draft.sections.filter((section) => section.status === "gap");
@@ -85,6 +151,13 @@ async function runSanityChecks(docxPath, draft) {
       if (count < 1) failures.push(`gap reason for section "${section.id}" not found in rendered text`);
     }
   }
+
+  // A document used as a format reference must not have become a source of data. Checked on the
+  // rendered text as well as on the draft, because the rendered file is what leaves this repo, and a
+  // value could in principle reach it through the renderer rather than through the draft.
+  const referenceTokens = loadReferenceTokens();
+  failures.push(...identityFailures(text, referenceTokens, "rendered text"));
+  if (draft) failures.push(...referenceBoundaryFailures(draft, referenceTokens));
 
   return failures;
 }
