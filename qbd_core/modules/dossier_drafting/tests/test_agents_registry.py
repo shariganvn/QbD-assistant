@@ -51,7 +51,9 @@ def test_every_target_section_exists_in_the_outline():
 
 def test_every_implemented_agent_is_a_real_agent():
     assert set(registry.IMPLEMENTED) <= set(AGENTS)
-    assert registry.status_of("4.4") == ("pending", "")
+    assert set(registry.BLOCKED) <= set(AGENTS)
+    assert not set(registry.BLOCKED) & set(registry.IMPLEMENTED)
+    assert registry.status_of("4.4")[0] == "blocked"
     assert registry.status_of("3.5")[0] == "implemented"
 
 
@@ -69,3 +71,24 @@ def test_a5_ordering_is_provisional_and_listed_for_final_approval():
         "agent 5.2 (Granulation Assessor)",
     ]
     assert all("Trưởng R&D" in i for i in items)
+
+
+def test_every_agent_has_a_status_and_nothing_is_left_pending():
+    pending = [a for a in AGENTS if registry.status_of(a)[0] == "pending"]
+    assert pending == []
+
+
+def test_every_blocked_or_partial_agent_says_why():
+    for agent_id in AGENTS:
+        status, why = registry.status_of(agent_id)
+        assert status in ("implemented", "partial", "blocked") and why
+
+
+def test_narrative_specs_match_the_registry_and_the_outline():
+    from qbd_core.modules.dossier_drafting.agents import narrative
+
+    leaves = {s["id"] for s in leaf_sections(load_outline())}
+    for spec in narrative.specs():
+        assert spec.id in AGENTS and registry.status_of(spec.id)[0] == "partial"
+        assert set(spec.leads) <= leaves
+        assert set(spec.leads) <= {t for t in AGENTS[spec.id].targets}

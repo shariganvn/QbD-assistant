@@ -65,4 +65,5 @@ model writes.
 | 2026-10-21 | Agent registry, agent 4.1, provider wiring | First model agent through the shared ask/claim-check path; the rest stay pending and named | - |
 | 2026-10-21 | Agent 3.2 (QTPP), 3.1 marked blocked, A13 provisional list | Next sourced section; honest status for agents that cannot run on three inputs | - |
 | 2026-10-21 | Agent 4.2 (excipients) | Excipient table and grade rationale from sourced sentences | - |
+| 2026-10-21 | Narrative agents from data; every agent has a status | Seven agents write sourced literature sentences beside a marked experiment gap; the rest are blocked with a reason | - |
 | 2026-10-21 | CQA proposal and confirmation gate | Dependent sections wait for a person's confirmation bound to the input | - |

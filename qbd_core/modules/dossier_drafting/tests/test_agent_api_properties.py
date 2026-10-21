@@ -84,14 +84,16 @@ class Scripted:
     def complete(self, request):
         self.sent.append(request)
         asks_for_qtpp = any("QTPP Builder" in p.text for p in request.payload.parts)
-        other = any("Excipient Selector" in p.text for p in request.payload.parts)
+        other = not any("API Properties" in p.text for p in request.payload.parts) and not (
+            asks_for_qtpp
+        )
         pool = {}
         for part in request.payload.parts:
             match = part.kind == "evidence" and EVIDENCE_ID.match(part.text)
             if match:
                 pool[match.group(1)] = match.group(2)
         if other:
-            return '{"excipients": [], "grades": []}'
+            return "{}"
         return (self.qtpp if asks_for_qtpp else self.build)(pool)
 
 

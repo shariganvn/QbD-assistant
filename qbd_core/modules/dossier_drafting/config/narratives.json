@@ -1,0 +1,128 @@
+{
+  "source": "Agent specs for sections that describe the department's own experiments. The model may add sourced literature sentences; the experimental part always stays a marked gap.",
+  "agents": [
+    {
+      "id": "4.3",
+      "name": "Compatibility Studies",
+      "sections": [
+        {
+          "id": "P.2.1.2.2",
+          "lead": "kết quả nghiên cứu tương hợp thực nghiệm (thiết kế, điều kiện bảo quản, chỉ tiêu theo dõi, kết luận) chưa có"
+        }
+      ],
+      "queries": [
+        "{substance} tương hợp tá dược",
+        "{substance} không tương hợp tương kỵ",
+        "{substance} {form} tương hợp"
+      ]
+    },
+    {
+      "id": "5.3",
+      "name": "Rationale Writer",
+      "sections": [
+        {
+          "id": "P.2.2.1.3.1",
+          "lead": "kết quả đánh giá của phòng về dập thẳng và tạo hạt (agent 5.1, 5.2) chưa có, lý do chọn phương pháp pha chế chưa được kết luận"
+        }
+      ],
+      "queries": [
+        "{substance} {form} phương pháp pha chế",
+        "{substance} dập thẳng",
+        "{substance} xát hạt tạo hạt"
+      ]
+    },
+    {
+      "id": "6.3",
+      "name": "Overage Evaluator",
+      "sections": [
+        {
+          "id": "P.2.2.2",
+          "lead": "đánh giá lượng đóng dư theo số liệu thực nghiệm của phòng chưa có"
+        }
+      ],
+      "queries": [
+        "{substance} lượng đóng dư overage",
+        "{substance} hao hụt trong sản xuất"
+      ]
+    },
+    {
+      "id": "8.1",
+      "name": "Dissolution Method Developer",
+      "sections": [
+        {
+          "id": "P.2.2.3.1.1",
+          "lead": "kết quả thử độ tan trong các môi trường để chứng minh điều kiện sink chưa có"
+        },
+        {
+          "id": "P.2.2.3.1.2",
+          "lead": "phương pháp hòa tan của phòng (thiết bị, môi trường, tốc độ quay, thời điểm lấy mẫu) chưa được xây dựng"
+        },
+        {
+          "id": "P.2.2.3.1.3",
+          "lead": "dữ liệu chứng minh khả năng phân biệt của phương pháp chưa có"
+        }
+      ],
+      "queries": [
+        "{substance} độ tan môi trường hòa tan",
+        "{substance} {form} phương pháp thử hòa tan",
+        "{substance} điều kiện sink"
+      ]
+    },
+    {
+      "id": "9.1",
+      "name": "Process Risk and Environment Control",
+      "sections": [
+        {
+          "id": "P.2.3.2.1",
+          "lead": "chiến lược kiểm soát điều kiện môi trường của phòng chưa được xác lập"
+        },
+        {
+          "id": "P.2.3.2.2",
+          "lead": "số liệu hàm ẩm của phòng chưa có"
+        }
+      ],
+      "queries": [
+        "{substance} độ ẩm nhạy cảm điều kiện sản xuất",
+        "{substance} hút ẩm kiểm soát môi trường",
+        "{substance} {form} hàm ẩm"
+      ]
+    },
+    {
+      "id": "9.2",
+      "name": "Unit Operation Developer",
+      "sections": [
+        {
+          "id": "P.2.3.2.3",
+          "lead": "kết quả phát triển công đoạn trộn của phòng chưa có"
+        },
+        {
+          "id": "P.2.3.2.4",
+          "lead": "kết quả phát triển công đoạn dập viên của phòng chưa có"
+        },
+        {
+          "id": "P.2.3.2.5",
+          "lead": "kết quả phát triển công đoạn bao phim của phòng chưa có"
+        }
+      ],
+      "queries": [
+        "{substance} {form} công đoạn trộn",
+        "{substance} {form} dập viên",
+        "{substance} {form} bao phim"
+      ]
+    },
+    {
+      "id": "10.3",
+      "name": "Compatibility",
+      "sections": [
+        {
+          "id": "P.2.6",
+          "lead": "kết quả thử tương thích của phòng (dung môi pha loãng, bao bì) chưa có"
+        }
+      ],
+      "queries": [
+        "{substance} tương thích dung môi pha loãng",
+        "{substance} {form} tương thích bao bì"
+      ]
+    }
+  ]
+}

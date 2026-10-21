@@ -47,16 +47,66 @@ IMPLEMENTED: dict[str, tuple[Status, str]] = {
         "partial",
         "substance name is taken as typed; no identity resolution or ambiguity stop",
     ),
-    "3.1": (
-        "blocked",
-        "needs strengths and measured reference-product data, not among the three inputs",
-    ),
     "3.2": ("implemented", "dossier_drafting.agents.qtpp"),
+    **{
+        agent_id: ("partial", f"dossier_drafting.agents.narrative: sourced literature only; {why}")
+        for agent_id, why in {
+            "4.3": "the own compatibility study stays a gap",
+            "5.3": "the own compression/granulation assessment stays a gap",
+            "6.3": "overage from the own data stays a gap",
+            "8.1": "the own dissolution method and sink data stay gaps",
+            "9.1": "environment and moisture data stay gaps; the risk table is blocked",
+            "9.2": "the own unit-operation results stay gaps",
+            "10.3": "the own compatibility tests stay gaps",
+        }.items()
+    },
+    "5.1": ("partial", "absorbed into 5.3; no separate assessment without the team's data"),
+    "5.2": ("partial", "absorbed into 5.3; no separate assessment without the team's data"),
+    "3.3": (
+        "partial",
+        "candidates from propose_cqa; the person confirms at gate 3.5; no rationale",
+    ),
+    "7.1": ("partial", "BCS statements come from agent 4.1 (P.2.1.1.2); no separate verdict"),
     "4.1": ("implemented", "dossier_drafting.agents.api_properties"),
     "4.2": ("implemented", "dossier_drafting.agents.excipients"),
     "12.1": ("implemented", "quality_gate.checklist (Appendix C)"),
     "12.3": ("implemented", "quality_gate.consistency"),
     "12.4": ("implemented", "quality_gate.provenance"),
+}
+
+
+# Agents that cannot run on the three inputs, with the reason. They stay marked gaps in the draft.
+NEEDS_TEAM_DATA = "needs the team's own experimental data, which is not among the three inputs"
+NEEDS_JUDGEMENT = "risk levels are the team's judgement on confirmed CQA and experiments"
+BLOCKED: dict[str, str] = {
+    "0.4": "no model review loop exists (12.2 deferred), so there is nothing to control",
+    "1.2": "the reference-product profile needs its measured data (strengths, tests)",
+    "1.3": "intake of experimental and stability files; no such files are given",
+    "3.1": "needs strengths and measured reference-product data, not among the three inputs",
+    "4.4": NEEDS_JUDGEMENT,
+    "4.5": "combinations of substances are out of the SOP and refused at intake",
+    "6.1a": NEEDS_JUDGEMENT,
+    "6.1b": NEEDS_JUDGEMENT,
+    "6.2": NEEDS_TEAM_DATA,
+    "6.4": "final formula needs strengths and the team's formulation results",
+    "6.5": "needs the final formula and the strengths",
+    "7.2": "compares excipients with the reference product, which needs agent 3.1 data",
+    "7.3": "similarity calculation needs the team's dissolution data",
+    "7.4": "route decision needs dissolution data and the eligibility verdict",
+    "8.2": "comparative dissolution needs the team's dissolution data",
+    "8.3": NEEDS_TEAM_DATA,
+    "8.4": NEEDS_TEAM_DATA,
+    "8.5": "conclusion needs the route decision and the team's data",
+    "9.3": NEEDS_TEAM_DATA,
+    "9.4": NEEDS_JUDGEMENT,
+    "9.5": "optional module that needs a decision of the project owner",
+    "10.1": "container-closure choice needs the final formula and stability data",
+    "10.2": NEEDS_TEAM_DATA,
+    "11.1": "links stability, overage and container sections that are still gaps",
+    "11.2": "links process sections that are still gaps",
+    "11.3": "links control-strategy sections that are still gaps",
+    "11.4": "links the route decision and the BE conclusion, which are still gaps",
+    "12.2": "a model review would send the draft text out; the code checks 12.1, 12.3, 12.4 stay",
 }
 
 
@@ -82,6 +132,8 @@ def load_agents() -> dict[str, AgentSpec]:
 
 
 def status_of(agent_id: str) -> tuple[Status, str]:
+    if agent_id in BLOCKED:
+        return "blocked", BLOCKED[agent_id]
     return IMPLEMENTED.get(agent_id, ("pending", ""))
 
 
