@@ -22,6 +22,7 @@ class AgentSpec:
     kind: Literal["llm", "deterministic", "human"]
     out_of_sop: bool
     notes: str
+    provisional: str | None = None
 
 
 # Where an agent's job is done in qbd_core. An id missing here is pending.
@@ -63,6 +64,7 @@ def load_agents() -> dict[str, AgentSpec]:
             kind=a["kind"],
             out_of_sop=bool(a["out_of_sop"]),
             notes=a["notes"] or "",
+            provisional=a.get("provisional"),
         )
         for a in raw
     }
@@ -74,3 +76,10 @@ def status_of(agent_id: str) -> tuple[Status, str]:
 
 def agents_for_section(section_id: str) -> tuple[AgentSpec, ...]:
     return tuple(a for a in load_agents().values() if section_id in a.targets)
+
+
+def provisional_decisions() -> tuple[str, ...]:
+    """Design choices used until the head of R&D confirms them at the final approval (A13)."""
+    return tuple(
+        f"agent {a.id} ({a.name}): {a.provisional}" for a in load_agents().values() if a.provisional
+    )

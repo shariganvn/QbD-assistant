@@ -9,7 +9,11 @@ from typing import Any
 from qbd_core.modules.dossier_drafting import config
 from qbd_core.modules.dossier_drafting.agents import api_properties
 from qbd_core.modules.dossier_drafting.agents.llm import LlmSetup
-from qbd_core.modules.dossier_drafting.agents.registry import agents_for_section, status_of
+from qbd_core.modules.dossier_drafting.agents.registry import (
+    agents_for_section,
+    provisional_decisions,
+    status_of,
+)
 from qbd_core.modules.dossier_drafting.cqa import (
     ConfirmedCqa,
     CqaConfirmation,
@@ -187,6 +191,7 @@ def assemble_draft(
             {"id": sid, "status": "gap", "gapReason": f"{GAP_LABEL} {reason}. {extra}".strip()}
         )
         gaps.append(GapEntry(section_id=sid, reason=f"{reason}. {extra}".strip()))
+    agent_log += [f"A13: {item}" for item in provisional_decisions()]
     evidence = tuple(used.values())
     cited = sorted({r.provenance.file for r in evidence})
     meta: dict[str, Any] = {

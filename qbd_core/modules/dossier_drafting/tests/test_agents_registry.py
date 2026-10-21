@@ -58,3 +58,14 @@ def test_every_implemented_agent_is_a_real_agent():
 @pytest.mark.parametrize("section", ["P.2.1.1.1", "P.2.2.1.2.2", "P.2.3.4"])
 def test_a_section_names_the_agents_that_fill_it(section):
     assert registry.agents_for_section(section)
+
+
+def test_a5_ordering_is_provisional_and_listed_for_final_approval():
+    from qbd_core.modules.dossier_drafting.agents.registry import provisional_decisions
+
+    items = provisional_decisions()
+    assert [i.split(":")[0] for i in items] == [
+        "agent 5.1 (Direct Compression Assessor)",
+        "agent 5.2 (Granulation Assessor)",
+    ]
+    assert all("Trưởng R&D" in i for i in items)

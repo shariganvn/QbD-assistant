@@ -17,3 +17,7 @@ G-05 G-07 pass; draft.json valid.
 
 ## Risks and rollback
 Each step lands as its own commits; reverting them restores the previous state. Nothing is published on any failed check.
+
+## Provisional decision: A5 ordering (task 4.6)
+
+Decision 2026-10-21 (project owner): agents 5.1 and 5.2 run after 4.1 as the A5 refinement proposes, without waiting for a separate written confirmation from the head of R&D. The choice is listed in every run report as an `A13:` line (from `provisional` in `config/agents.json`) so the head of R&D sees and settles it at the final approval. If rejected: edit `depends_on` of 5.1 and 5.2 in `agents.json` and re-run; no code change. Reopen condition: A13 rejects or amends the ordering.

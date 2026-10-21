@@ -1,889 +1,948 @@
 {
- "source": "Notion kit PTDH v0.1 via docs/reports/qbd-core-p2-autodraft/agent-map.json (target sections and kinds are an engineering inference, not stated by the kit)",
- "agents": [
-  {
-   "id": "0.1",
-   "name": "Input Validator",
-   "skill": "A0",
-   "wave": 0,
-   "depends_on": [],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": true,
-   "notes": "Kit says not in SOP; system convention. Checks max_actives."
-  },
-  {
-   "id": "0.2",
-   "name": "Data Gap Register",
-   "skill": "A0",
-   "wave": "cross",
-   "depends_on": [
-    "0.7"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": ""
-  },
-  {
-   "id": "0.3",
-   "name": "Report Assembler",
-   "skill": "A0",
-   "wave": "final",
-   "depends_on": [
-    "12.1",
-    "0.2"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Depends on all waves; reuses 12.1 result, does not re-score."
-  },
-  {
-   "id": "0.4",
-   "name": "Loop Controller",
-   "skill": "A0",
-   "wave": "after-6",
-   "depends_on": [
-    "12.1",
-    "12.2",
-    "12.3",
-    "12.4"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Loops only if gap fillable from Kho or user data; > max_review_loops asks user (default 1)."
-  },
-  {
-   "id": "0.5",
-   "name": "Dosage Form Classifier",
-   "skill": "A0",
-   "wave": 0,
-   "depends_on": [
-    "0.1"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Non immediate-release tablet groups flagged NGOAI SOP."
-  },
-  {
-   "id": "0.6",
-   "name": "Knowledge Base Connector",
-   "skill": "A0",
-   "wave": "cross",
-   "depends_on": [],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Fail-closed for group C or unclassified."
-  },
-  {
-   "id": "0.7",
-   "name": "Wave Scheduler and Merger",
-   "skill": "A0",
-   "wave": "cross",
-   "depends_on": [],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Runs at end of each wave. Sequential fallback in wave then ascending ID must give same result."
-  },
-  {
-   "id": "0.8",
-   "name": "Combination Planner",
-   "skill": "A0",
-   "wave": 0,
-   "depends_on": [
-    "0.1",
-    "1.4"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": true,
-   "notes": "Only for combinations. combo_without_rmp: stop and report."
-  },
-  {
-   "id": "1.4",
-   "name": "Active Identity Resolver",
-   "skill": "A1",
-   "wave": 0,
-   "depends_on": [
-    "0.1"
-   ],
-   "target_sections": [],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Multiple candidates: stop and ask user."
-  },
-  {
-   "id": "1.1",
-   "name": "API Data Collector",
-   "skill": "A1",
-   "wave": 1,
-   "depends_on": [
-    "1.4"
-   ],
-   "target_sections": [],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Per active. Unsourced value is CAN DU LIEU."
-  },
-  {
-   "id": "1.2",
-   "name": "RMP Profiler",
-   "skill": "A1",
-   "wave": 1,
-   "depends_on": [
-    "1.4"
-   ],
-   "target_sections": [],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Per active; combination needs RMP of exact combination. No formula guessing."
-  },
-  {
-   "id": "1.3",
-   "name": "Experimental-Stability Data Intake",
-   "skill": "A1",
-   "wave": 1,
-   "depends_on": [
-    "1.4"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Per active; rerun on new data. First run with no data writes prioritized gaps."
-  },
-  {
-   "id": "2.1",
-   "name": "CTD Mapper",
-   "skill": "A2",
-   "wave": 1,
-   "depends_on": [
-    "0.1"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Runs if market EU or Both."
-  },
-  {
-   "id": "2.2",
-   "name": "ACTD Mapper",
-   "skill": "A2",
-   "wave": 1,
-   "depends_on": [
-    "0.1"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Runs if market Domestic or Both. App.I in Kho is a DRAFT; final section count pending."
-  },
-  {
-   "id": "2.3",
-   "name": "Dual-Market Reconciler",
-   "skill": "A2",
-   "wave": 1,
-   "depends_on": [
-    "2.1",
-    "2.2"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Only for market Both. No merging unless SOP allows."
-  },
-  {
-   "id": "3.1",
-   "name": "RMP Describer",
-   "skill": "A3",
-   "wave": 2,
-   "depends_on": [
-    "1.2"
-   ],
-   "target_sections": [
-    "P.2.2.1.1"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Conflicting sources: state and justify choice."
-  },
-  {
-   "id": "3.2",
-   "name": "QTPP Builder",
-   "skill": "A3",
-   "wave": 2,
-   "depends_on": [
-    "3.1",
-    "0.5"
-   ],
-   "target_sections": [
-    "P.2.2.1.2.1"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "SOP does not list QTPP attributes; ICH Q8(R2) once loaded to Kho."
-  },
-  {
-   "id": "3.3",
-   "name": "CQA Builder",
-   "skill": "A3",
-   "wave": 2,
-   "depends_on": [
-    "3.2",
-    "3.4"
-   ],
-   "target_sections": [
-    "P.2.2.1.2.2"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "No CQA beyond library unless sourced; proposals go to 3.5. Opens gate 3.5."
-  },
-  {
-   "id": "3.4",
-   "name": "Dosage-Form CQA Library",
-   "skill": "A3",
-   "wave": 2,
-   "depends_on": [
-    "0.5"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "N2-N9 tagged NGOAI SOP."
-  },
-  {
-   "id": "3.5",
-   "name": "CQA Confirmation Gate",
-   "skill": "A3",
-   "wave": "gate (after 3.3)",
-   "depends_on": [
-    "3.3"
-   ],
-   "target_sections": [
-    "P.2.2.1.2.2"
-   ],
-   "kind": "human",
-   "out_of_sop": true,
-   "notes": "Not in SOP. Blocks 4.4, wave 3+. CQA change after A4/A5 ran: 0.7 computes rerun set. Never self-confirm."
-  },
-  {
-   "id": "4.1",
-   "name": "API Properties",
-   "skill": "A4",
-   "wave": 2,
-   "depends_on": [
-    "1.1"
-   ],
-   "target_sections": [
-    "P.2.1.1.1",
-    "P.2.1.1.2"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Per active. BCS/solubility decide A7; physchem decides A5. 1.3 is an input but not in depends_on. ACTD needs less than EU."
-  },
-  {
-   "id": "4.2",
-   "name": "Excipient Selector",
-   "skill": "A4",
-   "wave": 2,
-   "depends_on": [
-    "3.2",
-    "4.1"
-   ],
-   "target_sections": [
-    "P.2.1.2.1",
-    "P.2.1.2.3"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Per active. N5-N9: Kho lacks internal docs, write CAN DU LIEU. ACTD not required for generic."
-  },
-  {
-   "id": "4.3",
-   "name": "Compatibility Studies",
-   "skill": "A4",
-   "wave": 2,
-   "depends_on": [
-    "4.2",
-    "1.3"
-   ],
-   "target_sections": [
-    "P.2.1.2.2"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Per active. No data: no compatibility conclusion."
-  },
-  {
-   "id": "4.4",
-   "name": "Initial Risk Assessment",
-   "skill": "A4",
-   "wave": 3,
-   "depends_on": [
-    "3.3",
-    "4.1",
-    "4.3"
-   ],
-   "target_sections": [
-    "P.2.1.1.3"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Waits for gate 3.5 though 3.5 is not in depends_on. Missing data is CAN DU LIEU, never default Low. Feeds 6.1a."
-  },
-  {
-   "id": "4.5",
-   "name": "API-API Interaction Assessor",
-   "skill": "A4",
-   "wave": 2,
-   "depends_on": [
-    "4.1"
-   ],
-   "target_sections": [],
-   "kind": "llm",
-   "out_of_sop": true,
-   "notes": "Only if is_combination = yes; depends on all per-active 4.1. Not in SOP."
-  },
-  {
-   "id": "5.1",
-   "name": "Direct Compression Assessor",
-   "skill": "A5",
-   "wave": 2,
-   "depends_on": [
-    "4.1",
-    "3.2"
-   ],
-   "target_sections": [],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "No numeric thresholds. Refinement (after 4.1) awaits R&D head confirmation."
-  },
-  {
-   "id": "5.2",
-   "name": "Granulation Assessor",
-   "skill": "A5",
-   "wave": 2,
-   "depends_on": [
-    "4.1",
-    "3.2"
-   ],
-   "target_sections": [],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Same as 5.1."
-  },
-  {
-   "id": "5.3",
-   "name": "Rationale Writer",
-   "skill": "A5",
-   "wave": 2,
-   "depends_on": [
-    "5.1",
-    "5.2"
-   ],
-   "target_sections": [
-    "P.2.2.1.3.1"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Outside N1,N2: only scope + gap. Final decision belongs to project."
-  },
-  {
-   "id": "6.1a",
-   "name": "Formulation Risk Assessment (initial)",
-   "skill": "A6",
-   "wave": 3,
-   "depends_on": [
-    "4.4",
-    "5.3",
-    "3.5"
-   ],
-   "target_sections": [
-    "P.2.2.1.3.2"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "6.1 split into 6.1a/6.1b for the scheduler."
-  },
-  {
-   "id": "6.2",
-   "name": "Formulation Studies",
-   "skill": "A6",
-   "wave": 3,
-   "depends_on": [
-    "6.1a",
-    "4.2",
-    "4.3",
-    "1.3"
-   ],
-   "target_sections": [
-    "P.2.2.1.3.3"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Records user data as is; creates no results. DOE only if project chooses."
-  },
-  {
-   "id": "6.3",
-   "name": "Overage Evaluator",
-   "skill": "A6",
-   "wave": 3,
-   "depends_on": [
-    "6.2",
-    "1.3"
-   ],
-   "target_sections": [
-    "P.2.2.2"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Mandatory for all markets. No data: \"chua co du lieu\", not \"no overage\"."
-  },
-  {
-   "id": "6.1b",
-   "name": "Formulation Risk Assessment (updated)",
-   "skill": "A6",
-   "wave": 3,
-   "depends_on": [
-    "6.2",
-    "6.3"
-   ],
-   "target_sections": [
-    "P.2.2.1.3.4"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": ""
-  },
-  {
-   "id": "6.4",
-   "name": "Final Formula and Roles",
-   "skill": "A6",
-   "wave": 3,
-   "depends_on": [
-    "6.1b",
-    "6.2",
-    "6.3"
-   ],
-   "target_sections": [
-    "P.2.2.1.4"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Feeds A9, A10. 4.2 is an input but only transitive."
-  },
-  {
-   "id": "6.5",
-   "name": "Multi-strength Strategy",
-   "skill": "A6",
-   "wave": 3,
-   "depends_on": [
-    "6.4"
-   ],
-   "target_sections": [],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Only if >= 2 strengths. SOP gives no criteria; no self-set. Strength-specific outline leaves exist; mapping to them not stated."
-  },
-  {
-   "id": "7.1",
-   "name": "BCS and ICH M9 Eligibility",
-   "skill": "A7",
-   "wave": 4,
-   "depends_on": [
-    "4.1"
-   ],
-   "target_sections": [],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Dosage form outside M9 scope: stop and ask."
-  },
-  {
-   "id": "7.2",
-   "name": "Excipient-vs-RMP Check",
-   "skill": "A7",
-   "wave": 4,
-   "depends_on": [
-    "4.2",
-    "3.1"
-   ],
-   "target_sections": [],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": ""
-  },
-  {
-   "id": "7.3",
-   "name": "Comparative Dissolution Gate",
-   "skill": "A7",
-   "wave": 4,
-   "depends_on": [
-    "1.3"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Valid only with user data. Must use the same similarity method as 8.2 although it does not depend on 8.1/8.2."
-  },
-  {
-   "id": "7.4",
-   "name": "Route: Miễn BE hoặc Kế hoạch BE",
-   "skill": "A7",
-   "wave": 5,
-   "depends_on": [
-    "7.1",
-    "7.2",
-    "7.3",
-    "8.2"
-   ],
-   "target_sections": [],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Runs before 8.5. Mismatch 7.3 vs 8.2: report and ask user."
-  },
-  {
-   "id": "8.1",
-   "name": "Dissolution Method Developer",
-   "skill": "A8",
-   "wave": 4,
-   "depends_on": [
-    "4.1",
-    "3.5",
-    "1.3"
-   ],
-   "target_sections": [
-    "P.2.2.3.1.1",
-    "P.2.2.3.1.2",
-    "P.2.2.3.1.3"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "No parameters without data."
-  },
-  {
-   "id": "8.2",
-   "name": "Comparative Dissolution",
-   "skill": "A8",
-   "wave": 4,
-   "depends_on": [
-    "8.1",
-    "1.3"
-   ],
-   "target_sections": [
-    "P.2.2.3.2"
-   ],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "f2 computed only from user data; criteria from cited official doc (SOP sets no threshold)."
-  },
-  {
-   "id": "8.3",
-   "name": "Impurity Profile vs RMP",
-   "skill": "A8",
-   "wave": 4,
-   "depends_on": [
-    "1.3",
-    "3.1"
-   ],
-   "target_sections": [
-    "P.2.2.3.3.1"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": ""
-  },
-  {
-   "id": "8.4",
-   "name": "Other Dosage Form Properties",
-   "skill": "A8",
-   "wave": 4,
-   "depends_on": [
-    "3.1",
-    "3.2"
-   ],
-   "target_sections": [
-    "P.2.2.3.4"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Outline also has strength-specific leaves P.2.2.3.3.2, P.2.2.3.3.3; mapping not stated."
-  },
-  {
-   "id": "8.5",
-   "name": "BE-Biowaiver Conclusion Writer",
-   "skill": "A8",
-   "wave": 5,
-   "depends_on": [
-    "7.4",
-    "8.2",
-    "8.3"
-   ],
-   "target_sections": [],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Must follow 7.4; mismatch is reported to 12.3. Outline has no BE leaf."
-  },
-  {
-   "id": "9.1",
-   "name": "Process Risk and Environment Control",
-   "skill": "A9",
-   "wave": 4,
-   "depends_on": [
-    "6.4",
-    "5.3",
-    "3.5",
-    "4.1"
-   ],
-   "target_sections": [
-    "P.2.3.1",
-    "P.2.3.2.1",
-    "P.2.3.2.2"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "No self-set humidity/temperature ranges. Runs first in A9 (chain 9.1-9.4)."
-  },
-  {
-   "id": "9.2",
-   "name": "Unit Operation Developer",
-   "skill": "A9",
-   "wave": 4,
-   "depends_on": [
-    "9.1",
-    "6.4",
-    "5.3",
-    "1.3"
-   ],
-   "target_sections": [
-    "P.2.3.2.3",
-    "P.2.3.2.4",
-    "P.2.3.2.5"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Operation list comes from 5.3 and user data; outside N1,N2 is NGOAI SOP, ask user."
-  },
-  {
-   "id": "9.3",
-   "name": "Scale-up",
-   "skill": "A9",
-   "wave": 4,
-   "depends_on": [
-    "9.2",
-    "1.3"
-   ],
-   "target_sections": [
-    "P.2.3.3"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "No extrapolation of parameters."
-  },
-  {
-   "id": "9.4",
-   "name": "CPP Proposer",
-   "skill": "A9",
-   "wave": 4,
-   "depends_on": [
-    "9.1",
-    "9.2",
-    "9.3",
-    "3.5"
-   ],
-   "target_sections": [
-    "P.2.3.4"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Proposal only; R&D head confirms. Feeds 11.3."
-  },
-  {
-   "id": "9.5",
-   "name": "Advanced QbD Module",
-   "skill": "A9",
-   "wave": 4,
-   "depends_on": [
-    "9.2",
-    "9.3"
-   ],
-   "target_sections": [],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Optional; never self-enabled. Depends on user decision. Commercial design space belongs to P.3."
-  },
-  {
-   "id": "10.1",
-   "name": "Container Closure",
-   "skill": "A10",
-   "wave": 4,
-   "depends_on": [
-    "6.4",
-    "4.1",
-    "3.1",
-    "1.3"
-   ],
-   "target_sections": [
-    "P.2.4.1",
-    "P.2.4.2"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "No stability data: no conclusion."
-  },
-  {
-   "id": "10.2",
-   "name": "Microbiological Attributes",
-   "skill": "A10",
-   "wave": 4,
-   "depends_on": [
-    "0.5",
-    "6.4",
-    "1.3"
-   ],
-   "target_sections": [
-    "P.2.5"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Never blank. N5-N9 NGOAI SOP."
-  },
-  {
-   "id": "10.3",
-   "name": "Compatibility",
-   "skill": "A10",
-   "wave": 1,
-   "depends_on": [
-    "0.5",
-    "1.3"
-   ],
-   "target_sections": [
-    "P.2.6"
-   ],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Runs in wave 1; needs no final formula. Market input from A2 is not in depends_on."
-  },
-  {
-   "id": "11.1",
-   "name": "Stability Link",
-   "skill": "A11",
-   "wave": 4,
-   "depends_on": [
-    "1.3",
-    "6.3",
-    "10.1"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Runs after 10.1. No shelf life without data."
-  },
-  {
-   "id": "11.2",
-   "name": "Process Link",
-   "skill": "A11",
-   "wave": 5,
-   "depends_on": [
-    "9.2",
-    "9.3",
-    "9.4"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Does not write commercial process."
-  },
-  {
-   "id": "11.3",
-   "name": "Control Strategy Link",
-   "skill": "A11",
-   "wave": 5,
-   "depends_on": [
-    "9.4",
-    "3.5",
-    "11.2"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Proposal only."
-  },
-  {
-   "id": "11.4",
-   "name": "Interchangeability Link",
-   "skill": "A11",
-   "wave": 5,
-   "depends_on": [
-    "7.4",
-    "8.5",
-    "2.1",
-    "2.2"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Kit says dependency \"A2\" (skill level); 2.1/2.2 are my inference."
-  },
-  {
-   "id": "12.1",
-   "name": "Self-check Phụ lục C",
-   "skill": "A12",
-   "wave": 6,
-   "depends_on": [
-    "12.3",
-    "12.4",
-    "2.1",
-    "2.2"
-   ],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Item 15 vs A2 frame, item 16 via 12.4, item 17 via 12.3. Item 11 N/A only with reason."
-  },
-  {
-   "id": "12.2",
-   "name": "QA/QC Reviewer",
-   "skill": "A12",
-   "wave": 6,
-   "depends_on": [
-    "12.1",
-    "9.4",
-    "11.3",
-    "8.1",
-    "3.5"
-   ],
-   "target_sections": [],
-   "kind": "llm",
-   "out_of_sop": false,
-   "notes": "Machine pre-review only; GMP criteria NGOAI SOP."
-  },
-  {
-   "id": "12.3",
-   "name": "Consistency Checker",
-   "skill": "A12",
-   "wave": 6,
-   "depends_on": [],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Checks 7.4 vs 8.5, 7.3 vs 8.2 method, CQA-change reruns, per-active branches. Reports, never fixes."
-  },
-  {
-   "id": "12.4",
-   "name": "Evidence Tracer",
-   "skill": "A12",
-   "wave": 6,
-   "depends_on": [],
-   "target_sections": [],
-   "kind": "deterministic",
-   "out_of_sop": false,
-   "notes": "Unconfirmed SOP v01 or product-specific values count as untraceable. External source needs full citation."
-  }
- ]
+  "source": "Notion kit PTDH v0.1 via docs/reports/qbd-core-p2-autodraft/agent-map.json (target sections and kinds are an engineering inference, not stated by the kit)",
+  "agents": [
+    {
+      "id": "0.1",
+      "name": "Input Validator",
+      "skill": "A0",
+      "wave": 0,
+      "depends_on": [],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": true,
+      "notes": "Kit says not in SOP; system convention. Checks max_actives.",
+      "provisional": null
+    },
+    {
+      "id": "0.2",
+      "name": "Data Gap Register",
+      "skill": "A0",
+      "wave": "cross",
+      "depends_on": [
+        "0.7"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "",
+      "provisional": null
+    },
+    {
+      "id": "0.3",
+      "name": "Report Assembler",
+      "skill": "A0",
+      "wave": "final",
+      "depends_on": [
+        "12.1",
+        "0.2"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Depends on all waves; reuses 12.1 result, does not re-score.",
+      "provisional": null
+    },
+    {
+      "id": "0.4",
+      "name": "Loop Controller",
+      "skill": "A0",
+      "wave": "after-6",
+      "depends_on": [
+        "12.1",
+        "12.2",
+        "12.3",
+        "12.4"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Loops only if gap fillable from Kho or user data; > max_review_loops asks user (default 1).",
+      "provisional": null
+    },
+    {
+      "id": "0.5",
+      "name": "Dosage Form Classifier",
+      "skill": "A0",
+      "wave": 0,
+      "depends_on": [
+        "0.1"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Non immediate-release tablet groups flagged NGOAI SOP.",
+      "provisional": null
+    },
+    {
+      "id": "0.6",
+      "name": "Knowledge Base Connector",
+      "skill": "A0",
+      "wave": "cross",
+      "depends_on": [],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Fail-closed for group C or unclassified.",
+      "provisional": null
+    },
+    {
+      "id": "0.7",
+      "name": "Wave Scheduler and Merger",
+      "skill": "A0",
+      "wave": "cross",
+      "depends_on": [],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Runs at end of each wave. Sequential fallback in wave then ascending ID must give same result.",
+      "provisional": null
+    },
+    {
+      "id": "0.8",
+      "name": "Combination Planner",
+      "skill": "A0",
+      "wave": 0,
+      "depends_on": [
+        "0.1",
+        "1.4"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": true,
+      "notes": "Only for combinations. combo_without_rmp: stop and report.",
+      "provisional": null
+    },
+    {
+      "id": "1.4",
+      "name": "Active Identity Resolver",
+      "skill": "A1",
+      "wave": 0,
+      "depends_on": [
+        "0.1"
+      ],
+      "target_sections": [],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Multiple candidates: stop and ask user.",
+      "provisional": null
+    },
+    {
+      "id": "1.1",
+      "name": "API Data Collector",
+      "skill": "A1",
+      "wave": 1,
+      "depends_on": [
+        "1.4"
+      ],
+      "target_sections": [],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Per active. Unsourced value is CAN DU LIEU.",
+      "provisional": null
+    },
+    {
+      "id": "1.2",
+      "name": "RMP Profiler",
+      "skill": "A1",
+      "wave": 1,
+      "depends_on": [
+        "1.4"
+      ],
+      "target_sections": [],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Per active; combination needs RMP of exact combination. No formula guessing.",
+      "provisional": null
+    },
+    {
+      "id": "1.3",
+      "name": "Experimental-Stability Data Intake",
+      "skill": "A1",
+      "wave": 1,
+      "depends_on": [
+        "1.4"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Per active; rerun on new data. First run with no data writes prioritized gaps.",
+      "provisional": null
+    },
+    {
+      "id": "2.1",
+      "name": "CTD Mapper",
+      "skill": "A2",
+      "wave": 1,
+      "depends_on": [
+        "0.1"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Runs if market EU or Both.",
+      "provisional": null
+    },
+    {
+      "id": "2.2",
+      "name": "ACTD Mapper",
+      "skill": "A2",
+      "wave": 1,
+      "depends_on": [
+        "0.1"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Runs if market Domestic or Both. App.I in Kho is a DRAFT; final section count pending.",
+      "provisional": null
+    },
+    {
+      "id": "2.3",
+      "name": "Dual-Market Reconciler",
+      "skill": "A2",
+      "wave": 1,
+      "depends_on": [
+        "2.1",
+        "2.2"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Only for market Both. No merging unless SOP allows.",
+      "provisional": null
+    },
+    {
+      "id": "3.1",
+      "name": "RMP Describer",
+      "skill": "A3",
+      "wave": 2,
+      "depends_on": [
+        "1.2"
+      ],
+      "target_sections": [
+        "P.2.2.1.1"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Conflicting sources: state and justify choice.",
+      "provisional": null
+    },
+    {
+      "id": "3.2",
+      "name": "QTPP Builder",
+      "skill": "A3",
+      "wave": 2,
+      "depends_on": [
+        "3.1",
+        "0.5"
+      ],
+      "target_sections": [
+        "P.2.2.1.2.1"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "SOP does not list QTPP attributes; ICH Q8(R2) once loaded to Kho.",
+      "provisional": null
+    },
+    {
+      "id": "3.3",
+      "name": "CQA Builder",
+      "skill": "A3",
+      "wave": 2,
+      "depends_on": [
+        "3.2",
+        "3.4"
+      ],
+      "target_sections": [
+        "P.2.2.1.2.2"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "No CQA beyond library unless sourced; proposals go to 3.5. Opens gate 3.5.",
+      "provisional": null
+    },
+    {
+      "id": "3.4",
+      "name": "Dosage-Form CQA Library",
+      "skill": "A3",
+      "wave": 2,
+      "depends_on": [
+        "0.5"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "N2-N9 tagged NGOAI SOP.",
+      "provisional": null
+    },
+    {
+      "id": "3.5",
+      "name": "CQA Confirmation Gate",
+      "skill": "A3",
+      "wave": "gate (after 3.3)",
+      "depends_on": [
+        "3.3"
+      ],
+      "target_sections": [
+        "P.2.2.1.2.2"
+      ],
+      "kind": "human",
+      "out_of_sop": true,
+      "notes": "Not in SOP. Blocks 4.4, wave 3+. CQA change after A4/A5 ran: 0.7 computes rerun set. Never self-confirm.",
+      "provisional": null
+    },
+    {
+      "id": "4.1",
+      "name": "API Properties",
+      "skill": "A4",
+      "wave": 2,
+      "depends_on": [
+        "1.1"
+      ],
+      "target_sections": [
+        "P.2.1.1.1",
+        "P.2.1.1.2"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Per active. BCS/solubility decide A7; physchem decides A5. 1.3 is an input but not in depends_on. ACTD needs less than EU.",
+      "provisional": null
+    },
+    {
+      "id": "4.2",
+      "name": "Excipient Selector",
+      "skill": "A4",
+      "wave": 2,
+      "depends_on": [
+        "3.2",
+        "4.1"
+      ],
+      "target_sections": [
+        "P.2.1.2.1",
+        "P.2.1.2.3"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Per active. N5-N9: Kho lacks internal docs, write CAN DU LIEU. ACTD not required for generic.",
+      "provisional": null
+    },
+    {
+      "id": "4.3",
+      "name": "Compatibility Studies",
+      "skill": "A4",
+      "wave": 2,
+      "depends_on": [
+        "4.2",
+        "1.3"
+      ],
+      "target_sections": [
+        "P.2.1.2.2"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Per active. No data: no compatibility conclusion.",
+      "provisional": null
+    },
+    {
+      "id": "4.4",
+      "name": "Initial Risk Assessment",
+      "skill": "A4",
+      "wave": 3,
+      "depends_on": [
+        "3.3",
+        "4.1",
+        "4.3"
+      ],
+      "target_sections": [
+        "P.2.1.1.3"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Waits for gate 3.5 though 3.5 is not in depends_on. Missing data is CAN DU LIEU, never default Low. Feeds 6.1a.",
+      "provisional": null
+    },
+    {
+      "id": "4.5",
+      "name": "API-API Interaction Assessor",
+      "skill": "A4",
+      "wave": 2,
+      "depends_on": [
+        "4.1"
+      ],
+      "target_sections": [],
+      "kind": "llm",
+      "out_of_sop": true,
+      "notes": "Only if is_combination = yes; depends on all per-active 4.1. Not in SOP.",
+      "provisional": null
+    },
+    {
+      "id": "5.1",
+      "name": "Direct Compression Assessor",
+      "skill": "A5",
+      "wave": 2,
+      "depends_on": [
+        "4.1",
+        "3.2"
+      ],
+      "target_sections": [],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "No numeric thresholds. Refinement (after 4.1) awaits R&D head confirmation.",
+      "provisional": "Thứ tự 5.1/5.2 chạy sau 4.1 (tinh chỉnh A5) chưa được Trưởng R&D xác nhận; dùng tạm, xem lại ở bước duyệt A13. Nếu bị bác: sửa depends_on tại đây và chạy lại."
+    },
+    {
+      "id": "5.2",
+      "name": "Granulation Assessor",
+      "skill": "A5",
+      "wave": 2,
+      "depends_on": [
+        "4.1",
+        "3.2"
+      ],
+      "target_sections": [],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Same as 5.1.",
+      "provisional": "Thứ tự 5.1/5.2 chạy sau 4.1 (tinh chỉnh A5) chưa được Trưởng R&D xác nhận; dùng tạm, xem lại ở bước duyệt A13. Nếu bị bác: sửa depends_on tại đây và chạy lại."
+    },
+    {
+      "id": "5.3",
+      "name": "Rationale Writer",
+      "skill": "A5",
+      "wave": 2,
+      "depends_on": [
+        "5.1",
+        "5.2"
+      ],
+      "target_sections": [
+        "P.2.2.1.3.1"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Outside N1,N2: only scope + gap. Final decision belongs to project.",
+      "provisional": null
+    },
+    {
+      "id": "6.1a",
+      "name": "Formulation Risk Assessment (initial)",
+      "skill": "A6",
+      "wave": 3,
+      "depends_on": [
+        "4.4",
+        "5.3",
+        "3.5"
+      ],
+      "target_sections": [
+        "P.2.2.1.3.2"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "6.1 split into 6.1a/6.1b for the scheduler.",
+      "provisional": null
+    },
+    {
+      "id": "6.2",
+      "name": "Formulation Studies",
+      "skill": "A6",
+      "wave": 3,
+      "depends_on": [
+        "6.1a",
+        "4.2",
+        "4.3",
+        "1.3"
+      ],
+      "target_sections": [
+        "P.2.2.1.3.3"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Records user data as is; creates no results. DOE only if project chooses.",
+      "provisional": null
+    },
+    {
+      "id": "6.3",
+      "name": "Overage Evaluator",
+      "skill": "A6",
+      "wave": 3,
+      "depends_on": [
+        "6.2",
+        "1.3"
+      ],
+      "target_sections": [
+        "P.2.2.2"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Mandatory for all markets. No data: \"chua co du lieu\", not \"no overage\".",
+      "provisional": null
+    },
+    {
+      "id": "6.1b",
+      "name": "Formulation Risk Assessment (updated)",
+      "skill": "A6",
+      "wave": 3,
+      "depends_on": [
+        "6.2",
+        "6.3"
+      ],
+      "target_sections": [
+        "P.2.2.1.3.4"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "",
+      "provisional": null
+    },
+    {
+      "id": "6.4",
+      "name": "Final Formula and Roles",
+      "skill": "A6",
+      "wave": 3,
+      "depends_on": [
+        "6.1b",
+        "6.2",
+        "6.3"
+      ],
+      "target_sections": [
+        "P.2.2.1.4"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Feeds A9, A10. 4.2 is an input but only transitive.",
+      "provisional": null
+    },
+    {
+      "id": "6.5",
+      "name": "Multi-strength Strategy",
+      "skill": "A6",
+      "wave": 3,
+      "depends_on": [
+        "6.4"
+      ],
+      "target_sections": [],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Only if >= 2 strengths. SOP gives no criteria; no self-set. Strength-specific outline leaves exist; mapping to them not stated.",
+      "provisional": null
+    },
+    {
+      "id": "7.1",
+      "name": "BCS and ICH M9 Eligibility",
+      "skill": "A7",
+      "wave": 4,
+      "depends_on": [
+        "4.1"
+      ],
+      "target_sections": [],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Dosage form outside M9 scope: stop and ask.",
+      "provisional": null
+    },
+    {
+      "id": "7.2",
+      "name": "Excipient-vs-RMP Check",
+      "skill": "A7",
+      "wave": 4,
+      "depends_on": [
+        "4.2",
+        "3.1"
+      ],
+      "target_sections": [],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "",
+      "provisional": null
+    },
+    {
+      "id": "7.3",
+      "name": "Comparative Dissolution Gate",
+      "skill": "A7",
+      "wave": 4,
+      "depends_on": [
+        "1.3"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Valid only with user data. Must use the same similarity method as 8.2 although it does not depend on 8.1/8.2.",
+      "provisional": null
+    },
+    {
+      "id": "7.4",
+      "name": "Route: Miễn BE hoặc Kế hoạch BE",
+      "skill": "A7",
+      "wave": 5,
+      "depends_on": [
+        "7.1",
+        "7.2",
+        "7.3",
+        "8.2"
+      ],
+      "target_sections": [],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Runs before 8.5. Mismatch 7.3 vs 8.2: report and ask user.",
+      "provisional": null
+    },
+    {
+      "id": "8.1",
+      "name": "Dissolution Method Developer",
+      "skill": "A8",
+      "wave": 4,
+      "depends_on": [
+        "4.1",
+        "3.5",
+        "1.3"
+      ],
+      "target_sections": [
+        "P.2.2.3.1.1",
+        "P.2.2.3.1.2",
+        "P.2.2.3.1.3"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "No parameters without data.",
+      "provisional": null
+    },
+    {
+      "id": "8.2",
+      "name": "Comparative Dissolution",
+      "skill": "A8",
+      "wave": 4,
+      "depends_on": [
+        "8.1",
+        "1.3"
+      ],
+      "target_sections": [
+        "P.2.2.3.2"
+      ],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "f2 computed only from user data; criteria from cited official doc (SOP sets no threshold).",
+      "provisional": null
+    },
+    {
+      "id": "8.3",
+      "name": "Impurity Profile vs RMP",
+      "skill": "A8",
+      "wave": 4,
+      "depends_on": [
+        "1.3",
+        "3.1"
+      ],
+      "target_sections": [
+        "P.2.2.3.3.1"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "",
+      "provisional": null
+    },
+    {
+      "id": "8.4",
+      "name": "Other Dosage Form Properties",
+      "skill": "A8",
+      "wave": 4,
+      "depends_on": [
+        "3.1",
+        "3.2"
+      ],
+      "target_sections": [
+        "P.2.2.3.4"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Outline also has strength-specific leaves P.2.2.3.3.2, P.2.2.3.3.3; mapping not stated.",
+      "provisional": null
+    },
+    {
+      "id": "8.5",
+      "name": "BE-Biowaiver Conclusion Writer",
+      "skill": "A8",
+      "wave": 5,
+      "depends_on": [
+        "7.4",
+        "8.2",
+        "8.3"
+      ],
+      "target_sections": [],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Must follow 7.4; mismatch is reported to 12.3. Outline has no BE leaf.",
+      "provisional": null
+    },
+    {
+      "id": "9.1",
+      "name": "Process Risk and Environment Control",
+      "skill": "A9",
+      "wave": 4,
+      "depends_on": [
+        "6.4",
+        "5.3",
+        "3.5",
+        "4.1"
+      ],
+      "target_sections": [
+        "P.2.3.1",
+        "P.2.3.2.1",
+        "P.2.3.2.2"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "No self-set humidity/temperature ranges. Runs first in A9 (chain 9.1-9.4).",
+      "provisional": null
+    },
+    {
+      "id": "9.2",
+      "name": "Unit Operation Developer",
+      "skill": "A9",
+      "wave": 4,
+      "depends_on": [
+        "9.1",
+        "6.4",
+        "5.3",
+        "1.3"
+      ],
+      "target_sections": [
+        "P.2.3.2.3",
+        "P.2.3.2.4",
+        "P.2.3.2.5"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Operation list comes from 5.3 and user data; outside N1,N2 is NGOAI SOP, ask user.",
+      "provisional": null
+    },
+    {
+      "id": "9.3",
+      "name": "Scale-up",
+      "skill": "A9",
+      "wave": 4,
+      "depends_on": [
+        "9.2",
+        "1.3"
+      ],
+      "target_sections": [
+        "P.2.3.3"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "No extrapolation of parameters.",
+      "provisional": null
+    },
+    {
+      "id": "9.4",
+      "name": "CPP Proposer",
+      "skill": "A9",
+      "wave": 4,
+      "depends_on": [
+        "9.1",
+        "9.2",
+        "9.3",
+        "3.5"
+      ],
+      "target_sections": [
+        "P.2.3.4"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Proposal only; R&D head confirms. Feeds 11.3.",
+      "provisional": null
+    },
+    {
+      "id": "9.5",
+      "name": "Advanced QbD Module",
+      "skill": "A9",
+      "wave": 4,
+      "depends_on": [
+        "9.2",
+        "9.3"
+      ],
+      "target_sections": [],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Optional; never self-enabled. Depends on user decision. Commercial design space belongs to P.3.",
+      "provisional": null
+    },
+    {
+      "id": "10.1",
+      "name": "Container Closure",
+      "skill": "A10",
+      "wave": 4,
+      "depends_on": [
+        "6.4",
+        "4.1",
+        "3.1",
+        "1.3"
+      ],
+      "target_sections": [
+        "P.2.4.1",
+        "P.2.4.2"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "No stability data: no conclusion.",
+      "provisional": null
+    },
+    {
+      "id": "10.2",
+      "name": "Microbiological Attributes",
+      "skill": "A10",
+      "wave": 4,
+      "depends_on": [
+        "0.5",
+        "6.4",
+        "1.3"
+      ],
+      "target_sections": [
+        "P.2.5"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Never blank. N5-N9 NGOAI SOP.",
+      "provisional": null
+    },
+    {
+      "id": "10.3",
+      "name": "Compatibility",
+      "skill": "A10",
+      "wave": 1,
+      "depends_on": [
+        "0.5",
+        "1.3"
+      ],
+      "target_sections": [
+        "P.2.6"
+      ],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Runs in wave 1; needs no final formula. Market input from A2 is not in depends_on.",
+      "provisional": null
+    },
+    {
+      "id": "11.1",
+      "name": "Stability Link",
+      "skill": "A11",
+      "wave": 4,
+      "depends_on": [
+        "1.3",
+        "6.3",
+        "10.1"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Runs after 10.1. No shelf life without data.",
+      "provisional": null
+    },
+    {
+      "id": "11.2",
+      "name": "Process Link",
+      "skill": "A11",
+      "wave": 5,
+      "depends_on": [
+        "9.2",
+        "9.3",
+        "9.4"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Does not write commercial process.",
+      "provisional": null
+    },
+    {
+      "id": "11.3",
+      "name": "Control Strategy Link",
+      "skill": "A11",
+      "wave": 5,
+      "depends_on": [
+        "9.4",
+        "3.5",
+        "11.2"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Proposal only.",
+      "provisional": null
+    },
+    {
+      "id": "11.4",
+      "name": "Interchangeability Link",
+      "skill": "A11",
+      "wave": 5,
+      "depends_on": [
+        "7.4",
+        "8.5",
+        "2.1",
+        "2.2"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Kit says dependency \"A2\" (skill level); 2.1/2.2 are my inference.",
+      "provisional": null
+    },
+    {
+      "id": "12.1",
+      "name": "Self-check Phụ lục C",
+      "skill": "A12",
+      "wave": 6,
+      "depends_on": [
+        "12.3",
+        "12.4",
+        "2.1",
+        "2.2"
+      ],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Item 15 vs A2 frame, item 16 via 12.4, item 17 via 12.3. Item 11 N/A only with reason.",
+      "provisional": null
+    },
+    {
+      "id": "12.2",
+      "name": "QA/QC Reviewer",
+      "skill": "A12",
+      "wave": 6,
+      "depends_on": [
+        "12.1",
+        "9.4",
+        "11.3",
+        "8.1",
+        "3.5"
+      ],
+      "target_sections": [],
+      "kind": "llm",
+      "out_of_sop": false,
+      "notes": "Machine pre-review only; GMP criteria NGOAI SOP.",
+      "provisional": null
+    },
+    {
+      "id": "12.3",
+      "name": "Consistency Checker",
+      "skill": "A12",
+      "wave": 6,
+      "depends_on": [],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Checks 7.4 vs 8.5, 7.3 vs 8.2 method, CQA-change reruns, per-active branches. Reports, never fixes.",
+      "provisional": null
+    },
+    {
+      "id": "12.4",
+      "name": "Evidence Tracer",
+      "skill": "A12",
+      "wave": 6,
+      "depends_on": [],
+      "target_sections": [],
+      "kind": "deterministic",
+      "out_of_sop": false,
+      "notes": "Unconfirmed SOP v01 or product-specific values count as untraceable. External source needs full citation.",
+      "provisional": null
+    }
+  ]
 }

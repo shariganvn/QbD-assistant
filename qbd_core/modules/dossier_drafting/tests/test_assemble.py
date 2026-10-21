@@ -153,3 +153,9 @@ def test_command_line_run_writes_a_valid_draft_and_rejects_bad_input(tmp_path):
     )
     assert combo.returncode == 3
     assert out.read_bytes() == before
+
+
+def test_run_report_lists_provisional_decisions_for_the_final_approver():
+    run = assemble_draft(intake(), kb(), TODAY)
+    lines = [line for line in run.agent_log if line.startswith("A13:")]
+    assert len(lines) == 2 and "5.1" in lines[0] and "5.2" in lines[1]
