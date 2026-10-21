@@ -25,9 +25,10 @@ from qbd_core.modules.dossier_drafting.models import COMBINATION_OUT_OF_SOP, Int
 from qbd_core.modules.dossier_drafting.outline import (
     leaf_sections,
     load_outline,
-    per_strength_beyond_first,
+    most_strength_sections,
+    per_strength_beyond,
 )
-from qbd_core.modules.evidence.api import KnowledgePort, TrialData
+from qbd_core.modules.evidence.api import KnowledgePort, TrialData, read_strengths
 from qbd_core.shared.contracts import Classification, EvidenceRecord, GapEntry
 from qbd_core.shared.markers import GAP_LABEL
 
@@ -152,7 +153,15 @@ def assemble_draft(
     used: dict[str, EvidenceRecord] = {}
     sections: list[dict[str, Any]] = []
     gaps: list[GapEntry] = []
-    not_applicable = set(per_strength_beyond_first(outline))
+    declared = read_strengths(trial)
+    strengths = list(declared.strengths)
+    if len(strengths) > most_strength_sections(outline):
+        # The outline cannot report this many; declaring them would make Stage B refuse the draft.
+        declared = type(declared)(
+            conflict=f"outline chỉ có chỗ cho {most_strength_sections(outline)} hàm lượng"
+        )
+        strengths = []
+    not_applicable = set(per_strength_beyond(outline, max(1, len(strengths))))
     agent_log: list[str] = []
     ran: set[str] = set()
     by_agent: dict[str, dict[str, Any]] = {}
@@ -224,13 +233,17 @@ def assemble_draft(
             f"{len(trial.tables) - len(trial.unrecognized)} nhận dạng ({', '.join(sorted(counts))})"
         )
         agent_log += [f"agent 1.3: chưa nhận dạng, {item}" for item in trial.unrecognized]
+        if strengths:
+            agent_log.append(f"agent 1.3: hàm lượng đọc từ dữ liệu: {', '.join(strengths)}")
+        elif declared.conflict:
+            agent_log.append(f"agent 1.3: không khai báo hàm lượng, {declared.conflict}")
     agent_log += [f"A13: {item}" for item in provisional_decisions()]
     evidence = tuple(used.values())
     cited = sorted({r.provenance.file for r in evidence})
     meta: dict[str, Any] = {
         "productName": f"{substance} – {intake.request.dosage_form}",
         "apiName": substance,
-        "strengths": [f"{GAP_LABEL} hàm lượng"],
+        "strengths": strengths or [f"{GAP_LABEL} hàm lượng"],
         "sourceFiles": (
             [name for name, _ in trial.files]
             if trial is not None and trial.files

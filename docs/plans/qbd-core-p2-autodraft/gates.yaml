@@ -304,3 +304,19 @@ gates:
     owner_step: "07"
     blocked_by: a model agent that is handed trial data; today none is, so the test holds trivially
     status: unverified
+
+  - id: G-17
+    title: Strengths come from the team's data or stay a gap
+    invariant: >
+      meta.strengths holds only strengths read from composition-table headers when every composition
+      table agrees; a disagreement, mixed units, a strength written two ways or more strengths than the
+      outline can report declare nothing and say why. The quality gate recomputes the list and blocks any
+      other.
+    boundary_owner: evidence + quality_gate
+    fixture: minimal .docx files and the department's example report
+    command: python -m pytest qbd_core/modules/dossier_drafting/tests/test_strengths_from_data.py -q
+    expected: exit 0; the example report gives 5 mg and 10 mg; the draft passes Stage B and the quality gate.
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-17.txt
+    owner_step: "07"
+    status: pass
+

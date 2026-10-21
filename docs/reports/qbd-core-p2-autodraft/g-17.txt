@@ -1,0 +1,10 @@
+# G-17 evidence, 2026-10-21
+$ python -m pytest qbd_core/modules/dossier_drafting/tests/test_strengths_from_data.py -q
+13 passed in 2.03s
+
+$ python -m pytest qbd_core -q
+340 passed in 17.16s
+
+Mutations (reverted, each caught):
+- consistency.py: strengths comparison removed -> tests fail
+- trial_strengths.py: disagreement check removed -> tests fail

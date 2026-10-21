@@ -30,7 +30,11 @@ from qbd_core.modules.dossier_drafting.models import (
     IntakeRejected,
     IntakeResult,
 )
-from qbd_core.modules.dossier_drafting.outline import leaf_sections, load_outline
+from qbd_core.modules.dossier_drafting.outline import (
+    leaf_sections,
+    load_outline,
+    most_strength_sections,
+)
 
 __all__ = [
     "AgentInfrastructureError",
@@ -50,6 +54,7 @@ __all__ = [
     "group_gaps",
     "leaf_sections",
     "load_outline",
+    "most_strength_sections",
     "section_map_verified",
     "intake_digest",
     "load_confirmation",

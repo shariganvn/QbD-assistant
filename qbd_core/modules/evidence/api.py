@@ -21,6 +21,7 @@ from qbd_core.modules.evidence.trial_intake import (
     classify,
     load_trial_data,
 )
+from qbd_core.modules.evidence.trial_strengths import Strengths, read_strengths
 from qbd_core.modules.evidence.trial_tags import (
     DATA_TAG,
     cell_text,
@@ -43,11 +44,13 @@ __all__ = [
     "KnowledgeDocument",
     "KnowledgePort",
     "StoreCorrupt",
+    "Strengths",
     "TrialData",
     "TrialIntakeError",
     "TrialTable",
     "classify",
     "load_trial_data",
+    "read_strengths",
     "evidence_id",
     "load_documents",
 ]

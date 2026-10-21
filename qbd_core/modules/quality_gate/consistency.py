@@ -4,7 +4,13 @@ from __future__ import annotations
 
 from typing import Any
 
-from qbd_core.modules.dossier_drafting.api import CQA_SECTION, DraftRun
+from qbd_core.modules.dossier_drafting.api import (
+    CQA_SECTION,
+    DraftRun,
+    load_outline,
+    most_strength_sections,
+)
+from qbd_core.modules.evidence.api import read_strengths
 from qbd_core.modules.quality_gate.models import Finding
 from qbd_core.shared.contracts import Classification
 from qbd_core.shared.markers import kind_of
@@ -34,6 +40,12 @@ def check_consistency(run: DraftRun) -> list[Finding]:
     product = _norm(meta["productName"])
     if _norm(request.substances[0]) not in product or _norm(request.dosage_form) not in product:
         findings.append(_block("E_META_MISMATCH", None, "productName"))
+    declared = [x for x in meta["strengths"] if kind_of(x) is None]
+    expected = list(read_strengths(run.trial).strengths)
+    if len(expected) > most_strength_sections(load_outline()):
+        expected = []  # more than the outline can report is not declared
+    if declared != expected:
+        findings.append(_block("E_STRENGTH_NOT_IN_DATA", None, "meta.strengths"))
     registered = {g.section_id for g in run.gaps}
     in_draft = marked_gap_ids(run.draft)
     for sid in sorted(in_draft ^ registered):

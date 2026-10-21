@@ -69,7 +69,8 @@ a local provider; until then they stay marked gaps. Estimated to open 14 to 18 o
 ## Slices
 1. Done: `--trial-file`, Stage A by CLI, header-word recognition, unrecognised tables listed, exit 10. G-13 pass.
 2. Done: `[dữ liệu: ...]` tag and quality-gate check (G-14), `calc.py` (G-15), first consumer P.2.2.3.1.1 sink condition from a `sink_condition` table.
-3. Next: consumers 3.1, 6.4, 7.3/8.2 (needs dissolution tables with multi-row headers, and a `[tính: ...]` tag for f2), 8.3, 8.4, 10.2, 11.x. Earlier plan text: `DataRecord` with cell-level tags and the quality-gate check (G-14), then calculation module (G-15), then the first consumers: 3.1, 6.4, 7.3/8.2, 8.3, 8.4, 10.2, 11.x.
+3. Done: strengths read from composition headers (G-17); two strengths open the second-strength sections.
+4. Next: consumers 3.1, 6.4, 7.3/8.2 (needs dissolution tables with multi-row headers, and a `[tính: ...]` tag for f2), 8.3, 8.4, 10.2, 11.x. Earlier plan text: `DataRecord` with cell-level tags and the quality-gate check (G-14), then calculation module (G-15), then the first consumers: 3.1, 6.4, 7.3/8.2, 8.3, 8.4, 10.2, 11.x.
 
 ## Risks and rollback
 Trial layouts differ, so recognition will miss tables at first; misses become visible gaps, not wrong

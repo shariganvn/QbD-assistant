@@ -31,3 +31,22 @@ def per_strength_beyond_first(outline: dict[str, Any]) -> list[str]:
         for s in leaf_sections(outline)
         if (s.get("form") or {}).get("strengthIndex", 0) >= 1
     ]
+
+
+def per_strength_beyond(outline: dict[str, Any], count: int) -> list[str]:
+    """Per-strength sections for strength positions beyond the `count` declared strengths."""
+    return [
+        s["id"]
+        for s in leaf_sections(outline)
+        if (s.get("form") or {}).get("strengthIndex", 0) >= count
+    ]
+
+
+def most_strength_sections(outline: dict[str, Any]) -> int:
+    """How many strengths one per-strength family of the outline can report."""
+    families: dict[str, int] = {}
+    for s in leaf_sections(outline):
+        if "strengthIndex" in (s.get("form") or {}):
+            parent = s["id"].rsplit(".", 1)[0]
+            families[parent] = families.get(parent, 0) + 1
+    return min(families.values()) if families else 1
