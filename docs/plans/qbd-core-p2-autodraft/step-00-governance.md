@@ -1,7 +1,7 @@
 ---
 title: "Step 00 - Governance"
 workstream: qbd-core-p2-autodraft
-status: pending
+status: done
 ---
 
 # Step 00 - Governance

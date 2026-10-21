@@ -1,7 +1,7 @@
 # ADR — `qbd_core` module boundaries (DDD-lite + Hexagonal, business-capability split)
 
-Status: **Proposed (draft — chờ user confirm)** · Date: 2026-07-20 · Scope: **Phase 2 `qbd_core` only**
-Future canonical ID nếu confirm: `D1` (sẽ ghi lại tại `docs/decisions/D1-qbd-core-module-boundaries.md`, status `active`).
+Status: **Accepted 2026-10-21** (user confirmed the three open questions below) · Date: 2026-07-20 · Scope: **`qbd_core` only**
+Scope and the boundary with `cowork-p2-kit/` and `tools/pharma-dev-draft/`: `docs/decisions/D20261021-qbd-core-p2-autodraft-scope.md`.
 
 > **Không đụng Phase 1.** `cowork-p2-kit/` (Node.js MVP) và workstream đang active
 > `docs/plans/qbd-p2-ingest-completion/` giữ nguyên cấu trúc theo layer kỹ thuật
@@ -152,10 +152,13 @@ Khi bắt đầu code (bước 4 trở đi), nên chuyển "Thứ tự implement
 theo `RULE-BRAINSTORM-PLAN.md` (Invariant/Boundary/Fixture/Command/Evidence per gate) — ADR
 này chỉ ghi quyết định + outline, không thay thế plan thực thi.
 
-## Open questions
+## Resolved questions (2026-10-21)
 
-1. `egress_gate` tách hay gộp `provider_access`? (§1)
-2. `quality_gate` chấm rubric bằng code thật hay vẫn LLM-assisted self-score? Ảnh hưởng
-   `dossier_drafting` có phải expose thêm gì cho `quality_gate` không.
-3. DB dùng chung — Postgres schema-per-module (namespaced) hay 1 flat schema? ADR này chỉ
-   chốt "DB dùng chung được", chưa chốt schema-per-module.
+1. `egress_gate` and `provider_access` are **separate** modules (policy vs mechanism, as argued in §1).
+   Six modules stand.
+2. `quality_gate` scores **by code**: deterministic checks only (checklist, consistency, provenance,
+   market numbering). No LLM-assisted self-score. `dossier_drafting` exposes its draft and gap register
+   through `api.py` and nothing else.
+3. Storage layout is **deferred to the evidence step**. Until a module needs persistence, none is
+   created. When it is, the choice (file store or shared database, namespaced per module) is recorded
+   in that module's `SPEC.md` and reported here.

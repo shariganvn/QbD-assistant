@@ -36,7 +36,7 @@ nghiên cứu viên định hướng đề tài ngay từ lúc nhận đề án.
 - Không hard-code thông số; mọi giá trị truy được nguồn. Thiếu dữ liệu → ghi `CẦN DỮ LIỆU` vào Data Gap Register, không tự điền số.
 - Tra Kho nội bộ trước, không có thì tra ngoài kèm trích dẫn (nguồn, địa chỉ, ngày truy cập). Tài liệu nhóm B/C không ra ngoài; fail-closed.
 - Cổng xác nhận CQA (3.5) do người dùng; chưa xác nhận thì không chạy tiếp các bước phụ thuộc.
-- Hiện thực: pipeline `qbd_core/` (kế hoạch ở `docs/plans/qbd-core-p2-autodraft/` khi được duyệt). `cowork-p2-kit/` và `tools/pharma-dev-draft/` giữ nguyên ranh giới hiện có; `qbd_core` chỉ gọi renderer docx qua CLI, không import chéo.
+- Hiện thực: pipeline `qbd_core/` (kế hoạch đã duyệt ở `docs/plans/qbd-core-p2-autodraft/`). `cowork-p2-kit/` và `tools/pharma-dev-draft/` giữ nguyên ranh giới hiện có; `qbd_core` chỉ gọi renderer docx qua CLI, không import chéo.
 - Nguồn thiết kế: Notion "Soạn thảo phát triển dược học" và sơ đồ Whimsical "Hệ thống Agent tự động soạn thảo PTDH (P.2)".
 
 ---
@@ -73,9 +73,8 @@ Khi chuyển từ brainstorm --> plan, đọc rule `.claude/rules/RULE-BRAINSTOR
 
 ## qbd_core module boundaries (Phase 2)
 
-Chưa bắt đầu code (đang chờ duyệt plan; mục tiêu ở phần "Mục tiêu hệ thống"). Luật module boundary sống ở
-`docs/architecture/ADR-qbd-core-module-boundaries.md` (draft, chờ confirm) — đọc khi thật sự
-bắt đầu `qbd_core/`. Không áp dụng cho `cowork-p2-kit/` (Phase 1 MVP).
+Plan đã duyệt; code theo `docs/plans/qbd-core-p2-autodraft/`. Luật module boundary sống ở
+`docs/architecture/ADR-qbd-core-module-boundaries.md` (accepted 2026-10-21) — đọc trước khi sửa `qbd_core/`. Không áp dụng cho `cowork-p2-kit/` (Phase 1 MVP).
 
 ## GitNexus — Known Issues (human-owned, outside generated block)
 
