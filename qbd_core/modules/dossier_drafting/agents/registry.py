@@ -91,7 +91,7 @@ BLOCKED: dict[str, str] = {
     "6.1a": NEEDS_JUDGEMENT,
     "6.1b": NEEDS_JUDGEMENT,
     "6.2": NEEDS_TEAM_DATA,
-    "6.4": "final formula needs the team's formulation results (strengths now come from the trial files)",
+    "6.4": "final formula needs the team's formulation results; strengths come from trial files",
     "6.5": "needs the final formula and the strengths",
     "7.2": "compares excipients with the reference product, which needs agent 3.1 data",
     "7.3": "similarity calculation needs the team's dissolution data",
