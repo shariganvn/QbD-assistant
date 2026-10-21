@@ -1,0 +1,13 @@
+G-07 evidence (CQA confirmation gate), 2026-10-21
+Scope: synthetic documents; one gated section (P.2.2.1.2.2). More CQA-dependent sections join when their agents are built.
+$ python3 -m pytest qbd_core/modules/dossier_drafting/tests/test_cqa_gate.py -q
+...............                                                          [100%]
+15 passed in 1.46s
+
+Negative controls (each reverted afterwards):
+ - input-digest check disabled: 3 failed, 12 passed
+ - signature/date check disabled: 4 failed, 11 passed
+ - section filled without confirmation: 2 failed, 13 passed
+
+Known limit: the gate records who confirmed and when but cannot authenticate the person; the file can be edited by anyone with access to it.
+Whole project: 126 passed in 3.19s; ruff: All checks passed!

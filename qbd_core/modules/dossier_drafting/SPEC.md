@@ -23,6 +23,16 @@ IntakeRequest, DraftSection, GapEntry
   file carry the gap marker, and `notApplicableSections` lists the second-strength sections. `DraftRun`
   also returns the evidence used, the gap register, and `contains_restricted` (true when any sentence
   comes from a document that is not class A, which means the draft file must not leave the machine).
+- `propose_cqa(intake) -> CqaProposal`: candidate CQA of the dosage-form group (status
+  `candidate_unconfirmed`), the digest of the input, and a blank confirmation template.
+- `intake_digest(intake)`: hash of substances (case and order ignored), form id and market.
+- `require_confirmation(intake, confirmation, today) -> ConfirmedCqa`: raises `CqaNotConfirmed` with
+  `E_CQA_NOT_CONFIRMED` (none given), `E_CQA_WRONG_INPUT` (digest differs), `E_CQA_EMPTY`,
+  `E_CQA_INVALID` (blank or duplicate name), `E_CQA_UNSIGNED` (no name, no date, or a date after today).
+  CQA the person added beyond the proposal are reported in `added_by_person`.
+- `load_confirmation(path)`: `None` for a missing or unreadable file.
+- In `assemble_draft`, no confirmation leaves P.2.2.1.2.2 a gap (`cqa_status = "pending"`); a flawed one
+  raises. Command line: `cqa-propose` writes the proposal; `run --cqa-confirmation` exits 5 on a flawed one.
 - `group_gaps(group_id)`: `CẦN DỮ LIỆU` entries owed by a group without internal documents (N5-N9).
 
 ## Invariants
@@ -40,7 +50,8 @@ None.
 None yet; other modules are called only through their api.py.
 
 ## Non-goals
-Anything outside the purpose above. In this slice also: market-specific numbering (the outline is CTD;
+Anything outside the purpose above. Verifying who a signer is (the gate checks the record, not the
+identity). In this slice also: market-specific numbering (the outline is CTD;
 the ACTD mapping is a later quality check), tables, risk matrices and figures, and any text a language
 model writes.
 
@@ -50,3 +61,4 @@ model writes.
 | 2026-10-21 | Scaffold | Module boundary accepted in the ADR | - |
 | 2026-10-21 | Intake validation and configuration data | Input rules and the 38-form catalogue as data, not code | - |
 | 2026-10-21 | Thin-slice assembler and `run` command | Three inputs to a valid, gap-flagged draft end to end | - |
+| 2026-10-21 | CQA proposal and confirmation gate | Dependent sections wait for a person's confirmation bound to the input | - |

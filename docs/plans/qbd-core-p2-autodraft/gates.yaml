@@ -106,18 +106,26 @@ gates:
   - id: G-07
     title: CQA confirmation gate
     invariant: >
-      Agents that depend on the CQA set do not run until a person confirms it.
-    boundary_owner: dossier_drafting
-    fixture: run without confirmation
+      The section that depends on the CQA set (P.2.2.1.2.2) stays a marked gap until a person's confirmation
+      is on file and bound to this exact input (substances, form, market). A flawed confirmation (another
+      input, empty or duplicate set, no name, no date, a date after the run) stops the run with a fixed
+      code; it is never treated as absence. Who confirmed is a recorded claim: the code checks the record,
+      not the identity.
+    boundary_owner: dossier_drafting (cqa.py, assemble.py)
+    fixture: qbd_core/modules/dossier_drafting/tests/test_cqa_gate.py (synthetic documents)
     command: >
-      pytest qbd_core/tests/drafting -k cqa_gate -q
+      python -m pytest qbd_core/modules/dossier_drafting/tests/test_cqa_gate.py -q
     expected: >
-      stops with the fixed code; no dependent output written
+      exit 0. No confirmation: cqa_status pending, the section is a gap whose reason names gate 3.5, draft
+      valid. Valid confirmation: section covered with signer, date, the confirmed set and one open
+      justification per CQA. Flawed: E_CQA_WRONG_INPUT, E_CQA_EMPTY, E_CQA_INVALID or E_CQA_UNSIGNED, exit
+      code 5 on the command line, previous output file byte-identical.
     negative_cases:
-      - confirmation for a different input hash is refused
+      - confirmation signed for a different form or market -> E_CQA_WRONG_INPUT
+      - unreadable confirmation file -> treated as not confirmed
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-07.txt
     owner_step: "04"
-    status: unverified
+    status: pass
 
   - id: G-08
     title: Section numbering follows the market
