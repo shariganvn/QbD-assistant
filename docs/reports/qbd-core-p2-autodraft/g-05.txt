@@ -1,0 +1,16 @@
+G-05 evidence (fail-closed, all-or-nothing publication), 2026-10-21
+Scope: the current pipeline (intake, documents, drafting, quality gate, render, publish). Provider stages are G-12 (step 04).
+$ python3 -m pytest qbd_core/tests/test_pipeline_failclosed.py -q
+......................                                                   [100%]
+22 passed in 0.40s
+
+Real defects found and fixed while writing these tests:
+ - a --date error and an invalid documents file were reported with the same code;
+ - a failing knowledge lookup was reported as unreadable documents;
+ - a JSON object (not a list) was accepted as an empty document set;
+ - a blocked run overwrote the last good quality report; it now writes draft.quality.blocked.json;
+ - files were written one by one, so a failure between them left a mixed set; now staged then replaced with rollback.
+
+Negative controls (each reverted): rollback removed: 2 failed; blocked report under the normal name: 1 failed.
+Known limit: a process kill between two replacements of the final step can still leave a mixed set; the window is the few os.replace calls after every file is staged and fsynced.
+Whole project: 213 passed in 10.29s; ruff: All checks passed!

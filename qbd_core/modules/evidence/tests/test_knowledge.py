@@ -81,3 +81,12 @@ def test_a_record_with_only_a_citation_cannot_be_verified_as_internal():
 def test_duplicate_file_ids_are_refused():
     with pytest.raises(ValueError, match="duplicate"):
         InMemoryKnowledge([DOCS[0], DOCS[0]])
+
+
+def test_a_document_set_must_be_a_list(tmp_path):
+    path = tmp_path / "docs.json"
+    path.write_text("{}", encoding="utf-8")
+    with pytest.raises(ValueError, match="list"):
+        load_documents(path)
+    path.write_text("[]", encoding="utf-8")
+    assert load_documents(path) == ()

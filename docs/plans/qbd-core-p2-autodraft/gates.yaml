@@ -78,37 +78,49 @@ gates:
     status: pass
 
   - id: G-05
-    title: Failure is fail-closed and atomic
+    title: A failed run publishes nothing and changes nothing
     invariant: >
-      Provider error, schema violation, missing manifest or tool failure publishes nothing and leaves the previous output hash unchanged.
-    boundary_owner: dossier_drafting + rendering
-    fixture: recorded provider that fails at each stage; prior output present
+      Rejected input, unreadable or invalid documents, a flawed CQA confirmation, a quality block, a render
+      or verification failure, a failure while staging or replacing files, and an unexpected crash all leave
+      every previously published file byte-identical and leave no partial or temporary file. Files are
+      published as a set (draft, quality report, page): all are replaced or none. A blocked run writes its
+      report under a separate name so the last good report keeps matching the last good draft.
+    boundary_owner: qbd_core/run.py + qbd_core/publish.py
+    fixture: qbd_core/tests/test_pipeline_failclosed.py (synthetic documents, a published first run)
     command: >
-      pytest qbd_core/tests/failclosed -q
+      python -m pytest qbd_core/tests/test_pipeline_failclosed.py -q
     expected: >
-      hash before == hash after for every injected failure
+      exit 0. For every injected failure the folder snapshot (path to sha256) equals the snapshot before the
+      run, except a blocked run, which adds only the separate blocked report; exit codes are 2 intake or
+      date, 3 combination, 4 documents, 5 CQA, 6 render, 7 blocked, 8 publish; a failed first run leaves the
+      folders empty; after failures a good run still publishes.
     negative_cases:
-      - unreadable tool output; schema mismatch
+      - second of three replacements fails -> the first is restored to its old bytes
+      - staging of the second file fails -> no target touched
+      - knowledge lookup raises -> nothing published
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-05.txt
     owner_step: "04"
-    status: unverified
+    status: pass
 
   - id: G-06
     title: Runs are deterministic
     invariant: >
-      Two runs on identical input and recorded provider produce identical draft.json and HTML page hashes.
+      The same input and date give byte-identical draft.json, quality report and HTML page across separate
+      processes, hash seeds, locales, time zones, working folders and output folders, and the files hold no
+      machine-specific text (no temporary or home path). A different input or date changes the files.
     boundary_owner: pipeline
-    fixture: case Atorvastatin calcium / film-coated tablet / both
+    fixture: Atorvastatin calcium / Viên nén bao phim / both, synthetic documents, three environments
     command: >
-      run the pipeline twice with --evidence-provider recorded; compare sha256
+      python -m pytest qbd_core/tests/test_pipeline_determinism.py -q
     expected: >
-      hashes equal
+      exit 0. The three sha256 triples are equal; no path text in any file; other input or date gives other
+      hashes.
     negative_cases:
-      - a differing timestamp or ordering fails the gate
+      - an unsorted set in the assembler (hash-seed dependent order) -> fails
+      - a timestamp in the page -> fails
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-06.txt
     owner_step: "05"
-    progress: renderer part verified (same draft gives identical page bytes, test_same_draft_gives_identical_bytes); the whole pipeline run twice is step 05.4
-    status: unverified
+    status: pass
 
   - id: G-07
     title: CQA confirmation gate
@@ -210,3 +222,25 @@ gates:
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/p5-6-format.txt
     owner_step: "05"
     status: pass
+
+  - id: G-12
+    title: Language-model stages are fail-closed and repeatable
+    invariant: >
+      When the drafting agents call a provider (step 04), a provider error, an invalid answer, a refused
+      egress or a missing manifest stops the run with nothing published, and with a recorded provider two
+      runs on the same input give identical files. The gateway already refuses and fails closed on its own
+      (provider_access tests); this gate is the same property at pipeline level.
+    boundary_owner: dossier_drafting + provider_access
+    fixture: recorded provider that fails at each agent stage
+    command: >
+      python -m pytest qbd_core/tests -k provider -q
+    expected: >
+      exit 0; folder snapshot unchanged for every injected provider failure; identical hashes for a repeated
+      recorded run.
+    negative_cases:
+      - blocked egress for one agent
+      - provider answer that fails the agent's output schema
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-12.txt
+    owner_step: "04"
+    blocked_by: step 04 agents A1-A12 (task 4.4)
+    status: unverified

@@ -1,0 +1,8 @@
+G-06 evidence (deterministic runs), 2026-10-21
+$ python3 -m pytest qbd_core/tests/test_pipeline_determinism.py -q
+...                                                                      [100%]
+3 passed in 2.73s
+
+Environments compared (separate processes): PYTHONHASHSEED 0 / 1 / 2718281; LC_ALL C.UTF-8 / C / LANG en_US.UTF-8; TZ UTC / Asia/Ho_Chi_Minh / America/Los_Angeles; three different output folders. Result: identical sha256 for draft.json, draft.quality.json and the HTML page.
+Negative controls (each reverted): an unsorted set in the assembler: 1 failed; a timestamp in the page: 1 failed.
+Scope note: no language-model stage runs in the pipeline yet; a recorded-provider repeat is part of G-12.

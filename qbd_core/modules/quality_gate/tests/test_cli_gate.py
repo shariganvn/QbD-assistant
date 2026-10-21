@@ -62,7 +62,8 @@ def test_a_blocking_finding_writes_the_report_but_no_draft_and_no_page(tmp_path,
     blocking = QualityReport(findings=(Finding(code="E_UNSOURCED_TEXT", severity="block"),))
     monkeypatch.setattr(run_module, "evaluate_run", lambda *a, **k: blocking)
     assert run_module.run(blocked_args(tmp_path)) == 7
-    assert (tmp_path / "draft.quality.json").is_file()
+    assert (tmp_path / "draft.quality.blocked.json").is_file()
+    assert not (tmp_path / "draft.quality.json").exists()
     assert not (tmp_path / "draft.json").exists() and not (tmp_path / "html").exists()
 
 

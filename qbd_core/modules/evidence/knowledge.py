@@ -27,6 +27,8 @@ def evidence_id(file_id: str, page: int, quote: str) -> str:
 
 def load_documents(path: str | Path) -> tuple[KnowledgeDocument, ...]:
     raw = json.loads(Path(path).read_text(encoding="utf-8"))
+    if not isinstance(raw, list):
+        raise ValueError("a document set is a JSON list")
     return tuple(KnowledgeDocument.model_validate(item) for item in raw)
 
 
