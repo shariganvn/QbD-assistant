@@ -2,9 +2,15 @@
 
 from __future__ import annotations
 
-from collections.abc import Collection
+from collections.abc import Collection, Sequence
 
-from qbd_core.modules.egress_gate.api import Destination, Manifest, check_egress
+from qbd_core.modules.egress_gate.api import (
+    Destination,
+    Manifest,
+    Payload,
+    PayloadPart,
+    check_egress,
+)
 from qbd_core.modules.provider_access.errors import ProviderFailed, ProviderRefused
 from qbd_core.modules.provider_access.models import LLMRequest, ProviderResult
 from qbd_core.modules.provider_access.port import LLMPort
@@ -18,6 +24,20 @@ class ProviderGateway:
         self._provider = provider
         self._approved = frozenset(approved_models)
         self._manifest = manifest
+
+    @property
+    def destination(self) -> Destination:
+        return self._provider.destination
+
+    def split_allowed(
+        self, parts: Sequence[PayloadPart]
+    ) -> tuple[tuple[PayloadPart, ...], tuple[PayloadPart, ...]]:
+        """Parts the egress policy lets through for this provider, and the parts it holds back."""
+        allowed, held = [], []
+        for part in parts:
+            ok = check_egress(Payload(parts=(part,)), self.destination, self._manifest).allowed
+            (allowed if ok else held).append(part)
+        return tuple(allowed), tuple(held)
 
     def call(self, request: LLMRequest) -> ProviderResult:
         if request.model not in self._approved:

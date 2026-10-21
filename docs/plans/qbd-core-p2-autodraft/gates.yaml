@@ -226,21 +226,27 @@ gates:
   - id: G-12
     title: Language-model stages are fail-closed and repeatable
     invariant: >
-      When the drafting agents call a provider (step 04), a provider error, an invalid answer, a refused
-      egress or a missing manifest stops the run with nothing published, and with a recorded provider two
-      runs on the same input give identical files. The gateway already refuses and fails closed on its own
-      (provider_access tests); this gate is the same property at pipeline level.
+      A provider failure (error, empty answer, missing recording, unapproved model, egress block of the
+      whole request) stops the run with exit 9 and nothing published. A model answer in the wrong shape,
+      with an invented number, an unknown evidence id or a forged tag does not stop the run: that item
+      or agent stays a marked gap and is never published. Evidence the egress policy does not allow is
+      left out of the request, and with none left the model is not called. With a recorded provider two
+      runs on the same input give identical files.
     boundary_owner: dossier_drafting + provider_access
-    fixture: recorded provider that fails at each agent stage
+    fixture: scripted and recorded providers over a class A and a class B document
     command: >
-      python -m pytest qbd_core/tests -k provider -q
+      python -m pytest qbd_core/tests/test_pipeline_provider.py
+      qbd_core/modules/dossier_drafting/tests/test_agent_api_properties.py -q
     expected: >
-      exit 0; folder snapshot unchanged for every injected provider failure; identical hashes for a repeated
-      recorded run.
+      exit 0; folder snapshot unchanged for every provider failure; identical hashes for a repeated
+      recorded run; class B text absent from every remote request; Stage B validator accepts the draft.
     negative_cases:
-      - blocked egress for one agent
-      - provider answer that fails the agent's output schema
+      - provider error, recorded miss, unapproved model, unreadable recording (exit 9)
+      - answer not JSON, not an object, invented number, unknown id, forged tag, label outside the form
+      - class A without approval, file absent from manifest, no manifest (no call)
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-12.txt
     owner_step: "04"
-    blocked_by: step 04 agents A1-A12 (task 4.4)
-    status: unverified
+    scope_note: >
+      Only agent 4.1 exists. The gate covers the shared path every later agent uses (ask, claim check,
+      gateway), so new agents add cases rather than new rules.
+    status: pass

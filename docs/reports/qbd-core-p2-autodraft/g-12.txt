@@ -1,0 +1,12 @@
+# G-12 evidence, 2026-10-21
+$ python -m pytest qbd_core/tests/test_pipeline_provider.py qbd_core/modules/dossier_drafting/tests/test_agent_api_properties.py -q
+......................                                                   [100%]
+22 passed in 0.52s
+
+$ python -m pytest qbd_core -q
+250 passed in 11.32s
+
+Mutations (each reverted afterwards, each caught):
+- claims.py: number check removed -> test_invented_number_turns_that_row_into_a_marked_gap fails
+- gateway.split_allowed: policy bypassed -> 13 tests fail (class B in remote request, replay)
+- llm.ask: provider error swallowed -> 3 tests fail (abort, unapproved model, recorded miss)

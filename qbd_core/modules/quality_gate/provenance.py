@@ -12,6 +12,11 @@ from qbd_core.modules.quality_gate.models import Finding
 from qbd_core.shared.contracts import EvidenceRecord
 from qbd_core.shared.markers import kind_of
 
+CLAIM_TAG = re.compile(
+    r"\[tổng hợp: (?P<file>[^,\]]+), trang (?P<page>\d+), (?P<id>E-[0-9a-f]{12})\]"
+)
+CLAIM_TAGS_AT_END = re.compile(r"(?:\s*\[tổng hợp: [^\]]+\])+\s*$")
+NUMBER = re.compile(r"\d+(?:[.,]\d+)?")
 TAG = re.compile(
     r"\s*\[nguồn: (?P<file>[^,\]]+), trang (?P<page>\d+), (?P<id>E-[0-9a-f]{12})\]\s*$"
 )
@@ -19,6 +24,33 @@ TAG = re.compile(
 
 def _block(code: str, section_id: str | None, detail: str = "") -> Finding:
     return Finding(code=code, severity="block", section_id=section_id, detail=detail)
+
+
+def _numbers(text: str) -> set[str]:
+    return {n.replace(",", ".") for n in NUMBER.findall(text)}
+
+
+def _check_claim(
+    text: str, sid: str, evidence: Mapping[str, EvidenceRecord], knowledge: KnowledgePort
+) -> list[Finding]:
+    """A synthesized sentence: every tag must resolve to a verified record, and no number may appear
+    that is absent from the cited quotes. Whether the wording is faithful is left to a person."""
+    tail = CLAIM_TAGS_AT_END.search(text)
+    body = text[: tail.start()].strip()
+    cited = []
+    for tag in CLAIM_TAG.finditer(tail.group()):
+        record = evidence.get(tag["id"])
+        prov = record.provenance if record else None
+        if prov is None or prov.file != tag["file"] or prov.page != int(tag["page"]):
+            return [_block("E_SOURCE_MISMATCH", sid, tag["id"])]
+        if not knowledge.verify(record):
+            return [_block("E_SOURCE_UNVERIFIED", sid, tag["id"])]
+        cited.append(record.text)
+    if not body:
+        return [_block("E_UNSOURCED_TEXT", sid)]
+    if not _numbers(body) <= _numbers(" ".join(cited)):
+        return [_block("E_CLAIM_NUMBER_UNSUPPORTED", sid)]
+    return []
 
 
 def _check_text(
@@ -31,6 +63,8 @@ def _check_text(
 ) -> list[Finding]:
     if kind_of(text) is not None:
         return []
+    if CLAIM_TAGS_AT_END.search(text):
+        return _check_claim(text, sid, evidence, knowledge)
     tag = TAG.search(text)
     if tag is None:
         if authored:
@@ -76,6 +110,7 @@ def check_provenance(
                 findings += _check_text(text, sid, by_id, knowledge, authored, is_cell)
                 if (tag := TAG.search(text)) is not None:
                     cited.add(tag["file"])
+                cited.update(t["file"] for t in CLAIM_TAG.finditer(text))
     sources = draft["meta"].get("referenceSources", [])
     findings += [
         _block("E_REFERENCE_MISSING", None, f)

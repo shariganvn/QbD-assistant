@@ -18,7 +18,7 @@ IntakeRequest, DraftSection, GapEntry
   contract of tools/pharma-dev-draft. Every leaf section of its outline is a gap with a marked reason,
   except the free-form sections listed in `SECTION_QUERIES`, which become `covered` only when
   `knowledge.search` returns sentences; each such paragraph is the retrieved sentence verbatim plus
-  `[nguồn: file, trang, id]`. No language model is used in this slice. A combination of substances raises
+  `[nguồn: file, trang, id]`. A language model is used only when a provider is configured (`llm=`); today that is agent 4.1 (API Properties) for P.2.1.1.1 and P.2.1.1.2. A model sentence is published only with a `[tổng hợp: file, trang, id]` tag per cited record and only if every number in it appears in the cited quotes; a provider failure raises `AgentInfrastructureError` (exit 9), an unusable answer leaves the agent's sections as marked gaps. The registry (`agents/registry.py`, `config/agents.json`) names which agents exist and which are pending, and gap reasons say so. A combination of substances raises
   `DraftingRefused("E_COMBINATION_NOT_SUPPORTED")`. Sections the outline binds to a second or later strength are written as a plain `Không áp dụng: ...`
   reason without a marker and are not in the gap register. The draft states what it lacks: strength and source
   file carry the gap marker, and `notApplicableSections` lists the second-strength sections. `DraftRun`
@@ -62,4 +62,5 @@ model writes.
 | 2026-10-21 | Scaffold | Module boundary accepted in the ADR | - |
 | 2026-10-21 | Intake validation and configuration data | Input rules and the 38-form catalogue as data, not code | - |
 | 2026-10-21 | Thin-slice assembler and `run` command | Three inputs to a valid, gap-flagged draft end to end | - |
+| 2026-10-21 | Agent registry, agent 4.1, provider wiring | First model agent through the shared ask/claim-check path; the rest stay pending and named | - |
 | 2026-10-21 | CQA proposal and confirmation gate | Dependent sections wait for a person's confirmation bound to the input | - |

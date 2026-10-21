@@ -7,6 +7,9 @@ from datetime import date
 from typing import Any
 
 from qbd_core.modules.dossier_drafting import config
+from qbd_core.modules.dossier_drafting.agents import api_properties
+from qbd_core.modules.dossier_drafting.agents.llm import LlmSetup
+from qbd_core.modules.dossier_drafting.agents.registry import agents_for_section, status_of
 from qbd_core.modules.dossier_drafting.cqa import (
     ConfirmedCqa,
     CqaConfirmation,
@@ -21,8 +24,8 @@ from qbd_core.modules.dossier_drafting.outline import (
 )
 from qbd_core.modules.evidence.api import KnowledgePort
 from qbd_core.shared.contracts import Classification, EvidenceRecord, GapEntry
+from qbd_core.shared.markers import GAP_LABEL
 
-GAP_LABEL = "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
 # Free-form sections the slice may fill from retrieved sentences. {substance} is the only variable.
 SECTION_QUERIES = {
     "P.2.1.1.2": "{substance} phân loại BCS tính thấm sinh khả dụng",
@@ -50,6 +53,8 @@ class DraftRun:
     # "pending" until a person confirms the CQA set; sections that need it stay gaps meanwhile.
     cqa_status: str = "pending"
     confirmed_cqa: ConfirmedCqa | None = None
+    # One line per agent that was started or held back, for the report; never part of the draft.
+    agent_log: tuple[str, ...] = ()
 
 
 def _group_reason(section_id: str, group_id: str) -> str:
@@ -92,6 +97,27 @@ def _cqa_blocks(confirmed: ConfirmedCqa, intake: IntakeResult) -> list[dict[str,
     return blocks
 
 
+def _agent_note(section_id: str, ran: set[str]) -> str:
+    agents = agents_for_section(section_id)
+    if not agents:
+        return "chưa có agent phụ trách mục này"
+    notes = []
+    for agent in agents:
+        status, _ = status_of(agent.id)
+        if status == "pending":
+            notes.append(f"agent {agent.id} ({agent.name}) chưa được dựng")
+        elif agent.id in ran:
+            notes.append(f"agent {agent.id} đã chạy nhưng chưa có kết quả dùng được")
+        else:
+            notes.append(f"agent {agent.id} ({agent.name}) cần nhà cung cấp mô hình, chưa cấu hình")
+    return "; ".join(notes)
+
+
+def _property_rows(outline: dict[str, Any]) -> list[str]:
+    section = next(s for s in outline["sections"] if s["id"] == api_properties.PROPERTIES_SECTION)
+    return list(section["form"]["tables"][0]["rows"])
+
+
 def _paragraph(record: EvidenceRecord) -> dict[str, str]:
     prov = record.provenance
     return {
@@ -106,6 +132,7 @@ def assemble_draft(
     today: date,
     outline: dict[str, Any] | None = None,
     confirmation: CqaConfirmation | None = None,
+    llm: LlmSetup | None = None,
 ) -> DraftRun:
     if COMBINATION_OUT_OF_SOP in intake.scope_flags:
         raise DraftingRefused("E_COMBINATION_NOT_SUPPORTED")
@@ -116,6 +143,16 @@ def assemble_draft(
     sections: list[dict[str, Any]] = []
     gaps: list[GapEntry] = []
     not_applicable = set(per_strength_beyond_first(outline))
+    agent_log: list[str] = []
+    ran: set[str] = set()
+    by_agent: dict[str, dict[str, Any]] = {}
+    if llm is not None:
+        labels = _property_rows(outline)
+        result = api_properties.run(llm, intake, knowledge, labels)
+        ran.add(api_properties.AGENT_ID)
+        by_agent = result.sections
+        used.update(result.cited)
+        agent_log += result.notes or [f"agent {api_properties.AGENT_ID}: ran"]
     for section in leaf_sections(outline):
         sid = section["id"]
         if sid in not_applicable:
@@ -126,6 +163,9 @@ def assemble_draft(
             sections.append(
                 {"id": sid, "status": "covered", "blocks": _cqa_blocks(confirmed, intake)}
             )
+            continue
+        if sid in by_agent:
+            sections.append(by_agent[sid])
             continue
         template = SECTION_QUERIES.get(sid)
         hits = (
@@ -139,7 +179,7 @@ def assemble_draft(
                 {"id": sid, "status": "covered", "blocks": [_paragraph(h) for h in hits]}
             )
             continue
-        reason = "chưa có bằng chứng nội bộ và chưa có agent soạn mục này"
+        reason = f"chưa có bằng chứng nội bộ; {_agent_note(sid, ran)}"
         if sid == CQA_SECTION:
             reason = "bộ CQA chưa được người xác nhận ở cổng 3.5"
         extra = _group_reason(sid, intake.group)
@@ -164,4 +204,6 @@ def assemble_draft(
     draft = {"schemaVersion": "1.0", "meta": meta, "sections": sections}
     restricted = any(r.classification is not Classification.A for r in evidence)
     status = "confirmed" if confirmed else "pending"
-    return DraftRun(intake, draft, evidence, tuple(gaps), restricted, status, confirmed)
+    return DraftRun(
+        intake, draft, evidence, tuple(gaps), restricted, status, confirmed, tuple(agent_log)
+    )

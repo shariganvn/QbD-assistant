@@ -1,5 +1,6 @@
 """Public entry points of the dossier_drafting module. Other modules import only from here."""
 
+from qbd_core.modules.dossier_drafting.agents.llm import AgentInfrastructureError, LlmSetup
 from qbd_core.modules.dossier_drafting.assemble import (
     CQA_SECTION,
     DraftingRefused,
@@ -32,6 +33,8 @@ from qbd_core.modules.dossier_drafting.models import (
 from qbd_core.modules.dossier_drafting.outline import leaf_sections, load_outline
 
 __all__ = [
+    "AgentInfrastructureError",
+    "LlmSetup",
     "COMBINATION_OUT_OF_SOP",
     "CQA_SECTION",
     "ConfirmedCqa",

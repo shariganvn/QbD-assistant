@@ -1,5 +1,6 @@
 import copy
 import dataclasses
+import re
 from datetime import date
 from pathlib import Path
 
@@ -263,3 +264,65 @@ def test_a_fully_covered_item_is_for_review_and_an_all_na_item_is_na():
 
     report = evaluate_run(with_draft(make_run("eu"), cover), kb())
     assert {c.no: c.status for c in report.checklist}[14] == "review"
+
+
+def claim(text, *records):
+    tags = "".join(
+        f" [tổng hợp: {r.provenance.file}, trang {r.provenance.page}, {r.id}]" for r in records
+    )
+    return {"type": "paragraph", "text": text + tags}
+
+
+def test_a_synthesized_sentence_with_verified_tags_and_supported_numbers_passes():
+    run = make_run()
+    record = run.evidence[0]
+    quote_numbers = " ".join(re.findall(r"\d+", record.text))
+    text = "Tóm lại, nguồn nêu chuyện này" + (f" ({quote_numbers})" if quote_numbers else "") + "."
+    run = with_draft(run, lambda d: section(d, "P.2.1.1.2")["blocks"].append(claim(text, record)))
+    assert evaluate_run(run, kb()).passed
+
+
+@pytest.mark.parametrize(
+    ("text", "code"),
+    [("Giá trị là 98,6 mg.", "E_CLAIM_NUMBER_UNSUPPORTED"), ("   ", "E_UNSOURCED_TEXT")],
+)
+def test_a_synthesized_sentence_with_an_invented_number_is_blocked(text, code):
+    run = make_run()
+    record = run.evidence[0]
+    run = with_draft(run, lambda d: section(d, "P.2.1.1.2")["blocks"].append(claim(text, record)))
+    assert code in codes(evaluate_run(run, kb()))
+
+
+def test_a_synthesized_sentence_citing_an_unknown_or_unverified_record_is_blocked():
+    run = make_run()
+    record = run.evidence[0]
+    ghost = EvidenceRecord(
+        id="E-000000000000",
+        text="x",
+        provenance=Provenance(file=record.provenance.file, page=record.provenance.page, quote="x"),
+    )
+    run2 = with_draft(run, lambda d: section(d, "P.2.1.1.2")["blocks"].append(claim("Câu.", ghost)))
+    assert "E_SOURCE_MISMATCH" in codes(evaluate_run(run2, kb()))
+    forged = EvidenceRecord(
+        id=record.id,
+        text=record.text,
+        provenance=Provenance(file=record.provenance.file, page=2, quote="Một câu không có thật."),
+    )
+    run3 = dataclasses.replace(
+        with_draft(run, lambda d: section(d, "P.2.1.1.2")["blocks"].append(claim("Câu.", record))),
+        evidence=(forged, *run.evidence[1:]),
+    )
+    assert {"E_SOURCE_UNVERIFIED", "E_SOURCE_MISMATCH"} & set(codes(evaluate_run(run3, kb())))
+
+
+def test_a_cited_synthesis_file_must_be_listed_as_a_reference():
+    run = make_run()
+    record = [r for r in run.evidence if r.provenance.file == "SYN-B"][0]
+
+    def edit(draft):
+        section(draft, "P.2.1.1.2")["blocks"].append(claim("Câu.", record))
+        draft["meta"]["referenceSources"] = ["Kho, file SYN-A"]
+
+    both = with_draft(run, edit)
+    refs = [f for f in evaluate_run(both, kb()).blocking if f.code == "E_REFERENCE_MISSING"]
+    assert "SYN-B" in [f.detail for f in refs]

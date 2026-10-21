@@ -6,6 +6,7 @@ import re
 from collections.abc import Iterator
 from typing import Any
 
+GAP_LABEL = "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]"
 GAP_PREFIX = "[CHƯA CÓ DỮ LIỆU"
 DECISION_PREFIX = "[CẦN QUYẾT ĐỊNH"
 MARKER = re.compile(r"\[(?:CHƯA CÓ DỮ LIỆU|CẦN QUYẾT ĐỊNH)[^\]]*\]")
