@@ -1,0 +1,812 @@
+{
+ "typedNumberPatterns": [
+  [
+   "other",
+   320
+  ],
+  [
+   "P.9.9.9.9.9.",
+   11
+  ],
+  [
+   "P.9.9.9.9. B",
+   5
+  ],
+  [
+   "P.9.9.9.9. F",
+   3
+  ],
+  [
+   "P.9.9.9.9. P",
+   2
+  ],
+  [
+   "P.9.9.9.9. C",
+   2
+  ],
+  [
+   "P.9.9.9.9. E",
+   2
+  ],
+  [
+   "P.9Pharmaceu",
+   1
+  ]
+ ],
+ "paragraphGroups": [
+  {
+   "count": 138,
+   "signature": [
+    "both",
+    [
+     [
+      "after",
+      "0"
+     ],
+     [
+      "before",
+      "60"
+     ],
+     [
+      "line",
+      "360"
+     ]
+    ],
+    [],
+    null,
+    null,
+    [
+     "font=Arimo",
+     "sz=10.0"
+    ]
+   ],
+   "samples": [
+    "Aaaaaaaaaa aaaaaaaa aa a aaaa-aaaa",
+    "Aaaaaaaaaa aaaaaaaa aaaaaaaaaa aaa",
+    "Aaaaaaaaaa aaaaaaaa aaaaa aaaaaaaa"
+   ]
+  },
+  {
+   "count": 70,
+   "signature": [
+    "center",
+    [
+     [
+      "after",
+      "0"
+     ],
+     [
+      "before",
+      "60"
+     ],
+     [
+      "line",
+      "360"
+     ]
+    ],
+    [],
+    null,
+    null,
+    [
+     "b",
+     "font=Arimo",
+     "sz=10.0"
+    ]
+   ],
+   "samples": [
+    "Table 9. Aaaaaaaa aaaaaaaaaa aa AA",
+    "Figure 9. AAA aaaaaa aaa aaaaaaaaa",
+    "Table 9. Aaaaaaaaaa aa aaaaaaaaa a"
+   ]
+  },
+  {
+   "count": 69,
+   "signature": [
+    "both",
+    [
+     [
+      "after",
+      "0"
+     ],
+     [
+      "before",
+      "60"
+     ],
+     [
+      "line",
+      "360"
+     ]
+    ],
+    [],
+    null,
+    null,
+    [
+     "b",
+     "font=Arimo",
+     "sz=10.0"
+    ]
+   ],
+   "samples": [
+    "A.9.9.9. Aaaa Aaaaaaaaa",
+    "A.9.9.9.9. Aaaaaaaaaaaaaaa aaaaaaa",
+    "Aaaaaaaaaaaa"
+   ]
+  },
+  {
+   "count": 17,
+   "signature": [
+    "both",
+    [
+     [
+      "after",
+      "0"
+     ],
+     [
+      "before",
+      "60"
+     ],
+     [
+      "line",
+      "360"
+     ]
+    ],
+    [],
+    null,
+    null,
+    [
+     "font=Arimo",
+     "i",
+     "sz=10.0",
+     "u"
+    ]
+   ],
+   "samples": [
+    "Aaaaaaa: Aa aaa aaaaaaaa aaaa AAA ",
+    "Aaaaaaaaaaaaa aaaaaaa:",
+    "Aaaaaaaaaaaaa aaaaaaa:"
+   ]
+  },
+  {
+   "count": 17,
+   "signature": [
+    "both",
+    [
+     [
+      "after",
+      "0"
+     ],
+     [
+      "line",
+      "360"
+     ]
+    ],
+    [],
+    null,
+    null,
+    [
+     "font=Arimo",
+     "sz=10.0"
+    ]
+   ],
+   "samples": [
+    "Aaaaaaaaa: Aaaaaaaaa 9 (aaaaaaa)",
+    "Aaaaaaaaaaa aaaaaa: 999 aA aa 9.9 ",
+    "Aaaaaaaa aaaaa: 99 aaa"
+   ]
+  },
+  {
+   "count": 7,
+   "signature": [
+    null,
+    [
+     [
+      "after",
+      "200"
+     ],
+     [
+      "line",
+      "276"
+     ]
+    ],
+    [
+     [
+      "hanging",
+      "709"
+     ],
+     [
+      "left",
+      "709"
+     ]
+    ],
+    null,
+    null,
+    [
+     "b",
+     "font=Arimo",
+     "sz=10.0"
+    ]
+   ],
+   "samples": [
+    "A.9Aaaaaaaaaaaaaa Aaaaaaaaaaa",
+    "A.9.9Aaaaaaaaaa aa aaa Aaaa Aaaaaa",
+    "A.9.9Aaaa Product"
+   ]
+  },
+  {
+   "count": 7,
+   "signature": [
+    "both",
+    [
+     [
+      "after",
+      "0"
+     ],
+     [
+      "before",
+      "60"
+     ],
+     [
+      "line",
+      "336"
+     ]
+    ],
+    [],
+    null,
+    null,
+    [
+     "font=Arimo",
+     "sz=10.0"
+    ]
+   ],
+   "samples": [
+    "- Aaaa aaaaaaaaaa aaaaaaaa, aaaaaa",
+    "- Aaaa aaaaaaa aaaaaaaa aaaaaaaaa ",
+    "- Aaaa aaaaaaaaa aaaaaaaaa aaaaaa "
+   ]
+  },
+  {
+   "count": 5,
+   "signature": [
+    "both",
+    [
+     [
+      "after",
+      "0"
+     ],
+     [
+      "line",
+      "360"
+     ]
+    ],
+    [],
+    null,
+    null,
+    [
+     "font=Arimo",
+     "i",
+     "sz=10.0"
+    ]
+   ],
+   "samples": [
+    "*Aaa aaaaa 9999999 aaa aaaaaaa aaa",
+    "*Aaa aaaaa 9999999 aaa aaaaaaa aaa",
+    "."
+   ]
+  },
+  {
+   "count": 4,
+   "signature": [
+    null,
+    [
+     [
+      "after",
+      "0"
+     ],
+     [
+      "before",
+      "60"
+     ],
+     [
+      "line",
+      "240"
+     ]
+    ],
+    [],
+    null,
+    null,
+    [
+     "b",
+     "font=Arimo",
+     "i",
+     "sz=10.0"
+    ]
+   ],
+   "samples": [
+    "Aaaaaaaaaa aaaaaaaa: aaaa 9: Aaaaa",
+    "Aaaaaaaaaaaaaaaa aaaaaaaaa: aaaa 9",
+    "Aaaaaaa aaaaaaaa aaaaaaaaa: aaaa 9"
+   ]
+  },
+  {
+   "count": 4,
+   "signature": [
+    "both",
+    [
+     [
+      "after",
+      "0"
+     ],
+     [
+      "before",
+      "60"
+     ],
+     [
+      "line",
+      "360"
+     ]
+    ],
+    [],
+    [
+     "num",
+     "23",
+     "0"
+    ],
+    null,
+    [
+     "font=Arimo",
+     "sz=10.0"
+    ]
+   ],
+   "samples": [
+    "Aa aaaaaaaaaaaaa aaa aaaaaa aaaaaa",
+    "Aa aaaaaaa aaaaaaa, aaa aaaaaaaa a",
+    "Aa aaaaaaa aaaaaaaaa aaaaaaa, aaa "
+   ]
+  },
+  {
+   "count": 3,
+   "signature": [
+    "both",
+    [
+     [
+      "after",
+      "0"
+     ],
+     [
+      "before",
+      "60"
+     ],
+     [
+      "line",
+      "360"
+     ]
+    ],
+    [],
+    null,
+    null,
+    [
+     "b",
+     "font=Arimo",
+     "i",
+     "sz=10.0",
+     "u"
+    ]
+   ],
+   "samples": [
+    "Aaaaaaaaaa 9: Aaaaaaaaaaa aaaaaaaa",
+    "Aaaaaaaaaa 9: aaaaaaaaaaa aaaaaaaa",
+    "Aaaaaaaaaa 9: Aaaaaaaaaaa aaaaaaaa"
+   ]
+  },
+  {
+   "count": 2,
+   "signature": [
+    null,
+    [
+     [
+      "after",
+      "0"
+     ],
+     [
+      "before",
+      "60"
+     ],
+     [
+      "line",
+      "360"
+     ]
+    ],
+    [],
+    null,
+    null,
+    [
+     "b",
+     "font=Arimo",
+     "sz=10.0"
+    ]
+   ],
+   "samples": [
+    "A.9.9.9. Aaaaaaaaaa",
+    "A.9.9.9.9. Aaaaaaaaaaaaaa aaa aaaa"
+   ]
+  },
+  {
+   "count": 2,
+   "signature": [
+    "both",
+    [
+     [
+      "after",
+      "0"
+     ],
+     [
+      "before",
+      "60"
+     ],
+     [
+      "line",
+      "360"
+     ]
+    ],
+    [],
+    null,
+    null,
+    [
+     "font=Arimo",
+     "i",
+     "sz=10.0"
+    ]
+   ],
+   "samples": [
+    "* Aaaaaaaaaaa aaa aaaaaaa aaaaaaaa",
+    "(+): Aaaa aaaaaa aaaaaaa"
+   ]
+  },
+  {
+   "count": 2,
+   "signature": [
+    "both",
+    [
+     [
+      "before",
+      "60"
+     ],
+     [
+      "line",
+      "360"
+     ]
+    ],
+    [],
+    [
+     "num",
+     "11",
+     "0"
+    ],
+    null,
+    [
+     "b",
+     "font=Arimo",
+     "sz=10.0"
+    ]
+   ],
+   "samples": [
+    "Aaa aaaaaa aa aaaaaaaaaaa aaaa: aa",
+    "Aaa aaaaaaaaa aa aaaaaaaaaaa aaa a"
+   ]
+  }
+ ],
+ "numberingUsed": {
+  "11": [
+   {
+    "lvl": "0",
+    "fmt": "bullet",
+    "text": "-",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "720",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "1",
+    "fmt": "bullet",
+    "text": "o",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "1440",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "2",
+    "fmt": "bullet",
+    "text": "",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "2160",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "3",
+    "fmt": "bullet",
+    "text": "",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "2880",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "4",
+    "fmt": "bullet",
+    "text": "o",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "3600",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   }
+  ],
+  "12": [
+   {
+    "lvl": "0",
+    "fmt": "bullet",
+    "text": "",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "720",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "1",
+    "fmt": "bullet",
+    "text": "o",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "1440",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "2",
+    "fmt": "bullet",
+    "text": "",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "2160",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "3",
+    "fmt": "bullet",
+    "text": "",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "2880",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "4",
+    "fmt": "bullet",
+    "text": "o",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "3600",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   }
+  ],
+  "23": [
+   {
+    "lvl": "0",
+    "fmt": "bullet",
+    "text": "-",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "720",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "1",
+    "fmt": "bullet",
+    "text": "o",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "1440",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "2",
+    "fmt": "bullet",
+    "text": "",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "2160",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "3",
+    "fmt": "bullet",
+    "text": "",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "2880",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "4",
+    "fmt": "bullet",
+    "text": "o",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "3600",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   }
+  ],
+  "26": [
+   {
+    "lvl": "0",
+    "fmt": "bullet",
+    "text": "+",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "1080",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "1",
+    "fmt": "bullet",
+    "text": "o",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "1800",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "2",
+    "fmt": "bullet",
+    "text": "",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "2520",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "3",
+    "fmt": "bullet",
+    "text": "",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "3240",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "4",
+    "fmt": "bullet",
+    "text": "o",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "3960",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   }
+  ],
+  "27": [
+   {
+    "lvl": "0",
+    "fmt": "bullet",
+    "text": "-",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "540",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "1",
+    "fmt": "bullet",
+    "text": "o",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "1260",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "2",
+    "fmt": "bullet",
+    "text": "▪",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "1980",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "3",
+    "fmt": "bullet",
+    "text": "●",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "2700",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "4",
+    "fmt": "bullet",
+    "text": "o",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "3420",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   }
+  ],
+  "30": [
+   {
+    "lvl": "0",
+    "fmt": "bullet",
+    "text": "-",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "720",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "1",
+    "fmt": "bullet",
+    "text": "o",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "1440",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "2",
+    "fmt": "bullet",
+    "text": "",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "2160",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "3",
+    "fmt": "bullet",
+    "text": "",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "2880",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   },
+   {
+    "lvl": "4",
+    "fmt": "bullet",
+    "text": "o",
+    "suff": null,
+    "ind": {
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}left": "3600",
+     "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hanging": "360"
+    }
+   }
+  ]
+ }
+}

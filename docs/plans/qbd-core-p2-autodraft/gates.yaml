@@ -181,3 +181,25 @@ gates:
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-10.txt
     owner_step: "06"
     status: unverified
+
+  - id: G-11
+    title: Page style follows the department sample
+    invariant: >
+      The HTML page carries the format tokens measured from the department's real P.2 sample (font, size,
+      line spacing, heading style, table borders, header fill, risk-level colours, A4 margins, page
+      number), verified in a browser and in a generated PDF, and the tokens contain no content of the
+      sample.
+    boundary_owner: rendering
+    fixture: docs/reports/qbd-core-p2-autodraft/sample-docx/format-tokens.json (format tokens only)
+    command: >
+      python -m pytest qbd_core/modules/rendering -q
+    expected: >
+      exit 0. CSS contains every measured token; computed styles in Chromium are 10 pt, 1.5 line height,
+      -1.25 cm indent on P.2.n headings, header fill rgb(166,166,166); risk cells are green, yellow and
+      red.
+    negative_cases:
+      - a token removed from the CSS -> test names it
+      - a risk level outside the outline's scale gets no fill
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/p5-6-format.txt
+    owner_step: "05"
+    status: pass

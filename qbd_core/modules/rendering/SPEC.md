@@ -33,10 +33,17 @@ columns, no header row) directly before the first section; tables the outline ma
 header row; a section that does not apply is a plain sentence (`Không áp dụng: ...`), not a gap box, and
 is not a data request. Kept on purpose although the sample has none: the status line, scope notice, facts
 table, registers and blank sign-off table (the SOP needs the draft label).
+Measured from the real .docx (`docs/reports/qbd-core-p2-autodraft/sample-docx/README.md`) and applied:
+Arimo 10 pt (fallback Arial), justified, 1.5 line spacing, headings bold at body size, `P.2.n` with a
+1.25 cm hanging indent, Table Grid 0.5 pt black borders, grey `#A6A6A6` header cells, risk cells green
+`#00B050` / yellow `#FFFF00` / red `#FF0000` (lowest, middle, highest level of the outline's scale),
+A4 with left 2.5 cm, right 1.5 cm, bottom 3 cm, a one-line header and the page number at the bottom
+right. Checked in headless Chromium: computed styles match, the PDF is A4 with a 2.5 cm left margin,
+the header text and the page number.
 Not applied yet: table and figure captions (`Table N.` bold above, `Figure N.` italic below; table blocks
 have no caption field in the Stage B contract, which belongs to tools/pharma-dev-draft), figure drawing,
-merged group cells, risk-level colours, fonts, sizes, borders, page header and footer. These need the
-real `.docx` or a contract change and are listed in section 7 of the spec file.
+merged group cells, the sample's two-table header block, landscape sections and forced page breaks. Captions
+need a contract change; the rest has no marker in the draft.
 
 ## Export buttons
 - **PDF**: `window.print()`; a print stylesheet hides the toolbar. The user picks "Save as PDF".
@@ -66,8 +73,7 @@ outline `tools/pharma-dev-draft/schemas/p2-outline.json` (read as data). Without
 
 ## Non-goals
 Native `.docx`, figures and images (stop the render until drawn), judging whether a draft is good enough
-(quality_gate), signing off (a person does), matching the fonts, colours and page layout of the department sample (waits for
-the real .docx).
+(quality_gate), signing off (a person does), the sample's company header block, landscape sections and forced page breaks.
 
 ## Spec history
 | Date | Change | Rationale | PR |

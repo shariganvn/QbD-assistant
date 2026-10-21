@@ -229,6 +229,14 @@ def test_browser_export_buttons(tmp_path):
         assert download.value.suggested_filename == "p2-orientation-draft.doc"
         assert text.startswith("<html xmlns:o=") and 'class="scope-notice"' in text
         assert "btn-word" not in text
+        computed = page.evaluate(
+            """() => {
+              const q = (s) => getComputedStyle(document.querySelector(s));
+              return [q('body').fontSize, q('body').lineHeight, q('h2').textIndent,
+                      q('th').backgroundColor];
+            }"""
+        )
+        assert computed == ["13.3333px", "20px", "-47.2441px", "rgb(166, 166, 166)"]
         page.emulate_media(media="print")
         assert page.eval_on_selector(".toolbar", "e => getComputedStyle(e).display") == "none"
         assert page.pdf(format="A4")[:4] == b"%PDF"
@@ -312,3 +320,45 @@ def test_a_plain_reason_is_a_paragraph_and_a_marked_gap_keeps_its_box():
 def test_header_strip_names_product_module_and_date():
     page = build_html(synthetic_draft(), synthetic_outline())
     assert "<strong>Module:</strong> 3.2.P.2" in page and "2026-10-21" in page
+
+
+def test_css_carries_the_measured_sample_tokens():
+    from qbd_core.modules.rendering.html_doc import CSS
+
+    for token in (
+        "Arimo",
+        "font-size:10pt",
+        "line-height:1.5",
+        "text-align:justify",
+        "text-indent:-1.25cm",
+        ".5pt solid #000",
+        "background:#a6a6a6",
+        "td.risk-low{background:#00b050}",
+        "td.risk-mid{background:#ffff00}",
+        "td.risk-high{background:#f00}",
+        "@page{size:A4;margin:3.5cm 1.5cm 3cm 2.5cm",
+        "content:counter(page)",
+    ):
+        assert token in CSS, token
+
+
+def test_risk_levels_map_lowest_green_highest_red_and_the_rest_yellow():
+    from qbd_core.modules.rendering.html_blocks import risk_classes
+
+    assert risk_classes({"riskScale": ["Thấp", "Trung bình", "Cao"]}) == {
+        "Thấp": "risk-low",
+        "Trung bình": "risk-mid",
+        "Cao": "risk-high",
+    }
+    assert risk_classes({"riskScale": ["a", "b"]}) == {"a": "risk-low", "b": "risk-high"}
+    assert risk_classes({}) == {}
+
+
+def test_cells_get_risk_fill_or_long_justification():
+    from qbd_core.modules.rendering.html_blocks import cell_class, table
+
+    risk = {"Cao": "risk-high"}
+    assert cell_class(" Cao ", risk) == "risk-high"
+    assert cell_class("ngắn", risk) == "" and cell_class("x" * 81, risk) == "long"
+    page = table(["a"], [["Cao"], ["Thấp"]], risk=risk)
+    assert page.count('class="risk-high"') == 1

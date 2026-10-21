@@ -1,0 +1,523 @@
+{
+ "docDefaults": {
+  "rPr": {
+   "font": "minorHAnsi",
+   "size_pt": 11.0
+  },
+  "pPr": {
+   "spacing": {
+    "after": "160",
+    "line": "259",
+    "lineRule": "auto"
+   }
+  }
+ },
+ "paragraphStylesUsed": {
+  "(none)": {
+   "count": 5808
+  },
+  "oancuaDanhsach": {
+   "count": 7,
+   "name": "List Paragraph",
+   "type": "paragraph",
+   "basedOn": "Binhthng",
+   "rPr": {
+    "font": "Times New Roman"
+   },
+   "pPr": {
+    "spacing": {
+     "after": "0",
+     "line": "240",
+     "lineRule": "auto"
+    },
+    "ind": {
+     "left": "720"
+    }
+   }
+  }
+ },
+ "tableStylesUsed": {
+  "LiBang": {
+   "count": 52,
+   "name": "Table Grid"
+  },
+  "(none)": {
+   "count": 21,
+   "name": null
+  },
+  "TableGrid2": {
+   "count": 1,
+   "name": "Table Grid2"
+  }
+ },
+ "sections": [
+  [
+   "{\"footer\": [\"default\"], \"header\": [\"default\"], \"margins\": {\"bottom\": \"1701\", \"footer\": \"850\", \"header\": \"850\", \"left\": \"1418\", \"right\": \"851\", \"top\": \"3119\"}, \"page\": {\"h\": \"16838\", \"w\": \"11906\"}, \"titlePg\": false}",
+   1
+  ],
+  [
+   "{\"footer\": [], \"header\": [\"default\"], \"margins\": {\"bottom\": \"1701\", \"footer\": \"851\", \"header\": \"851\", \"left\": \"1418\", \"right\": \"851\", \"top\": \"3119\"}, \"page\": {\"h\": \"11906\", \"orient\": \"landscape\", \"w\": \"16838\"}, \"titlePg\": false}",
+   1
+  ],
+  [
+   "{\"footer\": [], \"header\": [\"default\"], \"margins\": {\"bottom\": \"1701\", \"footer\": \"850\", \"header\": \"850\", \"left\": \"1418\", \"right\": \"851\", \"top\": \"3119\"}, \"page\": {\"h\": \"16838\", \"w\": \"11906\"}, \"titlePg\": false}",
+   1
+  ],
+  [
+   "{\"footer\": [], \"header\": [\"default\"], \"margins\": {\"bottom\": \"1701\", \"footer\": \"850\", \"header\": \"850\", \"left\": \"1418\", \"right\": \"851\", \"top\": \"3119\"}, \"page\": {\"h\": \"16839\", \"w\": \"11907\"}, \"titlePg\": false}",
+   1
+  ]
+ ],
+ "headersFooters": {
+  "word/footer1.xml": {
+   "paragraphs": 1,
+   "tables": 0,
+   "images": 0,
+   "fields": [
+    "PAGE"
+   ],
+   "maskedText": [
+    "9"
+   ],
+   "firstParagraph": {
+    "pPr": {
+     "jc": "right"
+    },
+    "rPr": {
+     "font": "Arimo",
+     "size_pt": 10.0
+    }
+   }
+  },
+  "word/header1.xml": {
+   "paragraphs": 10,
+   "tables": 2,
+   "images": 0,
+   "fields": [],
+   "maskedText": [
+    "Aaaaaaaaaa aaaaaaaa",
+    "9 aa ",
+    "Aaaa-aaaaaa aaaaaaa",
+    "Aaaa AA. Aaaaaaa"
+   ],
+   "firstParagraph": {
+    "pPr": {
+     "spacing": {
+      "line": "276",
+      "lineRule": "auto"
+     }
+    },
+    "rPr": {
+     "font": "Arimo",
+     "size_pt": 10.0,
+     "b": true
+    }
+   }
+  },
+  "word/header2.xml": {
+   "paragraphs": 10,
+   "tables": 2,
+   "images": 0,
+   "fields": [],
+   "maskedText": [
+    "Aaaaaaaaaa aaaaaaaa",
+    "9 aa ",
+    "Aaaa-aaaaaa aaaaaaa",
+    "Aaaa AA. Aaaaaaa"
+   ],
+   "firstParagraph": {
+    "pPr": {
+     "spacing": {
+      "line": "276",
+      "lineRule": "auto"
+     }
+    },
+    "rPr": {
+     "font": "Arimo",
+     "size_pt": 10.0,
+     "b": true
+    }
+   }
+  },
+  "word/header3.xml": {
+   "paragraphs": 10,
+   "tables": 2,
+   "images": 0,
+   "fields": [],
+   "maskedText": [
+    "Aaaaaaaaaa aaaaaaaa",
+    "9 aa ",
+    "Aaaa-aaaaaa aaaaaaa",
+    "Aaaa AA. Aaaaaaa"
+   ],
+   "firstParagraph": {
+    "pPr": {
+     "spacing": {
+      "line": "276",
+      "lineRule": "auto"
+     }
+    },
+    "rPr": {
+     "font": "Arimo",
+     "size_pt": 10.0,
+     "b": true
+    }
+   }
+  },
+  "word/header4.xml": {
+   "paragraphs": 10,
+   "tables": 2,
+   "images": 0,
+   "fields": [],
+   "maskedText": [
+    "Aaaaaaaaaa aaaaaaaa",
+    "9 aa ",
+    "Aaaa-aaaaaa aaaaaaa",
+    "Aaaa AA. Aaaaaaa"
+   ],
+   "firstParagraph": {
+    "pPr": {
+     "spacing": {
+      "line": "276",
+      "lineRule": "auto"
+     }
+    },
+    "rPr": {
+     "font": "Arimo",
+     "size_pt": 10.0,
+     "b": true
+    }
+   }
+  }
+ },
+ "headingStyles": {},
+ "headingText": {
+  "typedPattern": {},
+  "maskedExamples": []
+ },
+ "captions": {
+  "counts": {
+   "Table": 46,
+   "Figure": 29
+  },
+  "samples": [
+   {
+    "label": "Table",
+    "style": null,
+    "pPr": {
+     "spacing": {
+      "before": "60",
+      "after": "0",
+      "line": "360",
+      "lineRule": "auto"
+     },
+     "jc": "center"
+    },
+    "firstRuns": [
+     {
+      "font": "Arimo",
+      "size_pt": 10.0,
+      "b": true
+     },
+     {
+      "font": "Arimo",
+      "size_pt": 10.0,
+      "b": true
+     }
+    ],
+    "hasSEQ": false,
+    "masked": "Table 9. Aaaaaaaa aaaaaaa"
+   },
+   {
+    "label": "Figure",
+    "style": null,
+    "pPr": {
+     "spacing": {
+      "before": "60",
+      "after": "0",
+      "line": "360",
+      "lineRule": "auto"
+     },
+     "jc": "center"
+    },
+    "firstRuns": [
+     {
+      "font": "Arimo",
+      "size_pt": 10.0,
+      "b": true
+     },
+     {
+      "font": "Arimo",
+      "size_pt": 10.0,
+      "b": true
+     }
+    ],
+    "hasSEQ": false,
+    "masked": "Figure 9. AAA aaaaaa aaa "
+   }
+  ]
+ },
+ "tables": {
+  "count": 74,
+  "borders": [
+   [
+    "{}",
+    54
+   ],
+   [
+    "{\"bottom\": [\"single\", \"4\", \"000000\"], \"insideH\": [\"single\", \"4\", \"000000\"], \"insideV\": [\"single\", \"4\", \"000000\"], \"left\": [\"single\", \"4\", \"000000\"], \"right\": [\"single\", \"4\", \"000000\"], \"top\": [\"single\", \"4\", \"000000\"]}",
+    14
+   ],
+   [
+    "{\"bottom\": [\"single\", \"4\", \"auto\"], \"insideH\": [\"single\", \"4\", \"auto\"], \"insideV\": [\"single\", \"4\", \"auto\"], \"left\": [\"single\", \"4\", \"auto\"], \"right\": [\"single\", \"4\", \"auto\"], \"top\": [\"single\", \"4\", \"auto\"]}",
+    3
+   ],
+   [
+    "{\"bottom\": [\"single\", \"4\", \"000000\"], \"insideH\": [\"single\", \"4\", \"000000\"], \"insideV\": [\"nil\", null, null], \"left\": [\"nil\", null, null], \"right\": [\"nil\", null, null], \"top\": [\"single\", \"4\", \"000000\"]}",
+    2
+   ]
+  ],
+  "layout": {
+   "null": 74
+  },
+  "cellMargins": [
+   [
+    "{}",
+    70
+   ],
+   [
+    "{\"left\": \"57\", \"right\": \"57\"}",
+    3
+   ],
+   [
+    "{\"left\": \"74\", \"right\": \"74\"}",
+    1
+   ]
+  ],
+  "alignment": {
+   "null": 52,
+   "center": 20,
+   "right": 2
+  },
+  "headerRow": {
+   "noRepeat": 32,
+   "repeatHeader": 42
+  },
+  "fills": [
+   [
+    [
+     "body",
+     "00B050"
+    ],
+    113
+   ],
+   [
+    [
+     "firstRow",
+     "A6A6A6"
+    ],
+    102
+   ],
+   [
+    [
+     "body",
+     "A6A6A6"
+    ],
+    83
+   ],
+   [
+    [
+     "body",
+     "00CC00"
+    ],
+    24
+   ],
+   [
+    [
+     "body",
+     "FFFF00"
+    ],
+    20
+   ],
+   [
+    [
+     "firstRow",
+     "BFBFBF"
+    ],
+    16
+   ],
+   [
+    [
+     "body",
+     "BFBFBF"
+    ],
+    10
+   ],
+   [
+    [
+     "firstRow",
+     "808080"
+    ],
+    8
+   ]
+  ],
+  "riskWordFills": [
+   [
+    [
+     "Low",
+     "00B050"
+    ],
+    114
+   ],
+   [
+    [
+     "Low",
+     "00CC00"
+    ],
+    24
+   ],
+   [
+    [
+     "Medium",
+     "FFFF00"
+    ],
+    20
+   ],
+   [
+    [
+     "High",
+     "FF0000"
+    ],
+    5
+   ],
+   [
+    [
+     "Medium",
+     "A6A6A6"
+    ],
+    1
+   ]
+  ],
+  "cellFontSizes": [
+   [
+    10.0,
+    5486
+   ]
+  ],
+  "cellFonts": [
+   [
+    "Arimo",
+    5532
+   ]
+  ]
+ },
+ "bodyRuns": {
+  "fonts": [
+   [
+    "Arimo",
+    8114
+   ],
+   [
+    "Times New Roman",
+    84
+   ],
+   [
+    null,
+    24
+   ]
+  ],
+  "sizesPt": [
+   [
+    10.0,
+    8068
+   ],
+   [
+    10.5,
+    84
+   ],
+   [
+    null,
+    50
+   ],
+   [
+    8.0,
+    20
+   ]
+  ],
+  "colors": [
+   [
+    null,
+    8037
+   ],
+   [
+    "000000",
+    180
+   ],
+   [
+    "auto",
+    3
+   ],
+   [
+    "0D0D0D",
+    2
+   ]
+  ]
+ },
+ "figures": {
+  "placement": {
+   "inline": 37,
+   "anchor": 0
+  },
+  "extentsCm_cx_cy": [
+   [
+    [
+     15.9,
+     6.1
+    ],
+    2
+   ],
+   [
+    [
+     13.5,
+     7.0
+    ],
+    2
+   ],
+   [
+    [
+     13.5,
+     7.4
+    ],
+    2
+   ],
+   [
+    [
+     2.8,
+     0.0
+    ],
+    2
+   ],
+   [
+    [
+     9.3,
+     4.0
+    ],
+    1
+   ],
+   [
+    [
+     8.8,
+     4.3
+    ],
+    1
+   ]
+  ]
+ },
+ "fields": {
+  "HYPERLINK": 1
+ },
+ "pageBreaks": {
+  "br_page": 28,
+  "pageBreakBefore": 0
+ }
+}

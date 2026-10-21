@@ -1,12 +1,11 @@
-P5.6 evidence (HTML structure follows the P.2 sample), 2026-10-21
-Source of format: Notion page SAMPLE_P2-Sample_Acmecompany (Kho > Sample), read by a subagent that wrote docs/reports/qbd-core-p2-autodraft/sample-format-spec.md (format only, no data).
+P5.6 evidence, update with the real .docx, 2026-10-21
+Sample .docx supplied by the user; formatting read with extractors in sample-docx/ (format tokens only, masked text).
 
 $ python3 -m pytest qbd_core -q
-..............                                                           [100%]
-158 passed in 6.73s
+.................                                                        [100%]
+161 passed in 6.22s
 ruff: All checks passed!
 
-Visual check: page rendered and screenshotted in headless Chromium (title, header strip, status line, notice, facts table, H2/H3/H4 section headings, gap boxes, plain evidence paragraph with source tag).
-
-Applied: heading levels, header strip, abbreviation list before P.2.1, headerless tables per outline form, plain not-applicable sentence.
-Not applied (needs the real .docx or a Stage B contract change): table/figure captions, figure drawing, merged group cells, risk-level colours, fonts, sizes, borders, page header/footer, TOC.
+Browser (Chromium 141): body 13.3333px (10 pt), line-height 20px (1.5), h2 text-indent -47.2441px (-1.25 cm), th rgb(166,166,166), risk fills rgb(0,176,80) / rgb(255,255,0) / rgb(255,0,0), td border 0.5pt black.
+PDF (PyMuPDF): 2 pages, A4 (21.0 x 29.7 cm), left text margin 2.5 cm, header text 'bản nháp nội bộ, chưa FD duyệt' at the top, page number at the bottom right.
+Not verified: appearance in Microsoft Word of the downloaded .doc (the CSS is carried in it; Word ignores @page margin boxes and some CSS).

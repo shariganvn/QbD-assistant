@@ -11,6 +11,7 @@ from qbd_core.modules.rendering.html_blocks import (
     heading_text,
     level,
     marked,
+    risk_classes,
     table,
 )
 from qbd_core.modules.rendering.markers import kind_of
@@ -38,16 +39,30 @@ SIGNOFF_ROLES = ("Soạn thảo", "Rà soát FD", "Phê duyệt QA/PO")
 BLANK = "________________"
 SPOT_HEADERS = ["Mục", "Vị trí", "Nội dung"]
 CSS = (
-    "body{font-family:system-ui,sans-serif;max-width:60rem;margin:2rem auto;padding:0 1rem;"
-    "line-height:1.5;color:#1a1a1a}table{border-collapse:collapse;width:100%;margin:.5rem 0}"
-    "th,td{border:1px solid #999;padding:.3rem .5rem;vertical-align:top;text-align:left}"
-    ".scope-notice{border:1px solid #999;background:#f4f1e6;padding:.8rem 1rem;margin:1rem 0}"
-    ".gap{background:#fde8e8}.decision{background:#fff3cd}mark{padding:0 .15rem}"
+    # Measured from the department sample: Arimo 10 pt, justified, 1.5 line spacing, 3 pt before.
+    'body{font-family:Arimo,Arial,"Liberation Sans",Helvetica,sans-serif;font-size:10pt;'
+    "line-height:1.5;color:#000;text-align:justify;max-width:17cm;margin:1.5rem auto;"
+    "padding:0 1rem}"
+    "p{margin:3pt 0 0}h1,h2,h3,h4,h5,h6{font-size:10pt;font-weight:bold;margin:3pt 0 0;"
+    "line-height:1.5;text-align:justify}h1,h2{padding-left:1.25cm;text-indent:-1.25cm;"
+    "margin-bottom:10pt;line-height:1.15}h6{font-style:italic;text-decoration:underline}"
+    "table{border-collapse:collapse;width:100%;margin:6pt 0}"
+    "th,td{border:.5pt solid #000;padding:0 .19cm;vertical-align:middle;text-align:center;"
+    "line-height:1.15}td.long{text-align:justify}th{background:#a6a6a6;font-weight:bold}"
+    "td p,th p{margin:3pt 0 0}ul{margin:3pt 0 0;padding-left:.8cm;list-style-type:'- '}"
+    "td.risk-low{background:#00b050}td.risk-mid{background:#ffff00}td.risk-high{background:#f00}"
+    ".scope-notice{border:.5pt solid #000;background:#f4f1e6;padding:.5rem .8rem;margin:1rem 0;"
+    "text-align:justify}.gap{background:#fde8e8}.decision{background:#fff3cd}mark{padding:0 .15rem}"
     ".gap-section{border-left:4px solid #c0392b;padding-left:.8rem}"
     ".toolbar{position:sticky;top:0;background:#fff;padding:.5rem 0;display:flex;gap:.5rem;"
-    "align-items:center;border-bottom:1px solid #ccc}"
+    "align-items:center;border-bottom:1px solid #ccc;font-size:10pt}"
     ".toolbar button{padding:.4rem .9rem;cursor:pointer}"
-    "@page{size:A4;margin:18mm}@media print{.no-print{display:none}body{max-width:none;margin:0}"
+    # Page: A4 with the sample's left 2.5 cm, right 1.5 cm, bottom 3 cm margins (top is shorter
+    # because our header is one line) and the page number bottom right as in the sample footer.
+    "@page{size:A4;margin:3.5cm 1.5cm 3cm 2.5cm;"
+    '@top-left{content:"3.2.P.2 - bản nháp nội bộ, chưa FD duyệt";font:10pt Arimo,Arial,sans-serif}'
+    "@bottom-right{content:counter(page);font:10pt Arimo,Arial,sans-serif}}"
+    "@media print{.no-print{display:none}body{max-width:none;margin:0;padding:0}"
     "h1,h2,h3,h4{break-after:avoid}tr{break-inside:avoid}}"
 )
 WORD_FILE = "p2-orientation-draft.doc"
@@ -76,7 +91,9 @@ SCRIPT = (
 )
 
 
-def section_body(section: dict[str, Any], entry: dict[str, Any]) -> list[str]:
+def section_body(
+    section: dict[str, Any], entry: dict[str, Any], risk: dict[str, str] | None = None
+) -> list[str]:
     if section["status"] == "gap":
         reason = section["gapReason"]
         if kind_of(reason) is None:  # a plain statement, for example "not applicable"
@@ -89,12 +106,13 @@ def section_body(section: dict[str, Any], entry: dict[str, Any]) -> list[str]:
         if item["type"] == "table":
             header = not (seen < len(forms) and forms[seen].get("headerless"))
             seen += 1
-        out.append(block(item, entry["id"], header))
+        out.append(block(item, entry["id"], header, risk))
     return out
 
 
 def sections_html(draft: dict[str, Any], outline: dict[str, Any]) -> str:
     by_id = {s["id"]: s for s in draft["sections"]}
+    risk = risk_classes(outline)
     parts = []
     for entry in outline["sections"]:
         lvl = level(entry)
@@ -102,7 +120,7 @@ def sections_html(draft: dict[str, Any], outline: dict[str, Any]) -> str:
         parts.append(f'<h{lvl} id="s-{esc(entry["id"])}">{title}</h{lvl}>')
         section = by_id.get(entry["id"])
         if section is not None:
-            parts.extend(section_body(section, entry))
+            parts.extend(section_body(section, entry, risk))
     return "".join(parts)
 
 
