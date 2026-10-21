@@ -1,0 +1,12 @@
+Provider access evidence (task 4.1), 2026-10-21
+Scope: LLMPort, ProviderGateway and RecordedProvider against the synthetic egress manifest. No concrete network provider exists yet (no contract or approved model list), so nothing real was called.
+$ python3 -m pytest qbd_core/modules/provider_access -q
+................                                                         [100%]
+16 passed in 0.15s
+
+Negative controls (each reverted afterwards):
+ - egress refusal disabled: 7 failed, 9 passed (a restricted payload reached the provider)
+ - approved-model check disabled: 1 failed, 15 passed
+ - provider exceptions no longer converted: 2 failed, 14 passed
+
+Whole project: 81 passed in 0.40s; ruff: All checks passed!
