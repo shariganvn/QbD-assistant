@@ -1,0 +1,15 @@
+{
+  "input": {
+    "substances": [
+      "A"
+    ],
+    "dosage_form": "Viên nén",
+    "market": "eu",
+    "strength": "10 mg"
+  },
+  "expect": {
+    "codes": [
+      "E_FIELD_UNKNOWN"
+    ]
+  }
+}

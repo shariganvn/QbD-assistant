@@ -1,0 +1,72 @@
+{
+  "source": "SOP-RD-001 v02, Phụ lục A. Chưa đối chiếu với Phụ lục I ACTD chính thức và TT32 trong Kho.",
+  "verified_against_kho": false,
+  "sections": [
+    {
+      "ctd": "P.2.1.1",
+      "actd": "P2.2.1",
+      "title": "Hoạt chất",
+      "generic_actd_note": "Tài liệu khoa học"
+    },
+    {
+      "ctd": "P.2.1.2",
+      "actd": "P2.2.2",
+      "title": "Tá dược",
+      "generic_actd_note": "Không yêu cầu"
+    },
+    {
+      "ctd": "P.2.2.1",
+      "actd": "P2.3.1",
+      "title": "Phát triển công thức",
+      "generic_actd_note": "Bắt buộc"
+    },
+    {
+      "ctd": "P.2.2.2",
+      "actd": "P2.3.2",
+      "title": "Lượng đóng dư",
+      "generic_actd_note": "Bắt buộc"
+    },
+    {
+      "ctd": "P.2.2.3",
+      "actd": "P2.3.3",
+      "title": "Đặc tính lý hóa và sinh học",
+      "generic_actd_note": "Bắt buộc"
+    },
+    {
+      "ctd": "P.2.3",
+      "actd": "P2.4",
+      "title": "Phát triển quy trình sản xuất",
+      "generic_actd_note": "Mục đánh dấu NCE/Biotech; EU yêu cầu"
+    },
+    {
+      "ctd": "P.2.4",
+      "actd": "P2.5",
+      "title": "Hệ bao bì",
+      "generic_actd_note": "Bắt buộc"
+    },
+    {
+      "ctd": "P.2.5",
+      "actd": "P2.6",
+      "title": "Thuộc tính vi sinh",
+      "generic_actd_note": "Bắt buộc"
+    },
+    {
+      "ctd": "P.2.6",
+      "actd": "P2.7",
+      "title": "Tính tương hợp",
+      "generic_actd_note": "Tài liệu khoa học"
+    },
+    {
+      "ctd": "P.8",
+      "actd": "P8",
+      "title": "Độ ổn định",
+      "generic_actd_note": "Bắt buộc"
+    },
+    {
+      "ctd": null,
+      "actd": "P9",
+      "title": "Khả năng thay thế lẫn nhau",
+      "generic_actd_note": "Dữ liệu hòa tan in vitro"
+    }
+  ]
+}

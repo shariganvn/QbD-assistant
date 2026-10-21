@@ -1,0 +1,175 @@
+{
+  "source": "Whimsical board 'Hệ thống Agent tự động soạn thảo PTDH (P.2)', bảng 4; Notion config/dosage-forms.md. CQA là ứng viên, người dùng xác nhận ở cổng 3.5.",
+  "groups": [
+    {
+      "title": "Viên nén (phóng thích thông thường và biến thể)",
+      "sop_coverage": "in_sop_variants_need_confirmation",
+      "internal_documents": true,
+      "base": [
+        "Assay",
+        "Content Uniformity",
+        "Dissolution",
+        "Degradation Products"
+      ],
+      "specific": [
+        "sủi bọt: thời gian rã/sủi, độ ẩm",
+        "phân tán trong miệng: thời gian rã trong miệng, độ mài mòn",
+        "phân tán trong nước: độ phân tán",
+        "nhai, ngậm, đặt dưới lưỡi: thời gian rã hoặc tan, cảm quan",
+        "đặt âm đạo: thời gian rã, vi sinh"
+      ],
+      "equivalence_note": "ICH M9 và M13A theo tên dành cho dạng uống giải phóng tức thời; phải kiểm tra phạm vi từng dạng (ngậm, dưới lưỡi, âm đạo) và xin xác nhận hướng chứng minh tương đương",
+      "id": "N1",
+      "cqa_status": "candidate_unconfirmed"
+    },
+    {
+      "title": "Viên nén bao phim, bao tan trong ruột",
+      "sop_coverage": "outside_sop_coating",
+      "internal_documents": true,
+      "base": [
+        "Assay",
+        "Content Uniformity",
+        "Dissolution",
+        "Degradation Products"
+      ],
+      "specific": [
+        "tan trong ruột: khả năng chống dịch vị và hòa tan trong môi trường đệm",
+        "vi hạt: đồng đều hàm lượng vi hạt trong viên"
+      ],
+      "equivalence_note": "Như N1; dạng tan trong ruột hòa tan hai giai đoạn, cần mô tả riêng, SOP không có hướng dẫn chi tiết",
+      "id": "N2",
+      "cqa_status": "candidate_unconfirmed"
+    },
+    {
+      "title": "Phóng thích kéo dài",
+      "sop_coverage": "outside_sop",
+      "internal_documents": true,
+      "base": [
+        "Assay",
+        "Content Uniformity",
+        "hồ sơ giải phóng nhiều thời điểm",
+        "Degradation Products"
+      ],
+      "specific": [
+        "nguy cơ giải phóng ồ ạt (dose dumping)",
+        "độ bền lớp bao hoặc nền kiểm soát giải phóng"
+      ],
+      "equivalence_note": "Không dùng quy tắc IR; SOP không có hướng dẫn cho nhóm này",
+      "id": "N3",
+      "cqa_status": "candidate_unconfirmed"
+    },
+    {
+      "title": "Viên nang cứng",
+      "sop_coverage": "outside_sop",
+      "internal_documents": true,
+      "base": [
+        "Assay",
+        "Content Uniformity",
+        "Dissolution",
+        "Degradation Products"
+      ],
+      "specific": [
+        "độ rã, độ ẩm và tương tác với vỏ nang",
+        "vi hạt tan trong ruột: chống dịch vị"
+      ],
+      "equivalence_note": "Công nghệ nén hoặc tạo hạt của Phụ lục B.2 chỉ áp dụng một phần; hòa tan như N1",
+      "id": "N4",
+      "cqa_status": "candidate_unconfirmed"
+    },
+    {
+      "title": "Chế phẩm đặt",
+      "sop_coverage": "outside_sop",
+      "internal_documents": false,
+      "base": [
+        "Assay",
+        "Content Uniformity",
+        "Degradation Products",
+        "vi sinh"
+      ],
+      "specific": [
+        "điểm chảy hoặc thời gian tan rã/chảy",
+        "giải phóng hoạt chất"
+      ],
+      "equivalence_note": "SOP mục 6.5 viết cho hòa tan: ghi rõ không áp dụng hoặc chỉ tiêu thay thế, xin Trưởng bộ phận R&D xác nhận; Phụ lục B.2 không áp dụng",
+      "id": "N5",
+      "cqa_status": "candidate_unconfirmed"
+    },
+    {
+      "title": "Cốm và bột",
+      "sop_coverage": "outside_sop",
+      "internal_documents": false,
+      "base": [
+        "Assay",
+        "đồng đều đơn vị liều",
+        "Degradation Products",
+        "độ ẩm",
+        "phân bố cỡ hạt",
+        "vi sinh"
+      ],
+      "specific": [
+        "thời gian hoàn nguyên và phân tán/hòa tan khi pha",
+        "ổn định sau khi pha",
+        "thời gian sủi (dạng sủi bọt)"
+      ],
+      "equivalence_note": "Hòa tan hoặc chỉ tiêu thay thế, xin xác nhận; Phụ lục B.2 chỉ áp dụng một phần",
+      "id": "N6",
+      "cqa_status": "candidate_unconfirmed"
+    },
+    {
+      "title": "Chế phẩm lỏng uống",
+      "sop_coverage": "outside_sop",
+      "internal_documents": false,
+      "base": [
+        "Assay",
+        "Degradation Products",
+        "pH",
+        "vi sinh và hiệu quả hệ bảo quản"
+      ],
+      "specific": [
+        "độ nhớt (siro, nhũ dịch, hỗn dịch)",
+        "khả năng phân tán lại và cỡ hạt (hỗn dịch)",
+        "kích thước giọt, ổn định nhũ (nhũ dịch)"
+      ],
+      "equivalence_note": "Không có hòa tan thường quy: ghi rõ không áp dụng hoặc chỉ tiêu thay thế, xin xác nhận; Phụ lục B.2 không áp dụng",
+      "id": "N7",
+      "cqa_status": "candidate_unconfirmed"
+    },
+    {
+      "title": "Bán rắn dùng ngoài và đặt",
+      "sop_coverage": "outside_sop",
+      "internal_documents": false,
+      "base": [
+        "Assay",
+        "Degradation Products",
+        "pH",
+        "độ nhớt/lưu biến",
+        "đồng nhất (cỡ hạt hoặc giọt)",
+        "vi sinh và hệ bảo quản"
+      ],
+      "specific": [
+        "giải phóng hoạt chất in vitro",
+        "quang ổn định khi đang sử dụng"
+      ],
+      "equivalence_note": "SOP không có hướng dẫn chứng minh tương đương; trong Kho chưa có tài liệu riêng",
+      "id": "N8",
+      "cqa_status": "candidate_unconfirmed"
+    },
+    {
+      "title": "Chế phẩm súc miệng",
+      "sop_coverage": "outside_sop",
+      "internal_documents": false,
+      "base": [
+        "Assay",
+        "pH",
+        "vi sinh và hệ bảo quản"
+      ],
+      "specific": [
+        "khả năng phân tán lại (hỗn dịch)",
+        "ổn định nhũ (nhũ dịch)"
+      ],
+      "equivalence_note": "Như N7",
+      "id": "N9",
+      "cqa_status": "candidate_unconfirmed"
+    }
+  ]
+}

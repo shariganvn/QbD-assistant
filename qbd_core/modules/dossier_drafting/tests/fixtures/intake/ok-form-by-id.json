@@ -1,0 +1,14 @@
+{
+  "input": {
+    "substances": [
+      "Atorvastatin calcium"
+    ],
+    "dosage_form": "f09",
+    "market": "eu"
+  },
+  "expect": {
+    "form_id": "F09",
+    "group": "N2",
+    "flags": []
+  }
+}

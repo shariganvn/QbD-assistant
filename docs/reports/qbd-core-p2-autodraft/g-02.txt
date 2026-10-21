@@ -1,0 +1,11 @@
+G-02 evidence, 2026-10-21
+$ python3 -m pytest qbd_core/modules/dossier_drafting/tests/test_config.py -q
+.....                                                                    [100%]
+5 passed in 0.12s
+
+Negative control: form id F38 renamed F37 made test_thirty_eight_forms_each_in_one_group fail (1 failed, 4 passed); reverted.
+Catalogue: 38 forms, 9 groups (8,3,2,2,2,8,4,6,3). Source: Notion config/dosage-forms.md; group lists agree with Whimsical table 4.
+Name difference: Notion F25 'Thuốc bột pha hỗn dịch trực tràng'; Whimsical table 4 writes 'bột pha hỗn dịch dùng đường trực tràng'. Notion list is used (it is the select list).
+c514bc873f0c17833e83430b8db0c8025ba5650c07ecf4847cee6694cc22b323  ctd_actd_map.json
+6a59ea4e71aae8c50e7a064a966185777a200969d880abb090265364e2634b46  dosage_forms.json
+bdfb0b993d94d4a58b4835761c8229528647798fecc41e02405f7e2ec3b8526a  groups.json

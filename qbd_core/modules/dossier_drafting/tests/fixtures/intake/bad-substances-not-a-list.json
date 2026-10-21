@@ -1,0 +1,12 @@
+{
+  "input": {
+    "substances": "Atorvastatin calcium",
+    "dosage_form": "Viên nén",
+    "market": "eu"
+  },
+  "expect": {
+    "codes": [
+      "E_FIELD_TYPE"
+    ]
+  }
+}

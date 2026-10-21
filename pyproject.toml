@@ -15,6 +15,9 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 include = ["qbd_core*"]
 
+[tool.setuptools.package-data]
+"*" = ["*.json", "*.md"]
+
 [tool.pytest.ini_options]
 testpaths = ["qbd_core"]
 

@@ -11,32 +11,32 @@ gates:
     invariant: >
       More than 3 substances, a form outside the 38, an unknown market, or an empty field is rejected with a fixed error code; a combination carries the out-of-SOP flag.
     boundary_owner: intake
-    fixture: qbd_core/tests/fixtures/intake/*.json
+    fixture: qbd_core/modules/dossier_drafting/tests/fixtures/intake/*.json
     command: >
-      pytest qbd_core/tests/intake -q
+      python -m pytest qbd_core/modules/dossier_drafting/tests/test_intake.py -q
     expected: >
       exit 0; each bad case yields its fixed code
     negative_cases:
       - each valid-looking edge (3 substances, duplicate form name) accepted or rejected as specified
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-01.txt
     owner_step: "02"
-    status: unverified
+    status: pass
 
   - id: G-02
     title: Form catalogue is complete
     invariant: >
       38 forms map to exactly one of N1-N9 (the duplicated effervescent granule counts once); N5-N9 sections without internal documents emit CẦN DỮ LIỆU.
     boundary_owner: config
-    fixture: qbd_core/config/*.json
+    fixture: qbd_core/modules/dossier_drafting/config/*.json
     command: >
-      pytest qbd_core/tests/config -q
+      python -m pytest qbd_core/modules/dossier_drafting/tests/test_config.py -q
     expected: >
       38/38 mapped, 0 duplicates, 0 empty groups
     negative_cases:
       - a form mapped to two groups fails
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-02.txt
     owner_step: "02"
-    status: unverified
+    status: pass
 
   - id: G-03
     title: No restricted document leaves the machine

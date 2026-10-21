@@ -1,0 +1,14 @@
+{
+  "input": {
+    "substances": [
+      "A"
+    ],
+    "dosage_form": "39",
+    "market": "eu"
+  },
+  "expect": {
+    "codes": [
+      "E_FORM_UNKNOWN"
+    ]
+  }
+}

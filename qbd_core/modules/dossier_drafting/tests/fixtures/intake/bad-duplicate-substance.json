@@ -1,0 +1,15 @@
+{
+  "input": {
+    "substances": [
+      "A",
+      "a"
+    ],
+    "dosage_form": "Viên nén",
+    "market": "eu"
+  },
+  "expect": {
+    "codes": [
+      "E_SUBSTANCE_DUPLICATE"
+    ]
+  }
+}

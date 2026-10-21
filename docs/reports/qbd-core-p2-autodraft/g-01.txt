@@ -1,0 +1,21 @@
+G-01 evidence, 2026-10-21, parent commit 7bac205
+$ python3 -m pytest qbd_core/modules/dossier_drafting/tests/test_intake.py -q
+.................                                                        [100%]
+17 passed in 0.15s
+
+Negative control: MAX_SUBSTANCES changed 3 -> 4 made test_fixture[bad-four-substances] fail (1 failed, 16 passed); reverted.
+ff540300d7bcfe0c05fe71466faaf7914bcc3a6b6fbf4168e60efae3ef0a09f1  bad-blank-substance.json
+1f9180da4153cc3e3cad950a8a6746667e8e79712293b63a69a7ec891247036d  bad-duplicate-substance.json
+27ca1e67bdc4f42fdbefda1ab942563900dfb5db5dd878e76ae3766b58e801b2  bad-empty-input.json
+ede9d7c239df8c6c9d6122b8ff0a8e8ebb82d7dd9a4c4fb94ace766ae0eacdb5  bad-empty-substances.json
+836bafc2355346ebe7f40de3178a8ddcf25989411acfe29624a640575ccb5ce0  bad-form-number-out-of-range.json
+4eb7b1d4237eda63839e81f239ec23dbe522fb1baf63220c1a33f153702cd7d3  bad-form-unknown.json
+152fb318c3061064d7f7ef7e342e44039532b85a3451757b252d0f1a30568505  bad-four-substances.json
+cc647aba534ac47c25b49efcf0c8789edf88223ffcedb1f602213384a7e5e90b  bad-market-unknown.json
+cb193e0172624da016ff1375c9849bf8de93673f69fa5e03dde5963f2bfa2425  bad-substances-not-a-list.json
+20855d8b6b607e02c46842b75823aeb6ac7851c54f7a683b98163c92b42e469a  bad-unknown-field.json
+8fdf06de936d79f4644b287e366b055da703135a9142252eef80795f53a1af09  ok-form-by-id.json
+beabcb35d87246a8a7c2e43195d9d680087858261b05c28b69b5c2bf4d2fce21  ok-form-by-number.json
+bc013efcb3e6aaec2df0fc65b1a1df4bf1528df7a5c66440cee3cf910c2b3406  ok-single-by-name.json
+4bcac7523f00c8bc50484c8ab9b62ca82135c4ba1dfd01dd875c24ba3d498ec6  ok-spacing-and-case.json
+2c6162bd52188ef6d0747dd406ffc811111ea53591df6e3830c4a037543c1410  ok-three-substances-flagged.json

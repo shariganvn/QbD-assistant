@@ -1,0 +1,14 @@
+{
+  "input": {
+    "substances": [
+      "  Atorvastatin calcium "
+    ],
+    "dosage_form": "  VIÊN NÉN   bao phim ",
+    "market": "EU"
+  },
+  "expect": {
+    "form_id": "F09",
+    "group": "N2",
+    "flags": []
+  }
+}

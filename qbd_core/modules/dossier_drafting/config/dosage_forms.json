@@ -1,0 +1,195 @@
+{
+  "source": "Notion: Bộ skill PTDH v0.1 / config / dosage-forms.md (danh sách người dùng cung cấp, 39 dòng gộp còn 38)",
+  "forms": [
+    {
+      "id": "F01",
+      "name": "Viên nén",
+      "group": "N1"
+    },
+    {
+      "id": "F02",
+      "name": "Viên nén sủi bọt",
+      "group": "N1"
+    },
+    {
+      "id": "F03",
+      "name": "Viên nén phân tán trong miệng",
+      "group": "N1"
+    },
+    {
+      "id": "F04",
+      "name": "Viên nén phân tán trong nước",
+      "group": "N1"
+    },
+    {
+      "id": "F05",
+      "name": "Viên nén nhai",
+      "group": "N1"
+    },
+    {
+      "id": "F06",
+      "name": "Viên nén ngậm",
+      "group": "N1"
+    },
+    {
+      "id": "F07",
+      "name": "Viên nén đặt dưới lưỡi",
+      "group": "N1"
+    },
+    {
+      "id": "F08",
+      "name": "Viên nén đặt âm đạo",
+      "group": "N1"
+    },
+    {
+      "id": "F09",
+      "name": "Viên nén bao phim",
+      "group": "N2"
+    },
+    {
+      "id": "F10",
+      "name": "Viên nén bao phim tan trong ruột",
+      "group": "N2"
+    },
+    {
+      "id": "F11",
+      "name": "Viên nén bao phim chứa vi hạt bao tan trong ruột",
+      "group": "N2"
+    },
+    {
+      "id": "F12",
+      "name": "Viên nén phóng thích kéo dài",
+      "group": "N3"
+    },
+    {
+      "id": "F13",
+      "name": "Viên nén bao phim phóng thích kéo dài",
+      "group": "N3"
+    },
+    {
+      "id": "F14",
+      "name": "Viên nang cứng",
+      "group": "N4"
+    },
+    {
+      "id": "F15",
+      "name": "Viên nang cứng chứa vi hạt tan trong ruột",
+      "group": "N4"
+    },
+    {
+      "id": "F16",
+      "name": "Viên đạn đặt trực tràng",
+      "group": "N5"
+    },
+    {
+      "id": "F17",
+      "name": "Viên đạn đặt âm đạo",
+      "group": "N5"
+    },
+    {
+      "id": "F18",
+      "name": "Thuốc cốm uống",
+      "group": "N6"
+    },
+    {
+      "id": "F19",
+      "name": "Thuốc cốm pha dung dịch uống",
+      "group": "N6"
+    },
+    {
+      "id": "F20",
+      "name": "Thuốc cốm pha hỗn dịch uống",
+      "group": "N6"
+    },
+    {
+      "id": "F21",
+      "name": "Thuốc cốm sủi bọt pha dung dịch uống",
+      "group": "N6"
+    },
+    {
+      "id": "F22",
+      "name": "Thuốc bột uống",
+      "group": "N6"
+    },
+    {
+      "id": "F23",
+      "name": "Thuốc bột pha dung dịch uống",
+      "group": "N6"
+    },
+    {
+      "id": "F24",
+      "name": "Thuốc bột pha hỗn dịch uống",
+      "group": "N6"
+    },
+    {
+      "id": "F25",
+      "name": "Thuốc bột pha hỗn dịch trực tràng",
+      "group": "N6"
+    },
+    {
+      "id": "F26",
+      "name": "Siro",
+      "group": "N7"
+    },
+    {
+      "id": "F27",
+      "name": "Dung dịch uống",
+      "group": "N7"
+    },
+    {
+      "id": "F28",
+      "name": "Nhũ dịch uống",
+      "group": "N7"
+    },
+    {
+      "id": "F29",
+      "name": "Hỗn dịch uống",
+      "group": "N7"
+    },
+    {
+      "id": "F30",
+      "name": "Kem bôi da",
+      "group": "N8"
+    },
+    {
+      "id": "F31",
+      "name": "Kem đặt trực tràng",
+      "group": "N8"
+    },
+    {
+      "id": "F32",
+      "name": "Kem thụt trực tràng",
+      "group": "N8"
+    },
+    {
+      "id": "F33",
+      "name": "Gel bôi da",
+      "group": "N8"
+    },
+    {
+      "id": "F34",
+      "name": "Thuốc mỡ bôi da",
+      "group": "N8"
+    },
+    {
+      "id": "F35",
+      "name": "Lotion",
+      "group": "N8"
+    },
+    {
+      "id": "F36",
+      "name": "Dung dịch súc miệng",
+      "group": "N9"
+    },
+    {
+      "id": "F37",
+      "name": "Hỗn dịch súc miệng",
+      "group": "N9"
+    },
+    {
+      "id": "F38",
+      "name": "Nhũ dịch súc miệng",
+      "group": "N9"
+    }
+  ]
+}

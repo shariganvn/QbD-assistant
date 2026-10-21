@@ -1,3 +1,21 @@
 """Public entry points of the dossier_drafting module. Other modules import only from here."""
 
-__all__: list[str] = []
+from qbd_core.modules.dossier_drafting.config import group_gaps, groups, section_map
+from qbd_core.modules.dossier_drafting.intake import validate_intake
+from qbd_core.modules.dossier_drafting.models import (
+    COMBINATION_OUT_OF_SOP,
+    IntakeIssue,
+    IntakeRejected,
+    IntakeResult,
+)
+
+__all__ = [
+    "COMBINATION_OUT_OF_SOP",
+    "IntakeIssue",
+    "IntakeRejected",
+    "IntakeResult",
+    "group_gaps",
+    "groups",
+    "section_map",
+    "validate_intake",
+]

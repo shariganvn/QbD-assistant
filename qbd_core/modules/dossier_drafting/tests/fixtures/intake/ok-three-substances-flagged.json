@@ -1,0 +1,18 @@
+{
+  "input": {
+    "substances": [
+      "A",
+      "B",
+      "C"
+    ],
+    "dosage_form": "Viên nén",
+    "market": "eu"
+  },
+  "expect": {
+    "form_id": "F01",
+    "group": "N1",
+    "flags": [
+      "COMBINATION_OUT_OF_SOP"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "input": {
+    "substances": [
+      "A"
+    ],
+    "dosage_form": "Viên nén",
+    "market": "US"
+  },
+  "expect": {
+    "codes": [
+      "E_MARKET_UNKNOWN"
+    ]
+  }
+}
