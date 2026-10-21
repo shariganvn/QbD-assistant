@@ -46,6 +46,14 @@ IMPLEMENTED: dict[str, tuple[Status, str]] = {
         "partial",
         "evidence.trial_intake: tables named or listed as unrecognised; only sink data used",
     ),
+    "7.3": (
+        "partial",
+        "dossier_drafting.calc.f2 with the pair and point rules; no separate gate verdict",
+    ),
+    "8.2": (
+        "partial",
+        "dossier_drafting.dissolution: f2 and profile tables when the trial tables fit",
+    ),
     "1.1": ("partial", "retrieval is done inside agent 4.1; no separate collector output"),
     "1.4": (
         "partial",
@@ -94,9 +102,7 @@ BLOCKED: dict[str, str] = {
     "6.4": "final formula needs the team's formulation results; strengths come from trial files",
     "6.5": "needs the final formula and the strengths",
     "7.2": "compares excipients with the reference product, which needs agent 3.1 data",
-    "7.3": "similarity calculation needs the team's dissolution data",
     "7.4": "route decision needs dissolution data and the eligibility verdict",
-    "8.2": "comparative dissolution needs the team's dissolution data",
     "8.3": NEEDS_TEAM_DATA,
     "8.4": NEEDS_TEAM_DATA,
     "8.5": "conclusion needs the route decision and the team's data",

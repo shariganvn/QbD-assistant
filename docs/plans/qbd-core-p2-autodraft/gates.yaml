@@ -320,3 +320,20 @@ gates:
     owner_step: "07"
     status: pass
 
+  - id: G-18
+    title: Comparative dissolution f2 is computed by code and re-checked by the gate
+    invariant: >
+      Every f2 published in P.2.2.3.2 equals f2 recomputed from the cells its [tính: f2, ...] tag names;
+      a profile with a blank cell, fewer than three usable points, no reference column or an unknown
+      strength gives a marked gap row and no number; without declared strengths the section stays a gap.
+    boundary_owner: dossier_drafting + quality_gate
+    fixture: minimal .docx profile tables built in the test
+    command: python -m pytest qbd_core/modules/dossier_drafting/tests/test_dissolution.py -q
+    expected: exit 0; f2 = 64.6 for the worked example; wrong value, wrong range, wrong column and a removed tag are blocked; draft passes Stage B.
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-18.txt
+    owner_step: "07"
+    scope_note: >
+      Run on the department's example report no f2 is produced, because its test columns are empty
+      (a template); the notes name each table left out.
+    status: pass
+

@@ -1,0 +1,12 @@
+# G-18 evidence, 2026-10-21
+$ python -m pytest qbd_core/modules/dossier_drafting/tests/test_dissolution.py -q
+12 passed in 1.98s
+
+$ python -m pytest qbd_core -q
+352 passed in 19.93s
+
+Mutations (reverted, each caught):
+- provenance.py: f2 recomputation compare removed -> test fails
+- dissolution.py: blank-cell check removed -> test fails
+
+On the example report: tables 30, 32 have no reference/test columns, table 31 has an empty test column; no f2 is produced.

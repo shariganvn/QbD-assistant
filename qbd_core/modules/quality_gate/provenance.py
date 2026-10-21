@@ -6,12 +6,13 @@ import re
 from collections.abc import Mapping
 from typing import Any
 
-from qbd_core.modules.dossier_drafting.api import CQA_SECTION
+from qbd_core.modules.dossier_drafting.api import CQA_SECTION, CalcError, f2
 from qbd_core.modules.evidence.api import (
     DATA_TAG,
     KnowledgePort,
     TrialData,
     cell_text,
+    first_number,
     numbers_in,
 )
 from qbd_core.modules.quality_gate.models import Finding
@@ -63,10 +64,38 @@ def _check_claim(
 ORDINAL = re.compile(r"[1-9]\d{0,2}")
 
 
+CALC_TAG = re.compile(
+    r"\[tính: f2, (?P<file>[^,\]]+), bảng (?P<table>\d+), đối chiếu cột (?P<ref>\d+), "
+    r"thử cột (?P<test>\d+), hàng (?P<first>\d+)-(?P<last>\d+)\]"
+)
+
+
+def _check_f2_row(row: list[str], sid: str, trial: TrialData | None) -> list[Finding]:
+    """The f2 cell of a row must equal f2 recomputed from the cells the row's tag points at."""
+    tag = CALC_TAG.search(row[0])
+    if tag is None or trial is None or len(row) < 2:
+        return [_block("E_CALC_MISMATCH", sid, "f2 tag")]
+    pairs = []
+    for number in range(int(tag["first"]), int(tag["last"]) + 1):
+        cells = [
+            cell_text(trial, tag["file"], int(tag["table"]), number, int(tag[key]))
+            for key in ("ref", "test")
+        ]
+        values = [first_number(c) if c is not None else None for c in cells]
+        if None in values:
+            return [_block("E_CALC_INPUT", sid, "f2 input cell")]
+        pairs.append(values)
+    try:
+        value = f2([p[0] for p in pairs], [p[1] for p in pairs])
+    except CalcError:
+        return [_block("E_CALC_INPUT", sid, "f2 input")]
+    return [] if f"{value:.1f}" == row[1].strip() else [_block("E_CALC_MISMATCH", sid, "f2 value")]
+
+
 def _check_data(text: str, sid: str, trial: TrialData | None) -> list[Finding]:
     """A sentence built from the team's data: each tag must name a real cell, and no number may
     appear that is absent from the cited cells."""
-    body = DATA_TAG.sub("", text).strip()
+    body = CALC_TAG.sub("", DATA_TAG.sub("", text)).strip()
     if not body:
         return [_block("E_UNSOURCED_TEXT", sid)]
     cells = []
@@ -140,12 +169,19 @@ def check_provenance(
                 cells = [(block["text"], False)]
             elif block["type"] == "table":
                 ordinal = {i for i, h in enumerate(block["headers"]) if h.strip().upper() == "STT"}
-                cells = [
-                    (c, True)
-                    for row in block["rows"]
-                    for i, c in enumerate(row)
-                    if not (i in ordinal and ORDINAL.fullmatch(c.strip()))
-                ]
+                is_f2 = len(block["headers"]) > 1 and block["headers"][1].strip().lower() == "f2"
+                cells = []
+                for row in block["rows"]:
+                    skip = set()
+                    if is_f2 and CALC_TAG.search(row[0]):
+                        findings += _check_f2_row(row, sid, trial)
+                        skip.add(1)
+                        data_files.update(t["file"] for t in CALC_TAG.finditer(row[0]))
+                    cells += [
+                        (c, True)
+                        for i, c in enumerate(row)
+                        if i not in skip and not (i in ordinal and ORDINAL.fullmatch(c.strip()))
+                    ]
             else:
                 continue
             for text, is_cell in cells:

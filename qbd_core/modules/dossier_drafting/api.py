@@ -7,6 +7,7 @@ from qbd_core.modules.dossier_drafting.assemble import (
     DraftRun,
     assemble_draft,
 )
+from qbd_core.modules.dossier_drafting.calc import CalcError, f2
 from qbd_core.modules.dossier_drafting.config import (
     group_gaps,
     groups,
@@ -37,6 +38,8 @@ from qbd_core.modules.dossier_drafting.outline import (
 )
 
 __all__ = [
+    "CalcError",
+    "f2",
     "AgentInfrastructureError",
     "LlmSetup",
     "COMBINATION_OUT_OF_SOP",
