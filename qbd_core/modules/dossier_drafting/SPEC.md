@@ -14,6 +14,15 @@ IntakeRequest, DraftSection, GapEntry
   `COMBINATION_OUT_OF_SOP`.
 - `groups()`, `section_map()`: read-only configuration (38 forms in groups N1-N9, CQA candidates per
   group, CTD/ACTD numbering from the SOP appendix).
+- `assemble_draft(intake, knowledge, today) -> DraftRun`: builds a `draft.json` that follows the Stage B
+  contract of tools/pharma-dev-draft. Every leaf section of its outline is a gap with a marked reason,
+  except the free-form sections listed in `SECTION_QUERIES`, which become `covered` only when
+  `knowledge.search` returns sentences; each such paragraph is the retrieved sentence verbatim plus
+  `[nguồn: file, trang, id]`. No language model is used in this slice. A combination of substances raises
+  `DraftingRefused("E_COMBINATION_NOT_SUPPORTED")`. The draft states what it lacks: strength and source
+  file carry the gap marker, and `notApplicableSections` lists the second-strength sections. `DraftRun`
+  also returns the evidence used, the gap register, and `contains_restricted` (true when any sentence
+  comes from a document that is not class A, which means the draft file must not leave the machine).
 - `group_gaps(group_id)`: `CẦN DỮ LIỆU` entries owed by a group without internal documents (N5-N9).
 
 ## Invariants
@@ -31,10 +40,13 @@ None.
 None yet; other modules are called only through their api.py.
 
 ## Non-goals
-Anything outside the purpose above.
+Anything outside the purpose above. In this slice also: market-specific numbering (the outline is CTD;
+the ACTD mapping is a later quality check), tables, risk matrices and figures, and any text a language
+model writes.
 
 ## Spec history
 | Date | Change | Rationale | PR |
 |---|---|---|---|
 | 2026-10-21 | Scaffold | Module boundary accepted in the ADR | - |
 | 2026-10-21 | Intake validation and configuration data | Input rules and the 38-form catalogue as data, not code | - |
+| 2026-10-21 | Thin-slice assembler and `run` command | Three inputs to a valid, gap-flagged draft end to end | - |

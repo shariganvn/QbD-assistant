@@ -21,7 +21,7 @@ def test_cross_module_imports_go_through_api():
         own = path.relative_to(ROOT / "modules").parts[0]
         for name in _imports(path):
             if name.startswith(PREFIX):
-                target = name[len(PREFIX):].split(".")
+                target = name[len(PREFIX) :].split(".")
                 if target[0] != own and target[1:2] != ["api"]:
                     bad.append(f"{path.relative_to(ROOT)} -> {name}")
     assert not bad, bad

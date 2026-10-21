@@ -1,0 +1,19 @@
+[
+  {
+    "file_id": "SYN-A",
+    "name": "Synthetic open monograph",
+    "classification": "A",
+    "pages": [
+      "Trang một không liên quan.",
+      "Câu tổng hợp để thử truy hồi: Atorvastatin calcium được dùng ở đây chỉ để kiểm tra phân loại BCS và tính thấm."
+    ]
+  },
+  {
+    "file_id": "SYN-B",
+    "name": "Synthetic restricted textbook",
+    "classification": "B",
+    "pages": [
+      "Câu tổng hợp để thử truy hồi: Atorvastatin calcium không dùng lượng đóng dư (overage) trong ví dụ thử nghiệm này."
+    ]
+  }
+]

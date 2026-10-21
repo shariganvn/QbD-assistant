@@ -27,7 +27,5 @@ def test_fixture(path):
 
 
 def test_canonical_form_name_is_returned():
-    result = validate_intake(
-        {"substances": ["X"], "dosage_form": "f09", "market": "both"}
-    )
+    result = validate_intake({"substances": ["X"], "dosage_form": "f09", "market": "both"})
     assert result.request.dosage_form == "Viên nén bao phim"

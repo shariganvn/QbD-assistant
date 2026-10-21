@@ -1,0 +1,18 @@
+Evidence 4.2 (thin slice: three inputs to draft.json), 2026-10-21
+Case: Atorvastatin calcium / Viên nén bao phim (F09, group N2) / Cả hai. Knowledge base: SYNTHETIC fixture documents (invented sentences); no Kho document was read.
+$ python3 -m pytest qbd_core/modules/dossier_drafting/tests/test_assemble.py -q
+..........                                                               [100%]
+10 passed in 1.24s
+
+Stage B validator on the produced draft (inside the tests): exit 0, 43 sections, all valid.
+Command-line run: exit 0 on valid input; exit 2 (E_FORM_UNKNOWN) on a bad form; exit 3 on a combination; the existing output file is byte-identical after both refusals.
+
+Negative controls (each reverted afterwards):
+ - combination refusal disabled: 2 failed, 30 passed
+ - notApplicableSections emptied: 3 failed, 29 passed (validator rejects the draft)
+ - restricted flag forced false: 1 failed, 31 passed
+
+Result shape for the case: 2 covered sections (P.2.1.1.2, P.2.2.2), 41 gap sections.
+Limits: the market is validated but does not yet change numbering (check G-08, step 05). Retrieval is word overlap only. Output is a gap register, not a P.2 draft ready for review.
+
+Whole project: 111 passed in 1.84s; ruff: All checks passed!
