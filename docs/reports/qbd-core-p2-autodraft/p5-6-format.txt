@@ -1,0 +1,12 @@
+P5.6 evidence (HTML structure follows the P.2 sample), 2026-10-21
+Source of format: Notion page SAMPLE_P2-Sample_Acmecompany (Kho > Sample), read by a subagent that wrote docs/reports/qbd-core-p2-autodraft/sample-format-spec.md (format only, no data).
+
+$ python3 -m pytest qbd_core -q
+..............                                                           [100%]
+158 passed in 6.73s
+ruff: All checks passed!
+
+Visual check: page rendered and screenshotted in headless Chromium (title, header strip, status line, notice, facts table, H2/H3/H4 section headings, gap boxes, plain evidence paragraph with source tag).
+
+Applied: heading levels, header strip, abbreviation list before P.2.1, headerless tables per outline form, plain not-applicable sentence.
+Not applied (needs the real .docx or a Stage B contract change): table/figure captions, figure drawing, merged group cells, risk-level colours, fonts, sizes, borders, page header/footer, TOC.

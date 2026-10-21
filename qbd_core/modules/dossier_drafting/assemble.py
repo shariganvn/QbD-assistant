@@ -115,8 +115,13 @@ def assemble_draft(
     used: dict[str, EvidenceRecord] = {}
     sections: list[dict[str, Any]] = []
     gaps: list[GapEntry] = []
+    not_applicable = set(per_strength_beyond_first(outline))
     for section in leaf_sections(outline):
         sid = section["id"]
+        if sid in not_applicable:
+            reason = "Không áp dụng: bản định hướng chưa khai hàm lượng thứ hai trở đi."
+            sections.append({"id": sid, "status": "gap", "gapReason": reason})
+            continue
         if sid == CQA_SECTION and confirmed:
             sections.append(
                 {"id": sid, "status": "covered", "blocks": _cqa_blocks(confirmed, intake)}
@@ -152,7 +157,7 @@ def assemble_draft(
         "draftDate": today.isoformat(),
         "assembledBy": "qbd_core, bản định hướng từ ba đầu vào, chưa FD duyệt",
         "extractionMethod": "xml-walk",
-        "notApplicableSections": per_strength_beyond_first(outline),
+        "notApplicableSections": sorted(not_applicable),
     }
     if cited:
         meta["referenceSources"] = [f"Kho tài liệu nội bộ, file {file}" for file in cited]

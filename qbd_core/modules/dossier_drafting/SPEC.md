@@ -19,7 +19,8 @@ IntakeRequest, DraftSection, GapEntry
   except the free-form sections listed in `SECTION_QUERIES`, which become `covered` only when
   `knowledge.search` returns sentences; each such paragraph is the retrieved sentence verbatim plus
   `[nguồn: file, trang, id]`. No language model is used in this slice. A combination of substances raises
-  `DraftingRefused("E_COMBINATION_NOT_SUPPORTED")`. The draft states what it lacks: strength and source
+  `DraftingRefused("E_COMBINATION_NOT_SUPPORTED")`. Sections the outline binds to a second or later strength are written as a plain `Không áp dụng: ...`
+  reason without a marker and are not in the gap register. The draft states what it lacks: strength and source
   file carry the gap marker, and `notApplicableSections` lists the second-strength sections. `DraftRun`
   also returns the evidence used, the gap register, and `contains_restricted` (true when any sentence
   comes from a document that is not class A, which means the draft file must not leave the machine).

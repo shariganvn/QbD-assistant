@@ -2,12 +2,20 @@
 
 from __future__ import annotations
 
-import html
 from typing import Any
 
 from qbd_core.modules.rendering import annex
-from qbd_core.modules.rendering.errors import RenderFailed
-from qbd_core.modules.rendering.markers import MARKER
+from qbd_core.modules.rendering.html_blocks import (
+    block,
+    esc,
+    heading_text,
+    level,
+    marked,
+    table,
+)
+from qbd_core.modules.rendering.markers import kind_of
+
+__all__ = ["SCRIPT", "block", "build_html"]
 
 TITLE = "3.2.P.2 Phát triển dược học (Pharmaceutical Development) - bản định hướng"
 STATUS = "Trạng thái: BẢN NHÁP NỘI BỘ – CHƯA THẨM ĐỊNH"
@@ -68,74 +76,21 @@ SCRIPT = (
 )
 
 
-def esc(text: str) -> str:
-    return html.escape(text, quote=True)
-
-
-def marked(text: str) -> str:
-    def wrap(match):
-        cls = "gap" if match.group().startswith("[CHƯA") else "decision"
-        return f'<mark class="{cls}">{match.group()}</mark>'
-
-    return MARKER.sub(wrap, esc(text))
-
-
-def cell(text: str) -> str:
-    lines = text.split("\n")
-    out, bullets = [], []
-    for line in lines + [""]:
-        if line.startswith("- "):
-            bullets.append(f"<li>{marked(line[2:])}</li>")
-            continue
-        if bullets:
-            out.append(f"<ul>{''.join(bullets)}</ul>")
-            bullets = []
-        if line:
-            out.append(f"<p>{marked(line)}</p>")
-    return "".join(out)
-
-
-def table(headers: list[str], rows: list[list[str]], align: list[str] | None = None) -> str:
-    def style(i):
-        return f' style="text-align:{align[i]}"' if align else ""
-
-    head = "".join(f"<th{style(i)}>{esc(h)}</th>" for i, h in enumerate(headers))
-    body = "".join(
-        "<tr>" + "".join(f"<td{style(i)}>{cell(c)}</td>" for i, c in enumerate(row)) + "</tr>"
-        for row in rows
-    )
-    return f"<table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>"
-
-
-def block(item: dict[str, Any], section_id: str) -> str:
-    kind = item["type"]
-    if kind == "heading2":
-        return f"<h5>{marked(item['text'])}</h5>"
-    if kind == "heading3":
-        return f"<h6>{marked(item['text'])}</h6>"
-    if kind == "paragraph":
-        text = marked(item["text"])
-        text = f"<em>{text}</em>" if item.get("italic") else text
-        text = f"<strong>{text}</strong>" if item.get("bold") else text
-        return f"<p>{text}</p>"
-    if kind == "table":
-        align = item.get("columnAlign")
-        return table(item["headers"], item["rows"], align)
-    raise RenderFailed("E_BLOCK_UNSUPPORTED", f"{section_id}: {kind}")
-
-
-def heading_text(entry: dict[str, Any], meta: dict[str, Any]) -> str:
-    text = entry["headingVi"]
-    index = (entry.get("form") or {}).get("strengthIndex")
-    if index is not None and "{strength}" in text:
-        strengths = meta["strengths"]
-        name = strengths[index] if index < len(strengths) else "hàm lượng khác (không áp dụng)"
-        text = text.replace("{strength}", name)
-    return f"{entry['ctdReference']} {text}"
-
-
-def level(entry: dict[str, Any]) -> int:
-    return min(2 + entry["id"].count(".") - 1, 4)
+def section_body(section: dict[str, Any], entry: dict[str, Any]) -> list[str]:
+    if section["status"] == "gap":
+        reason = section["gapReason"]
+        if kind_of(reason) is None:  # a plain statement, for example "not applicable"
+            return [f"<p>{marked(reason)}</p>"]
+        return [f'<div class="gap-section"><p>{marked(reason)}</p></div>']
+    forms = (entry.get("form") or {}).get("tables") or []
+    out, seen = [], 0
+    for item in section["blocks"]:
+        header = True
+        if item["type"] == "table":
+            header = not (seen < len(forms) and forms[seen].get("headerless"))
+            seen += 1
+        out.append(block(item, entry["id"], header))
+    return out
 
 
 def sections_html(draft: dict[str, Any], outline: dict[str, Any]) -> str:
@@ -146,13 +101,25 @@ def sections_html(draft: dict[str, Any], outline: dict[str, Any]) -> str:
         title = marked(heading_text(entry, draft["meta"]))
         parts.append(f'<h{lvl} id="s-{esc(entry["id"])}">{title}</h{lvl}>')
         section = by_id.get(entry["id"])
-        if section is None:
-            continue
-        if section["status"] == "gap":
-            parts.append(f'<div class="gap-section"><p>{marked(section["gapReason"])}</p></div>')
-        else:
-            parts.extend(block(b, entry["id"]) for b in section["blocks"])
+        if section is not None:
+            parts.extend(section_body(section, entry))
     return "".join(parts)
+
+
+def abbreviations_html(meta: dict[str, Any]) -> str:
+    pairs = sorted(meta.get("abbreviations") or [], key=lambda pair: pair[0].casefold())
+    if not pairs:
+        return ""
+    return "<h2>Danh mục chữ viết tắt</h2>" + table(
+        ["Từ viết tắt", "Giải thích"], pairs, header=False
+    )
+
+
+def strip_html(meta: dict[str, Any]) -> str:
+    return (
+        f"<p><strong>Sản phẩm:</strong> {esc(meta['productName'])} | "
+        f"<strong>Module:</strong> 3.2.P.2 | <strong>Ngày:</strong> {esc(meta['draftDate'])}</p>"
+    )
 
 
 def registers_html(draft: dict[str, Any], outline: dict[str, Any]) -> str:
@@ -199,11 +166,14 @@ def build_html(draft: dict[str, Any], outline: dict[str, Any]) -> str:
         f"<title>{esc(TITLE)}</title><style>{CSS}</style></head><body>"
         + TOOLBAR
         + '<main id="doc">'
-        + f"<h1>{esc(TITLE)}</h1><p><strong>{esc(STATUS)}</strong></p>"
+        + f"<h1>{esc(TITLE)}</h1>"
+        + strip_html(meta)
+        + f"<p><strong>{esc(STATUS)}</strong></p>"
         f'<div class="scope-notice"><p><strong>{esc(NOTICE_TITLE)}</strong></p>'
         f"<p>{marked(NOTICE_1)}</p>"
         f"<p>{esc(provenance)}</p><p><strong>{esc(NOTICE_2)}</strong></p></div>"
         + table(["Thông tin", "Giá trị"], facts)
+        + abbreviations_html(meta)
         + sections_html(draft, outline)
         + registers_html(draft, outline)
         + f"<h2>{esc(SIGNOFF_HEADING)}</h2>"

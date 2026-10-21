@@ -25,6 +25,19 @@ as a marked box, covered sections as their blocks); a section status table; the 
 grouped by experiment; the decision register; the sign-off table with three blank rows. Markers are
 highlighted. Registers are derived from the draft's own markers.
 
+## Format (from `docs/reports/qbd-core-p2-autodraft/sample-format-spec.md`)
+Applied, all visible in the sample rendering: `P.2.n` is H2 and each further number one level deeper
+(capped at H5, H1 is the chapter title); in-section unnumbered headings are H6; a header strip
+`Sản phẩm | Module | Ngày` under the title; the abbreviation list (`meta.abbreviations`, sorted, two
+columns, no header row) directly before the first section; tables the outline marks `headerless` print no
+header row; a section that does not apply is a plain sentence (`Không áp dụng: ...`), not a gap box, and
+is not a data request. Kept on purpose although the sample has none: the status line, scope notice, facts
+table, registers and blank sign-off table (the SOP needs the draft label).
+Not applied yet: table and figure captions (`Table N.` bold above, `Figure N.` italic below; table blocks
+have no caption field in the Stage B contract, which belongs to tools/pharma-dev-draft), figure drawing,
+merged group cells, risk-level colours, fonts, sizes, borders, page header and footer. These need the
+real `.docx` or a contract change and are listed in section 7 of the spec file.
+
 ## Export buttons
 - **PDF**: `window.print()`; a print stylesheet hides the toolbar. The user picks "Save as PDF".
 - **Word**: downloads `p2-orientation-draft.doc` (the page body as HTML with Word namespaces). Word opens
@@ -53,11 +66,12 @@ outline `tools/pharma-dev-draft/schemas/p2-outline.json` (read as data). Without
 
 ## Non-goals
 Native `.docx`, figures and images (stop the render until drawn), judging whether a draft is good enough
-(quality_gate), signing off (a person does), matching the visual style of the department sample (waits
-for a readable copy).
+(quality_gate), signing off (a person does), matching the fonts, colours and page layout of the department sample (waits for
+the real .docx).
 
 ## Spec history
 | Date | Change | Rationale | PR |
 |---|---|---|---|
 | 2026-10-21 | Scaffold | Module boundary accepted in the ADR | - |
 | 2026-10-21 | HTML renderer, verifier, export buttons | User decision: the output is HTML with PDF and Word buttons | - |
+| 2026-10-21 | Structure follows the P.2 sample | Heading levels, abbreviations, headerless tables, not-applicable text | - |

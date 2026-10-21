@@ -17,6 +17,7 @@ REPO = Path(__file__).resolve().parents[4]
 VALIDATOR = REPO / "tools" / "pharma-dev-draft" / "draft" / "validate-draft.mjs"
 DOCS = Path(__file__).parent / "fixtures" / "documents.json"
 TODAY = date(2026, 10, 21)
+NOT_APPLICABLE = {"P.2.2.3.3.3", "P.2.2.3.4.2", "P.2.3.3.2"}
 
 
 def intake(form="Viên nén bao phim", substances=("Atorvastatin calcium",)):
@@ -48,7 +49,7 @@ def test_only_sections_with_evidence_are_covered_and_every_quote_verifies():
     run = assemble_draft(intake(), kb(), TODAY)
     assert set(covered(run)) == {"P.2.1.1.2", "P.2.2.2"}
     assert len(run.draft["sections"]) == 43
-    assert len(run.gaps) == 41
+    assert len(run.gaps) == 38
     knowledge = kb()
     assert run.evidence and all(knowledge.verify(r) for r in run.evidence)
     for section in covered(run).values():
@@ -58,13 +59,21 @@ def test_only_sections_with_evidence_are_covered_and_every_quote_verifies():
 def test_every_uncovered_section_is_a_marked_gap():
     run = assemble_draft(intake(), kb(), TODAY)
     for section in run.draft["sections"]:
-        if section["status"] == "gap":
+        if section["status"] == "gap" and section["id"] not in NOT_APPLICABLE:
             assert section["gapReason"].startswith("[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG]")
+
+
+def test_second_strength_sections_are_plainly_not_applicable_and_not_data_requests():
+    run = assemble_draft(intake(), kb(), TODAY)
+    reasons = {s["id"]: s["gapReason"] for s in run.draft["sections"] if s["id"] in NOT_APPLICABLE}
+    assert set(reasons) == NOT_APPLICABLE
+    assert all(r.startswith("Không áp dụng") and "[CHƯA" not in r for r in reasons.values())
+    assert NOT_APPLICABLE.isdisjoint({g.section_id for g in run.gaps})
 
 
 def test_no_evidence_means_an_all_gap_draft_that_is_still_valid(tmp_path):
     run = assemble_draft(intake(), InMemoryKnowledge([]), TODAY)
-    assert not covered(run) and len(run.gaps) == 43 and not run.evidence
+    assert not covered(run) and len(run.gaps) == 40 and not run.evidence
     assert validate(run.draft, tmp_path).returncode == 0
 
 

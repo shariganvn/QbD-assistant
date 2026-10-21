@@ -234,3 +234,81 @@ def test_browser_export_buttons(tmp_path):
         assert page.pdf(format="A4")[:4] == b"%PDF"
         browser.close()
     assert errors == []
+
+
+def synthetic_outline():
+    return {
+        "sections": [
+            {"id": "P.2.1", "ctdReference": "3.2.P.2.1", "headingVi": "Mẹ", "container": True},
+            {
+                "id": "P.2.1.1",
+                "ctdReference": "3.2.P.2.1.1",
+                "headingVi": "Con",
+                "container": True,
+            },
+            {
+                "id": "P.2.1.1.1",
+                "ctdReference": "3.2.P.2.1.1.1",
+                "headingVi": "Bảng nhãn",
+                "form": {"tables": [{"headerless": True}, {}]},
+            },
+        ]
+    }
+
+
+def synthetic_draft(abbreviations=None):
+    table = {"type": "table", "headers": ["A", "B"], "rows": [["x", "y"]]}
+    meta = {
+        "productName": "P",
+        "apiName": "A",
+        "strengths": ["5 mg"],
+        "sourceFiles": ["f"],
+        "draftDate": "2026-10-21",
+        "assembledBy": "t",
+    }
+    if abbreviations:
+        meta["abbreviations"] = abbreviations
+    return {
+        "meta": meta,
+        "sections": [{"id": "P.2.1.1.1", "status": "covered", "blocks": [table, table]}],
+    }
+
+
+def test_heading_levels_follow_the_section_numbers():
+    page = build_html(synthetic_draft(), synthetic_outline())
+    assert '<h2 id="s-P.2.1">' in page and '<h3 id="s-P.2.1.1">' in page
+    assert '<h4 id="s-P.2.1.1.1">' in page
+    assert page.count("<h1>") == 1
+
+
+def test_a_table_the_form_marks_headerless_has_no_header_row():
+    from qbd_core.modules.rendering.html_doc import section_body
+
+    draft = synthetic_draft()
+    entry = synthetic_outline()["sections"][2]
+    body = "".join(section_body(draft["sections"][0], entry))
+    assert body.count("<table>") == 2 and body.count("<thead>") == 1  # the second table only
+
+
+def test_abbreviations_come_first_sorted_without_a_header_row():
+    page = build_html(synthetic_draft([["ZZ", "z"], ["aa", "a"]]), synthetic_outline())
+    assert page.index("Danh mục chữ viết tắt") < page.index('id="s-P.2.1"')
+    assert page.index("<td><p>aa</p></td>") < page.index("<td><p>ZZ</p></td>")
+    assert "Danh mục chữ viết tắt" not in build_html(synthetic_draft(), synthetic_outline())
+
+
+def test_a_plain_reason_is_a_paragraph_and_a_marked_gap_keeps_its_box():
+    from qbd_core.modules.rendering.html_doc import section_body
+
+    entry = {"id": "x"}
+    plain = section_body({"status": "gap", "gapReason": "Không áp dụng: lý do."}, entry)
+    marked_gap = section_body(
+        {"status": "gap", "gapReason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] thiếu."}, entry
+    )
+    assert plain == ["<p>Không áp dụng: lý do.</p>"]
+    assert 'class="gap-section"' in marked_gap[0]
+
+
+def test_header_strip_names_product_module_and_date():
+    page = build_html(synthetic_draft(), synthetic_outline())
+    assert "<strong>Module:</strong> 3.2.P.2" in page and "2026-10-21" in page
