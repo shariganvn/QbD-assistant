@@ -1,0 +1,10 @@
+# G-14 evidence, 2026-10-21
+$ python -m pytest qbd_core/modules/dossier_drafting/tests/test_data_sections.py -q
+10 passed in 1.54s
+
+$ python -m pytest qbd_core -q
+326 passed in 14.00s
+
+Mutations (reverted, each caught):
+- provenance.py: number check removed -> test_a_changed_number_or_tag_is_blocked fails
+- data_sections.py: verdict threshold altered -> sink sentence test fails

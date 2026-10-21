@@ -20,6 +20,7 @@ from qbd_core.modules.dossier_drafting.cqa import (
     CqaNotConfirmed,
     require_confirmation,
 )
+from qbd_core.modules.dossier_drafting.data_sections import data_sections
 from qbd_core.modules.dossier_drafting.models import COMBINATION_OUT_OF_SOP, IntakeResult
 from qbd_core.modules.dossier_drafting.outline import (
     leaf_sections,
@@ -59,6 +60,8 @@ class DraftRun:
     confirmed_cqa: ConfirmedCqa | None = None
     # One line per agent that was started or held back, for the report; never part of the draft.
     agent_log: tuple[str, ...] = ()
+    # The team's own trial data the run read, if any; kept so the quality gate can re-read cells.
+    trial: TrialData | None = None
 
 
 def _group_reason(section_id: str, group_id: str) -> str:
@@ -176,6 +179,10 @@ def assemble_draft(
             by_agent.update(found.sections)
             used.update(found.cited)
             agent_log += found.notes or [f"agent {spec.id}: ran"]
+    for sid, filled in data_sections(trial).items():
+        # The model's lead line says the experiment is missing; with data in hand it no longer is.
+        literature = by_agent[sid]["blocks"][1:] if sid in by_agent else []
+        by_agent[sid] = {**filled, "blocks": filled["blocks"] + literature}
     for section in leaf_sections(outline):
         sid = section["id"]
         if sid in not_applicable:
@@ -240,5 +247,13 @@ def assemble_draft(
     restricted = any(r.classification is not Classification.A for r in evidence)
     status = "confirmed" if confirmed else "pending"
     return DraftRun(
-        intake, draft, evidence, tuple(gaps), restricted, status, confirmed, tuple(agent_log)
+        intake,
+        draft,
+        evidence,
+        tuple(gaps),
+        restricted,
+        status,
+        confirmed,
+        tuple(agent_log),
+        trial,
     )

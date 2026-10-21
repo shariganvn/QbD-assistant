@@ -21,7 +21,11 @@ def evaluate_run(
     market = run.intake.request.market
     numbering, findings = numbering_for(market, outline)
     findings += check_provenance(
-        run.draft, run.evidence, knowledge, cqa_confirmed=run.cqa_status == "confirmed"
+        run.draft,
+        run.evidence,
+        knowledge,
+        cqa_confirmed=run.cqa_status == "confirmed",
+        trial=run.trial,
     )
     findings += check_consistency(run)
     verified = section_map_verified()

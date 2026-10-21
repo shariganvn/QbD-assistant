@@ -1,10 +1,81 @@
 {
   "source": "Header words of the team's trial-report tables, taken from the department's example report. A table is recognised only when exactly one kind matches; each inner list is a group of synonyms and every group needs one hit.",
   "kinds": [
-    {"id": "solubility", "label": "Độ tan theo môi trường", "all_of": [["media", "môi trường"], ["solubility", "độ tan"]]},
-    {"id": "dissolution_profile", "label": "Hồ sơ hòa tan", "all_of": [["dissolution", "hòa tan"]]},
-    {"id": "composition", "label": "Công thức theo hàm lượng", "all_of": [["components", "ingredients", "name of ingredient", "thành phần", "tên nguyên liệu"], ["mg"]]},
-    {"id": "physical_tests", "label": "Thử nghiệm vật lý của viên", "all_of": [["hardness", "độ cứng", "characteristics", "đặc tính"]]},
-    {"id": "impurity", "label": "Tạp chất", "all_of": [["impurity", "tạp chất"]]}
+    {
+      "id": "solubility",
+      "label": "Độ tan theo môi trường",
+      "all_of": [
+        [
+          "media",
+          "môi trường"
+        ],
+        [
+          "solubility",
+          "độ tan"
+        ]
+      ]
+    },
+    {
+      "id": "sink_condition",
+      "label": "Điều kiện sink",
+      "all_of": [
+        [
+          "medium",
+          "media",
+          "môi trường"
+        ],
+        [
+          "sink"
+        ]
+      ]
+    },
+    {
+      "id": "dissolution_profile",
+      "label": "Hồ sơ hòa tan",
+      "all_of": [
+        [
+          "dissolution",
+          "hòa tan"
+        ]
+      ]
+    },
+    {
+      "id": "composition",
+      "label": "Công thức theo hàm lượng",
+      "all_of": [
+        [
+          "components",
+          "ingredients",
+          "name of ingredient",
+          "thành phần",
+          "tên nguyên liệu"
+        ],
+        [
+          "mg"
+        ]
+      ]
+    },
+    {
+      "id": "physical_tests",
+      "label": "Thử nghiệm vật lý của viên",
+      "all_of": [
+        [
+          "hardness",
+          "độ cứng",
+          "characteristics",
+          "đặc tính"
+        ]
+      ]
+    },
+    {
+      "id": "impurity",
+      "label": "Tạp chất",
+      "all_of": [
+        [
+          "impurity",
+          "tạp chất"
+        ]
+      ]
+    }
   ]
 }

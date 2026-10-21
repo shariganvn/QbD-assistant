@@ -274,31 +274,31 @@ gates:
     invariant: A number taken from the team's data carries a [dữ liệu: ...] tag and appears in that cell.
     boundary_owner: quality_gate
     fixture: draft with a tag whose cell was edited
-    command: python -m pytest qbd_core/modules/quality_gate -k data_tag -q
-    expected: exit 0; edited number, wrong cell and forged tag are blocked.
+    command: python -m pytest qbd_core/modules/dossier_drafting/tests/test_data_sections.py -q
+    expected: exit 0; edited number, wrong cell, wrong file or table, bare tag, unlisted file and a run without trial data are blocked.
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-14.txt
     owner_step: "07"
-    blocked_by: first section that uses a data value
-    status: unverified
+    scope_note: First consumer is the sink-condition section (P.2.2.3.1.1).
+    status: pass
 
   - id: G-15
     title: Calculations match hand-checked values
     invariant: f2, mean, RSD and overage come from code and match worked examples; too few points or mixed units are refused.
     boundary_owner: dossier_drafting
     fixture: worked examples with known results
-    command: python -m pytest qbd_core/modules/dossier_drafting -k calc -q
-    expected: exit 0
+    command: python -m pytest qbd_core/modules/dossier_drafting/tests/test_calc.py -q
+    expected: exit 0; f2 equals 64.626 for the worked example and 100 for identical profiles.
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-15.txt
     owner_step: "07"
-    blocked_by: calculation module
-    status: unverified
+    scope_note: The functions are verified. No section publishes a calculated value yet, so no [tính] tag exists.
+    status: pass
 
   - id: G-16
     title: Experimental data never reaches a remote destination
     invariant: no trial-table text is in any payload built for a provider.
     boundary_owner: provider_access
     fixture: run with trial files and a remote recorded provider
-    command: python -m pytest qbd_core/tests -k never_reaches -q
+    command: python -m pytest qbd_core/tests/test_pipeline_trial.py -k never_reaches -q
     expected: exit 0; no payload part contains trial text.
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-16.txt
     owner_step: "07"

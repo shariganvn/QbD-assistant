@@ -1,0 +1,9 @@
+# G-15 evidence, 2026-10-21
+$ python -m pytest qbd_core/modules/dossier_drafting/tests/test_calc.py -q
+14 passed in 0.02s
+
+$ python -m pytest qbd_core -q
+326 passed in 14.30s
+
+Mutations (reverted, each caught):
+- calc.py: f2 formula altered -> 2 tests fail

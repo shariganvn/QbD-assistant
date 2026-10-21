@@ -21,8 +21,20 @@ from qbd_core.modules.evidence.trial_intake import (
     classify,
     load_trial_data,
 )
+from qbd_core.modules.evidence.trial_tags import (
+    DATA_TAG,
+    cell_text,
+    first_number,
+    numbers_in,
+    tag_for,
+)
 
 __all__ = [
+    "DATA_TAG",
+    "cell_text",
+    "first_number",
+    "numbers_in",
+    "tag_for",
     "DuplicateEvidence",
     "EvidenceStorePort",
     "InMemoryEvidenceStore",

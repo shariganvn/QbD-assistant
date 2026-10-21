@@ -44,7 +44,7 @@ IMPLEMENTED: dict[str, tuple[Status, str]] = {
     "3.5": ("implemented", "dossier_drafting.cqa (confirmation gate)"),
     "1.3": (
         "partial",
-        "evidence.trial_intake: tables named or listed as not recognised; values not used yet",
+        "evidence.trial_intake: tables named or listed as not recognised; only sink data used so far",
     ),
     "1.1": ("partial", "retrieval is done inside agent 4.1; no separate collector output"),
     "1.4": (
@@ -58,7 +58,7 @@ IMPLEMENTED: dict[str, tuple[Status, str]] = {
             "4.3": "the own compatibility study stays a gap",
             "5.3": "the own compression/granulation assessment stays a gap",
             "6.3": "overage from the own data stays a gap",
-            "8.1": "the own dissolution method and sink data stay gaps",
+            "8.1": "the sink section uses the team's data when given; method and power stay gaps",
             "9.1": "environment and moisture data stay gaps; the risk table is blocked",
             "9.2": "the own unit-operation results stay gaps",
             "10.3": "the own compatibility tests stay gaps",

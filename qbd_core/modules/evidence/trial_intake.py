@@ -143,6 +143,8 @@ def load_trial_data(paths: list[str], extract: Extractor | None = None) -> Trial
             digest = hashlib.sha256(path.read_bytes()).hexdigest()
         except OSError as error:
             raise TrialIntakeError("E_TRIAL_UNREADABLE", path.name) from error
+        if re.search(r"[,\[\]]", path.name):
+            raise TrialIntakeError("E_TRIAL_NAME", path.name)
         if path.name in seen:
             raise TrialIntakeError("E_TRIAL_DUPLICATE_NAME", path.name)
         seen.add(path.name)
