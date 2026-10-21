@@ -1,0 +1,7 @@
+# G-13 evidence, 2026-10-21
+$ python -m pytest qbd_core/modules/evidence/tests/test_trial_intake.py qbd_core/tests/test_pipeline_trial.py -q
+....................                                                     [100%]
+20 passed in 1.55s
+
+$ python -m pytest qbd_core -q
+302 passed in 12.78s

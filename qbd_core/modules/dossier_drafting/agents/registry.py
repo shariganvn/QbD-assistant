@@ -42,6 +42,10 @@ IMPLEMENTED: dict[str, tuple[Status, str]] = {
     "2.3": ("implemented", "quality_gate.numbering (market: eu, domestic, both)"),
     "3.4": ("partial", "dossier_drafting.config.groups and propose_cqa (candidates)"),
     "3.5": ("implemented", "dossier_drafting.cqa (confirmation gate)"),
+    "1.3": (
+        "partial",
+        "evidence.trial_intake: tables named or listed as not recognised; values not used yet",
+    ),
     "1.1": ("partial", "retrieval is done inside agent 4.1; no separate collector output"),
     "1.4": (
         "partial",
@@ -81,7 +85,6 @@ NEEDS_JUDGEMENT = "risk levels are the team's judgement on confirmed CQA and exp
 BLOCKED: dict[str, str] = {
     "0.4": "no model review loop exists (12.2 deferred), so there is nothing to control",
     "1.2": "the reference-product profile needs its measured data (strengths, tests)",
-    "1.3": "intake of experimental and stability files; no such files are given",
     "3.1": "needs strengths and measured reference-product data, not among the three inputs",
     "4.4": NEEDS_JUDGEMENT,
     "4.5": "combinations of substances are out of the SOP and refused at intake",

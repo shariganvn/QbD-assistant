@@ -26,7 +26,7 @@ from qbd_core.modules.dossier_drafting.outline import (
     load_outline,
     per_strength_beyond_first,
 )
-from qbd_core.modules.evidence.api import KnowledgePort
+from qbd_core.modules.evidence.api import KnowledgePort, TrialData
 from qbd_core.shared.contracts import Classification, EvidenceRecord, GapEntry
 from qbd_core.shared.markers import GAP_LABEL
 
@@ -139,6 +139,7 @@ def assemble_draft(
     outline: dict[str, Any] | None = None,
     confirmation: CqaConfirmation | None = None,
     llm: LlmSetup | None = None,
+    trial: TrialData | None = None,
 ) -> DraftRun:
     if COMBINATION_OUT_OF_SOP in intake.scope_flags:
         raise DraftingRefused("E_COMBINATION_NOT_SUPPORTED")
@@ -209,6 +210,13 @@ def assemble_draft(
             {"id": sid, "status": "gap", "gapReason": f"{GAP_LABEL} {reason}. {extra}".strip()}
         )
         gaps.append(GapEntry(section_id=sid, reason=f"{reason}. {extra}".strip()))
+    if trial is not None:
+        counts = {t.kind for t in trial.tables if t.kind}
+        agent_log.append(
+            f"agent 1.3: {len(trial.files)} file, {len(trial.tables)} bảng, "
+            f"{len(trial.tables) - len(trial.unrecognized)} nhận dạng ({', '.join(sorted(counts))})"
+        )
+        agent_log += [f"agent 1.3: chưa nhận dạng, {item}" for item in trial.unrecognized]
     agent_log += [f"A13: {item}" for item in provisional_decisions()]
     evidence = tuple(used.values())
     cited = sorted({r.provenance.file for r in evidence})
@@ -216,7 +224,11 @@ def assemble_draft(
         "productName": f"{substance} – {intake.request.dosage_form}",
         "apiName": substance,
         "strengths": [f"{GAP_LABEL} hàm lượng"],
-        "sourceFiles": [f"{GAP_LABEL} chưa có file thử nghiệm"],
+        "sourceFiles": (
+            [name for name, _ in trial.files]
+            if trial is not None and trial.files
+            else [f"{GAP_LABEL} chưa có file thử nghiệm"]
+        ),
         "draftDate": today.isoformat(),
         "assembledBy": "qbd_core, bản định hướng từ ba đầu vào, chưa FD duyệt",
         "extractionMethod": "xml-walk",

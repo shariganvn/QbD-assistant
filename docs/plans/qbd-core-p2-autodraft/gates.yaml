@@ -250,3 +250,57 @@ gates:
       Only agent 4.1 exists. The gate covers the shared path every later agent uses (ask, claim check,
       gateway), so new agents add cases rather than new rules.
     status: pass
+
+  - id: G-13
+    title: Trial-file intake is repeatable and stops on a bad file
+    invariant: >
+      The same trial files give identical data whatever the order given; a table is named only when
+      exactly one kind matches, otherwise it is listed as not recognised with file and table number; a
+      missing, corrupt, duplicate-named or wrongly shaped file stops the run (exit 10) with nothing
+      published.
+    boundary_owner: evidence
+    fixture: minimal .docx files built in the test (qbd_core/tests/docx_factory.py)
+    command: >
+      python -m pytest qbd_core/modules/evidence/tests/test_trial_intake.py
+      qbd_core/tests/test_pipeline_trial.py -q
+    expected: exit 0; identical JSON for both file orders; exit 10 and no output folder for a bad file.
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-13.txt
+    owner_step: "07"
+    scope_note: Intake and recognition only. No value from the data is used in a section yet.
+    status: pass
+
+  - id: G-14
+    title: Every published experimental number is in its cited cell
+    invariant: A number taken from the team's data carries a [dữ liệu: ...] tag and appears in that cell.
+    boundary_owner: quality_gate
+    fixture: draft with a tag whose cell was edited
+    command: python -m pytest qbd_core/modules/quality_gate -k data_tag -q
+    expected: exit 0; edited number, wrong cell and forged tag are blocked.
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-14.txt
+    owner_step: "07"
+    blocked_by: first section that uses a data value
+    status: unverified
+
+  - id: G-15
+    title: Calculations match hand-checked values
+    invariant: f2, mean, RSD and overage come from code and match worked examples; too few points or mixed units are refused.
+    boundary_owner: dossier_drafting
+    fixture: worked examples with known results
+    command: python -m pytest qbd_core/modules/dossier_drafting -k calc -q
+    expected: exit 0
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-15.txt
+    owner_step: "07"
+    blocked_by: calculation module
+    status: unverified
+
+  - id: G-16
+    title: Experimental data never reaches a remote destination
+    invariant: no trial-table text is in any payload built for a provider.
+    boundary_owner: provider_access
+    fixture: run with trial files and a remote recorded provider
+    command: python -m pytest qbd_core/tests -k never_reaches -q
+    expected: exit 0; no payload part contains trial text.
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-16.txt
+    owner_step: "07"
+    blocked_by: a model agent that is handed trial data; today none is, so the test holds trivially
+    status: unverified

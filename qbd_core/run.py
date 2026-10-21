@@ -22,7 +22,12 @@ from qbd_core.modules.dossier_drafting.api import (
     validate_intake,
 )
 from qbd_core.modules.egress_gate.api import Destination, try_load_manifest
-from qbd_core.modules.evidence.api import InMemoryKnowledge, load_documents
+from qbd_core.modules.evidence.api import (
+    InMemoryKnowledge,
+    TrialIntakeError,
+    load_documents,
+    load_trial_data,
+)
 from qbd_core.modules.provider_access.api import ProviderGateway, RecordedProvider
 from qbd_core.modules.quality_gate.api import QualityReport, evaluate_run
 from qbd_core.modules.rendering.api import DEFAULT_NAME, RenderFailed, render_draft
@@ -38,6 +43,13 @@ def add_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--date", default=None, help="YYYY-MM-DD; defaults to today")
     parser.add_argument("--cqa-confirmation", default=None, help="JSON signed by the person")
     parser.add_argument("--render-dir", default=None, help="also render the HTML page here")
+    parser.add_argument(
+        "--trial-file",
+        action="append",
+        default=None,
+        dest="trial_files",
+        help="trial report .docx of the team; repeat for several. Read by code only",
+    )
     parser.add_argument(
         "--provider-recording",
         default=None,
@@ -87,7 +99,8 @@ def checklist_rows(report: QualityReport) -> list[tuple[str, str, str, str]]:
     EXIT_BLOCKED,
     EXIT_PUBLISH,
     EXIT_PROVIDER,
-) = (2, 3, 4, 5, 6, 7, 8, 9)
+    EXIT_TRIAL,
+) = (2, 3, 4, 5, 6, 7, 8, 9, 10)
 
 
 class BadDate(Exception):  # noqa: N818
@@ -142,7 +155,11 @@ def _compute(args: argparse.Namespace):
     knowledge = _knowledge(args.documents)
     confirmation = load_confirmation(args.cqa_confirmation)
     llm = _llm(args)
-    result = assemble_draft(intake, knowledge, today, confirmation=confirmation, llm=llm)
+    files = getattr(args, "trial_files", None)
+    trial = load_trial_data(files) if files else None
+    result = assemble_draft(
+        intake, knowledge, today, confirmation=confirmation, llm=llm, trial=trial
+    )
     return result, evaluate_run(result, knowledge)
 
 
@@ -168,6 +185,9 @@ def run(args: argparse.Namespace) -> int:
     except (AgentInfrastructureError, ProviderSetupError) as failed:
         print(f"provider failed: {failed}", file=sys.stderr)
         return EXIT_PROVIDER
+    except TrialIntakeError as failed:
+        print(f"trial file failed: {failed}", file=sys.stderr)
+        return EXIT_TRIAL
     except BadDate:
         print("rejected: --date is not YYYY-MM-DD", file=sys.stderr)
         return EXIT_INTAKE

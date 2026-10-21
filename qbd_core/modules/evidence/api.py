@@ -14,6 +14,13 @@ from qbd_core.modules.evidence.store import (
     JsonFileEvidenceStore,
     StoreCorrupt,
 )
+from qbd_core.modules.evidence.trial_intake import (
+    TrialData,
+    TrialIntakeError,
+    TrialTable,
+    classify,
+    load_trial_data,
+)
 
 __all__ = [
     "DuplicateEvidence",
@@ -24,6 +31,11 @@ __all__ = [
     "KnowledgeDocument",
     "KnowledgePort",
     "StoreCorrupt",
+    "TrialData",
+    "TrialIntakeError",
+    "TrialTable",
+    "classify",
+    "load_trial_data",
     "evidence_id",
     "load_documents",
 ]

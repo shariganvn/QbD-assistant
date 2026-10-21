@@ -1,7 +1,7 @@
 ---
 title: "Step 07 - Experimental data intake (design)"
 workstream: qbd-core-p2-autodraft
-status: design, waiting for two decisions
+status: slice 1 done (intake and recognition, G-13 pass); next slices open
 ---
 
 # Step 07 - Experimental data intake (agent 1.3)
@@ -62,9 +62,13 @@ a local provider; until then they stay marked gaps. Estimated to open 14 to 18 o
 | G-15 calculations | f2, mean, RSD, overage match hand-checked values | pytest data_intake -k calc | fewer than 3 time points, unit mismatch |
 | G-16 no leak | experimental data never reaches a remote destination | pytest provider_access -k data | data record in payload, local vs remote |
 
-## Decisions needed from the project owner
-1. Input form: the team's existing trial `.docx` reports (recommended) or a fixed spreadsheet template.
-2. Who may read the data: deterministic code only for now (recommended), or also a local model later.
+## Decisions (2026-10-21, project owner)
+1. Input form: the team's existing trial `.docx` reports.
+2. Who may read the data: deterministic code only; a local model may be added later.
+
+## Slices
+1. Done: `--trial-file`, Stage A by CLI, header-word recognition, unrecognised tables listed, exit 10. G-13 pass.
+2. Next: `DataRecord` with cell-level tags and the quality-gate check (G-14), then calculation module (G-15), then the first consumers: 3.1, 6.4, 7.3/8.2, 8.3, 8.4, 10.2, 11.x.
 
 ## Risks and rollback
 Trial layouts differ, so recognition will miss tables at first; misses become visible gaps, not wrong
