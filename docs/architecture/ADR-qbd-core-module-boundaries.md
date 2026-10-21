@@ -159,6 +159,6 @@ này chỉ ghi quyết định + outline, không thay thế plan thực thi.
 2. `quality_gate` scores **by code**: deterministic checks only (checklist, consistency, provenance,
    market numbering). No LLM-assisted self-score. `dossier_drafting` exposes its draft and gap register
    through `api.py` and nothing else.
-3. Storage layout is **deferred to the evidence step**. Until a module needs persistence, none is
-   created. When it is, the choice (file store or shared database, namespaced per module) is recorded
-   in that module's `SPEC.md` and reported here.
+3. Storage layout was **deferred to the evidence step** and is now decided there: one JSON file per run,
+   replaced atomically, no database (see `modules/evidence/SPEC.md`). Revisit when a module needs
+   concurrent writers or queries across runs.

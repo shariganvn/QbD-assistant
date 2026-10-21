@@ -1,0 +1,27 @@
+[
+  {
+    "file_id": "DOC-A",
+    "name": "Synthetic monograph A",
+    "classification": "A",
+    "pages": [
+      "Atorvastatin calcium là hoạt chất thuộc nhóm statin. Độ tan trong nước rất thấp.",
+      "Viên nén bao phim được bảo quản ở nơi khô ráo. Độ ẩm tương đối không quá sáu mươi phần trăm."
+    ]
+  },
+  {
+    "file_id": "DOC-B",
+    "name": "Synthetic textbook B",
+    "classification": "B",
+    "pages": [
+      "Tá dược độn lactose cải thiện tính chảy của khối bột. Magnesium stearate dùng làm chất bôi trơn."
+    ]
+  },
+  {
+    "file_id": "DOC-Q",
+    "name": "Synthetic unsorted Q",
+    "classification": "?",
+    "pages": [
+      "Tương kỵ giữa hoạt chất và tá dược cần được kiểm tra bằng DSC."
+    ]
+  }
+]

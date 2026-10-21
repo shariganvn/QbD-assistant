@@ -1,0 +1,12 @@
+Evidence 3.4 (knowledge lookup and evidence store), 2026-10-21
+Scope: synthetic documents only; no Kho document was read.
+$ python3 -m pytest qbd_core/modules/evidence -q
+....................                                                     [100%]
+20 passed in 0.18s
+
+Negative controls (each reverted afterwards):
+ - verify() always true: 1 failed, 19 passed
+ - match threshold removed (every sentence qualifies): 1 failed, 19 passed
+ - atomic replace removed (direct write): 3 failed, 17 passed
+
+Whole project: 101 passed in 0.47s; ruff: All checks passed!
