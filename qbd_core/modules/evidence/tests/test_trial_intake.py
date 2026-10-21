@@ -1,4 +1,5 @@
 import hashlib
+from pathlib import Path
 
 import pytest
 
@@ -87,3 +88,22 @@ def test_an_extractor_answer_of_the_wrong_shape_stops_the_intake(tmp_path, extra
     with pytest.raises(TrialIntakeError) as caught:
         load_trial_data([str(path)], extract=lambda _: extracted)
     assert caught.value.code == "E_EXTRACT_SHAPE"
+
+
+REPORT = (
+    Path(__file__).resolve().parents[4] / "docs/raw/135-00-Pharmaceutical Development-example.docx"
+)
+
+
+@pytest.mark.skipif(not REPORT.exists(), reason="example report not in the checkout")
+def test_recognition_on_the_departments_example_report_does_not_regress():
+    """46 tables, measured 2026-10-21: 33 named, 13 listed as not recognised, none ambiguous."""
+    data = load_trial_data([str(REPORT)])
+    named = [t for t in data.tables if t.kind]
+    assert len(data.tables) == 46
+    assert len(named) >= 33
+    assert not any("khớp nhiều loại" in line for line in data.unrecognized)
+    by_index = {t.index: t.kind for t in data.tables}
+    assert by_index[4] == "solubility"
+    assert by_index[25] == "sink_condition"
+    assert {by_index[i] for i in (30, 31, 32)} == {"dissolution_profile"}

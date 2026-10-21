@@ -76,6 +76,120 @@
           "tạp chất"
         ]
       ]
+    },
+    {
+      "id": "particle_size",
+      "label": "Cỡ hạt",
+      "all_of": [
+        [
+          "particle",
+          "cỡ hạt"
+        ]
+      ]
+    },
+    {
+      "id": "batch_results",
+      "label": "Kết quả theo lô",
+      "all_of": [
+        [
+          "batch",
+          "lô"
+        ],
+        [
+          "parameter",
+          "specification",
+          "chỉ tiêu",
+          "tiêu chuẩn"
+        ]
+      ]
+    },
+    {
+      "id": "test_results",
+      "label": "Chỉ tiêu, tiêu chuẩn và kết quả",
+      "all_of": [
+        [
+          "test",
+          "chỉ tiêu"
+        ],
+        [
+          "specification",
+          "tiêu chuẩn"
+        ],
+        [
+          "result",
+          "kết quả"
+        ]
+      ]
+    },
+    {
+      "id": "dissolution_method",
+      "label": "So sánh phương pháp hòa tan",
+      "all_of": [
+        [
+          "usp",
+          "bp",
+          "ph. eur"
+        ],
+        [
+          "experiment",
+          "thực nghiệm"
+        ]
+      ]
+    },
+    {
+      "id": "scale_up",
+      "label": "Nâng cỡ lô",
+      "all_of": [
+        [
+          "scale",
+          "cỡ lô",
+          "quy mô"
+        ],
+        [
+          "lab",
+          "pilot",
+          "phòng thí nghiệm"
+        ]
+      ]
+    },
+    {
+      "id": "packaging",
+      "label": "Bao bì",
+      "all_of": [
+        [
+          "packaging",
+          "bao bì"
+        ]
+      ]
+    },
+    {
+      "id": "batch_info",
+      "label": "Thông tin lô",
+      "all_of": [
+        [
+          "mfg",
+          "manufacturing date",
+          "ngày sản xuất"
+        ],
+        [
+          "batch",
+          "lô"
+        ]
+      ]
+    },
+    {
+      "id": "design_table",
+      "label": "Bảng thiết kế (QTPP, CQA, rủi ro), không phải số đo",
+      "all_of": [
+        [
+          "justification",
+          "biện luận",
+          "cqas",
+          "qtpp",
+          "formulation variables",
+          "process steps"
+        ]
+      ]
     }
   ]
 }
