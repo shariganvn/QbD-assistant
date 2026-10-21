@@ -1,7 +1,10 @@
 # Implementation Plan
 
-There is **no active implementation plan**. This file remains the single
-authoritative router; wait for a scope to be accepted before picking work up.
+## Active
+
+- [qbd_core P.2 autodraft plan](docs/plans/qbd-core-p2-autodraft/plan.md) — `active`. Gates in
+  `gates.yaml` (G-01..G-10), all `unverified`. Scope: `docs/decisions/D20261021-qbd-core-p2-autodraft-scope.md`.
+  Start from step 00; read only the current step.
 
 ## Latest completed
 

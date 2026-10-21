@@ -1,0 +1,167 @@
+# Executable acceptance gates for qbd-core-p2-autodraft.
+# This file owns gate bodies. Step files describe implementation; they must not restate a gate.
+
+version: 1
+workstream: qbd-core-p2-autodraft
+evidence_root: docs/reports/qbd-core-p2-autodraft
+
+gates:
+  - id: G-01
+    title: Invalid input is refused
+    invariant: >
+      More than 3 substances, a form outside the 38, an unknown market, or an empty field is rejected with a fixed error code; a combination carries the out-of-SOP flag.
+    boundary_owner: intake
+    fixture: qbd_core/tests/fixtures/intake/*.json
+    command: >
+      pytest qbd_core/tests/intake -q
+    expected: >
+      exit 0; each bad case yields its fixed code
+    negative_cases:
+      - each valid-looking edge (3 substances, duplicate form name) accepted or rejected as specified
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-01.txt
+    owner_step: "02"
+    status: unverified
+
+  - id: G-02
+    title: Form catalogue is complete
+    invariant: >
+      38 forms map to exactly one of N1-N9 (the duplicated effervescent granule counts once); N5-N9 sections without internal documents emit CẦN DỮ LIỆU.
+    boundary_owner: config
+    fixture: qbd_core/config/*.json
+    command: >
+      pytest qbd_core/tests/config -q
+    expected: >
+      38/38 mapped, 0 duplicates, 0 empty groups
+    negative_cases:
+      - a form mapped to two groups fails
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-02.txt
+    owner_step: "02"
+    status: unverified
+
+  - id: G-03
+    title: No restricted document leaves the machine
+    invariant: >
+      Files of class B, C or unclassified never appear in any outbound payload.
+    boundary_owner: egress_gate
+    fixture: manifest plus payloads that embed class B/C text and class ? file ids
+    command: >
+      pytest qbd_core/tests/egress -q
+    expected: >
+      0 leaks; every trap payload blocked
+    negative_cases:
+      - manifest missing or unreadable -> block all egress
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-03.txt
+    owner_step: "03"
+    status: unverified
+
+  - id: G-04
+    title: Every value has a source
+    invariant: >
+      Each numeric or factual value in draft.json carries provenance {file,page,quote} or a citation; otherwise it is a Data Gap Register entry.
+    boundary_owner: quality_gate
+    fixture: draft with one unsourced value
+    command: >
+      pytest qbd_core/tests/quality -k provenance -q
+    expected: >
+      0 unsourced values; the planted one is rejected
+    negative_cases:
+      - stale or missing source -> not published
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-04.txt
+    owner_step: "05"
+    status: unverified
+
+  - id: G-05
+    title: Failure is fail-closed and atomic
+    invariant: >
+      Provider error, schema violation, missing manifest or tool failure publishes nothing and leaves the previous output hash unchanged.
+    boundary_owner: dossier_drafting + rendering
+    fixture: recorded provider that fails at each stage; prior output present
+    command: >
+      pytest qbd_core/tests/failclosed -q
+    expected: >
+      hash before == hash after for every injected failure
+    negative_cases:
+      - unreadable tool output; schema mismatch
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-05.txt
+    owner_step: "04"
+    status: unverified
+
+  - id: G-06
+    title: Runs are deterministic
+    invariant: >
+      Two runs on identical input and recorded provider produce identical draft.json and docx hashes.
+    boundary_owner: pipeline
+    fixture: case Atorvastatin calcium / film-coated tablet / both
+    command: >
+      run the pipeline twice with --evidence-provider recorded; compare sha256
+    expected: >
+      hashes equal
+    negative_cases:
+      - a differing timestamp or ordering fails the gate
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-06.txt
+    owner_step: "05"
+    status: unverified
+
+  - id: G-07
+    title: CQA confirmation gate
+    invariant: >
+      Agents that depend on the CQA set do not run until a person confirms it.
+    boundary_owner: dossier_drafting
+    fixture: run without confirmation
+    command: >
+      pytest qbd_core/tests/drafting -k cqa_gate -q
+    expected: >
+      stops with the fixed code; no dependent output written
+    negative_cases:
+      - confirmation for a different input hash is refused
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-07.txt
+    owner_step: "04"
+    status: unverified
+
+  - id: G-08
+    title: Section numbering follows the market
+    invariant: >
+      EU yields CTD numbering, domestic yields ACTD, both yields both, per SOP appendix A.
+    boundary_owner: config + quality_gate
+    fixture: three market cases
+    command: >
+      pytest qbd_core/tests/quality -k market -q
+    expected: >
+      100% of sections numbered correctly
+    negative_cases:
+      - a missing mandatory ACTD section fails
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-08.txt
+    owner_step: "05"
+    status: unverified
+
+  - id: G-09
+    title: Rendered document is valid
+    invariant: >
+      The docx produced through the CLI passes schema validation, carries the scope notice and blank signature rows.
+    boundary_owner: rendering
+    fixture: valid draft.json
+    command: >
+      npm run pharma-dev:validate -- <draft>; npm run pharma-dev:verify -- <docx> --draft <draft>
+    expected: >
+      exit 0
+    negative_cases:
+      - invalid draft.json -> no docx written
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-09.txt
+    owner_step: "05"
+    status: unverified
+
+  - id: G-10
+    title: Acceptance case set
+    invariant: >
+      All cases of step 06 reach appendix C 17/17 or N.A. with reason; out-of-scope case is declined; one case has recorded sign-off by the head of R&D.
+    boundary_owner: whole system
+    fixture: case list approved by the project owner
+    command: >
+      python -m qbd_core accept --cases <list>
+    expected: >
+      one report per case, none failing
+    negative_cases:
+      - combination and out-of-scope cases
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-10.txt
+    owner_step: "06"
+    status: unverified
