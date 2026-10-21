@@ -34,6 +34,7 @@ Architecture: `docs/architecture/ADR-qbd-core-module-boundaries.md`.
 | 04 Dossier drafting | step-04-dossier-drafting.md | [ ] |
 | 05 Quality and render | step-05-quality-render.md | [ ] |
 | 06 Acceptance | step-06-acceptance.md | [ ] |
+| 07 Experimental data intake | step-07-experimental-data-intake.md | design; waiting for two decisions |
 
 Dependencies: 01 after 00; 02 and 03 after 01; 04 after 02 and 03; 05 after 04; 06 after 05.
 Parallel, non-blocking: confirmation of the A5 refinement by the head of R&D (blocks only freezing the
