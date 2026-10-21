@@ -20,6 +20,7 @@ from qbd_core.modules.dossier_drafting.api import (
     validate_intake,
 )
 from qbd_core.modules.evidence.api import InMemoryKnowledge, load_documents
+from qbd_core.modules.quality_gate.api import QualityReport, evaluate_run
 from qbd_core.modules.rendering.api import DEFAULT_NAME, RenderFailed, render_draft
 
 
@@ -31,6 +32,7 @@ def add_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--out", required=True)
     parser.add_argument("--date", default=None, help="YYYY-MM-DD; defaults to today")
     parser.add_argument("--cqa-confirmation", default=None, help="JSON signed by the person")
+    parser.add_argument("--render-dir", default=None, help="also render the HTML page here")
 
 
 def _write_atomically(path: Path, text: str) -> None:
@@ -43,6 +45,19 @@ def _write_atomically(path: Path, text: str) -> None:
     except BaseException:
         Path(tmp).unlink(missing_ok=True)
         raise
+
+
+STATUS_LABEL = {
+    "pass": "Đạt",
+    "fail": "Không đạt",
+    "review": "Chờ người rà soát",
+    "open": "Còn khoảng trống",
+    "na": "N.A.",
+}
+
+
+def checklist_rows(report: QualityReport) -> list[tuple[str, str, str, str]]:
+    return [(str(c.no), c.text, STATUS_LABEL[c.status], c.detail) for c in report.checklist]
 
 
 def run(args: argparse.Namespace) -> int:
@@ -62,14 +77,30 @@ def run(args: argparse.Namespace) -> int:
     except DraftingRefused as refused:
         print(f"refused: {refused.code}", file=sys.stderr)
         return 3
+    report = evaluate_run(result, knowledge)
+    out = Path(args.out)
+    _write_atomically(
+        out.with_name(out.stem + ".quality.json"), report.model_dump_json(indent=2) + "\n"
+    )
+    if not report.passed:
+        blocked = ", ".join(sorted({f.code for f in report.blocking}))
+        print(f"blocked by the quality gate: {blocked}", file=sys.stderr)
+        return 7
     body = json.dumps(result.draft, ensure_ascii=False, indent=2) + "\n"
-    _write_atomically(Path(args.out), body)
+    _write_atomically(out, body)
     covered = sum(s["status"] == "covered" for s in result.draft["sections"])
     summary = (
         f"{covered} covered, {len(result.gaps)} gap, "
         f"restricted={result.contains_restricted}, cqa={result.cqa_status}"
     )
     print(f"draft written: {summary}")
+    if args.render_dir:
+        try:
+            page = render_draft(result.draft, args.render_dir, checklist=checklist_rows(report))
+        except RenderFailed as failed:
+            print(f"render failed: {failed.code}", file=sys.stderr)
+            return 6
+        print(f"html written: {page.path} ({page.size} bytes)")
     return 0
 
 

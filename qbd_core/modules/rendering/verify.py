@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from html.parser import HTMLParser
 from typing import Any
 
@@ -74,7 +75,9 @@ def _norm(text: str) -> str:
     return " ".join(text.split())
 
 
-def verify_html(page: str, draft: dict[str, Any]) -> list[str]:
+def verify_html(
+    page: str, draft: dict[str, Any], checklist: Sequence[Sequence[str]] | None = None
+) -> list[str]:
     parsed = _Page()
     parsed.feed(page)
     visible = _norm(" ".join(parsed.text))
@@ -96,6 +99,11 @@ def verify_html(page: str, draft: dict[str, Any]) -> list[str]:
     signed = [r for r in parsed.rows if r and r[0] in SIGNOFF_ROLES]
     if signed != [[role, BLANK, BLANK, ""] for role in SIGNOFF_ROLES]:
         failures.append("sign-off rows are not the three blank rows")
+    if checklist:
+        present = [r for r in parsed.rows if r and r[0] in {row[0] for row in checklist}]
+        wanted = [[_norm(c) for c in row] for row in checklist]
+        if [[_norm(c) for c in r] for r in present if len(r) == 4] != wanted:
+            failures.append("the checklist rows differ from the report")
     for section in draft["sections"]:
         texts = (
             [section["gapReason"]]

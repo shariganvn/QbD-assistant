@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from qbd_core.modules.rendering.markers import kind_of, spots
+from qbd_core.shared.markers import kind_of, spots
 
 OTHER = "Khác"
 

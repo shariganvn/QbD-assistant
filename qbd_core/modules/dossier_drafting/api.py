@@ -1,7 +1,17 @@
 """Public entry points of the dossier_drafting module. Other modules import only from here."""
 
-from qbd_core.modules.dossier_drafting.assemble import DraftingRefused, DraftRun, assemble_draft
-from qbd_core.modules.dossier_drafting.config import group_gaps, groups, section_map
+from qbd_core.modules.dossier_drafting.assemble import (
+    CQA_SECTION,
+    DraftingRefused,
+    DraftRun,
+    assemble_draft,
+)
+from qbd_core.modules.dossier_drafting.config import (
+    group_gaps,
+    groups,
+    section_map,
+    section_map_verified,
+)
 from qbd_core.modules.dossier_drafting.cqa import (
     ConfirmedCqa,
     CqaConfirmation,
@@ -19,9 +29,11 @@ from qbd_core.modules.dossier_drafting.models import (
     IntakeRejected,
     IntakeResult,
 )
+from qbd_core.modules.dossier_drafting.outline import leaf_sections, load_outline
 
 __all__ = [
     "COMBINATION_OUT_OF_SOP",
+    "CQA_SECTION",
     "ConfirmedCqa",
     "CqaConfirmation",
     "CqaNotConfirmed",
@@ -33,6 +45,9 @@ __all__ = [
     "IntakeResult",
     "assemble_draft",
     "group_gaps",
+    "leaf_sections",
+    "load_outline",
+    "section_map_verified",
     "intake_digest",
     "load_confirmation",
     "propose_cqa",

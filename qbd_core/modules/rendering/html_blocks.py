@@ -6,7 +6,7 @@ import html
 from typing import Any
 
 from qbd_core.modules.rendering.errors import RenderFailed
-from qbd_core.modules.rendering.markers import MARKER
+from qbd_core.shared.markers import MARKER
 
 
 def esc(text: str) -> str:

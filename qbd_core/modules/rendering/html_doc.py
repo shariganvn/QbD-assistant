@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from typing import Any
 
 from qbd_core.modules.rendering import annex
@@ -14,7 +15,7 @@ from qbd_core.modules.rendering.html_blocks import (
     risk_classes,
     table,
 )
-from qbd_core.modules.rendering.markers import kind_of
+from qbd_core.shared.markers import kind_of
 
 __all__ = ["SCRIPT", "block", "build_html"]
 
@@ -38,6 +39,8 @@ SIGNOFF_HEADING = "Ghi nhận soạn thảo và rà soát"
 SIGNOFF_ROLES = ("Soạn thảo", "Rà soát FD", "Phê duyệt QA/PO")
 BLANK = "________________"
 SPOT_HEADERS = ["Mục", "Vị trí", "Nội dung"]
+CHECKLIST_HEADING = "Danh mục kiểm tra trước khi nộp rà soát (Phụ lục C của SOP)"
+CHECKLIST_HEADERS = ["TT", "Nội dung kiểm tra", "Kết quả", "Ghi chú"]
 CSS = (
     # Measured from the department sample: Arimo 10 pt, justified, 1.5 line spacing, 3 pt before.
     'body{font-family:Arimo,Arial,"Liberation Sans",Helvetica,sans-serif;font-size:10pt;'
@@ -163,7 +166,17 @@ def registers_html(draft: dict[str, Any], outline: dict[str, Any]) -> str:
     return "".join(out)
 
 
-def build_html(draft: dict[str, Any], outline: dict[str, Any]) -> str:
+def checklist_html(rows: Sequence[Sequence[str]] | None) -> str:
+    if not rows:
+        return ""
+    return f"<h2>{esc(CHECKLIST_HEADING)}</h2>" + table(CHECKLIST_HEADERS, [list(r) for r in rows])
+
+
+def build_html(
+    draft: dict[str, Any],
+    outline: dict[str, Any],
+    checklist: Sequence[Sequence[str]] | None = None,
+) -> str:
     meta = draft["meta"]
     provenance = (
         f"Xuất xứ bản nháp: dựng tự động bởi {meta['assembledBy']}; "
@@ -194,6 +207,7 @@ def build_html(draft: dict[str, Any], outline: dict[str, Any]) -> str:
         + abbreviations_html(meta)
         + sections_html(draft, outline)
         + registers_html(draft, outline)
+        + checklist_html(checklist)
         + f"<h2>{esc(SIGNOFF_HEADING)}</h2>"
         + table(["Vai trò", "Họ tên", "Chữ ký", "Ngày"], signoff)
         + f"</main><script>{SCRIPT}</script></body></html>\n"

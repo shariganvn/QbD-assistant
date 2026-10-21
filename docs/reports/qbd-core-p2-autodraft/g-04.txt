@@ -1,0 +1,12 @@
+G-04 evidence and P5.1 (quality gate), 2026-10-21
+Scope: synthetic documents; deterministic checks only.
+$ python3 -m pytest qbd_core/modules/quality_gate -q
+..........................                                               [100%]
+26 passed in 0.57s
+
+Negative controls (each reverted afterwards): source verification disabled: 1 failed; unsourced-text check disabled: 2 failed; gap-register check disabled: 1 failed; unmapped-section check disabled: 1 failed.
+
+Slice result for Atorvastatin / film-coated tablet: no blocking finding; checklist items 1-14 open or review, 16 and 17 pass, 15 review (both and domestic: ACTD numbering unverified) or pass (EU).
+Not verified: G-08 stays unverified until the ACTD numbering is checked against Appendix I and TT32 (task 2.4); the HTML headings do not print ACTD numbers yet.
+
+Whole project: 187 passed in 6.77s; ruff: All checks passed!

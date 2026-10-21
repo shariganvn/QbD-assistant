@@ -58,18 +58,24 @@ gates:
   - id: G-04
     title: Every value has a source
     invariant: >
-      Each numeric or factual value in draft.json carries provenance {file,page,quote} or a citation; otherwise it is a Data Gap Register entry.
-    boundary_owner: quality_gate
-    fixture: draft with one unsourced value
+      Each covered paragraph carries a source tag that names an evidence record whose file and page match,
+      whose text is the record's quote, and whose quote occurs on the cited page; each table cell holding a
+      number is marked or tagged; each cited file is listed as a reference; evidence ids are unique.
+      Anything else is a marked gap. The check is code and does not use a language model.
+    boundary_owner: quality_gate (provenance.py)
+    fixture: qbd_core/modules/quality_gate/tests/test_quality_gate.py (synthetic documents)
     command: >
-      pytest qbd_core/tests/quality -k provenance -q
+      python -m pytest qbd_core/modules/quality_gate -q
     expected: >
-      0 unsourced values; the planted one is rejected
+      exit 0. The clean run passes; each planted defect (unsourced text, wrong page, changed quote, unknown
+      id, forged record, number in a cell without a source, missing reference, duplicate id) is reported
+      with its code and blocks the run (exit code 7 on the command line, no draft written).
     negative_cases:
-      - stale or missing source -> not published
+      - the report never repeats draft text
+      - blocked run leaves an earlier draft byte-identical
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-04.txt
     owner_step: "05"
-    status: unverified
+    status: pass
 
   - id: G-05
     title: Failure is fail-closed and atomic
@@ -135,13 +141,14 @@ gates:
     boundary_owner: config + quality_gate
     fixture: three market cases
     command: >
-      pytest qbd_core/tests/quality -k market -q
+      python -m pytest qbd_core/modules/quality_gate -k numbering -q
     expected: >
       100% of sections numbered correctly
     negative_cases:
       - a missing mandatory ACTD section fails
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-08.txt
     owner_step: "05"
+    progress: mapping complete and tested for the three markets (every leaf section maps, domestic requirement from the SOP note); NOT closed because the ACTD numbers come from the SOP and are not yet checked against Appendix I and TT32 (step 02.4), and the HTML headings do not print ACTD numbers yet
     status: unverified
 
   - id: G-09

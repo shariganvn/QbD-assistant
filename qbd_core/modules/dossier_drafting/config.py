@@ -41,6 +41,12 @@ def section_map() -> tuple[dict[str, Any], ...]:
     return tuple(_load("ctd_actd_map.json")["sections"])
 
 
+@cache
+def section_map_verified() -> bool:
+    """True once the SOP numbering was checked against the official ACTD Appendix I and TT32."""
+    return bool(_load("ctd_actd_map.json")["verified_against_kho"])
+
+
 def find_form(raw: str) -> dict[str, str] | None:
     """Match by id (F09), by number (9) or by name, ignoring case and spacing."""
     key = normalise(raw)

@@ -1,0 +1,150 @@
+{
+  "source": "SOP-RD-001 v02, Phụ lục C (17 mục). Mục 1-14 chấm theo độ phủ nội dung; 15-17 kiểm cơ học.",
+  "coverage_items": [
+    {
+      "no": 1,
+      "text": "Có bảng QTPP và CQA, mỗi mục có lý giải",
+      "sections": [
+        "P.2.2.1.2.1",
+        "P.2.2.1.2.2"
+      ]
+    },
+    {
+      "no": 2,
+      "text": "Có đánh giá rủi ro ban đầu và cập nhật cho hoạt chất, công thức, quy trình",
+      "sections": [
+        "P.2.1.1.3",
+        "P.2.1.1.4",
+        "P.2.2.1.3.2",
+        "P.2.2.1.3.4",
+        "P.2.3.1",
+        "P.2.3.4"
+      ]
+    },
+    {
+      "no": 3,
+      "text": "Có đặc tính hoạt chất và tá dược, lý do chọn cấp độ tá dược",
+      "sections": [
+        "P.2.1.1.1",
+        "P.2.1.1.2",
+        "P.2.1.2.1",
+        "P.2.1.2.3"
+      ]
+    },
+    {
+      "no": 4,
+      "text": "Có nghiên cứu tương hợp hoạt chất - tá dược",
+      "sections": [
+        "P.2.1.2.2"
+      ]
+    },
+    {
+      "no": 5,
+      "text": "Có mô tả RMP và so sánh với sản phẩm",
+      "sections": [
+        "P.2.2.1.1"
+      ]
+    },
+    {
+      "no": 6,
+      "text": "Có lý giải chọn công nghệ bào chế",
+      "sections": [
+        "P.2.2.1.3.1"
+      ]
+    },
+    {
+      "no": 7,
+      "text": "Có công thức cuối và vai trò từng thành phần",
+      "sections": [
+        "P.2.2.1.4",
+        "P.2.2.1.3.3",
+        "P.2.2.1.3.3.1",
+        "P.2.2.1.3.3.2"
+      ]
+    },
+    {
+      "no": 8,
+      "text": "Có nêu về lượng đóng dư (kể cả không dùng)",
+      "sections": [
+        "P.2.2.2"
+      ]
+    },
+    {
+      "no": 9,
+      "text": "Có phương pháp hòa tan, hòa tan so sánh, kết luận BE/miễn BE",
+      "sections": [
+        "P.2.2.3.1.1",
+        "P.2.2.3.1.2",
+        "P.2.2.3.1.3",
+        "P.2.2.3.2"
+      ]
+    },
+    {
+      "no": 10,
+      "text": "Có so sánh tạp chất với RMP; đặc tính khác của dạng bào chế (nếu có)",
+      "sections": [
+        "P.2.2.3.3.1",
+        "P.2.2.3.3.2",
+        "P.2.2.3.3.3",
+        "P.2.2.3.4",
+        "P.2.2.3.4.1",
+        "P.2.2.3.4.2"
+      ]
+    },
+    {
+      "no": 11,
+      "text": "Có chiến lược kiểm soát môi trường (nếu sản phẩm nhạy)",
+      "sections": [
+        "P.2.3.2.1",
+        "P.2.3.2.2"
+      ]
+    },
+    {
+      "no": 12,
+      "text": "Có phát triển từng công đoạn quy trình và nâng quy mô",
+      "sections": [
+        "P.2.3.2",
+        "P.2.3.2.3",
+        "P.2.3.2.4",
+        "P.2.3.2.5",
+        "P.2.3.3",
+        "P.2.3.3.1",
+        "P.2.3.3.2"
+      ]
+    },
+    {
+      "no": 13,
+      "text": "Có hệ bao bì và lý giải; liên kết dữ liệu ổn định",
+      "sections": [
+        "P.2.4.1",
+        "P.2.4.2"
+      ]
+    },
+    {
+      "no": 14,
+      "text": "Có thuộc tính vi sinh và tính tương hợp (hoặc ghi không áp dụng)",
+      "sections": [
+        "P.2.5",
+        "P.2.6"
+      ]
+    }
+  ],
+  "mechanical_items": [
+    {
+      "no": 15,
+      "text": "Số mục CTD/ACTD đúng theo thị trường nộp (Phụ lục A)",
+      "check": "numbering"
+    },
+    {
+      "no": 16,
+      "text": "Mọi giá trị trong báo cáo truy được nguồn gốc; không còn giá trị thông số không nguồn",
+      "check": "provenance"
+    },
+    {
+      "no": 17,
+      "text": "Dữ liệu sản phẩm, hoạt chất nhất quán toàn báo cáo",
+      "check": "consistency"
+    }
+  ],
+  "mapping_note": "Which outline sections answer which Appendix C item is an engineering mapping (the formulation studies are attached to item 7, the process development parent to item 12); FD to confirm."
+}

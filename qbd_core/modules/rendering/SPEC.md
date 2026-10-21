@@ -8,7 +8,7 @@ validator of tools/pharma-dev-draft accepted it.
 RenderedDocument, RenderFailed.
 
 ## API contract (api.py)
-- `render_draft(draft, output_dir, name="p2-orientation-draft.html", *, tool_root, node, timeout)
+- `render_draft(draft, output_dir, name="p2-orientation-draft.html", *, checklist, tool_root, node, timeout)
   -> RenderedDocument` (path, size, sha256 of the page and of the draft). Order: run
   `validate-draft.mjs` (subprocess) on the draft; build the page; verify it; write it in a staging folder
   inside `output_dir`; replace `output_dir/name` in one step. The staging folder is always removed.
@@ -22,7 +22,7 @@ RenderedDocument, RenderFailed.
 Title and the fixed status line; the scope notice (internal draft, not FD-approved, not a submission,
 provenance sentence); a facts table; every outline section in order (containers as headings, gap sections
 as a marked box, covered sections as their blocks); a section status table; the data-request register
-grouped by experiment; the decision register; the sign-off table with three blank rows. Markers are
+grouped by experiment; the decision register; the Appendix C checklist table when the caller passes the quality report's rows (checked against them); the sign-off table with three blank rows. Markers are
 highlighted. Registers are derived from the draft's own markers.
 
 ## Format (from `docs/reports/qbd-core-p2-autodraft/sample-format-spec.md`)

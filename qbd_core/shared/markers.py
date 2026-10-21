@@ -1,4 +1,4 @@
-"""The two markers of an unfinished spot, and how they are found in draft text."""
+"""The two markers of an unfinished spot, and how they are found in draft text (shared)."""
 
 from __future__ import annotations
 

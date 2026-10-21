@@ -9,6 +9,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
@@ -48,6 +49,7 @@ def render_draft(
     output_dir: str | Path,
     name: str = DEFAULT_NAME,
     *,
+    checklist: Sequence[Sequence[str]] | None = None,
     tool_root: str | Path = DEFAULT_TOOL_ROOT,
     node: str = "node",
     timeout: float = 60,
@@ -67,8 +69,8 @@ def render_draft(
         draft_path.write_text(json.dumps(draft, ensure_ascii=False, indent=2), encoding="utf-8")
         _validate(draft_path, tool, node, timeout)
         outline = json.loads((tool / "schemas" / "p2-outline.json").read_text(encoding="utf-8"))
-        page = build_html(draft, outline)
-        failures = verify_html(page, draft)
+        page = build_html(draft, outline, checklist)
+        failures = verify_html(page, draft, checklist)
         if failures:
             raise RenderFailed("E_VERIFY_FAILED", "; ".join(failures[:5]))
         staged = stage / name
