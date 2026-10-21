@@ -51,7 +51,7 @@ def test_every_target_section_exists_in_the_outline():
 
 def test_every_implemented_agent_is_a_real_agent():
     assert set(registry.IMPLEMENTED) <= set(AGENTS)
-    assert registry.status_of("4.3") == ("pending", "")
+    assert registry.status_of("4.4") == ("pending", "")
     assert registry.status_of("3.5")[0] == "implemented"
 
 

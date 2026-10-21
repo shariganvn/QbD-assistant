@@ -7,7 +7,7 @@ from datetime import date
 from typing import Any
 
 from qbd_core.modules.dossier_drafting import config
-from qbd_core.modules.dossier_drafting.agents import api_properties, qtpp
+from qbd_core.modules.dossier_drafting.agents import api_properties, excipients, qtpp
 from qbd_core.modules.dossier_drafting.agents.llm import LlmSetup
 from qbd_core.modules.dossier_drafting.agents.registry import (
     agents_for_section,
@@ -164,6 +164,11 @@ def assemble_draft(
         by_agent.update(plan.sections)
         used.update(plan.cited)
         agent_log += plan.notes or [f"agent {qtpp.AGENT_ID}: ran"]
+        picked = excipients.run(llm, intake, knowledge)
+        ran.add(excipients.AGENT_ID)
+        by_agent.update(picked.sections)
+        used.update(picked.cited)
+        agent_log += picked.notes or [f"agent {excipients.AGENT_ID}: ran"]
     for section in leaf_sections(outline):
         sid = section["id"]
         if sid in not_applicable:

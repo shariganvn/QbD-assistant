@@ -54,6 +54,8 @@ class Scripted:
                 pool[match.group(1)] = match.group(2)
         if any("QTPP Builder" in p.text for p in request.payload.parts):
             return self.qtpp(pool)
+        if any("Excipient Selector" in p.text for p in request.payload.parts):
+            return json.dumps({"excipients": [], "grades": []})
         return json.dumps({"properties": [], "biology": []})
 
 

@@ -48,6 +48,8 @@ class Capture:
         self.requests.append(request)
         if any("QTPP Builder" in p.text for p in request.payload.parts):
             return json.dumps({"items": []})
+        if any("Excipient Selector" in p.text for p in request.payload.parts):
+            return json.dumps({"excipients": [], "grades": []})
         ids = [m.group(1) for p in request.payload.parts if (m := EVIDENCE.match(p.text))]
         row = {"label": "Số đăng ký CAS", "value": "CAS 134523-03-8.", "evidence_ids": ids[:1]}
         return json.dumps({"properties": [row], "biology": []})

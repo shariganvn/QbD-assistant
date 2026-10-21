@@ -53,6 +53,7 @@ IMPLEMENTED: dict[str, tuple[Status, str]] = {
     ),
     "3.2": ("implemented", "dossier_drafting.agents.qtpp"),
     "4.1": ("implemented", "dossier_drafting.agents.api_properties"),
+    "4.2": ("implemented", "dossier_drafting.agents.excipients"),
     "12.1": ("implemented", "quality_gate.checklist (Appendix C)"),
     "12.3": ("implemented", "quality_gate.consistency"),
     "12.4": ("implemented", "quality_gate.provenance"),

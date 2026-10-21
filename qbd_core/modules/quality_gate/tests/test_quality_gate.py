@@ -326,3 +326,17 @@ def test_a_cited_synthesis_file_must_be_listed_as_a_reference():
     both = with_draft(run, edit)
     refs = [f for f in evaluate_run(both, kb()).blocking if f.code == "E_REFERENCE_MISSING"]
     assert "SYN-B" in [f.detail for f in refs]
+
+
+def test_only_a_plain_running_number_in_an_stt_column_is_exempt_from_the_source_rule():
+    def add(draft):
+        table = {
+            "type": "table",
+            "headers": ["STT", "Giá trị", "Số"],
+            "rows": [["1", "chữ", "chữ"], ["12,5", "chữ", "chữ"], ["2", "chữ", "3"]],
+        }
+        section(draft, "P.2.1.1.2")["blocks"].append(table)
+
+    report = evaluate_run(with_draft(make_run(), add), kb())
+    findings = [f for f in report.blocking if f.code == "E_VALUE_WITHOUT_SOURCE"]
+    assert len(findings) == 2

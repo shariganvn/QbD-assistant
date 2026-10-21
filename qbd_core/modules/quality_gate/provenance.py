@@ -53,6 +53,10 @@ def _check_claim(
     return []
 
 
+# A running number in a column headed STT is the row's position, not a value from a source.
+ORDINAL = re.compile(r"[1-9]\d{0,2}")
+
+
 def _check_text(
     text: str,
     sid: str,
@@ -103,7 +107,13 @@ def check_provenance(
             if block["type"] == "paragraph":
                 cells = [(block["text"], False)]
             elif block["type"] == "table":
-                cells = [(c, True) for row in block["rows"] for c in row]
+                ordinal = {i for i, h in enumerate(block["headers"]) if h.strip().upper() == "STT"}
+                cells = [
+                    (c, True)
+                    for row in block["rows"]
+                    for i, c in enumerate(row)
+                    if not (i in ordinal and ORDINAL.fullmatch(c.strip()))
+                ]
             else:
                 continue
             for text, is_cell in cells:
