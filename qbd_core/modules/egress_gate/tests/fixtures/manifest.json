@@ -1,0 +1,67 @@
+{
+  "entries": [
+    {
+      "file_id": "A-APPROVED",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-21"
+    },
+    {
+      "file_id": "A-PENDING",
+      "classification": "A"
+    },
+    {
+      "file_id": "B-BOOK",
+      "classification": "B",
+      "shingles": [
+        "07ba87c7d986b66b",
+        "0d9270b1cbbe17c5",
+        "1664f5d979e87efe",
+        "32a782aa245b11d4",
+        "4a21402a1fc7e688",
+        "4f41f5350df6a44b",
+        "648d7f4a690b5f13",
+        "830cc74b9008bf4c",
+        "99c8137f0bd4ecb1",
+        "af085eec3a2450a7",
+        "bbeb7ebcea65ef7b",
+        "c35c104943013df4",
+        "c7e5ab978bc756d3",
+        "cd02cc91d48a1d33",
+        "eddfb1983990f8f8",
+        "f42e866fd80260fd",
+        "f8a45ccc63a35b15"
+      ]
+    },
+    {
+      "file_id": "C-INTERNAL",
+      "classification": "C",
+      "shingles": [
+        "0ecb27c10ac20e83",
+        "11e666f3fa173516",
+        "12862d87ad8eea3e",
+        "260c6556cd82ee75",
+        "3bcba22354f95309",
+        "50b715da970e4b64",
+        "5832c4fdd6539d74",
+        "77c52a103e74f830",
+        "7b0afafa1709f1cc",
+        "85f9d9d891ca2fb5",
+        "9f3c0464a7169992",
+        "a084c6c3cb3431f0",
+        "b2d9952ad949a3ad",
+        "b4dc494f8126f1b7",
+        "d1407e3431105934",
+        "d5c8bc39979e6017",
+        "deddca6b7e2faec8",
+        "e475a152e86d3b9b",
+        "eb09b979a3cc2e5f",
+        "f175e8ba6d783fad"
+      ]
+    },
+    {
+      "file_id": "Q-UNSORTED",
+      "classification": "?"
+    }
+  ]
+}

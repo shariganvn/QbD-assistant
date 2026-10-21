@@ -1,0 +1,12 @@
+G-03 partial evidence (framework only), 2026-10-21
+Scope: egress_gate policy against a SYNTHETIC manifest. The real Kho manifest does not exist yet (needs classification of the 18 group ?/C files), so G-03 stays unverified.
+$ python3 -m pytest qbd_core/modules/egress_gate -q
+.......................                                                  [100%]
+23 passed in 0.19s
+
+Negative controls (each reverted afterwards):
+ - class check on a source disabled: 3 failed, 20 passed
+ - verbatim restricted-text scan disabled: 6 failed, 17 passed
+ - missing-manifest block disabled: 1 failed, 22 passed
+
+Known limit: only verbatim 8-word overlap with a restricted document is detected; paraphrase is not (see SPEC non-goals).

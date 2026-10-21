@@ -43,15 +43,16 @@ gates:
     invariant: >
       Files of class B, C or unclassified never appear in any outbound payload.
     boundary_owner: egress_gate
-    fixture: manifest plus payloads that embed class B/C text and class ? file ids
+    fixture: synthetic manifest and payloads in qbd_core/modules/egress_gate/tests/fixtures (framework); the real Kho manifest (step 03) is required to close the gate
     command: >
-      pytest qbd_core/tests/egress -q
+      python -m pytest qbd_core/modules/egress_gate -q
     expected: >
       0 leaks; every trap payload blocked
     negative_cases:
       - manifest missing or unreadable -> block all egress
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-03.txt
     owner_step: "03"
+    progress: framework tests pass against a synthetic manifest (docs/reports/qbd-core-p2-autodraft/g-03-framework.txt); gate not closed until the real manifest passes the same checks
     status: unverified
 
   - id: G-04
