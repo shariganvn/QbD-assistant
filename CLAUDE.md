@@ -26,6 +26,22 @@ Mọi phản hồi cho HUMAN tuân theo 5 nguyên tắc:
 
 ---
 
+## Mục tiêu hệ thống
+
+Khi nghiên cứu viên nhập **3 trường** — Hoạt chất (tối đa 3; tổ hợp là NGOÀI SOP), Dạng bào chế
+(38 giá trị, chia 9 nhóm N1–N9), Thị trường (EU / Trong nước / Cả hai) — hệ thống tự dựng bản
+**định hướng** báo cáo Phát triển Dược học (P.2; CTD 3.2.P.2 / ACTD) theo SOP-RD-001 v02, để
+nghiên cứu viên định hướng đề tài ngay từ lúc nhận đề án.
+
+- Đầu ra là bản nháp nội bộ, luôn gắn nhãn "chưa FD duyệt"; Trưởng bộ phận R&D duyệt cuối (A13), không tự động hóa.
+- Không hard-code thông số; mọi giá trị truy được nguồn. Thiếu dữ liệu → ghi `CẦN DỮ LIỆU` vào Data Gap Register, không tự điền số.
+- Tra Kho nội bộ trước, không có thì tra ngoài kèm trích dẫn (nguồn, địa chỉ, ngày truy cập). Tài liệu nhóm B/C không ra ngoài; fail-closed.
+- Cổng xác nhận CQA (3.5) do người dùng; chưa xác nhận thì không chạy tiếp các bước phụ thuộc.
+- Hiện thực: pipeline `qbd_core/` (kế hoạch ở `docs/plans/qbd-core-p2-autodraft/` khi được duyệt). `cowork-p2-kit/` và `tools/pharma-dev-draft/` giữ nguyên ranh giới hiện có; `qbd_core` chỉ gọi renderer docx qua CLI, không import chéo.
+- Nguồn thiết kế: Notion "Soạn thảo phát triển dược học" và sơ đồ Whimsical "Hệ thống Agent tự động soạn thảo PTDH (P.2)".
+
+---
+
 ## Where things live
 
 - `docs/raw/` — source of example file to work with.
@@ -58,7 +74,7 @@ Khi chuyển từ brainstorm --> plan, đọc rule `.claude/rules/RULE-BRAINSTOR
 
 ## qbd_core module boundaries (Phase 2)
 
-Chưa bắt đầu code. Luật module boundary sống ở
+Chưa bắt đầu code (đang chờ duyệt plan; mục tiêu ở phần "Mục tiêu hệ thống"). Luật module boundary sống ở
 `docs/architecture/ADR-qbd-core-module-boundaries.md` (draft, chờ confirm) — đọc khi thật sự
 bắt đầu `qbd_core/`. Không áp dụng cho `cowork-p2-kit/` (Phase 1 MVP).
 
