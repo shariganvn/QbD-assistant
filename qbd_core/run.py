@@ -163,7 +163,10 @@ def _llm(args: argparse.Namespace) -> LlmSetup | None:
 
 def _real_llm(args: argparse.Namespace, recording: str | None, model: str | None) -> LlmSetup:
     """Every missing prerequisite refuses; nothing falls back to another provider."""
-    config = load_config()
+    try:
+        config = load_config()
+    except (OSError, ValueError, KeyError, TypeError, VendorSetupError) as error:
+        raise ProviderSetupError(f"providers.json unusable: {type(error).__name__}") from error
     path = getattr(args, "manifest", None)
     manifest = try_load_manifest(path) if path else None
     if recording is not None or not model:
@@ -173,12 +176,12 @@ def _real_llm(args: argparse.Namespace, recording: str | None, model: str | None
     if model not in config.approved_models:
         raise ProviderSetupError("model is not on the approved list")
     if manifest is None:
-        raise ProviderSetupError("--manifest is required to send anything")
+        raise ProviderSetupError("--manifest is missing or unreadable; nothing can be sent")
     try:
         provider = AnthropicProvider(config, os.environ)
     except VendorSetupError as error:
         raise ProviderSetupError(str(error)) from error
-    return LlmSetup(ProviderGateway(provider, config.approved_models, manifest), model)
+    return LlmSetup(ProviderGateway(provider, {model}, manifest), model)
 
 
 def _compute(args: argparse.Namespace):

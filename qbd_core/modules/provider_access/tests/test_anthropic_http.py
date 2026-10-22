@@ -1,6 +1,7 @@
 import json
 import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from pathlib import Path
 
 import pytest
 
@@ -21,7 +22,11 @@ class Server:
     def __init__(self, status=200, body=None, delay=0.0):
         outer = self
         self.seen: list[dict] = []
-        reply = body if body is not None else {"content": [{"type": "text", "text": "xin chào"}]}
+        reply = (
+            body
+            if body is not None
+            else {"content": [{"type": "text", "text": "xin chào"}], "stop_reason": "end_turn"}
+        )
 
         class Handler(BaseHTTPRequestHandler):
             def do_POST(self):
@@ -65,7 +70,10 @@ def request(model="claude-sonnet-5-5", text="câu hỏi", source="A-APPROVED"):
 def manifest():
     from qbd_core.modules.egress_gate.api import try_load_manifest
 
-    return try_load_manifest("qbd_core/modules/egress_gate/tests/fixtures/manifest.json")
+    path = Path(__file__).parents[2] / "egress_gate/tests/fixtures/manifest.json"
+    loaded = try_load_manifest(path)
+    assert loaded is not None
+    return loaded
 
 
 def gateway(cfg, manifest):
@@ -75,7 +83,7 @@ def gateway(cfg, manifest):
 
 def test_shipped_config_is_off_and_names_one_model():
     cfg = load_config()
-    assert cfg.enabled is False and cfg.zdr_on_file is False
+    assert cfg.enabled is False
     assert cfg.approved_models == ("claude-sonnet-5-5",)
 
 
@@ -99,15 +107,23 @@ def test_answer_text_is_returned_and_request_is_well_formed(manifest):
 
 @pytest.mark.parametrize(
     ("status", "body"),
-    [(500, {"error": "x"}), (200, b"not json"), (200, {"content": []}), (200, {"nope": 1})],
+    [
+        (500, {"error": "x"}),
+        (200, b"not json"),
+        (200, {"content": [], "stop_reason": "end_turn"}),
+        (200, {"nope": 1}),
+        (200, {"content": [{"type": "text", "text": "cắt"}], "stop_reason": "max_tokens"}),
+        (302, {"content": []}),
+    ],
 )
 def test_bad_answers_fail_closed(status, body, manifest):
     server = Server(status, body)
     try:
-        with pytest.raises(ProviderFailed):
+        with pytest.raises(ProviderFailed) as failed:
             gateway(config(server.url), manifest).call(request())
     finally:
         server.close()
+    assert failed.value.code in {"E_PROVIDER_ERROR", "E_RESPONSE_INVALID"}
 
 
 def test_timeout_fails_closed(manifest):
@@ -148,3 +164,45 @@ def test_no_manifest_means_nothing_is_sent():
     finally:
         server.close()
     assert server.seen == []
+
+
+def test_disabled_config_cannot_build_a_provider():
+    with pytest.raises(ProviderSetupError):
+        AnthropicProvider(load_config(), {"ANTHROPIC_API_KEY": "k"})
+
+
+@pytest.mark.parametrize(
+    ("parts", "code"),
+    [
+        ((PayloadPart(kind="evidence", text="x", source_ids=("NOPE",)),), "E_SOURCE_UNKNOWN"),
+        (
+            (PayloadPart(kind="evidence", text="x", source_ids=("A-PENDING",)),),
+            "E_SOURCE_UNAPPROVED",
+        ),
+        ((PayloadPart(kind="evidence", text="x"),), "E_PART_UNATTRIBUTED"),
+    ],
+)
+def test_other_egress_refusals_send_nothing(parts, code, manifest):
+    server = Server()
+    try:
+        with pytest.raises(ProviderRefused) as refused:
+            gateway(config(server.url), manifest).call(
+                LLMRequest(model="claude-sonnet-5-5", payload=Payload(parts=parts))
+            )
+    finally:
+        server.close()
+    assert code in refused.value.detail and server.seen == []
+
+
+def test_the_key_never_appears_in_a_failure(manifest):
+    server = Server(500, {"error": "x"})
+    try:
+        with pytest.raises(ProviderFailed) as failed:
+            gateway(config(server.url), manifest).call(request())
+    finally:
+        server.close()
+    chain, error = [], failed.value
+    while error is not None:
+        chain.append(repr(error) + str(error))
+        error = error.__cause__
+    assert not any("test-key" in text for text in chain)

@@ -12,6 +12,14 @@ DOCS = Path(__file__).parents[1] / "modules/dossier_drafting/tests/fixtures/docu
 MANIFEST = Path(__file__).parents[1] / "modules/egress_gate/tests/fixtures/manifest.json"
 
 
+@pytest.fixture(autouse=True)
+def nothing_is_sent(monkeypatch):
+    def fail(*args, **kwargs):
+        raise AssertionError("a request was sent")
+
+    monkeypatch.setattr("urllib.request.OpenerDirector.open", fail)
+
+
 def invoke(tmp_path, *extra):
     out = tmp_path / "draft.json"
     code = main.main(
@@ -27,28 +35,35 @@ def enable(monkeypatch, **changes):
     monkeypatch.setattr(run, "load_config", lambda: type(base)(**{**base.__dict__, **changes}))
 
 
-def test_shipped_configuration_refuses_and_publishes_nothing(tmp_path, monkeypatch):
+def test_shipped_configuration_refuses_and_publishes_nothing(tmp_path, monkeypatch, capsys):
     monkeypatch.setenv("ANTHROPIC_API_KEY", "k")
     code, out = invoke(tmp_path, "--model", "claude-sonnet-5-5", "--manifest", str(MANIFEST))
     assert code == run.EXIT_PROVIDER and not out.exists()
+    assert "switched off" in capsys.readouterr().err
 
 
 @pytest.mark.parametrize(
-    ("extra", "changes", "env"),
+    ("extra", "changes", "env", "why"),
     [
-        ([], {"enabled": True}, True),
-        (["--model", "other", "--manifest", str(MANIFEST)], {"enabled": True}, True),
-        (["--model", "claude-sonnet-5-5"], {"enabled": True}, True),
-        (["--model", "claude-sonnet-5-5", "--manifest", str(MANIFEST)], {"enabled": True}, False),
+        ([], {"enabled": True}, True, "takes --model"),
+        (["--model", "other", "--manifest", str(MANIFEST)], {"enabled": True}, True, "approved"),
+        (["--model", "claude-sonnet-5-5"], {"enabled": True}, True, "manifest"),
+        (
+            ["--model", "claude-sonnet-5-5", "--manifest", str(MANIFEST)],
+            {"enabled": True},
+            False,
+            "is not set",
+        ),
     ],
 )
-def test_each_missing_prerequisite_refuses(tmp_path, monkeypatch, extra, changes, env):
+def test_each_missing_prerequisite_refuses(tmp_path, monkeypatch, capsys, extra, changes, env, why):
     enable(monkeypatch, **changes)
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     if env:
         monkeypatch.setenv("ANTHROPIC_API_KEY", "k")
     code, out = invoke(tmp_path, *extra)
     assert code == run.EXIT_PROVIDER and not out.exists()
+    assert why in capsys.readouterr().err
 
 
 def test_a_recording_cannot_be_mixed_with_the_real_provider(tmp_path, monkeypatch):

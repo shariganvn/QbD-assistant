@@ -7,6 +7,7 @@ Any problem raises, and the gateway turns it into ProviderFailed. No retry, no d
 from __future__ import annotations
 
 import json
+import urllib.error
 import urllib.request
 from collections.abc import Mapping
 from dataclasses import dataclass
@@ -24,7 +25,6 @@ class ProviderSetupError(Exception):
 @dataclass(frozen=True)
 class ProviderConfig:
     enabled: bool
-    zdr_on_file: bool
     approved_models: tuple[str, ...]
     endpoint: str
     api_version: str
@@ -37,9 +37,10 @@ def load_config() -> ProviderConfig:
     text = files("qbd_core.modules.provider_access").joinpath("config", "providers.json")
     raw = json.loads(text.read_text("utf-8"))
     vendor = raw["anthropic"]
+    if type(raw["enabled"]) is not bool or not vendor["endpoint"].startswith("https://"):
+        raise ProviderSetupError("providers.json: enabled must be true/false, endpoint https")
     return ProviderConfig(
         enabled=raw["enabled"],
-        zdr_on_file=raw["zdr_on_file"],
         approved_models=tuple(raw["approved_models"]),
         endpoint=vendor["endpoint"],
         api_version=vendor["api_version"],
@@ -49,8 +50,20 @@ def load_config() -> ProviderConfig:
     )
 
 
+MAX_ANSWER_BYTES = 1_000_000
+
+
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    """A redirect would re-send the key to another host, so it is an error instead."""
+
+    def redirect_request(self, *args, **kwargs):
+        return None
+
+
 class AnthropicProvider:
     def __init__(self, config: ProviderConfig, environ: Mapping[str, str]) -> None:
+        if not config.enabled:
+            raise ProviderSetupError("provider is switched off in providers.json")
         key = environ.get(config.api_key_env, "")
         if not key:
             raise ProviderSetupError(f"{config.api_key_env} is not set")
@@ -85,7 +98,13 @@ class AnthropicProvider:
                 "anthropic-version": self._config.api_version,
             },
         )
-        with urllib.request.urlopen(http, timeout=self._config.timeout_seconds) as answer:  # noqa: S310
-            data = json.loads(answer.read().decode("utf-8"))
+        opener = urllib.request.build_opener(_NoRedirect)
+        with opener.open(http, timeout=self._config.timeout_seconds) as answer:
+            raw = answer.read(MAX_ANSWER_BYTES + 1)
+        if len(raw) > MAX_ANSWER_BYTES:
+            raise ValueError("answer too large")
+        data = json.loads(raw.decode("utf-8"))
+        if data.get("stop_reason") != "end_turn":
+            raise ValueError("answer is not complete")
         blocks = data["content"]
         return "".join(b["text"] for b in blocks if b.get("type") == "text")

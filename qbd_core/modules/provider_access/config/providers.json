@@ -1,6 +1,5 @@
 {
   "enabled": false,
-  "zdr_on_file": false,
   "approved_models": ["claude-sonnet-5-5"],
   "anthropic": {
     "endpoint": "https://api.anthropic.com/v1/messages",

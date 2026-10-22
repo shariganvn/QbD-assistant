@@ -16,7 +16,7 @@ LLMPort, LLMRequest, ProviderResult, ProviderGateway, RecordedProvider.
   A refusal means the provider was never called.
 - `LLMPort`: `destination` and `complete(request) -> str`. A destination other than `local` is treated as
   leaving the machine.
-- `AnthropicProvider(config, environ)`: Messages API over HTTPS (standard library), destination REMOTE. Built from `config/providers.json`, which ships `enabled: false`, `zdr_on_file: false` and one approved model. The key comes from the environment variable the config names. Any network, status, JSON or empty-answer problem raises; no retry and no default answer.
+- `AnthropicProvider(config, environ)`: Messages API over HTTPS (standard library), destination REMOTE. Built from `config/providers.json`, which ships `enabled: false` and one approved model; the endpoint must be https and redirects are errors; the adapter itself refuses to build when disabled; an answer that is not `end_turn` or is over 1 MB fails. The key comes from the environment variable the config names. Any network, status, JSON or empty-answer problem raises; no retry and no default answer.
 - `RecordedProvider(answers, destination=REMOTE)`: replays answers keyed by `request_digest`; an unknown
   request raises `RecordedMiss`, never a made-up answer. Defaults to REMOTE so tests go through the same
   gate as a real provider.

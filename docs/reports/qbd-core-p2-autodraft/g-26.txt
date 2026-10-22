@@ -7,4 +7,6 @@ request; no manifest sends nothing; shipped config is off; each missing prerequi
 publishes nothing; a recording cannot be mixed with the real provider.
 Existing: test_pipeline_trial.py::test_trial_text_never_reaches_a_provider_payload (trial text absent
 from every payload).
+Review: code-reviewer findings fixed (adapter refuses when disabled, https-only endpoint, redirects are errors, answer must be end_turn and under 1 MB, config errors exit 9, refusal reasons pinned in tests, other egress refusals tested). zdr_on_file removed: it enforced nothing.
+Not added: an end-to-end run of the pipeline with the adapter and a stub server.
 Not verified: behaviour against the real service, vendor choice, ZDR (none on file).
