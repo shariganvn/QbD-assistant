@@ -1,0 +1,15 @@
+Kho manifest from the approved classification. 2026-10-22.
+Source: Notion "4. Kho tài liệu" (111 Drive files, ids) and kho/classification-draft.md (22/10/2026 decisions).
+Result: docs/kho/manifest.json, 111 entries by Drive id only: A 19, B 82, C 10.
+Command: python -m pytest qbd_core/modules/egress_gate -q (27 passed, includes test_kho_manifest.py).
+Checked: 111 unique ids of 33 characters; every class A entry has approved_by and approved_on, no B or C
+entry has; check_egress allows exactly the A ids and refuses B, C and an unknown id; no file names stored.
+Decisions applied: 4 files approved on 22/10 (QbD-for-MR-Generics, BE_Investigation-Bioequivalence, Codex,
+INS-Codex), B: BE_Dissolution-Similarity, Flavour-Aroma; C: TGA, SAMPLE_P2, VICH-GL51, 7 Asap files; 3 DOE
+.docx removed from the Kho.
+Project owner choice: every class A family that finished the terms-of-use step is recorded as approved by
+Lê Thọ Tiển on 2026-10-22. The classification page still calls the other families proposals not approved
+file by file, so the approver should confirm that reading.
+Limits: no document fingerprints (no local text); ids copied from the Notion page and not re-checked
+against Drive; a mistyped id fails closed (file unknown, refused). The Notion sample page
+SAMPLE_P2-Sample_Acmecompany is not a Drive file and is not listed. G-03 stays unverified.

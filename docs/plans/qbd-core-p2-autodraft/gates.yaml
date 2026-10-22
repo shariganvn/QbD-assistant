@@ -52,7 +52,7 @@ gates:
       - manifest missing or unreadable -> block all egress
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-03.txt
     owner_step: "03"
-    progress: framework tests pass against a synthetic manifest (docs/reports/qbd-core-p2-autodraft/g-03-framework.txt); gate not closed until the real manifest passes the same checks
+    progress: framework tests pass against a synthetic manifest (docs/reports/qbd-core-p2-autodraft/g-03-framework.txt); the real manifest (docs/kho/manifest.json, 111 files) now passes the class checks, see docs/reports/qbd-core-p2-autodraft/g-28.txt; not closed: no document fingerprints, no run of the full payload trap against the real Kho text
     status: unverified
 
   - id: G-04

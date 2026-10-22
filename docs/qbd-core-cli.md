@@ -42,3 +42,7 @@ holds text from a document that is not class A must stay on the machine.
 ## Real provider
 
 `run --provider {anthropic,openai,gemini} --model NAME --manifest manifest.json` uses the real provider. It refuses (exit 9, nothing published) unless that vendor's entry in `provider_access/config/providers.json` has `enabled: true`, the model is on that vendor's approved list (empty for OpenAI and Gemini until the project names models), a manifest is given and the key variable it names is set. It cannot be combined with `--provider-recording`. With no zero-data-retention contract on file only approved class A material is sent; trial data and class B/C files never leave the machine.
+
+## Kho manifest
+
+`docs/kho/manifest.json` lists the 111 Kho files by Drive id and class (A 19, B 82, C 10), no file names. Pass it as `--manifest docs/kho/manifest.json`. Only class A entries carry `approved_by` and `approved_on`; every other file is refused by the egress gate. The id-to-name table is kept outside the repository.
