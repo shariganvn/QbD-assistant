@@ -107,8 +107,12 @@ def build_section(
                 found = cells.get((label, strength), [])
                 values = {_fold(t) for t, *_ in found}
                 if len(values) > 1:
-                    notes.append(f"{label}, {strength}: các bảng ghi giá trị khác nhau")
-                    row.append(_gap("các bảng thí nghiệm ghi giá trị khác nhau"))
+                    notes.append(
+                        f"{label}, {strength}: nhiều dòng hoặc bảng cùng khớp, giá trị khác nhau"
+                    )
+                    row.append(
+                        _gap("nhiều dòng hoặc nhiều bảng cùng khớp dòng này với giá trị khác nhau")
+                    )
                 elif found:
                     text, table, number, col = found[0]
                     row.append(f"{text} {tag_for(table, number, col)}")

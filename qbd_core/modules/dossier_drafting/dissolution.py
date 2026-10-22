@@ -124,7 +124,14 @@ def _cell(profile: Profile, row: int, col: int) -> str:
     return f"{text.strip()} {tag_for(profile.table, row, col)}"
 
 
-def _label(comparison: Comparison) -> str:
+REASONS = {
+    "E_F2_RANGE": "có giá trị hòa tan ngoài khoảng 0–100 %",
+    "E_F2_TOO_FEW_POINTS": "dưới ba thời điểm dùng được để tính f2",
+    "E_F2_LENGTH": "hai cột không cùng số thời điểm",
+}
+
+
+def _label(comparison: Comparison, with_calc: bool = True) -> str:
     profile = comparison.profile
     cond_row = profile.label_row - 1
     conditions = ""
@@ -141,6 +148,9 @@ def _label(comparison: Comparison) -> str:
     )
     text = f"{head}{comparison.test.label} so với {comparison.reference.label}"
     first, last = profile.time_rows[0], profile.time_rows[-1]
+    if not with_calc:
+        plain = f"{head}{comparison.test.label} so với {comparison.reference.label}"
+        return f"{plain} {tags} {names}".replace("  ", " ")
     calc = (
         f"[tính: f2, {profile.table.file}, bảng {profile.table.index}, "
         f"đối chiếu cột {comparison.reference.col}, thử cột {comparison.test.col}, "
@@ -168,8 +178,9 @@ def build_section(
         for comparison in found:
             value, reason = f2_of(comparison)
             if value is None:
-                label = f"{comparison.test.label} so với {comparison.reference.label}"
-                rows2.append([f"{table.file}, bảng {table.index}: {label}", _gap(reason), ""])
+                rows2.append(
+                    [_label(comparison, with_calc=False), _gap(REASONS.get(reason, reason)), ""]
+                )
                 notes.append(f"{table.file}, bảng {table.index}: không tính được f2 ({reason})")
                 continue
             rows2.append([_label(comparison), value, ""])

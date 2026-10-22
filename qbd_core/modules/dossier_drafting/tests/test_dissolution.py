@@ -126,7 +126,9 @@ def test_a_changed_profile_value_is_blocked_by_the_data_tag(tmp_path):
     ],
 )
 def test_what_cannot_be_computed_is_a_marked_gap_row_never_a_number(tmp_path, tables, note):
-    run, _ = run_with(tmp_path, *tables)
+    run, knowledge = run_with(tmp_path, *tables)
+    report = evaluate_run(run, knowledge)
+    assert report.passed, [f.code for f in report.blocking]
     notes = [line for line in run.agent_log if line.startswith("agent 8.2:")]
     assert any(note in line for line in notes)
     text = json.dumps(section(run), ensure_ascii=False)
@@ -150,3 +152,13 @@ def test_a_table_without_a_reference_column_is_left_out_and_reported(tmp_path):
     run, _ = run_with(tmp_path, COMPOSITION, lab)
     assert section(run)["status"] == "gap"
     assert any("không có đủ cột đối chiếu" in line for line in run.agent_log)
+
+
+def test_a_profile_above_100_percent_gives_a_readable_gap_row_that_the_gate_accepts(tmp_path):
+    high = profile(["107.7", "105.9", "105.4"], ["82.4", "90.6", "94.8"])
+    run, knowledge = run_with(tmp_path, COMPOSITION, GOOD, high)
+    cell = section(run)["blocks"][1]["rows"][1][1]
+    assert cell.startswith("[CHƯA CÓ DỮ LIỆU") and "ngoài khoảng 0–100" in cell
+    assert "E_F2_RANGE" not in cell
+    report = evaluate_run(run, knowledge)
+    assert report.passed, [f.code for f in report.blocking]
