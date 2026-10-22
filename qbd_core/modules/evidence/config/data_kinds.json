@@ -1,5 +1,5 @@
 {
-  "source": "Header words of the team's trial-report tables, taken from the department's example report. A table is recognised only when exactly one kind matches; each inner list is a group of synonyms and every group needs one hit. A kind may also list none_of groups: any hit rules it out.",
+  "source": "Header words of the team's trial-report tables, taken from the department's example report. A table is recognised only when exactly one kind matches; each inner list is a group of synonyms and every group needs one hit. A kind may also list none_of groups: any hit rules it out. A kind with also_first_column also reads the first cells of the first three rows.",
   "kinds": [
     {
       "id": "solubility",
@@ -101,7 +101,8 @@
           "impurity",
           "tạp chất"
         ]
-      ]
+      ],
+      "also_first_column": true
     },
     {
       "id": "particle_size",

@@ -1,0 +1,5 @@
+{
+  "source": "Words that label rows of the team's dissolution tables (from the department's report).",
+  "average": ["average", "mean", "trung bình"],
+  "statistics": ["max", "min", "rsd", "sd", "cv", "maximum", "minimum"]
+}

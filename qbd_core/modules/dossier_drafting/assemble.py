@@ -23,6 +23,7 @@ from qbd_core.modules.dossier_drafting.cqa import (
 from qbd_core.modules.dossier_drafting.data_sections import data_sections
 from qbd_core.modules.dossier_drafting.dissolution import build_section as dissolution_section
 from qbd_core.modules.dossier_drafting.formula import build_section as formula_section
+from qbd_core.modules.dossier_drafting.impurity import build_section as impurity_section
 from qbd_core.modules.dossier_drafting.models import COMBINATION_OUT_OF_SOP, IntakeResult
 from qbd_core.modules.dossier_drafting.outline import (
     leaf_sections,
@@ -227,6 +228,10 @@ def assemble_draft(
     if final is not None:
         by_agent[final["id"]] = final
     agent_log += [f"agent 6.4: {note}" for note in final_notes]
+    profile, profile_notes = impurity_section(trial, tuple(strengths), rmp.names, substance)
+    if profile is not None:
+        by_agent[profile["id"]] = profile
+    agent_log += [f"agent 8.3: {note}" for note in profile_notes]
     reference, reference_notes = reference_section(trial, tuple(strengths), outline, rmp.names)
     if reference is not None:
         by_agent[reference["id"]] = reference

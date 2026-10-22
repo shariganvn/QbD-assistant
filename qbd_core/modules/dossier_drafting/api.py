@@ -24,6 +24,7 @@ from qbd_core.modules.dossier_drafting.cqa import (
     propose_cqa,
     require_confirmation,
 )
+from qbd_core.modules.dossier_drafting.f2_tag import F2_TAG, cells_of
 from qbd_core.modules.dossier_drafting.intake import validate_intake
 from qbd_core.modules.dossier_drafting.models import (
     COMBINATION_OUT_OF_SOP,
@@ -38,6 +39,8 @@ from qbd_core.modules.dossier_drafting.outline import (
 )
 
 __all__ = [
+    "F2_TAG",
+    "cells_of",
     "CalcError",
     "f2",
     "AgentInfrastructureError",

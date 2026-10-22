@@ -1,0 +1,5 @@
+{
+  "source": "Rules for calculations, set by the project owner.",
+  "dissolution_cap_percent": 100,
+  "dissolution_cap_decided": "2026-10-22, project owner: a dissolution value above the cap counts as the cap in f2; the cell itself is copied unchanged"
+}

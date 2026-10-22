@@ -1,0 +1,9 @@
+# G-22 evidence, 2026-10-22
+$ python -m pytest qbd_core/modules/dossier_drafting/tests/test_dissolution.py qbd_core/modules/dossier_drafting/tests/test_calc.py -q
+28 passed in 1.50s
+
+$ python -m pytest qbd_core -q
+384 passed in 17.63s
+
+Mutations (reverted, each caught):
+- calc.py: cap removed -> tests fail

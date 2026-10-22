@@ -57,7 +57,7 @@ Extractor = Callable[[Path], dict]
 
 
 @cache
-def kinds() -> tuple[tuple[str, tuple[tuple[str, ...], ...], tuple[str, ...]], ...]:
+def kinds() -> tuple[tuple[str, tuple[tuple[str, ...], ...], tuple[str, ...], bool], ...]:
     text = files("qbd_core.modules.evidence").joinpath("config", "data_kinds.json")
     raw = json.loads(text.read_text("utf-8"))["kinds"]
     return tuple(
@@ -65,6 +65,7 @@ def kinds() -> tuple[tuple[str, tuple[tuple[str, ...], ...], tuple[str, ...]], .
             k["id"],
             tuple(tuple(g) for g in k["all_of"]),
             tuple(word for group in k.get("none_of", []) for word in group),
+            bool(k.get("also_first_column", False)),
         )
         for k in raw
     )
@@ -74,15 +75,17 @@ def _fold(text: str) -> str:
     return " ".join(unicodedata.normalize("NFC", text).lower().split())
 
 
-def classify(headers: tuple[str, ...]) -> tuple[str | None, str]:
-    """(kind, "") for one clear match, else (None, reason)."""
-    haystack = _fold(" | ".join(headers))
-    matched = [
-        kind
-        for kind, groups, excluded in kinds()
-        if all(any(word in haystack for word in group) for group in groups)
-        and not any(word in haystack for word in excluded)
-    ]
+def classify(headers: tuple[str, ...], lead: tuple[str, ...] = ()) -> tuple[str | None, str]:
+    """(kind, "") for one clear match, else (None, reason). `lead` are the first cells of the first
+    rows, which only the kinds that ask for them read."""
+    plain = _fold(" | ".join(headers))
+    wide = _fold(" | ".join((*headers, *lead)))
+    matched = []
+    for kind, groups, excluded, uses_lead in kinds():
+        haystack = wide if uses_lead else plain
+        hit = all(any(word in haystack for word in group) for group in groups)
+        if hit and not any(word in haystack for word in excluded):
+            matched.append(kind)
     if len(matched) == 1:
         return matched[0], ""
     if not matched:
@@ -158,7 +161,8 @@ def load_trial_data(paths: list[str], extract: Extractor | None = None) -> Trial
         seen.add(path.name)
         infos.append((path.name, digest))
         for number, (headers, rows) in enumerate(_tables(run(path), path.name), start=1):
-            kind, reason = classify(headers)
+            lead = tuple(r[0] for r in rows[:3] if r)
+            kind, reason = classify(headers, lead)
             tables.append(
                 TrialTable(file=path.name, index=number, headers=headers, rows=rows, kind=kind)
             )

@@ -6,7 +6,13 @@ import re
 from collections.abc import Mapping
 from typing import Any
 
-from qbd_core.modules.dossier_drafting.api import CQA_SECTION, CalcError, f2
+from qbd_core.modules.dossier_drafting.api import (
+    CQA_SECTION,
+    F2_TAG,
+    CalcError,
+    cells_of,
+    f2,
+)
 from qbd_core.modules.evidence.api import (
     DATA_TAG,
     KnowledgePort,
@@ -64,29 +70,25 @@ def _check_claim(
 ORDINAL = re.compile(r"[1-9]\d{0,2}")
 
 
-CALC_TAG = re.compile(
-    r"\[tính: f2, (?P<file>[^,\]]+), bảng (?P<table>\d+), đối chiếu cột (?P<ref>\d+), "
-    r"thử cột (?P<test>\d+), hàng (?P<first>\d+)-(?P<last>\d+)\]"
-)
-
-
 def _check_f2_row(row: list[str], sid: str, trial: TrialData | None) -> list[Finding]:
     """The f2 cell of a row must equal f2 recomputed from the cells the row's tag points at."""
-    tag = CALC_TAG.search(row[0])
+    tag = F2_TAG.search(row[0])
     if tag is None or trial is None or len(row) < 2:
         return [_block("E_CALC_MISMATCH", sid, "f2 tag")]
-    pairs = []
-    for number in range(int(tag["first"]), int(tag["last"]) + 1):
-        cells = [
-            cell_text(trial, tag["file"], int(tag["table"]), number, int(tag[key]))
-            for key in ("ref", "test")
-        ]
-        values = [first_number(c) if c is not None else None for c in cells]
-        if None in values:
+    ref, test = cells_of(tag["ref"]), cells_of(tag["test"])
+    if ref is None or test is None or len(ref) != len(test):
+        return [_block("E_CALC_INPUT", sid, "f2 tag cells")]
+    values = []
+    for group in (ref, test):
+        numbers = []
+        for r, c in group:
+            cell = cell_text(trial, tag["file"], int(tag["table"]), r, c)
+            numbers.append(first_number(cell) if cell is not None else None)
+        if None in numbers:
             return [_block("E_CALC_INPUT", sid, "f2 input cell")]
-        pairs.append(values)
+        values.append(numbers)
     try:
-        value = f2([p[0] for p in pairs], [p[1] for p in pairs])
+        value = f2(values[0], values[1])
     except CalcError:
         return [_block("E_CALC_INPUT", sid, "f2 input")]
     return [] if f"{value:.1f}" == row[1].strip() else [_block("E_CALC_MISMATCH", sid, "f2 value")]
@@ -95,7 +97,7 @@ def _check_f2_row(row: list[str], sid: str, trial: TrialData | None) -> list[Fin
 def _check_data(text: str, sid: str, trial: TrialData | None) -> list[Finding]:
     """A sentence built from the team's data: each tag must name a real cell, and no number may
     appear that is absent from the cited cells."""
-    body = CALC_TAG.sub("", DATA_TAG.sub("", text)).strip()
+    body = F2_TAG.sub("", DATA_TAG.sub("", text)).strip()
     if not body:
         return [_block("E_UNSOURCED_TEXT", sid)]
     cells = []
@@ -173,10 +175,10 @@ def check_provenance(
                 cells = []
                 for row in block["rows"]:
                     skip = set()
-                    if is_f2 and CALC_TAG.search(row[0]):
+                    if is_f2 and F2_TAG.search(row[0]):
                         findings += _check_f2_row(row, sid, trial)
                         skip.add(1)
-                        data_files.update(t["file"] for t in CALC_TAG.finditer(row[0]))
+                        data_files.update(t["file"] for t in F2_TAG.finditer(row[0]))
                     cells += [
                         (c, True)
                         for i, c in enumerate(row)

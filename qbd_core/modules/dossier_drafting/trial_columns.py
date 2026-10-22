@@ -49,6 +49,9 @@ def _labels(table: TrialTable) -> list[str]:
     for row in table.rows[:3]:
         if row and not row[0].strip():
             labels += [c for c in row[1:] if c.strip()]
+    for row in table.rows:  # a product name alone on its row heads a block of statistics rows
+        if row and row[0].strip() and not any(c.strip() for c in row[1:]):
+            labels.append(row[0])
     return labels
 
 

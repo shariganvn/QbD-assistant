@@ -41,3 +41,12 @@ code. The brand is now inferred from the tables (see G-21) and shown to the fina
 sample, unchanged file: sections filled from data are P.2.2.1.1, P.2.2.1.4 and P.2.2.3.2, the quality gate
 passes, f2 is 56.5 and 91.4 for two comparisons and a marked gap for four (reference above 100 %).
 No knowledge-base source confirms the brand yet.
+
+## Update after the owner's answers (2026-10-22, second round)
+- f2 ceiling: a value above 100 % counts as 100 % (configuration, G-22). Summary tables (Average rows) are
+  read. On this sample P.2.2.3.2 now lists 12 comparisons: f2 for 5 of them (49.0 to 91.4, two with the
+  ceiling note) and a marked gap for 7 (fewer than three usable points once both profiles pass 85 %).
+- P.2.2.3.3.1 impurity profile: filled from tables 48 and 49 (18 sentences), every number tagged; limits
+  are a marked gap. Batches 020822 and 030922 are named by no label, so they take the product of the
+  batch before them, allowed because the table has exactly the two product groups already found.
+- No breakability (8.4) or microbiology (10.2) table exists in this sample, so those agents stay blocked.

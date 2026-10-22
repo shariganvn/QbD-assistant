@@ -26,7 +26,6 @@ def test_points_after_both_profiles_reach_85_percent_are_left_out():
         ([50, 70], [45, 65], "E_F2_TOO_FEW_POINTS"),
         ([50, 90, 99], [45, 92, 99], "E_F2_TOO_FEW_POINTS"),
         ([50, 70, 90], [45, 65], "E_F2_LENGTH"),
-        ([50, 70, 110], [45, 65, 85], "E_F2_RANGE"),
         ([50, 70, -1], [45, 65, 85], "E_F2_RANGE"),
     ],
 )
@@ -61,3 +60,11 @@ def test_calculations_refuse_what_they_cannot_answer(call, code):
 def test_overage_is_a_percent_of_the_label_amount():
     assert overage_percent(100, 105) == pytest.approx(5.0)
     assert overage_percent(100, 100) == 0
+
+
+def test_a_value_above_the_ceiling_counts_as_the_ceiling():
+    from qbd_core.modules.dossier_drafting.calc import cap_percent, exceeds_cap
+
+    assert cap_percent() == 100
+    assert f2([50, 70, 110], [45, 65, 85]) == pytest.approx(f2([50, 70, 100], [45, 65, 85]))
+    assert exceeds_cap([50, 70, 110], [45, 65, 85]) and not exceeds_cap([50, 70, 100], [45])

@@ -60,7 +60,7 @@ def test_f2_is_computed_by_code_and_the_section_fills_both_tables(tmp_path):
     assert first["rows"][1][3].startswith("70 ± 3 [dữ liệu: trial-1.docx, bảng 2, hàng ")
     assert second["rows"][0][1] == "64.6"
     assert (
-        "[tính: f2, trial-1.docx, bảng 2, đối chiếu cột 2, thử cột 3, hàng 3-5]"
+        "[tính: f2, trial-1.docx, bảng 2, đối chiếu cột 2 hàng 3-5, thử cột 3 hàng 3-5]"
         in second["rows"][0][0]
     )
     assert "5 mg" in first["headers"][1] and "chưa có số liệu" in first["rows"][0][1]
@@ -154,11 +154,39 @@ def test_a_table_without_a_reference_column_is_left_out_and_reported(tmp_path):
     assert any("không có đủ cột đối chiếu" in line for line in run.agent_log)
 
 
-def test_a_profile_above_100_percent_gives_a_readable_gap_row_that_the_gate_accepts(tmp_path):
-    high = profile(["107.7", "105.9", "105.4"], ["82.4", "90.6", "94.8"])
-    run, knowledge = run_with(tmp_path, COMPOSITION, GOOD, high)
-    cell = section(run)["blocks"][1]["rows"][1][1]
-    assert cell.startswith("[CHƯA CÓ DỮ LIỆU") and "ngoài khoảng 0–100" in cell
-    assert "E_F2_RANGE" not in cell
+def test_a_profile_above_100_percent_counts_as_100_and_the_row_says_so(tmp_path):
+    high = profile(
+        ["107.7", "105.9", "105.4", "104.0", "104.0"],
+        ["60.0", "70.0", "80.0", "84.0", "88.0"],
+        times=(5, 10, 15, 20, 30),
+    )
+    run, knowledge = run_with(tmp_path, COMPOSITION, high)
+    row = section(run)["blocks"][1]["rows"][0]
+    assert float(row[1]) > 0 and "mức trần" in row[2]
+    assert "107.7" in json.dumps(section(run), ensure_ascii=False)  # the cell is copied as written
+    report = evaluate_run(run, knowledge)
+    assert report.passed, [f.code for f in report.blocking]
+
+
+SUMMARY = [
+    ["Time (mins)Dissolution (%)", "5", "10", "15", "30"],
+    ["Zetix® 5 mg batch no. G01", "", "", "", ""],
+    ["Average", "50", "70", "90", "95"],
+    ["Max", "55", "75", "95", "99"],
+    ["RSD", "5", "4", "3", "2"],
+    ["Atorvastatin 5 mg film coated tablet", "", "", "", ""],
+    ["Average", "45", "65", "85", "93"],
+    ["Max", "50", "70", "90", "99"],
+    ["RSD", "6", "5", "4", "3"],
+]
+
+
+def test_a_summary_table_gives_f2_from_the_average_rows(tmp_path):
+    run, knowledge = run_with(tmp_path, COMPOSITION, SUMMARY)
+    first, second = section(run)["blocks"]
+    assert second["rows"][0][1] == "64.6"
+    tag = second["rows"][0][0]
+    assert "[tính: f2, trial-1.docx, bảng 2, đối chiếu hàng 2 cột 2-5, thử hàng 6 cột 2-5]" in tag
+    assert first["rows"][0][0].startswith("5 [dữ liệu: trial-1.docx, bảng 2, hàng 0, cột 2]")
     report = evaluate_run(run, knowledge)
     assert report.passed, [f.code for f in report.blocking]

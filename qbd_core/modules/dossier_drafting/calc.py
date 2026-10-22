@@ -2,11 +2,27 @@
 
 from __future__ import annotations
 
+import json
 import math
 from collections.abc import Sequence
+from functools import cache
+from importlib.resources import files
 
 F2_MIN_POINTS = 3
 F2_PLATEAU = 85.0
+
+
+@cache
+def cap_percent() -> float | None:
+    """The ceiling the owner set for a dissolution value in f2, or None for no ceiling."""
+    text = files("qbd_core.modules.dossier_drafting").joinpath("config", "calc_rules.json")
+    value = json.loads(text.read_text("utf-8")).get("dissolution_cap_percent")
+    return None if value is None else float(value)
+
+
+def exceeds_cap(*profiles: Sequence[float]) -> bool:
+    cap = cap_percent()
+    return cap is not None and any(v > cap for p in profiles for v in p)
 
 
 class CalcError(Exception):
@@ -40,13 +56,17 @@ def overage_percent(label_amount: float, charged_amount: float) -> float:
 
 
 def f2(reference: Sequence[float], test: Sequence[float]) -> float:
-    """Similarity factor over paired time points, using points up to the first one at which both
-    profiles are at 85 % or more. Fewer than three usable points, unequal lengths or a percentage
-    outside 0 to 100 are refused."""
+    """Similarity factor over paired time points, using points up to the first one at which
+    both profiles are at 85 % or more. A value above the owner's ceiling counts as the ceiling.
+    Fewer than three usable points, unequal lengths or a negative value are refused."""
     if len(reference) != len(test):
         raise CalcError("E_F2_LENGTH")
-    if any(not 0 <= v <= 100 for v in (*reference, *test)):
+    cap = cap_percent()
+    ceiling = 100.0 if cap is None else cap
+    if any(v < 0 or (cap is None and v > ceiling) for v in (*reference, *test)):
         raise CalcError("E_F2_RANGE")
+    if cap is not None:
+        reference, test = [min(v, cap) for v in reference], [min(v, cap) for v in test]
     used = []
     for r, t in zip(reference, test, strict=True):
         used.append((r, t))

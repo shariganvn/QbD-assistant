@@ -13,13 +13,15 @@ NUMBER = re.compile(r"\d+(?:[.,]\d+)?")
 
 
 def tag_for(table: TrialTable, row: int, col: int) -> str:
-    """Row and column count from 1 over the table body (the header row is not a row)."""
+    """Row and column count from 1 over the table body; row 0 is the header row."""
     return f"[dữ liệu: {table.file}, bảng {table.index}, hàng {row}, cột {col}]"
 
 
 def cell_text(trial: TrialData, file: str, table: int, row: int, col: int) -> str | None:
     for candidate in trial.tables:
         if candidate.file == file and candidate.index == table:
+            if row == 0:  # the header row
+                return candidate.headers[col - 1] if 1 <= col <= len(candidate.headers) else None
             if 1 <= row <= len(candidate.rows) and 1 <= col <= len(candidate.rows[row - 1]):
                 return candidate.rows[row - 1][col - 1]
             return None

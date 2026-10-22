@@ -391,3 +391,39 @@ gates:
       the line for the final approver says so.
     status: pass
 
+  - id: G-22
+    title: f2 caps a dissolution value at the owner's ceiling and reads summary tables
+    invariant: >
+      A dissolution value above dissolution_cap_percent (config/calc_rules.json, set by the owner) counts as
+      the ceiling in f2 while the cell is copied unchanged and the row says so; negative values, fewer than
+      three usable points and unequal lengths are refused; a summary table (time points across, each
+      product a block with an Average row) gives f2 from the Average rows; the quality gate recomputes f2
+      from the cells the tag names, by column or by row, with the same cap.
+    boundary_owner: dossier_drafting + quality_gate
+    fixture: minimal .docx tables in both layouts, and the sample report
+    command: >
+      python -m pytest qbd_core/modules/dossier_drafting/tests/test_dissolution.py
+      qbd_core/modules/dossier_drafting/tests/test_calc.py -q
+    expected: exit 0; f2 = 64.6 for the worked example in both layouts; a wrong value, range or tag is blocked.
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-22.txt
+    owner_step: "07"
+    scope_note: >
+      The cap is an owner decision of 2026-10-22 (read as "a value above 100 % counts as 100 %"), kept in
+      configuration so it can be changed or removed. The final approver should confirm it.
+    status: pass
+
+  - id: G-23
+    title: Impurity profile attributes every batch to a product or stays a gap
+    invariant: >
+      P.2.2.3.3.1 gets a sentence per impurity only from an impurity table whose batch columns pair with
+      (RRT, result) cells; each batch is tied to the reference product or the product by labels elsewhere
+      in the files, a batch no label names is inherited only when the table has no more product groups than
+      products found; every number is tagged; limits stay a marked gap.
+    boundary_owner: dossier_drafting
+    fixture: minimal .docx tables, and the sample report
+    command: python -m pytest qbd_core/modules/dossier_drafting/tests/test_impurity_profile.py -q
+    expected: exit 0; the draft passes Stage B and the quality gate; a changed result is blocked.
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-23.txt
+    owner_step: "07"
+    status: pass
+
