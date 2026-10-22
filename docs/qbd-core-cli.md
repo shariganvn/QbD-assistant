@@ -38,3 +38,7 @@ the SOP and refused.
 Publication is all-or-nothing and the output is repeatable: the same input and date give byte-identical
 files (`docs/plans/qbd-core-p2-autodraft/gates.yaml`, G-05 and G-06). The page is a local file; a draft that
 holds text from a document that is not class A must stay on the machine.
+
+## Real provider
+
+`run --provider anthropic --model claude-sonnet-5-5 --manifest manifest.json` uses the real provider. It refuses (exit 9, nothing published) unless `provider_access/config/providers.json` has `enabled: true`, the model is on its approved list, a manifest is given and the key variable it names is set. It cannot be combined with `--provider-recording`. With no zero-data-retention contract on file only approved class A material is sent; trial data and class B/C files never leave the machine.

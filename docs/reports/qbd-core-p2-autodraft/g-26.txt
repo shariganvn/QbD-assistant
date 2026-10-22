@@ -1,0 +1,10 @@
+Real provider adapter (G-16 support). 2026-10-22.
+Command: python -m pytest qbd_core/modules/provider_access qbd_core/tests/test_pipeline_real_provider.py -q
+Result: pass against a local fake HTTP server only. No call was made to a real service.
+Covered: well-formed request and header; 500, invalid JSON, empty content and missing field fail closed;
+timeout fails closed; unapproved model refused before any request; class B source blocked before any
+request; no manifest sends nothing; shipped config is off; each missing prerequisite exits 9 and
+publishes nothing; a recording cannot be mixed with the real provider.
+Existing: test_pipeline_trial.py::test_trial_text_never_reaches_a_provider_payload (trial text absent
+from every payload).
+Not verified: behaviour against the real service, vendor choice, ZDR (none on file).

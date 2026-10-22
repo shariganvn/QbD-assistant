@@ -1,0 +1,63 @@
+"""The real provider is off until the project turns it on, and every missing part refuses."""
+
+import json
+from pathlib import Path
+
+import pytest
+
+from qbd_core import main, run
+from qbd_core.modules.provider_access import api as provider_api
+
+DOCS = Path(__file__).parents[1] / "modules/dossier_drafting/tests/fixtures/documents.json"
+MANIFEST = Path(__file__).parents[1] / "modules/egress_gate/tests/fixtures/manifest.json"
+
+
+def invoke(tmp_path, *extra):
+    out = tmp_path / "draft.json"
+    code = main.main(
+        ["run", "--substance", "Atorvastatin calcium", "--form", "Viên nén bao phim",
+         "--market", "both", "--documents", str(DOCS), "--out", str(out),
+         "--date", "2026-10-22", "--provider", "anthropic", *extra]
+    )  # fmt: skip
+    return code, out
+
+
+def enable(monkeypatch, **changes):
+    base = provider_api.load_config()
+    monkeypatch.setattr(run, "load_config", lambda: type(base)(**{**base.__dict__, **changes}))
+
+
+def test_shipped_configuration_refuses_and_publishes_nothing(tmp_path, monkeypatch):
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "k")
+    code, out = invoke(tmp_path, "--model", "claude-sonnet-5-5", "--manifest", str(MANIFEST))
+    assert code == run.EXIT_PROVIDER and not out.exists()
+
+
+@pytest.mark.parametrize(
+    ("extra", "changes", "env"),
+    [
+        ([], {"enabled": True}, True),
+        (["--model", "other", "--manifest", str(MANIFEST)], {"enabled": True}, True),
+        (["--model", "claude-sonnet-5-5"], {"enabled": True}, True),
+        (["--model", "claude-sonnet-5-5", "--manifest", str(MANIFEST)], {"enabled": True}, False),
+    ],
+)
+def test_each_missing_prerequisite_refuses(tmp_path, monkeypatch, extra, changes, env):
+    enable(monkeypatch, **changes)
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    if env:
+        monkeypatch.setenv("ANTHROPIC_API_KEY", "k")
+    code, out = invoke(tmp_path, *extra)
+    assert code == run.EXIT_PROVIDER and not out.exists()
+
+
+def test_a_recording_cannot_be_mixed_with_the_real_provider(tmp_path, monkeypatch):
+    enable(monkeypatch, enabled=True)
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "k")
+    recording = tmp_path / "rec.json"
+    recording.write_text(json.dumps({}), encoding="utf-8")
+    code, _ = invoke(
+        tmp_path, "--model", "claude-sonnet-5-5", "--manifest", str(MANIFEST),
+        "--provider-recording", str(recording),
+    )  # fmt: skip
+    assert code == run.EXIT_PROVIDER

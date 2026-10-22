@@ -1,0 +1,12 @@
+{
+  "enabled": false,
+  "zdr_on_file": false,
+  "approved_models": ["claude-sonnet-5-5"],
+  "anthropic": {
+    "endpoint": "https://api.anthropic.com/v1/messages",
+    "api_version": "2023-06-01",
+    "api_key_env": "ANTHROPIC_API_KEY",
+    "max_tokens": 4096,
+    "timeout_seconds": 60
+  }
+}

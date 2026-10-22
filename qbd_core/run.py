@@ -28,7 +28,13 @@ from qbd_core.modules.evidence.api import (
     load_documents,
     load_trial_data,
 )
-from qbd_core.modules.provider_access.api import ProviderGateway, RecordedProvider
+from qbd_core.modules.provider_access.api import (
+    AnthropicProvider,
+    ProviderGateway,
+    RecordedProvider,
+    load_config,
+)
+from qbd_core.modules.provider_access.api import ProviderSetupError as VendorSetupError
 from qbd_core.modules.quality_gate.api import QualityReport, evaluate_run
 from qbd_core.modules.rendering.api import DEFAULT_NAME, RenderFailed, render_draft
 from qbd_core.publish import PublishFailed, publish_all
@@ -54,6 +60,12 @@ def add_arguments(parser: argparse.ArgumentParser) -> None:
         "--provider-recording",
         default=None,
         help="JSON of stored model answers keyed by request digest; turns the model agents on",
+    )
+    parser.add_argument(
+        "--provider",
+        choices=["anthropic"],
+        default=None,
+        help="real provider; off in providers.json until the project turns it on",
     )
     parser.add_argument("--model", default=None, help="model name the recording was made for")
     parser.add_argument("--manifest", default=None, help="Kho manifest; without it nothing is sent")
@@ -133,6 +145,8 @@ def _llm(args: argparse.Namespace) -> LlmSetup | None:
     """Model agents run only when a recording and a model name are both given."""
     recording = getattr(args, "provider_recording", None)
     model = getattr(args, "model", None)
+    if getattr(args, "provider", None):
+        return _real_llm(args, recording, model)
     if recording is None and model is None:
         return None
     if recording is None or not model:
@@ -145,6 +159,26 @@ def _llm(args: argparse.Namespace) -> LlmSetup | None:
     path = getattr(args, "manifest", None)
     manifest = try_load_manifest(path) if path else None
     return LlmSetup(ProviderGateway(provider, {model}, manifest), model)
+
+
+def _real_llm(args: argparse.Namespace, recording: str | None, model: str | None) -> LlmSetup:
+    """Every missing prerequisite refuses; nothing falls back to another provider."""
+    config = load_config()
+    path = getattr(args, "manifest", None)
+    manifest = try_load_manifest(path) if path else None
+    if recording is not None or not model:
+        raise ProviderSetupError("--provider takes --model and no --provider-recording")
+    if not config.enabled:
+        raise ProviderSetupError("provider is switched off in providers.json")
+    if model not in config.approved_models:
+        raise ProviderSetupError("model is not on the approved list")
+    if manifest is None:
+        raise ProviderSetupError("--manifest is required to send anything")
+    try:
+        provider = AnthropicProvider(config, os.environ)
+    except VendorSetupError as error:
+        raise ProviderSetupError(str(error)) from error
+    return LlmSetup(ProviderGateway(provider, config.approved_models, manifest), model)
 
 
 def _compute(args: argparse.Namespace):
