@@ -48,14 +48,16 @@ def _empty(text: str) -> bool:
     return not text.strip() or "<<" in text
 
 
-def _strength_columns(table: TrialTable, strengths: tuple[str, ...]) -> dict[str, int]:
+def _strength_columns(
+    table: TrialTable, strengths: tuple[str, ...], rmp: tuple[str, ...]
+) -> dict[str, int]:
     """Strength to 1-based column, for the columns labelled as the reference product."""
     labels = list(table.headers)
     named = {i: named_strength(h, strengths) for i, h in enumerate(labels)}
     in_table = {s for s in named.values() if s}
     found: dict[str, int] = {}
     for i, label in enumerate(labels):
-        if not is_reference(label):
+        if not is_reference(label, rmp):
             continue
         strength = named[i] or (next(iter(in_table)) if len(in_table) == 1 else None)
         if strength and strength not in found:
@@ -63,13 +65,13 @@ def _strength_columns(table: TrialTable, strengths: tuple[str, ...]) -> dict[str
     return found
 
 
-def _collect(trial: TrialData, strengths: tuple[str, ...]):
+def _collect(trial: TrialData, strengths: tuple[str, ...], rmp: tuple[str, ...]):
     """(row, strength) to the list of (text, table, row number, column)."""
     cells: dict[tuple[str, str], list[tuple[str, TrialTable, int, int]]] = {}
     for table in trial.tables:
         if table.kind in IGNORED_KINDS:
             continue
-        columns = _strength_columns(table, strengths)
+        columns = _strength_columns(table, strengths, rmp)
         if not columns:
             continue
         for number, row in enumerate(table.rows, start=1):
@@ -90,12 +92,15 @@ def _gap(reason: str) -> str:
 
 
 def build_section(
-    trial: TrialData | None, strengths: tuple[str, ...], outline: dict[str, Any]
+    trial: TrialData | None,
+    strengths: tuple[str, ...],
+    outline: dict[str, Any],
+    rmp: tuple[str, ...] = (),
 ) -> tuple[dict[str, Any] | None, list[str]]:
     if trial is None or not strengths:
         return None, []
     form = next(s for s in outline["sections"] if s["id"] == SECTION)["form"]
-    cells = _collect(trial, strengths)
+    cells = _collect(trial, strengths, rmp)
     if not cells:
         return None, ["không có cột nào được gắn nhãn thuốc đối chiếu có số liệu"]
     notes, tables = [], []

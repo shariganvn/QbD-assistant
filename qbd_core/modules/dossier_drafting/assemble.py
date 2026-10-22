@@ -31,6 +31,7 @@ from qbd_core.modules.dossier_drafting.outline import (
     per_strength_beyond,
 )
 from qbd_core.modules.dossier_drafting.reference import build_section as reference_section
+from qbd_core.modules.dossier_drafting.trial_columns import rmp_names
 from qbd_core.modules.evidence.api import KnowledgePort, TrialData, read_strengths
 from qbd_core.shared.contracts import Classification, EvidenceRecord, GapEntry
 from qbd_core.shared.markers import GAP_LABEL
@@ -139,6 +140,27 @@ def _paragraph(record: EvidenceRecord) -> dict[str, str]:
     }
 
 
+def _rmp_log(rmp, substance: str, knowledge: KnowledgePort) -> list[str]:
+    """Which brand was taken as the reference product, from where, and whether a source agrees."""
+    if rmp.note:
+        return [f"agent 3.1: {rmp.note}"]
+    if not rmp.names:
+        return []
+    shown_where = "; ".join(rmp.where[:3])
+    where = shown_where + (f" và {len(rmp.where) - 3} bảng khác" if len(rmp.where) > 3 else "")
+    words = [w for w in substance.lower().split() if len(w) >= 5]
+    sources = [
+        r
+        for r in knowledge.search(f"{substance} {rmp.shown}", 5)
+        if rmp.names[0] in r.text.lower() and any(w in r.text.lower() for w in words)
+    ]
+    source = f"có nguồn {sources[0].id}" if sources else "chưa có nguồn xác nhận trong Kho"
+    return [
+        f"agent 3.1: thuốc đối chiếu suy ra từ tiêu đề bảng: {rmp.shown} ({where}); {source}",
+        f"A13: tên thuốc đối chiếu {rmp.shown} được suy ra từ tiêu đề bảng của nhóm, {source}",
+    ]
+
+
 def assemble_draft(
     intake: IntakeResult,
     knowledge: KnowledgePort,
@@ -195,7 +217,9 @@ def assemble_draft(
         # The model's lead line says the experiment is missing; with data in hand it no longer is.
         literature = by_agent[sid]["blocks"][1:] if sid in by_agent else []
         by_agent[sid] = {**filled, "blocks": filled["blocks"] + literature}
-    comparative, comparative_notes = dissolution_section(trial, tuple(strengths))
+    rmp = rmp_names(trial, substance, tuple(strengths))
+    agent_log += _rmp_log(rmp, substance, knowledge)
+    comparative, comparative_notes = dissolution_section(trial, tuple(strengths), rmp.names)
     if comparative is not None:
         by_agent[comparative["id"]] = comparative
     agent_log += [f"agent 8.2: {note}" for note in comparative_notes]
@@ -203,7 +227,7 @@ def assemble_draft(
     if final is not None:
         by_agent[final["id"]] = final
     agent_log += [f"agent 6.4: {note}" for note in final_notes]
-    reference, reference_notes = reference_section(trial, tuple(strengths), outline)
+    reference, reference_notes = reference_section(trial, tuple(strengths), outline, rmp.names)
     if reference is not None:
         by_agent[reference["id"]] = reference
     agent_log += [f"agent 3.1: {note}" for note in reference_notes]

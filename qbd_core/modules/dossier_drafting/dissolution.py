@@ -69,10 +69,12 @@ def parse_profile(table: TrialTable) -> Profile | str:
     return Profile(table, label_row, tuple(times), columns)
 
 
-def comparisons(profile: Profile, strengths: tuple[str, ...]) -> tuple[list[Comparison], list[str]]:
+def comparisons(
+    profile: Profile, strengths: tuple[str, ...], rmp: tuple[str, ...] = ()
+) -> tuple[list[Comparison], list[str]]:
     where = f"{profile.table.file}, bảng {profile.table.index}"
-    refs = [c for c in profile.columns if is_reference(c.label)]
-    tests = [c for c in profile.columns if not is_reference(c.label)]
+    refs = [c for c in profile.columns if is_reference(c.label, rmp)]
+    tests = [c for c in profile.columns if not is_reference(c.label, rmp)]
     if not refs or not tests:
         return [], [f"{where}: không có đủ cột đối chiếu và cột thử"]
     named = {c: named_strength(c.label, strengths) for c in profile.columns}
@@ -160,7 +162,7 @@ def _label(comparison: Comparison, with_calc: bool = True) -> str:
 
 
 def build_section(
-    trial: TrialData | None, strengths: tuple[str, ...]
+    trial: TrialData | None, strengths: tuple[str, ...], rmp: tuple[str, ...] = ()
 ) -> tuple[dict[str, Any] | None, list[str]]:
     """The covered section, or None; plus one note per table or pair left out."""
     if trial is None or not strengths:
@@ -173,7 +175,7 @@ def build_section(
         if isinstance(profile, str):
             notes.append(f"{table.file}, bảng {table.index}: {profile}")
             continue
-        found, why = comparisons(profile, strengths)
+        found, why = comparisons(profile, strengths, rmp)
         notes += why
         for comparison in found:
             value, reason = f2_of(comparison)

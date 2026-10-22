@@ -34,3 +34,10 @@ the single form row.
 The team's reports name the reference product by brand in every table. Direction 1 (a reference word in the
 column label) means editing each table. Option 2 (one `--reference-product Concor` input) would fill the
 three sections above from this file as it is.
+
+## Update after the owner's answer (2026-10-22)
+The owner confirmed the brand in the headers is the reference product and that no brand may be written in
+code. The brand is now inferred from the tables (see G-21) and shown to the final approver. Run on this
+sample, unchanged file: sections filled from data are P.2.2.1.1, P.2.2.1.4 and P.2.2.3.2, the quality gate
+passes, f2 is 56.5 and 91.4 for two comparisons and a marked gap for four (reference above 100 %).
+No knowledge-base source confirms the brand yet.

@@ -373,3 +373,21 @@ gates:
       until its columns carry a reference word. The two dissolution-equivalence rows point to P.2.2.3.2.
     status: pass
 
+  - id: G-21
+    title: The reference product's name comes from the tables, never from the code
+    invariant: >
+      A brand is taken as the reference product only when a table has a column naming the substance and
+      a strength beside a column naming a strength but not the substance; two different brands are not
+      resolved; the choice is logged as a reviewer item with the tables it came from and whether the
+      knowledge base names a source; no brand name appears in non-test code or configuration.
+    boundary_owner: dossier_drafting
+    fixture: minimal .docx tables with invented brand names, and the sample report
+    command: python -m pytest qbd_core/modules/dossier_drafting/tests/test_reference_name_from_tables.py -q
+    expected: exit 0; the scan of qbd_core finds no brand name outside tests.
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-21.txt
+    owner_step: "07"
+    scope_note: >
+      On the sample report the brand is found in 10 tables and no knowledge-base source confirms it yet;
+      the line for the final approver says so.
+    status: pass
+
