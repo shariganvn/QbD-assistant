@@ -466,7 +466,8 @@ gates:
     owner_step: "07"
     scope_note: >
       The uploaded microbiology report (SAMPLE_BAO_CAO_NGHIEN_CUU_VI_SINH...pdf) is an unfilled framework
-      that states it is not a results report, so nothing is carried from it. Only the microbiology kind is
-      configured; the subdivision report can be added the same way.
+      that states it is not a results report, so nothing is carried from it. Two kinds are configured: microbiology
+      (target P.2.5) and tablet subdivision (target P.2.2.3.4, filed under the section of the strength the
+      report is about and after the calculated results; no summary table read).
     status: pass
 

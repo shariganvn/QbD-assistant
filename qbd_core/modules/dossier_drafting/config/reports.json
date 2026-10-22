@@ -1,15 +1,51 @@
 {
-  "source": "Kinds of the department's study reports whose discussion and conclusion are carried into P.2, and the words that mark a report as an unfilled template.",
-  "template_markers": ["chưa phải báo cáo kết quả", "chưa phải báo cáo thực nghiệm"],
-  "placeholder_markers": ["[điền", "[…]", "[chưa có dữ liệu", "[chưa đánh giá", "[đạt/không đạt]"],
+  "source": "Kinds of the department's study reports whose discussion and conclusion are carried into P.2, and the words that mark a report as an unfilled template. per_strength files the text under the section of the strength the report is about; summary false skips the item-data-conclusion table.",
+  "template_markers": [
+    "chưa phải báo cáo kết quả",
+    "chưa phải báo cáo thực nghiệm"
+  ],
+  "placeholder_markers": [
+    "[điền",
+    "[…]",
+    "[chưa có dữ liệu",
+    "[chưa đánh giá",
+    "[đạt/không đạt]"
+  ],
   "max_placeholders_in_a_filled_report": 2,
   "heading_max_chars": 80,
   "reports": [
     {
       "id": "microbiology",
-      "title_words": ["nghiên cứu vi sinh"],
+      "title_words": [
+        "nghiên cứu vi sinh"
+      ],
       "target": "P.2.5",
-      "carry": [["bàn luận"], ["kết luận"]]
+      "carry": [
+        [
+          "bàn luận"
+        ],
+        [
+          "kết luận"
+        ]
+      ]
+    },
+    {
+      "id": "subdivision",
+      "title_words": [
+        "khả năng chia viên",
+        "chia viên theo vạch"
+      ],
+      "target": "P.2.2.3.4",
+      "per_strength": true,
+      "summary": false,
+      "carry": [
+        [
+          "bàn luận"
+        ],
+        [
+          "kết luận"
+        ]
+      ]
     }
   ]
 }

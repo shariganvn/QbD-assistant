@@ -155,3 +155,67 @@ def test_a_report_of_another_kind_is_ignored(tmp_path):
     other = ["BÁO CÁO KHÁC", "6. Bàn luận", "Một đoạn."]
     run, _ = run_with(tmp_path, other, COMPOSITION)
     assert section(run)["status"] == "gap"
+
+
+SPLIT_REPORT = [
+    "BÁO CÁO NGHIÊN CỨU KHẢ NĂNG CHIA VIÊN THEO VẠCH KHẮC",
+    "7. Bàn luận",
+    "Khối lượng các phần viên phân bố đều quanh giá trị trung bình, không có xu hướng một phía.",
+    "Đạt phép thử đồng đều khối lượng chưa chứng minh đồng đều hàm lượng.",
+    "8. Kết luận",
+    "Viên chia được theo vạch thành hai phần và đáp ứng phép thử đồng đều khối lượng.",
+    "9. Phụ lục",
+    "Phiếu cân từng phần viên.",
+]
+SPLIT_INFO = [
+    ["Thông tin", "Nội dung"],
+    ["Dược chất - hàm lượng", "Atorvastatin 10 mg"],
+]
+SPLIT_COMPOSITION = [["Components", "Product 5 mg", "Product 10 mg"], ["a", "1", "2"]]
+
+
+def split_section(run, sid):
+    return next(s for s in run.draft["sections"] if s["id"] == sid)
+
+
+def test_a_subdivision_report_s_discussion_and_conclusion_go_under_its_strength(tmp_path):
+    run, knowledge = run_with(tmp_path, SPLIT_REPORT, SPLIT_COMPOSITION, SPLIT_INFO)
+    second = split_section(run, "P.2.2.3.4.2")  # 10 mg is the second declared strength
+    texts_ = [b["text"] for b in second["blocks"]]
+    assert texts_[0].startswith("7. Bàn luận [dữ liệu: micro-1.docx, đoạn 2]")
+    assert any(t.startswith("Viên chia được theo vạch") for t in texts_)
+    assert not any("Phiếu cân" in t for t in texts_)
+    assert split_section(run, "P.2.2.3.4.1")["status"] == "gap"
+    report = evaluate_run(run, knowledge)
+    assert report.passed, [f.code for f in report.blocking]
+
+
+def test_the_report_text_is_added_after_the_calculated_results(tmp_path):
+    head = ["STT", "Khối lượng phần viên, mg", "Tỷ lệ, %"]
+    masses = [head, *[[str(i + 1), str(100 + (i % 7) - 3), ""] for i in range(30)]]
+    run, knowledge = run_with(tmp_path, SPLIT_REPORT, SPLIT_COMPOSITION, SPLIT_INFO, masses)
+    blocks = split_section(run, "P.2.2.3.4.2")["blocks"]
+    assert blocks[0]["text"].startswith("Đồng đều khối lượng phần viên: 30 phần viên")
+    assert blocks[1]["text"].startswith("7. Bàn luận")
+    report = evaluate_run(run, knowledge)
+    assert report.passed, [f.code for f in report.blocking]
+
+
+def test_a_subdivision_report_with_no_strength_is_reported_and_left_out(tmp_path):
+    run, _ = run_with(tmp_path, SPLIT_REPORT, SPLIT_COMPOSITION)
+    assert split_section(run, "P.2.2.3.4.2")["status"] == "gap"
+    assert any("không xác định được hàm lượng" in line for line in run.agent_log if "10.2" in line)
+
+
+def test_an_unfilled_subdivision_template_carries_nothing(tmp_path):
+    template = [
+        "BÁO CÁO NGHIÊN CỨU KHẢ NĂNG CHIA VIÊN THEO VẠCH KHẮC",
+        "Tên sản phẩm: […]",
+        "Dược chất - hàm lượng: […]",
+        "Dạng bào chế: […]",
+        "7. Bàn luận",
+        "Bàn luận dựa trên dữ liệu thực tế, theo các nội dung sau.",
+    ]
+    run, _ = run_with(tmp_path, template, SPLIT_COMPOSITION, SPLIT_INFO)
+    assert split_section(run, "P.2.2.3.4.2")["status"] == "gap"
+    assert any("mẫu chưa điền" in line for line in run.agent_log)

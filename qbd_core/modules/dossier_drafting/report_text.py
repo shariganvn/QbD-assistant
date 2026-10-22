@@ -14,6 +14,7 @@ from functools import cache
 from importlib.resources import files
 from typing import Any
 
+from qbd_core.modules.dossier_drafting.subdivision import file_strength
 from qbd_core.modules.dossier_drafting.trial_columns import fold
 from qbd_core.modules.evidence.api import TrialData, paragraph_tag, tag_for
 from qbd_core.shared.markers import GAP_LABEL
@@ -107,8 +108,16 @@ def _gap(reason: str) -> str:
     return f"{GAP_LABEL} {reason}"
 
 
+def _strength_section(target: str, strength_index: int, outline: dict[str, Any]) -> str | None:
+    for section in outline["sections"]:
+        form = section.get("form") or {}
+        if section["id"].startswith(target + ".") and form.get("strengthIndex") == strength_index:
+            return section["id"]
+    return None
+
+
 def build_sections(
-    trial: TrialData | None, outline: dict[str, Any]
+    trial: TrialData | None, outline: dict[str, Any], strengths: tuple[str, ...] = ()
 ) -> tuple[dict[str, dict[str, Any]], list[str]]:
     if trial is None:
         return {}, []
@@ -122,7 +131,9 @@ def build_sections(
             if _is_template(paragraphs):
                 notes.append(f"{file}: báo cáo là mẫu chưa điền, không có kết quả để chuyển")
                 continue
-            results, skipped = _summary_blocks(trial, file)
+            results, skipped = (
+                _summary_blocks(trial, file) if report.get("summary", True) else ([], 0)
+            )
             blocks = list(results)
             every = [w for group in report["carry"] for w in group]
             for words in report["carry"]:
@@ -142,7 +153,22 @@ def build_sections(
             if not blocks:
                 notes.append(f"{file}: không thấy kết quả, bàn luận hay kết luận để chuyển")
                 continue
-            sections[report["target"]] = _build(report["target"], outline, blocks)
+            target = report["target"]
+            if report.get("per_strength"):
+                strength = file_strength(trial, file, strengths) if strengths else None
+                target = (
+                    _strength_section(target, strengths.index(strength), outline)
+                    if strength
+                    else None
+                )
+                if target is None:
+                    notes.append(f"{file}: không xác định được hàm lượng của báo cáo")
+                    continue
+            existing = sections.get(target)
+            if existing is not None:
+                existing["blocks"] += blocks
+            else:
+                sections[target] = _build(target, outline, blocks)
     return sections, notes
 
 

@@ -242,8 +242,12 @@ def assemble_draft(
         agent_log.append(
             "A13: tiêu chí chia viên lấy từ mẫu báo cáo của phòng, chưa xác nhận bản dược điển"
         )
-    carried, carried_notes = report_sections(trial, outline)
-    by_agent.update(carried)
+    carried, carried_notes = report_sections(trial, outline, tuple(strengths))
+    for sid, found in carried.items():
+        if sid in by_agent and by_agent[sid]["status"] == "covered":
+            by_agent[sid]["blocks"] = [*by_agent[sid]["blocks"], *found["blocks"]]
+        else:
+            by_agent[sid] = found
     agent_log += [f"agent 10.2: {note}" for note in carried_notes]
     reference, reference_notes = reference_section(trial, tuple(strengths), outline, rmp.names)
     if reference is not None:
