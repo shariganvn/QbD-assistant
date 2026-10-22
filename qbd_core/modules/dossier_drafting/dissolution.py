@@ -13,11 +13,11 @@ from dataclasses import dataclass
 from typing import Any
 
 from qbd_core.modules.dossier_drafting.calc import CalcError, f2
+from qbd_core.modules.dossier_drafting.trial_columns import is_reference, named_strength
 from qbd_core.modules.evidence.api import TrialData, TrialTable, first_number, tag_for
 from qbd_core.shared.markers import GAP_LABEL
 
 SECTION = "P.2.2.3.2"
-REFERENCE_WORDS = ("rmp", "reference", "đối chiếu", "originator", "biệt dược gốc")
 PLAIN_NUMBER = re.compile(r"\s*\d+(?:[.,]\d+)?\s*")
 TIME_HEADER = "Thời điểm lấy mẫu"
 
@@ -69,22 +69,13 @@ def parse_profile(table: TrialTable) -> Profile | str:
     return Profile(table, label_row, tuple(times), columns)
 
 
-def _is_reference(label: str) -> bool:
-    return any(word in label.lower() for word in REFERENCE_WORDS)
-
-
-def _named(label: str, strengths: tuple[str, ...]) -> str | None:
-    hits = [s for s in strengths if s in label]
-    return max(hits, key=len) if hits else None
-
-
 def comparisons(profile: Profile, strengths: tuple[str, ...]) -> tuple[list[Comparison], list[str]]:
     where = f"{profile.table.file}, bảng {profile.table.index}"
-    refs = [c for c in profile.columns if _is_reference(c.label)]
-    tests = [c for c in profile.columns if not _is_reference(c.label)]
+    refs = [c for c in profile.columns if is_reference(c.label)]
+    tests = [c for c in profile.columns if not is_reference(c.label)]
     if not refs or not tests:
         return [], [f"{where}: không có đủ cột đối chiếu và cột thử"]
-    named = {c: _named(c.label, strengths) for c in profile.columns}
+    named = {c: named_strength(c.label, strengths) for c in profile.columns}
     in_table = {s for s in named.values() if s}
     out, notes = [], []
     for test in tests:

@@ -355,3 +355,21 @@ gates:
       written; no proportion is calculated and no strength is declared derived.
     status: pass
 
+  - id: G-20
+    title: Reference-product table uses only columns labelled as the reference product
+    invariant: >
+      P.2.2.1.1 is filled only from columns whose label says reference product (RMP, reference, đối
+      chiếu); the product's own columns never enter it; two different values for one row and strength
+      stay a marked gap; placeholders count as empty; every copied cell carries its cell tag; with no
+      labelled column the section stays a gap.
+    boundary_owner: dossier_drafting
+    fixture: minimal .docx tables built in the test, and the example report
+    command: python -m pytest qbd_core/modules/dossier_drafting/tests/test_reference_product.py -q
+    expected: exit 0; the draft passes Stage B and the quality gate; a changed value is blocked.
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-20.txt
+    owner_step: "07"
+    scope_note: >
+      The example report names its reference columns by brand (Concor), so nothing is filled from it
+      until its columns carry a reference word. The two dissolution-equivalence rows point to P.2.2.3.2.
+    status: pass
+

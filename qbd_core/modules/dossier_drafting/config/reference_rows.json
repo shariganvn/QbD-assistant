@@ -1,0 +1,22 @@
+{
+  "source": "Row labels of the P.2.2.1.1 form (taken from the outline) and the first-column words of trial tables that name the same row. A row is matched by the longest word it contains; two form rows with the same hit length leave the row out.",
+  "rows": {
+    "Thành phần tá dược": ["excipients", "tá dược"],
+    "Dạng bào chế": ["pharmaceutical form", "dạng bào chế"],
+    "Tài liệu tham khảo (TLTK)": ["references", "tài liệu tham khảo"],
+    "Nhà sản xuất": ["manufacturer", "nhà sản xuất"],
+    "Số đăng ký": ["registration", "số đăng ký"],
+    "Hạn dùng": ["shelf life", "expiry", "hạn dùng"],
+    "Điều kiện bảo quản": ["storage", "bảo quản"],
+    "Quy cách đóng gói": ["packaging", "đóng gói"],
+    "Cảm quan": ["appearance", "cảm quan"],
+    "Khối lượng trung bình": ["average weight", "mean mass", "khối lượng trung bình"],
+    "Kích thước viên": ["dimension", "tablet size", "kích thước"],
+    "Độ cứng": ["hardness", "độ cứng"],
+    "Thời gian rã": ["disintegration", "thời gian rã"],
+    "Định lượng": ["assay", "định lượng"],
+    "Tạp chất liên quan": ["related substances", "impurit", "tạp chất"],
+    "Đồng đều hàm lượng": ["content uniformity", "đồng đều hàm lượng"],
+    "Hàm lượng chất bảo quản": ["preservative", "chất bảo quản"]
+  }
+}

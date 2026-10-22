@@ -30,6 +30,7 @@ from qbd_core.modules.dossier_drafting.outline import (
     most_strength_sections,
     per_strength_beyond,
 )
+from qbd_core.modules.dossier_drafting.reference import build_section as reference_section
 from qbd_core.modules.evidence.api import KnowledgePort, TrialData, read_strengths
 from qbd_core.shared.contracts import Classification, EvidenceRecord, GapEntry
 from qbd_core.shared.markers import GAP_LABEL
@@ -202,6 +203,10 @@ def assemble_draft(
     if final is not None:
         by_agent[final["id"]] = final
     agent_log += [f"agent 6.4: {note}" for note in final_notes]
+    reference, reference_notes = reference_section(trial, tuple(strengths), outline)
+    if reference is not None:
+        by_agent[reference["id"]] = reference
+    agent_log += [f"agent 3.1: {note}" for note in reference_notes]
     for section in leaf_sections(outline):
         sid = section["id"]
         if sid in not_applicable:

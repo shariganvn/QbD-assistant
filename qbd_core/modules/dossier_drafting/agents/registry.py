@@ -55,6 +55,7 @@ IMPLEMENTED: dict[str, tuple[Status, str]] = {
         "dossier_drafting.dissolution: f2 and profile tables when the trial tables fit",
     ),
     "6.4": ("partial", "dossier_drafting.formula: copies the team's formula table; no proportions"),
+    "3.1": ("partial", "dossier_drafting.reference: only columns labelled RMP/reference/đối chiếu"),
     "1.1": ("partial", "retrieval is done inside agent 4.1; no separate collector output"),
     "1.4": (
         "partial",
@@ -94,7 +95,6 @@ NEEDS_JUDGEMENT = "risk levels are the team's judgement on confirmed CQA and exp
 BLOCKED: dict[str, str] = {
     "0.4": "no model review loop exists (12.2 deferred), so there is nothing to control",
     "1.2": "the reference-product profile needs its measured data (strengths, tests)",
-    "3.1": "cannot tell which columns are the reference product: labels are brand names",
     "4.4": NEEDS_JUDGEMENT,
     "4.5": "combinations of substances are out of the SOP and refused at intake",
     "6.1a": NEEDS_JUDGEMENT,
