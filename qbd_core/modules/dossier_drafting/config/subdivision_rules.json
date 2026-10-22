@@ -1,0 +1,23 @@
+{
+  "source": "Acceptance rules of the tablet-subdivision study, as written in the department's report template (SAMPLE_Subdivision_of_tablets.pdf). The template says the Ph. Eur. text is a public version to be confirmed against the pharmacopoeia edition used for the dossier.",
+  "confirmed": false,
+  "rules": {
+    "ph_eur_mass": {
+      "title": "Đồng đều khối lượng phần viên",
+      "sample_size": 30,
+      "inner_low": 85,
+      "inner_high": 115,
+      "outer_low": 75,
+      "outer_high": 125,
+      "max_outside_inner": 1,
+      "max_outside_outer": 0,
+      "source": "Ph. Eur., chuyên luận chung Tablets, mục Subdivision of tablets"
+    },
+    "fda_loss": {
+      "title": "Hao hụt khối lượng khi chia",
+      "sample_size": 15,
+      "max_loss_percent": 3.0,
+      "source": "FDA, Tablet Scoring: Nomenclature, Labeling, and Data for Evaluation, 2013"
+    }
+  }
+}

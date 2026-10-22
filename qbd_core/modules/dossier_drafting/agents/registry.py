@@ -60,6 +60,10 @@ IMPLEMENTED: dict[str, tuple[Status, str]] = {
         "partial",
         "dossier_drafting.impurity: impurity tables whose batches can be tied to a product",
     ),
+    "8.4": (
+        "partial",
+        "dossier_drafting.subdivision: mass uniformity and mass loss only; rules unconfirmed",
+    ),
     "1.1": ("partial", "retrieval is done inside agent 4.1; no separate collector output"),
     "1.4": (
         "partial",
@@ -107,7 +111,6 @@ BLOCKED: dict[str, str] = {
     "6.5": "needs the final formula and the strengths",
     "7.2": "compares excipients with the reference product, which needs agent 3.1 data",
     "7.4": "route decision needs dissolution data and the eligibility verdict",
-    "8.4": "no breakability table in any real report yet; the layout is not known",
     "8.5": "conclusion needs the route decision and the team's data",
     "9.3": NEEDS_TEAM_DATA,
     "9.4": NEEDS_JUDGEMENT,

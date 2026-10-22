@@ -37,8 +37,14 @@ from qbd_core.modules.dossier_drafting.outline import (
     load_outline,
     most_strength_sections,
 )
+from qbd_core.modules.dossier_drafting.subdivision import ANY_TAG as SUBDIVISION_TAG
+from qbd_core.modules.dossier_drafting.subdivision import files_in as subdivision_files
+from qbd_core.modules.dossier_drafting.subdivision import verify as verify_subdivision
 
 __all__ = [
+    "SUBDIVISION_TAG",
+    "subdivision_files",
+    "verify_subdivision",
     "F2_TAG",
     "cells_of",
     "CalcError",

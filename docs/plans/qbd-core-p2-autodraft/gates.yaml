@@ -427,3 +427,24 @@ gates:
     owner_step: "07"
     status: pass
 
+  - id: G-24
+    title: Tablet subdivision results are calculated by code from complete data and rebuilt by the gate
+    invariant: >
+      P.2.2.3.4 and its per-strength sections hold a mass-uniformity or mass-loss sentence only when the
+      table has exactly the sample size the rule asks for; the sentence is rebuilt from the cells its
+      [tính: ...] tag names and from config/subdivision_rules.json and must match word for word; the rule
+      sentences in the parent section match the configuration; a report is filed under the strength its
+      information table states, or the only declared strength, otherwise it is reported and left out; the
+      rules are flagged as unconfirmed for the final approver.
+    boundary_owner: dossier_drafting + quality_gate
+    fixture: minimal .docx tables laid out as in the department's report template
+    command: python -m pytest qbd_core/modules/dossier_drafting/tests/test_subdivision.py -q
+    expected: exit 0; a flipped verdict, a changed count, a short range and an altered rule are blocked.
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-24.txt
+    owner_step: "07"
+    scope_note: >
+      Built from the department's empty report template (SAMPLE_Subdivision_of_tablets.pdf), not from a
+      filled report; the first real report may need keywords added to config/trial_words.json. Sections
+      5.1 (observations) and 5.4 (additional tests) of the template are not read.
+    status: pass
+

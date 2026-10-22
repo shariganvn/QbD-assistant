@@ -32,6 +32,8 @@ from qbd_core.modules.dossier_drafting.outline import (
     per_strength_beyond,
 )
 from qbd_core.modules.dossier_drafting.reference import build_section as reference_section
+from qbd_core.modules.dossier_drafting.subdivision import build_sections as subdivision_sections
+from qbd_core.modules.dossier_drafting.subdivision import rules_confirmed
 from qbd_core.modules.dossier_drafting.trial_columns import rmp_names
 from qbd_core.modules.evidence.api import KnowledgePort, TrialData, read_strengths
 from qbd_core.shared.contracts import Classification, EvidenceRecord, GapEntry
@@ -232,6 +234,13 @@ def assemble_draft(
     if profile is not None:
         by_agent[profile["id"]] = profile
     agent_log += [f"agent 8.3: {note}" for note in profile_notes]
+    split, split_notes = subdivision_sections(trial, tuple(strengths), outline)
+    by_agent.update(split)
+    agent_log += [f"agent 8.4: {note}" for note in split_notes]
+    if split and not rules_confirmed():
+        agent_log.append(
+            "A13: tiêu chí chia viên lấy từ mẫu báo cáo của phòng, chưa xác nhận bản dược điển"
+        )
     reference, reference_notes = reference_section(trial, tuple(strengths), outline, rmp.names)
     if reference is not None:
         by_agent[reference["id"]] = reference

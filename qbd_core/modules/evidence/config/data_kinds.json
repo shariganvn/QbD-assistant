@@ -217,6 +217,44 @@
           "process steps"
         ]
       ]
+    },
+    {
+      "id": "subdivision_mass",
+      "label": "Khối lượng phần viên sau chia",
+      "all_of": [
+        [
+          "khối lượng phần viên",
+          "part mass"
+        ]
+      ]
+    },
+    {
+      "id": "subdivision_loss",
+      "label": "Hao hụt khối lượng khi chia",
+      "all_of": [
+        [
+          "khối lượng viên nguyên",
+          "whole tablet"
+        ],
+        [
+          "hao hụt",
+          "loss"
+        ]
+      ]
+    },
+    {
+      "id": "report_info",
+      "label": "Thông tin chung của báo cáo",
+      "all_of": [
+        [
+          "thông tin",
+          "information"
+        ],
+        [
+          "nội dung",
+          "content"
+        ]
+      ]
     }
   ]
 }

@@ -1,5 +1,35 @@
 {
   "source": "Words that label rows of the team's dissolution tables (from the department's report).",
-  "average": ["average", "mean", "trung bình"],
-  "statistics": ["max", "min", "rsd", "sd", "cv", "maximum", "minimum"]
+  "average": [
+    "average",
+    "mean",
+    "trung bình"
+  ],
+  "statistics": [
+    "max",
+    "min",
+    "rsd",
+    "sd",
+    "cv",
+    "maximum",
+    "minimum"
+  ],
+  "part_mass": [
+    "khối lượng phần viên",
+    "part mass",
+    "mass of the part"
+  ],
+  "whole_mass": [
+    "khối lượng viên nguyên",
+    "whole tablet"
+  ],
+  "parts_total": [
+    "tổng khối lượng",
+    "total mass of the parts",
+    "sum of the parts"
+  ],
+  "strength_row": [
+    "hàm lượng",
+    "strength"
+  ]
 }

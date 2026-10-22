@@ -9,9 +9,12 @@ from typing import Any
 from qbd_core.modules.dossier_drafting.api import (
     CQA_SECTION,
     F2_TAG,
+    SUBDIVISION_TAG,
     CalcError,
     cells_of,
     f2,
+    subdivision_files,
+    verify_subdivision,
 )
 from qbd_core.modules.evidence.api import (
     DATA_TAG,
@@ -126,6 +129,8 @@ def _check_text(
 ) -> list[Finding]:
     if kind_of(text) is not None:
         return []
+    if SUBDIVISION_TAG.search(text):
+        return [_block(code, sid) for code in verify_subdivision(text, trial)]
     if DATA_TAG.search(text):
         return _check_data(text, sid, trial)
     if CLAIM_TAGS_AT_END.search(text):
@@ -192,6 +197,7 @@ def check_provenance(
                     cited.add(tag["file"])
                 cited.update(t["file"] for t in CLAIM_TAG.finditer(text))
                 data_files.update(t["file"] for t in DATA_TAG.finditer(text))
+                data_files.update(subdivision_files(text))
     sources = draft["meta"].get("referenceSources", [])
     findings += [
         _block("E_REFERENCE_MISSING", None, f)
