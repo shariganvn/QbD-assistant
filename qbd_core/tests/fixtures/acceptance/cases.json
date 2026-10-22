@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-22",
+  "documents": "../../../modules/dossier_drafting/tests/fixtures/documents.json",
+  "cases": [
+    {"id": "n1-tablet", "group": "N1", "substances": ["Atorvastatin calcium"], "form": "Viên nén", "market": "both", "expect_exit": 0},
+    {"id": "n2-film-coated", "group": "N2", "substances": ["Atorvastatin calcium"], "form": "Viên nén bao phim", "market": "both", "expect_exit": 0},
+    {"id": "n2-film-coated-eu", "group": "N2", "substances": ["Atorvastatin calcium"], "form": "Viên nén bao phim", "market": "eu", "expect_exit": 0},
+    {"id": "n2-film-coated-domestic", "group": "N2", "substances": ["Atorvastatin calcium"], "form": "Viên nén bao phim", "market": "domestic", "expect_exit": 0},
+    {"id": "n3-extended-release", "group": "N3", "substances": ["Atorvastatin calcium"], "form": "Viên nén phóng thích kéo dài", "market": "both", "expect_exit": 0},
+    {"id": "n4-hard-capsule", "group": "N4", "substances": ["Atorvastatin calcium"], "form": "Viên nang cứng", "market": "both", "expect_exit": 0},
+    {"id": "n5-suppository", "group": "N5", "substances": ["Atorvastatin calcium"], "form": "Viên đạn đặt trực tràng", "market": "both", "expect_exit": 0},
+    {"id": "n6-granules", "group": "N6", "substances": ["Atorvastatin calcium"], "form": "Thuốc cốm uống", "market": "both", "expect_exit": 0},
+    {"id": "n7-syrup", "group": "N7", "substances": ["Atorvastatin calcium"], "form": "Siro", "market": "both", "expect_exit": 0},
+    {"id": "n8-cream", "group": "N8", "substances": ["Atorvastatin calcium"], "form": "Kem bôi da", "market": "both", "expect_exit": 0},
+    {"id": "n9-mouthwash", "group": "N9", "substances": ["Atorvastatin calcium"], "form": "Dung dịch súc miệng", "market": "both", "expect_exit": 0},
+    {"id": "combination-refused", "group": "negative", "substances": ["Atorvastatin calcium", "Amlodipine besilate"], "form": "Viên nén", "market": "both", "expect_exit": 3},
+    {"id": "form-outside-the-38", "group": "negative", "substances": ["Atorvastatin calcium"], "form": "Hệ trị liệu qua da", "market": "both", "expect_exit": 2},
+    {"id": "four-substances", "group": "negative", "substances": ["A", "B", "C", "D"], "form": "Viên nén", "market": "both", "expect_exit": 2},
+    {"id": "market-unknown", "group": "negative", "substances": ["Atorvastatin calcium"], "form": "Viên nén", "market": "asean", "expect_exit": 2},
+    {"id": "documents-unreadable", "group": "negative", "substances": ["Atorvastatin calcium"], "form": "Viên nén", "market": "both", "documents": "does-not-exist.json", "expect_exit": 4}
+  ]
+}

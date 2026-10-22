@@ -1,0 +1,20 @@
+{
+  "id": "market-unknown",
+  "group": "negative",
+  "input": {
+    "substances": [
+      "Atorvastatin calcium"
+    ],
+    "form": "Viên nén",
+    "market": "asean"
+  },
+  "expected_exit": 2,
+  "exit": 2,
+  "exit_matches": true,
+  "deterministic": true,
+  "files": [],
+  "covered": 0,
+  "gap": 0,
+  "appendix_c": {},
+  "data_requests": []
+}

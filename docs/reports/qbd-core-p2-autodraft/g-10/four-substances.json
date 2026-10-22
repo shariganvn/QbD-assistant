@@ -1,0 +1,23 @@
+{
+  "id": "four-substances",
+  "group": "negative",
+  "input": {
+    "substances": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "form": "Viên nén",
+    "market": "both"
+  },
+  "expected_exit": 2,
+  "exit": 2,
+  "exit_matches": true,
+  "deterministic": true,
+  "files": [],
+  "covered": 0,
+  "gap": 0,
+  "appendix_c": {},
+  "data_requests": []
+}

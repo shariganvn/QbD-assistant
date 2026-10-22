@@ -1,0 +1,21 @@
+{
+  "id": "combination-refused",
+  "group": "negative",
+  "input": {
+    "substances": [
+      "Atorvastatin calcium",
+      "Amlodipine besilate"
+    ],
+    "form": "Viên nén",
+    "market": "both"
+  },
+  "expected_exit": 3,
+  "exit": 3,
+  "exit_matches": true,
+  "deterministic": true,
+  "files": [],
+  "covered": 0,
+  "gap": 0,
+  "appendix_c": {},
+  "data_requests": []
+}

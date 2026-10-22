@@ -1,0 +1,193 @@
+{
+  "id": "n5-suppository",
+  "group": "N5",
+  "input": {
+    "substances": [
+      "Atorvastatin calcium"
+    ],
+    "form": "Viên đạn đặt trực tràng",
+    "market": "both"
+  },
+  "expected_exit": 0,
+  "exit": 0,
+  "exit_matches": true,
+  "deterministic": true,
+  "files": [
+    "draft.json",
+    "draft.quality.json"
+  ],
+  "covered": 2,
+  "gap": 41,
+  "appendix_c": {
+    "na": 1,
+    "open": 12,
+    "pass": 2,
+    "review": 2
+  },
+  "data_requests": [
+    {
+      "section": "P.2.1.1.1",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 4.1 (API Properties) cần nhà cung cấp mô hình, chưa cấu hình."
+    },
+    {
+      "section": "P.2.1.1.3",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 4.4 (Initial Risk Assessment) bị chặn: risk levels are the team's judgement on confirmed CQA and experiments."
+    },
+    {
+      "section": "P.2.1.1.4",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; chưa có agent phụ trách mục này."
+    },
+    {
+      "section": "P.2.1.2.1",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 4.2 (Excipient Selector) cần nhà cung cấp mô hình, chưa cấu hình."
+    },
+    {
+      "section": "P.2.1.2.2",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 4.3 (Compatibility Studies) cần nhà cung cấp mô hình, chưa cấu hình."
+    },
+    {
+      "section": "P.2.1.2.3",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 4.2 (Excipient Selector) cần nhà cung cấp mô hình, chưa cấu hình."
+    },
+    {
+      "section": "P.2.2.1.1",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 3.1 (RMP Describer) cần nhà cung cấp mô hình, chưa cấu hình. CẦN DỮ LIỆU: technology choice: Appendix B.2 gives no basis for this group"
+    },
+    {
+      "section": "P.2.2.1.2.1",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 3.2 (QTPP Builder) cần nhà cung cấp mô hình, chưa cấu hình. CẦN DỮ LIỆU: technology choice: Appendix B.2 gives no basis for this group"
+    },
+    {
+      "section": "P.2.2.1.2.2",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] bộ CQA chưa được người xác nhận ở cổng 3.5. CẦN DỮ LIỆU: technology choice: Appendix B.2 gives no basis for this group"
+    },
+    {
+      "section": "P.2.2.1.3.1",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 5.3 (Rationale Writer) cần nhà cung cấp mô hình, chưa cấu hình. CẦN DỮ LIỆU: technology choice: Appendix B.2 gives no basis for this group"
+    },
+    {
+      "section": "P.2.2.1.3.2",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 6.1a (Formulation Risk Assessment (initial)) bị chặn: risk levels are the team's judgement on confirmed CQA and experiments. CẦN DỮ LIỆU: technology choice: Appendix B.2 gives no basis for this group"
+    },
+    {
+      "section": "P.2.2.1.3.3",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 6.2 (Formulation Studies) bị chặn: needs the team's own experimental data, which is not among the three inputs. CẦN DỮ LIỆU: technology choice: Appendix B.2 gives no basis for this group"
+    },
+    {
+      "section": "P.2.2.1.3.3.1",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; chưa có agent phụ trách mục này. CẦN DỮ LIỆU: technology choice: Appendix B.2 gives no basis for this group"
+    },
+    {
+      "section": "P.2.2.1.3.3.2",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; chưa có agent phụ trách mục này. CẦN DỮ LIỆU: technology choice: Appendix B.2 gives no basis for this group"
+    },
+    {
+      "section": "P.2.2.1.3.4",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 6.1b (Formulation Risk Assessment (updated)) bị chặn: risk levels are the team's judgement on confirmed CQA and experiments. CẦN DỮ LIỆU: technology choice: Appendix B.2 gives no basis for this group"
+    },
+    {
+      "section": "P.2.2.1.4",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 6.4 (Final Formula and Roles) cần nhà cung cấp mô hình, chưa cấu hình. CẦN DỮ LIỆU: technology choice: Appendix B.2 gives no basis for this group"
+    },
+    {
+      "section": "P.2.2.3.1.1",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 8.1 (Dissolution Method Developer) cần nhà cung cấp mô hình, chưa cấu hình. CẦN DỮ LIỆU: equivalence direction (BE or waiver): no internal document for this group CẦN DỮ LIỆU: surrogate for dissolution: no internal document for this group"
+    },
+    {
+      "section": "P.2.2.3.1.2",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 8.1 (Dissolution Method Developer) cần nhà cung cấp mô hình, chưa cấu hình. CẦN DỮ LIỆU: equivalence direction (BE or waiver): no internal document for this group CẦN DỮ LIỆU: surrogate for dissolution: no internal document for this group"
+    },
+    {
+      "section": "P.2.2.3.1.3",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 8.1 (Dissolution Method Developer) cần nhà cung cấp mô hình, chưa cấu hình. CẦN DỮ LIỆU: equivalence direction (BE or waiver): no internal document for this group CẦN DỮ LIỆU: surrogate for dissolution: no internal document for this group"
+    },
+    {
+      "section": "P.2.2.3.2",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 8.2 (Comparative Dissolution) cần nhà cung cấp mô hình, chưa cấu hình. CẦN DỮ LIỆU: equivalence direction (BE or waiver): no internal document for this group CẦN DỮ LIỆU: surrogate for dissolution: no internal document for this group"
+    },
+    {
+      "section": "P.2.2.3.3.1",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 8.3 (Impurity Profile vs RMP) cần nhà cung cấp mô hình, chưa cấu hình. CẦN DỮ LIỆU: equivalence direction (BE or waiver): no internal document for this group CẦN DỮ LIỆU: surrogate for dissolution: no internal document for this group"
+    },
+    {
+      "section": "P.2.2.3.3.2",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; chưa có agent phụ trách mục này. CẦN DỮ LIỆU: equivalence direction (BE or waiver): no internal document for this group CẦN DỮ LIỆU: surrogate for dissolution: no internal document for this group"
+    },
+    {
+      "section": "P.2.2.3.3.3",
+      "reason": "Không áp dụng: bản định hướng chưa khai hàm lượng thứ hai trở đi."
+    },
+    {
+      "section": "P.2.2.3.4",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 8.4 (Other Dosage Form Properties) cần nhà cung cấp mô hình, chưa cấu hình. CẦN DỮ LIỆU: equivalence direction (BE or waiver): no internal document for this group CẦN DỮ LIỆU: surrogate for dissolution: no internal document for this group"
+    },
+    {
+      "section": "P.2.2.3.4.1",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; chưa có agent phụ trách mục này. CẦN DỮ LIỆU: equivalence direction (BE or waiver): no internal document for this group CẦN DỮ LIỆU: surrogate for dissolution: no internal document for this group"
+    },
+    {
+      "section": "P.2.2.3.4.2",
+      "reason": "Không áp dụng: bản định hướng chưa khai hàm lượng thứ hai trở đi."
+    },
+    {
+      "section": "P.2.3.1",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 9.1 (Process Risk and Environment Control) cần nhà cung cấp mô hình, chưa cấu hình."
+    },
+    {
+      "section": "P.2.3.2",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; chưa có agent phụ trách mục này."
+    },
+    {
+      "section": "P.2.3.2.1",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 9.1 (Process Risk and Environment Control) cần nhà cung cấp mô hình, chưa cấu hình."
+    },
+    {
+      "section": "P.2.3.2.2",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 9.1 (Process Risk and Environment Control) cần nhà cung cấp mô hình, chưa cấu hình."
+    },
+    {
+      "section": "P.2.3.2.3",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 9.2 (Unit Operation Developer) cần nhà cung cấp mô hình, chưa cấu hình."
+    },
+    {
+      "section": "P.2.3.2.4",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 9.2 (Unit Operation Developer) cần nhà cung cấp mô hình, chưa cấu hình."
+    },
+    {
+      "section": "P.2.3.2.5",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 9.2 (Unit Operation Developer) cần nhà cung cấp mô hình, chưa cấu hình."
+    },
+    {
+      "section": "P.2.3.3",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 9.3 (Scale-up) bị chặn: needs the team's own experimental data, which is not among the three inputs."
+    },
+    {
+      "section": "P.2.3.3.1",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; chưa có agent phụ trách mục này."
+    },
+    {
+      "section": "P.2.3.3.2",
+      "reason": "Không áp dụng: bản định hướng chưa khai hàm lượng thứ hai trở đi."
+    },
+    {
+      "section": "P.2.3.4",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 9.4 (CPP Proposer) bị chặn: risk levels are the team's judgement on confirmed CQA and experiments."
+    },
+    {
+      "section": "P.2.4.1",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 10.1 (Container Closure) bị chặn: container-closure choice needs the final formula and stability data."
+    },
+    {
+      "section": "P.2.4.2",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 10.1 (Container Closure) bị chặn: container-closure choice needs the final formula and stability data."
+    },
+    {
+      "section": "P.2.5",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 10.2 (Microbiological Attributes) cần nhà cung cấp mô hình, chưa cấu hình."
+    },
+    {
+      "section": "P.2.6",
+      "reason": "[CHƯA CÓ DỮ LIỆU – CẦN BỔ SUNG] chưa có bằng chứng nội bộ; agent 10.3 (Compatibility) cần nhà cung cấp mô hình, chưa cấu hình."
+    }
+  ]
+}

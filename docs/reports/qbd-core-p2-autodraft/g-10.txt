@@ -1,0 +1,20 @@
+case | group | exit (expected) | same bytes twice | covered | gap | appendix C
+n1-tablet | N1 | 0 (0) | yes | 2 | 41 | na=1, open=12, pass=2, review=2
+n2-film-coated | N2 | 0 (0) | yes | 2 | 41 | na=1, open=12, pass=2, review=2
+n2-film-coated-eu | N2 | 0 (0) | yes | 2 | 41 | open=13, pass=3, review=1
+n2-film-coated-domestic | N2 | 0 (0) | yes | 2 | 41 | na=1, open=12, pass=2, review=2
+n3-extended-release | N3 | 0 (0) | yes | 2 | 41 | na=1, open=12, pass=2, review=2
+n4-hard-capsule | N4 | 0 (0) | yes | 2 | 41 | na=1, open=12, pass=2, review=2
+n5-suppository | N5 | 0 (0) | yes | 2 | 41 | na=1, open=12, pass=2, review=2
+n6-granules | N6 | 0 (0) | yes | 2 | 41 | na=1, open=12, pass=2, review=2
+n7-syrup | N7 | 0 (0) | yes | 2 | 41 | na=1, open=12, pass=2, review=2
+n8-cream | N8 | 0 (0) | yes | 2 | 41 | na=1, open=12, pass=2, review=2
+n9-mouthwash | N9 | 0 (0) | yes | 2 | 41 | na=1, open=12, pass=2, review=2
+combination-refused | negative | 3 (3) | yes | 0 | 0 | -
+form-outside-the-38 | negative | 2 (2) | yes | 0 | 0 | -
+four-substances | negative | 2 (2) | yes | 0 | 0 | -
+market-unknown | negative | 2 (2) | yes | 0 | 0 | -
+documents-unreadable | negative | 4 (4) | yes | 0 | 0 | -
+cases: 16; failed: none
+knowledge: synthetic documents; this shows the pipeline, not real content
+head of R&D sign-off (A13): not recorded here

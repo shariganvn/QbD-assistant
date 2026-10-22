@@ -1,0 +1,20 @@
+{
+  "id": "form-outside-the-38",
+  "group": "negative",
+  "input": {
+    "substances": [
+      "Atorvastatin calcium"
+    ],
+    "form": "Hệ trị liệu qua da",
+    "market": "both"
+  },
+  "expected_exit": 2,
+  "exit": 2,
+  "exit_matches": true,
+  "deterministic": true,
+  "files": [],
+  "covered": 0,
+  "gap": 0,
+  "appendix_c": {},
+  "data_requests": []
+}

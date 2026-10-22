@@ -8,6 +8,7 @@ page is rendered).
 | Command | Purpose |
 |---|---|
 | `cqa-propose --substance S --form F --market M --out proposal.json` | Candidate CQA for the dosage-form group, bound to the input; a person fills the confirmation template. |
+| `accept --cases cases.json --out-dir DIR` | Runs every acceptance case twice through `run`; writes one report per case, `g-10.txt` and `g-10-data-requests.md` only if every case met its expected exit code with identical bytes (else exit 11, nothing written; 12 unreadable cases). |
 | `run --substance S [--substance S2 ...] --form F --market M --documents docs.json --out draft.json [--date YYYY-MM-DD] [--cqa-confirmation signed.json] [--render-dir DIR] [--trial-file REPORT.docx ...] [--provider-recording FILE --model NAME [--manifest FILE] [--provider-destination remote|local]]` | Build the gap-flagged draft, run the quality gate, publish `draft.json`, `draft.quality.json` and, with `--render-dir`, `p2-orientation-draft.html`. |
 | `render --draft draft.json --out-dir DIR` | Render an existing draft to the HTML page. |
 

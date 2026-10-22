@@ -33,7 +33,7 @@ Architecture: `docs/architecture/ADR-qbd-core-module-boundaries.md`.
 | 03 Evidence and egress | step-03-evidence-egress.md | [ ] |
 | 04 Dossier drafting | step-04-dossier-drafting.md | [ ] |
 | 05 Quality and render | step-05-quality-render.md | [ ] |
-| 06 Acceptance | step-06-acceptance.md | [ ] |
+| 06 Acceptance | step-06-acceptance.md | [ ] (accept command done; sign-off pending) |
 | 07 Experimental data intake | step-07-experimental-data-intake.md | slices 1-5 done (G-13 to G-15, G-17 to G-25); consumers open |
 
 Dependencies: 01 after 00; 02 and 03 after 01; 04 after 02 and 03; 05 after 04; 06 after 05.

@@ -199,6 +199,14 @@ gates:
       - combination and out-of-scope cases
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-10.txt
     owner_step: "06"
+    scope_note: >
+      `accept` runs 16 cases (N1-N9, EU/domestic/both, combination, form outside the 38, 4 substances,
+      unknown market, unreadable documents), each twice, and compares exit code and bytes. Knowledge is
+      the synthetic documents.json, so this shows the pipeline, not real content. Appendix C is far from
+      17/17 (about 12 open) and the report says so; the gate is not closed.
+    reopen_when: >
+      Kho classification (G-03), the ACTD/TT32 PDFs (G-08), real knowledge documents and the head of
+      R&D sign-off (A13) on one case exist.
     status: unverified
 
   - id: G-11

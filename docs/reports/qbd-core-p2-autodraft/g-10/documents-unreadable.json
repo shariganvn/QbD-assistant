@@ -1,0 +1,20 @@
+{
+  "id": "documents-unreadable",
+  "group": "negative",
+  "input": {
+    "substances": [
+      "Atorvastatin calcium"
+    ],
+    "form": "Viên nén",
+    "market": "both"
+  },
+  "expected_exit": 4,
+  "exit": 4,
+  "exit_matches": true,
+  "deterministic": true,
+  "files": [],
+  "covered": 0,
+  "gap": 0,
+  "appendix_c": {},
+  "data_requests": []
+}
