@@ -1,0 +1,8 @@
+OpenAI and Gemini adapters (G-16 support). 2026-10-22.
+Command: python -m pytest qbd_core -q
+Result: 460 passed, ruff clean, against local fake HTTP servers only. No call was made to a real service.
+Covered per vendor: request shape and key header (Gemini key never in the address); 500, invalid JSON,
+empty, truncated answer and redirect fail closed; key absent from the error chain; unapproved model,
+class B and unknown sources refused before any request; shipped config off with no approved model;
+Gemini model name with odd characters never reaches the address; CLI exits 9 and publishes nothing.
+Not done: Perplexity; OpenAI and Gemini model names (project to supply); real-service run; ZDR.

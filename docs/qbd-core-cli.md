@@ -41,4 +41,4 @@ holds text from a document that is not class A must stay on the machine.
 
 ## Real provider
 
-`run --provider anthropic --model claude-sonnet-5-5 --manifest manifest.json` uses the real provider. It refuses (exit 9, nothing published) unless `provider_access/config/providers.json` has `enabled: true`, the model is on its approved list, a manifest is given and the key variable it names is set. It cannot be combined with `--provider-recording`. With no zero-data-retention contract on file only approved class A material is sent; trial data and class B/C files never leave the machine.
+`run --provider {anthropic,openai,gemini} --model NAME --manifest manifest.json` uses the real provider. It refuses (exit 9, nothing published) unless that vendor's entry in `provider_access/config/providers.json` has `enabled: true`, the model is on that vendor's approved list (empty for OpenAI and Gemini until the project names models), a manifest is given and the key variable it names is set. It cannot be combined with `--provider-recording`. With no zero-data-retention contract on file only approved class A material is sent; trial data and class B/C files never leave the machine.

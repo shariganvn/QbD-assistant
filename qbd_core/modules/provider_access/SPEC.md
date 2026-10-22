@@ -16,7 +16,7 @@ LLMPort, LLMRequest, ProviderResult, ProviderGateway, RecordedProvider.
   A refusal means the provider was never called.
 - `LLMPort`: `destination` and `complete(request) -> str`. A destination other than `local` is treated as
   leaving the machine.
-- `AnthropicProvider(config, environ)`: Messages API over HTTPS (standard library), destination REMOTE. Built from `config/providers.json`, which ships `enabled: false` and one approved model; the endpoint must be https and redirects are errors; the adapter itself refuses to build when disabled; an answer that is not `end_turn` or is over 1 MB fails. The key comes from the environment variable the config names. Any network, status, JSON or empty-answer problem raises; no retry and no default answer.
+- `AnthropicProvider`, `OpenAIProvider`, `GeminiProvider` (all `HttpProvider(config, environ)`, chosen by `build_provider(name, config, environ)`): the Gemini key travels in a header and the model name must match `[A-Za-z0-9._-]+`. OpenAI and Gemini ship `approved_models: []`, so every call is refused until the project lists a model. Common rules as below. Original note for Anthropic: Messages API over HTTPS (standard library), destination REMOTE. Built from `config/providers.json`, which ships `enabled: false` and one approved model; the endpoint must be https and redirects are errors; the adapter itself refuses to build when disabled; an answer that is not `end_turn` or is over 1 MB fails. The key comes from the environment variable the config names. Any network, status, JSON or empty-answer problem raises; no retry and no default answer.
 - `RecordedProvider(answers, destination=REMOTE)`: replays answers keyed by `request_digest`; an unknown
   request raises `RecordedMiss`, never a made-up answer. Defaults to REMOTE so tests go through the same
   gate as a real provider.
@@ -47,3 +47,4 @@ retries, cost tracking, and any decision about what is classified.
 | 2026-10-21 | Scaffold | Module boundary accepted in the ADR | - |
 | 2026-10-21 | Gateway, port, recorded provider | Single guarded route to a provider; replayable runs | - |
 | 2026-10-22 | Anthropic HTTP adapter, off by default | Real provider path with the approved model; vendor still to be confirmed by the project | - |
+| 2026-10-22 | OpenAI and Gemini adapters on a shared HTTP base; per-vendor config | Project asked for three vendors; Perplexity left out (web-search answers fall outside the evidence gate) | - |

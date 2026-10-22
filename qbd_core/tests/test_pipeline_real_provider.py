@@ -31,8 +31,8 @@ def invoke(tmp_path, *extra):
 
 
 def enable(monkeypatch, **changes):
-    base = provider_api.load_config()
-    monkeypatch.setattr(run, "load_config", lambda: type(base)(**{**base.__dict__, **changes}))
+    base = provider_api.load_config()  # anthropic
+    monkeypatch.setattr(run, "load_config", lambda name: type(base)(**{**base.__dict__, **changes}))
 
 
 def test_shipped_configuration_refuses_and_publishes_nothing(tmp_path, monkeypatch, capsys):
@@ -76,3 +76,18 @@ def test_a_recording_cannot_be_mixed_with_the_real_provider(tmp_path, monkeypatc
         "--provider-recording", str(recording),
     )  # fmt: skip
     assert code == run.EXIT_PROVIDER
+
+
+@pytest.mark.parametrize("name", ["openai", "gemini"])
+def test_other_vendors_ship_off_and_refuse(tmp_path, monkeypatch, capsys, name):
+    monkeypatch.setenv("OPENAI_API_KEY", "k")
+    monkeypatch.setenv("GEMINI_API_KEY", "k")
+    out = tmp_path / "draft.json"
+    code = main.main(
+        ["run", "--substance", "Atorvastatin calcium", "--form", "Viên nén bao phim",
+         "--market", "both", "--documents", str(DOCS), "--out", str(out),
+         "--date", "2026-10-22", "--provider", name, "--model", "some-model",
+         "--manifest", str(MANIFEST)]
+    )  # fmt: skip
+    assert code == run.EXIT_PROVIDER and not out.exists()
+    assert "switched off" in capsys.readouterr().err

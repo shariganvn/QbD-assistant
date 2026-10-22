@@ -29,9 +29,10 @@ from qbd_core.modules.evidence.api import (
     load_trial_data,
 )
 from qbd_core.modules.provider_access.api import (
-    AnthropicProvider,
+    HTTP_PROVIDERS,
     ProviderGateway,
     RecordedProvider,
+    build_provider,
     load_config,
 )
 from qbd_core.modules.provider_access.api import ProviderSetupError as VendorSetupError
@@ -63,7 +64,7 @@ def add_arguments(parser: argparse.ArgumentParser) -> None:
     )
     parser.add_argument(
         "--provider",
-        choices=["anthropic"],
+        choices=sorted(HTTP_PROVIDERS),
         default=None,
         help="real provider; off in providers.json until the project turns it on",
     )
@@ -164,7 +165,7 @@ def _llm(args: argparse.Namespace) -> LlmSetup | None:
 def _real_llm(args: argparse.Namespace, recording: str | None, model: str | None) -> LlmSetup:
     """Every missing prerequisite refuses; nothing falls back to another provider."""
     try:
-        config = load_config()
+        config = load_config(args.provider)
     except (OSError, ValueError, KeyError, TypeError, VendorSetupError) as error:
         raise ProviderSetupError(f"providers.json unusable: {type(error).__name__}") from error
     path = getattr(args, "manifest", None)
@@ -178,7 +179,7 @@ def _real_llm(args: argparse.Namespace, recording: str | None, model: str | None
     if manifest is None:
         raise ProviderSetupError("--manifest is missing or unreadable; nothing can be sent")
     try:
-        provider = AnthropicProvider(config, os.environ)
+        provider = build_provider(args.provider, config, os.environ)
     except VendorSetupError as error:
         raise ProviderSetupError(str(error)) from error
     return LlmSetup(ProviderGateway(provider, {model}, manifest), model)
