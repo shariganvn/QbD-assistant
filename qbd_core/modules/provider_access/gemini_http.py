@@ -34,4 +34,6 @@ class GeminiProvider(HttpProvider):
         candidate = data["candidates"][0]
         if candidate.get("finishReason") != "STOP":
             raise ValueError("answer is not complete")
-        return "".join(p.get("text", "") for p in candidate["content"]["parts"])
+        return "".join(
+            p.get("text", "") for p in candidate["content"]["parts"] if not p.get("thought")
+        )

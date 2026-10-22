@@ -11,11 +11,18 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from importlib.resources import files
 from typing import Any
+from urllib.parse import urlsplit
 
 from qbd_core.modules.egress_gate.api import Destination
 from qbd_core.modules.provider_access.models import LLMRequest
 
 MAX_ANSWER_BYTES = 1_000_000
+# Where each vendor's key may be sent. Fixed in code so a config edit cannot redirect the key.
+VENDOR_HOSTS = {
+    "anthropic": "api.anthropic.com",
+    "openai": "api.openai.com",
+    "gemini": "generativelanguage.googleapis.com",
+}
 
 
 class ProviderSetupError(Exception):
@@ -40,8 +47,10 @@ def load_config(name: str = "anthropic") -> ProviderConfig:
     if name not in raw:
         raise ProviderSetupError(f"providers.json has no provider {name}")
     vendor = raw[name]
-    if type(vendor["enabled"]) is not bool or not vendor["endpoint"].startswith("https://"):
-        raise ProviderSetupError("providers.json: enabled must be true/false, endpoint https")
+    try:
+        _check(name, vendor)
+    except (KeyError, TypeError, AttributeError, ValueError) as error:
+        raise ProviderSetupError(f"providers.json: {name} is invalid") from error
     return ProviderConfig(
         name=name,
         enabled=vendor["enabled"],
@@ -52,6 +61,31 @@ def load_config(name: str = "anthropic") -> ProviderConfig:
         max_tokens=vendor["max_tokens"],
         timeout_seconds=vendor["timeout_seconds"],
     )
+
+
+def _check(name: str, vendor: dict[str, Any]) -> None:
+    models = vendor["approved_models"]
+    ok = (
+        type(vendor["enabled"]) is bool
+        and isinstance(models, list)
+        and all(isinstance(m, str) and m for m in models)
+        and type(vendor["max_tokens"]) is int
+        and vendor["max_tokens"] > 0
+        and isinstance(vendor["timeout_seconds"], int | float)
+        and not isinstance(vendor["timeout_seconds"], bool)
+        and 0 < vendor["timeout_seconds"] <= 600
+        and isinstance(vendor["api_key_env"], str)
+        and vendor["api_key_env"] != ""
+    )
+    parts = urlsplit(vendor["endpoint"])
+    pinned = (
+        parts.scheme == "https"
+        and parts.hostname == VENDOR_HOSTS.get(name)
+        and parts.port is None
+        and not (parts.username or parts.password or parts.query or parts.fragment)
+    )
+    if not (ok and pinned):
+        raise ValueError(name)
 
 
 class _NoRedirect(urllib.request.HTTPRedirectHandler):

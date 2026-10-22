@@ -6,3 +6,10 @@ empty, truncated answer and redirect fail closed; key absent from the error chai
 class B and unknown sources refused before any request; shipped config off with no approved model;
 Gemini model name with odd characters never reaches the address; CLI exits 9 and publishes nothing.
 Not done: Perplexity; OpenAI and Gemini model names (project to supply); real-service run; ZDR.
+Review follow-up: each vendor's host is pinned in code (config cannot send the key elsewhere);
+endpoint must be https with no userinfo, query, fragment or port; config types and ranges are checked
+and every error is a setup error (exit 9); a redirect to a second server is proven not to reach it;
+the "nothing sent" guard records instead of raising; Gemini thought parts are dropped; enabled with no
+approved model refuses. Known and accepted: tests inject an http local server directly into the
+adapter; an HTTPS_PROXY in the environment is honoured and sees the key and payload; the timeout is
+per socket operation.

@@ -27,10 +27,9 @@ HTTP_PROVIDERS = {
 
 def build_provider(name, config, environ):
     """The adapter for a configured vendor; unknown names are a setup error."""
-    try:
-        return HTTP_PROVIDERS[name](config, environ)
-    except KeyError:
-        raise ProviderSetupError(f"unknown provider {name}") from None
+    if name not in HTTP_PROVIDERS:
+        raise ProviderSetupError(f"unknown provider {name}")
+    return HTTP_PROVIDERS[name](config, environ)
 
 
 __all__ = [

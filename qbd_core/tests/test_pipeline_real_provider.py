@@ -12,12 +12,19 @@ DOCS = Path(__file__).parents[1] / "modules/dossier_drafting/tests/fixtures/docu
 MANIFEST = Path(__file__).parents[1] / "modules/egress_gate/tests/fixtures/manifest.json"
 
 
+SENT: list = []
+
+
 @pytest.fixture(autouse=True)
 def nothing_is_sent(monkeypatch):
-    def fail(*args, **kwargs):
-        raise AssertionError("a request was sent")
+    SENT.clear()
+    monkeypatch.setattr("urllib.request.OpenerDirector.open", lambda *a, **k: SENT.append(a))
 
-    monkeypatch.setattr("urllib.request.OpenerDirector.open", fail)
+
+@pytest.fixture(autouse=True)
+def nothing_was_sent_afterwards():
+    yield
+    assert SENT == []
 
 
 def invoke(tmp_path, *extra):
@@ -66,7 +73,7 @@ def test_each_missing_prerequisite_refuses(tmp_path, monkeypatch, capsys, extra,
     assert why in capsys.readouterr().err
 
 
-def test_a_recording_cannot_be_mixed_with_the_real_provider(tmp_path, monkeypatch):
+def test_a_recording_cannot_be_mixed_with_the_real_provider(tmp_path, monkeypatch, capsys):
     enable(monkeypatch, enabled=True)
     monkeypatch.setenv("ANTHROPIC_API_KEY", "k")
     recording = tmp_path / "rec.json"
@@ -76,6 +83,7 @@ def test_a_recording_cannot_be_mixed_with_the_real_provider(tmp_path, monkeypatc
         "--provider-recording", str(recording),
     )  # fmt: skip
     assert code == run.EXIT_PROVIDER
+    assert "no --provider-recording" in capsys.readouterr().err
 
 
 @pytest.mark.parametrize("name", ["openai", "gemini"])
@@ -91,3 +99,24 @@ def test_other_vendors_ship_off_and_refuse(tmp_path, monkeypatch, capsys, name):
     )  # fmt: skip
     assert code == run.EXIT_PROVIDER and not out.exists()
     assert "switched off" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("name", ["openai", "gemini"])
+def test_an_enabled_vendor_without_approved_models_refuses_every_model(
+    tmp_path, monkeypatch, capsys, name
+):
+    base = provider_api.load_config(name)
+    monkeypatch.setattr(
+        run, "load_config", lambda n: type(base)(**{**base.__dict__, "enabled": True})
+    )
+    monkeypatch.setenv("OPENAI_API_KEY", "k")
+    monkeypatch.setenv("GEMINI_API_KEY", "k")
+    out = tmp_path / "draft.json"
+    code = main.main(
+        ["run", "--substance", "Atorvastatin calcium", "--form", "Viên nén bao phim",
+         "--market", "both", "--documents", str(DOCS), "--out", str(out),
+         "--date", "2026-10-22", "--provider", name, "--model", "any-model",
+         "--manifest", str(MANIFEST)]
+    )  # fmt: skip
+    assert code == run.EXIT_PROVIDER and not out.exists()
+    assert "approved list" in capsys.readouterr().err

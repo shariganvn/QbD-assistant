@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 from qbd_core.modules.egress_gate.api import Payload, PayloadPart, try_load_manifest
+from qbd_core.modules.provider_access import http_provider
 from qbd_core.modules.provider_access.api import (
     LLMRequest,
     ProviderFailed,
@@ -121,14 +122,13 @@ def test_answer_and_request_shape(name):
 
 
 @pytest.mark.parametrize("name", NAMES)
-@pytest.mark.parametrize("kind", ["status", "json", "empty", "cut", "redirect"])
+@pytest.mark.parametrize("kind", ["status", "json", "empty", "cut"])
 def test_bad_answers_fail_closed_and_hide_the_key(name, kind):
     status, body = {
         "status": (500, {"error": "x"}),
         "json": (200, b"not json"),
         "empty": (200, {}),
         "cut": (200, CUT[name]),
-        "redirect": (302, {}),
     }[kind]
     server = Server(status, body)
     try:
@@ -181,3 +181,75 @@ def test_gemini_model_with_odd_characters_never_reaches_the_address():
 def test_unknown_vendor_is_a_setup_error():
     with pytest.raises(ProviderSetupError):
         build_provider("perplexity", load_config(), {})
+
+
+@pytest.mark.parametrize("name", NAMES)
+def test_a_redirect_never_reaches_the_second_host(name):
+    second = Server(body=GOOD[name])
+    first = Server(302, {})
+    original = first.httpd.RequestHandlerClass.send_response
+
+    def with_location(self, code, message=None):
+        original(self, code, message)
+        self.send_header("Location", second.base() + "/elsewhere")
+
+    first.httpd.RequestHandlerClass.send_response = with_location
+    try:
+        with pytest.raises(ProviderFailed):
+            gateway(name, config(name, first.base())).call(request())
+    finally:
+        first.close()
+        second.close()
+    assert second.seen == []
+
+
+def test_gemini_thought_parts_are_left_out():
+    body = {
+        "candidates": [
+            {
+                "finishReason": "STOP",
+                "content": {"parts": [{"text": "nghĩ", "thought": True}, {"text": "kết quả"}]},
+            }
+        ]
+    }
+    server = Server(body=body)
+    try:
+        result = gateway("gemini", config("gemini", server.base())).call(request())
+    finally:
+        server.close()
+    assert result.text == "kết quả"
+
+
+def _vendor(name, **changes):
+    base = {
+        "enabled": False, "approved_models": ["m"], "api_key_env": "K", "max_tokens": 10,
+        "timeout_seconds": 5, "endpoint": f"https://{http_provider.VENDOR_HOSTS[name]}/v1/x",
+    }  # fmt: skip
+    return {**base, **changes}
+
+
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {"endpoint": "https://evil.example.com/v1/x"},
+        {"endpoint": "http://api.anthropic.com/v1/x"},
+        {"endpoint": "https://user:pw@api.anthropic.com/v1/x"},
+        {"endpoint": "https://api.anthropic.com/v1/x?key=1"},
+        {"endpoint": "https://api.anthropic.com:8443/v1/x"},
+        {"endpoint": None},
+        {"approved_models": "abc"},
+        {"approved_models": [""]},
+        {"timeout_seconds": None},
+        {"timeout_seconds": 0},
+        {"max_tokens": True},
+        {"enabled": "false"},
+    ],
+)
+def test_bad_vendor_entries_are_refused(changes):
+    with pytest.raises((ValueError, KeyError, TypeError, AttributeError)):
+        http_provider._check("anthropic", _vendor("anthropic", **changes))
+
+
+@pytest.mark.parametrize("name", ["anthropic", *NAMES])
+def test_a_well_formed_vendor_entry_passes(name):
+    http_provider._check(name, _vendor(name))
