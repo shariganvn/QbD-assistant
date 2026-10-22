@@ -1,0 +1,12 @@
+# G-25 evidence, 2026-10-22
+$ python -m pytest qbd_core/modules/dossier_drafting/tests/test_report_text.py -q
+11 passed in 1.13s
+
+$ python -m pytest qbd_core -q
+407 passed in 19.36s
+
+Mutations (reverted, each caught):
+- report_text.py: unfilled-template check removed -> tests fail
+- provenance.py: paragraph equality removed -> tests fail
+
+The uploaded microbiology PDF, converted to paragraphs in a scratch docx: 167 paragraphs, recognised as an unfilled template, nothing carried.

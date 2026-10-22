@@ -64,6 +64,10 @@ IMPLEMENTED: dict[str, tuple[Status, str]] = {
         "partial",
         "dossier_drafting.subdivision: mass uniformity and mass loss only; rules unconfirmed",
     ),
+    "10.2": (
+        "partial",
+        "dossier_drafting.report_text: carries a filled report's results, discussion, conclusion",
+    ),
     "1.1": ("partial", "retrieval is done inside agent 4.1; no separate collector output"),
     "1.4": (
         "partial",
@@ -116,7 +120,6 @@ BLOCKED: dict[str, str] = {
     "9.4": NEEDS_JUDGEMENT,
     "9.5": "optional module that needs a decision of the project owner",
     "10.1": "container-closure choice needs the final formula and stability data",
-    "10.2": "no microbiology table in any real report yet; the layout is not known",
     "11.1": "links stability, overage and container sections that are still gaps",
     "11.2": "links process sections that are still gaps",
     "11.3": "links control-strategy sections that are still gaps",

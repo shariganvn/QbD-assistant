@@ -1,0 +1,15 @@
+{
+  "source": "Kinds of the department's study reports whose discussion and conclusion are carried into P.2, and the words that mark a report as an unfilled template.",
+  "template_markers": ["chưa phải báo cáo kết quả", "chưa phải báo cáo thực nghiệm"],
+  "placeholder_markers": ["[điền", "[…]", "[chưa có dữ liệu", "[chưa đánh giá", "[đạt/không đạt]"],
+  "max_placeholders_in_a_filled_report": 2,
+  "heading_max_chars": 80,
+  "reports": [
+    {
+      "id": "microbiology",
+      "title_words": ["nghiên cứu vi sinh"],
+      "target": "P.2.5",
+      "carry": [["bàn luận"], ["kết luận"]]
+    }
+  ]
+}

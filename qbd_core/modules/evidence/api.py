@@ -24,14 +24,20 @@ from qbd_core.modules.evidence.trial_intake import (
 from qbd_core.modules.evidence.trial_strengths import Strengths, read_strengths
 from qbd_core.modules.evidence.trial_tags import (
     DATA_TAG,
+    PARAGRAPH_TAG,
     cell_text,
     first_number,
     numbers_in,
+    paragraph_tag,
+    paragraph_text,
     tag_for,
 )
 
 __all__ = [
     "DATA_TAG",
+    "PARAGRAPH_TAG",
+    "paragraph_tag",
+    "paragraph_text",
     "cell_text",
     "first_number",
     "numbers_in",

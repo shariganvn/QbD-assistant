@@ -76,7 +76,8 @@ a local provider; until then they stay marked gaps. Estimated to open 14 to 18 o
 7. Revised (decision 2026-10-22, project owner): reports keep the reference product's brand in table headers and no brand may be written in code. The brand is inferred from comparison tables (G-21); a reference word still works. The inferred name is shown to the final approver.
 8. Done (2026-10-22): f2 ceiling and summary tables (G-22), impurity profile (G-23). 8.4 and 10.2 wait for a real table of their kind.
 9. Done (2026-10-22): tablet subdivision from the department's report template (G-24). 10.2 waits for a microbiology table.
-10. Next: consumers 6.4, 7.3/8.2 (needs dissolution tables with multi-row headers, and a `[tính: ...]` tag for f2), 8.3, 8.4, 10.2, 11.x. Earlier plan text: `DataRecord` with cell-level tags and the quality-gate check (G-14), then calculation module (G-15), then the first consumers: 3.1, 6.4, 7.3/8.2, 8.3, 8.4, 10.2, 11.x.
+10. Done (2026-10-22): microbiology report text carried into P.2.5 (G-25). The uploaded framework is unfilled, so nothing was carried from it.
+11. Next: consumers 6.4, 7.3/8.2 (needs dissolution tables with multi-row headers, and a `[tính: ...]` tag for f2), 8.3, 8.4, 10.2, 11.x. Earlier plan text: `DataRecord` with cell-level tags and the quality-gate check (G-14), then calculation module (G-15), then the first consumers: 3.1, 6.4, 7.3/8.2, 8.3, 8.4, 10.2, 11.x.
 
 ## Risks and rollback
 Trial layouts differ, so recognition will miss tables at first; misses become visible gaps, not wrong

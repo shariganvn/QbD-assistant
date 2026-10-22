@@ -18,11 +18,13 @@ from qbd_core.modules.dossier_drafting.api import (
 )
 from qbd_core.modules.evidence.api import (
     DATA_TAG,
+    PARAGRAPH_TAG,
     KnowledgePort,
     TrialData,
     cell_text,
     first_number,
     numbers_in,
+    paragraph_text,
 )
 from qbd_core.modules.quality_gate.models import Finding
 from qbd_core.shared.contracts import EvidenceRecord
@@ -97,6 +99,18 @@ def _check_f2_row(row: list[str], sid: str, trial: TrialData | None) -> list[Fin
     return [] if f"{value:.1f}" == row[1].strip() else [_block("E_CALC_MISMATCH", sid, "f2 value")]
 
 
+def _check_paragraph(text: str, sid: str, trial: TrialData | None) -> list[Finding]:
+    """A carried paragraph: exactly one tag, and the text must equal that paragraph."""
+    tags = list(PARAGRAPH_TAG.finditer(text))
+    body = " ".join(PARAGRAPH_TAG.sub("", text).split())
+    if len(tags) != 1 or trial is None:
+        return [_block("E_DATA_SOURCE_MISMATCH", sid)]
+    source = paragraph_text(trial, tags[0]["file"], int(tags[0]["n"]))
+    if source is None:
+        return [_block("E_DATA_SOURCE_MISMATCH", sid, tags[0].group())]
+    return [] if body == " ".join(source.split()) else [_block("E_PARAGRAPH_MISMATCH", sid)]
+
+
 def _check_data(text: str, sid: str, trial: TrialData | None) -> list[Finding]:
     """A sentence built from the team's data: each tag must name a real cell, and no number may
     appear that is absent from the cited cells."""
@@ -131,6 +145,8 @@ def _check_text(
         return []
     if SUBDIVISION_TAG.search(text):
         return [_block(code, sid) for code in verify_subdivision(text, trial)]
+    if PARAGRAPH_TAG.search(text):
+        return _check_paragraph(text, sid, trial)
     if DATA_TAG.search(text):
         return _check_data(text, sid, trial)
     if CLAIM_TAGS_AT_END.search(text):
@@ -198,6 +214,7 @@ def check_provenance(
                 cited.update(t["file"] for t in CLAIM_TAG.finditer(text))
                 data_files.update(t["file"] for t in DATA_TAG.finditer(text))
                 data_files.update(subdivision_files(text))
+                data_files.update(t["file"] for t in PARAGRAPH_TAG.finditer(text))
     sources = draft["meta"].get("referenceSources", [])
     findings += [
         _block("E_REFERENCE_MISSING", None, f)

@@ -255,6 +255,24 @@
           "content"
         ]
       ]
+    },
+    {
+      "id": "report_summary",
+      "label": "Bảng tổng hợp hạng mục - dữ liệu - kết luận",
+      "all_of": [
+        [
+          "hạng mục",
+          "item"
+        ],
+        [
+          "dữ liệu",
+          "data"
+        ],
+        [
+          "kết luận",
+          "conclusion"
+        ]
+      ]
     }
   ]
 }

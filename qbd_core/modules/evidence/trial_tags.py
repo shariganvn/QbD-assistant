@@ -9,6 +9,7 @@ from qbd_core.modules.evidence.trial_intake import TrialData, TrialTable
 DATA_TAG = re.compile(
     r"\[dữ liệu: (?P<file>[^,\]]+), bảng (?P<table>\d+), hàng (?P<row>\d+), cột (?P<col>\d+)\]"
 )
+PARAGRAPH_TAG = re.compile(r"\[dữ liệu: (?P<file>[^,\]]+), đoạn (?P<n>\d+)\]")
 NUMBER = re.compile(r"\d+(?:[.,]\d+)?")
 
 
@@ -35,3 +36,13 @@ def numbers_in(text: str) -> set[str]:
 def first_number(text: str) -> float | None:
     found = NUMBER.search(text)
     return float(found.group().replace(",", ".")) if found else None
+
+
+def paragraph_tag(file: str, number: int) -> str:
+    """Points at the number-th paragraph (from 1) outside tables in a trial file."""
+    return f"[dữ liệu: {file}, đoạn {number}]"
+
+
+def paragraph_text(trial: TrialData, file: str, number: int) -> str | None:
+    paragraphs = trial.paragraphs(file)
+    return paragraphs[number - 1] if 1 <= number <= len(paragraphs) else None

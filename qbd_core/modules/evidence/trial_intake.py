@@ -48,6 +48,11 @@ class TrialData(Strict):
     files: tuple[tuple[str, str], ...] = ()  # (name, sha256 of the source file)
     tables: tuple[TrialTable, ...] = ()
     unrecognized: tuple[str, ...] = ()
+    # (file name, its paragraphs outside tables, in order); paragraph numbers count from 1
+    texts: tuple[tuple[str, tuple[str, ...]], ...] = ()
+
+    def paragraphs(self, file: str) -> tuple[str, ...]:
+        return next((p for name, p in self.texts if name == file), ())
 
     def of_kind(self, kind: str) -> tuple[TrialTable, ...]:
         return tuple(t for t in self.tables if t.kind == kind)
@@ -148,6 +153,7 @@ def load_trial_data(paths: list[str], extract: Extractor | None = None) -> Trial
     infos: list[tuple[str, str]] = []
     tables: list[TrialTable] = []
     unrecognized: list[str] = []
+    texts: list[tuple[str, tuple[str, ...]]] = []
     for given in sorted(paths, key=lambda p: Path(p).name):
         path = Path(given)
         try:
@@ -160,7 +166,11 @@ def load_trial_data(paths: list[str], extract: Extractor | None = None) -> Trial
             raise TrialIntakeError("E_TRIAL_DUPLICATE_NAME", path.name)
         seen.add(path.name)
         infos.append((path.name, digest))
-        for number, (headers, rows) in enumerate(_tables(run(path), path.name), start=1):
+        extracted = run(path)
+        paragraphs = extracted.get("paragraphs") if isinstance(extracted, dict) else None
+        if isinstance(paragraphs, list) and all(isinstance(p, str) for p in paragraphs):
+            texts.append((path.name, tuple(paragraphs)))
+        for number, (headers, rows) in enumerate(_tables(extracted, path.name), start=1):
             lead = tuple(r[0] for r in rows[:3] if r)
             kind, reason = classify(headers, lead)
             tables.append(
@@ -168,4 +178,9 @@ def load_trial_data(paths: list[str], extract: Extractor | None = None) -> Trial
             )
             if kind is None:
                 unrecognized.append(f"{path.name}, bảng {number}: {reason}")
-    return TrialData(files=tuple(infos), tables=tuple(tables), unrecognized=tuple(unrecognized))
+    return TrialData(
+        files=tuple(infos),
+        tables=tuple(tables),
+        unrecognized=tuple(unrecognized),
+        texts=tuple(texts),
+    )

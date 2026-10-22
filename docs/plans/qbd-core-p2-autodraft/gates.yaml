@@ -448,3 +448,25 @@ gates:
       5.1 (observations) and 5.4 (additional tests) of the template are not read.
     status: pass
 
+  - id: G-25
+    title: A study report's results, discussion and conclusion are carried word for word, only from a filled report
+    invariant: >
+      For a report of a configured kind (config/reports.json) the summary-table rows with every cell filled
+      and the paragraphs under the configured headings are copied into the target section, each with a tag
+      naming its table cell or paragraph; the gate requires each paragraph to equal the source paragraph
+      and each number to be in its cells. A report that says it is not a results report, or holds more than
+      the allowed number of placeholders, carries nothing; a heading without its number that cannot be
+      bounded carries nothing; placeholder paragraphs and rows are skipped and counted. The form's tables
+      stay marked gaps because the report gives no figure per row of the form.
+    boundary_owner: dossier_drafting + quality_gate
+    fixture: minimal .docx reports (filled and unfilled) built in the test
+    command: python -m pytest qbd_core/modules/dossier_drafting/tests/test_report_text.py -q
+    expected: exit 0; the draft passes Stage B and the quality gate; a changed paragraph or tag is blocked.
+    evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-25.txt
+    owner_step: "07"
+    scope_note: >
+      The uploaded microbiology report (SAMPLE_BAO_CAO_NGHIEN_CUU_VI_SINH...pdf) is an unfilled framework
+      that states it is not a results report, so nothing is carried from it. Only the microbiology kind is
+      configured; the subdivision report can be added the same way.
+    status: pass
+

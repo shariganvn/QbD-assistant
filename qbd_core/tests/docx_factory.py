@@ -24,8 +24,9 @@ def table_xml(rows):
     return f"<w:tbl>{body}</w:tbl>"
 
 
-def make_docx(path: Path, tables) -> Path:
-    body = "<w:p><w:r><w:t>Báo cáo</w:t></w:r></w:p>" + "".join(table_xml(t) for t in tables)
+def make_docx(path: Path, tables, paragraphs=()) -> Path:
+    lead = "".join(f"<w:p><w:r><w:t>{t}</w:t></w:r></w:p>" for t in (paragraphs or ["Báo cáo"]))
+    body = lead + "".join(table_xml(t) for t in tables)
     head = f'<?xml version="1.0" encoding="UTF-8"?><w:document xmlns:w="{W}">'
     doc = f"{head}<w:body>{body}</w:body></w:document>"
     with zipfile.ZipFile(path, "w") as z:

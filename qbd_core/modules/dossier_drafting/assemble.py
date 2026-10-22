@@ -32,6 +32,7 @@ from qbd_core.modules.dossier_drafting.outline import (
     per_strength_beyond,
 )
 from qbd_core.modules.dossier_drafting.reference import build_section as reference_section
+from qbd_core.modules.dossier_drafting.report_text import build_sections as report_sections
 from qbd_core.modules.dossier_drafting.subdivision import build_sections as subdivision_sections
 from qbd_core.modules.dossier_drafting.subdivision import rules_confirmed
 from qbd_core.modules.dossier_drafting.trial_columns import rmp_names
@@ -241,6 +242,9 @@ def assemble_draft(
         agent_log.append(
             "A13: tiêu chí chia viên lấy từ mẫu báo cáo của phòng, chưa xác nhận bản dược điển"
         )
+    carried, carried_notes = report_sections(trial, outline)
+    by_agent.update(carried)
+    agent_log += [f"agent 10.2: {note}" for note in carried_notes]
     reference, reference_notes = reference_section(trial, tuple(strengths), outline, rmp.names)
     if reference is not None:
         by_agent[reference["id"]] = reference
