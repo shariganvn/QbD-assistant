@@ -36,10 +36,14 @@ def test_counts_by_class(manifest):
     assert len({e.file_id for e in manifest.entries}) == 111
 
 
-def test_only_class_a_is_approved(manifest):
-    for entry in manifest.entries:
-        approved = entry.approved_by is not None and entry.approved_on is not None
-        assert approved == (entry.classification == "A"), entry.file_id
+def test_only_the_listed_class_a_files_are_approved(manifest):
+    approved = [e for e in manifest.entries if e.approved_by is not None]
+    assert len(approved) == 13
+    assert all(e.classification == "A" and e.approved_on is not None for e in approved)
+    class_a = [e for e in manifest.entries if e.classification == "A"]
+    assert len(class_a) - len(approved) == 6, "class A kept local is refused too"
+    assert all(e.approved_by is None and e.approved_on is None for e in manifest.entries
+               if e.classification != "A")  # fmt: skip
 
 
 def test_entries_hold_opaque_ids_not_document_names(manifest):
@@ -49,5 +53,5 @@ def test_entries_hold_opaque_ids_not_document_names(manifest):
 
 def test_egress_follows_the_class(manifest):
     for entry in manifest.entries:
-        assert allowed(manifest, entry.file_id) == (entry.classification == "A")
+        assert allowed(manifest, entry.file_id) == (entry.approved_by is not None)
     assert not allowed(manifest, "NOT-IN-THE-MANIFEST")

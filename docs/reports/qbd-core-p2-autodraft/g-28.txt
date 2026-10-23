@@ -13,3 +13,12 @@ file by file, so the approver should confirm that reading.
 Limits: no document fingerprints (no local text); ids copied from the Notion page and not re-checked
 against Drive; a mistyped id fails closed (file unknown, refused). The Notion sample page
 SAMPLE_P2-Sample_Acmecompany is not a Drive file and is not listed. G-03 stays unverified.
+
+Correction 2026-10-23: the earlier "every class A family is approved" reading is withdrawn. Notion
+(classification-per-file.md, 23/10) separates class from the upload flag, and the 22/10 decisions
+table lists what may leave the machine. Now 13 files are approved (EMA 2, FDA 6, VN state texts 4,
+MDPI 1); 6 class A files stay local (WHO 2, ASEAN, Module3-P, Biowaiver-MOH, INS-Codex); Codex-FDA
+moved A to B; Working-Within-Design-Space moved B to A. Counts: A 19, B 82, C 10, total 111.
+Still open: the Kho was rescanned to 393 files (A 249, B 119, C 25; upload flag Yes 28, No 16,
+Pending 205). The per-file table lives in another repository and is not reachable from here; the
+real document text is not in Notion. G-03 stays unverified.
