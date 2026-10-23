@@ -46,3 +46,4 @@ beyond word overlap, and deciding classes (a person approves them).
 |---|---|---|---|
 | 2026-10-21 | Scaffold | Module boundary accepted in the ADR | - |
 | 2026-10-21 | Knowledge lookup, verification, file store | Provenance on every hit; atomic persistence without a database | - |
+| 2026-10-23 | Kho loader (`kho_loader.py`) | Build knowledge documents from files the owner downloaded; ids from the owner's table, checked against the egress manifest | - |

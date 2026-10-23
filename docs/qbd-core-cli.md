@@ -46,3 +46,7 @@ holds text from a document that is not class A must stay on the machine.
 ## Kho manifest
 
 `docs/kho/manifest.json` lists the 393 Kho files by Drive id and class (A 249, B 119, C 25), no file names. It comes from the owner's table `classification-manifest.xlsx` (23/10/2026). Pass it as `--manifest docs/kho/manifest.json`. Only the 28 class A files whose upload flag is "Có" carry `approved_by` and `approved_on`; the other 221 class A files (flag "Chờ" 205, "Không" 16) and every B and C file are refused by the egress gate. The id-to-name table and the spreadsheet stay outside the repository.
+
+## Loading Kho text on your machine
+
+`kho-load --table classification-manifest.xlsx --folder DOWNLOADS --manifest docs/kho/manifest.json --out DOCUMENTS.json [--classes A,B,C]` writes the knowledge documents for `run --documents`. Files are matched to Drive ids by the file name in the owner's table; text is extracted from the files themselves (PDF through `pdftotext`, `.docx` from the document XML; other types are skipped with a reason), so stored pages are exactly what the extractor read. It exits 13 and writes nothing when the table and the manifest disagree on an id or class, when a table is unreadable, or when `--out` is inside a git work tree (class B and C text must not be committed). The report lists counts and reasons, never file names.

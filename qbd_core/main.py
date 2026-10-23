@@ -18,6 +18,9 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_arguments(commands.add_parser("run", help="build a draft from the three inputs"))
     run.add_render_arguments(commands.add_parser("render", help="render a draft to one HTML file"))
     run.add_propose_arguments(commands.add_parser("cqa-propose", help="write the CQA proposal"))
+    run.add_kho_load_arguments(
+        commands.add_parser("kho-load", help="build the documents JSON from downloaded Kho files")
+    )
     accept.add_arguments(
         commands.add_parser("accept", help="run the acceptance cases and write one report each")
     )
@@ -32,6 +35,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return run.render(args)
     if args.command == "cqa-propose":
         return run.propose(args)
+    if args.command == "kho-load":
+        return run.kho_load(args)
     if args.command == "accept":
         return accept.accept(args)
     build_parser().print_help()

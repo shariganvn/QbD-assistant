@@ -1,5 +1,13 @@
 """Public entry points of the evidence module. Other modules import only from here."""
 
+from qbd_core.modules.evidence.kho_loader import (
+    KhoLoadError,
+    Loaded,
+    TableRow,
+    build_documents,
+    inside_a_git_tree,
+    read_table,
+)
 from qbd_core.modules.evidence.knowledge import (
     InMemoryKnowledge,
     KnowledgePort,
@@ -34,6 +42,12 @@ from qbd_core.modules.evidence.trial_tags import (
 )
 
 __all__ = [
+    "KhoLoadError",
+    "Loaded",
+    "TableRow",
+    "build_documents",
+    "inside_a_git_tree",
+    "read_table",
     "DATA_TAG",
     "PARAGRAPH_TAG",
     "paragraph_tag",

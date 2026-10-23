@@ -1,0 +1,9 @@
+Kho text loader. 2026-10-23.
+Command: python -m pytest qbd_core -q (489 passed, 1 skipped).
+Added: qbd_core kho-load. Matches downloaded files to Drive ids through the owner's table, extracts text from
+the files (pdftotext for PDF, document XML for .docx), and writes the JSON for run --documents.
+Fail-closed: table or manifest disagreement on an id or class, unreadable table, a missing pdftotext, or an
+output path inside a git tree each exit 13 with nothing written. Skipped files are reported by reason and id.
+Tested on synthetic files only (docx, a one-page PDF written by the test, an xlsx built by the test).
+Not run on the real Kho: the files are on the owner's machine. Other types (.doc, .pptx, .xlsx, images, zip)
+are skipped as unsupported_type; scanned PDFs without text are skipped as no_text.

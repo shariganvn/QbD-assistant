@@ -7,6 +7,7 @@ import json
 import os
 import sys
 import tempfile
+from collections import Counter
 from datetime import date
 from pathlib import Path
 
@@ -24,9 +25,13 @@ from qbd_core.modules.dossier_drafting.api import (
 from qbd_core.modules.egress_gate.api import Destination, try_load_manifest
 from qbd_core.modules.evidence.api import (
     InMemoryKnowledge,
+    KhoLoadError,
     TrialIntakeError,
+    build_documents,
+    inside_a_git_tree,
     load_documents,
     load_trial_data,
+    read_table,
 )
 from qbd_core.modules.provider_access.api import (
     HTTP_PROVIDERS,
@@ -114,6 +119,9 @@ def checklist_rows(report: QualityReport) -> list[tuple[str, str, str, str]]:
     EXIT_PROVIDER,
     EXIT_TRIAL,
 ) = (2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+
+EXIT_KHO = 13
 
 
 class BadDate(Exception):  # noqa: N818
@@ -305,4 +313,43 @@ def render(args: argparse.Namespace) -> int:
         print(f"render failed: {failed.code}", file=sys.stderr)
         return 6
     print(f"html written: {result.path} ({result.size} bytes)")
+    return 0
+
+
+def add_kho_load_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--table", required=True, help="classification-manifest.xlsx of the owner")
+    parser.add_argument("--folder", required=True, help="folder with the downloaded Kho files")
+    parser.add_argument("--manifest", required=True, help="docs/kho/manifest.json")
+    parser.add_argument("--out", required=True, help="documents JSON; must be outside any git tree")
+    parser.add_argument("--classes", default="A,B,C", help="comma list of classes to load")
+
+
+def kho_load(args: argparse.Namespace) -> int:
+    """Write the knowledge documents for run --documents from files on this machine."""
+    out = Path(args.out)
+    if inside_a_git_tree(out):
+        print("refused: the output folder is inside a git work tree", file=sys.stderr)
+        return EXIT_KHO
+    manifest = try_load_manifest(args.manifest)
+    if manifest is None:
+        print("refused: the manifest is missing or unreadable", file=sys.stderr)
+        return EXIT_KHO
+    known = {e.file_id: e.classification.value for e in manifest.entries}
+    classes = tuple(c.strip() for c in args.classes.split(",") if c.strip())
+    try:
+        loaded = build_documents(args.folder, read_table(args.table), known, classes)
+        payload = json.dumps(
+            [d.model_dump(mode="json") for d in loaded.documents], ensure_ascii=False, indent=1
+        )
+        publish_all({out: (payload + "\n").encode("utf-8")})
+    except KhoLoadError as failed:
+        print(f"kho load failed: {failed}", file=sys.stderr)
+        return EXIT_KHO
+    except PublishFailed as failed:
+        print(f"publish failed: {failed}", file=sys.stderr)
+        return EXIT_PUBLISH
+    by_class = Counter(known[d.file_id] for d in loaded.documents)
+    reasons = Counter(loaded.skipped.values())
+    print(f"loaded {len(loaded.documents)} documents {dict(sorted(by_class.items()))}")
+    print(f"skipped {len(loaded.skipped)} {dict(sorted(reasons.items()))}")
     return 0
