@@ -45,4 +45,4 @@ holds text from a document that is not class A must stay on the machine.
 
 ## Kho manifest
 
-`docs/kho/manifest.json` lists the 111 Kho files by Drive id and class (A 19, B 82, C 10), no file names. Pass it as `--manifest docs/kho/manifest.json`. Only 13 class A files carry `approved_by` and `approved_on` (the files Notion lists as allowed to leave the machine); the other 6 class A files are kept local and, like every B and C file, are refused by the egress gate. A 393-file manifest waits for the per-file table (`classification-manifest.csv`). The id-to-name table is kept outside the repository.
+ lists the 393 Kho files by Drive id and class (A 249, B 119, C 25), no file names. It comes from the owner's table  (23/10/2026). Pass it as . Only the 28 class A files whose upload flag is "Co" carry  and ; the other 221 class A files (flag "Cho" 205, "Khong" 16) and every B and C file are refused by the egress gate. The id-to-name table and the spreadsheet stay outside the repository.

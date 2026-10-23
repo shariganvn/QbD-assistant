@@ -32,16 +32,16 @@ def allowed(manifest, file_id):
 
 def test_counts_by_class(manifest):
     counts = Counter(e.classification for e in manifest.entries)
-    assert counts == {"A": 19, "B": 82, "C": 10}
-    assert len({e.file_id for e in manifest.entries}) == 111
+    assert counts == {"A": 249, "B": 119, "C": 25}
+    assert len({e.file_id for e in manifest.entries}) == 393
 
 
 def test_only_the_listed_class_a_files_are_approved(manifest):
     approved = [e for e in manifest.entries if e.approved_by is not None]
-    assert len(approved) == 13
+    assert len(approved) == 28
     assert all(e.classification == "A" and e.approved_on is not None for e in approved)
     class_a = [e for e in manifest.entries if e.classification == "A"]
-    assert len(class_a) - len(approved) == 6, "class A kept local is refused too"
+    assert len(class_a) - len(approved) == 221, "class A kept local is refused too"
     assert all(e.approved_by is None and e.approved_on is None for e in manifest.entries
                if e.classification != "A")  # fmt: skip
 

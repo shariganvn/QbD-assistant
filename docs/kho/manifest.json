@@ -1,8 +1,20 @@
 {
   "entries": [
     {
+      "file_id": "1-5BNhqmRks8IHj2TphV8C7Eza47dFPo_",
+      "classification": "A"
+    },
+    {
       "file_id": "1-HraIPXQ--E125GfeO58gLROxQNhejZz",
       "classification": "B"
+    },
+    {
+      "file_id": "1-HyxEFM9L67K9X76RUi6Ld2BhnyZb2aO",
+      "classification": "A"
+    },
+    {
+      "file_id": "1-NWUL-bkxjlyn5vCz05bbsY6RcOwDAwT",
+      "classification": "A"
     },
     {
       "file_id": "1-SL4IXSxXJdCRz66gn_vEYrgdZbXFtzD",
@@ -19,12 +31,48 @@
       "classification": "B"
     },
     {
+      "file_id": "1-u4HzDhrudrAej5OtsSdIA6bq5_JGRy6",
+      "classification": "A"
+    },
+    {
+      "file_id": "1-uATMmtrn-ZqLVYkOIKdIqV2jI-kSyMR",
+      "classification": "A"
+    },
+    {
       "file_id": "1035hxaa9HGcW48Xj2szKqEBFJImh1BFU",
       "classification": "B"
     },
     {
+      "file_id": "10C2AzWbfHKOuPfPfJE2pEowKva1ZxiDg",
+      "classification": "A"
+    },
+    {
+      "file_id": "10CkdSHvBZWp6vNx_fqpD5o5N7Bw-z_N5",
+      "classification": "A"
+    },
+    {
       "file_id": "10D5CTvvj5hShUAPsAbifZ0CkbZ3VQPzh",
       "classification": "B"
+    },
+    {
+      "file_id": "10KLZJ_By6KX8jeJDoCninKMe6Y0tm1Hg",
+      "classification": "A"
+    },
+    {
+      "file_id": "10ah3ihnRTSNLmqhE6RCoo3pW1vCGtOxY",
+      "classification": "A"
+    },
+    {
+      "file_id": "10uYpA6RX9h6WaMEyLqCVqIQjmFKPCi-g",
+      "classification": "B"
+    },
+    {
+      "file_id": "119joeNeM-ITFXK-QDK40Xmi-JbOW7LEv",
+      "classification": "A"
+    },
+    {
+      "file_id": "11CduZaTfPdh_La4S7E1Ga24Rrpjdt0f9",
+      "classification": "A"
     },
     {
       "file_id": "11GOEmXfcBEPEU4ENEKx6yThPNNsHXR_x",
@@ -43,12 +91,52 @@
       "approved_on": "2026-10-22"
     },
     {
+      "file_id": "11_bcWTErQO_kq7drnYh2o3XVC3XRt5Ik",
+      "classification": "A"
+    },
+    {
       "file_id": "11buRV0QgeapH-can5BCHA436zgCUObme",
+      "classification": "A"
+    },
+    {
+      "file_id": "11pRAyscctcnrtPHxK_7bs8wHroI_EGrR",
+      "classification": "A"
+    },
+    {
+      "file_id": "11qAxO6JfHcdNjSWnxiiknqvag9FLQ0G-",
+      "classification": "A"
+    },
+    {
+      "file_id": "11w-f3E8MucdnTJvVdgnvbwa5CMKMX4k3",
       "classification": "A"
     },
     {
       "file_id": "122Ia6yJXrGS_DAyevsehx6ZsJvrrycLD",
       "classification": "B"
+    },
+    {
+      "file_id": "125lTea3NXeafanQegiMjzvviCv5WBI_M",
+      "classification": "A"
+    },
+    {
+      "file_id": "126zDGj5kvwqesqIjlmaEhNKAjM32S5dY",
+      "classification": "A"
+    },
+    {
+      "file_id": "12GhgEZibkfRhXdWpg7q4bNjUWwsNO2FB",
+      "classification": "B"
+    },
+    {
+      "file_id": "12QHBEpnpBl9Z8jyMb4zsbwZpTqs1uT7H",
+      "classification": "A"
+    },
+    {
+      "file_id": "12Xe7-jGmmD9bfJpbw8DB-K__5cvh5WNT",
+      "classification": "A"
+    },
+    {
+      "file_id": "12ahg1Ugw1yXqGHOeEhZJevN01jOiFs2U",
+      "classification": "A"
     },
     {
       "file_id": "12tg89MuvhLfwoH8SerUjY9MxIHMlBpbH",
@@ -59,12 +147,64 @@
       "classification": "B"
     },
     {
+      "file_id": "1316vNSifzMboNnw5fWEBL3rz3RHIr_CH",
+      "classification": "A"
+    },
+    {
+      "file_id": "137oDunwhorVuPY6qCHdlIQ3Wols2QSOb",
+      "classification": "A"
+    },
+    {
+      "file_id": "13EiwLzpP0acwR7hqm31NKn-JXxYJ8mfY",
+      "classification": "A"
+    },
+    {
+      "file_id": "13Io3aeH4xEJgsRRLnv6Gvknt9o64srb0",
+      "classification": "A"
+    },
+    {
+      "file_id": "13QsaQyWLXU3c8hYgymPho97gT1nPq9z3",
+      "classification": "A"
+    },
+    {
+      "file_id": "13SNvyD0w-qgZhe3W0fDetDMCzlcbrL6b",
+      "classification": "A"
+    },
+    {
+      "file_id": "13VniJZObu_BNDDs6srTC9uUGB9NV3wBQ",
+      "classification": "B"
+    },
+    {
+      "file_id": "13Vnvook0f46PGnYsN5j8OvIr-DSbziS3",
+      "classification": "A"
+    },
+    {
+      "file_id": "13WCqabJbXr6Ii6qc0KBvWTXGFY843WOg",
+      "classification": "A"
+    },
+    {
       "file_id": "13fF1VvSrjlmkmM2OKweHj_BDKQ7b0KL9",
       "classification": "B"
     },
     {
+      "file_id": "13mP39FdkZtHnevs2fSvE-_wZxFC2Dq0m",
+      "classification": "A"
+    },
+    {
       "file_id": "13nJbsKCPY3bC4b0xTdKARRBYSRh6PdzM",
       "classification": "B"
+    },
+    {
+      "file_id": "13zQBPBMre1m9NhPz07ARK_CQwQxX1mI1",
+      "classification": "A"
+    },
+    {
+      "file_id": "14MZCuuGkwcxc6k0JDrSOEtJTzglByQpx",
+      "classification": "B"
+    },
+    {
+      "file_id": "14b4gE2gECabjXsrZxv7tqRs7w0s3JABa",
+      "classification": "A"
     },
     {
       "file_id": "14nLftXVH-rJPUUdFL3ebCARIi_icKJxI",
@@ -75,24 +215,180 @@
       "classification": "B"
     },
     {
+      "file_id": "14oO_uqh-aB_ZRp1_hb1KpykAsL7jREbW",
+      "classification": "A"
+    },
+    {
+      "file_id": "14qhSz03VG0a1Ax-eyKSs290BxwX7Enpt",
+      "classification": "A"
+    },
+    {
+      "file_id": "14sRwxYD6T7key0NigTWFj9ANl7LYUUHe",
+      "classification": "A"
+    },
+    {
+      "file_id": "14sfIj_CjMgO9FgERKpkhkqGq6Bk2swk5",
+      "classification": "A"
+    },
+    {
+      "file_id": "14wbnKkb8JqX20pzql0K8XovaIRrrhioL",
+      "classification": "A"
+    },
+    {
+      "file_id": "151-G7bSOKHB1tq41lBH8_49bei5rNnsO",
+      "classification": "A"
+    },
+    {
+      "file_id": "15ICs4wC_QIDoiHXmsUKcFSvo5lzZXWm-",
+      "classification": "A"
+    },
+    {
+      "file_id": "15bIrW0Q93EYzsebU0-qwkmLaYMbji-nl",
+      "classification": "A"
+    },
+    {
+      "file_id": "15nxm_BKVuZXT0cdwGrBWVTVEL0hPGb82",
+      "classification": "C"
+    },
+    {
+      "file_id": "15xYmP4T-QeybOeCsupDa0_07N4faJGXV",
+      "classification": "A"
+    },
+    {
+      "file_id": "15xbo_vWE4ONB5BW4x65uGox37iPsQyCw",
+      "classification": "B"
+    },
+    {
+      "file_id": "160RTGBJE3QapGaTFuVyshC0rKW3Avi5J",
+      "classification": "A"
+    },
+    {
+      "file_id": "164zAcZxU0Sok1KHa9X2U9ZRbK6RzPOLS",
+      "classification": "A"
+    },
+    {
       "file_id": "16E5-q0K9X5KdOugynoNJZxTjpEjBq7TM",
       "classification": "B"
+    },
+    {
+      "file_id": "16_BZYl0coOmGKjI8qw8tVIxSI9W-y4US",
+      "classification": "A"
     },
     {
       "file_id": "16jb1OH1C2ssTqmZdJY7Uv61zJa04LaYZ",
       "classification": "B"
     },
     {
+      "file_id": "16lZimbgthfXI0u2Ogu2RezFjCj_3qslw",
+      "classification": "A"
+    },
+    {
+      "file_id": "16xieKruPiNkiTxmU_RxDi97ORbf8aI0e",
+      "classification": "A"
+    },
+    {
+      "file_id": "178WVZrPx-rYE3II_p2y3Q-21Y0HqRC79",
+      "classification": "A"
+    },
+    {
+      "file_id": "179i1JVE1-ebTyG4iGi1CZSgWj_aqcJxe",
+      "classification": "A"
+    },
+    {
+      "file_id": "17ClWzXRnrvL8PKAWkV9x6HBLPGBWPfr9",
+      "classification": "A"
+    },
+    {
+      "file_id": "17E9H_RNjwkutCfScyQjQiBGwWkHB0e73",
+      "classification": "C"
+    },
+    {
+      "file_id": "17JtZkH8l16lzGqcNkjTyPlxdLEsY5IrS",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-23"
+    },
+    {
+      "file_id": "17PW94J9b6f5EYF3jrI6ji5dV8YE4Unuu",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-23"
+    },
+    {
       "file_id": "17UYredfoTn4Px3uFptizCrOmsg04MJ4S",
       "classification": "B"
+    },
+    {
+      "file_id": "17VyM6cx-g1CU2Fn7O_dGSFlNoBaatlFE",
+      "classification": "A"
+    },
+    {
+      "file_id": "17dGI_j-u45zH9aRktj76VdeVl7eo4n0Q",
+      "classification": "A"
     },
     {
       "file_id": "17oTPUh1gNrxzXSdxb-EKhnClxsFb8lRK",
       "classification": "B"
     },
     {
+      "file_id": "18-y5a3-8Ot_C22nHpBFqyo-34KeKV96b",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-23"
+    },
+    {
+      "file_id": "187A7vuPxgrVZLjeLOwGVUwyUY-mMB087",
+      "classification": "A"
+    },
+    {
+      "file_id": "18AsZc0kdH1e9U1egjv4yB5TpyzzpDozS",
+      "classification": "B"
+    },
+    {
+      "file_id": "18DFdkLRhdgRpBBXf5uZ01gA4zSNn1fG1",
+      "classification": "A"
+    },
+    {
+      "file_id": "18MgcOo5x7qKd7gBPAYvieLtyV6DC5y8T",
+      "classification": "A"
+    },
+    {
+      "file_id": "18QZxALcHkJT1ZRXCTNF19yzMwgtKbY0a",
+      "classification": "B"
+    },
+    {
       "file_id": "18gO2Ox-n0B87XdW43oxyTRGOeu_2d0D2",
       "classification": "B"
+    },
+    {
+      "file_id": "18mlBQHQMI8r6NZXWm4g_OGyZC-Z1AGO6",
+      "classification": "A"
+    },
+    {
+      "file_id": "18tdHj9t9lA8xm64u3O_e6wHI7GPytsff",
+      "classification": "A"
+    },
+    {
+      "file_id": "18vBgh4vbRa-O89KQFtCPKHi62P72du8L",
+      "classification": "A"
+    },
+    {
+      "file_id": "18wtJm0x0Rd7Lh8uW6FyaW_3XATs6Ka8k",
+      "classification": "C"
+    },
+    {
+      "file_id": "192OjCqNfmLc_DRiHdcHMG-Wc90oZSFQN",
+      "classification": "B"
+    },
+    {
+      "file_id": "19WYvV0YO1C70UnaaqyPRzE5EW-OxN0RN",
+      "classification": "A"
+    },
+    {
+      "file_id": "19uyxRrlQyrE9vJv1hiFSjvjziQdkbW4V",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-23"
     },
     {
       "file_id": "1A0WpFo65e9BVpOf0HMqnjmA7F7S1MfmU",
@@ -101,11 +397,43 @@
       "approved_on": "2026-10-22"
     },
     {
+      "file_id": "1A0lVjcDHO1xDP_ppLBNuRzL3vEisIVDM",
+      "classification": "A"
+    },
+    {
+      "file_id": "1A1AGwqdRa6IsEAbOHDnD3jkDUORd0TrT",
+      "classification": "A"
+    },
+    {
       "file_id": "1A2zE-zib6NWDJOSjzAYiWPG3H_ojQWiw",
       "classification": "B"
     },
     {
+      "file_id": "1AAmn5l6bfBMD7qEi8IRyrDg2uclchNkG",
+      "classification": "A"
+    },
+    {
+      "file_id": "1AG-cG0wRFkUQIXKjjf8pxxxSM2GK0vDV",
+      "classification": "C"
+    },
+    {
+      "file_id": "1ALHjqUgI0tJyzAQhK_wQHtoJaUyHZRqK",
+      "classification": "A"
+    },
+    {
       "file_id": "1AQwY0oUp8PdFwEmdqY38odGjcPUWYTFO",
+      "classification": "B"
+    },
+    {
+      "file_id": "1ATVyrxNRlYSrW3cXszZ_22vx5YkrXo9s",
+      "classification": "A"
+    },
+    {
+      "file_id": "1AcCUbz3P6LpUOnVkN9x6LNoNzykVPGHI",
+      "classification": "A"
+    },
+    {
+      "file_id": "1AjiboowsCM6rgaem4ea30cERxO600QIi",
       "classification": "B"
     },
     {
@@ -113,11 +441,85 @@
       "classification": "B"
     },
     {
+      "file_id": "1ApskgUNDbN51udl3fAwdqEat6q-XPLpR",
+      "classification": "A"
+    },
+    {
+      "file_id": "1B4n-HDiNvzsOObnQ79krVYUtLP5dh2z8",
+      "classification": "A"
+    },
+    {
+      "file_id": "1BOkw-7bjQcVxhOwlXYjIIYQJK9z8h4rK",
+      "classification": "A"
+    },
+    {
+      "file_id": "1BSnqIe5kxK2-lL1e3JDzqC48np22uNRS",
+      "classification": "A"
+    },
+    {
       "file_id": "1BdYXlcLNHUUrkf5mVATz9LnNa0FV3BQO",
       "classification": "B"
     },
     {
+      "file_id": "1BhH_9e82KKHqPm59QrOFvIJTDPnuymtt",
+      "classification": "B"
+    },
+    {
+      "file_id": "1Bhx2egTzMkl39JBxpQccHBleOcQm87Y5",
+      "classification": "A"
+    },
+    {
+      "file_id": "1BsS7l5TOw3T7RhffdTQdQuFR8j_naWiH",
+      "classification": "A"
+    },
+    {
+      "file_id": "1C3eEWnhigQjROz4C_CwJ0pGjJD1tGBer",
+      "classification": "A"
+    },
+    {
+      "file_id": "1C3vo5XaVwlMOFzgdBOza4tyPhco3Q1Zz",
+      "classification": "A"
+    },
+    {
+      "file_id": "1C6uoWSbtOurLbOsl2X3BJV4E2gTWxoi-",
+      "classification": "C"
+    },
+    {
+      "file_id": "1CFL4loaXCX3ni8DgV2Db1hWTLB1xBWuh",
+      "classification": "A"
+    },
+    {
+      "file_id": "1CIH_zyif8fJ3GFo3Zv-OqeZTeX8HwAxt",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-23"
+    },
+    {
+      "file_id": "1CKv_rhrPPqcSlrMhZOtTyaZgkOnD_XaR",
+      "classification": "A"
+    },
+    {
+      "file_id": "1CMPTmQtglWIc1XCTVpGtBkb_XAX-y5pC",
+      "classification": "C"
+    },
+    {
       "file_id": "1COkPccgl3SySV6WWGap5TKRGwuYXvAoq",
+      "classification": "B"
+    },
+    {
+      "file_id": "1CY2nXX6b2pthqs5JvgeHnPtxleHZrPoZ",
+      "classification": "A"
+    },
+    {
+      "file_id": "1CjNjVLDMfsBGWRF6hVN4xWqZL26XYPG1",
+      "classification": "A"
+    },
+    {
+      "file_id": "1D4FZCM89U5TItiHMLsJxZJrSgrPzqaLA",
+      "classification": "A"
+    },
+    {
+      "file_id": "1D5GWNm2hN_vCJzHMp5pyJRF_lsihhR_K",
       "classification": "B"
     },
     {
@@ -129,13 +531,53 @@
       "classification": "B"
     },
     {
+      "file_id": "1Dc6Examu-dklU9NxtDFZQDpf65nZB7yQ",
+      "classification": "A"
+    },
+    {
+      "file_id": "1DmXsrJpGc-7wftzPHlW4QP7OwUWCVW9y",
+      "classification": "B"
+    },
+    {
+      "file_id": "1DuWuA7bvqsdhHHSN3wmXi7k4c_6SZZkj",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-23"
+    },
+    {
       "file_id": "1ENaAU8wC1M441B1VIsMTHc62sW6g00My",
       "classification": "A",
       "approved_by": "Lê Thọ Tiển",
       "approved_on": "2026-10-22"
     },
     {
+      "file_id": "1EaLiIFHc-tGDlmsZAJiGymNSmuC5H_Ti",
+      "classification": "A"
+    },
+    {
       "file_id": "1F3jsaO3j2_m9Rhs-4xEFt8MSlXnO_Ucr",
+      "classification": "A"
+    },
+    {
+      "file_id": "1FAnmINFp_Vg5YKCtf1RiSwlDHHLUCLIa",
+      "classification": "A"
+    },
+    {
+      "file_id": "1FG8KcRYptxRR4rykNApv54D-TmFCjsNB",
+      "classification": "B"
+    },
+    {
+      "file_id": "1FJ-_67wmzH-vLIbBoTVIKZDjHOR7D6Tw",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-23"
+    },
+    {
+      "file_id": "1FNtG1FUy_tqh57gPkzCWS1QDPtb3zxxc",
+      "classification": "A"
+    },
+    {
+      "file_id": "1FblBhfKrJ6tj1ueFSG7qFFHR5KTwv5jI",
       "classification": "A"
     },
     {
@@ -145,12 +587,24 @@
       "approved_on": "2026-10-22"
     },
     {
+      "file_id": "1G4PNnEhos1u0G8E5TCfzTLXP0bYY9G3n",
+      "classification": "A"
+    },
+    {
       "file_id": "1GICtukW5a1SKlsvq2yJs3StrzfjHCf8r",
       "classification": "B"
     },
     {
+      "file_id": "1GJiquy7kGZnDN-g57R-TiGn7G55vd32-",
+      "classification": "A"
+    },
+    {
       "file_id": "1H-7AvXTqKSQHqstOYw9AUqVmsHJ1yWBq",
       "classification": "C"
+    },
+    {
+      "file_id": "1H7p7XNjW_KmxOfqTNX0OiyWC-461weLM",
+      "classification": "A"
     },
     {
       "file_id": "1HIPm53QNcTCPpL7dPpoDrei46gS0fDxa",
@@ -161,16 +615,64 @@
       "classification": "B"
     },
     {
+      "file_id": "1Hc6HT3iUjVto2f6VJH6UuOxe2_mfg7Yp",
+      "classification": "A"
+    },
+    {
+      "file_id": "1Hgio6Ihzgxkbfj9lBalJu-0zacrfz1do",
+      "classification": "A"
+    },
+    {
+      "file_id": "1HuNnBZM8ILeny_18oITbGzxITyF3gvPG",
+      "classification": "A"
+    },
+    {
       "file_id": "1HuRsm6UBm_Jw8A8hJ9PX0UOrDpTlepqO",
       "classification": "B"
+    },
+    {
+      "file_id": "1I3fVSJD7jirqAuLZymRlorNxWtwt3X9U",
+      "classification": "A"
+    },
+    {
+      "file_id": "1I6aasmZAc_aIMeXVgaxYxdH7zKa5pA1e",
+      "classification": "A"
+    },
+    {
+      "file_id": "1IANIA4pNbOstj6ezaolyXOUSMSyVo59g",
+      "classification": "A"
     },
     {
       "file_id": "1IJKWtcrcXpNeeFehq5G4TvY_xVKUjSpr",
       "classification": "B"
     },
     {
+      "file_id": "1IQUirVaPC3XO-xtVVuRur5-Cbmx6v2K1",
+      "classification": "A"
+    },
+    {
+      "file_id": "1IZc2fe3BFbJBu0v_sAu5Gj33WIx5J4Z5",
+      "classification": "A"
+    },
+    {
       "file_id": "1IhqsCbvthKVKaChVSrfDqjxxJ15wKdJM",
       "classification": "B"
+    },
+    {
+      "file_id": "1In-EBekmY9Ja5e521bpuXdRBAKLNr-vL",
+      "classification": "A"
+    },
+    {
+      "file_id": "1IqxePIfWuQn7gvMfRAGLgAusIJQkk1jy",
+      "classification": "A"
+    },
+    {
+      "file_id": "1ItyxIJvU7KR-KyEUWImoE3BgCqTdivvi",
+      "classification": "A"
+    },
+    {
+      "file_id": "1J8x0Qc5ddiHlTIne00Cw7DmelLIbx1W3",
+      "classification": "A"
     },
     {
       "file_id": "1JF35SVM7PbWiMCSPvATIWyt7tGclXEz3",
@@ -181,8 +683,62 @@
       "classification": "B"
     },
     {
+      "file_id": "1Jp_n1ISGakpx6M55oFLFs4Iv-o-9H-Hu",
+      "classification": "A"
+    },
+    {
+      "file_id": "1JuZjhO_Zn8OSeKeUOjPy77vRuWEAK-Ew",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-23"
+    },
+    {
+      "file_id": "1KMKyVHSm3eFedin49ZggSNJaSP6Nca7f",
+      "classification": "A"
+    },
+    {
+      "file_id": "1KNSXGTXb0ylUXDVBWpaiQJHOtct5EnZl",
+      "classification": "C"
+    },
+    {
+      "file_id": "1KUWTMQ5ui2Vpx-LLOJ_Nif9jFXXH_zz4",
+      "classification": "A"
+    },
+    {
+      "file_id": "1KY3sHYkCHmkfI0OK5-4ljnsUeYVciqi9",
+      "classification": "A"
+    },
+    {
+      "file_id": "1KtIkRekX0Z5lqUpyvexNljXjPcGMeO4f",
+      "classification": "A"
+    },
+    {
+      "file_id": "1Kv8iSzRJeGeMYEWXJEgjXzg4oUYhv68A",
+      "classification": "A"
+    },
+    {
+      "file_id": "1L18It40cqlVcl7LuiAfOBtKHbIlFWH6m",
+      "classification": "A"
+    },
+    {
+      "file_id": "1L6KIQhOzMUV0cALRIaf7kJbzCCgPX0y1",
+      "classification": "A"
+    },
+    {
+      "file_id": "1L6yWJeH4sGOueK1NeD8u1fo2fzndOBXm",
+      "classification": "A"
+    },
+    {
       "file_id": "1LBABbp5LeP_b_Ns0Zuo2TEo1XCL9GGi6",
       "classification": "B"
+    },
+    {
+      "file_id": "1LHK0myMyuSiZjzvzGelTw453zAgPn3uS",
+      "classification": "A"
+    },
+    {
+      "file_id": "1LJdRnxMMJSyZfrxcX-A4SjeL_2cKXk0f",
+      "classification": "A"
     },
     {
       "file_id": "1Lew3i-WhE-oamE3QkJMX9AX_2qDejsQd",
@@ -191,6 +747,10 @@
     {
       "file_id": "1LfS_1utBFDy2YEG0JLrMw8WZafqEaCnB",
       "classification": "B"
+    },
+    {
+      "file_id": "1M-Z61RDIzEFJ4QW5ieggZ95r6lDizVXt",
+      "classification": "A"
     },
     {
       "file_id": "1M6bEYaRlq80oKPd1DIM20sExzXpAGz9F",
@@ -205,8 +765,76 @@
       "classification": "B"
     },
     {
+      "file_id": "1MNWfVGJEYgtnGVf0tlJzMT4xop1RtW1P",
+      "classification": "A"
+    },
+    {
+      "file_id": "1MoMbRgU6qI1XLUyzaNfMheFjM6w6n2J_",
+      "classification": "B"
+    },
+    {
+      "file_id": "1MyHenQTLrTrgOrtnDj-_n5MmhPZkcsMV",
+      "classification": "A"
+    },
+    {
+      "file_id": "1Mzbiuf-xgnN1RDI2luxdDVXsYAiUjp83",
+      "classification": "C"
+    },
+    {
+      "file_id": "1NFjrVHKFG13rXS3dZgZOSTHM3Oq_OihA",
+      "classification": "A"
+    },
+    {
+      "file_id": "1NJS6d7jU57d_k2MJM7gUpJluiTf5GE-5",
+      "classification": "A"
+    },
+    {
+      "file_id": "1NNt9NV8gQ7Q04GeOIAKrOxSfhiV80UZN",
+      "classification": "C"
+    },
+    {
       "file_id": "1NYBsJMvG7GCDcoofAOBveDgaEe4wMcfF",
       "classification": "B"
+    },
+    {
+      "file_id": "1Ng_z3M9se-JProE9qKNXZgugSXZ7Ai4C",
+      "classification": "A"
+    },
+    {
+      "file_id": "1NwWOwTgfVQdndEfvXdfRhIbInwxawxVy",
+      "classification": "B"
+    },
+    {
+      "file_id": "1NyLnjAJLla9zXDR-NczMkbeaLm7R8bZa",
+      "classification": "A"
+    },
+    {
+      "file_id": "1OKcIIQeVlwH8oKC7DhbE8JyD2SMJk_jz",
+      "classification": "A"
+    },
+    {
+      "file_id": "1P05xCWXAOUMh3BEeYeum8S9ZAR05wqBP",
+      "classification": "A"
+    },
+    {
+      "file_id": "1PI0DAi_Y0E2IaHzUnKj-lQjJBrExRZuz",
+      "classification": "A"
+    },
+    {
+      "file_id": "1PYNdhDOyEpQxX3GD-4qnTxbdkLUN-Wog",
+      "classification": "A"
+    },
+    {
+      "file_id": "1PwuXCDk2WjdnTPT8TOiQpnkEJNPGAfrr",
+      "classification": "B"
+    },
+    {
+      "file_id": "1QAR_EmMB8kqbnoDr9YAzebk30Jl1H-b8",
+      "classification": "A"
+    },
+    {
+      "file_id": "1QGPIEvL5T2gzar3Qf90Y5uUMuNeTCkLK",
+      "classification": "A"
     },
     {
       "file_id": "1QNnNCgzE8Ri239AH2vgkc1HF_hvtvKxq",
@@ -217,22 +845,114 @@
       "classification": "B"
     },
     {
+      "file_id": "1QSeYqiAtdkHo6O2Cft44AGCToT62XgpJ",
+      "classification": "A"
+    },
+    {
+      "file_id": "1REe9iUJpRNtU2AKupP_gRPHxR7Ydmnzu",
+      "classification": "B"
+    },
+    {
+      "file_id": "1RGgg0wkx4Yr-c5_6YxgiMgvQ7VgFTN8p",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-23"
+    },
+    {
+      "file_id": "1RMRTaYKD__a7w8G7767nKSOmTcVlW-7c",
+      "classification": "A"
+    },
+    {
+      "file_id": "1RXpS1itTawocDhnn3dxsXKn_6q2jUBbt",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-23"
+    },
+    {
+      "file_id": "1RbSe_vCDiYRE1Nr4YK9QFpDkFBIbbS39",
+      "classification": "A"
+    },
+    {
+      "file_id": "1RkONrobe6ORlkeHOjvavx17e65w-Gd8L",
+      "classification": "A"
+    },
+    {
       "file_id": "1SG_9xM9o8SegxszuAbt7Ad0V-HxnFxRU",
       "classification": "A",
       "approved_by": "Lê Thọ Tiển",
       "approved_on": "2026-10-22"
     },
     {
+      "file_id": "1SP4RHbJCXBVkrzSxCm-nV2Uw3PI42Wmt",
+      "classification": "A"
+    },
+    {
       "file_id": "1SaSXXDCHCQB9Obc1_IhkS3Q_zjsYycoK",
       "classification": "B"
+    },
+    {
+      "file_id": "1SgIr3-7g1foKqpMaf7G68PwWK_EvSSVc",
+      "classification": "A"
+    },
+    {
+      "file_id": "1Suul2pSf30bbdhW7wyo9VCkdnpQpWW4-",
+      "classification": "B"
+    },
+    {
+      "file_id": "1T5Zl0ZdO83U9hHWhFGzIF80jUTjpx26i",
+      "classification": "A"
+    },
+    {
+      "file_id": "1Ti9oRmOTG0gyVuiuAnxZpzNiSe8im2uX",
+      "classification": "A"
+    },
+    {
+      "file_id": "1TvEGUJhy2tTsvFR8no6ff19p_x3NzdqU",
+      "classification": "A"
+    },
+    {
+      "file_id": "1TxBiPhmiXW32KdMFOoFEq5akI1QCZmfd",
+      "classification": "A"
     },
     {
       "file_id": "1U2IALdzeSi4CHQNbMJiuPpbaFJpr6r7c",
       "classification": "B"
     },
     {
+      "file_id": "1U45MhAPWoyNwJLkxzYS1ZPrehA0j9EoU",
+      "classification": "A"
+    },
+    {
+      "file_id": "1U8kXtFziGmiO4qTetvFSDN3M6OU9-geH",
+      "classification": "A"
+    },
+    {
+      "file_id": "1UEZMWF5111wRAQkC1VRt77AarUG-tr4e",
+      "classification": "A"
+    },
+    {
+      "file_id": "1UHydIyEipw6bW4VSub5hedpfS3q9CtDX",
+      "classification": "A"
+    },
+    {
+      "file_id": "1USpEG-TUggR-NhmPIel0VhAJ9WkZWuAk",
+      "classification": "A"
+    },
+    {
+      "file_id": "1UezLs4TT14_7TBZBdZ8bzoO-zsAQpUWY",
+      "classification": "A"
+    },
+    {
+      "file_id": "1UkfVNWOdE_e-0vkitT4k00PlhcqQNDBS",
+      "classification": "A"
+    },
+    {
       "file_id": "1UlGrFHXmRGcRNVFpnTg5wjETyOkGfDyC",
       "classification": "A"
+    },
+    {
+      "file_id": "1UqN10vhqhb0RqsjnHbYvMXLm9sMSwbRD",
+      "classification": "C"
     },
     {
       "file_id": "1UuhCO2i3k8J05l26efNgaTBG955_UOpw",
@@ -243,22 +963,98 @@
       "classification": "B"
     },
     {
+      "file_id": "1V3tA3HUnUlnIeAqYtgUltTdccAOJSNK5",
+      "classification": "A"
+    },
+    {
+      "file_id": "1VB14IR0_7u473e_QTVvY6Ml68NJzcdDo",
+      "classification": "A"
+    },
+    {
+      "file_id": "1VCelThsxXWXh1xweUsFQZ0J6DGpqfJ9L",
+      "classification": "B"
+    },
+    {
+      "file_id": "1ViuZSjTBAwXMo5QGICiDKySwuWnHDBQA",
+      "classification": "A"
+    },
+    {
+      "file_id": "1VlM8oKPhkcjQwrYdpd81WPLzOh1fQlHc",
+      "classification": "A"
+    },
+    {
+      "file_id": "1Vlo0mHu7NgGdMmOygA85dT8n3dsPKDA2",
+      "classification": "A"
+    },
+    {
+      "file_id": "1W5PpA3MJNIfSLwDN7_s2YWc_mrIBjkex",
+      "classification": "C"
+    },
+    {
+      "file_id": "1W5ZjP-605yWOMfCivK3x-JtaVSXhpBqX",
+      "classification": "A"
+    },
+    {
       "file_id": "1WB9mJp1MreR5pRSWlT_fNO0WDDuuqY5s",
       "classification": "A",
       "approved_by": "Lê Thọ Tiển",
       "approved_on": "2026-10-22"
     },
     {
+      "file_id": "1WHybXZEQaZZeFHMIqqnAJnhuGIf5ETHJ",
+      "classification": "A"
+    },
+    {
+      "file_id": "1WTO1LkjVQE8eD2tKp7KpM5NtySDpm7OJ",
+      "classification": "B"
+    },
+    {
       "file_id": "1Wa9zvWlEKRsC1-2PQh4DkUHvd9WVODOD",
       "classification": "B"
+    },
+    {
+      "file_id": "1WanyDmjEa1VjCVKzyqTzDoT8ANkw4aB2",
+      "classification": "A"
     },
     {
       "file_id": "1WaySKIgkyayOqT_Ap5_w9RSbJksghlPL",
       "classification": "B"
     },
     {
+      "file_id": "1Wt6vAzozCg4sEb121b56XgdAJTK5SyuZ",
+      "classification": "A"
+    },
+    {
+      "file_id": "1X25k64BYo74M5OLV3YGp0JvcKF_BTn3e",
+      "classification": "A"
+    },
+    {
       "file_id": "1XF39FWE-zsrT3lTA2BPYkOrhiGFr5Kkp",
       "classification": "B"
+    },
+    {
+      "file_id": "1XfNiTd-c4Ntln_2qLufMpXfXKQMtx6su",
+      "classification": "A"
+    },
+    {
+      "file_id": "1Y0WqivIrL_49oWdstMd4nVxm7_mD_vAY",
+      "classification": "A"
+    },
+    {
+      "file_id": "1Y2NvtIBnUdScT14FplF4leV8t1m7Y6iW",
+      "classification": "A"
+    },
+    {
+      "file_id": "1YE24UIsvf62Te_18Ond9GEkh2ZE-BqdE",
+      "classification": "A"
+    },
+    {
+      "file_id": "1YR54bhCimP73K_uG_ShU6li7aDeTs8BJ",
+      "classification": "A"
+    },
+    {
+      "file_id": "1YZg_WyrY7EZTV2lIr5f522gkmxxFxEXh",
+      "classification": "A"
     },
     {
       "file_id": "1Z8TGHqNDoMV3Ew1VVMO0sNG481M82tNY",
@@ -277,8 +1073,28 @@
       "classification": "B"
     },
     {
+      "file_id": "1_VPHJ8u8WbprX1G0c_XnCl5DKGqy1YAU",
+      "classification": "A"
+    },
+    {
+      "file_id": "1_vfrM82yAJFBYunMMmsZvo0uT4DLfrW4",
+      "classification": "B"
+    },
+    {
+      "file_id": "1a6OW4l349Wmspl4diwtLQwPECZg8hmYN",
+      "classification": "A"
+    },
+    {
       "file_id": "1aIkm9tOo1PdkAytDap0_yBwrscDRwHbO",
       "classification": "B"
+    },
+    {
+      "file_id": "1aU39VfIrxBI3jjVC8GNW3QwRAwovvXyU",
+      "classification": "A"
+    },
+    {
+      "file_id": "1amKOJvbq5BcTi3tO5D6gmUz26sI4aLjV",
+      "classification": "A"
     },
     {
       "file_id": "1aw_5TIazWPCUUMju6UbFJqs0r4mBzxsv",
@@ -287,6 +1103,10 @@
     {
       "file_id": "1b2g2sGHqUdw5IC5Ca5Yg981wSjg0ibsZ",
       "classification": "C"
+    },
+    {
+      "file_id": "1bAiYSZlrVvY6ERdQ08QOnQwvu0gp_8Tz",
+      "classification": "A"
     },
     {
       "file_id": "1bR2qUnr6OKdjCKjmdx-bNKBNfmuTDbVX",
@@ -301,17 +1121,65 @@
       "classification": "B"
     },
     {
+      "file_id": "1bgXoeK0mpmbFWwsE6Uk0o9yZSvRUQcmx",
+      "classification": "B"
+    },
+    {
       "file_id": "1br0zmab0a84wOACkInJcB3CG4dHw_fcJ",
       "classification": "A",
       "approved_by": "Lê Thọ Tiển",
       "approved_on": "2026-10-22"
     },
     {
+      "file_id": "1c1t_YyuMkKRPno7H5HAmprqkWm3LJeV5",
+      "classification": "A"
+    },
+    {
+      "file_id": "1c3G4f11b4TRcjIDZ2TewHUnvs9JsIvoa",
+      "classification": "A"
+    },
+    {
+      "file_id": "1cUXSfm2bIf0WS_mUQJclCDTRjLy8CN6u",
+      "classification": "C"
+    },
+    {
       "file_id": "1cVWgEGPrqyxagSLZuJ9hrde-6cuhJ0eh",
       "classification": "B"
     },
     {
+      "file_id": "1coZUCRGPR0_iskQIrtfnkTL1-NujrGKZ",
+      "classification": "A"
+    },
+    {
+      "file_id": "1dF1e0dLnCHE8rUvsTWb47lhlaEvq7SY0",
+      "classification": "A"
+    },
+    {
+      "file_id": "1dLLqbqiL5A-S2b8xuh6kGPQQ9T1QDEbH",
+      "classification": "A"
+    },
+    {
+      "file_id": "1dZoTI5lTE7Q23hfRkf5gg9Ymhs00ni85",
+      "classification": "A"
+    },
+    {
+      "file_id": "1dhQIilaVCBDKd7xjpfzySD1bnWn_DL5y",
+      "classification": "A"
+    },
+    {
+      "file_id": "1dlTvfm7tF2R4HqH5Q4e_xxbVvhlIB4xL",
+      "classification": "A"
+    },
+    {
       "file_id": "1eB6VGLVrGj4Z5rt3UpmEVlwmr_ndScmN",
+      "classification": "B"
+    },
+    {
+      "file_id": "1eKsGV7p0_CLABPL3i4Tmi594-kVO7Ya6",
+      "classification": "A"
+    },
+    {
+      "file_id": "1eOnv9es8-yOCYw6k70WO2XFi3awsOYO7",
       "classification": "B"
     },
     {
@@ -319,11 +1187,45 @@
       "classification": "B"
     },
     {
+      "file_id": "1f-_dyTdDK3VYsbdJVhLced4fYQc15neu",
+      "classification": "A"
+    },
+    {
+      "file_id": "1fO2FdLcKnoTkkdJ3A2i9jRXDC4pmbYnI",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-23"
+    },
+    {
       "file_id": "1fOpbzub5gXcXVdTX2qBKZx5d0WvXxcRC",
       "classification": "B"
     },
     {
+      "file_id": "1fQ57fyarHQeMp7rNFEbL0390v6OUa5je",
+      "classification": "A"
+    },
+    {
+      "file_id": "1fm1L1tbOwckCDkNWxbWQ6HW1teg3ag7I",
+      "classification": "A"
+    },
+    {
+      "file_id": "1foOg9wkwWwGKdx0ITUecpeA-Zw3DzNiA",
+      "classification": "A"
+    },
+    {
       "file_id": "1gAoT1arxAP76XMzm39ICO87kyMZGE0aR",
+      "classification": "B"
+    },
+    {
+      "file_id": "1gMP9CrO6MLfQBW7AQ7FGW2-5nmxKXCJ2",
+      "classification": "A"
+    },
+    {
+      "file_id": "1gQYB7-gKJq1Y5GXgNnPdMkTJ_NoniDiY",
+      "classification": "A"
+    },
+    {
+      "file_id": "1genBWUaAYJyDo4YBHNnoMhlfPqTt95sz",
       "classification": "B"
     },
     {
@@ -331,16 +1233,72 @@
       "classification": "B"
     },
     {
-      "file_id": "1iHP9ocm4s9P3PIktthYIWoj9dRkz4tqg",
-      "classification": "C"
+      "file_id": "1hG08IK87XJK69p49FV9G4tcfvKVuCZ73",
+      "classification": "A"
+    },
+    {
+      "file_id": "1hLQedhRbmVx_b1pDjFmW48Lj8IUy6t3x",
+      "classification": "A"
+    },
+    {
+      "file_id": "1hYm4WWEeNmMzm6KaRyYAFMioCcCR1xPu",
+      "classification": "B"
+    },
+    {
+      "file_id": "1hbFyXVZfLENlgPTcz0pYQqaNJYqtDk9g",
+      "classification": "A"
+    },
+    {
+      "file_id": "1hkTemD2ZMW3Av59vKhdN0wGdqOzgS9Ha",
+      "classification": "A"
+    },
+    {
+      "file_id": "1hzUHeaQkP23aU9Uzcbj6q3QtrQhubHOB",
+      "classification": "A"
+    },
+    {
+      "file_id": "1iBr-B-qKDVv4kWY5unwKm3Tc-Pw3V1om",
+      "classification": "A"
+    },
+    {
+      "file_id": "1iCU-sRE32hCzl30oc9erbrwp7BWS_JCn",
+      "classification": "A"
+    },
+    {
+      "file_id": "1iSX4D7pSRIcKAPbtR9nWf9WdHiQDoraW",
+      "classification": "A"
     },
     {
       "file_id": "1i_lzXMgKOwg7PcbGcHnNn7uaKZKvhBOT",
       "classification": "B"
     },
     {
+      "file_id": "1ivuTI1Mwbc8bTL6o9Cw--Gg0_HXQnOZC",
+      "classification": "A"
+    },
+    {
+      "file_id": "1iw-2cQW0gUoB5GpNoVec6uUHTcaiHEHP",
+      "classification": "A"
+    },
+    {
+      "file_id": "1iztk2ZNY3IZEOdRCWkyyKjUYxh7inKAE",
+      "classification": "B"
+    },
+    {
       "file_id": "1jGcUkdqUEsXgBEckgIz0M5sV3c6V_U5Z",
       "classification": "B"
+    },
+    {
+      "file_id": "1jUtKeFPWTgFsSKayR3kknVdVjiWWtsMu",
+      "classification": "A"
+    },
+    {
+      "file_id": "1jV8pp75J5UlCnyKKdIUjhxGJYI4YgEGO",
+      "classification": "B"
+    },
+    {
+      "file_id": "1jc0HsPLVaYXfdOaV16s5GtxwlOOWslLI",
+      "classification": "A"
     },
     {
       "file_id": "1k6zqW1zl3xQDK6dh_vNSfKQY80tFayz9",
@@ -351,10 +1309,46 @@
       "classification": "B"
     },
     {
+      "file_id": "1kMGIIJo2cIM8SbH0Md75UT6kDK7TAwFR",
+      "classification": "A"
+    },
+    {
+      "file_id": "1kaYAZjWh2B7bZRp-9CsHgyREHI4fdw5R",
+      "classification": "A"
+    },
+    {
+      "file_id": "1kfofqXpuKk37G9p5rAsUdlt4G8D9dcQ7",
+      "classification": "A"
+    },
+    {
+      "file_id": "1l2a0z6H4Bw2do3MOqP-V9Z1UJvyc-VZy",
+      "classification": "B"
+    },
+    {
+      "file_id": "1lt08meQ2vYFYu2p-biQ37YHbw1vgsfBC",
+      "classification": "A"
+    },
+    {
+      "file_id": "1m7DOwUa8VIbK3gbaYkWIYTyLtYKCDS15",
+      "classification": "A"
+    },
+    {
+      "file_id": "1mMV-ZXjowKe5646_NwmOUS5UPvq5kDaL",
+      "classification": "A"
+    },
+    {
+      "file_id": "1mQRD2GXZRRCS9ZkBj06HYCbq5zyKb3lR",
+      "classification": "A"
+    },
+    {
       "file_id": "1m_Hb8eeaSLxSV4chGFI45VNAcdDOD6_t",
       "classification": "A",
       "approved_by": "Lê Thọ Tiển",
       "approved_on": "2026-10-22"
+    },
+    {
+      "file_id": "1mfKPBGUb1iKZqD1VIt1Eu9YGxVR2-6aE",
+      "classification": "B"
     },
     {
       "file_id": "1nAMs3xxVYbyeIUSdmE7FzykX1qbTKGPg",
@@ -365,8 +1359,30 @@
       "classification": "B"
     },
     {
+      "file_id": "1nL0gXQ93rrQ_M5_w9HF2RtfFGohfb1rM",
+      "classification": "B"
+    },
+    {
+      "file_id": "1n_jgXIERCQlOwaiiefbyHYZD8dyo2_vt",
+      "classification": "A"
+    },
+    {
+      "file_id": "1nbobWYRdagPia9Szl3M81d1h_7oGykCj",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-23"
+    },
+    {
+      "file_id": "1nqU72STJ-M5YcKzApjNWW7vCknwiHihZ",
+      "classification": "B"
+    },
+    {
       "file_id": "1nqjOHp4D4fK8hYlHSYt0Qp6M5LfmdU-o",
       "classification": "B"
+    },
+    {
+      "file_id": "1o3Hx3kxTLU_ToHmvPNz1lBtUFZ6qJ35Q",
+      "classification": "A"
     },
     {
       "file_id": "1o6R_9X8oZUDCeDREXuFbYx4wrkAyXWpw",
@@ -379,6 +1395,10 @@
       "approved_on": "2026-10-22"
     },
     {
+      "file_id": "1oKvp9C488PeSHIqICX43xOf3fncI7q4i",
+      "classification": "A"
+    },
+    {
       "file_id": "1oN0TQ1JcnZ7FWqXOCloxFjRu76RHQ6HG",
       "classification": "A"
     },
@@ -387,18 +1407,54 @@
       "classification": "B"
     },
     {
+      "file_id": "1oS6zwsetst4QamOUq1g7fEnkiDp2TGL6",
+      "classification": "A"
+    },
+    {
+      "file_id": "1ooK9teMJWYc7qcyflAfwewXXezSd3fdq",
+      "classification": "A"
+    },
+    {
+      "file_id": "1otSkfowSM50lmsGrAlFpWn6uQDAu-GHg",
+      "classification": "A"
+    },
+    {
       "file_id": "1owYiOebMuOO71mjROqSKtcuqbrDVtHWs",
       "classification": "A",
       "approved_by": "Lê Thọ Tiển",
       "approved_on": "2026-10-22"
     },
     {
+      "file_id": "1pHm2AguR1ez7dURLxjwtaGfym1C11wuR",
+      "classification": "A"
+    },
+    {
+      "file_id": "1pYHyHWfkX9ZulqgYnThUaJrYbS7ez5HR",
+      "classification": "A"
+    },
+    {
+      "file_id": "1pdeiKD80gZUe9Ho-BCUF13KNA9bFZhhv",
+      "classification": "B"
+    },
+    {
       "file_id": "1pjuvOEjUevSUnCbNUsxJq8oQt5ofxaNZ",
       "classification": "B"
     },
     {
+      "file_id": "1pkXeg1v88SZie7Fz9pnSxdQ6-hDT7S1f",
+      "classification": "A"
+    },
+    {
       "file_id": "1pnlCV91nhTcakIOHjnAAk3NAi9W-2K5J",
       "classification": "B"
+    },
+    {
+      "file_id": "1polksLCucUNJ3ewR6koB3sBHxzrRJABn",
+      "classification": "A"
+    },
+    {
+      "file_id": "1psMkVOHORkHC9dpgv5_OVhW8wQ9Ev6xW",
+      "classification": "A"
     },
     {
       "file_id": "1q50mVBfCHbJl115fpVEQR_qWPDDdOWnc",
@@ -413,6 +1469,10 @@
       "classification": "B"
     },
     {
+      "file_id": "1qbHV1j76Ug8-EdQGFd8QnDHIrWdMY5dh",
+      "classification": "A"
+    },
+    {
       "file_id": "1qmoUzFwsWdwZQV5iTyrSTLMIuT5o51H3",
       "classification": "C"
     },
@@ -421,12 +1481,54 @@
       "classification": "B"
     },
     {
+      "file_id": "1rCqnzjrIdXfauWm3MfRnzCsg2GNzlG2u",
+      "classification": "A"
+    },
+    {
       "file_id": "1ray6KXH3hKAc1L88SUlM1smZ-ZDcn8_D",
       "classification": "B"
     },
     {
+      "file_id": "1rpv2e37-MKm7h4rRM97glQvyfuL6oQIV",
+      "classification": "B"
+    },
+    {
+      "file_id": "1s1c4kJAbACO7VcaKCdNCaSmFkqJLtK5U",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-23"
+    },
+    {
+      "file_id": "1sHOYs-YmcrgHpvR2jio57I8Vhl8oN5fB",
+      "classification": "A"
+    },
+    {
+      "file_id": "1t0Q_hdcqmS047VvCfDTS_NnBBEm_1HFi",
+      "classification": "C"
+    },
+    {
+      "file_id": "1tB2heS5fNhcYRVLBb5aRkmZoAQ1X7s7b",
+      "classification": "A"
+    },
+    {
       "file_id": "1tEzypif8R-oZMoV5balqTMrED9aqwooA",
       "classification": "C"
+    },
+    {
+      "file_id": "1tXhRIGlxR8kyezJrdtCdwha0KMRekQYW",
+      "classification": "B"
+    },
+    {
+      "file_id": "1u8FsWzHszwZxKXcScmmMnrWbgMiu1hNi",
+      "classification": "A"
+    },
+    {
+      "file_id": "1uNS8k6OaQWMXB2OvzjbpDDBF2wC5rkE6",
+      "classification": "A"
+    },
+    {
+      "file_id": "1uRXku_V7neZF_8GL21ktarLg2zlu8ijm",
+      "classification": "B"
     },
     {
       "file_id": "1uxCliL7WBjdDzY1ZlfYAMNx1GocOFaVl",
@@ -437,7 +1539,45 @@
       "classification": "B"
     },
     {
+      "file_id": "1v6OOZFU9AM6mPi0G5BPwgQolyfm7JGxR",
+      "classification": "A"
+    },
+    {
+      "file_id": "1vTNfi_Dfnex3iOoOz1XyVdgWJ3Y7ObVs",
+      "classification": "A"
+    },
+    {
+      "file_id": "1vWxrSS_SaRBGKreZUFhRN_CRC5n7RBZV",
+      "classification": "A"
+    },
+    {
+      "file_id": "1vZX8j8ASsR8t8i4SjbeYmEO6oAoorESE",
+      "classification": "A"
+    },
+    {
+      "file_id": "1vcenC-PZVd5fF-GAhgmjTBXQXE_vY89d",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-23"
+    },
+    {
       "file_id": "1vfPxO6ZBUk4EBco73F-cwccnKu7BbXvz",
+      "classification": "C"
+    },
+    {
+      "file_id": "1vxHF1tNgZF9y1pbtazwLEsK1iWxOtUDf",
+      "classification": "A"
+    },
+    {
+      "file_id": "1wMn_Z54vyfLUgw-277YpttUTzKZw828g",
+      "classification": "B"
+    },
+    {
+      "file_id": "1wPSh-_SSMviUMqs2702vP8Fep3W1WgqJ",
+      "classification": "A"
+    },
+    {
+      "file_id": "1wvcigEJBBxvs4uaowxKiIXfVxyMWatk4",
       "classification": "C"
     },
     {
@@ -463,12 +1603,30 @@
       "classification": "B"
     },
     {
+      "file_id": "1yzjWvdZtAnVCwg6JluI5vqcq8U0qxOuX",
+      "classification": "C"
+    },
+    {
       "file_id": "1z528EPs_u_codyH3B1F3I0-9GbjDUOvd",
       "classification": "B"
     },
     {
+      "file_id": "1z7FF6295HZr79WvaxwGsWflTLoIGljxu",
+      "classification": "A",
+      "approved_by": "Lê Thọ Tiển",
+      "approved_on": "2026-10-23"
+    },
+    {
       "file_id": "1zET4ccnb7Dho-c3mUa4taIIksxsJp6nf",
       "classification": "B"
+    },
+    {
+      "file_id": "1zvbbjxPWqNIvRvk03nY_FaRtHqa4yLOe",
+      "classification": "B"
+    },
+    {
+      "file_id": "1zxYhG1vj2qJsJaZE3bnEyM35VBkblIxn",
+      "classification": "C"
     }
   ]
 }

@@ -22,3 +22,13 @@ moved A to B; Working-Within-Design-Space moved B to A. Counts: A 19, B 82, C 10
 Still open: the Kho was rescanned to 393 files (A 249, B 119, C 25; upload flag Yes 28, No 16,
 Pending 205). The per-file table lives in another repository and is not reachable from here; the
 real document text is not in Notion. G-03 stays unverified.
+
+Update 2026-10-23 (second): manifest rebuilt from the owner's table classification-manifest.xlsx.
+393 files, 393 unique valid Drive ids: A 249, B 119, C 25. Approved for egress: the 28 class A files whose
+upload flag is "Co" (Tien's flag; 14 status "Da duyet", 8 "Da kiem snippet", 6 "De xuat theo ten").
+The 13 files approved on 22/10 are all among them and keep their date; the other 15 carry 2026-10-23.
+Refused: A with flag "Cho" 205 (ICH legal notice not scanned) and "Khong" 16; all B (119) and C (25).
+To confirm with the approver: 6 of the 28 are still marked proposed by name, and the flag reads
+"allowed, with source citation", which the quality gate must enforce when such text is used.
+Still open: no document fingerprints; real text not yet loaded (the Drive connector returns text into
+the conversation, so loading all 28 files is a separate step). G-03 stays unverified.
