@@ -45,4 +45,4 @@ holds text from a document that is not class A must stay on the machine.
 
 ## Kho manifest
 
- lists the 393 Kho files by Drive id and class (A 249, B 119, C 25), no file names. It comes from the owner's table  (23/10/2026). Pass it as . Only the 28 class A files whose upload flag is "Co" carry  and ; the other 221 class A files (flag "Cho" 205, "Khong" 16) and every B and C file are refused by the egress gate. The id-to-name table and the spreadsheet stay outside the repository.
+`docs/kho/manifest.json` lists the 393 Kho files by Drive id and class (A 249, B 119, C 25), no file names. It comes from the owner's table `classification-manifest.xlsx` (23/10/2026). Pass it as `--manifest docs/kho/manifest.json`. Only the 28 class A files whose upload flag is "Có" carry `approved_by` and `approved_on`; the other 221 class A files (flag "Chờ" 205, "Không" 16) and every B and C file are refused by the egress gate. The id-to-name table and the spreadsheet stay outside the repository.
