@@ -6,6 +6,7 @@ from qbd_core.modules.evidence.kho_loader import (
     TableRow,
     build_documents,
     inside_a_git_tree,
+    manifest_entries,
     read_table,
 )
 from qbd_core.modules.evidence.knowledge import (
@@ -47,6 +48,7 @@ __all__ = [
     "TableRow",
     "build_documents",
     "inside_a_git_tree",
+    "manifest_entries",
     "read_table",
     "DATA_TAG",
     "PARAGRAPH_TAG",

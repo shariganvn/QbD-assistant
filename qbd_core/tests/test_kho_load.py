@@ -40,13 +40,17 @@ def tiny_pdf(path: Path, text: str) -> None:
     path.write_bytes(out)
 
 
-def make_xlsx(path: Path, rows: list[tuple[str, str, str]]) -> None:
+def make_xlsx(
+    path: Path,
+    rows: list[tuple[str, ...]],
+    header: tuple[str, ...] = ("file_id", "file_name", "nhom"),
+) -> None:
     def cell(ref, text):
         return f'<c r="{ref}" t="inlineStr"><is><t>{text}</t></is></c>'
 
-    sheet_rows = [("file_id", "file_name", "nhom"), *rows]
+    sheet_rows = [header, *rows]
     xml = "".join(
-        f'<row r="{i}">' + "".join(cell(f"{'ABC'[j]}{i}", v) for j, v in enumerate(r)) + "</row>"
+        f'<row r="{i}">' + "".join(cell(f"{chr(65 + j)}{i}", v) for j, v in enumerate(r)) + "</row>"
         for i, r in enumerate(sheet_rows, 1)
     )
     main_ns = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"

@@ -22,7 +22,7 @@ from qbd_core.modules.dossier_drafting.api import (
     propose_cqa,
     validate_intake,
 )
-from qbd_core.modules.egress_gate.api import Destination, try_load_manifest
+from qbd_core.modules.egress_gate.api import Destination, Manifest, try_load_manifest
 from qbd_core.modules.evidence.api import (
     InMemoryKnowledge,
     KhoLoadError,
@@ -31,6 +31,7 @@ from qbd_core.modules.evidence.api import (
     inside_a_git_tree,
     load_documents,
     load_trial_data,
+    manifest_entries,
     read_table,
 )
 from qbd_core.modules.provider_access.api import (
@@ -122,6 +123,7 @@ def checklist_rows(report: QualityReport) -> list[tuple[str, str, str, str]]:
 
 
 EXIT_KHO = 13
+EXIT_MANIFEST_DIFF = 14
 
 
 class BadDate(Exception):  # noqa: N818
@@ -352,4 +354,41 @@ def kho_load(args: argparse.Namespace) -> int:
     reasons = Counter(loaded.skipped.values())
     print(f"loaded {len(loaded.documents)} documents {dict(sorted(by_class.items()))}")
     print(f"skipped {len(loaded.skipped)} {dict(sorted(reasons.items()))}")
+    return 0
+
+
+def add_kho_manifest_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--table", required=True, help="classification-manifest.xlsx of the owner")
+    parser.add_argument("--out", required=True, help="docs/kho/manifest.json")
+    parser.add_argument("--approved-by", required=True, help="who approved the allowed files")
+    parser.add_argument("--approved-on", required=True, help="YYYY-MM-DD for newly allowed files")
+    parser.add_argument("--check", action="store_true", help="compare with --out, write nothing")
+
+
+def kho_manifest(args: argparse.Namespace) -> int:
+    """Build the egress manifest from the owner's table. Dates already in --out are kept."""
+    out = Path(args.out)
+    try:
+        date.fromisoformat(args.approved_on)
+        previous = json.loads(out.read_text("utf-8"))["entries"] if out.exists() else []
+        kept = {e["file_id"]: e["approved_on"] for e in previous if e.get("approved_by")}
+        entries = manifest_entries(read_table(args.table), args.approved_by, args.approved_on, kept)
+        text = json.dumps({"entries": entries}, ensure_ascii=False, indent=2) + "\n"
+        Manifest.model_validate({"entries": entries})
+    except (KhoLoadError, ValueError, KeyError, OSError, TypeError) as failed:
+        print(f"kho manifest failed: {type(failed).__name__}: {failed}", file=sys.stderr)
+        return EXIT_KHO
+    classes = Counter(e["classification"] for e in entries)
+    allowed = sum("approved_by" in e for e in entries)
+    summary = f"{len(entries)} files {dict(sorted(classes.items()))}, {allowed} allowed"
+    if args.check:
+        same = out.exists() and out.read_text("utf-8") == text
+        print(("same as " if same else "differs from ") + f"{out}: {summary}")
+        return 0 if same else EXIT_MANIFEST_DIFF
+    try:
+        publish_all({out: text.encode("utf-8")})
+    except PublishFailed as failed:
+        print(f"publish failed: {failed}", file=sys.stderr)
+        return EXIT_PUBLISH
+    print(f"manifest written: {summary}")
     return 0

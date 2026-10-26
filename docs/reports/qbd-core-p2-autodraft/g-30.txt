@@ -1,0 +1,8 @@
+kho-manifest: repeatable manifest build. 2026-10-26.
+Command: python -m pytest qbd_core -q (499 passed, 1 skipped), ruff clean.
+Checked on the owner's real table: kho-manifest --check reports "same as docs/kho/manifest.json" (393 files,
+A 249, B 119, C 25, 28 allowed), so the committed manifest is exactly what the tool produces.
+Tests: only A with flag "Co" approved; sorted, repeatable bytes; dates already in the manifest kept; --check
+exits 14 and writes nothing on a difference; a flag on a class other than A, an unknown flag or class, an empty
+flag, a bad date and a broken table each exit 13 with nothing written.
+Not done: the spreadsheet is not in the repository (it holds file names); no fingerprints.

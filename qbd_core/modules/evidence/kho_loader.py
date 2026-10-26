@@ -35,6 +35,8 @@ class TableRow:
     file_id: str
     file_name: str
     group: str
+    upload: str = ""  # the owner's upload flag; empty when the sheet has no such column
+    status: str = ""
 
 
 @dataclass(frozen=True)
@@ -100,7 +102,15 @@ def read_table(path: str | Path) -> tuple[TableRow, ...]:
             continue
         if not DRIVE_ID.fullmatch(file_id):
             raise KhoLoadError("E_TABLE_ID", "a file_id is not a Drive id")
-        table.append(TableRow(file_id, r.get(column["file_name"], ""), r.get(column["nhom"], "")))
+        table.append(
+            TableRow(
+                file_id,
+                r.get(column["file_name"], ""),
+                r.get(column["nhom"], ""),
+                r.get(column.get("tai_len_ngoai", ""), ""),
+                r.get(column.get("trang_thai", ""), ""),
+            )
+        )
     ids = [t.file_id for t in table]
     if not table or len(set(ids)) != len(ids):
         raise KhoLoadError("E_TABLE_ID", "empty table or repeated file_id")
@@ -186,3 +196,34 @@ def build_documents(
 def inside_a_git_tree(path: str | Path) -> bool:
     """True when the path sits in a git work tree: such a file could be committed by mistake."""
     return any((parent / ".git").exists() for parent in Path(path).resolve().parents)
+
+
+GROUPS = ("A", "B", "C", "?")
+ALLOWED_FLAG = "Có"
+FLAGS = (ALLOWED_FLAG, "Chờ", "Không")
+
+
+def manifest_entries(
+    table: tuple[TableRow, ...],
+    approved_by: str,
+    approved_on: str,
+    kept_dates: Mapping[str, str] | None = None,
+) -> list[dict[str, str]]:
+    """Egress manifest entries by Drive id and class, no names. Only a class A file whose upload
+    flag is "Có" is approved; everything unclear stops the build instead of being guessed."""
+    kept = kept_dates or {}
+    entries = []
+    for row in sorted(table, key=lambda r: r.file_id):
+        flag = unicodedata.normalize("NFC", row.upload)
+        if row.group not in GROUPS:
+            raise KhoLoadError("E_TABLE_GROUP", row.file_id)
+        if flag not in FLAGS:
+            raise KhoLoadError("E_TABLE_FLAG", f"{row.file_id}: unknown upload flag")
+        if flag == ALLOWED_FLAG and row.group != "A":
+            raise KhoLoadError("E_TABLE_FLAG", f"{row.file_id}: only class A can be allowed")
+        entry = {"file_id": row.file_id, "classification": row.group}
+        if flag == ALLOWED_FLAG:
+            entry["approved_by"] = approved_by
+            entry["approved_on"] = kept.get(row.file_id, approved_on)
+        entries.append(entry)
+    return entries
