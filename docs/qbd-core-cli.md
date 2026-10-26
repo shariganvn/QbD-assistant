@@ -57,8 +57,12 @@ holds text from a document that is not class A must stay on the machine.
 
 ## Web interface
 
-`python -m qbd_core serve --documents docs.json [--workdir runs] [--port 8765] [--provider NAME --model M --manifest manifest.json]`
+`python -m qbd_core user-add --users-file users.json --name NAME --role researcher|head` (password asked twice, never taken from arguments; also `user-list`, `user-remove`; exit 15 on any accounts failure). Keep the accounts file outside the repo.
 
-A local page around `run`: three inputs, CQA candidates the person ticks and signs, then the draft, the Data Gap Register and the quality checklist. Each run goes through `run.run`, so the draft, quality report and HTML are byte-for-byte what the command line writes for the same inputs. Files go to `<workdir>/<timestamp>/` (`draft.json`, `draft.quality.json`, `html/`, `cqa-confirmation.json`, `run.json`).
+`python -m qbd_core serve --documents docs.json --users-file users.json [--workdir runs] [--port 8765] [--provider NAME --model M --manifest manifest.json]`
 
-Safeguards: loopback only; requests with another `Host` are refused; every POST needs the per-start token; bodies over 64 KB are refused; only run ids of the form `YYYYMMDDTHHMMSS` are served. Provider settings come from the command line only; the page shows them read-only. There is no login, no project list, no CSV export and no button for the head-of-R&D approval (A13).
+A local page around `run`: sign in, three inputs, CQA candidates the signed-in person ticks (the confirmer is the account name, not a typed field), then the draft, the Data Gap Register and the quality checklist. Each run goes through `run.run`, so the draft, quality report and HTML are byte-for-byte what the command line writes for the same inputs. Files go to `<workdir>/<timestamp>/` (`draft.json`, `draft.quality.json`, `html/`, `cqa-confirmation.json`, `run.json`, `project.json`, `a13-record-<n>.json`). The project list reads `project.json`; `gaps.csv` and `checklist.csv` export a run (UTF-8 with BOM, cells that start with `=`, `+`, `-`, `@`, tab or CR get a leading quote).
+
+Roles: `researcher` creates and views; `head` can also record the A13 signature. The record names who signed, when, and the SHA-256 of `draft.json`, `draft.quality.json` and the HTML. It never changes the draft and unlocks no step; if the draft changes afterwards the page shows that the signature no longer matches. A second record needs a note and the first is kept.
+
+Safeguards: loopback only; another `Host` is refused; every POST needs the per-start token and a session; the session cookie is `HttpOnly; SameSite=Strict` and lasts 8 hours; five wrong passwords lock a name for a minute; bodies over 64 KB are refused; only run ids of the form `YYYYMMDDTHHMMSS` are served; the server will not start without a usable accounts file. Sign-in only separates people sharing one machine; it does not protect against someone who can read the disk. Provider settings come from the command line only and the page shows them read-only. There is no sign-up page and no switch for providers.

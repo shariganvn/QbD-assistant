@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 from collections.abc import Sequence
 
-from qbd_core import __version__, accept, run, webapp
+from qbd_core import __version__, accept, run, users, webapp
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -30,6 +30,9 @@ def build_parser() -> argparse.ArgumentParser:
     webapp.add_arguments(
         commands.add_parser("serve", help="local web page around `run`, loopback only")
     )
+    users.add_add_arguments(commands.add_parser("user-add", help="add a web page account"))
+    users.add_list_arguments(commands.add_parser("user-list", help="list web page accounts"))
+    users.add_remove_arguments(commands.add_parser("user-remove", help="remove a web page account"))
     return parser
 
 
@@ -47,6 +50,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         return run.kho_manifest(args)
     if args.command == "accept":
         return accept.accept(args)
+    if args.command == "user-add":
+        return users.user_add(args)
+    if args.command == "user-list":
+        return users.user_list(args)
+    if args.command == "user-remove":
+        return users.user_remove(args)
     if args.command == "serve":
         return webapp.serve(args)
     build_parser().print_help()

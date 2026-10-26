@@ -2,10 +2,8 @@
 
 from __future__ import annotations
 
-import argparse
 import http.client
 import json
-import threading
 from pathlib import Path
 from urllib.parse import urlencode
 
@@ -21,29 +19,13 @@ FORM = {"form": "Viên nén", "market": "both"}
 CQA = ["Assay", "Dissolution"]
 
 
-@pytest.fixture
-def server(tmp_path):
-    args = argparse.Namespace(
-        documents=str(DOCS),
-        workdir=str(tmp_path / "runs"),
-        port=0,
-        provider=None,
-        model=None,
-        manifest=None,
-    )
-    httpd = webapp.make_server(args)
-    thread = threading.Thread(target=httpd.serve_forever, daemon=True)
-    thread.start()
-    yield httpd, httpd.RequestHandlerClass.ctx
-    httpd.shutdown()
-    httpd.server_close()
-
-
-def call(server, method, path, fields=None, token=True, host=None, headers=None):
+def call(server, method, path, fields=None, token=True, host=None, headers=None, user="researcher"):
     httpd, ctx = server
     port = httpd.server_address[1]
     conn = http.client.HTTPConnection("127.0.0.1", port, timeout=20)
     head = {"Host": host or f"127.0.0.1:{port}", **(headers or {})}
+    if user:
+        head["Cookie"] = f"{webapp.COOKIE}={ctx.sids[user]}"
     body = None
     if fields is not None:
         data = dict(fields)
@@ -61,7 +43,7 @@ def inputs(substances=("Atorvastatin calcium",), **extra):
 
 
 def signed(**extra):
-    return inputs(cqa=CQA, confirmed_by="Nguyễn Văn A", confirmed_on="2026-01-01", **extra)
+    return inputs(cqa=CQA, confirmed_on="2026-01-01", **extra)
 
 
 def runs(ctx):
