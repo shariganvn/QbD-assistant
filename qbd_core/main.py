@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 from collections.abc import Sequence
 
-from qbd_core import __version__, accept, run
+from qbd_core import __version__, accept, run, webapp
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -27,6 +27,9 @@ def build_parser() -> argparse.ArgumentParser:
     accept.add_arguments(
         commands.add_parser("accept", help="run the acceptance cases and write one report each")
     )
+    webapp.add_arguments(
+        commands.add_parser("serve", help="local web page around `run`, loopback only")
+    )
     return parser
 
 
@@ -44,5 +47,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return run.kho_manifest(args)
     if args.command == "accept":
         return accept.accept(args)
+    if args.command == "serve":
+        return webapp.serve(args)
     build_parser().print_help()
     return 0

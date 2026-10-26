@@ -1,6 +1,7 @@
 """Public entry points of the dossier_drafting module. Other modules import only from here."""
 
 from qbd_core.modules.dossier_drafting.agents.llm import AgentInfrastructureError, LlmSetup
+from qbd_core.modules.dossier_drafting.agents.registry import status_rows as agent_status_rows
 from qbd_core.modules.dossier_drafting.assemble import (
     CQA_SECTION,
     DraftingRefused,
@@ -8,6 +9,9 @@ from qbd_core.modules.dossier_drafting.assemble import (
     assemble_draft,
 )
 from qbd_core.modules.dossier_drafting.calc import CalcError, f2
+from qbd_core.modules.dossier_drafting.config import (
+    forms as dosage_forms,
+)
 from qbd_core.modules.dossier_drafting.config import (
     group_gaps,
     groups,
@@ -43,6 +47,8 @@ from qbd_core.modules.dossier_drafting.subdivision import verify as verify_subdi
 
 __all__ = [
     "SUBDIVISION_TAG",
+    "agent_status_rows",
+    "dosage_forms",
     "subdivision_files",
     "verify_subdivision",
     "F2_TAG",

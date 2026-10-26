@@ -54,3 +54,11 @@ holds text from a document that is not class A must stay on the machine.
 ## Rebuilding the Kho manifest
 
 `kho-manifest --table classification-manifest.xlsx --out docs/kho/manifest.json --approved-by NAME --approved-on YYYY-MM-DD [--check]` rebuilds the egress manifest from the owner's table (sheet `Manifest`, columns `file_id`, `file_name`, `nhom`, `tai_len_ngoai`). Only a class A file whose upload flag is "Có" is approved; dates already in `--out` are kept, new ones take `--approved-on`. It stops with exit 13 (nothing written) on an unknown class or flag, a flag "Có" on a class other than A, a repeated or malformed id, an unreadable table or a bad date. With `--check` it writes nothing and exits 14 when the result differs from `--out`; run it after every change to the table. The spreadsheet itself stays outside the repository.
+
+## Web interface
+
+`python -m qbd_core serve --documents docs.json [--workdir runs] [--port 8765] [--provider NAME --model M --manifest manifest.json]`
+
+A local page around `run`: three inputs, CQA candidates the person ticks and signs, then the draft, the Data Gap Register and the quality checklist. Each run goes through `run.run`, so the draft, quality report and HTML are byte-for-byte what the command line writes for the same inputs. Files go to `<workdir>/<timestamp>/` (`draft.json`, `draft.quality.json`, `html/`, `cqa-confirmation.json`, `run.json`).
+
+Safeguards: loopback only; requests with another `Host` are refused; every POST needs the per-start token; bodies over 64 KB are refused; only run ids of the form `YYYYMMDDTHHMMSS` are served. Provider settings come from the command line only; the page shows them read-only. There is no login, no project list, no CSV export and no button for the head-of-R&D approval (A13).

@@ -155,6 +155,15 @@ def status_of(agent_id: str) -> tuple[Status, str]:
     return IMPLEMENTED.get(agent_id, ("pending", ""))
 
 
+def status_rows() -> tuple[tuple[str, str, str, str, str], ...]:
+    """(id, name, kind, status, reason) for every agent, in file order."""
+    rows = []
+    for agent in load_agents().values():
+        status, reason = status_of(agent.id)
+        rows.append((agent.id, agent.name, agent.kind, status, reason))
+    return tuple(rows)
+
+
 def agents_for_section(section_id: str) -> tuple[AgentSpec, ...]:
     return tuple(a for a in load_agents().values() if section_id in a.targets)
 

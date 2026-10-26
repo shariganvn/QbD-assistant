@@ -1,0 +1,8 @@
+Local web interface (`serve`), evidence
+Command: python -m pytest qbd_core/tests/test_webapp.py -q
+Covers: loopback bind, foreign Host refused, missing or wrong token refused, oversized body 413,
+non-form body refused, paths outside a run id 404, rejected input creates no run, unconfirmed CQA
+(exit 5) and future date write no draft, combination refused (exit 3), confirmed run shows gaps
+and the draft page, web draft/quality/HTML equal the command line byte for byte, system page read-only.
+Full suite: 521 passed, 1 skipped; ruff clean.
+Status: not a plan gate; A13 sign-off, G-03, G-08, G-10 remain unverified.
