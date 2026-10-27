@@ -1,0 +1,54 @@
+G-08 numbering check against the sources (27/10/2026)
+
+Sources given by the owner
+- ICH M4Q(R1), Step 4, 2002-09-12 (JSON extract). 3.2.P.2 on PDF pages 18-19, 3.2.P.8 on page 22.
+- Phụ lục I ACTD, DỰ THẢO 2025 ("ban hành kèm theo Thông tư số .../2025/TT-BYT", JSON extract of a 336-page PDF).
+  Part IV Hồ sơ chất lượng, P 2 on pages 24-26, P8 and P9 on page 30, requirement table on pages 13-14 and 17.
+- Thông tư 32/2026/TT-BYT (vbpl.vn; còn hiệu lực, hiệu lực từ 01/10/2026), read from the web page.
+
+Result: CTD side
+All ten CTD codes of the map exist in M4Q(R1) with the same title: P.2.1.1 Drug Substance, P.2.1.2 Excipients,
+P.2.2.1 Formulation Development, P.2.2.2 Overages, P.2.2.3 Physicochemical and Biological Properties,
+P.2.3 Manufacturing Process Development, P.2.4 Container Closure System, P.2.5 Microbiological Attributes,
+P.2.6 Compatibility, P.8 Stability.
+
+Result: ACTD side (draft annex)
+ctd -> actd in the map, each present in the draft with the same meaning:
+P.2.1.1 -> P2.2.1 Hoạt chất | P.2.1.2 -> P2.2.2 Tá dược | P.2.2.1 -> P2.3.1 | P.2.2.2 -> P2.3.2 | P.2.2.3 -> P2.3.3
+P.2.3 -> P2.4 Phát triển quy trình sản xuất | P.2.4 -> P2.5 Hệ thống bao bì đóng gói | P.2.5 -> P2.6 Thuộc tính vi sinh vật
+P.2.6 -> P2.7 Tính tương hợp | P.8 -> P8 Độ ổn định | (no CTD) -> P9 Khả năng thay thế lẫn nhau của sản phẩm
+Generic column (table pages 13-14, 17) against the map's requirement note:
+P2.2.1 literature = map | P2.2.2 empty (not required) = map | P2.3.1-3 required = map | P2.5, P2.6 required = map
+P2.7 literature = map | P8 required = map | P9 required (in vitro and in vivo) = map after the note below
+Differences found
+1. Titles: the map said "Hệ bao bì" and "Thuộc tính vi sinh"; the draft says "Hệ thống bao bì đóng gói" and
+   "Thuộc tính vi sinh vật". Official titles are now carried as actd_title and ctd_title in the map.
+2. P9 note named only in vitro dissolution; the draft names in vitro and in vivo (bioequivalence). Note extended and
+   marked mandatory.
+3. P2.4 (CTD P.2.3), domestic: the SOP marks it "recommended"; the draft table asks for it from NCE and biotech
+   only and leaves the generic column empty, which reads as not required. Left as the SOP has it and recorded in the
+   test fixture (known_differences). OWNER DECISION: keep "recommended" or change to "not required".
+4. ACTD P 2.1 (development studies) has no counterpart in the map; it applies to NCE and biotech only, so nothing is
+   drafted for a generic. The test records this.
+
+Thông tư 32/2026/TT-BYT
+Điều 2 defines ACTD and ICH-CTD. Điều 25 khoản 1-2: a drug dossier follows ACTD or ICH-CTD; for chemical drugs under
+ACTD, Part I administrative and Part II technical (quality, non-clinical, clinical); under ICH-CTD, Modules I to V.
+Điều 27 khoản 1: quality documents follow ACTD Part II or ICH-CTD Modules 2 and 3. The circular does not carry the
+section numbering itself, and the page does not attach an ACTD annex. Its own "Phụ lục I" is the fixed-dose
+combination clinical guidance, not the ACTD. So TT32 confirms that both formats are accepted for the domestic market
+(which is what the "both" and "domestic" cases rely on) and nothing more about numbering.
+
+What changed in the repo
+- config/ctd_actd_map.json: source text, checked_against, ctd_title, actd_title, P9 note.
+- quality_gate/tests/fixtures/source-sections.json and test_numbering_sources.py (codes, titles and the generic column
+  of the sources; every mapped number exists, titles equal, requirements equal except the one recorded difference;
+  the recorded difference must still differ).
+- Checklist item 15 for domestic and both markets stays "review" with a new detail: it matches the draft annex and
+  ICH M4Q(R1) and waits for the issued annex.
+
+Not closed
+- The ACTD source is a draft. If the issued annex has other numbers, the map must be checked again against it.
+- Owner decision on difference 3.
+- The HTML headings still do not print ACTD numbers.
+Full suite: 623 passed, 1 skipped; ruff clean.

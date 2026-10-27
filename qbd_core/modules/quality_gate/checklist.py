@@ -72,7 +72,11 @@ def mechanical_items(findings: list[Finding], market_has_actd: bool, map_verifie
         entry = texts[check]
         status, detail = ("fail", "xem findings") if codes & bad else ("pass", note)
         if check == "numbering" and status == "pass" and market_has_actd and not map_verified:
-            status, detail = "review", "ánh xạ ACTD lấy từ SOP, chưa đối chiếu Phụ lục I và TT32"
+            status, detail = (
+                "review",
+                "ánh xạ ACTD khớp dự thảo Phụ lục I (2025) và ICH M4Q(R1); "
+                "chờ bản Phụ lục I ban hành để khẳng định",
+            )
         items.append(
             ChecklistItem(no=entry["no"], text=entry["text"], status=status, detail=detail)
         )

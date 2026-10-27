@@ -1,72 +1,97 @@
 {
-  "source": "SOP-RD-001 v02, Phụ lục A. Chưa đối chiếu với Phụ lục I ACTD chính thức và TT32 trong Kho.",
+  "source": "SOP-RD-001 v02, Phụ lục A; đối chiếu 27/10/2026 với ICH M4Q(R1) và Phụ lục I ACTD dự thảo 2025 (xem docs/reports/qbd-core-p2-autodraft/g-08.txt)",
   "verified_against_kho": false,
   "sections": [
     {
       "ctd": "P.2.1.1",
       "actd": "P2.2.1",
       "title": "Hoạt chất",
-      "generic_actd_note": "Tài liệu khoa học"
+      "generic_actd_note": "Tài liệu khoa học",
+      "ctd_title": "Drug Substance",
+      "actd_title": "Hoạt chất"
     },
     {
       "ctd": "P.2.1.2",
       "actd": "P2.2.2",
       "title": "Tá dược",
-      "generic_actd_note": "Không yêu cầu"
+      "generic_actd_note": "Không yêu cầu",
+      "ctd_title": "Excipients",
+      "actd_title": "Tá dược"
     },
     {
       "ctd": "P.2.2.1",
       "actd": "P2.3.1",
       "title": "Phát triển công thức",
-      "generic_actd_note": "Bắt buộc"
+      "generic_actd_note": "Bắt buộc",
+      "ctd_title": "Formulation Development",
+      "actd_title": "Phát triển công thức bào chế"
     },
     {
       "ctd": "P.2.2.2",
       "actd": "P2.3.2",
       "title": "Lượng đóng dư",
-      "generic_actd_note": "Bắt buộc"
+      "generic_actd_note": "Bắt buộc",
+      "ctd_title": "Overages",
+      "actd_title": "Lượng đóng dư"
     },
     {
       "ctd": "P.2.2.3",
       "actd": "P2.3.3",
       "title": "Đặc tính lý hóa và sinh học",
-      "generic_actd_note": "Bắt buộc"
+      "generic_actd_note": "Bắt buộc",
+      "ctd_title": "Physicochemical and Biological Properties",
+      "actd_title": "Đặc tính hoá lý và sinh học"
     },
     {
       "ctd": "P.2.3",
       "actd": "P2.4",
       "title": "Phát triển quy trình sản xuất",
-      "generic_actd_note": "Mục đánh dấu NCE/Biotech; EU yêu cầu"
+      "generic_actd_note": "Mục đánh dấu NCE/Biotech; EU yêu cầu",
+      "ctd_title": "Manufacturing Process Development",
+      "actd_title": "Phát triển quy trình sản xuất"
     },
     {
       "ctd": "P.2.4",
       "actd": "P2.5",
       "title": "Hệ bao bì",
-      "generic_actd_note": "Bắt buộc"
+      "generic_actd_note": "Bắt buộc",
+      "ctd_title": "Container Closure System",
+      "actd_title": "Hệ thống bao bì đóng gói"
     },
     {
       "ctd": "P.2.5",
       "actd": "P2.6",
       "title": "Thuộc tính vi sinh",
-      "generic_actd_note": "Bắt buộc"
+      "generic_actd_note": "Bắt buộc",
+      "ctd_title": "Microbiological Attributes",
+      "actd_title": "Thuộc tính vi sinh vật"
     },
     {
       "ctd": "P.2.6",
       "actd": "P2.7",
       "title": "Tính tương hợp",
-      "generic_actd_note": "Tài liệu khoa học"
+      "generic_actd_note": "Tài liệu khoa học",
+      "ctd_title": "Compatibility",
+      "actd_title": "Tính tương hợp"
     },
     {
       "ctd": "P.8",
       "actd": "P8",
       "title": "Độ ổn định",
-      "generic_actd_note": "Bắt buộc"
+      "generic_actd_note": "Bắt buộc",
+      "ctd_title": "Stability",
+      "actd_title": "Độ ổn định"
     },
     {
       "ctd": null,
       "actd": "P9",
       "title": "Khả năng thay thế lẫn nhau",
-      "generic_actd_note": "Dữ liệu hòa tan in vitro"
+      "generic_actd_note": "Bắt buộc: dữ liệu hòa tan in vitro và tương đương sinh học in vivo (ACTD P9, áp dụng cho MaV và generic)",
+      "actd_title": "Khả năng thay thế lẫn nhau của sản phẩm"
     }
+  ],
+  "checked_against": [
+    "ICH M4Q(R1) Step 4, 2002-09-12",
+    "Phụ lục I ACTD, dự thảo 2025 (chưa phải bản ban hành)"
   ]
 }
