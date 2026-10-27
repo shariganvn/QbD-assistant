@@ -66,3 +66,7 @@ A local page around `run`: sign in, three inputs, CQA candidates the signed-in p
 Roles: `researcher` creates and views; `head` can also record the A13 signature. The record names who signed, when, and the SHA-256 of `draft.json`, `draft.quality.json` and the HTML. It never changes the draft and unlocks no step; if the draft changes afterwards the page shows that the signature no longer matches. A second record needs a note and the first is kept.
 
 Safeguards: loopback only; another `Host` is refused; every POST needs the per-start token and a session; the session cookie is `HttpOnly; SameSite=Strict` and lasts 8 hours; five wrong passwords lock a name for a minute; bodies over 64 KB are refused; only run ids of the form `YYYYMMDDTHHMMSS` are served; the server will not start without a usable accounts file. Sign-in only separates people sharing one machine; it does not protect against someone who can read the disk. Provider settings come from the command line only and the page shows them read-only. There is no sign-up page and no switch for providers.
+
+## Doctor
+
+`doctor [--documents F] [--manifest F] [--users-file F] [--provider NAME --model M] [--workdir DIR]` checks what a real run needs and writes nothing and sends nothing. It prints `[ok]`, `[FAIL]` or `[skip]` per item with counts and file ids only (never file names, text or key values) and exits 17 when anything fails. The provider check uses the same function `run` uses to refuse (`run.provider_problems`), so the two always agree. The full order of steps is in `docs/qbd-core-quickstart.md`.

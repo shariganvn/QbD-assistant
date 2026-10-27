@@ -8,6 +8,7 @@ import os
 import sys
 import tempfile
 from collections import Counter
+from collections.abc import Mapping
 from datetime import date
 from pathlib import Path
 
@@ -172,26 +173,48 @@ def _llm(args: argparse.Namespace) -> LlmSetup | None:
     return LlmSetup(ProviderGateway(provider, {model}, manifest), model)
 
 
+def provider_problems(
+    name: str,
+    model: str | None,
+    manifest_path: str | None,
+    environ: Mapping[str, str],
+    recording: str | None = None,
+) -> list[str]:
+    """Every reason a real provider cannot be used now, first reason first. Empty means usable.
+
+    `run` refuses on the first entry; `doctor` lists them all, so both answer the same way."""
+    try:
+        config = load_config(name)
+    except (OSError, ValueError, KeyError, TypeError, VendorSetupError) as error:
+        return [f"providers.json unusable: {type(error).__name__}"]
+    problems: list[str] = []
+    if recording is not None or not model:
+        problems.append("--provider takes --model and no --provider-recording")
+    if not config.enabled:
+        problems.append("provider is switched off in providers.json")
+    if model and model not in config.approved_models:
+        problems.append("model is not on the approved list")
+    manifest = try_load_manifest(manifest_path) if manifest_path else None
+    if manifest is None:
+        problems.append("--manifest is missing or unreadable; nothing can be sent")
+    if config.enabled and not environ.get(config.api_key_env):
+        problems.append(f"{config.api_key_env} is not set")
+    if not problems:
+        try:
+            build_provider(name, config, environ)
+        except VendorSetupError as error:
+            problems.append(str(error))
+    return problems
+
+
 def _real_llm(args: argparse.Namespace, recording: str | None, model: str | None) -> LlmSetup:
     """Every missing prerequisite refuses; nothing falls back to another provider."""
-    try:
-        config = load_config(args.provider)
-    except (OSError, ValueError, KeyError, TypeError, VendorSetupError) as error:
-        raise ProviderSetupError(f"providers.json unusable: {type(error).__name__}") from error
     path = getattr(args, "manifest", None)
-    manifest = try_load_manifest(path) if path else None
-    if recording is not None or not model:
-        raise ProviderSetupError("--provider takes --model and no --provider-recording")
-    if not config.enabled:
-        raise ProviderSetupError("provider is switched off in providers.json")
-    if model not in config.approved_models:
-        raise ProviderSetupError("model is not on the approved list")
-    if manifest is None:
-        raise ProviderSetupError("--manifest is missing or unreadable; nothing can be sent")
-    try:
-        provider = build_provider(args.provider, config, os.environ)
-    except VendorSetupError as error:
-        raise ProviderSetupError(str(error)) from error
+    problems = provider_problems(args.provider, model, path, os.environ, recording)
+    if problems:
+        raise ProviderSetupError(problems[0])
+    manifest = try_load_manifest(path)
+    provider = build_provider(args.provider, load_config(args.provider), os.environ)
     return LlmSetup(ProviderGateway(provider, {model}, manifest), model)
 
 

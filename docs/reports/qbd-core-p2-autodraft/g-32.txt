@@ -1,0 +1,10 @@
+doctor, a read-only readiness check
+Command: python -m pytest qbd_core/tests/test_doctor.py -q
+Covers: documents unreadable or with a repeated file_id; manifest missing; documents absent from the manifest or with
+another class; accounts file missing or lacking a role; workdir not writable; each provider case (shipped off, no model,
+model not approved, no manifest, no key, ready) gives the same answer in doctor and in run (exit 9); no network use
+(socket connect is refused in the test); key value and file names never appear in the output.
+Real check: doctor with the fixture documents and docs/kho/manifest.json reported the 2 fixture ids missing from the
+manifest and the provider switched off, exit 17.
+Full suite: 589 passed, 1 skipped; ruff clean.
+Status: not a plan gate. Real Kho text, API key and A13 sign-off remain with the owner.
