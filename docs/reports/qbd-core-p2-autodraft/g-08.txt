@@ -62,3 +62,7 @@ Update 27/10/2026 (owner decisions, see docs/decisions/D20261027-g08-numbering-o
   check rejects a page missing a number.
 - Gate status stays unverified until the SOP is amended and the issued annex (if it differs) is checked.
 Full suite: 627 passed, 1 skipped; ruff clean.
+
+Update 27/10/2026 (later): the owner reports SOP-RD-001 Appendix A amended as proposed in
+docs/decisions/D20261027-sop-rd-001-v02-amendment-text.md; recorded here as v02.1 (the number is the proposed one; the
+owner confirms it). The map source now names it. Remaining for G-08: the issued Phụ lục I, if its numbers differ from the draft.

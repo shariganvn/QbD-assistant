@@ -160,7 +160,7 @@ gates:
       - a missing mandatory ACTD section fails
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-08.txt
     owner_step: "05"
-    progress: mapping complete and tested for the three markets; on 27/10/2026 every CTD code and ACTD number of P.2 and P.8 was checked against ICH M4Q(R1) and Phụ lục I ACTD dự thảo 2025 and the generic-product requirement against the ACTD table (docs/reports/qbd-core-p2-autodraft/g-08.txt, test_numbering_sources.py); owner decisions of 27/10/2026 applied (P.2.3 domestic not required, draft annex as reference, ACTD numbers printed in the HTML, see docs/decisions/D20261027-g08-numbering-owner-decisions.md); NOT closed: SOP-RD-001 v02 Appendix A still to be amended by the owner, and the ACTD source is a draft annex (TT32 Điều 25, 27 points to ACTD or ICH-CTD without carrying the numbering)
+    progress: mapping complete and tested for the three markets; on 27/10/2026 every CTD code and ACTD number of P.2 and P.8 was checked against ICH M4Q(R1) and Phụ lục I ACTD dự thảo 2025 and the generic-product requirement against the ACTD table (docs/reports/qbd-core-p2-autodraft/g-08.txt, test_numbering_sources.py); owner decisions of 27/10/2026 applied (P.2.3 domestic not required, draft annex as reference, ACTD numbers printed in the HTML, see docs/decisions/D20261027-g08-numbering-owner-decisions.md); SOP-RD-001 Appendix A amended by the owner (recorded as v02.1, 27/10/2026); NOT closed: the ACTD source is a draft annex (TT32 Điều 25, 27 points to ACTD or ICH-CTD without carrying the numbering)
     status: unverified
 
   - id: G-09
