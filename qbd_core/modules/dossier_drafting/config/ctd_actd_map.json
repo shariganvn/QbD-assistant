@@ -46,7 +46,7 @@
       "ctd": "P.2.3",
       "actd": "P2.4",
       "title": "Phát triển quy trình sản xuất",
-      "generic_actd_note": "Mục đánh dấu NCE/Biotech; EU yêu cầu",
+      "generic_actd_note": "Không yêu cầu cho thuốc generic (ACTD P2.4 chỉ yêu cầu NCE và biotech); EU yêu cầu",
       "ctd_title": "Manufacturing Process Development",
       "actd_title": "Phát triển quy trình sản xuất"
     },
@@ -93,5 +93,25 @@
   "checked_against": [
     "ICH M4Q(R1) Step 4, 2002-09-12",
     "Phụ lục I ACTD, dự thảo 2025 (chưa phải bản ban hành)"
+  ],
+  "parents": [
+    {
+      "ctd": "P.2",
+      "ctd_title": "Pharmaceutical Development",
+      "actd": "P2",
+      "actd_title": "Sự phát triển dược học"
+    },
+    {
+      "ctd": "P.2.1",
+      "ctd_title": "Components of the Drug Product",
+      "actd": "P2.2",
+      "actd_title": "Thành phần của thành phẩm thuốc"
+    },
+    {
+      "ctd": "P.2.2",
+      "ctd_title": "Drug Product",
+      "actd": "P2.3",
+      "actd_title": "Thành phẩm thuốc"
+    }
   ]
 }

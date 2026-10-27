@@ -42,6 +42,11 @@ def section_map() -> tuple[dict[str, Any], ...]:
 
 
 @cache
+def parent_sections() -> tuple[dict[str, str], ...]:
+    """Headings above the leaf sections, with their ACTD numbers. Used for headings only."""
+    return tuple(_load("ctd_actd_map.json")["parents"])
+
+
 def section_map_verified() -> bool:
     """True once the SOP numbering was checked against the official ACTD Appendix I and TT32."""
     return bool(_load("ctd_actd_map.json")["verified_against_kho"])

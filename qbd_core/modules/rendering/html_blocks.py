@@ -96,14 +96,19 @@ def block(
     raise RenderFailed("E_BLOCK_UNSUPPORTED", f"{section_id}: {kind}")
 
 
-def heading_text(entry: dict[str, Any], meta: dict[str, Any]) -> str:
+def heading_text(entry: dict[str, Any], meta: dict[str, Any], actd: str | None = None) -> str:
     text = entry["headingVi"]
     index = (entry.get("form") or {}).get("strengthIndex")
     if index is not None and "{strength}" in text:
         strengths = meta["strengths"]
         name = strengths[index] if index < len(strengths) else "hàm lượng khác (không áp dụng)"
         text = text.replace("{strength}", name)
-    return f"{entry['ctdReference']} {text}"
+    return f"{section_label(entry, actd)} {text}"
+
+
+def section_label(entry: dict[str, Any], actd: str | None = None) -> str:
+    """The CTD number, followed by the ACTD number when the market has one."""
+    return f"{entry['ctdReference']} (ACTD {actd})" if actd else entry["ctdReference"]
 
 
 def level(entry: dict[str, Any]) -> int:

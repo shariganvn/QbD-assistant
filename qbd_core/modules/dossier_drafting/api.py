@@ -15,6 +15,7 @@ from qbd_core.modules.dossier_drafting.config import (
 from qbd_core.modules.dossier_drafting.config import (
     group_gaps,
     groups,
+    parent_sections,
     section_map,
     section_map_verified,
 )
@@ -74,6 +75,7 @@ __all__ = [
     "load_outline",
     "most_strength_sections",
     "section_map_verified",
+    "parent_sections",
     "intake_digest",
     "load_confirmation",
     "propose_cqa",

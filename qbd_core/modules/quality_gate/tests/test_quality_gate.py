@@ -225,7 +225,7 @@ def test_numbering_follows_the_market():
         domestic["P.2.1.2.1"].actd == "P2.2.2"
         and domestic["P.2.1.2.1"].requirement == "not_required"
     )
-    assert domestic["P.2.3.2"].requirement == "recommended"
+    assert domestic["P.2.3.2"].requirement == "not_required"
     assert both["P.2.5"].ctd == "3.2.P.2.5" and both["P.2.5"].actd == "P2.6"
 
 

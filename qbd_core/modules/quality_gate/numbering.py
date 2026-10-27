@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from qbd_core.modules.dossier_drafting.api import leaf_sections, section_map
+from qbd_core.modules.dossier_drafting.api import leaf_sections, parent_sections, section_map
 from qbd_core.modules.quality_gate.models import Finding, NumberingRow, Requirement
 from qbd_core.shared.contracts import Market
 
@@ -56,3 +56,15 @@ def numbering_for(
             )
         )
     return tuple(rows), findings
+
+
+def actd_numbers(market: Market, outline: dict[str, Any]) -> dict[str, str]:
+    """ACTD number of the headings that sit at a mapped level, for this market; empty for the EU.
+
+    Deeper headings belong to the mapped section above them and carry no number of their own."""
+    if market is Market.EU:
+        return {}
+    numbers = {e["ctd"]: e["actd"] for e in section_map() if e["ctd"]}
+    numbers.update({p["ctd"]: p["actd"] for p in parent_sections()})
+    ids = {s["id"] for s in outline["sections"]}
+    return {section: actd for section, actd in numbers.items() if section in ids}

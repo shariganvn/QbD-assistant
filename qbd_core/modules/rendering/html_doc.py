@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from typing import Any
 
 from qbd_core.modules.rendering import annex
@@ -13,6 +13,7 @@ from qbd_core.modules.rendering.html_blocks import (
     level,
     marked,
     risk_classes,
+    section_label,
     table,
 )
 from qbd_core.shared.markers import kind_of
@@ -113,13 +114,15 @@ def section_body(
     return out
 
 
-def sections_html(draft: dict[str, Any], outline: dict[str, Any]) -> str:
+def sections_html(
+    draft: dict[str, Any], outline: dict[str, Any], actd: Mapping[str, str] | None = None
+) -> str:
     by_id = {s["id"]: s for s in draft["sections"]}
     risk = risk_classes(outline)
     parts = []
     for entry in outline["sections"]:
         lvl = level(entry)
-        title = marked(heading_text(entry, draft["meta"]))
+        title = marked(heading_text(entry, draft["meta"], (actd or {}).get(entry["id"])))
         parts.append(f'<h{lvl} id="s-{esc(entry["id"])}">{title}</h{lvl}>')
         section = by_id.get(entry["id"])
         if section is not None:
@@ -143,10 +146,15 @@ def strip_html(meta: dict[str, Any]) -> str:
     )
 
 
-def registers_html(draft: dict[str, Any], outline: dict[str, Any]) -> str:
+def registers_html(
+    draft: dict[str, Any], outline: dict[str, Any], actd: Mapping[str, str] | None = None
+) -> str:
     requests, decisions = annex.collect(draft, outline)
     status = [
-        [e["ctdReference"], "Đã có nội dung" if s["status"] == "covered" else "Khoảng trống"]
+        [
+            section_label(e, (actd or {}).get(e["id"])),
+            "Đã có nội dung" if s["status"] == "covered" else "Khoảng trống",
+        ]
         for e in outline["sections"]
         if (s := next((x for x in draft["sections"] if x["id"] == e["id"]), None))
     ]
@@ -176,6 +184,7 @@ def build_html(
     draft: dict[str, Any],
     outline: dict[str, Any],
     checklist: Sequence[Sequence[str]] | None = None,
+    actd: Mapping[str, str] | None = None,
 ) -> str:
     meta = draft["meta"]
     provenance = (
@@ -205,8 +214,8 @@ def build_html(
         f"<p>{esc(provenance)}</p><p><strong>{esc(NOTICE_2)}</strong></p></div>"
         + table(["Thông tin", "Giá trị"], facts)
         + abbreviations_html(meta)
-        + sections_html(draft, outline)
-        + registers_html(draft, outline)
+        + sections_html(draft, outline, actd)
+        + registers_html(draft, outline, actd)
         + checklist_html(checklist)
         + f"<h2>{esc(SIGNOFF_HEADING)}</h2>"
         + table(["Vai trò", "Họ tên", "Chữ ký", "Ngày"], signoff)

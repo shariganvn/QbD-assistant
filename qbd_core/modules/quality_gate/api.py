@@ -7,5 +7,13 @@ from qbd_core.modules.quality_gate.models import (
     NumberingRow,
     QualityReport,
 )
+from qbd_core.modules.quality_gate.numbering import actd_numbers
 
-__all__ = ["ChecklistItem", "Finding", "NumberingRow", "QualityReport", "evaluate_run"]
+__all__ = [
+    "actd_numbers",
+    "ChecklistItem",
+    "Finding",
+    "NumberingRow",
+    "QualityReport",
+    "evaluate_run",
+]

@@ -20,6 +20,7 @@ from qbd_core.modules.dossier_drafting.api import (
     LlmSetup,
     assemble_draft,
     load_confirmation,
+    load_outline,
     propose_cqa,
     validate_intake,
 )
@@ -43,7 +44,7 @@ from qbd_core.modules.provider_access.api import (
     load_config,
 )
 from qbd_core.modules.provider_access.api import ProviderSetupError as VendorSetupError
-from qbd_core.modules.quality_gate.api import QualityReport, evaluate_run
+from qbd_core.modules.quality_gate.api import QualityReport, actd_numbers, evaluate_run
 from qbd_core.modules.rendering.api import DEFAULT_NAME, RenderFailed, render_draft
 from qbd_core.publish import PublishFailed, publish_all
 
@@ -236,7 +237,8 @@ def _compute(args: argparse.Namespace):
 
 def _render_bytes(result, report) -> bytes:
     with tempfile.TemporaryDirectory(prefix="qbd-render-") as scratch:
-        page = render_draft(result.draft, scratch, checklist=checklist_rows(report))
+        actd = actd_numbers(result.intake.request.market, load_outline())
+        page = render_draft(result.draft, scratch, checklist=checklist_rows(report), actd=actd)
         return Path(page.path).read_bytes()
 
 

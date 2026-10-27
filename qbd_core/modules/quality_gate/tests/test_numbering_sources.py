@@ -48,10 +48,12 @@ def test_the_generic_requirement_follows_the_actd_table_except_where_recorded(en
     if entry["ctd"] in DIFFERENCES:
         assert got != expected, "the recorded difference no longer exists; remove it"
     else:
-        assert got == expected
+        assert got == expected, DIFFERENCES
 
 
 def test_every_actd_pharmaceutical_development_section_is_mapped_or_explained():
     mapped = {e["actd"] for e in section_map()}
     missing = set(ACTD) - mapped
-    assert missing == {"P2.1"}  # NCE and biotech only; the generic column is empty
+    assert missing == {
+        "P2.1"
+    }  # NCE and biotech only: not applicable to the products this system drafts

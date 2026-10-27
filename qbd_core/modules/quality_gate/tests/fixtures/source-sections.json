@@ -2,7 +2,10 @@
   "note": "Codes, titles and the generic-product column read from the two sources the project was given on 2026-10-27. Titles only, no source text. Used to check config/ctd_actd_map.json.",
   "ctd_source": {
     "name": "ICH M4Q(R1), Step 4, 2002-09-12",
-    "pdf_pages": {"3.2.P.2": "18-19", "3.2.P.8": "22"},
+    "pdf_pages": {
+      "3.2.P.2": "18-19",
+      "3.2.P.8": "22"
+    },
     "sections": {
       "3.2.P.2": "Pharmaceutical Development",
       "3.2.P.2.1": "Components of the Drug Product",
@@ -21,24 +24,63 @@
   },
   "actd_source": {
     "name": "ACTD Phu luc I, du thao 2025 (annex to a draft circular 2025/TT-BYT; not the issued annex)",
-    "pages": {"text P 2": "24-26", "text P8 and P9": "30", "requirement table": "13-14 and 17"},
+    "pages": {
+      "text P 2": "24-26",
+      "text P8 and P9": "30",
+      "requirement table": "13-14 and 17"
+    },
     "generic_column": "G column of the requirement table: v = mandatory, v with scientific literature = literature, empty = not_required",
     "sections": {
-      "P2.1": {"title": "Thông tin về những nghiên cứu phát triển", "generic": "not_required"},
-      "P2.2.1": {"title": "Hoạt chất", "generic": "literature"},
-      "P2.2.2": {"title": "Tá dược", "generic": "not_required"},
-      "P2.3.1": {"title": "Phát triển công thức bào chế", "generic": "mandatory"},
-      "P2.3.2": {"title": "Lượng đóng dư", "generic": "mandatory"},
-      "P2.3.3": {"title": "Đặc tính hoá lý và sinh học", "generic": "mandatory"},
-      "P2.4": {"title": "Phát triển quy trình sản xuất", "generic": "not_required"},
-      "P2.5": {"title": "Hệ thống bao bì đóng gói", "generic": "mandatory"},
-      "P2.6": {"title": "Thuộc tính vi sinh vật", "generic": "mandatory"},
-      "P2.7": {"title": "Tính tương hợp", "generic": "literature"},
-      "P8": {"title": "Độ ổn định", "generic": "mandatory"},
-      "P9": {"title": "Khả năng thay thế lẫn nhau của sản phẩm", "generic": "mandatory"}
+      "P2.1": {
+        "title": "Thông tin về những nghiên cứu phát triển",
+        "generic": "not_required",
+        "applies": "NCE and biotech only; not applicable to generic products"
+      },
+      "P2.2.1": {
+        "title": "Hoạt chất",
+        "generic": "literature"
+      },
+      "P2.2.2": {
+        "title": "Tá dược",
+        "generic": "not_required"
+      },
+      "P2.3.1": {
+        "title": "Phát triển công thức bào chế",
+        "generic": "mandatory"
+      },
+      "P2.3.2": {
+        "title": "Lượng đóng dư",
+        "generic": "mandatory"
+      },
+      "P2.3.3": {
+        "title": "Đặc tính hoá lý và sinh học",
+        "generic": "mandatory"
+      },
+      "P2.4": {
+        "title": "Phát triển quy trình sản xuất",
+        "generic": "not_required"
+      },
+      "P2.5": {
+        "title": "Hệ thống bao bì đóng gói",
+        "generic": "mandatory"
+      },
+      "P2.6": {
+        "title": "Thuộc tính vi sinh vật",
+        "generic": "mandatory"
+      },
+      "P2.7": {
+        "title": "Tính tương hợp",
+        "generic": "literature"
+      },
+      "P8": {
+        "title": "Độ ổn định",
+        "generic": "mandatory"
+      },
+      "P9": {
+        "title": "Khả năng thay thế lẫn nhau của sản phẩm",
+        "generic": "mandatory"
+      }
     }
   },
-  "known_differences": {
-    "P.2.3": "SOP marks the manufacturing-process development section as recommended for the domestic market; the ACTD table asks for it from NCE and biotech only and leaves the generic column empty."
-  }
+  "known_differences": {}
 }
