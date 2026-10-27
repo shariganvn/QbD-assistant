@@ -18,6 +18,7 @@ User, Role (`researcher`, `head`), UserStore.
 ## Invariants
 - Passwords are stored only as scrypt hashes with a per-user salt; the file holds no password.
 - A missing or damaged accounts file lets nobody in.
+- A record whose scrypt cost differs from the module's own is damaged (never trusted as input to scrypt).
 - Writes replace the file whole or leave it as it was.
 
 ## Data owned
@@ -30,5 +31,5 @@ None.
 Standard library only.
 
 ## Non-goals
-Protection against someone who can read the disk, sign-up from the web page, role changes from the web
+Concurrent edits of the file by two administrators at once (one administrator at a time), protection against someone who can read the disk, sign-up from the web page, role changes from the web
 page, and any network exposure.

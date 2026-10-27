@@ -8,6 +8,7 @@ import hashlib
 import io
 import json
 import time
+import unicodedata
 
 import pytest
 
@@ -209,3 +210,65 @@ def test_server_refuses_to_start_without_users(tmp_path):
     with pytest.raises(AccountError):
         webapp.make_server(args)
     assert webapp.serve(args) == 15
+
+
+def test_name_variants_share_one_lockout_counter(server):
+    variants = [HEAD, HEAD + " ", HEAD.upper(), unicodedata.normalize("NFD", HEAD)]
+    for name in variants:
+        call(server, "POST", "/login", {"name": name, "password": "wrong"}, user=None)
+    call(server, "POST", "/login", {"name": HEAD, "password": "wrong"}, user=None)
+    right = call(server, "POST", "/login", {"name": HEAD, "password": "battery staple"}, user=None)
+    assert right[0] == 401
+
+
+def test_removing_an_account_ends_its_open_session(server):
+    assert call(server, "GET", "/", user="head")[0] == 200
+    server[1].store.remove(HEAD)
+    assert call(server, "GET", "/", user="head")[0] == 303
+    assert call(server, "POST", "/run", signed(), user="head")[0] == 401
+
+
+def test_damaged_accounts_file_ends_every_session(server):
+    server[1].store.path.write_text("damaged", encoding="utf-8")
+    assert call(server, "GET", "/")[0] == 303
+
+
+def test_draft_page_is_sandboxed_and_other_pages_have_no_script_policy(server):
+    run_id = make_run(server)
+    _, headers, _ = call(server, "GET", f"/runs/{run_id}/draft")
+    assert "sandbox allow-scripts" in dict(headers)["Content-Security-Policy"]
+    _, headers, _ = call(server, "GET", "/")
+    assert "script-src" not in dict(headers)["Content-Security-Policy"]
+
+
+def test_blocked_run_serves_no_draft_or_csv(server):
+    run_id = make_run(server, inputs())
+    for leaf in ("draft", "gaps.csv", "checklist.csv"):
+        assert call(server, "GET", f"/runs/{run_id}/{leaf}")[0] == 404
+
+
+def test_corrupt_run_record_does_not_break_the_list(server):
+    good = make_run(server)
+    bad = make_run(server)
+    (folder(server, bad) / "run.json").write_text("{}", encoding="utf-8")
+    page = call(server, "GET", "/runs")
+    assert page[0] == 200 and good in page[2].decode() and bad in page[2].decode()
+    assert call(server, "GET", f"/runs/{bad}")[0] == 200
+
+
+def test_rejected_run_keeps_what_was_typed(server):
+    fields = {**signed(), "form": "Dạng không có", "name": "Đề tài giữ lại"}
+    status, _, body = call(server, "POST", "/run", fields)
+    assert status == 400 and "Đề tài giữ lại" in body.decode()
+
+
+def test_non_ascii_content_length_is_refused(server):
+    import http.client
+
+    httpd, _ = server
+    conn = http.client.HTTPConnection("127.0.0.1", httpd.server_address[1], timeout=20)
+    conn.putrequest("POST", "/login")
+    conn.putheader("Content-Type", "application/x-www-form-urlencoded")
+    conn.putheader("Content-Length", "²")
+    conn.endheaders()
+    assert conn.getresponse().status == 411

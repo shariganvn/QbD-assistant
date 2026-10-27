@@ -46,7 +46,7 @@ def _valid_record(record: object) -> bool:
     try:
         bytes.fromhex(record["salt"])
         bytes.fromhex(record["hash"])
-        return all(isinstance(record[k], int) and record[k] > 0 for k in SCRYPT)
+        return all(type(record[k]) is int and record[k] == v for k, v in SCRYPT.items())
     except (KeyError, TypeError, ValueError):
         return False
 

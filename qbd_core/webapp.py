@@ -17,6 +17,7 @@ import io
 import json
 import re
 import secrets
+import sys
 import threading
 import time
 from dataclasses import dataclass
@@ -28,7 +29,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, quote, urlsplit
 
 from qbd_core import run
-from qbd_core.modules.accounts.api import AccountError, User, UserStore
+from qbd_core.modules.accounts.api import AccountError, User, UserStore, clean_name
 from qbd_core.modules.dossier_drafting.api import (
     IntakeRejected,
     agent_status_rows,
@@ -42,9 +43,12 @@ from qbd_core.modules.rendering.api import DEFAULT_NAME
 from qbd_core.publish import PublishFailed, publish_all
 from qbd_core.users import EXIT_ACCOUNTS
 
+EXIT_SERVE = 16
+
 MAX_BODY = 64 * 1024
 SESSION_SECONDS = 8 * 3600
 LOCK_AFTER, LOCK_SECONDS = 5, 60
+MAX_LOGINS, MAX_FAILURES, MAX_KEY = 4, 1000, 64
 COOKIE = "qbd_session"
 RUN_ID = re.compile(r"^\d{8}T\d{6}(-\d{1,3})?$")
 A13_FILE = re.compile(r"^a13-record-(\d+)\.json$")
@@ -148,6 +152,8 @@ class Context:
         self.token = secrets.token_hex(16)
         self.lock = threading.Lock()
         self.run_lock = threading.Lock()
+        self.sign_lock = threading.Lock()
+        self.logins = threading.BoundedSemaphore(MAX_LOGINS)
         self.sessions: dict[str, Session] = {}
         self.failures: dict[str, tuple[int, float]] = {}
         self.session_seconds = SESSION_SECONDS
@@ -156,37 +162,65 @@ class Context:
     def hosts(self) -> set[str]:
         return {f"127.0.0.1:{self.port}", f"localhost:{self.port}"}
 
-    def locked(self, name: str) -> bool:
-        count, since = self.failures.get(name.casefold(), (0, 0.0))
+    def _key(self, name: str) -> str:
+        try:
+            return clean_name(name).casefold()
+        except AccountError:
+            return name.strip().casefold()[:MAX_KEY]
+
+    def _locked(self, key: str) -> bool:
+        count, since = self.failures.get(key, (0, 0.0))
         return count >= LOCK_AFTER and time.time() - since < LOCK_SECONDS
 
     def login(self, name: str, password: str) -> str | None:
         """A session id, or None. Five wrong passwords lock the name for a minute."""
-        key = name.casefold()
+        key = self._key(name)
         with self.lock:
-            if self.locked(name):
+            if self._locked(key):
                 return None
-        user: User | None = self.store.authenticate(name, password)
+        if not self.logins.acquire(blocking=False):
+            return None
+        try:
+            user: User | None = self.store.authenticate(name, password)
+        finally:
+            self.logins.release()
         with self.lock:
             if user is None:
-                count, since = self.failures.get(key, (0, 0.0))
-                count = 1 if time.time() - since >= LOCK_SECONDS else count + 1
-                self.failures[key] = (count, time.time())
+                self._fail(key)
                 return None
             self.failures.pop(key, None)
             sid = secrets.token_urlsafe(32)
             self.sessions[sid] = Session(user.name, user.role, time.time() + self.session_seconds)
             return sid
 
+    def _fail(self, key: str) -> None:
+        now = time.time()
+        if len(self.failures) >= MAX_FAILURES:
+            for old in [k for k, (_, t) in self.failures.items() if now - t >= LOCK_SECONDS]:
+                del self.failures[old]
+            if len(self.failures) >= MAX_FAILURES:
+                return
+        count, since = self.failures.get(key, (0, 0.0))
+        self.failures[key] = (1 if now - since >= LOCK_SECONDS else count + 1, now)
+
     def session(self, sid: str | None) -> Session | None:
         if not sid:
             return None
         with self.lock:
             found = self.sessions.get(sid)
-            if found is not None and found.expires <= time.time():
+            if found is None:
+                return None
+            if found.expires <= time.time() or not self._still_valid(found):
                 del self.sessions[sid]
                 return None
             return found
+
+    def _still_valid(self, who: Session) -> bool:
+        """The account must still exist with the same role; a damaged file ends every session."""
+        try:
+            return any(u.name == who.name and u.role == who.role for u in self.store.users())
+        except AccountError:
+            return False
 
     def logout(self, sid: str | None) -> None:
         with self.lock:
@@ -400,7 +434,7 @@ def _sign_a13(ctx: Context, me: Session, run_id: str, fields: dict[str, list[str
     if record is None or record.get("exit") != 0 or None in prints.values():
         return 409
     note = _first(fields, "note").strip()[:500]
-    with ctx.run_lock:
+    with ctx.sign_lock:
         earlier = _a13_records(folder)
         if earlier and not note:
             return 422
@@ -433,9 +467,11 @@ def _a13_block(ctx: Context, me: Session, run_id: str, folder: Path, code: int) 
         prints = _fingerprints(folder)
         same = all(last.get(k) == v for k, v in prints.items())
         if same:
+            who = escape(str(last.get("signed_by", "?")))
+            when = escape(str(last.get("signed_on", "?")))
             body += (
-                f'<p class="ok">Đã ghi nhận chữ ký A13 do {escape(str(last["signed_by"]))} '
-                f"ngày {escape(str(last['signed_on']))}; mã băm khớp bản nháp hiện tại.</p>"
+                f'<p class="ok">Đã ghi nhận chữ ký A13 do {who} ngày {when}; '
+                "mã băm khớp bản nháp hiện tại.</p>"
             )
         else:
             body += '<p class="err">Bản nháp đã đổi sau chữ ký A13; chữ ký không còn khớp.</p>'
@@ -460,12 +496,12 @@ def _run_page(ctx: Context, me: Session, run_id: str) -> tuple[int, bytes]:
     if record is None:
         return 404, _page("Không có", "<h1>Không tìm thấy lần chạy</h1>", me, ctx.token)
     project = _load_json(folder / "project.json") or {}
-    code = record["exit"]
+    code = record.get("exit", "?")
     cls = "ok" if code == 0 else "err"
     title = escape(str(project.get("name") or run_id))
     body = f'<h1>{title}</h1><p class="muted">Lần chạy {escape(run_id)}</p><div class="card">'
-    body += f'<p class="{cls}">{escape(record["message"])} (mã {code})</p>'
-    log = escape(record["log"].strip())
+    body += f'<p class="{cls}">{escape(str(record.get("message", "")))} (mã {code})</p>'
+    log = escape(str(record.get("log", "")).strip())
     body += f"<pre>{log}</pre></div>" if log else "</div>"
     draft = _load_json(folder / "draft.json")
     if code == 0 and draft:
@@ -496,6 +532,21 @@ def _run_page(ctx: Context, me: Session, run_id: str) -> tuple[int, bytes]:
         body += "</table></div>"
     body += _a13_block(ctx, me, run_id, folder, code)
     return 200, _page(f"Lần chạy {run_id}", body, me, ctx.token)
+
+
+def _finished(ctx: Context, run_id: str) -> bool:
+    record = _load_json(ctx.workdir / run_id / "run.json")
+    return record is not None and record.get("exit") == 0
+
+
+def _values(fields: dict[str, list[str]]) -> dict[str, str]:
+    raw = _raw(fields)
+    return {
+        "name": _first(fields, "name").strip()[:120],
+        "substances": "\n".join(raw["substances"]),  # type: ignore[arg-type]
+        "form": str(raw["dosage_form"]),
+        "market": str(raw["market"]),
+    }
 
 
 def _csv_cell(value: object) -> str:
@@ -551,13 +602,13 @@ def _runs_page(ctx: Context, me: Session, only: str | None) -> bytes:
         record = _load_json(ctx.workdir / run_id / "run.json") or {"exit": "?", "message": ""}
         project = _load_json(ctx.workdir / run_id / "project.json") or {}
         entries.append((run_id, record, project))
-    codes = sorted({str(e[1]["exit"]) for e in entries})
+    codes = sorted({str(e[1].get("exit", "?")) for e in entries})
     links = '<p class="filters"><a href="/runs">Tất cả</a>' + "".join(
         f'<a href="/runs?exit={quote(c)}">Mã {escape(c)}</a>' for c in codes
     )
     rows = ""
     for run_id, record, project in entries:
-        if only is not None and str(record["exit"]) != only:
+        if only is not None and str(record.get("exit", "?")) != only:
             continue
         subs = ", ".join(project.get("substances") or []) or "không rõ"
         rows += (
@@ -566,7 +617,8 @@ def _runs_page(ctx: Context, me: Session, only: str | None) -> bytes:
             f"<td>{escape(str(project.get('form', '')))}</td>"
             f"<td>{escape(str(project.get('market', '')))}</td>"
             f"<td>{escape(str(project.get('created_by', '')))}</td>"
-            f"<td>{escape(str(record['exit']))}: {escape(record['message'])}</td></tr>"
+            f"<td>{escape(str(record.get('exit', '?')))}: "
+            f"{escape(str(record.get('message', '')))}</td></tr>"
         )
     table = (
         "<table><tr><th>Đề tài</th><th>Hoạt chất</th><th>Dạng</th><th>Thị trường</th>"
@@ -618,17 +670,19 @@ class Handler(BaseHTTPRequestHandler):
         body: bytes,
         kind: str = "text/html; charset=utf-8",
         extra: dict[str, str] | None = None,
+        draft: bool = False,
     ) -> None:
+        # The draft page needs its one fixed script, so it runs sandboxed in an opaque origin
+        # and cannot read the form token or reach the session.
+        policy = "default-src 'none'; style-src 'unsafe-inline'; img-src data:; form-action 'self'"
+        if draft:
+            policy += "; script-src 'unsafe-inline'; sandbox allow-scripts"
         self.send_response(status)
         self.send_header("Content-Type", kind)
         self.send_header("Content-Length", str(len(body)))
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("Referrer-Policy", "no-referrer")
-        self.send_header(
-            "Content-Security-Policy",
-            "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; "
-            "img-src data:; form-action 'self'",
-        )
+        self.send_header("Content-Security-Policy", policy)
         for key, value in (extra or {}).items():
             self.send_header(key, value)
         self.end_headers()
@@ -661,6 +715,19 @@ class Handler(BaseHTTPRequestHandler):
         return self.ctx.session(self._sid())
 
     def do_GET(self) -> None:  # noqa: N802 - http.server naming
+        self._guarded(self._get)
+
+    def do_POST(self) -> None:  # noqa: N802 - http.server naming
+        self._guarded(self._post)
+
+    def _guarded(self, handler) -> None:
+        try:
+            handler()
+        except Exception:  # one bad request must not kill the thread or show a traceback
+            with contextlib.suppress(Exception):
+                self._text(500, "internal error")
+
+    def _get(self) -> None:
         if not self._host_ok():
             return self._text(403, "host not allowed")
         parts = urlsplit(self.path)
@@ -684,11 +751,14 @@ class Handler(BaseHTTPRequestHandler):
         if leaf is None:
             status, body = _run_page(ctx, me, run_id)
             return self._send(status, body)
+        if not _finished(ctx, run_id):
+            return self._text(404, "not found")
         if leaf == "draft":
             try:
-                return self._send(200, (ctx.workdir / run_id / "html" / DEFAULT_NAME).read_bytes())
+                page = (ctx.workdir / run_id / "html" / DEFAULT_NAME).read_bytes()
             except OSError:
                 return self._text(404, "not found")
+            return self._send(200, page, draft=True)
         data = _csv_for(ctx, run_id, leaf.removesuffix(".csv"))
         if data is None:
             return self._text(404, "not found")
@@ -704,7 +774,7 @@ class Handler(BaseHTTPRequestHandler):
             self._text(403, "host not allowed")
             return None
         length = self.headers.get("Content-Length")
-        if length is None or not length.isdigit():
+        if length is None or not (length.isascii() and length.isdigit()):
             self._text(411, "length required")
             return None
         if int(length) > MAX_BODY:
@@ -721,7 +791,7 @@ class Handler(BaseHTTPRequestHandler):
             return None
         return fields
 
-    def do_POST(self) -> None:  # noqa: N802 - http.server naming
+    def _post(self) -> None:
         fields = self._read_form()
         if fields is None:
             return
@@ -746,7 +816,7 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/run":
             status, result = _execute(ctx, me, fields)
             if status != 200:
-                return self._send(status, _form_page(ctx, me, result))
+                return self._send(status, _form_page(ctx, me, result, _values(fields)))
             return self._redirect(f"/runs/{result}")
         match = re.fullmatch(r"/runs/([^/]+)/a13", path)
         if match and RUN_ID.match(match.group(1)):
@@ -782,8 +852,11 @@ def serve(args: argparse.Namespace) -> int:
     try:
         server = make_server(args)
     except AccountError as error:
-        print(f"accounts: {error}")
+        print(f"accounts: {error}", file=sys.stderr)
         return EXIT_ACCOUNTS
+    except OSError as error:
+        print(f"cannot listen: {error}", file=sys.stderr)
+        return EXIT_SERVE
     port = server.server_address[1]
     print(f"http://127.0.0.1:{port}/  (Ctrl+C to stop)")
     try:

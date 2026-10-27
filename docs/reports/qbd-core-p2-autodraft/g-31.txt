@@ -17,3 +17,16 @@ unchanged by signing, changed draft shows a mismatch, second record needs a note
 no record on a run without a draft, server refuses to start without users.
 Full suite: 565 passed, 1 skipped; ruff clean.
 Status: A13 sign-off of the real draft, G-03, G-08, G-10 remain unverified.
+
+Update: review fixes
+Independent review of the web page and accounts found, and the code now covers (tests in test_webapp_auth.py and
+accounts/tests/test_store.py): lockout counter shared by name variants (trim, case, NFD), open sessions end when the
+account is removed or the accounts file is damaged, unexpected errors answer 500 instead of killing the thread, a
+damaged run.json no longer breaks the list or the run page, scrypt cost in the file must equal the module's own,
+at most 4 password checks at once and a bounded failure table, A13 signing no longer waits behind a long run,
+draft and CSV are served only for finished runs, the draft page is served sandboxed (opaque origin) and every other
+page has no script policy, a rejected run keeps what was typed, serve reports port and accounts errors on stderr
+(exit 15 accounts, 16 port).
+Not changed: concurrent user-add by two administrators (documented as one administrator at a time); run output is
+captured through process-wide stream redirection, serialized by the run lock.
+Full suite: 574 passed, 1 skipped; ruff clean.

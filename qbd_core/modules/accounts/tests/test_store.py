@@ -91,3 +91,14 @@ def test_remove(store):
     assert [u.name for u in store.users()] == ["B"]
     with pytest.raises(AccountError):
         store.remove("A")
+
+
+def test_a_record_with_another_scrypt_cost_is_treated_as_damaged(store):
+    store.add("A", "researcher", "correct horse")
+    data = json.loads(store.path.read_text(encoding="utf-8"))
+    data["users"]["A"]["n"] = 3
+    store.path.write_text(json.dumps(data), encoding="utf-8")
+    assert store.authenticate("A", "correct horse") is None
+    data["users"]["A"]["n"] = True
+    store.path.write_text(json.dumps(data), encoding="utf-8")
+    assert store.authenticate("A", "correct horse") is None

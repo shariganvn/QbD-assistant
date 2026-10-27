@@ -57,7 +57,7 @@ holds text from a document that is not class A must stay on the machine.
 
 ## Web interface
 
-`python -m qbd_core user-add --users-file users.json --name NAME --role researcher|head` (password asked twice, never taken from arguments; also `user-list`, `user-remove`; exit 15 on any accounts failure). Keep the accounts file outside the repo.
+`python -m qbd_core user-add --users-file users.json --name NAME --role researcher|head` (password asked twice, never taken from arguments; also `user-list`, `user-remove`; exit 15 on any accounts failure; `serve` exits 16 when it cannot listen). Keep the accounts file outside the repo.
 
 `python -m qbd_core serve --documents docs.json --users-file users.json [--workdir runs] [--port 8765] [--provider NAME --model M --manifest manifest.json]`
 
