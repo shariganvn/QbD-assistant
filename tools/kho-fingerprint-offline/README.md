@@ -11,14 +11,17 @@ name is written to the output.
 ## Use
 1. Get approval from the head of R&D that hash files (no text) may leave the machine.
 2. Open `index.html` in a current Chrome or Edge (needs `DecompressionStream` and folder pick).
-3. Pick the folder with the downloaded Kho files, `classification-manifest.xlsx`
-   (sheet `Manifest`) and `docs/kho/manifest.json`. Classes default to `B,C`; class A is refused.
+3. Pick the **folder** with the downloaded Kho files in the first box (the page then shows how many
+   files it holds; the browser asks to confirm the upload, which stays on this machine), then
+   `classification-manifest.xlsx` (sheet `Manifest`) and `docs/kho/manifest.json` in the other two. Classes default to `B,C`; class A is refused.
 4. "Sinh dấu vân tay", then download `fingerprints.json`. It is a manifest the egress gate loads as
    is, with the salt it was built with. Keep it outside any git work tree.
 5. "Chạy bẫy", then download `g-03-trap-report.txt` (counts only). Send back the report, and the
    fingerprints file only with the approval in step 1.
 
-The page stops and offers no file when the manifest is unreadable, a class in the table differs from
+The page stops and offers no file when no document at all could be fingerprinted (the message
+lists the skip reasons, e.g. every file `not_found` when the wrong box or folder was chosen),
+when the first box holds a plain file instead of a folder, and when the manifest is unreadable, a class in the table differs from
 the manifest, the table is unreadable, or class A is asked for (same as the command, exit 13).
 
 ## Same output as the command

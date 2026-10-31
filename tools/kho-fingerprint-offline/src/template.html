@@ -19,6 +19,7 @@
   button:disabled { opacity:.5; cursor:default; }
   pre { white-space:pre-wrap; word-break:break-word; border:1px solid var(--line); border-radius:6px; padding:10px; min-height:1.5em; }
   [hidden] { display:none !important; }
+  .count { color:var(--mut); margin-top:4px; }
   #status { margin-top:12px; color:var(--mut); }
 </style>
 </head>
@@ -31,6 +32,7 @@
   <h2>1. Chọn dữ liệu</h2>
   <label for="folder">Thư mục chứa file Kho đã tải về</label>
   <input id="folder" type="file" webkitdirectory multiple>
+  <div id="folder-count" class="count"></div>
   <label for="table">classification-manifest.xlsx (sheet Manifest)</label>
   <input id="table" type="file" accept=".xlsx">
   <label for="manifest">docs/kho/manifest.json</label>

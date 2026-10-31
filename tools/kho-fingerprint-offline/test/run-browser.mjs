@@ -53,7 +53,20 @@ if (mode === 'eval') {
   await out(result);
 } else {
   const set = async (selector, paths) => page.setInputFiles(selector, paths);
-  await set('#folder', args.folder);
+  if (args.folderAsFile) {
+    // a plain file dropped into the folder box: no relative path, like a drag and drop
+    const b64 = readFileSync(args.folderAsFile).toString('base64');
+    await page.evaluate((data) => {
+      const bytes = Uint8Array.from(atob(data), (c) => c.charCodeAt(0));
+      const transfer = new DataTransfer();
+      transfer.items.add(new File([bytes], 'dropped.xlsx'));
+      const input = document.getElementById('folder');
+      input.files = transfer.files;
+      input.dispatchEvent(new Event('change'));
+    }, b64);
+  } else {
+    await set('#folder', args.folder);
+  }
   await set('#table', args.table);
   if (args.manifest) await set('#manifest', args.manifest);
   if (args.classes !== undefined) await page.fill('#classes', args.classes);

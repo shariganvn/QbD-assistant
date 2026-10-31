@@ -368,6 +368,10 @@
     const manifest = manifestFile ? parseManifest(await manifestFile.text()) : null;
     if (!manifest) throw new Fail('REFUSED', 'the manifest is missing or unreadable');
     if (!tableFile) throw new Fail('E_TABLE_UNREADABLE', 'no table chosen');
+    if (!folderFiles.length) throw new Fail('REFUSED', 'no Kho folder chosen');
+    if (!folderFiles.some((f) => (f.webkitRelativePath || '').includes('/'))) {
+      throw new Fail('REFUSED', 'the first box holds files, not a folder: pick the folder with the Kho files');
+    }
     const known = new Map(manifest.entries.map((e) => [e.file_id, e.classification]));
     const table = await readTable(await tableFile.arrayBuffer());
     const loaded = await buildDocuments(folderFiles, table, known, classes, onProgress);
@@ -376,6 +380,9 @@
     for (const d of loaded.documents) {
       hashes.set(d.file_id, [...(await shinglesAsync(d.pages.join(' '), salt))].sort());
       pages.set(d.file_id, d.pages);
+    }
+    if (!hashes.size) {
+      throw new Fail('E_NO_DOCUMENTS', `no document was fingerprinted out of ${folderFiles.length} files in the folder; skipped ${JSON.stringify(sortedObject(count([...loaded.skipped.values()])))}`);
     }
     const entries = manifest.entries.map((e) => ({
       file_id: e.file_id,
@@ -551,8 +558,13 @@
       a.download = name;
       a.hidden = false;
     };
+    $('folder').addEventListener('change', () => {
+      const n = $('folder').files.length;
+      $('folder-count').textContent = n ? `Đã chọn ${n} file trong thư mục` : '';
+    });
     $('go').addEventListener('click', async () => {
       const status = $('status');
+      status.textContent = '';
       $('dl-fp').hidden = true; $('dl-trap').hidden = true; $('trap-box').hidden = true; $('out').textContent = '';
       state.result = null;
       $('go').disabled = true;

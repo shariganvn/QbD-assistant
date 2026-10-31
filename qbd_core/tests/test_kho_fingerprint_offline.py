@@ -153,12 +153,12 @@ def test_trap_report_passes_and_holds_counts_only(kho):
         assert secret not in report and secret not in result["trap"]
 
 
-def test_trap_fails_when_the_hashes_are_missing(kho):
+def test_rows_without_hashes_are_reported_as_gate_still_open(kho):
     tmp, folder, table, manifest = kho
     (folder / "doc-B.docx").unlink()
-    (folder / "sub" / "doc-C.docx").unlink()
     result = page_run(kho, trap=True)
-    assert "Kết quả bẫy: KHÔNG ĐẠT" in result["trap"]
+    assert result["status"].startswith("Xong"), result
+    assert "Dòng B/C trong bảng chưa có hash: 1/2" in result["trap"]
     assert "G-03 chưa đóng" in result["trap"]
 
 
@@ -190,8 +190,9 @@ def test_files_without_a_match_are_counted_by_reason(kho):
     (kho[1] / "doc-B.docx").unlink()
     shutil.copy(kho[1] / "sub" / "doc-C.docx", kho[1] / "doc-C.docx")
     result = page_run(kho)
-    assert "not_found" in result["shown"] and "ambiguous_name" in result["shown"]
-    assert "doc-" not in result["shown"]
+    assert result["status"].startswith("Dừng")
+    assert "not_found" in result["status"] and "ambiguous_name" in result["status"]
+    assert "doc-" not in result["status"]
 
 
 def test_hashes_of_arbitrary_text_equal_the_python_ones():
@@ -281,3 +282,37 @@ def test_pdf_text_hashes_overlap_with_the_command_output(kho):
     mine = page.get(IDS["B"]).shingles
     theirs = python.get(IDS["B"]).shingles
     assert mine and theirs and len(mine & theirs) / len(theirs) >= 0.9
+
+
+def test_a_file_picked_where_the_folder_belongs_is_refused(kho):
+    tmp, folder, table, manifest = kho
+    result = drive(
+        "run",
+        {
+            "folderAsFile": str(table),
+            "table": str(table),
+            "manifest": str(manifest),
+            "saveTo": str(tmp / "page.json"),
+        },
+    )
+    assert result["status"].startswith("Dừng") and "not a folder" in result["status"]
+    assert result["downloadVisible"] is False and not (tmp / "page.json").exists()
+
+
+def test_a_folder_that_matches_no_table_row_stops_with_the_reasons(kho):
+    tmp, folder, table, manifest = kho
+    other = tmp / "elsewhere" / "inner"
+    other.mkdir(parents=True)
+    (other / "unrelated.txt").write_text("không liên quan", "utf-8")
+    result = drive(
+        "run",
+        {
+            "folder": str(tmp / "elsewhere"),
+            "table": str(table),
+            "manifest": str(manifest),
+            "saveTo": str(tmp / "page.json"),
+        },
+    )
+    assert result["status"].startswith("Dừng") and "E_NO_DOCUMENTS" in result["status"]
+    assert "not_found" in result["status"] and "unrelated" not in result["status"]
+    assert result["downloadVisible"] is False and not (tmp / "page.json").exists()
