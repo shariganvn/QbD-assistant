@@ -35,7 +35,7 @@ def _part_reasons(index: int, part: PayloadPart, manifest: Manifest, banned: fro
             reasons.append(Reason(code="E_PART_UNATTRIBUTED", part_index=index))
         for source_id in part.source_ids:
             reasons += _source_reasons(index, manifest.get(source_id), source_id)
-    if shingles(part.text) & banned:
+    if shingles(part.text, salt=manifest.salt) & banned:
         reasons.append(Reason(code="E_RESTRICTED_TEXT", part_index=index))
     return reasons
 

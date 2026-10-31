@@ -24,7 +24,7 @@ from qbd_core.modules.dossier_drafting.api import (
     propose_cqa,
     validate_intake,
 )
-from qbd_core.modules.egress_gate.api import Destination, Manifest, try_load_manifest
+from qbd_core.modules.egress_gate.api import Destination, Manifest, shingles, try_load_manifest
 from qbd_core.modules.evidence.api import (
     InMemoryKnowledge,
     KhoLoadError,
@@ -378,6 +378,56 @@ def kho_load(args: argparse.Namespace) -> int:
     by_class = Counter(known[d.file_id] for d in loaded.documents)
     reasons = Counter(loaded.skipped.values())
     print(f"loaded {len(loaded.documents)} documents {dict(sorted(by_class.items()))}")
+    print(f"skipped {len(loaded.skipped)} {dict(sorted(reasons.items()))}")
+    return 0
+
+
+def add_kho_fingerprint_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--table", required=True, help="classification-manifest.xlsx of the owner")
+    parser.add_argument("--folder", required=True, help="folder with the downloaded Kho files")
+    parser.add_argument("--manifest", required=True, help="docs/kho/manifest.json")
+    parser.add_argument("--out", required=True, help="manifest with hashes; outside any git tree")
+    parser.add_argument("--classes", default="B,C", help="comma list of classes to fingerprint")
+    parser.add_argument("--salt", default="", help="mixed into every hash; keep it with the output")
+
+
+def kho_fingerprint(args: argparse.Namespace) -> int:
+    """Write the manifest with word-window hashes of restricted files; no text leaves this step."""
+    out = Path(args.out)
+    if inside_a_git_tree(out):
+        print("refused: the output folder is inside a git work tree", file=sys.stderr)
+        return EXIT_KHO
+    manifest = try_load_manifest(args.manifest)
+    if manifest is None:
+        print("refused: the manifest is missing or unreadable", file=sys.stderr)
+        return EXIT_KHO
+    known = {e.file_id: e.classification.value for e in manifest.entries}
+    classes = tuple(c.strip() for c in args.classes.split(",") if c.strip())
+    if "A" in classes:
+        print("refused: class A files are not fingerprinted", file=sys.stderr)
+        return EXIT_KHO
+    try:
+        loaded = build_documents(args.folder, read_table(args.table), known, classes)
+        hashes = {
+            d.file_id: sorted(shingles(" ".join(d.pages), salt=args.salt)) for d in loaded.documents
+        }
+        entries = [
+            {**e.model_dump(mode="json"), "shingles": hashes.get(e.file_id, sorted(e.shingles))}
+            for e in manifest.entries
+        ]
+        text = json.dumps({"entries": entries, "salt": args.salt}, ensure_ascii=False, indent=1)
+        Manifest.model_validate_json(text)
+        publish_all({out: (text + "\n").encode("utf-8")})
+    except (KhoLoadError, ValueError) as failed:
+        print(f"kho fingerprint failed: {type(failed).__name__}", file=sys.stderr)
+        return EXIT_KHO
+    except PublishFailed as failed:
+        print(f"publish failed: {failed}", file=sys.stderr)
+        return EXIT_PUBLISH
+    by_class = Counter(known[i] for i in hashes)
+    empty = sum(not h for h in hashes.values())
+    reasons = Counter(loaded.skipped.values())
+    print(f"fingerprinted {len(hashes)} documents {dict(sorted(by_class.items()))}, {empty} empty")
     print(f"skipped {len(loaded.skipped)} {dict(sorted(reasons.items()))}")
     return 0
 

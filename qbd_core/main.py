@@ -21,6 +21,9 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_kho_load_arguments(
         commands.add_parser("kho-load", help="build the documents JSON from downloaded Kho files")
     )
+    run.add_kho_fingerprint_arguments(
+        commands.add_parser("kho-fingerprint", help="hash restricted Kho files, no text written")
+    )
     run.add_kho_manifest_arguments(
         commands.add_parser("kho-manifest", help="build the egress manifest from the owner table")
     )
@@ -49,6 +52,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return run.propose(args)
     if args.command == "kho-load":
         return run.kho_load(args)
+    if args.command == "kho-fingerprint":
+        return run.kho_fingerprint(args)
     if args.command == "kho-manifest":
         return run.kho_manifest(args)
     if args.command == "accept":

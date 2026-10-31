@@ -26,6 +26,8 @@ class ManifestEntry(Strict):
 
 class Manifest(Strict):
     entries: tuple[ManifestEntry, ...]
+    # Mixed into every shingle hash; empty keeps the plain hashes.
+    salt: str = ""
 
     def get(self, file_id: str) -> ManifestEntry | None:
         return next((e for e in self.entries if e.file_id == file_id), None)
