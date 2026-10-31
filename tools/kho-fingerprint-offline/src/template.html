@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' blob:; style-src 'unsafe-inline'; worker-src blob:; img-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kho Fingerprint Offline</title>
+<style>
+  :root { color-scheme: light dark; --fg:#1b1f24; --bg:#fff; --mut:#5b6572; --line:#d0d7de; --acc:#0b5cad; --ok:#1a7f37; }
+  @media (prefers-color-scheme: dark) { :root { --fg:#e6edf3; --bg:#0d1117; --mut:#9aa4af; --line:#30363d; --acc:#58a6ff; --ok:#3fb950; } }
+  body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 48px; }
+  h1 { font-size:20px; margin:0 0 4px; } h2 { font-size:16px; margin:28px 0 8px; }
+  p, li { color:var(--mut); } .note { border:1px solid var(--line); border-radius:8px; padding:10px 14px; }
+  label { display:block; margin:12px 0 4px; font-weight:600; }
+  input[type=text], input[type=password] { width:100%; box-sizing:border-box; padding:8px; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--fg); }
+  input[type=file] { width:100%; }
+  button, a.btn { display:inline-block; margin:14px 8px 0 0; padding:9px 16px; border:0; border-radius:6px; background:var(--acc); color:#fff; font:inherit; cursor:pointer; text-decoration:none; }
+  button:disabled { opacity:.5; cursor:default; }
+  pre { white-space:pre-wrap; word-break:break-word; border:1px solid var(--line); border-radius:6px; padding:10px; min-height:1.5em; }
+  [hidden] { display:none !important; }
+  #status { margin-top:12px; color:var(--mut); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Kho Fingerprint Offline</h1>
+  <p>Đọc file Kho trên máy này, chỉ tạo dấu vân tay hash của tài liệu nhóm B/C. Trang không gửi gì ra mạng (CSP chặn mọi kết nối); văn bản không được ghi ra file.</p>
+  <div class="note"><strong>Trước khi dùng:</strong> Trưởng bộ phận R&amp;D đã chấp thuận cho file hash (không có văn bản) rời máy. Dùng Chrome hoặc Edge bản mới.</div>
+
+  <h2>1. Chọn dữ liệu</h2>
+  <label for="folder">Thư mục chứa file Kho đã tải về</label>
+  <input id="folder" type="file" webkitdirectory multiple>
+  <label for="table">classification-manifest.xlsx (sheet Manifest)</label>
+  <input id="table" type="file" accept=".xlsx">
+  <label for="manifest">docs/kho/manifest.json</label>
+  <input id="manifest" type="file" accept=".json,application/json">
+
+  <h2>2. Tùy chọn</h2>
+  <label for="classes">Nhóm cần băm</label>
+  <input id="classes" type="text" value="B,C">
+  <label for="salt">Salt (tùy chọn; được ghi vào file hash, ngăn bảng băm dựng sẵn)</label>
+  <input id="salt" type="text" autocomplete="off">
+
+  <button id="go" type="button">Sinh dấu vân tay</button>
+  <a id="dl-fp" class="btn" hidden>Tải fingerprints.json</a>
+  <div id="status" role="status"></div>
+  <pre id="out"></pre>
+
+  <section id="trap-box" hidden>
+    <h2>3. Bẫy rò rỉ trên văn bản vừa đọc</h2>
+    <p>Tạo payload bẫy từ chính văn bản B/C (đoạn ngắn, dài, chữ hoa, dạng tổ hợp, cắt giữa trang), kiểm tra bằng đúng quy tắc của cổng egress. Báo cáo chỉ gồm số đếm.</p>
+    <button id="run-trap" type="button">Chạy bẫy</button>
+    <a id="dl-trap" class="btn" hidden>Tải g-03-trap-report.txt</a>
+    <pre id="trap-out"></pre>
+  </section>
+</main>
+<script>
+/*APP*/
+</script>
+</body>
+</html>

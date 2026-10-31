@@ -52,7 +52,7 @@ gates:
       - manifest missing or unreadable -> block all egress
     evidence_artifact: docs/reports/qbd-core-p2-autodraft/g-03.txt
     owner_step: "03"
-    progress: framework tests pass against a synthetic manifest (docs/reports/qbd-core-p2-autodraft/g-03-framework.txt); the real manifest (docs/kho/manifest.json, 111 files) now passes the class checks, see docs/reports/qbd-core-p2-autodraft/g-28.txt; manifest rebuilt 23/10 from the owner table (393 files, 28 approved); command `kho-fingerprint` (hashes only) now exists; not closed: it has not been run on the real Kho text and the full payload trap has not been run against those fingerprints. Fallback if that cannot be done: step-03 section 'Closing G-03 against real Kho text'
+    progress: framework tests pass against a synthetic manifest (docs/reports/qbd-core-p2-autodraft/g-03-framework.txt); the real manifest (docs/kho/manifest.json, 111 files) now passes the class checks, see docs/reports/qbd-core-p2-autodraft/g-28.txt; manifest rebuilt 23/10 from the owner table (393 files, 28 approved); command `kho-fingerprint` (hashes only) and an offline browser page (tools/kho-fingerprint-offline) now exist; not closed: it has not been run on the real Kho text and the full payload trap has not been run against those fingerprints. Fallback if that cannot be done: step-03 section 'Closing G-03 against real Kho text'
     status: unverified
 
   - id: G-04

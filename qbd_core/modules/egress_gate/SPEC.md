@@ -45,3 +45,4 @@ paraphrased restricted content: only verbatim 8-word overlap is caught.
 | 2026-10-21 | Scaffold | Module boundary accepted in the ADR | - |
 | 2026-10-21 | Policy, manifest loader, fingerprints | Fail-closed gate against a synthetic manifest; real manifest follows the Kho classification | - |
 | 2026-10-31 | NFC-normalised text and optional manifest salt in shingles | Extractor text and payload text must hash alike; an empty salt keeps the earlier hashes | - |
+| 2026-10-31 | Offline browser page repeats the shingle definition | Machines that cannot run commands; byte-for-byte parity with the command is tested | - |
