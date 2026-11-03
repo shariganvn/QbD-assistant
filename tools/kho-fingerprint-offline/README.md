@@ -43,3 +43,7 @@ The hashes of the embedded pdf.js files are in the comment at the top of `index.
 ## Tests
 `python -m pytest qbd_core/tests/test_kho_fingerprint_offline.py` drives the page in headless
 Chromium from `file://` (needs `node` and `playwright`; the tests skip when they are missing).
+
+## Without downloading the Kho
+`apps-script/` holds a Google Apps Script edition that reads the files inside Drive and hashes them
+there; see `apps-script/README.md`.
