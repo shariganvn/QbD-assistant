@@ -8,6 +8,9 @@ An toàn: `appsscript.json` không có quyền `script.external_request` và mã
 script không gọi ra ngoài Google được (có test kiểm tra). Văn bản chỉ nằm trong bộ nhớ và trong bản
 chuyển đổi Google Docs tạm (`__kho_tmp__…`), xóa vĩnh viễn ngay sau khi đọc.
 
+Quyền Sheets: `SpreadsheetApp.openById` đòi quyền `spreadsheets` đầy đủ (bản chỉ đọc không đủ). Script
+chỉ đọc Sheet, không có lệnh ghi nào, và vẫn không có quyền gọi ra ngoài Google.
+
 Giới hạn cần biết:
 - PDF và DOCX được **Google chuyển đổi sang Google Docs** (PDF qua OCR/convert), nên văn bản có thể
   khác `pdftotext`/pdf.js. Một số hash sẽ không trùng bản khác; đoạn chép dài nhiều dòng vẫn bị bắt.

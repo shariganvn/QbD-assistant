@@ -183,6 +183,9 @@ def test_the_script_cannot_reach_outside_google():
         assert forbidden not in code
     manifest = json.loads((TOOL / "apps-script" / "appsscript.json").read_text("utf-8"))
     assert not any("external_request" in s for s in manifest["oauthScopes"])
+    assert "https://www.googleapis.com/auth/spreadsheets" in manifest["oauthScopes"]
+    for write_call in ("setValue", "setValues", "appendRow", "clearContents", "deleteRow"):
+        assert write_call not in code
 
 
 def test_the_embedded_case_table_is_the_generated_one():
