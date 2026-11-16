@@ -21,7 +21,10 @@ const CONFIG = {
   BATCH_SECONDS: 270,
   OCR_LANGUAGE: 'vi',
   MAX_BYTES: 50 * 1024 * 1024, // larger files are not sent to Google's converter: reason too_large
-  RETRY_REASONS: ['unsupported_type', 'convert_failed'], // cleared by reprocess()
+  RETRY_REASONS: ['unsupported_type', 'convert_failed', 'zip_limits'], // cleared by reprocess()
+  ZIP_MAX_DEPTH: 3,
+  ZIP_MAX_MEMBERS: 2000,
+  ZIP_MAX_BYTES: 100 * 1024 * 1024, // total unpacked size of one archive
 };
 
 const SHINGLE_WORDS = 8;
@@ -36,6 +39,15 @@ const MIME_PPTX = 'application/vnd.openxmlformats-officedocument.presentationml.
 const MIME_XLSX = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 // Converted by Google (PDF and images through OCR); the Office formats above are read directly.
 const MIME_CONVERTIBLE = ['application/pdf', 'application/msword', 'image/png', 'image/jpeg'];
+const MIME_ZIP = ['application/zip', 'application/x-zip-compressed', 'application/x-zip'];
+const MIME_BINARY = ['application/vnd.ms-excel', 'application/octet-stream'];
+const TEXT_EXT = ['txt', 'md', 'csv', 'tsv', 'json', 'xml', 'html', 'htm', 'css', 'js', 'r', 'rd',
+  'rmd', 'py', 'bat', 'sh', 'ini', 'cfg', 'yml', 'yaml', 'log', 'tex', 'm', 'sql'];
+// Not read inside archives: pictures, compiled code, fonts and data blobs carry no prose.
+const SKIP_EXT = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'ico', 'svg', 'exe', 'dll', 'so', 'dylib',
+  'pyc', 'class', 'jar', 'o', 'obj', 'bin', 'dat', 'rds', 'rdata', 'mp3', 'mp4', 'woff', 'woff2',
+  'ttf', 'otf'];
+const MIME_BY_EXT = { pdf: 'application/pdf', doc: 'application/msword' };
 
 class Fail_ extends Error {
   constructor(code, detail) {
@@ -201,21 +213,34 @@ function loadInputs_() {
 }
 
 // ---- Text from Drive ----
-function convertAndRead_(file, tmpFolderId) {
-  let tmpId = null;
-  try {
-    const created = Drive.Files.create(
-      { name: TMP_PREFIX + file.getId(), mimeType: MIME_DOC, parents: [tmpFolderId] },
-      file.getBlob(),
-      { ocrLanguage: CONFIG.OCR_LANGUAGE }
-    );
-    tmpId = created.id;
-    return DocumentApp.openById(tmpId).getBody().getText();
-  } finally {
-    if (tmpId) {
-      try { Drive.Files.remove(tmpId); } catch (e) { /* cleanupTemp removes leftovers */ }
+function convertBlob_(blob, tag, tmpFolderId, fileId) {
+  // Google converts the blob to a Google Doc (PDF and pictures through OCR). When a first attempt
+  // fails it is repeated without the language hint, and for a Drive file through a plain copy.
+  const resource = { name: TMP_PREFIX + tag, mimeType: MIME_DOC, parents: [tmpFolderId] };
+  const attempts = [
+    function () { return Drive.Files.create(resource, blob, { ocrLanguage: CONFIG.OCR_LANGUAGE }); },
+    function () { return Drive.Files.create(resource, blob, {}); },
+  ];
+  if (fileId) attempts.push(function () { return Drive.Files.copy(resource, fileId); });
+  let lastError = null;
+  for (const attempt of attempts) {
+    let tmpId = null;
+    try {
+      tmpId = attempt().id;
+      return DocumentApp.openById(tmpId).getBody().getText();
+    } catch (e) {
+      lastError = e;
+    } finally {
+      if (tmpId) {
+        try { Drive.Files.remove(tmpId); } catch (e) { /* cleanupTemp removes leftovers */ }
+      }
     }
   }
+  throw lastError;
+}
+
+function convertAndRead_(file, tmpFolderId) {
+  return convertBlob_(file.getBlob(), file.getId(), tmpFolderId, file.getId());
 }
 
 // ---- Office files read straight from their XML (no Google conversion) ----
@@ -257,9 +282,9 @@ function paragraphs_(xml, ns) {
   return out;
 }
 
-function zipMembers_(file) {
+function zipMembers_(blob) {
   const parts = {};
-  Utilities.unzip(file.getBlob().setContentType('application/zip')).forEach(function (b) {
+  Utilities.unzip(blob.setContentType('application/zip')).forEach(function (b) {
     parts[b.getName()] = b;
   });
   return parts;
@@ -271,14 +296,14 @@ function numbered_(names, re) {
   });
 }
 
-function docxText_(file) {
-  const parts = zipMembers_(file);
+function docxText_(blob) {
+  const parts = zipMembers_(blob);
   if (!parts['word/document.xml']) throw new Fail_('E_NO_BODY');
   return paragraphs_(parts['word/document.xml'].getDataAsString('UTF-8'), 'w').join('\n');
 }
 
-function pptxText_(file) {
-  const parts = zipMembers_(file);
+function pptxText_(blob) {
+  const parts = zipMembers_(blob);
   const names = Object.keys(parts);
   const pages = numbered_(names, /^ppt\/slides\/slide\d+\.xml$/).map(function (n) {
     return paragraphs_(parts[n].getDataAsString('UTF-8'), 'a').join('\n');
@@ -289,8 +314,8 @@ function pptxText_(file) {
   return pages.concat(notes).join('\n');
 }
 
-function xlsxText_(file) {
-  const parts = zipMembers_(file);
+function xlsxText_(blob) {
+  const parts = zipMembers_(blob);
   const texts = [];
   const strings = parts['xl/sharedStrings.xml'];
   if (strings) {
@@ -311,15 +336,87 @@ function xlsxText_(file) {
   return texts.join('\n');
 }
 
-function extractText_(file, tmpFolderId) {
-  const mime = file.getMimeType();
-  if (mime === MIME_DOC) return DocumentApp.openById(file.getId()).getBody().getText();
-  if (mime === MIME_DOCX) {
-    try { return docxText_(file); } catch (e) { return convertAndRead_(file, tmpFolderId); }
+// Printable runs of a binary file (Word 97 text, Excel add-ins, executables): 8-bit runs of six or
+// more characters first, then UTF-16LE runs whose characters are in the Latin-1 range. The result
+// is lower fidelity than a real parser and is reported as method "strings".
+function stringsText_(blob) {
+  const raw = blob.getDataAsString('ISO-8859-1');
+  const eight = raw.match(/[\x20-\x7e\xa1-\xff\t]{6,}/g) || [];
+  const wide = (raw.match(/(?:[\x20-\x7e\xa1-\xff]\x00){6,}/g) || []).map(function (r) {
+    return r.replace(/\x00/g, '');
+  });
+  return eight.concat(wide).join('\n');
+}
+
+function extOf_(name) {
+  const dot = name.lastIndexOf('.');
+  return dot < 0 ? '' : name.slice(dot + 1).toLowerCase();
+}
+
+function memberText_(m, ext, tmpFolderId, depth, budget) {
+  if (TEXT_EXT.indexOf(ext) >= 0) return m.getDataAsString('UTF-8');
+  if (SKIP_EXT.indexOf(ext) >= 0) return '';
+  try {
+    if (ext === 'docx') return docxText_(m);
+    if (ext === 'pptx') return pptxText_(m);
+    if (ext === 'xlsx') return xlsxText_(m);
+    if (ext === 'zip') return zipText_(m, tmpFolderId, depth + 1, budget);
+    if (MIME_BY_EXT[ext]) {
+      return convertBlob_(m.setContentType(MIME_BY_EXT[ext]), 'z' + budget.n++, tmpFolderId, null);
+    }
+    return stringsText_(m);
+  } catch (e) {
+    if (e instanceof Fail_) throw e;
+    budget.failed++;
+    return '';
   }
-  if (mime === MIME_PPTX) return pptxText_(file);
-  if (mime === MIME_XLSX) return xlsxText_(file);
-  if (MIME_CONVERTIBLE.indexOf(mime) >= 0) return convertAndRead_(file, tmpFolderId);
+}
+
+function zipText_(blob, tmpFolderId, depth, budget) {
+  if (depth > CONFIG.ZIP_MAX_DEPTH) throw new Fail_('zip_limits', 'depth');
+  const members = Utilities.unzip(blob.setContentType('application/zip'));
+  budget.members += members.length;
+  if (budget.members > CONFIG.ZIP_MAX_MEMBERS) throw new Fail_('zip_limits', 'members');
+  const out = [];
+  members.forEach(function (m) {
+    budget.bytes += m.getBytes().length;
+    if (budget.bytes > CONFIG.ZIP_MAX_BYTES) throw new Fail_('zip_limits', 'bytes');
+    const ext = extOf_(m.getName());
+    budget.ext[ext] = (budget.ext[ext] || 0) + 1;
+    out.push(memberText_(m, ext, tmpFolderId, depth, budget));
+  });
+  return out.join('\n');
+}
+
+function newBudget_() {
+  return { bytes: 0, members: 0, failed: 0, n: 0, ext: {} };
+}
+
+function extractText_(file, tmpFolderId) {
+  // Returns { text, how } or null for a type that is not read.
+  const mime = file.getMimeType();
+  if (mime === MIME_DOC) {
+    return { text: DocumentApp.openById(file.getId()).getBody().getText(), how: 'docs' };
+  }
+  if (mime === MIME_DOCX) {
+    try { return { text: docxText_(file.getBlob()), how: 'xml' }; } catch (e) {
+      return { text: convertAndRead_(file, tmpFolderId), how: 'converted' };
+    }
+  }
+  if (mime === MIME_PPTX) return { text: pptxText_(file.getBlob()), how: 'xml' };
+  if (mime === MIME_XLSX) return { text: xlsxText_(file.getBlob()), how: 'xml' };
+  if (mime === 'application/msword') {
+    try { return { text: convertAndRead_(file, tmpFolderId), how: 'converted' }; } catch (e) {
+      return { text: stringsText_(file.getBlob()), how: 'strings' };
+    }
+  }
+  if (MIME_CONVERTIBLE.indexOf(mime) >= 0) {
+    return { text: convertAndRead_(file, tmpFolderId), how: 'converted' };
+  }
+  if (MIME_ZIP.indexOf(mime) >= 0) {
+    return { text: zipText_(file.getBlob(), tmpFolderId, 1, newBudget_()), how: 'zip' };
+  }
+  if (MIME_BINARY.indexOf(mime) >= 0) return { text: stringsText_(file.getBlob()), how: 'strings' };
   return null;
 }
 
@@ -379,23 +476,25 @@ function fingerprintOne_(row, ctx) {
   try { file = DriveApp.getFileById(row.fileId); } catch (e) { return { s: 'skip', r: 'not_found' }; }
   if (file.getName().normalize('NFC') !== row.fileName.normalize('NFC')) return { s: 'skip', r: 'name_differs' };
   if (file.getSize() > CONFIG.MAX_BYTES) return { s: 'skip', r: 'too_large' };
-  let text;
+  let got;
   try {
-    text = extractText_(file, ctx.folder.getId());
+    got = extractText_(file, ctx.folder.getId());
   } catch (e) {
+    if (e instanceof Fail_ && e.code === 'zip_limits') return { s: 'skip', r: 'zip_limits' };
     return { s: 'skip', r: 'convert_failed' };
   }
-  if (text === null) return { s: 'skip', r: 'unsupported_type' };
+  if (got === null) return { s: 'skip', r: 'unsupported_type' };
+  const text = got.text;
   if (!/\S/.test(text)) return { s: 'skip', r: 'no_text' };
   const hashes = shinglesOf_(text, CONFIG.SALT);
   if (ctx.dryRun) {
-    return { s: 'ok', n: hashes.length, words: words_(text).length, chars: text.length };
+    return { s: 'ok', n: hashes.length, words: words_(text).length, chars: text.length, h: got.how };
   }
   replaceFile_(ctx.folder, row.fileId + '.json', JSON.stringify({
     file_id: row.fileId, classification: row.group, shingles: hashes,
   }));
   const trap = runTrap_(text, hashes, CONFIG.SALT);
-  return { s: 'ok', n: hashes.length, t: trap.traps, b: trap.blocked, c: trap.controls, a: trap.allowed };
+  return { s: 'ok', n: hashes.length, h: got.how, t: trap.traps, b: trap.blocked, c: trap.controls, a: trap.allowed };
 }
 
 // ---- Entry points ----
@@ -449,13 +548,14 @@ function runBatch() {
 
 function summary_(inputs, progress) {
   const wanted = inputs.rows.filter(function (r) { return CONFIG.CLASSES.indexOf(r.group) >= 0; });
-  const ok = [], reasons = {};
+  const ok = [], reasons = {}, methods = {};
   let traps = 0, blocked = 0, controls = 0, allowed = 0;
   wanted.forEach(function (r) {
     const p = progress[r.fileId];
     if (!p) return;
     if (p.s === 'ok') {
       ok.push(r);
+      methods[p.h || 'earlier'] = (methods[p.h || 'earlier'] || 0) + 1;
       traps += p.t || 0; blocked += p.b || 0; controls += p.c || 0; allowed += p.a || 0;
     } else {
       reasons[p.r] = (reasons[p.r] || 0) + 1;
@@ -463,6 +563,7 @@ function summary_(inputs, progress) {
   });
   return [
     'fingerprinted ' + ok.length + '/' + wanted.length + ', skipped ' + JSON.stringify(reasons),
+    'methods ' + JSON.stringify(methods),
     'trap: total ' + traps + ', blocked ' + blocked + ', leaked ' + (traps - blocked)
       + '; controls allowed ' + allowed + '/' + controls,
   ].join('\n');
@@ -514,6 +615,50 @@ function reprocess() {
   });
   replaceFile_(folder, 'progress.json', JSON.stringify(progress));
   Logger.log('cleared ' + cleared + ' skipped rows; run runBatch, then finalize');
+}
+
+function inspect() {
+  // Discovery for the rows still skipped: counts only, never file names or text.
+  const folder = outFolder_();
+  const progress = loadProgress_(folder);
+  Object.keys(progress).forEach(function (id) {
+    const p = progress[id];
+    if (p.s !== 'skip' || CONFIG.RETRY_REASONS.indexOf(p.r) < 0) return;
+    let file;
+    try { file = DriveApp.getFileById(id); } catch (e) { return; }
+    const mime = file.getMimeType();
+    const line = { reason: p.r, mime: mime, bytes: file.getSize() };
+    try {
+      if (MIME_ZIP.indexOf(mime) >= 0) {
+        const budget = newBudget_();
+        Utilities.unzip(file.getBlob().setContentType('application/zip')).forEach(function (m) {
+          budget.members++;
+          budget.bytes += m.getBytes().length;
+          const ext = extOf_(m.getName());
+          budget.ext[ext] = (budget.ext[ext] || 0) + 1;
+        });
+        line.members = budget.members;
+        line.unpacked = budget.bytes;
+        line.ext = budget.ext;
+      } else if (MIME_BINARY.indexOf(mime) >= 0 || mime === 'application/msword') {
+        const raw = file.getBlob().getDataAsString('ISO-8859-1');
+        const eight = raw.match(/[\x20-\x7e\xa1-\xff\t]{6,}/g) || [];
+        const wide = raw.match(/(?:[\x20-\x7e\xa1-\xff]\x00){6,}/g) || [];
+        const longest = function (runs) {
+          return runs.reduce(function (m, r) { return Math.max(m, r.length); }, 0);
+        };
+        line.runs8 = eight.length;
+        line.chars8 = eight.reduce(function (n, r) { return n + r.length; }, 0);
+        line.longest8 = longest(eight);
+        line.runs16 = wide.length;
+        line.chars16 = wide.reduce(function (n, r) { return n + r.length / 2; }, 0);
+        line.longest16 = longest(wide) / 2;
+      }
+    } catch (e) {
+      line.error = String(e.message || e).slice(0, 80);
+    }
+    Logger.log(JSON.stringify(line));
+  });
 }
 
 function cleanupTemp() {

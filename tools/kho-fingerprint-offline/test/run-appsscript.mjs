@@ -15,20 +15,27 @@ const trashed = new Set();
 let nextId = 1;
 const tmpCreated = [];
 const tmpRemoved = [];
+const converts = [];
 
-const blobOf = (text, zip) => ({
-  getDataAsString: () => text,
-  getBytes: () => Buffer.from(text),
+const blobOf = (text, zip, latin1) => ({
+  getDataAsString: (cs) => (cs === 'ISO-8859-1' ? (latin1 ?? Buffer.from(text).toString('latin1')) : text),
+  getBytes: () => (latin1 !== undefined ? [...Buffer.from(latin1, 'latin1')] : [...Buffer.from(text)]),
   setContentType() { return this; },
   __zip: zip,
 });
+const memberOf = (name, value) => {
+  const blob = typeof value === 'string'
+    ? blobOf(value)
+    : value.zip ? blobOf('', value.zip) : blobOf('', undefined, value.latin1);
+  return Object.assign(blob, { getName: () => name });
+};
 const fileObj = (id) => {
   const f = disk.get(id);
   if (!f) throw new Error('not found');
   return {
     getId: () => id, getName: () => f.name, getMimeType: () => f.mime,
     getSize: () => f.size ?? Buffer.byteLength(f.text),
-    getBlob: () => blobOf(f.text, f.zip), setTrashed: (v) => { if (v) trashed.add(id); disk.delete(id); },
+    getBlob: () => blobOf(f.text, f.zip, f.latin1), setTrashed: (v) => { if (v) trashed.add(id); disk.delete(id); },
   };
 };
 const folders = new Map();
@@ -50,7 +57,7 @@ const folderObj = (name) => {
   };
 };
 
-for (const f of args.files || []) disk.set(f.id, { name: f.name, text: f.text ?? '', mime: f.mime, size: f.size, zip: f.zip });
+for (const f of args.files || []) disk.set(f.id, { name: f.name, text: f.text ?? '', mime: f.mime, size: f.size, zip: f.zip, latin1: f.latin1 });
 const manifestText = args.manifestText ?? JSON.stringify({ entries: args.entries });
 disk.set('manifest-file', { name: 'manifest.json', text: manifestText, mime: 'application/json' });
 
@@ -69,10 +76,23 @@ const context = {
   DocumentApp: { openById: (id) => ({ getBody: () => ({ getText: () => disk.get(id).text }) }) },
   Drive: {
     Files: {
-      create: (res, blob) => {
-        if (args.convertFails) throw new Error('conversion refused');
+      create: (res, blob, opts) => {
+        converts.push(opts && opts.ocrLanguage ? 'ocr' : 'plain');
+        if (args.convertFails || converts.length <= (args.convertFailTimes || 0)) {
+          throw new Error('conversion refused');
+        }
         const id = `tmp${nextId++}`;
         disk.set(id, { name: res.name, text: blob.getDataAsString(), mime: 'application/vnd.google-apps.document' });
+        tmpCreated.push(id);
+        return { id };
+      },
+      copy: (res, fileId) => {
+        converts.push('copy');
+        if (args.convertFails || converts.length <= (args.convertFailTimes || 0)) {
+          throw new Error('conversion refused');
+        }
+        const id = `tmp${nextId++}`;
+        disk.set(id, { name: res.name, text: disk.get(fileId).text, mime: 'application/vnd.google-apps.document' });
         tmpCreated.push(id);
         return { id };
       },
@@ -82,13 +102,13 @@ const context = {
   Utilities: {
     unzip: (blob) => {
       if (!blob.__zip) throw new Error('not a zip');
-      return Object.entries(blob.__zip).map(([name, text]) => ({ getName: () => name, getDataAsString: () => text }));
+      return Object.entries(blob.__zip).map(([name, value]) => memberOf(name, value));
     },
   },
   String, parseInt, ScriptApp: {},
 };
 vm.createContext(context);
-vm.runInContext(code + '\n;globalThis.__api = { shinglesOf_, words_, sha256Hex_, utf8Bytes_, CONFIG, selfTest, runBatch, finalize, pilot, reprocess, parseManifest_, tableRows_, paragraphs_ };', context);
+vm.runInContext(code + '\n;globalThis.__api = { shinglesOf_, words_, sha256Hex_, utf8Bytes_, CONFIG, selfTest, runBatch, finalize, pilot, reprocess, inspect, parseManifest_, tableRows_, paragraphs_ };', context);
 const api = context.__api;
 Object.assign(api.CONFIG, args.config || {});
 
@@ -106,6 +126,7 @@ try {
 }
 result.logs = logs;
 result.tmpCreated = tmpCreated.length;
+result.converts = converts;
 result.tmpRemoved = tmpRemoved.length;
 result.outputs = {};
 for (const [name, fo] of folders) {

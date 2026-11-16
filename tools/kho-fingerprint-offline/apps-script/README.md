@@ -55,6 +55,19 @@ quá lớn.
 3. Chạy **runBatch** đến khi có dòng `done`, rồi **finalize** (ghi đè `fingerprints.json` và
    `report.txt`) và **cleanupTemp**.
 
+## Các file còn lại sau lần chạy đầu (bản 3)
+Bản này đọc thêm `.zip` đệ quy (độ sâu và số thành viên và dung lượng giải nén đều có giới hạn trong
+`CONFIG`; vượt giới hạn thì ghi `zip_limits`), trích chuỗi chữ đọc được từ `.xla` và `.doc` khi Google
+không chuyển được (phương pháp "strings", độ chính xác thấp hơn bộ đọc thật; mã VBA nén trong `.xla`
+không được thấy), và thử chuyển đổi tối đa 3 cách trước khi bỏ cuộc một file.
+
+1. Dán `Code.gs` mới, giữ `CONFIG`. Chạy **selfTest**.
+2. Chạy **inspect**: in từng dòng đếm cho các file còn bỏ qua (loại, dung lượng, với zip là số thành
+   viên theo đuôi, với nhị phân là số đoạn chữ). Không in tên file hay nội dung. Gửi tôi các dòng này.
+3. Chạy **reprocess**, rồi **runBatch** đến `done: run finalize`, rồi **finalize** và **cleanupTemp**.
+   Báo cáo có thêm dòng `methods {...}` cho biết file được đọc bằng cách nào (`xml`, `converted`,
+   `zip`, `strings`).
+
 ## Kiểm thử
 `python -m pytest qbd_core/tests/test_kho_fingerprint_appsscript.py` chạy `Code.gs` trong node với
 Google services giả: so từng hash với bản Python, so từng byte file kết quả, kiểm tra bản chuyển đổi

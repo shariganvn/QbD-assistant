@@ -18,6 +18,7 @@ pytestmark = pytest.mark.skipif(
 )
 
 PDF = "application/pdf"
+BODY = "một hai ba bốn năm sáu bảy tám chín mười mười một"
 DOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 ID = {k: k.ljust(31, "x") + "01" for k in "ABCDEFG"}
 TEXT_B = "Quy trình nội bộ nhóm B mô tả bước nghiền trộn bột siêu mịn trước khi dập viên thuốc"
@@ -43,7 +44,7 @@ def scenario(*, salt="", classes=("B", "C"), extra_files=(), config=None):
         (ID["A"], "a.pdf", "A"),
         (ID["B"], "b.pdf", "B"),
         (ID["C"], "c.docx", "C"),
-        (ID["D"], "d.zip", "B"),
+        (ID["D"], "d.exe", "B"),
         (ID["E"], "e-gone.pdf", "C"),
         (ID["F"], "f-empty.pdf", "C"),
     ]
@@ -51,7 +52,7 @@ def scenario(*, salt="", classes=("B", "C"), extra_files=(), config=None):
         {"id": ID["A"], "name": "a.pdf", "mime": PDF, "text": TEXT_A},
         {"id": ID["B"], "name": "b.pdf", "mime": PDF, "text": TEXT_B},
         {"id": ID["C"], "name": "c.docx", "mime": DOCX, "text": TEXT_C},
-        {"id": ID["D"], "name": "d.zip", "mime": "application/zip", "text": "x"},
+        {"id": ID["D"], "name": "d.exe", "mime": "application/x-msdownload", "text": "x"},
         {"id": ID["F"], "name": "f-empty.pdf", "mime": PDF, "text": "   \n  "},
         *extra_files,
     ]
@@ -204,7 +205,14 @@ def run_one(mime, name, zip_members, *, size=None, salt="", extra=None):
     rows = [(ID["B"], name, "B")]
     table = [["file_id", "file_name", "folder", "nhom"], *[[i, n, "", g] for i, n, g in rows]]
     entries = [{"file_id": ID["B"], "classification": "B"}]
-    file = {"id": ID["B"], "name": name, "mime": mime, "text": "", "zip": zip_members, "size": size}
+    file = {
+        "id": ID["B"],
+        "name": name,
+        "mime": mime,
+        "text": BODY,
+        "zip": zip_members,
+        "size": size,
+    }
     cfg = {"TABLE_SHEET_ID": "sheet", "MANIFEST_FILE_ID": "manifest-file", "SALT": salt}
     got = run(
         files=[file],
@@ -348,3 +356,149 @@ def test_docx_hashes_equal_the_command_output_on_the_same_file(tmp_path):
     got, _ = run_one(DOCX, "x.docx", members)
     page = json.loads(got["outputs"]["kho-fingerprints"]["fingerprints.json"])
     assert command and set(page["entries"][0]["shingles"]) == set(command)
+
+
+ZIP = "application/x-zip-compressed"
+XLA = "application/vnd.ms-excel"
+DOC = "application/msword"
+ASCII_RUN = "Dissolution profile comparison using the similarity factor f2"
+WIDE_RUN = "Bootstrap confidence interval for bioequivalence"
+
+
+def binary_latin1() -> tuple[str, str]:
+    """A binary body with an 8-bit run, a UTF-16LE run and noise; plus the expected text."""
+    wide = "".join(c + "\x00" for c in WIDE_RUN)
+    body = "\x00\x01\x02ab\x03" + ASCII_RUN + "\x00\x00\xff\xfe" + wide + "\x00\x00\x00zz\x01"
+    return body, ASCII_RUN + "\n" + WIDE_RUN
+
+
+def stored_hashes(got):
+    out = json.loads(got["outputs"]["kho-fingerprints"]["fingerprints.json"])
+    return out["entries"][0]["shingles"]
+
+
+def run_binary(mime, **extra):
+    body, expected = binary_latin1()
+    rows = [(ID["B"], "x.bin", "B")]
+    table = [["file_id", "file_name", "folder", "nhom"], *[[i, n, "", g] for i, n, g in rows]]
+    file = {"id": ID["B"], "name": "x.bin", "mime": mime, "text": BODY, "latin1": body}
+    cfg = {"TABLE_SHEET_ID": "sheet", "MANIFEST_FILE_ID": "manifest-file"}
+    got = run(
+        files=[file],
+        entries=[{"file_id": ID["B"], "classification": "B"}],
+        table=table,
+        config=cfg,
+        steps=["runBatch", "finalize"],
+        **extra,
+    )
+    return got, expected
+
+
+def test_an_excel_add_in_is_read_as_printable_runs():
+    got, expected = run_binary(XLA)
+    assert got["error"] is None and got["tmpCreated"] == 0
+    assert stored_hashes(got) == sorted(shingles(expected))
+    progress = json.loads(got["outputs"]["kho-fingerprints"]["progress.json"])
+    assert progress[ID["B"]]["h"] == "strings"
+    assert any("methods" in line and "strings" in line for line in got["logs"])
+
+
+def test_a_legacy_doc_falls_back_to_printable_runs_when_google_refuses():
+    got, expected = run_binary(DOC, convertFails=True)
+    assert got["error"] is None
+    assert stored_hashes(got) == sorted(shingles(expected))
+
+
+def test_a_legacy_doc_that_converts_is_not_read_as_strings():
+    got, _ = run_binary(DOC)
+    progress = json.loads(got["outputs"]["kho-fingerprints"]["progress.json"])
+    assert progress[ID["B"]]["h"] == "converted" and got["tmpCreated"] == 1
+
+
+@pytest.mark.parametrize(
+    ("fail_times", "tries", "result"),
+    [
+        (0, ["ocr"], "ok"),
+        (1, ["ocr", "plain"], "ok"),
+        (2, ["ocr", "plain", "copy"], "ok"),
+        (3, ["ocr", "plain", "copy"], "skip"),
+    ],
+)
+def test_conversion_is_retried_before_a_file_is_given_up(fail_times, tries, result):
+    got, _ = run_one(PDF, "x.pdf", None, extra={"convertFailTimes": fail_times})
+    progress = json.loads(got["outputs"]["kho-fingerprints"]["progress.json"])
+    assert got["converts"] == tries
+    assert progress[ID["B"]]["s"] == result
+    assert got["tmpCreated"] == got["tmpRemoved"]
+
+
+def zip_text_members():
+    tail = "một hai ba bốn năm sáu bảy tám"
+    return {
+        "readme.txt": f"Hướng dẫn cài đặt {tail}",
+        "docs/manual.docx": {"zip": {"word/document.xml": docx_xml([f"Trang tài liệu {tail}"])}},
+        "lib/tool.xla": {"latin1": "\x00\x01" + ASCII_RUN + "\x00"},
+        "img/logo.png": "ảnh không đọc",
+        "bin/run.exe": "bỏ qua",
+        "inner.zip": {"zip": {"deep.txt": f"Tệp lồng nhau {tail}"}},
+    }, [
+        f"Hướng dẫn cài đặt {tail}",
+        f"Trang tài liệu {tail}",
+        ASCII_RUN,
+        "",
+        "",
+        f"Tệp lồng nhau {tail}",
+    ]
+
+
+def test_an_archive_is_read_member_by_member_recursively():
+    members, parts = zip_text_members()
+    got, _ = run_one(ZIP, "x.zip", members)
+    assert got["error"] is None
+    assert stored_hashes(got) == sorted(shingles("\n".join(parts)))
+    progress = json.loads(got["outputs"]["kho-fingerprints"]["progress.json"])
+    assert progress[ID["B"]]["h"] == "zip"
+    blob = json.dumps(got["outputs"], ensure_ascii=False) + "\n".join(got["logs"])
+    for name in ("readme", "manual", "logo", "run.exe", "deep.txt"):
+        assert name not in blob
+
+
+def test_an_archive_nested_too_deep_is_refused_not_hashed():
+    deep = {"leaf.txt": "x"}
+    for _ in range(5):
+        deep = {"in.zip": {"zip": deep}}
+    got, _ = run_one(ZIP, "x.zip", deep)
+    progress = json.loads(got["outputs"]["kho-fingerprints"]["progress.json"])
+    assert progress[ID["B"]] == {"s": "skip", "r": "zip_limits"}
+
+
+@pytest.mark.parametrize("limit", [{"ZIP_MAX_MEMBERS": 2}, {"ZIP_MAX_BYTES": 10}])
+def test_an_archive_over_the_limits_is_refused(limit):
+    members, _ = zip_text_members()
+    s = scenario(config=limit)
+    s["files"][2].update(name="c.zip", mime=ZIP, zip=members)
+    s["table"][3][1] = "c.zip"
+    got = run(**s, steps=["runBatch"])
+    progress = json.loads(got["outputs"]["kho-fingerprints"]["progress.json"])
+    assert progress[ID["C"]] == {"s": "skip", "r": "zip_limits"}
+
+
+def test_inspect_prints_counts_and_never_names_or_text():
+    members, _ = zip_text_members()
+    s = scenario()
+    s["files"][2].update(name="c.zip", mime=ZIP, zip=members)
+    s["table"][3][1] = "c.zip"
+    s["files"][1].update(mime=XLA, latin1=binary_latin1()[0])
+    seeded = {
+        ID["B"]: {"s": "skip", "r": "unsupported_type"},
+        ID["C"]: {"s": "skip", "r": "unsupported_type"},
+    }
+    got = run(**s, steps=["inspect"], seedProgress=seeded)
+    lines = [json.loads(line) for line in got["logs"] if line.startswith("{")]
+    zips = [x for x in lines if "members" in x]
+    assert zips and zips[0]["members"] == 6 and zips[0]["ext"]["txt"] == 1
+    binaries = [x for x in lines if "runs8" in x]
+    assert binaries and binaries[0]["runs16"] >= 1
+    blob = "\n".join(got["logs"])
+    for secret in (ASCII_RUN, WIDE_RUN, "readme", "manual"):
+        assert secret not in blob
