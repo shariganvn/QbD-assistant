@@ -43,6 +43,18 @@ Giới hạn cần biết:
 10. Gửi tôi `report.txt` (chỉ có số đếm). `fingerprints.json` chỉ gửi theo phê duyệt của Trưởng bộ phận
     R&D, không commit vào git.
 
+## Chạy lại sau khi cập nhật script (bổ sung loại file)
+Bản mới đọc trực tiếp `.docx`, `.pptx` (slide và ghi chú), `.xlsx` (chuỗi văn bản) từ nội dung file,
+OCR ảnh PNG/JPG, và đánh dấu riêng file lớn hơn `MAX_BYTES` (50 MB) là `too_large` thay vì gửi cho
+trình chuyển đổi của Google. Không hỗ trợ: `.zip`, `.xla`, `.doc` (nếu Google không chuyển được) và PDF
+quá lớn.
+
+1. Dán `Code.gs` mới đè lên cũ, giữ nguyên `TABLE_SHEET_ID` và `MANIFEST_FILE_ID` ở `CONFIG`. Lưu.
+2. Chạy **reprocess**: xóa trạng thái bỏ qua loại `unsupported_type` và `convert_failed` trong
+   `progress.json` (file đã băm xong được giữ nguyên, không xử lý lại).
+3. Chạy **runBatch** đến khi có dòng `done`, rồi **finalize** (ghi đè `fingerprints.json` và
+   `report.txt`) và **cleanupTemp**.
+
 ## Kiểm thử
 `python -m pytest qbd_core/tests/test_kho_fingerprint_appsscript.py` chạy `Code.gs` trong node với
 Google services giả: so từng hash với bản Python, so từng byte file kết quả, kiểm tra bản chuyển đổi

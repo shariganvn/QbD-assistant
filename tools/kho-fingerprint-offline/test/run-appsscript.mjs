@@ -16,13 +16,19 @@ let nextId = 1;
 const tmpCreated = [];
 const tmpRemoved = [];
 
-const blobOf = (text) => ({ getDataAsString: () => text, getBytes: () => Buffer.from(text) });
+const blobOf = (text, zip) => ({
+  getDataAsString: () => text,
+  getBytes: () => Buffer.from(text),
+  setContentType() { return this; },
+  __zip: zip,
+});
 const fileObj = (id) => {
   const f = disk.get(id);
   if (!f) throw new Error('not found');
   return {
     getId: () => id, getName: () => f.name, getMimeType: () => f.mime,
-    getBlob: () => blobOf(f.text), setTrashed: (v) => { if (v) trashed.add(id); disk.delete(id); },
+    getSize: () => f.size ?? Buffer.byteLength(f.text),
+    getBlob: () => blobOf(f.text, f.zip), setTrashed: (v) => { if (v) trashed.add(id); disk.delete(id); },
   };
 };
 const folders = new Map();
@@ -44,7 +50,7 @@ const folderObj = (name) => {
   };
 };
 
-for (const f of args.files || []) disk.set(f.id, { name: f.name, text: f.text ?? '', mime: f.mime });
+for (const f of args.files || []) disk.set(f.id, { name: f.name, text: f.text ?? '', mime: f.mime, size: f.size, zip: f.zip });
 const manifestText = args.manifestText ?? JSON.stringify({ entries: args.entries });
 disk.set('manifest-file', { name: 'manifest.json', text: manifestText, mime: 'application/json' });
 
@@ -73,16 +79,25 @@ const context = {
       remove: (id) => { tmpRemoved.push(id); disk.delete(id); },
     },
   },
-  ScriptApp: {},
+  Utilities: {
+    unzip: (blob) => {
+      if (!blob.__zip) throw new Error('not a zip');
+      return Object.entries(blob.__zip).map(([name, text]) => ({ getName: () => name, getDataAsString: () => text }));
+    },
+  },
+  String, parseInt, ScriptApp: {},
 };
 vm.createContext(context);
-vm.runInContext(code + '\n;globalThis.__api = { shinglesOf_, words_, sha256Hex_, utf8Bytes_, CONFIG, selfTest, runBatch, finalize, pilot, parseManifest_, tableRows_ };', context);
+vm.runInContext(code + '\n;globalThis.__api = { shinglesOf_, words_, sha256Hex_, utf8Bytes_, CONFIG, selfTest, runBatch, finalize, pilot, reprocess, parseManifest_, tableRows_, paragraphs_ };', context);
 const api = context.__api;
 Object.assign(api.CONFIG, args.config || {});
+
+if (args.seedProgress) folderObj('kho-fingerprints').createFile('progress.json', JSON.stringify(args.seedProgress), 'application/json');
 
 const result = { error: null };
 try {
   if (args.vectors) result.shingles = args.vectors.map(([t, s]) => api.shinglesOf_(t, s));
+  if (args.paragraphs) result.paragraphs = args.paragraphs.map(([xml, ns]) => api.paragraphs_(xml, ns));
   if (args.sha) result.sha = args.sha.map((s) => api.sha256Hex_(api.utf8Bytes_(s)));
   if (args.selfTest) api.selfTest();
   for (const step of args.steps || []) api[step]();

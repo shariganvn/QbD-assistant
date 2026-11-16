@@ -20,6 +20,8 @@ const CONFIG = {
   SALT: '',
   BATCH_SECONDS: 270,
   OCR_LANGUAGE: 'vi',
+  MAX_BYTES: 50 * 1024 * 1024, // larger files are not sent to Google's converter: reason too_large
+  RETRY_REASONS: ['unsupported_type', 'convert_failed'], // cleared by reprocess()
 };
 
 const SHINGLE_WORDS = 8;
@@ -29,11 +31,11 @@ const WORD_RE = /[\p{L}\p{N}_]+/gu;
 const CLASS_NAMES = ['A', 'B', 'C', '?'];
 const TMP_PREFIX = '__kho_tmp__';
 const MIME_DOC = 'application/vnd.google-apps.document';
-const MIME_CONVERTIBLE = [
-  'application/pdf',
-  'application/msword',
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-];
+const MIME_DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+const MIME_PPTX = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
+const MIME_XLSX = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+// Converted by Google (PDF and images through OCR); the Office formats above are read directly.
+const MIME_CONVERTIBLE = ['application/pdf', 'application/msword', 'image/png', 'image/jpeg'];
 
 class Fail_ extends Error {
   constructor(code, detail) {
@@ -216,9 +218,107 @@ function convertAndRead_(file, tmpFolderId) {
   }
 }
 
+// ---- Office files read straight from their XML (no Google conversion) ----
+function xmlText_(raw) {
+  return raw
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, function (m, t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;'); })
+    .replace(/&(#x[0-9a-fA-F]+|#[0-9]+|amp|lt|gt|quot|apos);/g, function (m, e) {
+      if (e === 'amp') return '&';
+      if (e === 'lt') return '<';
+      if (e === 'gt') return '>';
+      if (e === 'quot') return '"';
+      if (e === 'apos') return "'";
+      return String.fromCodePoint(e[1] === 'x' ? parseInt(e.slice(2), 16) : parseInt(e.slice(1), 10));
+    });
+}
+
+// Text of every <ns:p> paragraph in document order; a paragraph holds the text of all <ns:t>
+// below it, nested paragraphs included, as an XML tree walk would give.
+function paragraphs_(xml, ns) {
+  const token = new RegExp('<(/?)' + ns + ':(p|t)(?=[\\s/>])[^>]*?(/?)>', 'g');
+  const out = [];
+  const open = [];
+  let inText = false, start = 0, m;
+  const addText = function (txt) { open.forEach(function (i) { out[i] += txt; }); };
+  while ((m = token.exec(xml)) !== null) {
+    if (inText) { addText(xmlText_(xml.slice(start, m.index))); inText = false; }
+    const closing = m[1] === '/', selfClosing = m[3] === '/';
+    if (m[2] === 'p') {
+      if (closing) open.pop();
+      else {
+        out.push('');
+        if (!selfClosing) open.push(out.length - 1);
+      }
+    } else if (!closing && !selfClosing) {
+      inText = true;
+      start = token.lastIndex;
+    }
+  }
+  return out;
+}
+
+function zipMembers_(file) {
+  const parts = {};
+  Utilities.unzip(file.getBlob().setContentType('application/zip')).forEach(function (b) {
+    parts[b.getName()] = b;
+  });
+  return parts;
+}
+
+function numbered_(names, re) {
+  return names.filter(function (n) { return re.test(n); }).sort(function (a, b) {
+    return parseInt(a.match(/(\d+)\.xml$/)[1], 10) - parseInt(b.match(/(\d+)\.xml$/)[1], 10);
+  });
+}
+
+function docxText_(file) {
+  const parts = zipMembers_(file);
+  if (!parts['word/document.xml']) throw new Fail_('E_NO_BODY');
+  return paragraphs_(parts['word/document.xml'].getDataAsString('UTF-8'), 'w').join('\n');
+}
+
+function pptxText_(file) {
+  const parts = zipMembers_(file);
+  const names = Object.keys(parts);
+  const pages = numbered_(names, /^ppt\/slides\/slide\d+\.xml$/).map(function (n) {
+    return paragraphs_(parts[n].getDataAsString('UTF-8'), 'a').join('\n');
+  });
+  const notes = numbered_(names, /^ppt\/notesSlides\/notesSlide\d+\.xml$/).map(function (n) {
+    return paragraphs_(parts[n].getDataAsString('UTF-8'), 'a').join('\n');
+  });
+  return pages.concat(notes).join('\n');
+}
+
+function xlsxText_(file) {
+  const parts = zipMembers_(file);
+  const texts = [];
+  const strings = parts['xl/sharedStrings.xml'];
+  if (strings) {
+    (strings.getDataAsString('UTF-8').match(/<si\b[\s\S]*?<\/si>/g) || []).forEach(function (si) {
+      const t = (si.match(/<t(?=[\s>])[^>]*>[\s\S]*?<\/t>/g) || []).map(function (x) {
+        return xmlText_(x.replace(/^<t[^>]*>/, '').replace(/<\/t>$/, ''));
+      });
+      texts.push(t.join(''));
+    });
+  }
+  numbered_(Object.keys(parts), /^xl\/worksheets\/sheet\d+\.xml$/).forEach(function (n) {
+    (parts[n].getDataAsString('UTF-8').match(/<is>[\s\S]*?<\/is>/g) || []).forEach(function (is) {
+      texts.push((is.match(/<t(?=[\s>])[^>]*>[\s\S]*?<\/t>/g) || []).map(function (x) {
+        return xmlText_(x.replace(/^<t[^>]*>/, '').replace(/<\/t>$/, ''));
+      }).join(''));
+    });
+  });
+  return texts.join('\n');
+}
+
 function extractText_(file, tmpFolderId) {
   const mime = file.getMimeType();
   if (mime === MIME_DOC) return DocumentApp.openById(file.getId()).getBody().getText();
+  if (mime === MIME_DOCX) {
+    try { return docxText_(file); } catch (e) { return convertAndRead_(file, tmpFolderId); }
+  }
+  if (mime === MIME_PPTX) return pptxText_(file);
+  if (mime === MIME_XLSX) return xlsxText_(file);
   if (MIME_CONVERTIBLE.indexOf(mime) >= 0) return convertAndRead_(file, tmpFolderId);
   return null;
 }
@@ -278,6 +378,7 @@ function fingerprintOne_(row, ctx) {
   let file;
   try { file = DriveApp.getFileById(row.fileId); } catch (e) { return { s: 'skip', r: 'not_found' }; }
   if (file.getName().normalize('NFC') !== row.fileName.normalize('NFC')) return { s: 'skip', r: 'name_differs' };
+  if (file.getSize() > CONFIG.MAX_BYTES) return { s: 'skip', r: 'too_large' };
   let text;
   try {
     text = extractText_(file, ctx.folder.getId());
@@ -396,6 +497,23 @@ function finalize() {
   replaceFile_(folder, 'fingerprints.json', text);
   Logger.log(report);
   Logger.log('fingerprints.json written, ' + Math.round(text.length / 1024) + ' KB');
+}
+
+function reprocess() {
+  // Forget earlier skips of the kinds in CONFIG.RETRY_REASONS so that runBatch tries them again,
+  // for example after the script learned a new file type. Files already fingerprinted are kept.
+  const folder = outFolder_();
+  const progress = loadProgress_(folder);
+  let cleared = 0;
+  Object.keys(progress).forEach(function (id) {
+    const p = progress[id];
+    if (p.s === 'skip' && CONFIG.RETRY_REASONS.indexOf(p.r) >= 0) {
+      delete progress[id];
+      cleared++;
+    }
+  });
+  replaceFile_(folder, 'progress.json', JSON.stringify(progress));
+  Logger.log('cleared ' + cleared + ' skipped rows; run runBatch, then finalize');
 }
 
 function cleanupTemp() {
